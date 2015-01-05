@@ -25,34 +25,11 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
             return false;
         }
     });
+
 $config = Symfony\CS\Config\Config::create();
-$config->level(null);
-$config->fixers(
-    array(
-        'braces',
-        'elseif',
-        'empty_return',
-        'encoding',
-        'eof_ending',
-        'function_call_space',
-        'function_declaration',
-        'indentation',
-        'line_after_namespace',
-        'linefeed',
-        'lowercase_keywords',
-        'parenthesis',
-        'multiple_use',
-        'method_argument_space',
-        'php_closing_tag',
-        'psr0',
-        'remove_lines_between_uses',
-        'short_tag',
-        'standardize_not_equal',
-        'trailing_spaces',
-        'unused_use',
-        'visibility',
-        'whitespacy_lines',
-    )
-);
+$config->setUsingLinter(false);
+$config->setUsingCache(true);
+$config->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL);
 $config->finder($finder);
+
 return $config;
