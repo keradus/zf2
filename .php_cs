@@ -30,6 +30,7 @@ $config = Symfony\CS\Config\Config::create();
 $config->setUsingLinter(false);
 $config->setUsingCache(true);
 $config->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL);
+$config->fixers(array('-single_blank_line_before_namespace'));
 $config->finder($finder);
 
 return $config;
