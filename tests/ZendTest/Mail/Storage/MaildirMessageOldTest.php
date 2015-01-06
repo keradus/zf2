@@ -34,10 +34,11 @@ class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_originalMaildir = __DIR__ . '/../_files/test.maildir/';
+        $this->_originalMaildir = __DIR__.'/../_files/test.maildir/';
         if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 . 'directory before enabling the maildir tests');
+                                 .'directory before enabling the maildir tests');
+
             return;
         }
 
@@ -45,7 +46,7 @@ class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/../_files/test.tmp/';
+                $this->_tmpdir = __DIR__.'/../_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);
@@ -58,6 +59,7 @@ class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
             closedir($dh);
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
@@ -65,14 +67,14 @@ class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
         $this->_maildir = $this->_tmpdir;
 
         foreach (array('cur', 'new') as $dir) {
-            mkdir($this->_tmpdir . $dir);
-            $dh = opendir($this->_originalMaildir . $dir);
+            mkdir($this->_tmpdir.$dir);
+            $dh = opendir($this->_originalMaildir.$dir);
             while (($entry = readdir($dh)) !== false) {
-                $entry = $dir . '/' . $entry;
-                if (!is_file($this->_originalMaildir . $entry)) {
+                $entry = $dir.'/'.$entry;
+                if (!is_file($this->_originalMaildir.$entry)) {
                     continue;
                 }
-                copy($this->_originalMaildir . $entry, $this->_tmpdir . $entry);
+                copy($this->_originalMaildir.$entry, $this->_tmpdir.$entry);
             }
             closedir($dh);
         }
@@ -81,22 +83,21 @@ class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         foreach (array('cur', 'new') as $dir) {
-            if (!is_dir($this->_tmpdir . $dir)) {
+            if (!is_dir($this->_tmpdir.$dir)) {
                 continue;
             }
-            $dh = opendir($this->_tmpdir . $dir);
+            $dh = opendir($this->_tmpdir.$dir);
             while (($entry = readdir($dh)) !== false) {
-                $entry = $this->_tmpdir . $dir . '/' . $entry;
+                $entry = $this->_tmpdir.$dir.'/'.$entry;
                 if (!is_file($entry)) {
                     continue;
                 }
                 unlink($entry);
             }
             closedir($dh);
-            rmdir($this->_tmpdir . $dir);
+            rmdir($this->_tmpdir.$dir);
         }
     }
-
 
     public function testFetchHeader()
     {

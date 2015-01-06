@@ -22,12 +22,12 @@ class FormAbstractServiceFactoryTest extends TestCase
 {
     public function setUp()
     {
-        $services     = $this->services = new ServiceManager;
-        $elements     = new FormElementManager;
-        $filters      = new FilterPluginManager;
-        $hydrators    = new HydratorPluginManager;
-        $inputFilters = new InputFilterPluginManager;
-        $validators   = new ValidatorPluginManager;
+        $services     = $this->services = new ServiceManager();
+        $elements     = new FormElementManager();
+        $filters      = new FilterPluginManager();
+        $hydrators    = new HydratorPluginManager();
+        $inputFilters = new InputFilterPluginManager();
+        $validators   = new ValidatorPluginManager();
 
         $elements->setServiceLocator($services);
         $filters->setServiceLocator($services);
@@ -43,7 +43,7 @@ class FormAbstractServiceFactoryTest extends TestCase
 
         $inputFilters->setInvokableClass('FooInputFilter', 'Zend\InputFilter\InputFilter');
 
-        $forms = $this->forms = new FormAbstractServiceFactory;
+        $forms = $this->forms = new FormAbstractServiceFactory();
         $services->addAbstractFactory($forms);
     }
 
@@ -131,7 +131,7 @@ class FormAbstractServiceFactoryTest extends TestCase
                         'name' => 'email',
                         'options' => array(
                             'label' => 'Your email address',
-                        )
+                        ),
                     ),
                 ),
             ),
@@ -168,7 +168,7 @@ class FormAbstractServiceFactoryTest extends TestCase
                         'name' => 'email',
                         'options' => array(
                             'label' => 'Your email address',
-                        )
+                        ),
                     ),
                 ),
             ),

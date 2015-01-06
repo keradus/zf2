@@ -27,7 +27,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Console::isConsole());
         $className = Console::detectBestAdapter();
-        $adpater = new $className;
+        $adpater = new $className();
         $this->assertTrue($adpater instanceof Adapter\AdapterInterface);
 
         Console::overrideIsConsole(false);

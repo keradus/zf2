@@ -37,8 +37,8 @@ class Translator implements
      * with pre-2.3.0 code.
      *
      * @deprecated
-     * @param string $method
-     * @param array $args
+     * @param  string $method
+     * @param  array  $args
      * @return mixed
      */
     public function __call($method, array $args)
@@ -49,6 +49,7 @@ class Translator implements
                 $method
             ));
         }
+
         return call_user_func_array(array($this->translator, $method), $args);
     }
 
@@ -63,9 +64,9 @@ class Translator implements
     /**
      * Translate a message using the given text domain and locale
      *
-     * @param string $message
-     * @param string $textDomain
-     * @param string $locale
+     * @param  string $message
+     * @param  string $textDomain
+     * @param  string $locale
      * @return string
      */
     public function translate($message, $textDomain = 'default', $locale = null)
@@ -76,11 +77,11 @@ class Translator implements
     /**
      * Provide a pluralized translation of the given string using the given text domain and locale
      *
-     * @param string $singular
-     * @param string $plural
-     * @param string $number
-     * @param string $textDomain
-     * @param string $locale
+     * @param  string $singular
+     * @param  string $plural
+     * @param  string $number
+     * @param  string $textDomain
+     * @param  string $locale
      * @return string
      */
     public function translatePlural($singular, $plural, $number, $textDomain = 'default', $locale = null)

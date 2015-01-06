@@ -57,7 +57,7 @@ class YamlTest extends AbstractWriterTestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.yaml');
+        $config = $this->reader->fromFile(__DIR__.'/_files/allsections.yaml');
 
         $this->writer->toFile($this->getTestAssetFileName(), $config);
 

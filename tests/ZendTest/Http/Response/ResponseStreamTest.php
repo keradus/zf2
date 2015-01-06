@@ -15,7 +15,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 {
     public function testResponseFactoryFromStringCreatesValidResponse()
     {
-        $string = 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n";
+        $string = 'HTTP/1.0 200 OK'."\r\n\r\n".'Foo Bar'."\r\n";
         $stream = fopen('php://temp', 'rb+');
         fwrite($stream, 'Bar Foo');
         rewind($stream);
@@ -33,7 +33,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
     public function testResponseFactoryFromEmptyStringCreatesValidResponse()
     {
         $stream = fopen('php://temp', 'rb+');
-        fwrite($stream, 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n".'Bar Foo');
+        fwrite($stream, 'HTTP/1.0 200 OK'."\r\n\r\n".'Foo Bar'."\r\n".'Bar Foo');
         rewind($stream);
 
         $response = Stream::fromStream('', $stream);
@@ -43,16 +43,15 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 
     public function testGzipResponse()
     {
-        $stream = fopen(__DIR__ . '/../_files/response_gzip', 'rb');
+        $stream = fopen(__DIR__.'/../_files/response_gzip', 'rb');
 
         $headers = '';
-        while (false!== ($newLine = fgets($stream))) {
+        while (false !== ($newLine = fgets($stream))) {
             $headers .= $newLine;
             if ($headers == "\n" || $headers == "\r\n") {
                 break;
             }
         }
-
 
         $headers .= fread($stream, 100); //Should accept also part of body as text
 
@@ -62,7 +61,6 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('0b13cb193de9450aa70a6403e2c9902f', md5($res->getBody()));
         $this->assertEquals('f24dd075ba2ebfb3bf21270e3fdc5303', md5($res->getContent()));
     }
-
 
     public function test300isRedirect()
     {
@@ -80,7 +78,6 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->isSuccess(), 'Response is an error, but isSuccess() returned true');
     }
 
-
     public function testMultilineHeader()
     {
         $values   = $this->readResponse('response_multiline_header');
@@ -94,25 +91,23 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertRegexp("#text/html;\s+charset=iso-8859-1#s", $response->getHeaders()->get('content-type')->getFieldValue());
     }
 
-
     /**
      * Helper function: read test response from file
      *
-     * @param string $response
+     * @param  string $response
      * @return string
      */
     protected function readResponse($response)
     {
-        $stream = fopen(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $response, 'rb');
+        $stream = fopen(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.$response, 'rb');
 
         $data = '';
-        while (false!== ($newLine = fgets($stream))) {
+        while (false !== ($newLine = fgets($stream))) {
             $data .= $newLine;
             if ($newLine == "\n" || $newLine == "\r\n") {
                 break;
             }
         }
-
 
         $data .= fread($stream, 100); //Should accept also part of body as text
 

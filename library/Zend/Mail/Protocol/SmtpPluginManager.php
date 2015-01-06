@@ -36,7 +36,7 @@ class SmtpPluginManager extends AbstractPluginManager
      *
      * Checks that the extension loaded is an instance of Smtp.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

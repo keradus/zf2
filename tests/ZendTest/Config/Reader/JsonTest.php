@@ -29,7 +29,7 @@ class JsonTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/Json/' . $name . '.json';
+        return __DIR__.'/TestAssets/Json/'.$name.'.json';
     }
 
     public function testInvalidJsonFile()

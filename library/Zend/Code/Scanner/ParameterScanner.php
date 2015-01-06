@@ -89,8 +89,8 @@ class ParameterScanner
     protected $nameInformation = null;
 
     /**
-     * @param  array $parameterTokens
-     * @param  NameInformation $nameInformation
+     * @param array           $parameterTokens
+     * @param NameInformation $nameInformation
      */
     public function __construct(array $parameterTokens, NameInformation $nameInformation = null)
     {
@@ -145,7 +145,7 @@ class ParameterScanner
     /**
      * Set position
      *
-     * @param  int $position
+     * @param  int  $position
      * @return void
      */
     public function setPosition($position)

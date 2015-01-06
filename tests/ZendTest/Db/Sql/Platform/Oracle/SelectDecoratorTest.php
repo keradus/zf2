@@ -33,17 +33,17 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
             null,
             array(
                 $driver,
-                new OraclePlatform()
+                new OraclePlatform(),
             )
         );
 
-        $parameterContainer = new ParameterContainer;
+        $parameterContainer = new ParameterContainer();
         $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $statement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
 
         $statement->expects($this->once())->method('setSql')->with($expectedSql);
 
-        $selectDecorator = new SelectDecorator;
+        $selectDecorator = new SelectDecorator();
         $selectDecorator->setSubject($select);
         $selectDecorator->prepareStatement($adapter, $statement);
 
@@ -57,13 +57,13 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlString(Select $select, $notUsed, $notUsed, $expectedSql)
     {
-        $parameterContainer = new ParameterContainer;
+        $parameterContainer = new ParameterContainer();
         $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $statement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
 
-        $selectDecorator = new SelectDecorator;
+        $selectDecorator = new SelectDecorator();
         $selectDecorator->setSubject($select);
-        $this->assertEquals($expectedSql, $selectDecorator->getSqlString(new OraclePlatform));
+        $this->assertEquals($expectedSql, $selectDecorator->getSqlString(new OraclePlatform()));
     }
 
     /**
@@ -73,7 +73,7 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     public function dataProvider()
     {
-        $select0 = new Select;
+        $select0 = new Select();
         $select0->from(array('x' => 'foo'));
         $expectedSql0 = 'SELECT "x".* FROM "foo" "x"';
         $expectedFormatParamCount0 = 0;

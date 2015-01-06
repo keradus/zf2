@@ -12,9 +12,9 @@ namespace ZendTest\Feed\Reader\Integration;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -22,13 +22,12 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/laut.de-rdf.xml';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/laut.de-rdf.xml';
     }
 
     /**
      * Feed level testing
      */
-
     public function testGetsTitle()
     {
         $feed = Reader\Reader::importString(
@@ -42,7 +41,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(array(array('name'=>'laut.de')), (array) $feed->getAuthors());
+        $this->assertEquals(array(array('name' => 'laut.de')), (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -50,7 +49,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(array('name'=>'laut.de'), $feed->getAuthor());
+        $this->assertEquals(array('name' => 'laut.de'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -93,12 +92,9 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ISO-8859-1', $feed->getEncoding());
     }
 
-
-
     /**
      * Entry level testing
      */
-
     public function testGetsEntryId()
     {
         $feed = Reader\Reader::importString(
@@ -123,7 +119,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array(array('name'=>'laut.de')), (array) $entry->getAuthors());
+        $this->assertEquals(array(array('name' => 'laut.de')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -132,7 +128,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array('name'=>'laut.de'), $entry->getAuthor());
+        $this->assertEquals(array('name' => 'laut.de'), $entry->getAuthor());
     }
 
     // Technically, the next two tests should not pass. However the source feed has an encoding

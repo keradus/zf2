@@ -37,7 +37,7 @@ class Rar extends AbstractCompressionAlgorithm
     /**
      * Class constructor
      *
-     * @param array $options (Optional) Options to set
+     * @param  array                                 $options (Optional) Options to set
      * @throws Exception\ExtensionNotLoadedException if rar extension not loaded
      */
     public function __construct($options = null)
@@ -61,7 +61,7 @@ class Rar extends AbstractCompressionAlgorithm
     /**
      * Sets the callback to use
      *
-     * @param  string $callback
+     * @param  string                             $callback
      * @return self
      * @throws Exception\InvalidArgumentException if invalid callback provided
      */
@@ -72,6 +72,7 @@ class Rar extends AbstractCompressionAlgorithm
         }
 
         $this->options['callback'] = $callback;
+
         return $this;
     }
 
@@ -118,6 +119,7 @@ class Rar extends AbstractCompressionAlgorithm
     public function setPassword($password)
     {
         $this->options['password'] = (string) $password;
+
         return $this;
     }
 
@@ -134,7 +136,7 @@ class Rar extends AbstractCompressionAlgorithm
     /**
      * Sets the targetpath to use
      *
-     * @param  string $target
+     * @param  string                             $target
      * @return self
      * @throws Exception\InvalidArgumentException if specified target directory does not exist
      */
@@ -146,13 +148,14 @@ class Rar extends AbstractCompressionAlgorithm
 
         $target = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, (string) $target);
         $this->options['target'] = $target;
+
         return $this;
     }
 
     /**
      * Compresses the given content
      *
-     * @param  string|array $content
+     * @param  string|array               $content
      * @return string
      * @throws Exception\RuntimeException if no callback available, or error during compression
      */
@@ -177,10 +180,10 @@ class Rar extends AbstractCompressionAlgorithm
     /**
      * Decompresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return bool
      * @throws Exception\RuntimeException if archive not found, cannot be opened,
-     *                                    or error during decompression
+     *                                            or error during decompression
      */
     public function decompress($content)
     {
@@ -215,6 +218,7 @@ class Rar extends AbstractCompressionAlgorithm
         }
 
         rar_close($archive);
+
         return true;
     }
 

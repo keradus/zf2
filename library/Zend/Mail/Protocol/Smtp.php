@@ -72,9 +72,9 @@ class Smtp extends AbstractProtocol
      * the 'host' and 'port' keys in order to ensure that all required values
      * are present.
      *
-     * @param  string|array $host
-     * @param  null|int $port
-     * @param  null|array   $config
+     * @param  string|array                       $host
+     * @param  null|int                           $port
+     * @param  null|array                         $config
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($host = '127.0.0.1', $port = null, array $config = null)
@@ -123,7 +123,7 @@ class Smtp extends AbstractProtocol
                     break;
 
                 default:
-                    throw new Exception\InvalidArgumentException($config['ssl'] . ' is unsupported SSL type');
+                    throw new Exception\InvalidArgumentException($config['ssl'].' is unsupported SSL type');
             }
         }
 
@@ -137,7 +137,6 @@ class Smtp extends AbstractProtocol
         parent::__construct($host, $port);
     }
 
-
     /**
      * Connect to the server with the parameters given in the constructor.
      *
@@ -145,14 +144,13 @@ class Smtp extends AbstractProtocol
      */
     public function connect()
     {
-        return $this->_connect($this->transport . '://' . $this->host . ':' . $this->port);
+        return $this->_connect($this->transport.'://'.$this->host.':'.$this->port);
     }
-
 
     /**
      * Initiate HELO/EHLO sequence and set flag to indicate valid smtp session
      *
-     * @param  string $host The client hostname or IP address (default: 127.0.0.1)
+     * @param  string                     $host The client hostname or IP address (default: 127.0.0.1)
      * @throws Exception\RuntimeException
      */
     public function helo($host = '127.0.0.1')
@@ -198,28 +196,27 @@ class Smtp extends AbstractProtocol
     /**
      * Send EHLO or HELO depending on capabilities of smtp host
      *
-     * @param  string $host The client hostname or IP address (default: 127.0.0.1)
+     * @param  string                                  $host The client hostname or IP address (default: 127.0.0.1)
      * @throws \Exception|Exception\ExceptionInterface
      */
     protected function _ehlo($host)
     {
         // Support for older, less-compliant remote servers. Tries multiple attempts of EHLO or HELO.
         try {
-            $this->_send('EHLO ' . $host);
+            $this->_send('EHLO '.$host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
         } catch (Exception\ExceptionInterface $e) {
-            $this->_send('HELO ' . $host);
+            $this->_send('HELO '.$host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
         } catch (\Exception $e) {
             throw $e;
         }
     }
 
-
     /**
      * Issues MAIL command
      *
-     * @param  string $from Sender mailbox
+     * @param  string                     $from Sender mailbox
      * @throws Exception\RuntimeException
      */
     public function mail($from)
@@ -228,7 +225,7 @@ class Smtp extends AbstractProtocol
             throw new Exception\RuntimeException('A valid session has not been started');
         }
 
-        $this->_send('MAIL FROM:<' . $from . '>');
+        $this->_send('MAIL FROM:<'.$from.'>');
         $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
 
         // Set mail to true, clear recipients and any existing data flags as per 4.1.1.2 of RFC 2821
@@ -237,11 +234,10 @@ class Smtp extends AbstractProtocol
         $this->data = false;
     }
 
-
     /**
      * Issues RCPT command
      *
-     * @param  string $to Receiver(s) mailbox
+     * @param  string                     $to Receiver(s) mailbox
      * @throws Exception\RuntimeException
      */
     public function rcpt($to)
@@ -251,16 +247,15 @@ class Smtp extends AbstractProtocol
         }
 
         // Set rcpt to true, as per 4.1.1.3 of RFC 2821
-        $this->_send('RCPT TO:<' . $to . '>');
+        $this->_send('RCPT TO:<'.$to.'>');
         $this->_expect(array(250, 251), 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
         $this->rcpt = true;
     }
 
-
     /**
      * Issues DATA command
      *
-     * @param  string $data
+     * @param  string                     $data
      * @throws Exception\RuntimeException
      */
     public function data($data)
@@ -279,7 +274,7 @@ class Smtp extends AbstractProtocol
         foreach (explode(self::EOL, $data) as $line) {
             if (strpos($line, '.') === 0) {
                 // Escape lines prefixed with a '.'
-                $line = '.' . $line;
+                $line = '.'.$line;
             }
             $this->_send($line);
         }
@@ -288,7 +283,6 @@ class Smtp extends AbstractProtocol
         $this->_expect(250, 600); // Timeout set for 10 minutes as per RFC 2821 4.5.3.2
         $this->data = true;
     }
-
 
     /**
      * Issues the RSET command end validates answer
@@ -324,11 +318,11 @@ class Smtp extends AbstractProtocol
      *
      * Not used by Zend\Mail.
      *
-     * @param  string $user User Name or eMail to verify
+     * @param string $user User Name or eMail to verify
      */
     public function vrfy($user)
     {
-        $this->_send('VRFY ' . $user);
+        $this->_send('VRFY '.$user);
         $this->_expect(array(250, 251, 252), 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
     }
 

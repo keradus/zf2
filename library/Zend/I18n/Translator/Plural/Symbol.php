@@ -88,9 +88,9 @@ class Symbol
     /**
      * Create a new symbol.
      *
-     * @param  Parser  $parser
-     * @param  string  $id
-     * @param  int $leftBindingPower
+     * @param Parser $parser
+     * @param string $id
+     * @param int    $leftBindingPower
      */
     public function __construct(Parser $parser, $id, $leftBindingPower)
     {
@@ -108,6 +108,7 @@ class Symbol
     public function setNullDenotationGetter(Closure $getter)
     {
         $this->nullDenotationGetter = $getter;
+
         return $this;
     }
 
@@ -120,6 +121,7 @@ class Symbol
     public function setLeftDenotationGetter(Closure $getter)
     {
         $this->leftDenotationGetter = $getter;
+
         return $this;
     }
 
@@ -137,13 +139,14 @@ class Symbol
 
         /** @var callable $function  */
         $function = $this->nullDenotationGetter;
+
         return $function($this);
     }
 
     /**
      * Get left denotation.
      *
-     * @param  Symbol $left
+     * @param  Symbol                   $left
      * @throws Exception\ParseException
      * @return Symbol
      */
@@ -155,6 +158,7 @@ class Symbol
 
         /** @var callable $function  */
         $function = $this->leftDenotationGetter;
+
         return $function($this, $left);
     }
 }

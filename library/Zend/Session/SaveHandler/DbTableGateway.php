@@ -51,7 +51,7 @@ class DbTableGateway implements SaveHandlerInterface
     /**
      * Constructor
      *
-     * @param TableGateway $tableGateway
+     * @param TableGateway          $tableGateway
      * @param DbTableGatewayOptions $options
      */
     public function __construct(TableGateway $tableGateway, DbTableGatewayOptions $options)
@@ -89,7 +89,7 @@ class DbTableGateway implements SaveHandlerInterface
     /**
      * Read session data
      *
-     * @param string $id
+     * @param  string $id
      * @return string
      */
     public function read($id)
@@ -106,14 +106,15 @@ class DbTableGateway implements SaveHandlerInterface
             }
             $this->destroy($id);
         }
+
         return '';
     }
 
     /**
      * Write session data
      *
-     * @param string $id
-     * @param string $data
+     * @param  string $id
+     * @param  string $data
      * @return bool
      */
     public function write($id, $data)
@@ -158,12 +159,13 @@ class DbTableGateway implements SaveHandlerInterface
     /**
      * Garbage Collection
      *
-     * @param int $maxlifetime
+     * @param  int  $maxlifetime
      * @return true
      */
     public function gc($maxlifetime)
     {
         $platform = $this->tableGateway->getAdapter()->getPlatform();
+
         return (bool) $this->tableGateway->delete(
             sprintf(
                 '%s < %d',

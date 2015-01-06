@@ -14,13 +14,13 @@ use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 
 /**
-*/
+ */
 class Atom extends AbstractAtom implements Renderer\RendererInterface
 {
     /**
      * Constructor
      *
-     * @param  Writer\Feed $container
+     * @param Writer\Feed $container
      */
     public function __construct(Writer\Feed $container)
     {
@@ -91,6 +91,7 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
             $imported = $this->dom->importNode($element, true);
             $root->appendChild($imported);
         }
+
         return $this;
     }
 }

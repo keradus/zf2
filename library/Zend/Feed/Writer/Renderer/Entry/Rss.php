@@ -17,13 +17,13 @@ use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 
 /**
-*/
+ */
 class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
      *
-     * @param  Writer\Entry $container
+     * @param Writer\Entry $container
      */
     public function __construct(Writer\Entry $container)
     {
@@ -66,8 +66,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Set entry title
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                               $dom
+     * @param  DOMElement                                $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -76,13 +76,14 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         if (!$this->getDataContainer()->getDescription()
         && !$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
-            . ' title element but a title has not been set. In addition, there'
-            . ' is no description as required in the absence of a title.';
+            .' title element but a title has not been set. In addition, there'
+            .' is no description as required in the absence of a title.';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -95,8 +96,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Set entry description
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                               $dom
+     * @param  DOMElement                                $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -105,14 +106,15 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         if (!$this->getDataContainer()->getDescription()
         && !$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
-            . ' description element but a description has not been set. In'
-            . ' addition, there is no title element as required in the absence'
-            . ' of a description.';
+            .' description element but a description has not been set. In'
+            .' addition, there is no title element as required in the absence'
+            .' of a description.';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -129,7 +131,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set date entry was last modified
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
@@ -150,7 +152,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set date entry was created
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
@@ -169,7 +171,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set entry authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -182,7 +184,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $author = $this->dom->createElement('author');
             $name = $data['name'];
             if (array_key_exists('email', $data)) {
-                $name = $data['email'] . ' (' . $data['name'] . ')';
+                $name = $data['email'].' ('.$data['name'].')';
             }
             $text = $dom->createTextNode($name);
             $author->appendChild($text);
@@ -193,8 +195,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Set entry enclosure
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                               $dom
+     * @param  DOMElement                                $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -210,6 +212,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -219,16 +222,18 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
         if (isset($data['length']) && (int) $data['length'] <= 0) {
             $exception = new Writer\Exception\InvalidArgumentException('Enclosure "length" must be an integer'
-            . ' indicating the content\'s length in bytes');
+            .' indicating the content\'s length in bytes');
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -243,7 +248,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set link to entry
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
@@ -261,7 +266,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set entry identifier
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
@@ -288,7 +293,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set link to entry comments
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
@@ -306,8 +311,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Set entry categories
      *
-     * @param DOMDocument $dom
-     * @param DOMElement $root
+     * @param  DOMDocument $dom
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)

@@ -45,7 +45,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test encoding and decoding in a single step
-     * @param array $values   array of values to test against encode/decode
+     * @param array $values array of values to test against encode/decode
      */
     protected function _testJSON($values)
     {
@@ -61,7 +61,6 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->_testEncodeDecode(array(null));
     }
 
-
     /**
      * test boolean encoding/decoding
      */
@@ -70,7 +69,6 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Json\Decoder::decode(Json\Encoder::encode(true)));
         $this->assertFalse(Json\Decoder::decode(Json\Encoder::encode(false)));
     }
-
 
     /**
      * test integer encoding/decoding
@@ -81,9 +79,8 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->_testEncodeDecode(array(-1));
 
         $zero = Json\Decoder::decode(Json\Encoder::encode(0));
-        $this->assertEquals(0, $zero, 'Failed 0 integer test. Encoded: ' . serialize(Json\Encoder::encode(0)));
+        $this->assertEquals(0, $zero, 'Failed 0 integer test. Encoded: '.serialize(Json\Encoder::encode(0)));
     }
-
 
     /**
      * test float encoding/decoding
@@ -99,7 +96,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testString()
     {
         $this->_testEncodeDecode(array('string'));
-        $this->assertEquals('', Json\Decoder::decode(Json\Encoder::encode('')), 'Empty string encoded: ' . serialize(Json\Encoder::encode('')));
+        $this->assertEquals('', Json\Decoder::decode(Json\Encoder::encode('')), 'Empty string encoded: '.serialize(Json\Encoder::encode('')));
     }
 
     /**
@@ -110,7 +107,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $string   = 'INFO: Path \\\\test\\123\\abc';
         $expected = '"INFO: Path \\\\\\\\test\\\\123\\\\abc"';
         $encoded = Json\Encoder::encode($string);
-        $this->assertEquals($expected, $encoded, 'Backslash encoding incorrect: expected: ' . serialize($expected) . '; received: ' . serialize($encoded) . "\n");
+        $this->assertEquals($expected, $encoded, 'Backslash encoding incorrect: expected: '.serialize($expected).'; received: '.serialize($encoded)."\n");
         $this->assertEquals($string, Json\Decoder::decode($encoded));
     }
 
@@ -122,7 +119,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $expected = '"INFO: Path\nSome more"';
         $string   = "INFO: Path\nSome more";
         $encoded  = Json\Encoder::encode($string);
-        $this->assertEquals($expected, $encoded, 'Newline encoding incorrect: expected ' . serialize($expected) . '; received: ' . serialize($encoded) . "\n");
+        $this->assertEquals($expected, $encoded, 'Newline encoding incorrect: expected '.serialize($expected).'; received: '.serialize($encoded)."\n");
         $this->assertEquals($string, Json\Decoder::decode($encoded));
     }
 
@@ -134,7 +131,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $expected = '"INFO: Path\\t\\\\tSome more"';
         $string   = "INFO: Path\t\\tSome more";
         $encoded  = Json\Encoder::encode($string);
-        $this->assertEquals($expected, $encoded, 'Tab encoding incorrect: expected ' . serialize($expected) . '; received: ' . serialize($encoded) . "\n");
+        $this->assertEquals($expected, $encoded, 'Tab encoding incorrect: expected '.serialize($expected).'; received: '.serialize($encoded)."\n");
         $this->assertEquals($string, Json\Decoder::decode($encoded));
     }
 
@@ -149,7 +146,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             $encoded,
-            'Quote encoding incorrect: expected ' . serialize($expected) . '; received: ' . serialize($encoded) . "\n"
+            'Quote encoding incorrect: expected '.serialize($expected).'; received: '.serialize($encoded)."\n"
         );
         $this->assertEquals($string, Json\Decoder::decode($encoded)); // Bug: does not accept \u0022 as token!
     }
@@ -166,7 +163,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             $encoded,
-            'Encoding error: expected ' . serialize($expected) . '; received: ' . serialize($encoded) . "\n"
+            'Encoding error: expected '.serialize($expected).'; received: '.serialize($encoded)."\n"
         );
         $this->assertEquals($string, Json\Decoder::decode($encoded));
     }
@@ -179,11 +176,10 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testStringOfOtherSpecialCharsEncodedToUnicodeEscapes()
     {
         Json\Json::$useBuiltinEncoderDecoder = false;
-        $string   = "\\ - \n - \t - \r - " .chr(0x08). " - " .chr(0x0C). " - / - \v";
+        $string   = "\\ - \n - \t - \r - ".chr(0x08)." - ".chr(0x0C)." - / - \v";
         $encoded  = '"\u005C - \u000A - \u0009 - \u000D - \u0008 - \u000C - \u002F - \u000B"';
         $this->assertEquals($string, Json\Decoder::decode($encoded));
     }
-
 
     /**
      * test indexed array encoding/decoding
@@ -192,7 +188,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $array = array(1, 'one', 2, 'two');
         $encoded = Json\Encoder::encode($array);
-        $this->assertSame($array, Json\Decoder::decode($encoded), 'Decoded array does not match: ' . serialize($encoded));
+        $this->assertSame($array, Json\Decoder::decode($encoded), 'Decoded array does not match: '.serialize($encoded));
     }
 
     /**
@@ -274,14 +270,14 @@ class JsonTest extends \PHPUnit_Framework_TestCase
             ),
             234 => array(22, 'jb'),
             346 => array(64, 'francois'),
-            21  => array(12, 'paul')
+            21  => array(12, 'paul'),
         );
         $this->assertEquals($expect, Json\Decoder::decode($value, Json\Json::TYPE_ARRAY));
     }
 
     /**
      * Test encoding and decoding in a single step
-     * @param array $values   array of values to test against encode/decode
+     * @param array $values array of values to test against encode/decode
      */
     protected function _testEncodeDecode($values)
     {
@@ -306,6 +302,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         foreach ((array) $value as $k => $v) {
             $array[$k] = $this->_toArray($v);
         }
+
         return $array;
     }
 
@@ -328,7 +325,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $expected = array('data' => array(1, 2, 3, 4));
 
-        $json = '{"data":[1,2,3,4' . "\n]}";
+        $json = '{"data":[1,2,3,4'."\n]}";
         $this->assertEquals($expected, Json\Decoder::decode($json, Json\Json::TYPE_ARRAY));
 
         $json = '{"data":[1,2,3,4 ]}';
@@ -405,7 +402,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $everything['allItems'] = array($item1, $item2);
         $everything['currentItem'] = $item1;
 
-        $options = array('silenceCyclicalExceptions'=>true);
+        $options = array('silenceCyclicalExceptions' => true);
 
         Json\Json::$useBuiltinEncoderDecoder = true;
         $encoded = Json\Json::encode($everything, true, $options);
@@ -489,7 +486,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testEncodingArrayWithExpr()
     {
         $expr = new Json\Expr('window.alert("Zend JSON Expr")');
-        $array = array('expr'=>$expr, 'int'=>9, 'string'=>'text');
+        $array = array('expr' => $expr, 'int' => 9, 'string' => 'text');
         $result = Json\Json::encode($array, false, array('enableJsonExprFinder' => true));
         $expected = '{"expr":window.alert("Zend JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
@@ -571,7 +568,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
             2 => array(
                 "alpha" => "gamma",
                 "beta" => "gamma",
-            )
+            ),
         );
         $result = Json\Json::encode($data, false, array('enableJsonExprFinder' => true));
 
@@ -590,7 +587,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $data = array(
             0 => array(
-                "alpha" => "alpha"
+                "alpha" => "alpha",
             ),
             1 => array(
                 "alpha" => "beta",
@@ -603,7 +600,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
             ),
             4 => array(
                 "alpha" => new Json\Expr("epsilon"),
-            )
+            ),
         );
         $result = Json\Json::encode($data, false, array('enableJsonExprFinder' => true));
 
@@ -737,7 +734,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testCommaDecimalIsConvertedToCorrectJSONWithDot()
     {
         setlocale(LC_ALL, 'Spanish_Spain', 'es_ES', 'es_ES.utf-8');
-        if (strcmp('1,2', (string)floatval(1.20)) != 0) {
+        if (strcmp('1,2', (string) floatval(1.20)) != 0) {
             $this->markTestSkipped('This test only works for platforms where "," is the decimal point separator.');
         }
         Json\Json::$useBuiltinEncoderDecoder = true;
@@ -750,7 +747,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $iterator = new \ArrayIterator(array(
             'foo' => 'bar',
-            'baz' => 5
+            'baz' => 5,
         ));
         $target = '{"__className":"ArrayIterator","foo":"bar","baz":5}';
 
@@ -860,15 +857,15 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         // The escaped double-quote in item 'stringwithjsonchars' ensures that
         // escaped double-quotes don't throw off prettyPrint's string literal detection
         $test = array(
-            'simple'=>'simple test string',
-            'stringwithjsonchars'=>'\"[1,2]',
-            'complex'=>array(
-                'foo'=>'bar',
-                'far'=>'boo',
-                'faz'=>array(
-                    'obj'=>$o
-                )
-            )
+            'simple' => 'simple test string',
+            'stringwithjsonchars' => '\"[1,2]',
+            'complex' => array(
+                'foo' => 'bar',
+                'far' => 'boo',
+                'faz' => array(
+                    'obj' => $o,
+                ),
+            ),
         );
         $pretty = Json\Json::prettyPrint(Json\Json::encode($test), array("indent"  => " "));
         $expected = <<<EOB
@@ -931,7 +928,7 @@ EOB;
      */
     public function testWillEncodeArrayOfObjectsEachWithToJsonMethod()
     {
-        $array = array('one'=>new ToJsonClass());
+        $array = array('one' => new ToJsonClass());
         $expected = '{"one":{"__className":"ZendTest\\\\Json\\\\ToJSONClass","firstName":"John","lastName":"Doe","email":"john@doe.com"}}';
 
         Json\Json::$useBuiltinEncoderDecoder = true;
@@ -998,7 +995,7 @@ class ToJSONClass
         $data = array(
             'firstName' => $this->_firstName,
             'lastName'  => $this->_lastName,
-            'email'     => $this->_email
+            'email'     => $this->_email,
         );
 
         return Json\Json::encode($data);
@@ -1022,8 +1019,9 @@ class ZF11167_ToArrayClass
         $data = array(
             'firstName' => $this->_firstName,
             'lastName'  => $this->_lastName,
-            'email'     => $this->_email
+            'email'     => $this->_email,
         );
+
         return $data;
     }
 }
@@ -1054,7 +1052,7 @@ class ToJSONWithExpr
         $data = array(
             'expr'   => new Json\Expr($this->_expr),
             'int'    => $this->_int,
-            'string' => $this->_string
+            'string' => $this->_string,
         );
 
         return Json\Json::encode($data, false, array('enableJsonExprFinder' => true));

@@ -46,7 +46,7 @@ class TokenArrayScanner implements ScannerInterface
     protected $annotationManager = null;
 
     /**
-     * @param null|array $tokens
+     * @param null|array             $tokens
      * @param null|AnnotationManager $annotationManager
      */
     public function __construct($tokens, AnnotationManager $annotationManager = null)
@@ -167,7 +167,7 @@ class TokenArrayScanner implements ScannerInterface
     /**
      * Return the class object from this scanner
      *
-     * @param  string|int $name
+     * @param  string|int                         $name
      * @throws Exception\InvalidArgumentException
      * @return ClassScanner
      */
@@ -205,7 +205,7 @@ class TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * @param  string $className
+     * @param  string                    $className
      * @return bool|null|NameInformation
      */
     public function getClassNameInformation($className)
@@ -308,7 +308,6 @@ class TokenArrayScanner implements ScannerInterface
         /**
          * Variables & Setup
          */
-
         $tokens          = &$this->tokens; // localize
         $infos           = &$this->infos; // localize
         $tokenIndex      = null;
@@ -454,7 +453,7 @@ class TokenArrayScanner implements ScannerInterface
                     'lineEnd'    => null,
                     'namespace'  => $namespace,
                     'statements' => array(0 => array('use' => null,
-                                                     'as'  => null)),
+                                                     'as'  => null, )),
                 );
 
                 $useStatementIndex = 0;
@@ -474,7 +473,7 @@ class TokenArrayScanner implements ScannerInterface
                         $useAsContext = false;
                         $useStatementIndex++;
                         $infos[$infoIndex]['statements'][$useStatementIndex] = array('use' => null,
-                                                                                     'as'  => null);
+                                                                                     'as'  => null, );
                     }
                 }
 
@@ -517,7 +516,7 @@ class TokenArrayScanner implements ScannerInterface
                     T_INCLUDE      => 'include',
                     T_INCLUDE_ONCE => 'include_once',
                     T_REQUIRE      => 'require',
-                    T_REQUIRE_ONCE => 'require_once'
+                    T_REQUIRE_ONCE => 'require_once',
                 );
 
                 $infos[$infoIndex] = array(
@@ -587,7 +586,7 @@ class TokenArrayScanner implements ScannerInterface
                         || ($tokenType === T_FUNCTION && $infos[$infoIndex]['type'] === 'function'))
                 ) {
                     $infos[$infoIndex]['shortName'] = $tokens[$tokenIndex + 2][1];
-                    $infos[$infoIndex]['name']      = (($namespace != null) ? $namespace . '\\' : '') . $infos[$infoIndex]['shortName'];
+                    $infos[$infoIndex]['name']      = (($namespace != null) ? $namespace.'\\' : '').$infos[$infoIndex]['shortName'];
                 }
 
                 if ($tokenType === null) {
@@ -628,14 +627,13 @@ class TokenArrayScanner implements ScannerInterface
         /**
          * END FINITE STATE MACHINE FOR SCANNING TOKENS
          */
-
         $this->isScanned = true;
     }
 
     /**
      * Check for namespace
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return bool
      */
     public function hasNamespace($namespace)
@@ -647,11 +645,12 @@ class TokenArrayScanner implements ScannerInterface
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * @param  string $namespace
+     * @param  string                             $namespace
      * @return null|array
      * @throws Exception\InvalidArgumentException
      */

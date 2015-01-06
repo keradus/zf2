@@ -74,7 +74,7 @@ class DocBlockGenerator extends AbstractGenerator
      * @configkey tags             array
      *
      * @throws Exception\InvalidArgumentException
-     * @param  array $array
+     * @param  array                              $array
      * @return DocBlockGenerator
      */
     public static function fromArray(array $array)
@@ -105,13 +105,14 @@ class DocBlockGenerator extends AbstractGenerator
             static::$tagManager = new TagManager();
             static::$tagManager->initializeDefaultTags();
         }
+
         return static::$tagManager;
     }
 
     /**
-     * @param  string $shortDescription
-     * @param  string $longDescription
-     * @param  array $tags
+     * @param string $shortDescription
+     * @param string $longDescription
+     * @param array  $tags
      */
     public function __construct($shortDescription = null, $longDescription = null, array $tags = array())
     {
@@ -127,12 +128,13 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $shortDescription
+     * @param  string            $shortDescription
      * @return DocBlockGenerator
      */
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
+
         return $this;
     }
 
@@ -145,12 +147,13 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $longDescription
+     * @param  string            $longDescription
      * @return DocBlockGenerator
      */
     public function setLongDescription($longDescription)
     {
         $this->longDescription = $longDescription;
+
         return $this;
     }
 
@@ -163,7 +166,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array $tags
+     * @param  array             $tags
      * @return DocBlockGenerator
      */
     public function setTags(array $tags)
@@ -176,7 +179,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param array|TagInterface $tag
+     * @param  array|TagInterface                 $tag
      * @throws Exception\InvalidArgumentException
      * @return DocBlockGenerator
      */
@@ -196,6 +199,7 @@ class DocBlockGenerator extends AbstractGenerator
         }
 
         $this->tags[] = $tag;
+
         return $this;
     }
 
@@ -208,12 +212,13 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param bool $value
+     * @param  bool              $value
      * @return DocBlockGenerator
      */
     public function setWordWrap($value)
     {
         $this->wordwrap = (bool) $value;
+
         return $this;
     }
 
@@ -236,15 +241,15 @@ class DocBlockGenerator extends AbstractGenerator
 
         $output = '';
         if (null !== ($sd = $this->getShortDescription())) {
-            $output .= $sd . self::LINE_FEED . self::LINE_FEED;
+            $output .= $sd.self::LINE_FEED.self::LINE_FEED;
         }
         if (null !== ($ld = $this->getLongDescription())) {
-            $output .= $ld . self::LINE_FEED . self::LINE_FEED;
+            $output .= $ld.self::LINE_FEED.self::LINE_FEED;
         }
 
         /* @var $tag GeneratorInterface */
         foreach ($this->getTags() as $tag) {
-            $output .= $tag->generate() . self::LINE_FEED;
+            $output .= $tag->generate().self::LINE_FEED;
         }
 
         return $this->docCommentize(trim($output));
@@ -257,17 +262,17 @@ class DocBlockGenerator extends AbstractGenerator
     protected function docCommentize($content)
     {
         $indent  = $this->getIndentation();
-        $output  = $indent . '/**' . self::LINE_FEED;
+        $output  = $indent.'/**'.self::LINE_FEED;
         $content = $this->getWordWrap() == true ? wordwrap($content, 80, self::LINE_FEED) : $content;
         $lines   = explode(self::LINE_FEED, $content);
         foreach ($lines as $line) {
-            $output .= $indent . ' *';
+            $output .= $indent.' *';
             if ($line) {
                 $output .= " $line";
             }
             $output .= self::LINE_FEED;
         }
-        $output .= $indent . ' */' . self::LINE_FEED;
+        $output .= $indent.' */'.self::LINE_FEED;
 
         return $output;
     }

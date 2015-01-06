@@ -33,12 +33,13 @@ class HtmlCloud extends AbstractCloud
     /**
      * Set the HTML tags surrounding all tags
      *
-     * @param  array $htmlTags
+     * @param  array     $htmlTags
      * @return HTMLCloud
      */
     public function setHTMLTags(array $htmlTags)
     {
         $this->htmlTags = $htmlTags;
+
         return $this;
     }
 
@@ -61,6 +62,7 @@ class HtmlCloud extends AbstractCloud
     public function setSeparator($separator)
     {
         $this->separator = $separator;
+
         return $this;
     }
 
@@ -77,7 +79,7 @@ class HtmlCloud extends AbstractCloud
     /**
      * Defined by Zend\Tag\Cloud\Decorator\Cloud
      *
-     * @param  array $tags
+     * @param  array                              $tags
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -91,6 +93,7 @@ class HtmlCloud extends AbstractCloud
         }
         $cloudHTML = implode($this->getSeparator(), $tags);
         $cloudHTML = $this->wrapTag($cloudHTML);
+
         return $cloudHTML;
     }
 }

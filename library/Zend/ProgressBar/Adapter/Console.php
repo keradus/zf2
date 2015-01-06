@@ -137,7 +137,7 @@ class Console extends AbstractAdapter
     /**
      * Defined by Zend\ProgressBar adapter
      *
-     * @param  array|\Traversable $options
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -163,7 +163,7 @@ class Console extends AbstractAdapter
     /**
      * Set a different output-stream
      *
-     * @param  string $resource
+     * @param  string                            $resource
      * @throws Exception\RuntimeException
      * @return \Zend\ProgressBar\Adapter\Console
      */
@@ -205,7 +205,7 @@ class Console extends AbstractAdapter
     /**
      * Set the width of the progressbar
      *
-     * @param  int $width
+     * @param  int                               $width
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setWidth($width = null)
@@ -242,7 +242,7 @@ class Console extends AbstractAdapter
     /**
      * Set the elements to display with the progressbar
      *
-     * @param  array $elements
+     * @param  array                                                        $elements
      * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When an invalid element is found in the array
      * @return \Zend\ProgressBar\Adapter\Console
      */
@@ -251,7 +251,7 @@ class Console extends AbstractAdapter
         $allowedElements = array(self::ELEMENT_PERCENT,
                                  self::ELEMENT_BAR,
                                  self::ELEMENT_ETA,
-                                 self::ELEMENT_TEXT);
+                                 self::ELEMENT_TEXT, );
 
         if (count(array_diff($elements, $allowedElements)) > 0) {
             throw new Exception\InvalidArgumentException('Invalid element found in $elements array');
@@ -267,7 +267,7 @@ class Console extends AbstractAdapter
     /**
      * Set the left-hand character for the bar
      *
-     * @param  string $char
+     * @param  string                                                       $char
      * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When character is empty
      * @return \Zend\ProgressBar\Adapter\Console
      */
@@ -285,7 +285,7 @@ class Console extends AbstractAdapter
     /**
      * Set the right-hand character for the bar
      *
-     * @param  string $char
+     * @param  string                                                       $char
      * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When character is empty
      * @return \Zend\ProgressBar\Adapter\Console
      */
@@ -303,7 +303,7 @@ class Console extends AbstractAdapter
     /**
      * Set the indicator character for the bar
      *
-     * @param  string $char
+     * @param  string                            $char
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setBarIndicatorChar($char)
@@ -316,7 +316,7 @@ class Console extends AbstractAdapter
     /**
      * Set the width of the text element
      *
-     * @param  int $width
+     * @param  int                               $width
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setTextWidth($width)
@@ -341,7 +341,7 @@ class Console extends AbstractAdapter
     /**
      * Set the finish action
      *
-     * @param  string $action
+     * @param  string                                                       $action
      * @throws \Zend\ProgressBar\Adapter\Exception\InvalidArgumentException When an invalid action is specified
      * @return \Zend\ProgressBar\Adapter\Console
      */
@@ -349,7 +349,7 @@ class Console extends AbstractAdapter
     {
         $allowedActions = array(self::FINISH_ACTION_CLEAR_LINE,
                                 self::FINISH_ACTION_EOL,
-                                self::FINISH_ACTION_NONE);
+                                self::FINISH_ACTION_NONE, );
 
         if (!in_array($action, $allowedActions)) {
             throw new Exception\InvalidArgumentException('Invalid finish action specified');
@@ -363,12 +363,12 @@ class Console extends AbstractAdapter
     /**
      * Defined by Zend\ProgressBar\Adapter\AbstractAdapter
      *
-     * @param  float   $current       Current progress value
-     * @param  float   $max           Max progress value
-     * @param  float   $percent       Current percent value
-     * @param  int $timeTaken     Taken time in seconds
-     * @param  int $timeRemaining Remaining time in seconds
-     * @param  string  $text          Status text
+     * @param  float  $current       Current progress value
+     * @param  float  $max           Max progress value
+     * @param  float  $percent       Current percent value
+     * @param  int    $timeTaken     Taken time in seconds
+     * @param  int    $timeRemaining Remaining time in seconds
+     * @param  string $text          Status text
      * @return void
      */
     public function notify($current, $max, $percent, $timeTaken, $timeRemaining, $text)
@@ -410,7 +410,7 @@ class Console extends AbstractAdapter
                     break;
 
                 case self::ELEMENT_PERCENT:
-                    $renderedElements[] = str_pad(round($percent * 100), 3, ' ', STR_PAD_LEFT) . '%';
+                    $renderedElements[] = str_pad(round($percent * 100), 3, ' ', STR_PAD_LEFT).'%';
                     break;
 
                 case self::ELEMENT_ETA:
@@ -432,7 +432,7 @@ class Console extends AbstractAdapter
                         $etaFormatted = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
                     }
 
-                    $renderedElements[] = 'ETA ' . $etaFormatted;
+                    $renderedElements[] = 'ETA '.$etaFormatted;
                     break;
 
                 case self::ELEMENT_TEXT:
@@ -468,8 +468,8 @@ class Console extends AbstractAdapter
             case self::FINISH_ACTION_CLEAR_LINE:
                 if ($this->outputStarted) {
                     $data = str_repeat("\x08", $this->width)
-                          . str_repeat(' ', $this->width)
-                          . str_repeat("\x08", $this->width);
+                          .str_repeat(' ', $this->width)
+                          .str_repeat("\x08", $this->width);
 
                     $this->_outputData($data);
                 }

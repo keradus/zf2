@@ -63,13 +63,13 @@ class Received implements HeaderInterface, MultipleHeadersInterface
 
     public function toString()
     {
-        return 'Received: ' . $this->getFieldValue();
+        return 'Received: '.$this->getFieldValue();
     }
 
     /**
      * Serialize collection of Received headers to string
      *
-     * @param  array $headers
+     * @param  array                      $headers
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -84,6 +84,7 @@ class Received implements HeaderInterface, MultipleHeadersInterface
             }
             $strings[] = $header->toString();
         }
+
         return implode(Headers::EOL, $strings);
     }
 }

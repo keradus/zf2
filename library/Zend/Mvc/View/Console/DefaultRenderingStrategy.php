@@ -72,7 +72,7 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
         $console = $sm->get('console');
 
         // Append console response to response object
-        $content = $response->getContent() . $responseText;
+        $content = $response->getContent().$responseText;
         if (is_callable(array($console, 'encodeText'))) {
             $content = $console->encodeText($content);
         }

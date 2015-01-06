@@ -19,9 +19,9 @@ abstract class AbstractWriter implements WriterInterface
      * toFile(): defined by Writer interface.
      *
      * @see    WriterInterface::toFile()
-     * @param  string  $filename
-     * @param  mixed   $config
-     * @param  bool $exclusiveLock
+     * @param  string                             $filename
+     * @param  mixed                              $config
+     * @param  bool                               $exclusiveLock
      * @return void
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -61,7 +61,7 @@ abstract class AbstractWriter implements WriterInterface
      * toString(): defined by Writer interface.
      *
      * @see    WriterInterface::toString()
-     * @param  mixed   $config
+     * @param  mixed                              $config
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -70,14 +70,14 @@ abstract class AbstractWriter implements WriterInterface
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
         } elseif (!is_array($config)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable config');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable config');
         }
 
         return $this->processConfig($config);
     }
 
     /**
-     * @param array $config
+     * @param  array  $config
      * @return string
      */
     abstract protected function processConfig(array $config);

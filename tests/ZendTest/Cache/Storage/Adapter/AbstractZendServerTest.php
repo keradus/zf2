@@ -44,7 +44,7 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
 
         $this->_storage->expects($this->once())
                        ->method('zdcFetch')
-                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns'.AbstractZendServer::NAMESPACE_SEPARATOR.'key'))
                        ->will($this->returnValue('value'));
 
         $this->assertEquals('value', $this->_storage->getItem('key'));
@@ -57,7 +57,7 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
 
         $this->_storage->expects($this->once())
                        ->method('zdcFetch')
-                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns'.AbstractZendServer::NAMESPACE_SEPARATOR.'key'))
                        ->will($this->returnValue(null));
 
         $this->assertNull($this->_storage->getItem('key', $success));
@@ -70,7 +70,7 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
 
         $this->_storage->expects($this->once())
                        ->method('zdcFetch')
-                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns'.AbstractZendServer::NAMESPACE_SEPARATOR.'key'))
                        ->will($this->returnValue('value'));
 
         $this->assertEquals(array(), $this->_storage->getMetadata('key'));
@@ -82,7 +82,7 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
 
         $this->_storage->expects($this->once())
                        ->method('zdcFetch')
-                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns'.AbstractZendServer::NAMESPACE_SEPARATOR.'key'))
                        ->will($this->returnValue('value'));
 
         $this->assertEquals(true, $this->_storage->hasItem('key'));
@@ -96,7 +96,7 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
         $this->_storage->expects($this->once())
                        ->method('zdcStore')
                        ->with(
-                           $this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'),
+                           $this->equalTo('ns'.AbstractZendServer::NAMESPACE_SEPARATOR.'key'),
                            $this->equalTo('value'),
                            $this->equalTo(10)
                        )
@@ -111,7 +111,7 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
 
         $this->_storage->expects($this->once())
                        ->method('zdcDelete')
-                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns'.AbstractZendServer::NAMESPACE_SEPARATOR.'key'))
                        ->will($this->returnValue(true));
 
         $this->assertEquals(true, $this->_storage->removeItem('key'));

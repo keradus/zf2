@@ -97,7 +97,7 @@ class Socket implements HttpAdapter, StreamInterface
     /**
      * Set the configuration array for the adapter
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                         $options
      * @throws AdapterException\InvalidArgumentException
      */
     public function setOptions($options = array())
@@ -107,7 +107,7 @@ class Socket implements HttpAdapter, StreamInterface
         }
         if (!is_array($options)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Zend\Config object expected, got ' . gettype($options)
+                'Array or Zend\Config object expected, got '.gettype($options)
             );
         }
 
@@ -136,7 +136,7 @@ class Socket implements HttpAdapter, StreamInterface
      *
      * @since  Zend Framework 1.9
      *
-     * @param  mixed $context Stream context or array of context options
+     * @param  mixed                              $context Stream context or array of context options
      * @throws Exception\InvalidArgumentException
      * @return Socket
      */
@@ -149,7 +149,7 @@ class Socket implements HttpAdapter, StreamInterface
         } else {
             // Invalid parameter
             throw new AdapterException\InvalidArgumentException(
-                "Expecting either a stream context resource or array, got " . gettype($context)
+                "Expecting either a stream context resource or array, got ".gettype($context)
             );
         }
 
@@ -175,9 +175,9 @@ class Socket implements HttpAdapter, StreamInterface
     /**
      * Connect to the remote server
      *
-     * @param string  $host
-     * @param int     $port
-     * @param  bool $secure
+     * @param  string                            $host
+     * @param  int                               $port
+     * @param  bool                              $secure
      * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
@@ -242,7 +242,7 @@ class Socket implements HttpAdapter, StreamInterface
 
             ErrorHandler::start();
             $this->socket = stream_socket_client(
-                $host . ':' . $port,
+                $host.':'.$port,
                 $errno,
                 $errstr,
                 (int) $this->config['timeout'],
@@ -258,7 +258,7 @@ class Socket implements HttpAdapter, StreamInterface
                         'Unable to connect to %s:%d%s',
                         $host,
                         $port,
-                        ($error ? ' . Error #' . $error->getCode() . ': ' . $error->getMessage() : '')
+                        ($error ? ' . Error #'.$error->getCode().': '.$error->getMessage() : '')
                     ),
                     0,
                     $error
@@ -312,9 +312,9 @@ class Socket implements HttpAdapter, StreamInterface
                     ), 0, $error);
                 }
 
-                $host = $this->config['ssltransport'] . "://" . $host;
+                $host = $this->config['ssltransport']."://".$host;
             } else {
-                $host = 'tcp://' . $host;
+                $host = 'tcp://'.$host;
             }
 
             // Update connectedTo
@@ -322,17 +322,16 @@ class Socket implements HttpAdapter, StreamInterface
         }
     }
 
-
     /**
      * Send request to the remote server
      *
-     * @param string        $method
-     * @param \Zend\Uri\Uri $uri
-     * @param string        $httpVer
-     * @param array         $headers
-     * @param string        $body
+     * @param  string                            $method
+     * @param  \Zend\Uri\Uri                     $uri
+     * @param  string                            $httpVer
+     * @param  array                             $headers
+     * @param  string                            $body
      * @throws AdapterException\RuntimeException
-     * @return string Request as string
+     * @return string                            Request as string
      */
     public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
@@ -342,7 +341,7 @@ class Socket implements HttpAdapter, StreamInterface
         }
 
         $host = $uri->getHost();
-        $host = (strtolower($uri->getScheme()) == 'https' ? $this->config['ssltransport'] : 'tcp') . '://' . $host;
+        $host = (strtolower($uri->getScheme()) == 'https' ? $this->config['ssltransport'] : 'tcp').'://'.$host;
         if ($this->connectedTo[0] != $host || $this->connectedTo[1] != $uri->getPort()) {
             throw new AdapterException\RuntimeException('Trying to write but we are connected to the wrong host');
         }
@@ -353,12 +352,12 @@ class Socket implements HttpAdapter, StreamInterface
         // Build request headers
         $path = $uri->getPath();
         if ($uri->getQuery()) {
-            $path .= '?' . $uri->getQuery();
+            $path .= '?'.$uri->getQuery();
         }
         $request = "{$method} {$path} HTTP/{$httpVer}\r\n";
         foreach ($headers as $k => $v) {
             if (is_string($k)) {
-                $v = ucfirst($k) . ": $v";
+                $v = ucfirst($k).": $v";
             }
             $request .= "$v\r\n";
         }
@@ -367,7 +366,7 @@ class Socket implements HttpAdapter, StreamInterface
             $request .= "\r\n";
         } else {
             // Add the request body
-            $request .= "\r\n" . $body;
+            $request .= "\r\n".$body;
         }
 
         // Send the request
@@ -411,7 +410,7 @@ class Socket implements HttpAdapter, StreamInterface
 
         $this->_checkSocketReadTimeout();
 
-        $responseObj= Response::fromString($response);
+        $responseObj = Response::fromString($response);
 
         $statusCode = $responseObj->getStatusCode();
 
@@ -434,6 +433,7 @@ class Socket implements HttpAdapter, StreamInterface
             if ($connection && $connection->getFieldValue() == 'close') {
                 $this->close();
             }
+
             return $response;
         }
 
@@ -452,8 +452,8 @@ class Socket implements HttpAdapter, StreamInterface
                     $chunksize = trim($line);
                     if (! ctype_xdigit($chunksize)) {
                         $this->close();
-                        throw new AdapterException\RuntimeException('Invalid chunk size "' .
-                            $chunksize . '" unable to read chunked body');
+                        throw new AdapterException\RuntimeException('Invalid chunk size "'.
+                            $chunksize.'" unable to read chunked body');
                     }
 
                     // Convert the hexadecimal value to plain integer
@@ -494,8 +494,8 @@ class Socket implements HttpAdapter, StreamInterface
                 } while ($chunksize > 0);
             } else {
                 $this->close();
-                throw new AdapterException\RuntimeException('Cannot handle "' .
-                    $transferEncoding->getFieldValue() . '" transfer encoding');
+                throw new AdapterException\RuntimeException('Cannot handle "'.
+                    $transferEncoding->getFieldValue().'" transfer encoding');
             }
 
             // We automatically decode chunked-messages when writing to a stream
@@ -608,12 +608,13 @@ class Socket implements HttpAdapter, StreamInterface
     /**
      * Set output stream for the response
      *
-     * @param resource $stream
+     * @param  resource                         $stream
      * @return \Zend\Http\Client\Adapter\Socket
      */
     public function setOutputStream($stream)
     {
         $this->outStream = $stream;
+
         return $this;
     }
 

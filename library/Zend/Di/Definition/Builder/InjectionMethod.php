@@ -74,7 +74,7 @@ class InjectionMethod
 
     /**
      *
-     * @param mixed $requirement
+     * @param  mixed $requirement
      * @return int
      */
     public static function detectMethodRequirement($requirement)
@@ -110,6 +110,7 @@ class InjectionMethod
                     return Di::METHOD_IS_EAGER;
             }
         }
+
         return 0;
     }
 }

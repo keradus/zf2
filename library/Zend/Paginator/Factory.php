@@ -23,7 +23,7 @@ abstract class Factory
 
     /**
      * Create adapter from items if necessary, and return paginator
-     * @param Traversable/array $items
+     * @param  Traversable/array $items
      * @return Paginator
      */
     protected static function createAdapterFromItems($items)
@@ -34,28 +34,29 @@ abstract class Factory
         if (!is_array($items)) {
             throw new Exception\InvalidArgumentException(
                 'The factory needs an associative array '
-                . 'or a Traversable object as an argument when '
-                . "it's used with one parameter"
+                .'or a Traversable object as an argument when '
+                ."it's used with one parameter"
             );
         }
         if (!isset($items['adapter']) && !isset($items['items'])) {
             throw new Exception\InvalidArgumentException(
                 'The factory needs an associative array '
-                . 'or a Traversable object with keys '
-                . '"adapter" and "items"'
+                .'or a Traversable object with keys '
+                .'"adapter" and "items"'
             );
         }
         $adapter = $items['adapter'];
         $items = $items['items'];
 
         $paginator = static::getAdapterFromManager($items, $adapter);
+
         return $paginator;
     }
 
     /**
      * Get adapter from manager if necessary, and return paginator
-     * @param mixed $items
-     * @param mixed $adapter
+     * @param  mixed     $items
+     * @param  mixed     $adapter
      * @return Paginator
      */
     protected static function getAdapterFromManager($items, $adapter)
@@ -64,22 +65,25 @@ abstract class Factory
             return new Paginator($adapter);
         }
         $adapter = static::getAdapterPluginManager()->get($adapter, $items);
+
         return new Paginator($adapter);
     }
 
     /**
      * Create paginator with items and adapter
-     * @param mixed $items
-     * @param mixed $adapter
+     * @param  mixed     $items
+     * @param  mixed     $adapter
      * @return Paginator
      */
     public static function factory($items, $adapter = null)
     {
         if (null === $adapter) {
             $paginator = static::createAdapterFromItems($items);
+
             return $paginator;
         }
         $paginator = static::getAdapterFromManager($items, $adapter);
+
         return $paginator;
     }
 
@@ -104,6 +108,7 @@ abstract class Factory
         if (static::$adapters === null) {
             static::$adapters = new AdapterPluginManager();
         }
+
         return static::$adapters;
     }
 }

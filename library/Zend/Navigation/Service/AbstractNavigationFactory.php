@@ -29,12 +29,13 @@ abstract class AbstractNavigationFactory implements FactoryInterface
     protected $pages;
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface     $serviceLocator
      * @return \Zend\Navigation\Navigation
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $pages = $this->getPages($serviceLocator);
+
         return new Navigation($pages);
     }
 
@@ -45,7 +46,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
     abstract protected function getName();
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface                             $serviceLocator
      * @return array
      * @throws \Zend\Navigation\Exception\InvalidArgumentException
      */
@@ -67,12 +68,13 @@ abstract class AbstractNavigationFactory implements FactoryInterface
             $pages       = $this->getPagesFromConfig($configuration['navigation'][$this->getName()]);
             $this->pages = $this->preparePages($serviceLocator, $pages);
         }
+
         return $this->pages;
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param array|\Zend\Config\Config $pages
+     * @param  ServiceLocatorInterface                             $serviceLocator
+     * @param  array|\Zend\Config\Config                           $pages
      * @throws \Zend\Navigation\Exception\InvalidArgumentException
      */
     protected function preparePages(ServiceLocatorInterface $serviceLocator, $pages)
@@ -91,7 +93,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
     }
 
     /**
-     * @param string|\Zend\Config\Config|array $config
+     * @param  string|\Zend\Config\Config|array                    $config
      * @return array|null|\Zend\Config\Config
      * @throws \Zend\Navigation\Exception\InvalidArgumentException
      */
@@ -118,10 +120,10 @@ abstract class AbstractNavigationFactory implements FactoryInterface
     }
 
     /**
-     * @param array $pages
-     * @param RouteMatch $routeMatch
-     * @param Router $router
-     * @param null|Request $request
+     * @param  array        $pages
+     * @param  RouteMatch   $routeMatch
+     * @param  Router       $router
+     * @param  null|Request $request
      * @return mixed
      */
     protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null, $request = null)
@@ -146,6 +148,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
                 $page['pages'] = $this->injectComponents($page['pages'], $routeMatch, $router, $request);
             }
         }
+
         return $pages;
     }
 }

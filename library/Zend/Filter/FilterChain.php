@@ -47,7 +47,7 @@ class FilterChain extends AbstractFilter implements Countable
     }
 
     /**
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -110,6 +110,7 @@ class FilterChain extends AbstractFilter implements Countable
         if (!$this->plugins) {
             $this->setPluginManager(new FilterPluginManager());
         }
+
         return $this->plugins;
     }
 
@@ -122,27 +123,29 @@ class FilterChain extends AbstractFilter implements Countable
     public function setPluginManager(FilterPluginManager $plugins)
     {
         $this->plugins = $plugins;
+
         return $this;
     }
 
     /**
      * Retrieve a filter plugin by name
      *
-     * @param  mixed $name
-     * @param  array $options
+     * @param  mixed           $name
+     * @param  array           $options
      * @return FilterInterface
      */
     public function plugin($name, array $options = array())
     {
         $plugins = $this->getPluginManager();
+
         return $plugins->get($name, $options);
     }
 
     /**
      * Attach a filter to the chain
      *
-     * @param  callable|FilterInterface $callback A Filter implementation or valid PHP callback
-     * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
+     * @param  callable|FilterInterface           $callback A Filter implementation or valid PHP callback
+     * @param  int                                $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -158,6 +161,7 @@ class FilterChain extends AbstractFilter implements Countable
             $callback = array($callback, 'filter');
         }
         $this->filters->insert($callback, $priority);
+
         return $this;
     }
 
@@ -168,8 +172,8 @@ class FilterChain extends AbstractFilter implements Countable
      * with the retrieved instance.
      *
      * @param  string $name
-     * @param  mixed $options
-     * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
+     * @param  mixed  $options
+     * @param  int    $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return self
      */
     public function attachByName($name, $options = array(), $priority = self::DEFAULT_PRIORITY)
@@ -180,13 +184,14 @@ class FilterChain extends AbstractFilter implements Countable
             $options = null;
         }
         $filter = $this->getPluginManager()->get($name, $options);
+
         return $this->attach($filter, $priority);
     }
 
     /**
      * Merge the filter chain with the one given in parameter
      *
-     * @param FilterChain $filterChain
+     * @param  FilterChain $filterChain
      * @return self
      */
     public function merge(FilterChain $filterChain)

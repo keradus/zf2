@@ -44,7 +44,7 @@ class TranslatorTest extends TestCase
 
         Locale::setDefault('en_EN');
 
-        $this->testFilesDir = __DIR__ . '/_files';
+        $this->testFilesDir = __DIR__.'/_files';
     }
 
     public function tearDown()
@@ -61,16 +61,16 @@ class TranslatorTest extends TestCase
             'patterns' => array(
                 array(
                     'type' => 'phparray',
-                    'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-%s.php'
-                )
+                    'base_dir' => $this->testFilesDir.'/testarray',
+                    'pattern' => 'translation-%s.php',
+                ),
             ),
             'files' => array(
                 array(
                     'type' => 'phparray',
-                    'filename' => $this->testFilesDir . '/translation_en.php',
-                )
-            )
+                    'filename' => $this->testFilesDir.'/translation_en.php',
+                ),
+            ),
         ));
 
         $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
@@ -84,15 +84,15 @@ class TranslatorTest extends TestCase
             'translation_file_patterns' => array(
                 array(
                     'type' => 'phparray',
-                    'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-%s.php'
+                    'base_dir' => $this->testFilesDir.'/testarray',
+                    'pattern' => 'translation-%s.php',
                 ),
                 array(
                     'type' => 'phparray',
-                    'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-more-%s.php'
-                )
-            )
+                    'base_dir' => $this->testFilesDir.'/testarray',
+                    'pattern' => 'translation-more-%s.php',
+                ),
+            ),
         ));
 
         //Test translator instance
@@ -114,16 +114,16 @@ class TranslatorTest extends TestCase
             'translation_file_patterns' => array(
                 array(
                     'type'     => 'phparray',
-                    'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern'  => 'translation-de_DE.php'
+                    'base_dir' => $this->testFilesDir.'/testarray',
+                    'pattern'  => 'translation-de_DE.php',
                 ),
             ),
             'translation_files' => array(
                 array(
                     'type'     => 'phparray',
-                    'filename' => $this->testFilesDir . '/testarray/translation-more-de_DE.php'
-                )
-            )
+                    'filename' => $this->testFilesDir.'/testarray/translation-more-de_DE.php',
+                ),
+            ),
         ));
 
         $this->assertEquals('Nachricht 1', $translator->translate('Message 1')); //translation-de_DE.php
@@ -137,13 +137,13 @@ class TranslatorTest extends TestCase
             'patterns' => array(
                 array(
                     'type' => 'phparray',
-                    'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-%s.php'
-                )
+                    'base_dir' => $this->testFilesDir.'/testarray',
+                    'pattern' => 'translation-%s.php',
+                ),
             ),
             'cache' => array(
-                'adapter' => 'memory'
-            )
+                'adapter' => 'memory',
+            ),
         ));
 
         $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
@@ -177,7 +177,7 @@ class TranslatorTest extends TestCase
         $this->translator->setCache($cache);
 
         $cache->addItem(
-            'Zend_I18n_Translator_Messages_' . md5('default' . 'en_EN'),
+            'Zend_I18n_Translator_Messages_'.md5('default'.'en_EN'),
             new TextDomain(array('foo' => 'bar'))
         );
 
@@ -196,7 +196,7 @@ class TranslatorTest extends TestCase
 
         $this->assertEquals('bar', $this->translator->translate('foo'));
 
-        $item = $cache->getItem('Zend_I18n_Translator_Messages_' . md5('default' . 'en_EN'));
+        $item = $cache->getItem('Zend_I18n_Translator_Messages_'.md5('default'.'en_EN'));
         $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $item);
         $this->assertEquals('bar', $item['foo']);
     }
@@ -206,7 +206,7 @@ class TranslatorTest extends TestCase
         $this->translator->setLocale('en_EN');
         $this->translator->addTranslationFile(
             'phparray',
-            $this->testFilesDir . '/translation_en.php',
+            $this->testFilesDir.'/translation_en.php',
             'default',
             'en_EN'
         );
@@ -224,7 +224,7 @@ class TranslatorTest extends TestCase
     {
         $this->translator->addTranslationFilePattern(
             'phparray',
-            $this->testFilesDir . '/testarray',
+            $this->testFilesDir.'/testarray',
             'translation-%s.php'
         );
 
@@ -255,7 +255,7 @@ class TranslatorTest extends TestCase
     public function testEnableEventMangerViaFactory()
     {
         $translator = Translator::factory(array(
-            'event_manager_enabled' => true
+            'event_manager_enabled' => true,
         ));
         $this->assertTrue($translator->isEventManagerEnabled());
 

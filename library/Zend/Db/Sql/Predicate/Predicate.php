@@ -35,6 +35,7 @@ class Predicate extends PredicateSet
         $predicateSet->setUnnest($this);
         $this->addPredicate($predicateSet, ($this->nextPredicateCombineOperator) ?: $this->defaultCombination);
         $this->nextPredicateCombineOperator = null;
+
         return $predicateSet;
     }
 
@@ -62,6 +63,7 @@ class Predicate extends PredicateSet
         }
         $unnest       = $this->unnest;
         $this->unnest = null;
+
         return $unnest;
     }
 
@@ -72,8 +74,8 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
-     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
+     * @param  string                $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string                $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function equalTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -94,8 +96,8 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
-     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
+     * @param  string                $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string                $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function notEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -116,8 +118,8 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
-     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
+     * @param  string                $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string                $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function lessThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -138,8 +140,8 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
-     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
+     * @param  string                $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string                $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function greaterThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -160,8 +162,8 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
-     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
+     * @param  string                $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string                $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function lessThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -182,8 +184,8 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
-     * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
+     * @param  string                $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string                $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
     public function greaterThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE)
@@ -202,8 +204,8 @@ class Predicate extends PredicateSet
      *
      * Utilizes Like predicate
      *
-     * @param  string $identifier
-     * @param  string $like
+     * @param  string    $identifier
+     * @param  string    $like
      * @return Predicate
      */
     public function like($identifier, $like)
@@ -221,17 +223,18 @@ class Predicate extends PredicateSet
      *
      * Utilizes In predicate
      *
-     * @param  string $identifier
-     * @param  string $notLike
+     * @param  string    $identifier
+     * @param  string    $notLike
      * @return Predicate
      */
     public function notLike($identifier, $notLike)
     {
         $this->addPredicate(
             new NotLike($identifier, $notLike),
-            ($this->nextPredicateCombineOperator) ? : $this->defaultCombination
+            ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
         );
         $this->nextPredicateCombineOperator = null;
+
         return $this;
     }
 
@@ -258,7 +261,7 @@ class Predicate extends PredicateSet
      *
      * Literal predicate, for parameters, use expression()
      *
-     * @param  string $literal
+     * @param  string    $literal
      * @return Predicate
      */
     public function literal($literal)
@@ -288,7 +291,7 @@ class Predicate extends PredicateSet
      *
      * Utilizes IsNull predicate
      *
-     * @param  string $identifier
+     * @param  string    $identifier
      * @return Predicate
      */
     public function isNull($identifier)
@@ -307,7 +310,7 @@ class Predicate extends PredicateSet
      *
      * Utilizes IsNotNull predicate
      *
-     * @param  string $identifier
+     * @param  string    $identifier
      * @return Predicate
      */
     public function isNotNull($identifier)
@@ -326,7 +329,7 @@ class Predicate extends PredicateSet
      *
      * Utilizes In predicate
      *
-     * @param  string $identifier
+     * @param  string                    $identifier
      * @param  array|\Zend\Db\Sql\Select $valueSet
      * @return Predicate
      */
@@ -346,7 +349,7 @@ class Predicate extends PredicateSet
      *
      * Utilizes NotIn predicate
      *
-     * @param  string $identifier
+     * @param  string                    $identifier
      * @param  array|\Zend\Db\Sql\Select $valueSet
      * @return Predicate
      */
@@ -366,7 +369,7 @@ class Predicate extends PredicateSet
      *
      * Utilizes Between predicate
      *
-     * @param  string $identifier
+     * @param  string           $identifier
      * @param  int|float|string $minValue
      * @param  int|float|string $maxValue
      * @return Predicate
@@ -387,7 +390,7 @@ class Predicate extends PredicateSet
      *
      * Overloads "or", "and", "nest", and "unnest"
      *
-     * @param  string $name
+     * @param  string    $name
      * @return Predicate
      */
     public function __get($name)
@@ -404,6 +407,7 @@ class Predicate extends PredicateSet
             case 'unnest':
                 return $this->unnest();
         }
+
         return $this;
     }
 }

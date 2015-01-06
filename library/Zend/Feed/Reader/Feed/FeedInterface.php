@@ -13,13 +13,13 @@ use Countable;
 use Iterator;
 
 /**
-*/
+ */
 interface FeedInterface extends Iterator, Countable
 {
     /**
      * Get a single author
      *
-     * @param  int $index
+     * @param  int         $index
      * @return string|null
      */
     public function getAuthor($index = 0);

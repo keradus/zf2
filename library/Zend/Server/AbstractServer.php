@@ -67,6 +67,7 @@ abstract class AbstractServer implements Server
             $callback->setType('function')
                      ->setFunction($reflection->getName());
         }
+
         return $callback;
     }
 
@@ -74,18 +75,18 @@ abstract class AbstractServer implements Server
      * Build a method signature
      *
      * @param  Reflection\AbstractFunction $reflection
-     * @param  null|string|object $class
+     * @param  null|string|object          $class
      * @return Method\Definition
-     * @throws Exception\RuntimeException on duplicate entry
+     * @throws Exception\RuntimeException  on duplicate entry
      */
     protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
     {
         $ns         = $reflection->getNamespace();
         $name       = $reflection->getName();
-        $method     = empty($ns) ? $name : $ns . '.' . $name;
+        $method     = empty($ns) ? $name : $ns.'.'.$name;
 
         if (!$this->overwriteExistingMethods && $this->table->hasMethod($method)) {
-            throw new Exception\RuntimeException('Duplicate method registered: ' . $method);
+            throw new Exception\RuntimeException('Duplicate method registered: '.$method);
         }
 
         $definition = new Method\Definition();
@@ -114,6 +115,7 @@ abstract class AbstractServer implements Server
             $definition->setObject($class);
         }
         $this->table->addMethod($definition);
+
         return $definition;
     }
 
@@ -121,7 +123,7 @@ abstract class AbstractServer implements Server
      * Dispatch method
      *
      * @param  Method\Definition $invokable
-     * @param  array $params
+     * @param  array             $params
      * @return mixed
      */
     protected function _dispatch(Method\Definition $invokable, array $params)
@@ -131,6 +133,7 @@ abstract class AbstractServer implements Server
 
         if ('function' == $type) {
             $function = $callback->getFunction();
+
             return call_user_func_array($function, $params);
         }
 
@@ -148,9 +151,10 @@ abstract class AbstractServer implements Server
                 $reflection = new ReflectionClass($class);
                 $object     = $reflection->newInstanceArgs($invokeArgs);
             } else {
-                $object = new $class;
+                $object = new $class();
             }
         }
+
         return call_user_func_array(array($object, $method), $params);
     }
 

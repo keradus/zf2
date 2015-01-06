@@ -61,6 +61,7 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
         $ct = new CreateTable();
         $this->assertEquals('', $ct->getRawState('table'));
         $ct->setTable('test');
+
         return $ct;
     }
 
@@ -79,8 +80,9 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
     public function testAddColumn()
     {
         $column = $this->getMock('Zend\Db\Sql\Ddl\Column\ColumnInterface');
-        $ct = new CreateTable;
+        $ct = new CreateTable();
         $this->assertSame($ct, $ct->addColumn($column));
+
         return $ct;
     }
 
@@ -102,8 +104,9 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
     public function testAddConstraint()
     {
         $constraint = $this->getMock('Zend\Db\Sql\Ddl\Constraint\ConstraintInterface');
-        $ct = new CreateTable;
+        $ct = new CreateTable();
         $this->assertSame($ct, $ct->addConstraint($constraint));
+
         return $ct;
     }
 

@@ -27,9 +27,9 @@ class Query
     /**
      * Perform the query on Document
      *
-     * @param  string    $expression CSS selector or XPath query
-     * @param  Document  $document   Document to query
-     * @param  string    $type       The type of $expression
+     * @param  string   $expression CSS selector or XPath query
+     * @param  Document $document   Document to query
+     * @param  string   $type       The type of $expression
      * @return NodeList
      */
     public static function execute($expression, Document $document, $type = self::TYPE_XPATH)
@@ -51,6 +51,7 @@ class Query
         }
 
         $nodeList = $xpath->queryWithErrorException($expression);
+
         return new NodeList($nodeList);
     }
 
@@ -74,6 +75,7 @@ class Query
                     $expressions = array_merge($expressions, $xpath);
                 }
             }
+
             return implode('|', $expressions);
         }
 
@@ -84,7 +86,7 @@ class Query
             $pathSegment = static::_tokenize($segment);
             if (0 == $key) {
                 if (0 === strpos($pathSegment, '[contains(')) {
-                    $paths[0] .= '*' . ltrim($pathSegment, '*');
+                    $paths[0] .= '*'.ltrim($pathSegment, '*');
                 } else {
                     $paths[0] .= $pathSegment;
                 }
@@ -92,12 +94,12 @@ class Query
             }
             if (0 === strpos($pathSegment, '[contains(')) {
                 foreach ($paths as $pathKey => $xpath) {
-                    $paths[$pathKey] .= '//*' . ltrim($pathSegment, '*');
-                    $paths[]      = $xpath . $pathSegment;
+                    $paths[$pathKey] .= '//*'.ltrim($pathSegment, '*');
+                    $paths[]      = $xpath.$pathSegment;
                 }
             } else {
                 foreach ($paths as $pathKey => $xpath) {
-                    $paths[$pathKey] .= '//' . $pathSegment;
+                    $paths[$pathKey] .= '//'.$pathSegment;
                 }
             }
         }
@@ -105,6 +107,7 @@ class Query
         if (1 == count($paths)) {
             return $paths[0];
         }
+
         return implode('|', $paths);
     }
 
@@ -127,7 +130,7 @@ class Query
         $expression = preg_replace_callback(
             '|\[@?([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i',
             function ($matches) {
-                return '[@' . strtolower($matches[1]) . "='" . $matches[2] . "']";
+                return '[@'.strtolower($matches[1])."='".$matches[2]."']";
             },
             $expression
         );
@@ -136,8 +139,8 @@ class Query
         $expression = preg_replace_callback(
             '|\[([a-z0-9_-]+)~=[\'"]([^\'"]+)[\'"]\]|i',
             function ($matches) {
-                return "[contains(concat(' ', normalize-space(@" . strtolower($matches[1]) . "), ' '), ' "
-                     . $matches[2] . " ')]";
+                return "[contains(concat(' ', normalize-space(@".strtolower($matches[1])."), ' '), ' "
+                     .$matches[2]." ')]";
             },
             $expression
         );
@@ -146,8 +149,8 @@ class Query
         $expression = preg_replace_callback(
             '|\[([a-z0-9_-]+)\*=[\'"]([^\'"]+)[\'"]\]|i',
             function ($matches) {
-                return "[contains(@" . strtolower($matches[1]) . ", '"
-                     . $matches[2] . "')]";
+                return "[contains(@".strtolower($matches[1]).", '"
+                     .$matches[2]."')]";
             },
             $expression
         );

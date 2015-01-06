@@ -62,7 +62,7 @@ class Test implements AdapterInterface
     /**
      * Set the nextRequestWillFail flag
      *
-     * @param  bool $flag
+     * @param  bool                           $flag
      * @return \Zend\Http\Client\Adapter\Test
      */
     public function setNextRequestWillFail($flag)
@@ -75,7 +75,7 @@ class Test implements AdapterInterface
     /**
      * Set the configuration array for the adapter
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options = array())
@@ -86,7 +86,7 @@ class Test implements AdapterInterface
 
         if (! is_array($options)) {
             throw new Exception\InvalidArgumentException(
-                'Array or Traversable object expected, got ' . gettype($options)
+                'Array or Traversable object expected, got '.gettype($options)
             );
         }
 
@@ -95,13 +95,12 @@ class Test implements AdapterInterface
         }
     }
 
-
     /**
      * Connect to the remote server
      *
-     * @param  string $host
-     * @param  int    $port
-     * @param  bool   $secure
+     * @param  string                     $host
+     * @param  int                        $port
+     * @param  bool                       $secure
      * @throws Exception\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
@@ -115,12 +114,12 @@ class Test implements AdapterInterface
     /**
      * Send request to the remote server
      *
-     * @param string        $method
-     * @param \Zend\Uri\Uri $uri
-     * @param string        $httpVer
-     * @param array         $headers
-     * @param string        $body
-     * @return string Request as string
+     * @param  string        $method
+     * @param  \Zend\Uri\Uri $uri
+     * @param  string        $httpVer
+     * @param  array         $headers
+     * @param  string        $body
+     * @return string        Request as string
      */
     public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
@@ -130,18 +129,18 @@ class Test implements AdapterInterface
             $path = '/';
         }
         if ($uri->getQuery()) {
-            $path .= '?' . $uri->getQuery();
+            $path .= '?'.$uri->getQuery();
         }
         $request = "{$method} {$path} HTTP/{$httpVer}\r\n";
         foreach ($headers as $k => $v) {
             if (is_string($k)) {
-                $v = ucfirst($k) . ": $v";
+                $v = ucfirst($k).": $v";
             }
             $request .= "$v\r\n";
         }
 
         // Add the request body
-        $request .= "\r\n" . $body;
+        $request .= "\r\n".$body;
 
         // Do nothing - just return the request as string
 
@@ -158,6 +157,7 @@ class Test implements AdapterInterface
         if ($this->responseIndex >= count($this->responses)) {
             $this->responseIndex = 0;
         }
+
         return $this->responses[$this->responseIndex++];
     }
 
@@ -202,7 +202,7 @@ class Test implements AdapterInterface
      * Sets the position of the response buffer.  Selects which
      * response will be returned on the next call to read().
      *
-     * @param int $index
+     * @param  int                           $index
      * @throws Exception\OutOfRangeException
      */
     public function setResponseIndex($index)

@@ -107,7 +107,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->checkGDRequirement();
         $config = new Config(array('barcode'  => 'code39',
-                                   'renderer' => 'image'));
+                                   'renderer' => 'image', ));
         $renderer = Barcode\Barcode::factory($config);
         $this->assertTrue($renderer instanceof Renderer\Image);
         $this->assertTrue($renderer->getBarcode() instanceof Object\Code39);
@@ -118,7 +118,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->checkGDRequirement();
         $config = new Config(array('barcode'       => 'code25',
                                    'barcodeParams' => array(
-                                   'barHeight'     => 123)));
+                                   'barHeight'     => 123, ), ));
         $renderer = Barcode\Barcode::factory($config);
         $this->assertTrue($renderer instanceof Renderer\Image);
         $this->assertTrue($renderer->getBarcode() instanceof Object\Code25);
@@ -130,7 +130,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->checkGDRequirement();
         $config = new Config(array('barcode'        => 'code25',
                                    'rendererParams' => array(
-                                   'imageType'      => 'gif')));
+                                   'imageType'      => 'gif', ), ));
         $renderer = Barcode\Barcode::factory($config);
         $this->assertTrue($renderer instanceof Renderer\Image);
         $this->assertTrue($renderer->getBarcode() instanceof Object\Code25);
@@ -197,7 +197,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Config(array('barcode' => 'code25',
                                    'barcodeParams' => array(
-                                   'barHeight' => 123)));
+                                   'barHeight' => 123, ), ));
         $barcode = Barcode\Barcode::makeBarcode($config);
         $this->assertTrue($barcode instanceof Object\Code25);
         $this->assertSame(123, $barcode->getBarHeight());
@@ -287,7 +287,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->checkGDRequirement();
         $config = new Config(array('renderer'       => 'image',
-                                   'rendererParams' => array('imageType' => 'gif')));
+                                   'rendererParams' => array('imageType' => 'gif'), ));
         $renderer = Barcode\Barcode::makeRenderer($config);
         $this->assertTrue($renderer instanceof Renderer\Image);
         $this->assertSame('gif', $renderer->getimageType());
@@ -355,7 +355,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Enable TESTS_ZEND_BARCODE_PDF_SUPPORT to test PDF render');
         }
 
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/Object/_fonts/Vera.ttf');
         $resource = Barcode\Barcode::draw('code25', 'pdf', array('text' => '012345'));
         $this->assertTrue($resource instanceof Pdf\PdfDocument);
         Barcode\Barcode::setBarcodeFont('');
@@ -367,7 +367,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Enable TESTS_ZEND_BARCODE_PDF_SUPPORT to test PDF render');
         }
 
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/Object/_fonts/Vera.ttf');
         $resource = Barcode\Barcode::draw('code25', 'pdf');
         $this->assertTrue($resource instanceof Pdf\PdfDocument);
         Barcode\Barcode::setBarcodeFont('');
@@ -375,7 +375,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testProxyBarcodeRendererDrawAsSvg()
     {
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/Object/_fonts/Vera.ttf');
         $resource = Barcode\Barcode::draw('code25', 'svg', array('text' => '012345'));
         $this->assertTrue($resource instanceof \DOMDocument);
         Barcode\Barcode::setBarcodeFont('');
@@ -383,7 +383,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testProxyBarcodeRendererDrawAsSvgAutomaticallyRenderSvgIfException()
     {
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/Object/_fonts/Vera.ttf');
         $resource = Barcode\Barcode::draw('code25', 'svg');
         $this->assertTrue($resource instanceof \DOMDocument);
         Barcode\Barcode::setBarcodeFont('');

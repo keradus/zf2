@@ -16,8 +16,8 @@ interface StorageInterface
     /**
      * Set options.
      *
-     * @param array|Traversable|Adapter\AdapterOptions $options
-     * @return StorageInterface Fluent interface
+     * @param  array|Traversable|Adapter\AdapterOptions $options
+     * @return StorageInterface                         Fluent interface
      */
     public function setOptions($options);
 
@@ -33,10 +33,10 @@ interface StorageInterface
     /**
      * Get an item.
      *
-     * @param  string  $key
-     * @param  bool $success
-     * @param  mixed   $casToken
-     * @return mixed Data on success, null on failure
+     * @param  string                                   $key
+     * @param  bool                                     $success
+     * @param  mixed                                    $casToken
+     * @return mixed                                    Data on success, null on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getItem($key, & $success = null, & $casToken = null);
@@ -44,8 +44,8 @@ interface StorageInterface
     /**
      * Get multiple items.
      *
-     * @param  array $keys
-     * @return array Associative array of keys and values
+     * @param  array                                    $keys
+     * @return array                                    Associative array of keys and values
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getItems(array $keys);
@@ -53,7 +53,7 @@ interface StorageInterface
     /**
      * Test if an item exists.
      *
-     * @param  string $key
+     * @param  string                                   $key
      * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
@@ -62,8 +62,8 @@ interface StorageInterface
     /**
      * Test multiple items.
      *
-     * @param  array $keys
-     * @return array Array of found keys
+     * @param  array                                    $keys
+     * @return array                                    Array of found keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function hasItems(array $keys);
@@ -71,8 +71,8 @@ interface StorageInterface
     /**
      * Get metadata of an item.
      *
-     * @param  string $key
-     * @return array|bool Metadata on success, false on failure
+     * @param  string                                   $key
+     * @return array|bool                               Metadata on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getMetadata($key);
@@ -80,8 +80,8 @@ interface StorageInterface
     /**
      * Get multiple metadata
      *
-     * @param  array $keys
-     * @return array Associative array of keys and metadata
+     * @param  array                                    $keys
+     * @return array                                    Associative array of keys and metadata
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getMetadatas(array $keys);
@@ -91,8 +91,8 @@ interface StorageInterface
     /**
      * Store an item.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  string                                   $key
+     * @param  mixed                                    $value
      * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
@@ -101,8 +101,8 @@ interface StorageInterface
     /**
      * Store multiple items.
      *
-     * @param  array $keyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                                    $keyValuePairs
+     * @return array                                    Array of not stored keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function setItems(array $keyValuePairs);
@@ -110,8 +110,8 @@ interface StorageInterface
     /**
      * Add an item.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  string                                   $key
+     * @param  mixed                                    $value
      * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
@@ -120,8 +120,8 @@ interface StorageInterface
     /**
      * Add multiple items.
      *
-     * @param  array $keyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                                    $keyValuePairs
+     * @return array                                    Array of not stored keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function addItems(array $keyValuePairs);
@@ -129,8 +129,8 @@ interface StorageInterface
     /**
      * Replace an existing item.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  string                                   $key
+     * @param  mixed                                    $value
      * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
@@ -139,8 +139,8 @@ interface StorageInterface
     /**
      * Replace multiple existing items.
      *
-     * @param  array $keyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                                    $keyValuePairs
+     * @return array                                    Array of not stored keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function replaceItems(array $keyValuePairs);
@@ -151,9 +151,9 @@ interface StorageInterface
      * It uses the token received from getItem() to check if the item has
      * changed before overwriting it.
      *
-     * @param  mixed  $token
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  mixed                                    $token
+     * @param  string                                   $key
+     * @param  mixed                                    $value
      * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      * @see    getItem()
@@ -164,7 +164,7 @@ interface StorageInterface
     /**
      * Reset lifetime of an item
      *
-     * @param  string $key
+     * @param  string                                   $key
      * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
@@ -173,8 +173,8 @@ interface StorageInterface
     /**
      * Reset lifetime of multiple items.
      *
-     * @param  array $keys
-     * @return array Array of not updated keys
+     * @param  array                                    $keys
+     * @return array                                    Array of not updated keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function touchItems(array $keys);
@@ -182,7 +182,7 @@ interface StorageInterface
     /**
      * Remove an item.
      *
-     * @param  string $key
+     * @param  string                                   $key
      * @return bool
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
@@ -191,8 +191,8 @@ interface StorageInterface
     /**
      * Remove multiple items.
      *
-     * @param  array $keys
-     * @return array Array of not removed keys
+     * @param  array                                    $keys
+     * @return array                                    Array of not removed keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function removeItems(array $keys);
@@ -200,9 +200,9 @@ interface StorageInterface
     /**
      * Increment an item.
      *
-     * @param  string $key
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                                   $key
+     * @param  int                                      $value
+     * @return int|bool                                 The new value on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function incrementItem($key, $value);
@@ -210,8 +210,8 @@ interface StorageInterface
     /**
      * Increment multiple items.
      *
-     * @param  array $keyValuePairs
-     * @return array Associative array of keys and new values
+     * @param  array                                    $keyValuePairs
+     * @return array                                    Associative array of keys and new values
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function incrementItems(array $keyValuePairs);
@@ -219,9 +219,9 @@ interface StorageInterface
     /**
      * Decrement an item.
      *
-     * @param  string $key
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                                   $key
+     * @param  int                                      $value
+     * @return int|bool                                 The new value on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function decrementItem($key, $value);
@@ -229,8 +229,8 @@ interface StorageInterface
     /**
      * Decrement multiple items.
      *
-     * @param  array $keyValuePairs
-     * @return array Associative array of keys and new values
+     * @param  array                                    $keyValuePairs
+     * @return array                                    Associative array of keys and new values
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function decrementItems(array $keyValuePairs);

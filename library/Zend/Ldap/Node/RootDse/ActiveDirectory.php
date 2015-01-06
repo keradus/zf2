@@ -171,7 +171,7 @@ class ActiveDirectory extends Node\RootDse
     /**
      * Determines if the capability is supported
      *
-     * @param string|string|array $oids capability(s) to check
+     * @param  string|string|array $oids capability(s) to check
      * @return bool
      */
     public function supportsCapability($oids)
@@ -182,7 +182,7 @@ class ActiveDirectory extends Node\RootDse
     /**
      * Determines if the control is supported
      *
-     * @param string|array $oids control oid(s) to check
+     * @param  string|array $oids control oid(s) to check
      * @return bool
      */
     public function supportsControl($oids)
@@ -193,7 +193,7 @@ class ActiveDirectory extends Node\RootDse
     /**
      * Determines if the version is supported
      *
-     * @param string|array $policies policy(s) to check
+     * @param  string|array $policies policy(s) to check
      * @return bool
      */
     public function supportsPolicy($policies)
@@ -219,6 +219,7 @@ class ActiveDirectory extends Node\RootDse
     public function getSchemaDn()
     {
         $schemaDn = $this->getSchemaNamingContext();
+
         return Ldap\Dn::fromString($schemaDn);
     }
 }

@@ -20,7 +20,7 @@ class ViewManagerFactory implements FactoryInterface
     /**
      * Create and return a view manager based on detected environment
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface            $serviceLocator
      * @return ConsoleViewManager|HttpViewManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

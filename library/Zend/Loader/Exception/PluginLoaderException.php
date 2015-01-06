@@ -9,7 +9,7 @@
 
 namespace Zend\Loader\Exception;
 
-require_once __DIR__ . '/DomainException.php';
+require_once __DIR__.'/DomainException.php';
 
 /**
  * Plugin class loader exceptions

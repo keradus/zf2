@@ -44,5 +44,5 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Content-Transfer-Encoding: xxx', $contentTransferEncodingHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

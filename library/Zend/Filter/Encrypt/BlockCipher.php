@@ -56,7 +56,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
     /**
      * Class constructor
      *
-     * @param  string|array|Traversable $options Encryption Options
+     * @param  string|array|Traversable           $options Encryption Options
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
@@ -97,7 +97,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
     /**
      * Sets new encryption options
      *
-     * @param  string|array $options Encryption options
+     * @param  string|array                       $options Encryption options
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -106,6 +106,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         if (is_string($options)) {
             $this->blockCipher->setKey($options);
             $this->encryption['key'] = $options;
+
             return $this;
         }
 
@@ -161,7 +162,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
     /**
      * Set the inizialization vector
      *
-     * @param  string $vector
+     * @param  string                             $vector
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -173,13 +174,14 @@ class BlockCipher implements EncryptionAlgorithmInterface
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
         $this->encryption['vector'] = $vector;
+
         return $this;
     }
 
     /**
      * Set the encryption key
      *
-     * @param  string $key
+     * @param  string                             $key
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -191,6 +193,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
         $this->encryption['key'] = $key;
+
         return $this;
     }
 
@@ -227,6 +230,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         }
 
         $this->compression = $compression;
+
         return $this;
     }
 
@@ -235,9 +239,9 @@ class BlockCipher implements EncryptionAlgorithmInterface
      *
      * Encrypts $value with the defined settings
      *
-     * @param  string $value The content to encrypt
+     * @param  string                             $value The content to encrypt
      * @throws Exception\InvalidArgumentException
-     * @return string The encrypted content
+     * @return string                             The encrypted content
      */
     public function encrypt($value)
     {
@@ -252,6 +256,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         } catch (CryptException\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
+
         return $encrypted;
     }
 

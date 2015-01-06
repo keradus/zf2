@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Test\PHPUnit\Controller;
 
 use PHPUnit_Framework_TestCase;
@@ -694,7 +695,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * Recursively search a view model and it's children for the given templateName
      *
      * @param  \Zend\View\Model\ModelInterface $viewModel
-     * @param  string    $templateName
+     * @param  string                          $templateName
      * @return boolean
      */
     protected function searchTemplates($viewModel, $templateName)

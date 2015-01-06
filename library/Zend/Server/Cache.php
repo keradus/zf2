@@ -30,7 +30,7 @@ class Cache
      * Returns false on any error (typically, inability to write to file), true
      * on success.
      *
-     * @param  string $filename
+     * @param  string              $filename
      * @param  \Zend\Server\Server $server
      * @return bool
      */
@@ -90,7 +90,7 @@ class Cache
      * echo $response;
      * </code>
      *
-     * @param  string $filename
+     * @param  string              $filename
      * @param  \Zend\Server\Server $server
      * @return bool
      */
@@ -129,6 +129,7 @@ class Cache
     {
         if (is_string($filename) && file_exists($filename)) {
             unlink($filename);
+
             return true;
         }
 

@@ -24,7 +24,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
                                                'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
                                                'distinguishedname', 'instancetype', 'name', 'objectcategory',
                                                'objectguid',
-                                               'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
+                                               'usnchanged', 'usncreated', 'whenchanged', 'whencreated', );
 
     /**
      * Holds the node's DN.
@@ -45,9 +45,9 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  array         $data
-     * @param  bool       $fromDataSource
+     * @param \Zend\Ldap\Dn $dn
+     * @param array         $data
+     * @param bool          $fromDataSource
      */
     protected function __construct(Ldap\Dn $dn, array $data, $fromDataSource)
     {
@@ -56,8 +56,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
     }
 
     /**
-     * @param array   $data
-     * @param  bool $fromDataSource
+     * @param array $data
+     * @param bool  $fromDataSource
      */
     protected function loadData(array $data, $fromDataSource)
     {
@@ -74,7 +74,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * This is an online method.
      *
      * @param  \Zend\Ldap\Ldap $ldap
-     * @return AbstractNode Provides a fluid interface
+     * @return AbstractNode    Provides a fluid interface
      */
     public function reload(Ldap\Ldap $ldap = null)
     {
@@ -109,6 +109,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
     public function getDn()
     {
         $dn = clone $this->_getDn();
+
         return $dn;
     }
 
@@ -181,7 +182,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  bool $includeSystemAttributes
+     * @param  bool  $includeSystemAttributes
      * @return array
      */
     public function getAttributes($includeSystemAttributes = true)
@@ -190,6 +191,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
         foreach ($this->getData($includeSystemAttributes) as $name => $value) {
             $data[$name] = $this->getAttribute($name, null);
         }
+
         return $data;
     }
 
@@ -216,19 +218,20 @@ abstract class AbstractNode implements ArrayAccess, Countable
     /**
      * Returns an array representation of the current node
      *
-     * @param  bool $includeSystemAttributes
+     * @param  bool  $includeSystemAttributes
      * @return array
      */
     public function toArray($includeSystemAttributes = true)
     {
         $attributes = $this->getAttributes($includeSystemAttributes);
+
         return array_merge(array('dn' => $this->getDnString()), $attributes);
     }
 
     /**
      * Returns a JSON representation of the current node
      *
-     * @param  bool $includeSystemAttributes
+     * @param  bool   $includeSystemAttributes
      * @return string
      */
     public function toJson($includeSystemAttributes = true)
@@ -243,7 +246,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  bool $includeSystemAttributes
+     * @param  bool  $includeSystemAttributes
      * @return array
      */
     public function getData($includeSystemAttributes = true)
@@ -255,6 +258,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
                     $data[$key] = $value;
                 }
             }
+
             return $data;
         }
 
@@ -270,8 +274,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * true. In this case method returns false only if the attribute name is
      * missing in the key-collection.
      *
-     * @param  string  $name
-     * @param  bool $emptyExists
+     * @param  string $name
+     * @param  bool   $emptyExists
      * @return bool
      */
     public function existsAttribute($name, $emptyExists = false)
@@ -305,8 +309,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  string  $name
-     * @param  int $index
+     * @param  string                             $name
+     * @param  int                                $index
      * @return mixed
      * @throws \Zend\Ldap\Exception\LdapException
      */
@@ -324,8 +328,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  string  $name
-     * @param  int $index
+     * @param  string                             $name
+     * @param  int                                $index
      * @return array|int
      * @throws \Zend\Ldap\Exception\LdapException
      */
@@ -339,8 +343,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @param  mixed  $value
+     * @param  string                                      $name
+     * @param  mixed                                       $value
      * @throws \Zend\Ldap\Exception\BadMethodCallException
      */
     public function __set($name, $value)
@@ -353,7 +357,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  string $name
+     * @param  string                             $name
      * @return mixed
      * @throws \Zend\Ldap\Exception\LdapException
      */
@@ -396,10 +400,10 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @param         $value
+     * @param  string                                      $name
+     * @param                                              $value
      * @throws \Zend\Ldap\Exception\BadMethodCallException
-     * @param  mixed  $value
+     * @param  mixed                                       $value
      * @throws \Zend\Ldap\Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
@@ -413,7 +417,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  string $name
+     * @param  string                             $name
      * @return mixed
      * @throws \Zend\Ldap\Exception\LdapException
      */

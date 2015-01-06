@@ -34,6 +34,7 @@ class FilterIterator extends SplPriorityQueue
                 return true;
             }
         }
+
         return false;
     }
 
@@ -69,6 +70,7 @@ class FilterIterator extends SplPriorityQueue
         }
 
         $this->setExtractFlags(self::EXTR_DATA);
+
         return $removed;
     }
 
@@ -77,8 +79,8 @@ class FilterIterator extends SplPriorityQueue
      *
      * Iterates and calls the next filter in the chain.
      *
-     * @param  mixed $context
-     * @param  array $params
+     * @param  mixed          $context
+     * @param  array          $params
      * @param  FilterIterator $chain
      * @return mixed
      */
@@ -94,6 +96,7 @@ class FilterIterator extends SplPriorityQueue
         }
 
         $return = call_user_func($next->getCallback(), $context, $params, $chain);
+
         return $return;
     }
 }

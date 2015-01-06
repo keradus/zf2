@@ -21,7 +21,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(2, 1, 10000, 100, 0.9, 1.1, false),
-            array(2, 1, 10000, 100, 0.8, 1.2, true)
+            array(2, 1, 10000, 100, 0.8, 1.2, true),
         );
     }
 
@@ -181,7 +181,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
 
     public function testHashTimingSourceStrengthIsRandomWithCorrectLength()
     {
-        $source = new Math\Source\HashTiming;
+        $source = new Math\Source\HashTiming();
         $rand = $source->generate(32);
         $this->assertTrue(32 === strlen($rand));
         $rand2 = $source->generate(32);

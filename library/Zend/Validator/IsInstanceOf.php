@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Validator;
 
 use Traversable;
@@ -29,7 +30,7 @@ class IsInstanceOf extends AbstractValidator
      * @var array
      */
     protected $messageVariables = array(
-        'className' => 'className'
+        'className' => 'className',
     );
 
     /**
@@ -42,7 +43,7 @@ class IsInstanceOf extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
@@ -87,6 +88,7 @@ class IsInstanceOf extends AbstractValidator
     public function setClassName($className)
     {
         $this->className = $className;
+
         return $this;
     }
 
@@ -102,6 +104,7 @@ class IsInstanceOf extends AbstractValidator
             return true;
         }
         $this->error(self::NOT_INSTANCE_OF);
+
         return false;
     }
 }

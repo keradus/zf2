@@ -32,49 +32,49 @@ class QueryTest extends TestCase
                 new Query(),
                 'foo=bar&baz=bat',
                 null,
-                array('foo' => 'bar', 'baz' => 'bat')
+                array('foo' => 'bar', 'baz' => 'bat'),
             ),
             'empty-match' => array(
                 new Query(),
                 '',
                 null,
-                array()
+                array(),
             ),
             'url-encoded-parameters-are-decoded' => array(
                 new Query(),
                 'foo=foo%20bar',
                 null,
-                array('foo' => 'foo bar')
+                array('foo' => 'foo bar'),
             ),
             'nested-params' => array(
                 new Query(),
                 'foo%5Bbar%5D=baz&foo%5Bbat%5D=foo%20bar',
                 null,
-                array('foo' => array('bar' => 'baz', 'bat' => 'foo bar'))
+                array('foo' => array('bar' => 'baz', 'bat' => 'foo bar')),
             ),
         );
     }
 
     /**
-     * @param        Query $route
-     * @param        string   $path
-     * @param        integer  $offset
-     * @param        array    $params
+     * @param Query   $route
+     * @param string  $path
+     * @param integer $offset
+     * @param array   $params
      */
     public function testMatching(Query $route, $path, $offset, array $params = null)
     {
         $request = new Request();
-        $request->setUri('http://example.com?' . $path);
+        $request->setUri('http://example.com?'.$path);
         $match = $route->match($request, $offset);
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
     }
 
     /**
-     * @param        Query $route
-     * @param        string   $path
-     * @param        integer  $offset
-     * @param        array    $params
-     * @param        boolean  $skipAssembling
+     * @param Query   $route
+     * @param string  $path
+     * @param integer $offset
+     * @param array   $params
+     * @param boolean $skipAssembling
      */
     public function testAssembling(Query $route, $path, $offset, array $params = null, $skipAssembling = false)
     {
@@ -107,7 +107,6 @@ class QueryTest extends TestCase
         $route = new Query();
         $uri = new Http();
         $route->assemble(array('foo' => 'bar'), array('uri' => $uri));
-
 
         $this->assertEquals(array('foo'), $route->getAssembledParams());
     }

@@ -99,7 +99,7 @@ class Application implements
     /**
      * Constructor
      *
-     * @param mixed $configuration
+     * @param mixed          $configuration
      * @param ServiceManager $serviceManager
      */
     public function __construct($configuration, ServiceManager $serviceManager)
@@ -130,7 +130,7 @@ class Application implements
      * router. Attaches the ViewManager as a listener. Triggers the bootstrap
      * event.
      *
-     * @param array $listeners List of listeners to attach.
+     * @param  array       $listeners List of listeners to attach.
      * @return Application
      */
     public function bootstrap(array $listeners = array())
@@ -154,6 +154,7 @@ class Application implements
 
         // Trigger bootstrap events
         $events->trigger(MvcEvent::EVENT_BOOTSTRAP, $event);
+
         return $this;
     }
 
@@ -210,6 +211,7 @@ class Application implements
             get_class($this),
         ));
         $this->events = $eventManager;
+
         return $this;
     }
 
@@ -241,7 +243,7 @@ class Application implements
      * All other services are configured after module loading, thus can be
      * overridden by modules.
      *
-     * @param array $configuration
+     * @param  array       $configuration
      * @return Application
      */
     public static function init($configuration = array())
@@ -289,6 +291,7 @@ class Application implements
             if ($event->getError()) {
                 return true;
             }
+
             return false;
         };
 
@@ -301,6 +304,7 @@ class Application implements
                 $event->setResponse($response);
                 $events->trigger(MvcEvent::EVENT_FINISH, $event);
                 $this->response = $response;
+
                 return $this;
             }
         }
@@ -319,6 +323,7 @@ class Application implements
             $event->setResponse($response);
             $events->trigger(MvcEvent::EVENT_FINISH, $event);
             $this->response = $response;
+
             return $this;
         }
 
@@ -342,7 +347,7 @@ class Application implements
      * Triggers "render" and "finish" events, and returns response from
      * event object.
      *
-     * @param  MvcEvent $event
+     * @param  MvcEvent    $event
      * @return Application
      */
     protected function completeRequest(MvcEvent $event)
@@ -351,6 +356,7 @@ class Application implements
         $event->setTarget($this);
         $events->trigger(MvcEvent::EVENT_RENDER, $event);
         $events->trigger(MvcEvent::EVENT_FINISH, $event);
+
         return $this;
     }
 }

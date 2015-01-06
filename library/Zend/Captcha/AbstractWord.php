@@ -122,12 +122,13 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Set session class for persistence
      *
-     * @param  string $sessionClass
+     * @param  string       $sessionClass
      * @return AbstractWord
      */
     public function setSessionClass($sessionClass)
     {
         $this->sessionClass = $sessionClass;
+
         return $this;
     }
 
@@ -144,12 +145,13 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Set word length of captcha
      *
-     * @param int $wordlen
+     * @param  int          $wordlen
      * @return AbstractWord
      */
     public function setWordlen($wordlen)
     {
         $this->wordlen = $wordlen;
+
         return $this;
     }
 
@@ -163,30 +165,33 @@ abstract class AbstractWord extends AbstractAdapter
         if (null === $this->id) {
             $this->setId($this->generateRandomId());
         }
+
         return $this->id;
     }
 
     /**
      * Set captcha identifier
      *
-     * @param string $id
+     * @param  string       $id
      * @return AbstractWord
      */
     protected function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
     /**
      * Set timeout for session token
      *
-     * @param  int $ttl
+     * @param  int          $ttl
      * @return AbstractWord
      */
     public function setTimeout($ttl)
     {
         $this->timeout = (int) $ttl;
+
         return $this;
     }
 
@@ -203,12 +208,13 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Sets if session should be preserved on generate()
      *
-     * @param bool $keepSession Should session be kept on generate()?
+     * @param  bool         $keepSession Should session be kept on generate()?
      * @return AbstractWord
      */
     public function setKeepSession($keepSession)
     {
         $this->keepSession = $keepSession;
+
         return $this;
     }
 
@@ -225,12 +231,13 @@ abstract class AbstractWord extends AbstractAdapter
     /**
      * Set if numbers should be included in the pattern
      *
-     * @param  bool $useNumbers numbers should be included in the pattern?
+     * @param  bool         $useNumbers numbers should be included in the pattern?
      * @return AbstractWord
      */
     public function setUseNumbers($useNumbers)
     {
         $this->useNumbers = $useNumbers;
+
         return $this;
     }
 
@@ -247,17 +254,18 @@ abstract class AbstractWord extends AbstractAdapter
             if (!class_exists($this->sessionClass)) {
                 throw new Exception\InvalidArgumentException("Session class $this->sessionClass not found");
             }
-            $this->session = new $this->sessionClass('Zend_Form_Captcha_' . $id);
+            $this->session = new $this->sessionClass('Zend_Form_Captcha_'.$id);
             $this->session->setExpirationHops(1, null);
             $this->session->setExpirationSeconds($this->getTimeout());
         }
+
         return $this->session;
     }
 
     /**
      * Set session namespace object
      *
-     * @param  Container $session
+     * @param  Container    $session
      * @return AbstractWord
      */
     public function setSession(Container $session)
@@ -266,6 +274,7 @@ abstract class AbstractWord extends AbstractAdapter
         if ($session) {
             $this->keepSession = true;
         }
+
         return $this;
     }
 
@@ -280,13 +289,14 @@ abstract class AbstractWord extends AbstractAdapter
             $session     = $this->getSession();
             $this->word  = $session->word;
         }
+
         return $this->word;
     }
 
     /**
      * Set captcha word
      *
-     * @param  string $word
+     * @param  string       $word
      * @return AbstractWord
      */
     protected function setWord($word)
@@ -294,6 +304,7 @@ abstract class AbstractWord extends AbstractAdapter
         $session       = $this->getSession();
         $session->word = $word;
         $this->word    = $word;
+
         return $this;
     }
 
@@ -309,11 +320,11 @@ abstract class AbstractWord extends AbstractAdapter
         $vowels     = $this->useNumbers ? static::$VN : static::$V;
         $consonants = $this->useNumbers ? static::$CN : static::$C;
 
-        for ($i=0; $i < $wordLen; $i = $i + 2) {
+        for ($i = 0; $i < $wordLen; $i = $i + 2) {
             // generate word with mix of vowels and consonants
             $consonant = $consonants[array_rand($consonants)];
             $vowel     = $vowels[array_rand($vowels)];
-            $word     .= $consonant . $vowel;
+            $word     .= $consonant.$vowel;
         }
 
         if (strlen($word) > $wordLen) {
@@ -337,6 +348,7 @@ abstract class AbstractWord extends AbstractAdapter
         $this->setId($id);
         $word = $this->generateWord();
         $this->setWord($word);
+
         return $id;
     }
 
@@ -363,6 +375,7 @@ abstract class AbstractWord extends AbstractAdapter
         if (!is_array($value)) {
             if (!is_array($context)) {
                 $this->error(self::MISSING_VALUE);
+
                 return false;
             }
             $value = $context;
@@ -376,6 +389,7 @@ abstract class AbstractWord extends AbstractAdapter
 
         if (!isset($value['input'])) {
             $this->error(self::MISSING_VALUE);
+
             return false;
         }
         $input = strtolower($value['input']);
@@ -383,12 +397,14 @@ abstract class AbstractWord extends AbstractAdapter
 
         if (!isset($value['id'])) {
             $this->error(self::MISSING_ID);
+
             return false;
         }
 
         $this->id = $value['id'];
         if ($input !== $this->getWord()) {
             $this->error(self::BAD_CAPTCHA);
+
             return false;
         }
 

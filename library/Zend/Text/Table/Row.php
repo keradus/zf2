@@ -72,7 +72,7 @@ class Row
      *
      * Returns null, when the index is out of range
      *
-     * @param  int $index
+     * @param  int         $index
      * @return Column|null
      */
     public function getColumn($index)
@@ -114,9 +114,9 @@ class Row
     /**
      * Render the row
      *
-     * @param  array                               $columnWidths Width of all columns
-     * @param  Decorator $decorator    Decorator for the row borders
-     * @param  int                             $padding      Padding for the columns
+     * @param  array                       $columnWidths Width of all columns
+     * @param  Decorator                   $decorator    Decorator for the row borders
+     * @param  int                         $padding      Padding for the columns
      * @throws Exception\OverflowException When there are too many columns
      * @return string
      */

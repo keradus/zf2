@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Session;
 
 use Zend\EventManager\EventManager;
@@ -44,9 +45,9 @@ class ValidatorChain extends EventManager
     /**
      * Attach a listener to the session validator chain
      *
-     * @param  string $event
-     * @param  callable $callback
-     * @param  int $priority
+     * @param  string                       $event
+     * @param  callable                     $callback
+     * @param  int                          $priority
      * @return \Zend\Stdlib\CallbackHandler
      */
     public function attach($event, $callback = null, $priority = 1)
@@ -68,6 +69,7 @@ class ValidatorChain extends EventManager
         }
 
         $listener = parent::attach($event, $callback, $priority);
+
         return $listener;
     }
 

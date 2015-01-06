@@ -73,7 +73,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     }
 
     /**
-     * @param  string    $method
+     * @param  string          $method
      * @param  mixed|bool|null $isRequired
      * @return self
      */
@@ -118,12 +118,12 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
         $required = (isset($parameterInfo['required'])) ? (bool) $parameterInfo['required'] : false;
         $default  = (isset($parameterInfo['default'])) ? $parameterInfo['default'] : null;
 
-        $fqName = $this->class . '::' . $method . ':' . $parameterName;
+        $fqName = $this->class.'::'.$method.':'.$parameterName;
         $this->methodParameters[$method][$fqName] = array(
             $parameterName,
             $type,
             $required,
-            $default
+            $default,
         );
 
         return $this;
@@ -153,6 +153,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
         if ($this->class !== $class) {
             return array();
         }
+
         return $this->supertypes;
     }
 
@@ -164,6 +165,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
         if ($this->class !== $class) {
             return;
         }
+
         return $this->instantiator;
     }
 
@@ -183,6 +185,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
         if ($this->class !== $class) {
             return array();
         }
+
         return $this->methods;
     }
 
@@ -210,6 +213,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
         if ($this->class !== $class) {
             return false;
         }
+
         return (array_key_exists($method, $this->methodParameters));
     }
 

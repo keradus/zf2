@@ -19,7 +19,7 @@ class Parameters extends PhpArrayObject implements ParametersInterface
      * Enforces that we have an array, and enforces parameter access to array
      * elements.
      *
-     * @param  array $values
+     * @param array $values
      */
     public function __construct(array $values = null)
     {
@@ -86,12 +86,13 @@ class Parameters extends PhpArrayObject implements ParametersInterface
         if ($this->offsetExists($name)) {
             return parent::offsetGet($name);
         }
+
         return;
     }
 
     /**
-     * @param string $name
-     * @param mixed $default optional default value
+     * @param  string $name
+     * @param  mixed  $default optional default value
      * @return mixed
      */
     public function get($name, $default = null)
@@ -99,17 +100,19 @@ class Parameters extends PhpArrayObject implements ParametersInterface
         if ($this->offsetExists($name)) {
             return parent::offsetGet($name);
         }
+
         return $default;
     }
 
     /**
-     * @param string $name
-     * @param mixed $value
+     * @param  string     $name
+     * @param  mixed      $value
      * @return Parameters
      */
     public function set($name, $value)
     {
         $this[$name] = $value;
+
         return $this;
     }
 }

@@ -30,7 +30,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
     /**
      * Constructor.
      *
-     * @param array $data
+     * @param  array                            $data
      * @return \Zend\Ldap\Node\ChildrenIterator
      */
     public function __construct(array $data)
@@ -134,7 +134,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      * Returns a child with a given RDN.
      * Implements ArrayAccess.
      *
-     * @param  string $rdn
+     * @param  string     $rdn
      * @return array|null
      */
     public function offsetGet($rdn)
@@ -172,8 +172,8 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      * Does nothing.
      * Implements ArrayAccess.
      *
-     * @param  string $name
-     * @param         $value
+     * @param string $name
+     * @param        $value
      */
     public function offsetSet($name, $value)
     {
@@ -190,6 +190,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
         foreach ($this as $rdn => $node) {
             $data[$rdn] = $node;
         }
+
         return $data;
     }
 }

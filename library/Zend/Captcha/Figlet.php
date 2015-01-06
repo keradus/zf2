@@ -28,7 +28,7 @@ class Figlet extends AbstractWord
     /**
      * Constructor
      *
-     * @param  null|string|array|\Traversable $options
+     * @param null|string|array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -54,6 +54,7 @@ class Figlet extends AbstractWord
     public function generate()
     {
         $this->useNumbers = false;
+
         return parent::generate();
     }
 

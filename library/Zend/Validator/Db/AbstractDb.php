@@ -85,7 +85,7 @@ abstract class AbstractDb extends AbstractValidator
      * 'exclude' => An optional where clause or field/value pair to exclude from the query
      * 'adapter' => An optional database adapter to use
      *
-     * @param array|Traversable|Select $options Options to use for this validator
+     * @param  array|Traversable|Select                           $options Options to use for this validator
      * @throws \Zend\Validator\Exception\InvalidArgumentException
      */
     public function __construct($options = null)
@@ -94,6 +94,7 @@ abstract class AbstractDb extends AbstractValidator
 
         if ($options instanceof Select) {
             $this->setSelect($options);
+
             return;
         }
 
@@ -162,11 +163,12 @@ abstract class AbstractDb extends AbstractValidator
      * Sets a new database adapter
      *
      * @param  DbAdapter $adapter
-     * @return self Provides a fluent interface
+     * @return self      Provides a fluent interface
      */
     public function setAdapter(DbAdapter $adapter)
     {
         $this->adapter = $adapter;
+
         return $this;
     }
 
@@ -183,13 +185,14 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Sets a new exclude clause
      *
-     * @param string|array $exclude
-     * @return self Provides a fluent interface
+     * @param  string|array $exclude
+     * @return self         Provides a fluent interface
      */
     public function setExclude($exclude)
     {
         $this->exclude = $exclude;
         $this->select  = null;
+
         return $this;
     }
 
@@ -206,13 +209,14 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Sets a new field
      *
-     * @param string $field
+     * @param  string     $field
      * @return AbstractDb
      */
     public function setField($field)
     {
         $this->field  = (string) $field;
         $this->select = null;
+
         return $this;
     }
 
@@ -229,13 +233,14 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Sets a new table
      *
-     * @param string $table
-     * @return self Provides a fluent interface
+     * @param  string $table
+     * @return self   Provides a fluent interface
      */
     public function setTable($table)
     {
         $this->table  = (string) $table;
         $this->select = null;
+
         return $this;
     }
 
@@ -252,13 +257,14 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Sets a new schema
      *
-     * @param string $schema
-     * @return self Provides a fluent interface
+     * @param  string $schema
+     * @return self   Provides a fluent interface
      */
     public function setSchema($schema)
     {
         $this->schema = $schema;
         $this->select = null;
+
         return $this;
     }
 
@@ -266,11 +272,12 @@ abstract class AbstractDb extends AbstractValidator
      * Sets the select object to be used by the validator
      *
      * @param  Select $select
-     * @return self Provides a fluent interface
+     * @return self   Provides a fluent interface
      */
     public function setSelect(Select $select)
     {
         $this->select = $select;
+
         return $this;
     }
 
@@ -314,7 +321,7 @@ abstract class AbstractDb extends AbstractValidator
      * Run query and returns matches, or null if no matches are found.
      *
      * @param  string $value
-     * @return array when matches are found.
+     * @return array  when matches are found.
      */
     protected function query($value)
     {

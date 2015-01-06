@@ -23,7 +23,7 @@ class CheckTest extends \PHPUnit_Framework_TestCase
             array(array(
                 'CONSTRAINT %s CHECK (%s)',
                 array('foo', 'id>0'),
-                array($check::TYPE_IDENTIFIER, $check::TYPE_LITERAL)
+                array($check::TYPE_IDENTIFIER, $check::TYPE_LITERAL),
             )),
             $check->getExpressionData()
         );

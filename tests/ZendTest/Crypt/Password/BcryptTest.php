@@ -34,14 +34,14 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->password = 'test';
         $this->prefix = '$2y$';
 
-        $this->bcryptPassword = $this->prefix . '10$MTIzNDU2Nzg5MDEyMzQ1Nej0NmcAWSLR.oP7XOR9HD/vjUuOj100y';
+        $this->bcryptPassword = $this->prefix.'10$MTIzNDU2Nzg5MDEyMzQ1Nej0NmcAWSLR.oP7XOR9HD/vjUuOj100y';
     }
 
     public function testConstructByOptions()
     {
         $options = array(
             'cost'       => '15',
-            'salt'       => $this->salt
+            'salt'       => $this->salt,
         );
         $bcrypt  = new Bcrypt($options);
         $this->assertTrue($bcrypt instanceof Bcrypt);
@@ -53,7 +53,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     {
         $options = array(
             'cost'       => '15',
-            'salt'       => $this->salt
+            'salt'       => $this->salt,
         );
         $config  = new Config($options);
         $bcrypt  = new Bcrypt($config);
@@ -91,7 +91,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     public function testSetSmallSalt()
     {
         $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException',
-                                    'The length of the salt must be at least ' . Bcrypt::MIN_SALT_SIZE . ' bytes');
+                                    'The length of the salt must be at least '.Bcrypt::MIN_SALT_SIZE.' bytes');
         $this->bcrypt->setSalt('small salt');
     }
 
@@ -117,7 +117,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
 
     public function testPasswordWith8bitCharacter()
     {
-        $password = 'test' . chr(128);
+        $password = 'test'.chr(128);
         $this->bcrypt->setSalt($this->salt);
 
         $this->assertEquals('$2y$10$MTIzNDU2Nzg5MDEyMzQ1NemFdU/4JOrNpxMym09Mbp0m4hKTgfQo.',

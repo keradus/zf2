@@ -74,6 +74,6 @@ class HeaderLoader extends PluginClassLoader
         'vary'               => 'Zend\Http\Header\Vary',
         'via'                => 'Zend\Http\Header\Via',
         'warning'            => 'Zend\Http\Header\Warning',
-        'wwwauthenticate'    => 'Zend\Http\Header\WWWAuthenticate'
+        'wwwauthenticate'    => 'Zend\Http\Header\WWWAuthenticate',
     );
 }

@@ -37,7 +37,7 @@ class Bcrypt implements PasswordInterface
     /**
      * Constructor
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
@@ -66,7 +66,7 @@ class Bcrypt implements PasswordInterface
     /**
      * Bcrypt
      *
-     * @param  string $password
+     * @param  string                     $password
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -83,18 +83,19 @@ class Bcrypt implements PasswordInterface
          * @see http://php.net/security/crypt_blowfish.php
          */
         $prefix = '$2y$';
-        $hash = crypt($password, $prefix . $this->cost . '$' . $salt64);
+        $hash = crypt($password, $prefix.$this->cost.'$'.$salt64);
         if (strlen($hash) < 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
         }
+
         return $hash;
     }
 
     /**
      * Verify if a password is correct against a hash value
      *
-     * @param  string $password
-     * @param  string $hash
+     * @param  string                     $password
+     * @param  string                     $hash
      * @throws Exception\RuntimeException when the hash is unable to be processed
      * @return bool
      */
@@ -104,13 +105,14 @@ class Bcrypt implements PasswordInterface
         if ($result === $hash) {
             return true;
         }
+
         return false;
     }
 
     /**
      * Set the cost parameter
      *
-     * @param  int|string $cost
+     * @param  int|string                         $cost
      * @throws Exception\InvalidArgumentException
      * @return Bcrypt
      */
@@ -125,6 +127,7 @@ class Bcrypt implements PasswordInterface
             }
             $this->cost = sprintf('%1$02d', $cost);
         }
+
         return $this;
     }
 
@@ -141,7 +144,7 @@ class Bcrypt implements PasswordInterface
     /**
      * Set the salt value
      *
-     * @param  string $salt
+     * @param  string                             $salt
      * @throws Exception\InvalidArgumentException
      * @return Bcrypt
      */
@@ -149,10 +152,11 @@ class Bcrypt implements PasswordInterface
     {
         if (strlen($salt) < self::MIN_SALT_SIZE) {
             throw new Exception\InvalidArgumentException(
-                'The length of the salt must be at least ' . self::MIN_SALT_SIZE . ' bytes'
+                'The length of the salt must be at least '.self::MIN_SALT_SIZE.' bytes'
             );
         }
         $this->salt = $salt;
+
         return $this;
     }
 
@@ -170,7 +174,7 @@ class Bcrypt implements PasswordInterface
      * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
      *
      * @deprecated since zf 2.3 requires PHP >= 5.3.23
-     * @param bool $value
+     * @param  bool   $value
      * @return Bcrypt
      */
     public function setBackwardCompatibility($value)

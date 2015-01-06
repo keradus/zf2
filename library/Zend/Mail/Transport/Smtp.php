@@ -45,7 +45,7 @@ class Smtp implements TransportInterface
     /**
      * Constructor.
      *
-     * @param  SmtpOptions $options Optional
+     * @param SmtpOptions $options Optional
      */
     public function __construct(SmtpOptions $options = null)
     {
@@ -64,6 +64,7 @@ class Smtp implements TransportInterface
     public function setOptions(SmtpOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -80,13 +81,14 @@ class Smtp implements TransportInterface
     /**
      * Set plugin manager for obtaining SMTP protocol connection
      *
-     * @param  Protocol\SmtpPluginManager $plugins
+     * @param  Protocol\SmtpPluginManager         $plugins
      * @throws Exception\InvalidArgumentException
      * @return Smtp
      */
     public function setPluginManager(Protocol\SmtpPluginManager $plugins)
     {
         $this->plugins = $plugins;
+
         return $this;
     }
 
@@ -100,6 +102,7 @@ class Smtp implements TransportInterface
         if (null === $this->plugins) {
             $this->setPluginManager(new Protocol\SmtpPluginManager());
         }
+
         return $this->plugins;
     }
 
@@ -112,6 +115,7 @@ class Smtp implements TransportInterface
     public function setAutoDisconnect($flag)
     {
         $this->autoDisconnect = (bool) $flag;
+
         return $this;
     }
 
@@ -128,8 +132,8 @@ class Smtp implements TransportInterface
     /**
      * Return an SMTP connection
      *
-     * @param  string $name
-     * @param  array|null $options
+     * @param  string        $name
+     * @param  array|null    $options
      * @return Protocol\Smtp
      */
     public function plugin($name, array $options = null)
@@ -192,7 +196,7 @@ class Smtp implements TransportInterface
      * The connection via the protocol adapter is made just-in-time to allow a
      * developer to add a custom adapter if required before mail is sent.
      *
-     * @param Message $message
+     * @param  Message                    $message
      * @throws Exception\RuntimeException
      */
     public function send(Message $message)
@@ -232,13 +236,13 @@ class Smtp implements TransportInterface
         }
 
         // Issue DATA command to client
-        $connection->data($headers . Headers::EOL . $body);
+        $connection->data($headers.Headers::EOL.$body);
     }
 
     /**
      * Retrieve email address for envelope FROM
      *
-     * @param  Message $message
+     * @param  Message                    $message
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -259,6 +263,7 @@ class Smtp implements TransportInterface
 
         $from->rewind();
         $sender = $from->current();
+
         return $sender->getEmail();
     }
 
@@ -281,6 +286,7 @@ class Smtp implements TransportInterface
             $recipients[] = $address->getEmail();
         }
         $recipients = array_unique($recipients);
+
         return $recipients;
     }
 
@@ -294,6 +300,7 @@ class Smtp implements TransportInterface
     {
         $headers = clone $message->getHeaders();
         $headers->removeHeader('Bcc');
+
         return $headers->toString();
     }
 

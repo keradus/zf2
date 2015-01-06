@@ -25,7 +25,7 @@ interface WriterInterface
     /**
      * Set a message formatter for the writer
      *
-     * @param string|Formatter $formatter
+     * @param  string|Formatter $formatter
      * @return WriterInterface
      */
     public function setFormatter($formatter);
@@ -33,7 +33,7 @@ interface WriterInterface
     /**
      * Write a log message
      *
-     * @param  array $event
+     * @param  array           $event
      * @return WriterInterface
      */
     public function write(array $event);

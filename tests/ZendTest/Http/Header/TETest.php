@@ -44,5 +44,5 @@ class TETest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('TE: xxx', $tEHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

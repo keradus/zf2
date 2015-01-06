@@ -29,8 +29,8 @@ final class BooleanStrategy implements StrategyInterface
     private $falseValue;
 
     /**
-     * @param int|string $trueValue
-     * @param int|string $falseValue
+     * @param  int|string               $trueValue
+     * @param  int|string               $falseValue
      * @throws InvalidArgumentException
      */
     public function __construct($trueValue, $falseValue)
@@ -56,9 +56,9 @@ final class BooleanStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be extracted by the hydrator.
      *
-     * @param  bool $value The original value.
+     * @param  bool                     $value The original value.
      * @throws InvalidArgumentException
-     * @return int|string Returns the value that should be extracted.
+     * @return int|string               Returns the value that should be extracted.
      */
     public function extract($value)
     {
@@ -75,9 +75,9 @@ final class BooleanStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be hydrated by the hydrator.
      *
-     * @param  int|string $value The original value.
+     * @param  int|string               $value The original value.
      * @throws InvalidArgumentException
-     * @return bool Returns the value that should be hydrated.
+     * @return bool                     Returns the value that should be hydrated.
      */
     public function hydrate($value)
     {

@@ -34,15 +34,15 @@ class Rss extends AbstractEntry implements EntryInterface
     /**
      * Constructor
      *
-     * @param  DOMElement $entry
-     * @param  string $entryKey
-     * @param  string $type
+     * @param DOMElement $entry
+     * @param string     $entryKey
+     * @param string     $type
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         parent::__construct($entry, $entryKey, $type);
-        $this->xpathQueryRss = '//item[' . ($this->entryKey+1) . ']';
-        $this->xpathQueryRdf = '//rss:item[' . ($this->entryKey+1) . ']';
+        $this->xpathQueryRss = '//item['.($this->entryKey+1).']';
+        $this->xpathQueryRdf = '//rss:item['.($this->entryKey+1).']';
 
         $manager    = Reader\Reader::getExtensionManager();
         $extensions = array(
@@ -65,7 +65,7 @@ class Rss extends AbstractEntry implements EntryInterface
     /**
      * Get an author entry
      *
-     * @param int $index
+     * @param  int    $index
      * @return string
      */
     public function getAuthor($index = 0)
@@ -95,16 +95,16 @@ class Rss extends AbstractEntry implements EntryInterface
         if (!empty($authorsDc)) {
             foreach ($authorsDc as $author) {
                 $authors[] = array(
-                    'name' => $author['name']
+                    'name' => $author['name'],
                 );
             }
         }
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
         && $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $list = $this->xpath->query($this->xpathQueryRss . '//author');
+            $list = $this->xpath->query($this->xpathQueryRss.'//author');
         } else {
-            $list = $this->xpath->query($this->xpathQueryRdf . '//rss:author');
+            $list = $this->xpath->query($this->xpathQueryRdf.'//rss:author');
         }
         if ($list->length) {
             foreach ($list as $author) {
@@ -191,14 +191,14 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $dateModified = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/pubDate)');
+            $dateModified = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/pubDate)');
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
-                    $date = new DateTime('@' . $dateModifiedParsed);
+                    $date = new DateTime('@'.$dateModifiedParsed);
                 } else {
                     $dateStandards = array(DateTime::RSS, DateTime::RFC822,
-                                           DateTime::RFC2822, null);
+                                           DateTime::RFC2822, null, );
                     foreach ($dateStandards as $standard) {
                         try {
                             $date = date_create_from_format($standard, $dateModified);
@@ -208,7 +208,7 @@ class Rss extends AbstractEntry implements EntryInterface
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
-                                    . $e->getMessage(),
+                                    .$e->getMessage(),
                                     0, $e
                                 );
                             }
@@ -251,9 +251,9 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $description = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/description)');
+            $description = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/description)');
         } else {
-            $description = $this->xpath->evaluate('string(' . $this->xpathQueryRdf . '/rss:description)');
+            $description = $this->xpath->evaluate('string('.$this->xpathQueryRdf.'/rss:description)');
         }
 
         if (!$description) {
@@ -286,7 +286,7 @@ class Rss extends AbstractEntry implements EntryInterface
         $enclosure = null;
 
         if ($this->getType() == Reader\Reader::TYPE_RSS_20) {
-            $nodeList = $this->xpath->query($this->xpathQueryRss . '/enclosure');
+            $nodeList = $this->xpath->query($this->xpathQueryRss.'/enclosure');
 
             if ($nodeList->length > 0) {
                 $enclosure = new \stdClass();
@@ -321,7 +321,7 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $id = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/guid)');
+            $id = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/guid)');
         }
 
         if (!$id) {
@@ -350,7 +350,7 @@ class Rss extends AbstractEntry implements EntryInterface
     /**
      * Get a specific link
      *
-     * @param  int $index
+     * @param  int    $index
      * @return string
      */
     public function getLink($index = 0)
@@ -381,9 +381,9 @@ class Rss extends AbstractEntry implements EntryInterface
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $list = $this->xpath->query($this->xpathQueryRss . '//link');
+            $list = $this->xpath->query($this->xpathQueryRss.'//link');
         } else {
-            $list = $this->xpath->query($this->xpathQueryRdf . '//rss:link');
+            $list = $this->xpath->query($this->xpathQueryRdf.'//rss:link');
         }
 
         if (!$list->length) {
@@ -412,13 +412,13 @@ class Rss extends AbstractEntry implements EntryInterface
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
-            $list = $this->xpath->query($this->xpathQueryRss . '//category');
+            $list = $this->xpath->query($this->xpathQueryRss.'//category');
         } else {
-            $list = $this->xpath->query($this->xpathQueryRdf . '//rss:category');
+            $list = $this->xpath->query($this->xpathQueryRdf.'//rss:category');
         }
 
         if ($list->length) {
-            $categoryCollection = new Reader\Collection\Category;
+            $categoryCollection = new Reader\Collection\Category();
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->nodeValue,
@@ -465,9 +465,9 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $title = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/title)');
+            $title = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/title)');
         } else {
-            $title = $this->xpath->evaluate('string(' . $this->xpathQueryRdf . '/rss:title)');
+            $title = $this->xpath->evaluate('string('.$this->xpathQueryRdf.'/rss:title)');
         }
 
         if (!$title) {
@@ -533,7 +533,7 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10
             && $this->getType() !== Reader\Reader::TYPE_RSS_090
         ) {
-            $commentlink = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/comments)');
+            $commentlink = $this->xpath->evaluate('string('.$this->xpathQueryRss.'/comments)');
         }
 
         if (!$commentlink) {
@@ -582,7 +582,7 @@ class Rss extends AbstractEntry implements EntryInterface
     /**
      * Set the XPath query (incl. on all Extensions)
      *
-     * @param DOMXPath $xpath
+     * @param  DOMXPath $xpath
      * @return void
      */
     public function setXpath(DOMXPath $xpath)

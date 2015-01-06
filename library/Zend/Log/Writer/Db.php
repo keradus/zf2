@@ -49,10 +49,10 @@ class Db extends AbstractWriter
      *
      * We used the Adapter instead of Zend\Db for a performance reason.
      *
-     * @param Adapter|array|Traversable $db
-     * @param string $tableName
-     * @param array $columnMap
-     * @param string $separator
+     * @param  Adapter|array|Traversable          $db
+     * @param  string                             $tableName
+     * @param  array                              $columnMap
+     * @param  string                             $separator
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($db, $tableName = null, array $columnMap = null, $separator = null)
@@ -104,7 +104,7 @@ class Db extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param array $event event data
+     * @param  array                      $event event data
      * @return void
      * @throws Exception\RuntimeException
      */
@@ -131,16 +131,16 @@ class Db extends AbstractWriter
      * Prepare the INSERT SQL statement
      *
      * @param  Adapter $db
-     * @param  string $tableName
-     * @param  array $fields
+     * @param  string  $tableName
+     * @param  array   $fields
      * @return string
      */
     protected function prepareInsert(Adapter $db, $tableName, array $fields)
     {
         $keys = array_keys($fields);
-        $sql = 'INSERT INTO ' . $db->platform->quoteIdentifier($tableName) . ' (' .
-            implode(",", array_map(array($db->platform, 'quoteIdentifier'), $keys)) . ') VALUES (' .
-            implode(",", array_map(array($db->driver, 'formatParameterName'), $keys)) . ')';
+        $sql = 'INSERT INTO '.$db->platform->quoteIdentifier($tableName).' ('.
+            implode(",", array_map(array($db->platform, 'quoteIdentifier'), $keys)).') VALUES ('.
+            implode(",", array_map(array($db->driver, 'formatParameterName'), $keys)).')';
 
         return $sql;
     }
@@ -170,6 +170,7 @@ class Db extends AbstractWriter
                 $data[$columnMap[$name]] = $value;
             }
         }
+
         return $data;
     }
 
@@ -189,12 +190,13 @@ class Db extends AbstractWriter
         foreach ($event as $name => $value) {
             if (is_array($value)) {
                 foreach ($value as $key => $subvalue) {
-                    $data[$name . $this->separator . $key] = $subvalue;
+                    $data[$name.$this->separator.$key] = $subvalue;
                 }
             } else {
                 $data[$name] = $value;
             }
         }
+
         return $data;
     }
 }

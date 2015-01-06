@@ -47,7 +47,6 @@ class ExceptionStrategyTest extends TestCase
         }
         $this->assertTrue($found, 'MvcEvent::EVENT_DISPATCH_ERROR not found');
 
-
         $listeners        = $events->getListeners(MvcEvent::EVENT_RENDER_ERROR);
         $expectedCallback = array($this->strategy, 'prepareExceptionViewModel');
         $expectedPriority = 1;
@@ -164,11 +163,11 @@ class ExceptionStrategyTest extends TestCase
             $events->attachAggregate($this->strategy);
 
             $exception = new \Exception('some exception');
-            $event = new MvcEvent(MvcEvent::EVENT_DISPATCH_ERROR, null, array('exception'=>$exception));
+            $event = new MvcEvent(MvcEvent::EVENT_DISPATCH_ERROR, null, array('exception' => $exception));
             $event->setResult('something');
             $event->setError($error);
 
-            $events->trigger($event, null, array('exception'=>$exception));
+            $events->trigger($event, null, array('exception' => $exception));
 
             $this->assertEquals('something', $event->getResult(), sprintf('With an error of %s getResult should not be modified', $error));
         }
@@ -183,7 +182,7 @@ class ExceptionStrategyTest extends TestCase
             $events->attachAggregate($this->strategy);
 
             $exception = new \Exception('message foo');
-            $event = new MvcEvent(MvcEvent::EVENT_DISPATCH_ERROR, null, array('exception'=>$exception));
+            $event = new MvcEvent(MvcEvent::EVENT_DISPATCH_ERROR, null, array('exception' => $exception));
 
             $event->setError($error);
 
@@ -208,10 +207,10 @@ class ExceptionStrategyTest extends TestCase
             $i++;
         } while ($i < count($messages));
 
-        $event = new MvcEvent(MvcEvent::EVENT_DISPATCH_ERROR, null, array('exception'=>$exception));
+        $event = new MvcEvent(MvcEvent::EVENT_DISPATCH_ERROR, null, array('exception' => $exception));
         $event->setError('user-defined-error');
 
-        $events->trigger($event, null, array('exception'=>$exception)); //$this->strategy->prepareExceptionViewModel($event);
+        $events->trigger($event, null, array('exception' => $exception)); //$this->strategy->prepareExceptionViewModel($event);
 
         foreach ($messages as $message) {
             $this->assertContains($message, $event->getResult()->getResult(), sprintf('Not all errors are rendered'));

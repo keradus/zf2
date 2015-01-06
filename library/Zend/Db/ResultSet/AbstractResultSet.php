@@ -71,6 +71,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             if (is_array($this->buffer)) {
                 $this->dataSource->rewind();
             }
+
             return $this;
         }
 
@@ -107,6 +108,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
                 $this->dataSource->rewind();
             }
         }
+
         return $this;
     }
 
@@ -115,6 +117,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
         if ($this->buffer === -1 || is_array($this->buffer)) {
             return true;
         }
+
         return false;
     }
 
@@ -147,17 +150,20 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
         $dataSource->rewind();
         if (!$dataSource->valid()) {
             $this->fieldCount = 0;
+
             return 0;
         }
 
         $row = $dataSource->current();
         if (is_object($row) && $row instanceof Countable) {
             $this->fieldCount = $row->count();
+
             return $this->fieldCount;
         }
 
         $row = (array) $row;
         $this->fieldCount = count($row);
+
         return $this->fieldCount;
     }
 
@@ -203,6 +209,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
         if (is_array($this->buffer)) {
             $this->buffer[$this->position] = $data;
         }
+
         return $data;
     }
 
@@ -220,6 +227,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             return $this->dataSource->valid();
         } else {
             $key = key($this->dataSource);
+
             return ($key !== null);
         }
     }
@@ -252,6 +260,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             return $this->count;
         }
         $this->count = count($this->dataSource);
+
         return $this->count;
     }
 
@@ -273,10 +282,11 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
                 $return[] = $row->getArrayCopy();
             } else {
                 throw new Exception\RuntimeException(
-                    'Rows as part of this DataSource, with type ' . gettype($row) . ' cannot be cast to an array'
+                    'Rows as part of this DataSource, with type '.gettype($row).' cannot be cast to an array'
                 );
             }
         }
+
         return $return;
     }
 }

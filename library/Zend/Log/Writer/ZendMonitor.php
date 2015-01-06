@@ -28,7 +28,7 @@ class ZendMonitor extends AbstractWriter
     /**
      * Constructor
      *
-     * @param array|\Traversable|null $options
+     * @param  array|\Traversable|null $options
      * @return ZendMonitor
      */
     public function __construct($options = null)
@@ -60,7 +60,7 @@ class ZendMonitor extends AbstractWriter
     /**
      * Log a message to this writer.
      *
-     * @param array $event log data event
+     * @param  array $event log data event
      * @return void
      */
     public function write(array $event)
@@ -75,7 +75,7 @@ class ZendMonitor extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param array $event log data event
+     * @param  array $event log data event
      * @return void
      */
     protected function doWrite(array $event)

@@ -6,6 +6,7 @@
  * @copyright      Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license        http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Stdlib\Hydrator\Filter;
 
 class MethodMatchFilter implements FilterInterface
@@ -23,8 +24,8 @@ class MethodMatchFilter implements FilterInterface
     protected $exclude = null;
 
     /**
-     * @param string $method The method to exclude or include
-     * @param bool $exclude If the method should be excluded
+     * @param string $method  The method to exclude or include
+     * @param bool   $exclude If the method should be excluded
      */
     public function __construct($method, $exclude = true)
     {
@@ -43,6 +44,7 @@ class MethodMatchFilter implements FilterInterface
         if (substr($property, $pos) === $this->method) {
             return $this->exclude ? false : true;
         }
+
         return $this->exclude ? true : false;
     }
 }

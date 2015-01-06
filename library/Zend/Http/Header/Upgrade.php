@@ -24,7 +24,7 @@ class Upgrade implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'upgrade') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Upgrade string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Upgrade string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Upgrade implements HeaderInterface
 
     public function toString()
     {
-        return 'Upgrade: ' . $this->getFieldValue();
+        return 'Upgrade: '.$this->getFieldValue();
     }
 }

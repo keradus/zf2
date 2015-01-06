@@ -41,6 +41,7 @@ class FeatureSet
         foreach ($this->features as $feature) {
             $feature->setTableGateway($this->tableGateway);
         }
+
         return $this;
     }
 
@@ -53,6 +54,7 @@ class FeatureSet
                 break;
             }
         }
+
         return $feature;
     }
 
@@ -61,6 +63,7 @@ class FeatureSet
         foreach ($features as $feature) {
             $this->addFeature($feature);
         }
+
         return $this;
     }
 
@@ -70,6 +73,7 @@ class FeatureSet
             $feature->setTableGateway($this->tableGateway);
         }
         $this->features[] = $feature;
+
         return $this;
     }
 
@@ -86,7 +90,7 @@ class FeatureSet
     }
 
     /**
-     * @param string $property
+     * @param  string $property
      * @return bool
      */
     public function canCallMagicGet($property)
@@ -95,17 +99,18 @@ class FeatureSet
     }
 
     /**
-     * @param string $property
+     * @param  string $property
      * @return mixed
      */
     public function callMagicGet($property)
     {
         $return = null;
+
         return $return;
     }
 
     /**
-     * @param string $property
+     * @param  string $property
      * @return bool
      */
     public function canCallMagicSet($property)
@@ -121,11 +126,12 @@ class FeatureSet
     public function callMagicSet($property, $value)
     {
         $return = null;
+
         return $return;
     }
 
     /**
-     * @param string $method
+     * @param  string $method
      * @return bool
      */
     public function canCallMagicCall($method)
@@ -134,13 +140,14 @@ class FeatureSet
     }
 
     /**
-     * @param string $method
-     * @param array $arguments
+     * @param  string $method
+     * @param  array  $arguments
      * @return mixed
      */
     public function callMagicCall($method, $arguments)
     {
         $return = null;
+
         return $return;
     }
 }

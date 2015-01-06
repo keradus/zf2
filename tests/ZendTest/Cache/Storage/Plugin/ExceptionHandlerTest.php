@@ -110,7 +110,7 @@ class ExceptionHandlerTest extends CommonPluginTest
         $result = null;
         $event = new ExceptionEvent('getItem.exception', $this->_adapter, new ArrayObject(array(
             'key'     => 'key',
-            'options' => array()
+            'options' => array(),
         )), $result, $expectedException);
         $this->_plugin->onException($event);
 
@@ -128,7 +128,7 @@ class ExceptionHandlerTest extends CommonPluginTest
         $result = 'test';
         $event = new ExceptionEvent('getItem.exception', $this->_adapter, new ArrayObject(array(
             'key'     => 'key',
-            'options' => array()
+            'options' => array(),
         )), $result, new \Exception());
         $this->_plugin->onException($event);
 

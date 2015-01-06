@@ -28,7 +28,7 @@ class ResultIntegrationTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Result;
+        $this->object = new Result();
     }
 
     /**

@@ -22,8 +22,8 @@ class NameInformation
     protected $uses = array();
 
     /**
-     * @param  string $namespace
-     * @param  array $uses
+     * @param string $namespace
+     * @param array  $uses
      */
     public function __construct($namespace = null, array $uses = array())
     {
@@ -36,12 +36,13 @@ class NameInformation
     }
 
     /**
-     * @param  string $namespace
+     * @param  string          $namespace
      * @return NameInformation
      */
     public function setNamespace($namespace)
     {
         $this->namespace = (string) $namespace;
+
         return $this;
     }
 
@@ -62,7 +63,7 @@ class NameInformation
     }
 
     /**
-     * @param  array $uses
+     * @param  array           $uses
      * @return NameInformation
      */
     public function setUses(array $uses)
@@ -74,7 +75,7 @@ class NameInformation
     }
 
     /**
-     * @param  array $uses
+     * @param  array           $uses
      * @return NameInformation
      */
     public function addUses(array $uses)
@@ -91,8 +92,8 @@ class NameInformation
     }
 
     /**
-     * @param  array|string $use
-     * @param  string $as
+     * @param array|string $use
+     * @param string       $as
      */
     public function addUse($use, $as = null)
     {
@@ -129,7 +130,7 @@ class NameInformation
     public function resolveName($name)
     {
         if ($this->namespace && !$this->uses && strlen($name) > 0 && $name{0} != '\\') {
-            return $this->namespace . '\\' . $name;
+            return $this->namespace.'\\'.$name;
         }
 
         if (!$this->uses || strlen($name) <= 0 || $name{0} == '\\') {
@@ -147,7 +148,7 @@ class NameInformation
                 return substr_replace($name, $fqns, 0, $firstPartEnd);
             }
             if ($this->namespace) {
-                return $this->namespace . '\\' . $name;
+                return $this->namespace.'\\'.$name;
             }
         }
 

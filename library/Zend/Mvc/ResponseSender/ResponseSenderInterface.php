@@ -14,7 +14,7 @@ interface ResponseSenderInterface
     /**
      * Send the response
      *
-     * @param SendResponseEvent $event
+     * @param  SendResponseEvent $event
      * @return void
      */
     public function __invoke(SendResponseEvent $event);

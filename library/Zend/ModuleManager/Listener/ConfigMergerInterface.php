@@ -17,7 +17,7 @@ interface ConfigMergerInterface
     /**
      * getMergedConfig
      *
-     * @param  bool $returnConfigAsObject
+     * @param  bool  $returnConfigAsObject
      * @return mixed
      */
     public function getMergedConfig($returnConfigAsObject = true);
@@ -25,7 +25,7 @@ interface ConfigMergerInterface
     /**
      * setMergedConfig
      *
-     * @param  array $config
+     * @param  array                 $config
      * @return ConfigMergerInterface
      */
     public function setMergedConfig(array $config);

@@ -79,8 +79,8 @@ abstract class AbstractProtocol
     /**
      * Constructor.
      *
-     * @param  string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
-     * @param  int $port OPTIONAL Port number (default: null)
+     * @param  string                     $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
+     * @param  int                        $port OPTIONAL Port number (default: null)
      * @throws Exception\RuntimeException
      */
     public function __construct($host = '127.0.0.1', $port = null)
@@ -174,7 +174,7 @@ abstract class AbstractProtocol
     /**
      * Add the transaction log
      *
-     * @param  string $value new transaction
+     * @param string $value new transaction
      */
     protected function _addLog($value)
     {
@@ -190,7 +190,7 @@ abstract class AbstractProtocol
      *
      * An example $remote string may be 'tcp://mail.example.com:25' or 'ssh://hostname.com:2222'
      *
-     * @param  string $remote Remote
+     * @param  string                     $remote Remote
      * @throws Exception\RuntimeException
      * @return bool
      */
@@ -230,25 +230,25 @@ abstract class AbstractProtocol
     /**
      * Send the given request followed by a LINEEND to the server.
      *
-     * @param  string $request
+     * @param  string                     $request
      * @throws Exception\RuntimeException
-     * @return int|bool Number of bytes written to remote host
+     * @return int|bool                   Number of bytes written to remote host
      */
     protected function _send($request)
     {
         if (!is_resource($this->socket)) {
-            throw new Exception\RuntimeException('No connection has been established to ' . $this->host);
+            throw new Exception\RuntimeException('No connection has been established to '.$this->host);
         }
 
         $this->request = $request;
 
-        $result = fwrite($this->socket, $request . self::EOL);
+        $result = fwrite($this->socket, $request.self::EOL);
 
         // Save request to internal log
-        $this->_addLog($request . self::EOL);
+        $this->_addLog($request.self::EOL);
 
         if ($result === false) {
-            throw new Exception\RuntimeException('Could not send request to ' . $this->host);
+            throw new Exception\RuntimeException('Could not send request to '.$this->host);
         }
 
         return $result;
@@ -257,14 +257,14 @@ abstract class AbstractProtocol
     /**
      * Get a line from the stream.
      *
-     * @param  int $timeout Per-request timeout value if applicable
+     * @param  int                        $timeout Per-request timeout value if applicable
      * @throws Exception\RuntimeException
      * @return string
      */
     protected function _receive($timeout = null)
     {
         if (!is_resource($this->socket)) {
-            throw new Exception\RuntimeException('No connection has been established to ' . $this->host);
+            throw new Exception\RuntimeException('No connection has been established to '.$this->host);
         }
 
         // Adapters may wish to supply per-commend timeouts according to appropriate RFC
@@ -282,11 +282,11 @@ abstract class AbstractProtocol
         $info = stream_get_meta_data($this->socket);
 
         if (!empty($info['timed_out'])) {
-            throw new Exception\RuntimeException($this->host . ' has timed out');
+            throw new Exception\RuntimeException($this->host.' has timed out');
         }
 
         if ($response === false) {
-            throw new Exception\RuntimeException('Could not read from ' . $this->host);
+            throw new Exception\RuntimeException('Could not read from '.$this->host);
         }
 
         return $response;
@@ -298,10 +298,10 @@ abstract class AbstractProtocol
      * Read the response from the stream and check for expected return code.
      * Throws a Zend\Mail\Protocol\Exception\ExceptionInterface if an unexpected code is returned.
      *
-     * @param  string|array $code One or more codes that indicate a successful response
-     * @param  int $timeout Per-request timeout value if applicable
+     * @param  string|array               $code    One or more codes that indicate a successful response
+     * @param  int                        $timeout Per-request timeout value if applicable
      * @throws Exception\RuntimeException
-     * @return string Last line of response string
+     * @return string                     Last line of response string
      */
     protected function _expect($code, $timeout = null)
     {
@@ -317,7 +317,7 @@ abstract class AbstractProtocol
             list($cmd, $more, $msg) = preg_split('/([\s-]+)/', $result, 2, PREG_SPLIT_DELIM_CAPTURE);
 
             if ($errMsg !== '') {
-                $errMsg .= ' ' . $msg;
+                $errMsg .= ' '.$msg;
             } elseif ($cmd === null || !in_array($cmd, $code)) {
                 $errMsg =  $msg;
             }

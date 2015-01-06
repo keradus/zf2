@@ -40,16 +40,16 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
      * @var array
      */
     protected $options = array(
-        'buffer_results' => false
+        'buffer_results' => false,
     );
 
     /**
      * Constructor
      *
      * @param array|Connection|\mysqli $connection
-     * @param null|Statement $statementPrototype
-     * @param null|Result $resultPrototype
-     * @param array $options
+     * @param null|Statement           $statementPrototype
+     * @param null|Result              $resultPrototype
+     * @param array                    $options
      */
     public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, array $options = array())
     {
@@ -65,7 +65,7 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Mysqli
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
@@ -77,6 +77,7 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -181,18 +182,17 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Create statement
      *
-     * @param string $sqlOrResource
+     * @param  string    $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
     {
         /**
          * @todo Resource tracking
-        if (is_resource($sqlOrResource) && !in_array($sqlOrResource, $this->resources, true)) {
-            $this->resources[] = $sqlOrResource;
-        }
-        */
-
+         if (is_resource($sqlOrResource) && !in_array($sqlOrResource, $this->resources, true)) {
+         $this->resources[] = $sqlOrResource;
+         }
+         */
         $statement = clone $this->statementPrototype;
         if ($sqlOrResource instanceof mysqli_stmt) {
             $statement->setResource($sqlOrResource);
@@ -205,20 +205,22 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
             }
             $statement->initialize($this->connection->getResource());
         }
+
         return $statement;
     }
 
     /**
      * Create result
      *
-     * @param resource $resource
-     * @param null|bool $isBuffered
+     * @param  resource  $resource
+     * @param  null|bool $isBuffered
      * @return Result
      */
     public function createResult($resource, $isBuffered = null)
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue(), $isBuffered);
+
         return $result;
     }
 
@@ -235,8 +237,8 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Format parameter name
      *
-     * @param string $name
-     * @param mixed  $type
+     * @param  string $name
+     * @param  mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)

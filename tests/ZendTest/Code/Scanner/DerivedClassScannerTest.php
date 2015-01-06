@@ -17,7 +17,7 @@ class DerivedClassScannerTest extends \PHPUnit_Framework_TestCase
     public function testCreatesClass()
     {
         $ds = new DirectoryScanner();
-        $ds->addDirectory(__DIR__ . '/TestAsset');
+        $ds->addDirectory(__DIR__.'/TestAsset');
         $ads = new AggregateDirectoryScanner();
         $ads->addDirectoryScanner($ds);
         $c = $ads->getClass('ZendTest\Code\Scanner\TestAsset\MapperExample\RepositoryB');

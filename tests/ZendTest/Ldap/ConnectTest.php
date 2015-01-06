@@ -233,12 +233,12 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $useSsl = TESTS_ZEND_LDAP_USE_SSL;
         }
         if ($useSsl) {
-            $host = 'ldaps://' . $host;
+            $host = 'ldaps://'.$host;
         } else {
-            $host = 'ldap://' . $host;
+            $host = 'ldap://'.$host;
         }
         if ($port) {
-            $host = $host . ':' . $port;
+            $host = $host.':'.$port;
         }
 
         $ldap = new Ldap\Ldap();

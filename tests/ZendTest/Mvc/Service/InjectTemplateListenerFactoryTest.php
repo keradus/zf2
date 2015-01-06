@@ -46,7 +46,7 @@ class InjectTemplateListenerFactoryTest extends TestCase
                     // must be an array due to type hinting on setControllerMap()
                     'SomeModule' => 'some/module',
                 ),
-            ))
+            )),
         ));
 
         $this->assertEquals('some/module', $listener->mapController("SomeModule"));

@@ -22,9 +22,9 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
     {
         $testData = array(
             array('cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com',
-                  'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com'),
+                  'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com', ),
             array('Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.',
-                  'Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.'),
+                  'Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.', ),
             array("\x00 NULL CHAR first", base64_encode("\x00 NULL CHAR first")),
             array("\n LF CHAR first", base64_encode("\n LF CHAR first")),
             array("\r CR CHAR first", base64_encode("\r CR CHAR first")),
@@ -38,8 +38,9 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
             array("CHR(127) \x7f in string", base64_encode("CHR(127) \x7f in string")),
             array('Ä first', base64_encode('Ä first')),
             array('in Ä string', base64_encode('in Ä string')),
-            array('last char is a string ', base64_encode('last char is a string '))
+            array('last char is a string ', base64_encode('last char is a string ')),
         );
+
         return $testData;
     }
 
@@ -55,18 +56,19 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
     {
         $testData = array(
             array(array('dn' => 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com'),
-                  'dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com'),
+                  'dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com', ),
             array(array('dn' => 'cn=Jürgen Österreicher, ou=Äpfel, dc=airius, dc=com'),
-                  'dn:: ' . base64_encode('cn=Jürgen Österreicher, ou=Äpfel, dc=airius, dc=com')),
+                  'dn:: '.base64_encode('cn=Jürgen Österreicher, ou=Äpfel, dc=airius, dc=com'), ),
             array(array('description' => 'Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.'),
                   'description: Babs is a big sailing fan, and travels extensively in search of p'
-                      . PHP_EOL . ' erfect sailing conditions.'),
+                      .PHP_EOL.' erfect sailing conditions.', ),
             array(array('description' => "CHR(127) \x7f in string"),
-                  'description:: ' . base64_encode("CHR(127) \x7f in string")),
+                  'description:: '.base64_encode("CHR(127) \x7f in string"), ),
             array(array('description' => '1234567890123456789012345678901234567890123456789012345678901234 567890'),
-                  'description: 1234567890123456789012345678901234567890123456789012345678901234 ' . PHP_EOL
-                      . ' 567890'),
+                  'description: 1234567890123456789012345678901234567890123456789012345678901234 '.PHP_EOL
+                      .' 567890', ),
         );
+
         return $testData;
     }
 
@@ -82,7 +84,7 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
     public function testChangedWrapCount()
     {
         $input    = '56789012345678901234567890';
-        $expected = 'dn: 567890' . PHP_EOL . ' 1234567890' . PHP_EOL . ' 1234567890';
+        $expected = 'dn: 567890'.PHP_EOL.' 1234567890'.PHP_EOL.' 1234567890';
         $output   = Ldif\Encoder::encode(array('dn' => $input), array('wrap' => 10));
         $this->assertEquals($expected, $output);
     }
@@ -94,12 +96,12 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
             'b' => 'c',
             'c' => '',
             'd' => array(),
-            'e' => array(''));
-        $expected = 'a: a' . PHP_EOL .
-            'a: b' . PHP_EOL .
-            'b: c' . PHP_EOL .
-            'c: ' . PHP_EOL .
-            'd: ' . PHP_EOL .
+            'e' => array(''), );
+        $expected = 'a: a'.PHP_EOL.
+            'a: b'.PHP_EOL.
+            'b: c'.PHP_EOL.
+            'c: '.PHP_EOL.
+            'd: '.PHP_EOL.
             'e: ';
         $actual   = Ldif\Encoder::encode($data);
         $this->assertEquals($expected, $actual);
@@ -120,30 +122,30 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
             'boolean'     => array('TRUE', 'FALSE'),
             'objectclass' => array('account', 'top'),
         );
-        $expected = 'version: 1' . PHP_EOL .
-            'dn: cn=name,dc=example,dc=org' . PHP_EOL .
-            'objectclass: account' . PHP_EOL .
-            'objectclass: top' . PHP_EOL .
-            'boolean: TRUE' . PHP_EOL .
-            'boolean: FALSE' . PHP_EOL .
-            'cn: name' . PHP_EOL .
-            'empty: ' . PHP_EOL .
-            'host: a' . PHP_EOL .
-            'host: b' . PHP_EOL .
+        $expected = 'version: 1'.PHP_EOL.
+            'dn: cn=name,dc=example,dc=org'.PHP_EOL.
+            'objectclass: account'.PHP_EOL.
+            'objectclass: top'.PHP_EOL.
+            'boolean: TRUE'.PHP_EOL.
+            'boolean: FALSE'.PHP_EOL.
+            'cn: name'.PHP_EOL.
+            'empty: '.PHP_EOL.
+            'host: a'.PHP_EOL.
+            'host: b'.PHP_EOL.
             'host: c';
         $actual   = Ldif\Encoder::encode($data);
         $this->assertEquals($expected, $actual);
 
-        $expected = 'version: 1' . PHP_EOL .
-            'cn: name' . PHP_EOL .
-            'dn: cn=name,dc=example,dc=org' . PHP_EOL .
-            'host: a' . PHP_EOL .
-            'host: b' . PHP_EOL .
-            'host: c' . PHP_EOL .
-            'empty: ' . PHP_EOL .
-            'boolean: TRUE' . PHP_EOL .
-            'boolean: FALSE' . PHP_EOL .
-            'objectclass: account' . PHP_EOL .
+        $expected = 'version: 1'.PHP_EOL.
+            'cn: name'.PHP_EOL.
+            'dn: cn=name,dc=example,dc=org'.PHP_EOL.
+            'host: a'.PHP_EOL.
+            'host: b'.PHP_EOL.
+            'host: c'.PHP_EOL.
+            'empty: '.PHP_EOL.
+            'boolean: TRUE'.PHP_EOL.
+            'boolean: FALSE'.PHP_EOL.
+            'objectclass: account'.PHP_EOL.
             'objectclass: top';
         $actual   = Ldif\Encoder::encode($data, array('sort' => false));
         $this->assertEquals($expected, $actual);
@@ -152,16 +154,16 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
     public function testNodeEncoding()
     {
         $node     = $this->createTestNode();
-        $expected = 'version: 1' . PHP_EOL .
-            'dn: cn=name,dc=example,dc=org' . PHP_EOL .
-            'objectclass: account' . PHP_EOL .
-            'objectclass: top' . PHP_EOL .
-            'boolean: TRUE' . PHP_EOL .
-            'boolean: FALSE' . PHP_EOL .
-            'cn: name' . PHP_EOL .
-            'empty: ' . PHP_EOL .
-            'host: a' . PHP_EOL .
-            'host: b' . PHP_EOL .
+        $expected = 'version: 1'.PHP_EOL.
+            'dn: cn=name,dc=example,dc=org'.PHP_EOL.
+            'objectclass: account'.PHP_EOL.
+            'objectclass: top'.PHP_EOL.
+            'boolean: TRUE'.PHP_EOL.
+            'boolean: FALSE'.PHP_EOL.
+            'cn: name'.PHP_EOL.
+            'empty: '.PHP_EOL.
+            'host: a'.PHP_EOL.
+            'host: b'.PHP_EOL.
             'host: c';
         $actual   = $node->toLdif();
         $this->assertEquals($expected, $actual);
@@ -180,15 +182,15 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
             'boolean'     => array('TRUE', 'FALSE'),
             'objectclass' => array('account', 'top'),
         );
-        $expected = 'dn: cn=name,dc=example,dc=org' . PHP_EOL .
-            'objectclass: account' . PHP_EOL .
-            'objectclass: top' . PHP_EOL .
-            'boolean: TRUE' . PHP_EOL .
-            'boolean: FALSE' . PHP_EOL .
-            'cn: name' . PHP_EOL .
-            'empty: ' . PHP_EOL .
-            'host: a' . PHP_EOL .
-            'host: b' . PHP_EOL .
+        $expected = 'dn: cn=name,dc=example,dc=org'.PHP_EOL.
+            'objectclass: account'.PHP_EOL.
+            'objectclass: top'.PHP_EOL.
+            'boolean: TRUE'.PHP_EOL.
+            'boolean: FALSE'.PHP_EOL.
+            'cn: name'.PHP_EOL.
+            'empty: '.PHP_EOL.
+            'host: a'.PHP_EOL.
+            'host: b'.PHP_EOL.
             'host: c';
         $actual   = Ldif\Encoder::encode($data, array('version' => null));
         $this->assertEquals($expected, $actual);
@@ -219,32 +221,32 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
             'cn;lang-en'                 => array('Rodney Ogasawara'),
             'title;lang-en'              => array('Sales, Director'),
         );
-        $expected = 'dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz' . PHP_EOL .
-            'objectclass: top' . PHP_EOL .
-            'objectclass: person' . PHP_EOL .
-            'objectclass: organizationalPerson' . PHP_EOL .
-            'objectclass: inetOrgPerson' . PHP_EOL .
-            'uid: rogasawara' . PHP_EOL .
-            'mail: rogasawara@airius.co.jp' . PHP_EOL .
-            'givenname;lang-ja:: 44Ot44OJ44OL44O8' . PHP_EOL .
-            'sn;lang-ja:: 5bCP56yg5Y6f' . PHP_EOL .
-            'cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA==' . PHP_EOL .
-            'title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw==' . PHP_EOL .
-            'preferredlanguage: ja' . PHP_EOL .
-            'givenname:: 44Ot44OJ44OL44O8' . PHP_EOL .
-            'sn:: 5bCP56yg5Y6f' . PHP_EOL .
-            'cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA==' . PHP_EOL .
-            'title:: 5Za25qWt6YOoIOmDqOmVtw==' . PHP_EOL .
-            'givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8' . PHP_EOL .
-            'sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ' . PHP_EOL .
-            'cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA==' . PHP_EOL .
-            'title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==' . PHP_EOL .
-            'givenname;lang-en: Rodney' . PHP_EOL .
-            'sn;lang-en: Ogasawara' . PHP_EOL .
-            'cn;lang-en: Rodney Ogasawara' . PHP_EOL .
+        $expected = 'dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz'.PHP_EOL.
+            'objectclass: top'.PHP_EOL.
+            'objectclass: person'.PHP_EOL.
+            'objectclass: organizationalPerson'.PHP_EOL.
+            'objectclass: inetOrgPerson'.PHP_EOL.
+            'uid: rogasawara'.PHP_EOL.
+            'mail: rogasawara@airius.co.jp'.PHP_EOL.
+            'givenname;lang-ja:: 44Ot44OJ44OL44O8'.PHP_EOL.
+            'sn;lang-ja:: 5bCP56yg5Y6f'.PHP_EOL.
+            'cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA=='.PHP_EOL.
+            'title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw=='.PHP_EOL.
+            'preferredlanguage: ja'.PHP_EOL.
+            'givenname:: 44Ot44OJ44OL44O8'.PHP_EOL.
+            'sn:: 5bCP56yg5Y6f'.PHP_EOL.
+            'cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA=='.PHP_EOL.
+            'title:: 5Za25qWt6YOoIOmDqOmVtw=='.PHP_EOL.
+            'givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8'.PHP_EOL.
+            'sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ'.PHP_EOL.
+            'cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA=='.PHP_EOL.
+            'title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg=='.PHP_EOL.
+            'givenname;lang-en: Rodney'.PHP_EOL.
+            'sn;lang-en: Ogasawara'.PHP_EOL.
+            'cn;lang-en: Rodney Ogasawara'.PHP_EOL.
             'title;lang-en: Sales, Director';
         $actual   = Ldif\Encoder::encode($data, array('sort'   => false,
-                                                     'version' => null)
+                                                     'version' => null, )
         );
         $this->assertEquals($expected, $actual);
     }

@@ -70,7 +70,7 @@ interface ConnectionInterface
     /**
      * Execute
      *
-     * @param  string $sql
+     * @param  string          $sql
      * @return ResultInterface
      */
     public function execute($sql);

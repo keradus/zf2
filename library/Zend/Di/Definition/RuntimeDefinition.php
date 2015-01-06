@@ -117,6 +117,7 @@ class RuntimeDefinition implements DefinitionInterface
     public function getClassSupertypes($class)
     {
         $this->processClass($class);
+
         return $this->classes[$class]['supertypes'];
     }
 
@@ -126,6 +127,7 @@ class RuntimeDefinition implements DefinitionInterface
     public function getInstantiator($class)
     {
         $this->processClass($class);
+
         return $this->classes[$class]['instantiator'];
     }
 
@@ -135,6 +137,7 @@ class RuntimeDefinition implements DefinitionInterface
     public function hasMethods($class)
     {
         $this->processClass($class);
+
         return (count($this->classes[$class]['methods']) > 0);
     }
 
@@ -144,6 +147,7 @@ class RuntimeDefinition implements DefinitionInterface
     public function hasMethod($class, $method)
     {
         $this->processClass($class);
+
         return isset($this->classes[$class]['methods'][$method]);
     }
 
@@ -153,6 +157,7 @@ class RuntimeDefinition implements DefinitionInterface
     public function getMethods($class)
     {
         $this->processClass($class);
+
         return $this->classes[$class]['methods'];
     }
 
@@ -162,6 +167,7 @@ class RuntimeDefinition implements DefinitionInterface
     public function hasMethodParameters($class, $method)
     {
         $this->processClass($class);
+
         return (array_key_exists($method, $this->classes[$class]['parameters']));
     }
 
@@ -171,6 +177,7 @@ class RuntimeDefinition implements DefinitionInterface
     public function getMethodParameters($class, $method)
     {
         $this->processClass($class);
+
         return $this->classes[$class]['parameters'][$method];
     }
 
@@ -186,7 +193,7 @@ class RuntimeDefinition implements DefinitionInterface
 
     /**
      * @param string $class
-     * @param bool $forceLoad
+     * @param bool   $forceLoad
      */
     protected function processClass($class, $forceLoad = false)
     {
@@ -205,7 +212,7 @@ class RuntimeDefinition implements DefinitionInterface
             'supertypes'   => array(),
             'instantiator' => null,
             'methods'      => array(),
-            'parameters'   => array()
+            'parameters'   => array(),
         );
 
         $def = &$this->classes[$className]; // localize for brevity
@@ -325,7 +332,7 @@ class RuntimeDefinition implements DefinitionInterface
             /** @var $p \ReflectionParameter  */
             $actualParamName = $p->getName();
 
-            $fqName = $rClass->getName() . '::' . $rMethod->getName() . ':' . $p->getPosition();
+            $fqName = $rClass->getName().'::'.$rMethod->getName().':'.$p->getPosition();
 
             $def['parameters'][$methodName][$fqName] = array();
 

@@ -24,7 +24,7 @@ class Trailer implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'trailer') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Trailer string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Trailer string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Trailer implements HeaderInterface
 
     public function toString()
     {
-        return 'Trailer: ' . $this->getFieldValue();
+        return 'Trailer: '.$this->getFieldValue();
     }
 }

@@ -69,8 +69,6 @@ class BetweenTest extends TestCase
         $this->assertEquals('%1$s BETWEEN %2$s AND %3$s', $this->between->getSpecification());
     }
 
-
-
     /**
      * @covers Zend\Db\Sql\Predicate\Between::setIdentifier
      * @covers Zend\Db\Sql\Predicate\Between::getIdentifier
@@ -126,9 +124,9 @@ class BetweenTest extends TestCase
         ));
         $this->assertEquals($expected, $this->between->getExpressionData());
 
-        $this->between->setIdentifier(array(10=>Between::TYPE_VALUE))
-                      ->setMinValue(array('foo.bar'=>Between::TYPE_IDENTIFIER))
-                      ->setMaxValue(array('foo.baz'=>Between::TYPE_IDENTIFIER));
+        $this->between->setIdentifier(array(10 => Between::TYPE_VALUE))
+                      ->setMinValue(array('foo.bar' => Between::TYPE_IDENTIFIER))
+                      ->setMaxValue(array('foo.baz' => Between::TYPE_IDENTIFIER));
         $expected = array(array(
             $this->between->getSpecification(),
             array(10, 'foo.bar', 'foo.baz'),

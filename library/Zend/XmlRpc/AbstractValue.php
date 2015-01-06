@@ -116,7 +116,7 @@ abstract class AbstractValue
     /**
      * Changes the encoding of the generator
      *
-     * @param string $encoding
+     * @param  string $encoding
      * @return void
      */
     public static function setEncoding($encoding)
@@ -133,7 +133,6 @@ abstract class AbstractValue
      */
     abstract public function getValue();
 
-
     /**
      * Return the XML code that represent a native MXL-RPC value
      *
@@ -145,6 +144,7 @@ abstract class AbstractValue
             $this->generateXml();
             $this->xml = (string) $this->getGenerator();
         }
+
         return $this->xml;
     }
 
@@ -168,7 +168,7 @@ abstract class AbstractValue
      *
      * By default the value type is autodetected according to it's PHP type
      *
-     * @param  mixed $value
+     * @param  mixed                       $value
      * @param  Zend\XmlRpc\Value::constant $type
      * @throws Exception\ValueException
      * @return AbstractValue
@@ -221,7 +221,7 @@ abstract class AbstractValue
                 return new Value\Struct($value);
 
             default:
-                throw new Exception\ValueException('Given type is not a '. __CLASS__ .' constant');
+                throw new Exception\ValueException('Given type is not a '.__CLASS__.' constant');
         }
     }
 
@@ -229,7 +229,7 @@ abstract class AbstractValue
      * Get XML-RPC type for a PHP native variable
      *
      * @static
-     * @param mixed $value
+     * @param  mixed                              $value
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -241,11 +241,13 @@ abstract class AbstractValue
             } elseif ($value instanceof DateTime) {
                 return self::XMLRPC_TYPE_DATETIME;
             }
+
             return static::getXmlRpcTypeByValue(get_object_vars($value));
         } elseif (is_array($value)) {
             if (!empty($value) && is_array($value) && (array_keys($value) !== range(0, count($value) - 1))) {
                 return self::XMLRPC_TYPE_STRUCT;
             }
+
             return self::XMLRPC_TYPE_ARRAY;
         } elseif (is_int($value)) {
             return ($value > PHP_INT_MAX) ? self::XMLRPC_TYPE_I8 : self::XMLRPC_TYPE_INTEGER;
@@ -300,7 +302,7 @@ abstract class AbstractValue
                 return new Value\Boolean($value);
 
             case self::XMLRPC_TYPE_NIL:
-                return new Value\Nil;
+                return new Value\Nil();
 
             case self::XMLRPC_TYPE_STRING:
                 // Fall through to the next case
@@ -314,7 +316,7 @@ abstract class AbstractValue
      * Transform an XML string into a XML-RPC native value
      *
      * @param string|\SimpleXMLElement $xml A SimpleXMLElement object represent the XML string
-     * It can be also a valid XML string for conversion
+     *                                      It can be also a valid XML string for conversion
      *
      * @throws Exception\ValueException
      * @return \Zend\XmlRpc\AbstractValue
@@ -373,8 +375,8 @@ abstract class AbstractValue
                 if (null === $data) {
                     throw new Exception\ValueException(
                         'Invalid XML for XML-RPC native '
-                        . self::XMLRPC_TYPE_ARRAY
-                        . ' type: ARRAY tag must contain DATA tag'
+                        .self::XMLRPC_TYPE_ARRAY
+                        .' type: ARRAY tag must contain DATA tag'
                     );
                 }
                 $values = array();
@@ -402,7 +404,7 @@ abstract class AbstractValue
                 break;
             default:
                 throw new Exception\ValueException(
-                    'Value type \'' . $type . '\' parsed from the XML string is not a known XML-RPC native type'
+                    'Value type \''.$type.'\' parsed from the XML string is not a known XML-RPC native type'
                 );
                 break;
         }
@@ -422,7 +424,7 @@ abstract class AbstractValue
         } catch (\Exception $e) {
             // The given string is not a valid XML
             throw new Exception\ValueException(
-                'Failed to create XML-RPC value from XML string: ' . $e->getMessage(),
+                'Failed to create XML-RPC value from XML string: '.$e->getMessage(),
                 $e->getCode(),
                 $e
             );
@@ -432,9 +434,9 @@ abstract class AbstractValue
     /**
      * Extract XML/RPC type and value from SimpleXMLElement object
      *
-     * @param \SimpleXMLElement $xml
-     * @param string &$type Type bind variable
-     * @param string &$value Value bind variable
+     * @param  \SimpleXMLElement $xml
+     * @param  string            &$type  Type bind variable
+     * @param  string            &$value Value bind variable
      * @return void
      */
     protected static function _extractTypeAndValue(\SimpleXMLElement $xml, &$type, &$value)
@@ -446,7 +448,7 @@ abstract class AbstractValue
                 $namespaceXml = $xml->children($namespaceUri);
                 list($type, $value) = each($namespaceXml);
                 if ($type !== null) {
-                    $type = $namespaceName . ':' . $type;
+                    $type = $namespaceName.':'.$type;
                     break;
                 }
             }

@@ -27,7 +27,7 @@ class File extends Part
      * - endPos   end position of message or part in file (default: end of file)
      * - EOL      end of Line for messages
      *
-     * @param   array $params  full message with or without headers
+     * @param  array                              $params full message with or without headers
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
@@ -92,14 +92,14 @@ class File extends Part
             $pos = ftell($this->fh);
             $line = trim($line);
 
-            if ($line == '--' . $boundary) {
+            if ($line == '--'.$boundary) {
                 if ($part) {
                     // not first part
                     $part[1] = $lastPos;
                     $this->partPos[] = $part;
                 }
                 $part = array($pos);
-            } elseif ($line == '--' . $boundary . '--') {
+            } elseif ($line == '--'.$boundary.'--') {
                 $part[1] = $lastPos;
                 $this->partPos[] = $part;
                 break;
@@ -113,8 +113,8 @@ class File extends Part
      *
      * If part is multipart the raw content of this part with all sub parts is returned
      *
-     * @param resource $stream Optional
-     * @return string body
+     * @param  resource $stream Optional
+     * @return string   body
      */
     public function getContent($stream = null)
     {
@@ -123,6 +123,7 @@ class File extends Part
             return stream_copy_to_stream($this->fh, $stream, $this->contentPos[1] - $this->contentPos[0]);
         }
         $length = $this->contentPos[1] - $this->contentPos[0];
+
         return $length < 1 ? '' : fread($this->fh, $length);
     }
 
@@ -141,9 +142,9 @@ class File extends Part
     /**
      * Get part of multipart message
      *
-     * @param  int $num number of part starting with 1 for first part
+     * @param  int                        $num number of part starting with 1 for first part
      * @throws Exception\RuntimeException
-     * @return Part wanted part
+     * @return Part                       wanted part
      */
     public function getPart($num)
     {
@@ -153,6 +154,6 @@ class File extends Part
         }
 
         return new static(array('file' => $this->fh, 'startPos' => $this->partPos[$num][0],
-                              'endPos' => $this->partPos[$num][1]));
+                              'endPos' => $this->partPos[$num][1], ));
     }
 }

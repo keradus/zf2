@@ -28,7 +28,7 @@ class SelectTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\InArray'
+            'Zend\Validator\InArray',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
@@ -44,7 +44,7 @@ class SelectTest extends TestCase
             'Option 1' => 'Label 1',
             'Option 2' => 'Label 2',
             'Option 3' => 'Label 2',
-          ))));
+          )), ));
 
         $inputSpec = $element->getInputSpecification();
         $inArrayValidator = $inputSpec['validators'][0];
@@ -58,10 +58,10 @@ class SelectTest extends TestCase
         $element = new SelectElement();
         $element->setValueOptions(array(
           array('label' => 'group 1', 'options' => array(
-            array('value' => 'Option 1', 'label'=> 'Label 1'),
-            array('value' => 'Option 2', 'label'=> 'Label 2'),
-            array('value' => 'Option 3', 'label'=> 'Label 3'),
-          ))));
+            array('value' => 'Option 1', 'label' => 'Label 1'),
+            array('value' => 'Option 2', 'label' => 'Label 2'),
+            array('value' => 'Option 3', 'label' => 'Label 3'),
+          )), ));
 
         $inputSpec = $element->getInputSpecification();
         $inArrayValidator = $inputSpec['validators'][0];
@@ -88,7 +88,7 @@ class SelectTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\Explode'
+            'Zend\Validator\Explode',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
@@ -111,14 +111,14 @@ class SelectTest extends TestCase
                 array(
                     'foo' => 'My Foo Label',
                     'bar' => 'My Bar Label',
-                )
+                ),
             ),
             array(
                 array('foo', 'bar'),
                 array(
                     0 => array('label' => 'My Foo Label', 'value' => 'foo'),
                     1 => array('label' => 'My Bar Label', 'value' => 'bar'),
-                )
+                ),
             ),
         );
     }
@@ -154,10 +154,9 @@ class SelectTest extends TestCase
         $this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
 
         $element->setValueOptions($options);
-        $haystack=$inArrayValidator->getHaystack();
+        $haystack = $inArrayValidator->getHaystack();
         $this->assertCount(count($options), $haystack);
     }
-
 
     public function testOptionsHasArrayOnConstruct()
     {
@@ -243,7 +242,7 @@ class SelectTest extends TestCase
             'unselected_value' => 'empty',
             'value_options' => array(
                 'foo' => 'Foo',
-                'bar' => 'Bar'
+                'bar' => 'Bar',
             ),
         ));
         $element->setAttributes(array('multiple' => 'multiple'));

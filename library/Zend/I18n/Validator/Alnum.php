@@ -73,12 +73,13 @@ class Alnum extends AbstractValidator
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param  bool $allowWhiteSpace
+     * @param  bool        $allowWhiteSpace
      * @return AlnumFilter Provides a fluent interface
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {
         $this->options['allowWhiteSpace'] = (bool) $allowWhiteSpace;
+
         return $this;
     }
 
@@ -92,12 +93,14 @@ class Alnum extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
         $this->setValue($value);
         if ('' === $value) {
             $this->error(self::STRING_EMPTY);
+
             return false;
         }
 
@@ -109,6 +112,7 @@ class Alnum extends AbstractValidator
 
         if ($value != static::$filter->filter($value)) {
             $this->error(self::NOT_ALNUM);
+
             return false;
         }
 

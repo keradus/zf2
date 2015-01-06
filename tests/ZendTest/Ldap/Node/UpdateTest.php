@@ -40,7 +40,7 @@ class UpdateTest extends TestLdap\AbstractOnlineTestCase
     protected function stripActiveDirectorySystemAttributes(&$entry)
     {
         $adAttributes = array('distinguishedname', 'instancetype', 'name', 'objectcategory',
-                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
+                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated', );
         foreach ($adAttributes as $attr) {
             if (array_key_exists($attr, $entry)) {
                 unset($entry[$attr]);

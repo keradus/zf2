@@ -33,7 +33,7 @@ interface ParametersInterface extends ArrayAccess, Countable, Serializable, Trav
      *
      * Allow deserialization from standard array
      *
-     * @param array $values
+     * @param  array $values
      * @return mixed
      */
     public function fromArray(array $values);
@@ -69,8 +69,8 @@ interface ParametersInterface extends ArrayAccess, Countable, Serializable, Trav
     /**
      * Get
      *
-     * @param string $name
-     * @param mixed|null $default
+     * @param  string     $name
+     * @param  mixed|null $default
      * @return mixed
      */
     public function get($name, $default = null);
@@ -78,8 +78,8 @@ interface ParametersInterface extends ArrayAccess, Countable, Serializable, Trav
     /**
      * Set
      *
-     * @param string $name
-     * @param mixed $value
+     * @param  string              $name
+     * @param  mixed               $value
      * @return ParametersInterface
      */
     public function set($name, $value);

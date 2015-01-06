@@ -119,6 +119,7 @@ class BaseInputFilterTest extends TestCase
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
                ->add($baz, 'baz');
+
         return $filter;
     }
 
@@ -230,13 +231,13 @@ class BaseInputFilterTest extends TestCase
             'deep' => array(
                 'deep-input1' => 'deep-foo1',
                 'deep-input2' => 'deep-foo2',
-            )
+            ),
         );
-        $filter = new InputFilter;
-        $filter->add(new Input, 'flat');
-        $deepInputFilter = new InputFilter;
-        $deepInputFilter->add(new Input, 'deep-input1');
-        $deepInputFilter->add(new Input, 'deep-input2');
+        $filter = new InputFilter();
+        $filter->add(new Input(), 'flat');
+        $deepInputFilter = new InputFilter();
+        $deepInputFilter->add(new Input(), 'deep-input1');
+        $deepInputFilter->add(new Input(), 'deep-input2');
         $filter->add($deepInputFilter, 'deep');
         $filter->setData($data);
         $filter->setValidationGroup(array('deep' => 'deep-input1'));
@@ -248,7 +249,7 @@ class BaseInputFilterTest extends TestCase
     public function testSetDeepValidationGroupToNonInputFilterThrowsException()
     {
         $filter = $this->getInputFilter();
-        $filter->add(new Input, 'flat');
+        $filter->add(new Input(), 'flat');
         // we expect setValidationGroup to throw an exception when flat is treated
         // like an inputfilter which it actually isn't
         $this->setExpectedException(
@@ -436,10 +437,10 @@ class BaseInputFilterTest extends TestCase
      * Idea for this one is that one input may only need to be validated if another input is present.
      *
      * Commenting out for now, as validation context may make this irrelevant, and unsure what API to expose.
-    public function testCanConditionallyInvokeValidators()
-    {
-        $this->markTestIncomplete();
-    }
+     public function testCanConditionallyInvokeValidators()
+     {
+     $this->markTestIncomplete();
+     }
      */
 
     /**
@@ -450,11 +451,12 @@ class BaseInputFilterTest extends TestCase
     {
         $filter = new InputFilter();
 
-        $store = new stdClass;
+        $store = new stdClass();
         $foo   = new Input();
         $foo->getValidatorChain()->attach(new Validator\Callback(function ($value, $context) use ($store) {
             $store->value   = $value;
             $store->context = $context;
+
             return true;
         }));
 
@@ -480,11 +482,12 @@ class BaseInputFilterTest extends TestCase
     {
         $filter = new InputFilter();
 
-        $store = new stdClass;
+        $store = new stdClass();
         $foo   = new Input();
         $foo->getValidatorChain()->attach(new Validator\Callback(function ($value, $context) use ($store) {
             $store->value   = $value;
             $store->context = $context;
+
             return true;
         }));
 
@@ -541,7 +544,7 @@ class BaseInputFilterTest extends TestCase
                 'type'     => 'text',
                 'size'     => 0,
                 'error'    => 4,  // UPLOAD_ERR_NO_FILE
-            )
+            ),
         );
         $filter->setData($data);
         $this->assertTrue($filter->isValid());
@@ -751,7 +754,7 @@ class BaseInputFilterTest extends TestCase
         $validData = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
-            'baz' => ''
+            'baz' => '',
         );
         $filter->setData($validData);
         $this->assertFalse($filter->hasUnknown());
@@ -790,7 +793,7 @@ class BaseInputFilterTest extends TestCase
         $validData = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
-            'baz' => ''
+            'baz' => '',
         );
         $filter->setData($validData);
         $unknown = $filter->getUnknown();
@@ -809,9 +812,9 @@ class BaseInputFilterTest extends TestCase
                 array(
                     'validator' => new \Zend\Validator\IsInstanceOf(
                         array(
-                            'className' => 'Zend\InputFilter\Input'
+                            'className' => 'Zend\InputFilter\Input',
                         )
-                    )
+                    ),
                 )
             )
         );
@@ -820,8 +823,8 @@ class BaseInputFilterTest extends TestCase
 
         $data = array(
             'example' => array(
-                $input
-            )
+                $input,
+            ),
         );
 
         $filter->setData($data);
@@ -932,7 +935,7 @@ class BaseInputFilterTest extends TestCase
             array(
                 'foo',
                 'bar',
-                'baz'
+                'baz',
             ),
             array_keys($inputFilter->getInputs())
         );

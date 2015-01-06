@@ -34,7 +34,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     {
         $localOffset  = date('Z', $localTimestamp);
         $utcTimestamp = $localTimestamp - $localOffset;
-        $this->assertEquals(date('YmdHis', $utcTimestamp) . 'Z', $value);
+        $this->assertEquals(date('YmdHis', $utcTimestamp).'Z', $value);
     }
 
     public function testGetAttributeValue()
@@ -116,7 +116,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     {
         $data = array(
             'p1_true'  => array('TRUE'),
-            'p1_false' => array('FALSE')
+            'p1_false' => array('FALSE'),
         );
         Attribute::setAttribute($data, 'p2_true', true);
         Attribute::setAttribute($data, 'p2_false', false);
@@ -215,7 +215,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     public function testSetAttributeWithFilestream()
     {
         $data   = array();
-        $stream = fopen(__DIR__ . '/_files/AttributeTest.input.txt', 'r');
+        $stream = fopen(__DIR__.'/_files/AttributeTest.input.txt', 'r');
         Attribute::setAttribute($data, 'file', $stream);
         fclose($stream);
         $this->assertEquals('String from file', $data['file'][0]);
@@ -457,7 +457,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $hash = substr($binary, 0, 20);
         $salt = substr($binary, 20);
         $this->assertEquals(4, strlen($salt));
-        $this->assertEquals(sha1($password . $salt, true), $hash);
+        $this->assertEquals(sha1($password.$salt, true), $hash);
     }
 
     public function testPasswordGenerationSHA()
@@ -480,7 +480,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $hash = substr($binary, 0, 16);
         $salt = substr($binary, 16);
         $this->assertEquals(4, strlen($salt));
-        $this->assertEquals(md5($password . $salt, true), $hash);
+        $this->assertEquals(md5($password.$salt, true), $hash);
     }
 
     public function testPasswordGenerationMD5()

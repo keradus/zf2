@@ -13,7 +13,7 @@ use Countable;
 use Iterator;
 
 /**
-*/
+ */
 class Feed extends AbstractFeed implements Iterator, Countable
 {
     /**
@@ -39,11 +39,12 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function createEntry()
     {
-        $entry = new Entry;
+        $entry = new Entry();
         if ($this->getEncoding()) {
             $entry->setEncoding($this->getEncoding());
         }
         $entry->setType($this->getType());
+
         return $entry;
     }
 
@@ -51,7 +52,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * Appends a Zend\Feed\Writer\Deleted object representing a new entry tombstone
      * to the feed data container's internal group of entries.
      *
-     * @param Deleted $deleted
+     * @param  Deleted $deleted
      * @return void
      */
     public function addTombstone(Deleted $deleted)
@@ -68,11 +69,12 @@ class Feed extends AbstractFeed implements Iterator, Countable
      */
     public function createTombstone()
     {
-        $deleted = new Deleted;
+        $deleted = new Deleted();
         if ($this->getEncoding()) {
             $deleted->setEncoding($this->getEncoding());
         }
         $deleted->setType($this->getType());
+
         return $deleted;
     }
 
@@ -80,12 +82,13 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * Appends a Zend\Feed\Writer\Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
-     * @param Entry $entry
+     * @param  Entry $entry
      * @return Feed
      */
     public function addEntry(Entry $entry)
     {
         $this->entries[] = $entry;
+
         return $this;
     }
 
@@ -93,14 +96,14 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * Removes a specific indexed entry from the internal queue. Entries must be
      * added to a feed container in order to be indexed.
      *
-     * @param int $index
+     * @param  int                                $index
      * @throws Exception\InvalidArgumentException
      * @return Feed
      */
     public function removeEntry($index)
     {
         if (!isset($this->entries[$index])) {
-            throw new Exception\InvalidArgumentException('Undefined index: ' . $index . '. Entry does not exist.');
+            throw new Exception\InvalidArgumentException('Undefined index: '.$index.'. Entry does not exist.');
         }
         unset($this->entries[$index]);
 
@@ -111,7 +114,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * Retrieve a specific indexed entry from the internal queue. Entries must be
      * added to a feed container in order to be indexed.
      *
-     * @param int $index
+     * @param  int                                $index
      * @throws Exception\InvalidArgumentException
      */
     public function getEntry($index = 0)
@@ -119,7 +122,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
         if (isset($this->entries[$index])) {
             return $this->entries[$index];
         }
-        throw new Exception\InvalidArgumentException('Undefined index: ' . $index . '. Entry does not exist.');
+        throw new Exception\InvalidArgumentException('Undefined index: '.$index.'. Entry does not exist.');
     }
 
     /**
@@ -216,8 +219,8 @@ class Feed extends AbstractFeed implements Iterator, Countable
     /**
      * Attempt to build and return the feed resulting from the data set
      *
-     * @param  string  $type The feed type "rss" or "atom" to export as
-     * @param  bool    $ignoreExceptions
+     * @param  string                             $type             The feed type "rss" or "atom" to export as
+     * @param  bool                               $ignoreExceptions
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -226,14 +229,15 @@ class Feed extends AbstractFeed implements Iterator, Countable
         $this->setType(strtolower($type));
         $type = ucfirst($this->getType());
         if ($type !== 'Rss' && $type !== 'Atom') {
-            throw new Exception\InvalidArgumentException('Invalid feed type specified: ' . $type . '.'
-            . ' Should be one of "rss" or "atom".');
+            throw new Exception\InvalidArgumentException('Invalid feed type specified: '.$type.'.'
+            .' Should be one of "rss" or "atom".');
         }
-        $renderClass = 'Zend\\Feed\\Writer\\Renderer\\Feed\\' . $type;
+        $renderClass = 'Zend\\Feed\\Writer\\Renderer\\Feed\\'.$type;
         $renderer = new $renderClass($this);
         if ($ignoreExceptions) {
             $renderer->ignoreExceptions();
         }
+
         return $renderer->render()->saveXml();
     }
 }

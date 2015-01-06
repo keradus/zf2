@@ -90,7 +90,7 @@ class Redis extends AbstractAdapter implements
             // init namespace prefix
             $namespace = $options->getNamespace();
             if ($namespace !== '') {
-                $this->namespacePrefix = $namespace . $options->getNamespaceSeparator();
+                $this->namespacePrefix = $namespace.$options->getNamespaceSeparator();
             } else {
                 $this->namespacePrefix = '';
             }
@@ -116,6 +116,7 @@ class Redis extends AbstractAdapter implements
         if (!$options instanceof RedisOptions) {
             $options = new RedisOptions($options);
         }
+
         return parent::setOptions($options);
     }
 
@@ -130,43 +131,46 @@ class Redis extends AbstractAdapter implements
         if (!$this->options) {
             $this->setOptions(new RedisOptions());
         }
+
         return $this->options;
     }
 
     /**
      * Internal method to get an item.
      *
-     * @param string  &$normalizedKey Key where to store data
-     * @param bool &$success       If the operation was successfull
-     * @param mixed   &$casToken      Token
-     * @return mixed Data on success, false on key not found
+     * @param  string                     &$normalizedKey Key where to store data
+     * @param  bool                       &$success       If the operation was successfull
+     * @param  mixed                      &$casToken      Token
+     * @return mixed                      Data on success, false on key not found
      * @throws Exception\RuntimeException
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
         $redis = $this->getRedisResource();
         try {
-            $value = $redis->get($this->namespacePrefix . $normalizedKey);
+            $value = $redis->get($this->namespacePrefix.$normalizedKey);
         } catch (RedisResourceException $e) {
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
 
         if ($value === false) {
             $success = false;
+
             return;
         }
 
         $success = true;
         $casToken = $value;
+
         return $value;
     }
 
-     /**
+    /**
      * Internal method to get multiple items.
      *
      * @param array &$normalizedKeys Array of keys to be obtained
      *
-     * @return array Associative array of keys and values
+     * @return array                      Associative array of keys and values
      * @throws Exception\RuntimeException
      */
     protected function internalGetItems(array & $normalizedKeys)
@@ -175,7 +179,7 @@ class Redis extends AbstractAdapter implements
 
         $namespacedKeys = array();
         foreach ($normalizedKeys as $normalizedKey) {
-            $namespacedKeys[] = $this->namespacePrefix . $normalizedKey;
+            $namespacedKeys[] = $this->namespacePrefix.$normalizedKey;
         }
 
         try {
@@ -204,7 +208,7 @@ class Redis extends AbstractAdapter implements
     {
         $redis = $this->getRedisResource();
         try {
-            return $redis->exists($this->namespacePrefix . $normalizedKey);
+            return $redis->exists($this->namespacePrefix.$normalizedKey);
         } catch (RedisResourceException $e) {
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
@@ -229,9 +233,9 @@ class Redis extends AbstractAdapter implements
                 if ($this->resourceManager->getMajorVersion($this->resourceId) < 2) {
                     throw new Exception\UnsupportedMethodCallException("To use ttl you need version >= 2.0.0");
                 }
-                $success = $redis->setex($this->namespacePrefix . $normalizedKey, $ttl, $value);
+                $success = $redis->setex($this->namespacePrefix.$normalizedKey, $ttl, $value);
             } else {
-                $success = $redis->set($this->namespacePrefix . $normalizedKey, $value);
+                $success = $redis->set($this->namespacePrefix.$normalizedKey, $value);
             }
         } catch (RedisResourceException $e) {
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
@@ -240,12 +244,12 @@ class Redis extends AbstractAdapter implements
         return $success;
     }
 
-     /**
+    /**
      * Internal method to store multiple items.
      *
      * @param array &$normalizedKeyValuePairs An array of normalized key/value pairs
      *
-     * @return array Array of not stored keys
+     * @return array                      Array of not stored keys
      * @throws Exception\RuntimeException
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
@@ -255,7 +259,7 @@ class Redis extends AbstractAdapter implements
 
         $namespacedKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
-            $namespacedKeyValuePairs[$this->namespacePrefix . $normalizedKey] = $value;
+            $namespacedKeyValuePairs[$this->namespacePrefix.$normalizedKey] = $value;
         }
         try {
             if ($ttl > 0) {
@@ -285,8 +289,8 @@ class Redis extends AbstractAdapter implements
     /**
      * Add an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                     $normalizedKey
+     * @param  mixed                      $value
      * @return bool
      * @throws Exception\RuntimeException
      */
@@ -294,7 +298,7 @@ class Redis extends AbstractAdapter implements
     {
         $redis = $this->getRedisResource();
         try {
-            return $redis->setnx($this->namespacePrefix . $normalizedKey, $value);
+            return $redis->setnx($this->namespacePrefix.$normalizedKey, $value);
         } catch (RedisResourceException $e) {
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
@@ -312,7 +316,7 @@ class Redis extends AbstractAdapter implements
     {
         $redis = $this->getRedisResource();
         try {
-            return (bool) $redis->delete($this->namespacePrefix . $normalizedKey);
+            return (bool) $redis->delete($this->namespacePrefix.$normalizedKey);
         } catch (RedisResourceException $e) {
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
@@ -321,16 +325,16 @@ class Redis extends AbstractAdapter implements
     /**
      * Internal method to increment an item.
      *
-     * @param  string $normalizedKey
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                     $normalizedKey
+     * @param  int                        $value
+     * @return int|bool                   The new value on success, false on failure
      * @throws Exception\RuntimeException
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
     {
         $redis = $this->getRedisResource();
         try {
-            return $redis->incrBy($this->namespacePrefix . $normalizedKey, $value);
+            return $redis->incrBy($this->namespacePrefix.$normalizedKey, $value);
         } catch (RedisResourceException $e) {
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
@@ -339,16 +343,16 @@ class Redis extends AbstractAdapter implements
     /**
      * Internal method to decrement an item.
      *
-     * @param  string $normalizedKey
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                     $normalizedKey
+     * @param  int                        $value
+     * @return int|bool                   The new value on success, false on failure
      * @throws Exception\RuntimeException
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
     {
         $redis = $this->getRedisResource();
         try {
-            return $redis->decrBy($this->namespacePrefix . $normalizedKey, $value);
+            return $redis->decrBy($this->namespacePrefix.$normalizedKey, $value);
         } catch (RedisResourceException $e) {
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
@@ -375,7 +379,7 @@ class Redis extends AbstractAdapter implements
     /**
      * Remove items matching given prefix
      *
-     * @param string $prefix
+     * @param  string $prefix
      * @return bool
      */
     public function clearByPrefix($prefix)
@@ -389,7 +393,7 @@ class Redis extends AbstractAdapter implements
 
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator() . $prefix;
+        $prefix    = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator().$prefix;
 
         $redis->delete($redis->keys($prefix.'*'));
 

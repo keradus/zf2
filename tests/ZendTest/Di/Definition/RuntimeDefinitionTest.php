@@ -19,7 +19,7 @@ class RuntimeDefinitionTest extends TestCase
      */
     public function testStaticMethodsNotIncludedInDefinitions()
     {
-        $definition = new RuntimeDefinition;
+        $definition = new RuntimeDefinition();
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setFoo'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setName'));
     }
@@ -112,6 +112,6 @@ class RuntimeDefinitionTest extends TestCase
         $definition = new RuntimeDefinition(null, $explicitClasses);
 
         $this->assertTrue($definition->hasClass($className));
-        $this->assertSame(array("__construct"=> 3), $definition->getMethods($className));
+        $this->assertSame(array("__construct" => 3), $definition->getMethods($className));
     }
 }

@@ -114,6 +114,7 @@ class FormSubmitTest extends CommonTestCase
             'width'              => 'value',
         ));
         $element->setValue('value');
+
         return $element;
     }
 

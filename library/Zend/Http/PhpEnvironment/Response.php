@@ -41,6 +41,7 @@ class Response extends HttpResponse
         if (!$this->version) {
             $this->version = $this->detectVersion();
         }
+
         return $this->version;
     }
 
@@ -99,6 +100,7 @@ class Response extends HttpResponse
         }
 
         $this->headersSent = true;
+
         return $this;
     }
 
@@ -115,6 +117,7 @@ class Response extends HttpResponse
 
         echo $this->getContent();
         $this->contentSent = true;
+
         return $this;
     }
 
@@ -127,6 +130,7 @@ class Response extends HttpResponse
     {
         $this->sendHeaders()
              ->sendContent();
+
         return $this;
     }
 }

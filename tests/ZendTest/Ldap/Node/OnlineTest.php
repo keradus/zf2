@@ -70,7 +70,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
             $rdn  = $node->getRdnArray(Ldap\Dn::ATTR_CASEFOLD_LOWER);
             $attr = key($rdn);
             $node->deleteAttribute($attr);
-            $this->fail('Expected exception for modification of read-only attribute ' . $attr);
+            $this->fail('Expected exception for modification of read-only attribute '.$attr);
         } catch (Exception\ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s part of the RDN', $e->getMessage());
         }
@@ -204,14 +204,14 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $dns = array(
             $this->createDn('ou=Node,'),
             $this->createDn('ou=Test1,ou=Node,'),
-            $this->createDn('ou=Test2,ou=Node,'));
+            $this->createDn('ou=Test2,ou=Node,'), );
         foreach ($items as $key => $node) {
             $key = Ldap\Dn::fromString($key)->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
             $this->assertEquals($dns[$i], $key);
             if ($i === 0) {
                 $this->assertEquals('Node', $node->ou[0]);
             } else {
-                $this->assertEquals('Test' . $i, $node->ou[0]);
+                $this->assertEquals('Test'.$i, $node->ou[0]);
             }
             $this->assertEquals($key, $node->getDnString(Ldap\Dn::ATTR_CASEFOLD_LOWER));
             $i++;

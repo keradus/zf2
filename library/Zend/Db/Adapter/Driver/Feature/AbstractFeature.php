@@ -21,7 +21,7 @@ abstract class AbstractFeature
     /**
      * Set driver
      *
-     * @param DriverInterface $driver
+     * @param  DriverInterface $driver
      * @return void
      */
     public function setDriver(DriverInterface $driver)

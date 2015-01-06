@@ -27,7 +27,7 @@ class AclListener
      *      - Page is accepted if it has no resource or privilege.
      *      - Page is accepted if ACL allows page's resource or privilege.
      *
-     * @param  Event    $event
+     * @param  Event $event
      * @return bool
      */
     public static function accept(Event $event)

@@ -109,7 +109,7 @@ class PythonPickle extends AbstractAdapter
         "\x14" => '\\x14', "\x15" => '\\x15', "\x16" => '\\x16', "\x17" => '\\x17',
         "\x18" => '\\x18', "\x19" => '\\x19', "\x1a" => '\\x1a', "\x1b" => '\\x1b',
         "\x1c" => '\\x1c', "\x1d" => '\\x1d', "\x1e" => '\\x1e', "\x1f" => '\\x1f',
-        "\xff" => '\\xff'
+        "\xff" => '\\xff',
     );
 
     // process vars
@@ -134,7 +134,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Constructor.
      *
-     * @param  array|Traversable|PythonPickleOptions $options Optional
+     * @param array|Traversable|PythonPickleOptions $options Optional
      */
     public function __construct($options = null)
     {
@@ -161,6 +161,7 @@ class PythonPickle extends AbstractAdapter
         }
 
         $this->options = $options;
+
         return $this;
     }
 
@@ -174,6 +175,7 @@ class PythonPickle extends AbstractAdapter
         if ($this->options === null) {
             $this->options = new PythonPickleOptions();
         }
+
         return $this->options;
     }
 
@@ -182,7 +184,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Serialize PHP to PythonPickle format
      *
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return string
      */
     public function serialize($value)
@@ -206,7 +208,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Write a value
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @throws Exception\RuntimeException on invalid or unrecognized value type
      */
     protected function write($value)
@@ -246,50 +248,50 @@ class PythonPickle extends AbstractAdapter
      */
     protected function writeProto($protocol)
     {
-        $this->pickle .= self::OP_PROTO . $protocol;
+        $this->pickle .= self::OP_PROTO.$protocol;
     }
 
     /**
      * Write a get
      *
-     * @param  int $id Id of memo
+     * @param int $id Id of memo
      */
     protected function writeGet($id)
     {
         if ($this->protocol == 0) {
-            $this->pickle .= self::OP_GET . $id . "\r\n";
+            $this->pickle .= self::OP_GET.$id."\r\n";
         } elseif ($id <= 0xFF) {
             // BINGET + chr(i)
-            $this->pickle .= self::OP_BINGET . chr($id);
+            $this->pickle .= self::OP_BINGET.chr($id);
         } else {
             // LONG_BINGET + pack("<i", i)
             $bin = pack('l', $id);
             if (static::$isLittleEndian === false) {
                 $bin = strrev($bin);
             }
-            $this->pickle .= self::OP_LONG_BINGET . $bin;
+            $this->pickle .= self::OP_LONG_BINGET.$bin;
         }
     }
 
     /**
      * Write a put
      *
-     * @param  int $id Id of memo
+     * @param int $id Id of memo
      */
     protected function writePut($id)
     {
         if ($this->protocol == 0) {
-            $this->pickle .= self::OP_PUT . $id . "\r\n";
+            $this->pickle .= self::OP_PUT.$id."\r\n";
         } elseif ($id <= 0xff) {
             // BINPUT + chr(i)
-            $this->pickle .= self::OP_BINPUT . chr($id);
+            $this->pickle .= self::OP_BINPUT.chr($id);
         } else {
             // LONG_BINPUT + pack("<i", i)
             $bin = pack('l', $id);
             if (static::$isLittleEndian === false) {
                 $bin = strrev($bin);
             }
-            $this->pickle .= self::OP_LONG_BINPUT . $bin;
+            $this->pickle .= self::OP_LONG_BINPUT.$bin;
         }
     }
 
@@ -312,30 +314,32 @@ class PythonPickle extends AbstractAdapter
         if ($this->protocol >= 2) {
             $this->pickle .= ($value === true) ? self::OP_NEWTRUE : self::OP_NEWFALSE;
         } else {
-            $this->pickle .= self::OP_INT . (($value === true) ? '01' : '00') . "\r\n";
+            $this->pickle .= self::OP_INT.(($value === true) ? '01' : '00')."\r\n";
         }
     }
 
     /**
      * Write an integer value
      *
-     * @param  int $value
+     * @param int $value
      */
     protected function writeInt($value)
     {
         if ($this->protocol == 0) {
-            $this->pickle .= self::OP_INT . $value . "\r\n";
+            $this->pickle .= self::OP_INT.$value."\r\n";
+
             return;
         }
 
         if ($value >= 0) {
             if ($value <= 0xFF) {
                 // self.write(BININT1 + chr(obj))
-                $this->pickle .= self::OP_BININT1 . chr($value);
+                $this->pickle .= self::OP_BININT1.chr($value);
             } elseif ($value <= 0xFFFF) {
                 // self.write("%c%c%c" % (BININT2, obj&0xff, obj>>8))
-                $this->pickle .= self::OP_BININT2 . pack('v', $value);
+                $this->pickle .= self::OP_BININT2.pack('v', $value);
             }
+
             return;
         }
 
@@ -349,7 +353,8 @@ class PythonPickle extends AbstractAdapter
             if (static::$isLittleEndian === false) {
                 $bin = strrev($bin);
             }
-            $this->pickle .= self::OP_BININT . $bin;
+            $this->pickle .= self::OP_BININT.$bin;
+
             return;
         }
     }
@@ -357,48 +362,49 @@ class PythonPickle extends AbstractAdapter
     /**
      * Write a float value
      *
-     * @param  float $value
+     * @param float $value
      */
     protected function writeFloat($value)
     {
         if ($this->protocol == 0) {
-            $this->pickle .= self::OP_FLOAT . $value . "\r\n";
+            $this->pickle .= self::OP_FLOAT.$value."\r\n";
         } else {
             // self.write(BINFLOAT + pack('>d', obj))
             $bin = pack('d', $value);
             if (static::$isLittleEndian === true) {
                 $bin = strrev($bin);
             }
-            $this->pickle .= self::OP_BINFLOAT . $bin;
+            $this->pickle .= self::OP_BINFLOAT.$bin;
         }
     }
 
     /**
      * Write a string value
      *
-     * @param  string $value
+     * @param string $value
      */
     protected function writeString($value)
     {
         if (($id = $this->searchMemo($value)) !== false) {
             $this->writeGet($id);
+
             return;
         }
 
         if ($this->protocol == 0) {
-            $this->pickle .= self::OP_STRING . $this->quoteString($value) . "\r\n";
+            $this->pickle .= self::OP_STRING.$this->quoteString($value)."\r\n";
         } else {
             $n = strlen($value);
             if ($n <= 0xFF) {
                 // self.write(SHORT_BINSTRING + chr(n) + obj)
-                $this->pickle .= self::OP_SHORT_BINSTRING . chr($n) . $value;
+                $this->pickle .= self::OP_SHORT_BINSTRING.chr($n).$value;
             } else {
                 // self.write(BINSTRING + pack("<i", n) + obj)
                 $binLen = pack('l', $n);
                 if (static::$isLittleEndian === false) {
                     $binLen = strrev($binLen);
                 }
-                $this->pickle .= self::OP_BINSTRING . $binLen . $value;
+                $this->pickle .= self::OP_BINSTRING.$binLen.$value;
             }
         }
 
@@ -408,16 +414,17 @@ class PythonPickle extends AbstractAdapter
     /**
      * Write an associative array value as dictionary
      *
-     * @param  array|Traversable $value
+     * @param array|Traversable $value
      */
     protected function writeArrayDict($value)
     {
         if (($id = $this->searchMemo($value)) !== false) {
             $this->writeGet($id);
+
             return;
         }
 
-        $this->pickle .= self::OP_MARK . self::OP_DICT;
+        $this->pickle .= self::OP_MARK.self::OP_DICT;
         $this->memorize($value);
 
         foreach ($value as $k => $v) {
@@ -430,16 +437,17 @@ class PythonPickle extends AbstractAdapter
     /**
      * Write a simple array value as list
      *
-     * @param  array $value
+     * @param array $value
      */
     protected function writeArrayList(array $value)
     {
         if (($id = $this->searchMemo($value)) !== false) {
             $this->writeGet($id);
+
             return;
         }
 
-        $this->pickle .= self::OP_MARK . self::OP_LIST;
+        $this->pickle .= self::OP_MARK.self::OP_LIST;
         $this->memorize($value);
 
         foreach ($value as $v) {
@@ -451,7 +459,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Write an object as a dictionary
      *
-     * @param  object $value
+     * @param object $value
      */
     protected function writeObject($value)
     {
@@ -501,7 +509,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Search a value in the memo and return  the id
      *
-     * @param  mixed $value
+     * @param  mixed    $value
      * @return int|bool The id or false
      */
     protected function searchMemo($value)
@@ -530,7 +538,7 @@ class PythonPickle extends AbstractAdapter
             $enclosure     = "'";
         }
 
-        return $enclosure . strtr($str, $quoteArr) . $enclosure;
+        return $enclosure.strtr($str, $quoteArr).$enclosure;
     }
 
     /* unserialize */
@@ -538,7 +546,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Unserialize from Python Pickle format to PHP
      *
-     * @param  string $pickle
+     * @param  string                     $pickle
      * @return mixed
      * @throws Exception\RuntimeException on invalid Pickle string
      */
@@ -581,7 +589,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Load a pickle opcode
      *
-     * @param  string $op
+     * @param  string                     $op
      * @throws Exception\RuntimeException on invalid opcode
      */
     protected function load($op)
@@ -722,7 +730,7 @@ class PythonPickle extends AbstractAdapter
         if (!isset($this->stack[$lastStack])) {
             throw new Exception\RuntimeException('No stack exist');
         }
-        $this->memo[$id] =& $this->stack[$lastStack];
+        $this->memo[$id] = & $this->stack[$lastStack];
     }
 
     /**
@@ -738,7 +746,7 @@ class PythonPickle extends AbstractAdapter
         if (!isset($this->stack[$lastStack])) {
             throw new Exception\RuntimeException('No stack exist');
         }
-        $this->memo[$id] =& $this->stack[$lastStack];
+        $this->memo[$id] = & $this->stack[$lastStack];
     }
 
     /**
@@ -758,7 +766,7 @@ class PythonPickle extends AbstractAdapter
         if (!isset($this->stack[$lastStack])) {
             throw new Exception\RuntimeException('No stack exist');
         }
-        $this->memo[$id] =& $this->stack[$lastStack];
+        $this->memo[$id] = & $this->stack[$lastStack];
     }
 
     /**
@@ -771,9 +779,9 @@ class PythonPickle extends AbstractAdapter
         $id = (int) $this->readline();
 
         if (!array_key_exists($id, $this->memo)) {
-            throw new Exception\RuntimeException('Get id "' . $id . '" not found in memo');
+            throw new Exception\RuntimeException('Get id "'.$id.'" not found in memo');
         }
-        $this->stack[] =& $this->memo[$id];
+        $this->stack[] = & $this->memo[$id];
     }
 
     /**
@@ -786,9 +794,9 @@ class PythonPickle extends AbstractAdapter
         $id = ord($this->read(1));
 
         if (!array_key_exists($id, $this->memo)) {
-            throw new Exception\RuntimeException('Get id "' . $id . '" not found in memo');
+            throw new Exception\RuntimeException('Get id "'.$id.'" not found in memo');
         }
-        $this->stack[] =& $this->memo[$id];
+        $this->stack[] = & $this->memo[$id];
     }
 
     /**
@@ -805,9 +813,9 @@ class PythonPickle extends AbstractAdapter
         list(, $id) = unpack('l', $bin);
 
         if (!array_key_exists($id, $this->memo)) {
-            throw new Exception\RuntimeException('Get id "' . $id . '" not found in memo');
+            throw new Exception\RuntimeException('Get id "'.$id.'" not found in memo');
         }
-        $this->stack[] =& $this->memo[$id];
+        $this->stack[] = & $this->memo[$id];
     }
 
     /**
@@ -1014,7 +1022,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Convert a unicode sequence to UTF-8
      *
-     * @param  array $match
+     * @param  array  $match
      * @return string
      */
     protected function _convertMatchingUnicodeSequence2Utf8(array $match)
@@ -1025,7 +1033,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Convert a hex string to a UTF-8 string
      *
-     * @param  string $hex
+     * @param  string                     $hex
      * @return string
      * @throws Exception\RuntimeException on unmatched unicode sequence
      */
@@ -1037,16 +1045,16 @@ class PythonPickle extends AbstractAdapter
             $utf8Char = chr($uniCode);
         } elseif ($uniCode < 0x800) { // 2Byte
             $utf8Char = chr(0xC0 | $uniCode >> 6)
-                      . chr(0x80 | $uniCode & 0x3F);
+                      .chr(0x80 | $uniCode & 0x3F);
         } elseif ($uniCode < 0x10000) { // 3Byte
             $utf8Char = chr(0xE0 | $uniCode >> 12)
-                      . chr(0x80 | $uniCode >> 6 & 0x3F)
-                      . chr(0x80 | $uniCode & 0x3F);
+                      .chr(0x80 | $uniCode >> 6 & 0x3F)
+                      .chr(0x80 | $uniCode & 0x3F);
         } elseif ($uniCode < 0x110000) { // 4Byte
             $utf8Char  = chr(0xF0 | $uniCode >> 18)
-                       . chr(0x80 | $uniCode >> 12 & 0x3F)
-                       . chr(0x80 | $uniCode >> 6 & 0x3F)
-                       . chr(0x80 | $uniCode & 0x3F);
+                       .chr(0x80 | $uniCode >> 12 & 0x3F)
+                       .chr(0x80 | $uniCode >> 6 & 0x3F)
+                       .chr(0x80 | $uniCode & 0x3F);
         } else {
             throw new Exception\RuntimeException(
                 sprintf('Unsupported unicode character found "%s"', dechex($uniCode))
@@ -1100,7 +1108,7 @@ class PythonPickle extends AbstractAdapter
     protected function loadAppend()
     {
         $value  =  array_pop($this->stack);
-        $list   =& $this->stack[count($this->stack) - 1];
+        $list   = & $this->stack[count($this->stack) - 1];
         $list[] =  $value;
     }
 
@@ -1118,7 +1126,7 @@ class PythonPickle extends AbstractAdapter
     protected function loadAppends()
     {
         $k    =  $this->lastMarker();
-        $list =& $this->stack[$k - 1];
+        $list = & $this->stack[$k - 1];
         $max  =  count($this->stack);
         for ($i = $k + 1; $i < $max; $i++) {
             $list[] = $this->stack[$i];
@@ -1149,7 +1157,7 @@ class PythonPickle extends AbstractAdapter
     {
         $value =  array_pop($this->stack);
         $key   =  array_pop($this->stack);
-        $dict  =& $this->stack[count($this->stack) - 1];
+        $dict  = & $this->stack[count($this->stack) - 1];
         $dict[$key] = $value;
     }
 
@@ -1167,7 +1175,7 @@ class PythonPickle extends AbstractAdapter
     protected function loadSetItems()
     {
         $k    =  $this->lastMarker();
-        $dict =& $this->stack[$k - 1];
+        $dict = & $this->stack[$k - 1];
         $max  =  count($this->stack);
         for ($i = $k + 1; $i < $max; $i += 2) {
             $key        = $this->stack[$i];
@@ -1185,7 +1193,7 @@ class PythonPickle extends AbstractAdapter
     {
         $k                =  $this->lastMarker();
         $this->stack[$k]  =  array();
-        $tuple            =& $this->stack[$k];
+        $tuple            = & $this->stack[$k];
         $max              =  count($this->stack);
         for ($i = $k + 1; $i < $max; $i++) {
             $tuple[] = $this->stack[$i];
@@ -1246,7 +1254,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Read a segment of the pickle
      *
-     * @param  mixed $len
+     * @param  mixed                      $len
      * @return string
      * @throws Exception\RuntimeException if position matches end of data
      */
@@ -1257,6 +1265,7 @@ class PythonPickle extends AbstractAdapter
         }
 
         $this->pos += $len;
+
         return substr($this->pickle, ($this->pos - $len), $len);
     }
 
@@ -1315,13 +1324,14 @@ class PythonPickle extends AbstractAdapter
                 break;
             }
         }
+
         return $k;
     }
 
     /**
      * Decode a binary long sequence
      *
-     * @param  string $data
+     * @param  string           $data
      * @return int|float|string
      */
     protected function decodeBinLong($data)

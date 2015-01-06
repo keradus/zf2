@@ -30,7 +30,7 @@ class RedisResourceManager
     /**
      * Check if a resource exists
      *
-     * @param string $id
+     * @param  string $id
      * @return bool
      */
     public function hasResource($id)
@@ -41,7 +41,7 @@ class RedisResourceManager
     /**
      * Get redis server version
      *
-     * @param string $id
+     * @param  string                     $id
      * @return int
      * @throws Exception\RuntimeException
      */
@@ -52,6 +52,7 @@ class RedisResourceManager
         }
 
         $resource = & $this->resources[$id];
+
         return (int) $resource['version'];
     }
 
@@ -60,7 +61,7 @@ class RedisResourceManager
      *
      * @deprecated 2.2.2 Use getMajorVersion instead
      *
-     * @param string $id
+     * @param  string                     $id
      * @return int
      * @throws Exception\RuntimeException
      */
@@ -72,7 +73,7 @@ class RedisResourceManager
     /**
      * Get redis resource database
      *
-     * @param string $id
+     * @param  string $id
      * @return string
      */
     public function getDatabase($id)
@@ -82,13 +83,14 @@ class RedisResourceManager
         }
 
         $resource = & $this->resources[$id];
+
         return $resource['database'];
     }
 
     /**
      * Get redis resource password
      *
-     * @param string $id
+     * @param  string $id
      * @return string
      */
     public function getPassword($id)
@@ -98,13 +100,14 @@ class RedisResourceManager
         }
 
         $resource = & $this->resources[$id];
+
         return $resource['password'];
     }
 
     /**
      * Gets a redis resource
      *
-     * @param string $id
+     * @param  string                     $id
      * @return RedisResource
      * @throws Exception\RuntimeException
      */
@@ -122,6 +125,7 @@ class RedisResourceManager
             }
             $info = $resource['resource']->info();
             $resource['version'] = $info['redis_version'];
+
             return $resource['resource'];
         }
 
@@ -137,14 +141,15 @@ class RedisResourceManager
         $info = $redis->info();
         $resource['version'] = $info['redis_version'];
         $this->resources[$id]['resource'] = $redis;
+
         return $redis;
     }
 
     /**
      * Get server
-     * @param string $id
+     * @param  string                     $id
      * @throws Exception\RuntimeException
-     * @return array array('host' => <host>[, 'port' => <port>[, 'timeout' => <timeout>]])
+     * @return array                      array('host' => <host>[, 'port' => <port>[, 'timeout' => <timeout>]])
      */
     public function getServer($id)
     {
@@ -153,6 +158,7 @@ class RedisResourceManager
         }
 
         $resource = & $this->resources[$id];
+
         return $resource['server'];
     }
 
@@ -288,9 +294,9 @@ class RedisResourceManager
     /**
      * Set a resource
      *
-     * @param string $id
-     * @param array|Traversable|RedisResource $resource
-     * @return RedisResourceManager Fluent interface
+     * @param  string                          $id
+     * @param  array|Traversable|RedisResource $resource
+     * @return RedisResourceManager            Fluent interface
      */
     public function setResource($id, $resource)
     {
@@ -340,34 +346,36 @@ class RedisResourceManager
             );
         }
         $this->resources[$id] = $resource;
+
         return $this;
     }
 
     /**
      * Remove a resource
      *
-     * @param string $id
+     * @param  string               $id
      * @return RedisResourceManager Fluent interface
      */
     public function removeResource($id)
     {
         unset($this->resources[$id]);
+
         return $this;
     }
 
     /**
      * Set the persistent id
      *
-     * @param string $id
-     * @param string $persistentId
-     * @return RedisResourceManager Fluent interface
+     * @param  string                     $id
+     * @param  string                     $persistentId
+     * @return RedisResourceManager       Fluent interface
      * @throws Exception\RuntimeException
      */
     public function setPersistentId($id, $persistentId)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'persistent_id' => $persistentId
+                'persistent_id' => $persistentId,
             ));
         }
 
@@ -387,7 +395,7 @@ class RedisResourceManager
     /**
      * Get the persistent id
      *
-     * @param string $id
+     * @param  string                     $id
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -421,15 +429,15 @@ class RedisResourceManager
     /**
      * Set Redis options
      *
-     * @param string $id
-     * @param array  $libOptions
+     * @param  string               $id
+     * @param  array                $libOptions
      * @return RedisResourceManager Fluent interface
      */
     public function setLibOptions($id, array $libOptions)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'lib_options' => $libOptions
+                'lib_options' => $libOptions,
             ));
         }
 
@@ -455,7 +463,7 @@ class RedisResourceManager
     /**
      * Get Redis options
      *
-     * @param string $id
+     * @param  string                     $id
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -476,17 +484,19 @@ class RedisResourceManager
                     $libOptions[$constValue] = $resource->getOption($constValue);
                 }
             }
+
             return $libOptions;
         }
+
         return $resource['lib_options'];
     }
 
     /**
      * Set one Redis option
      *
-     * @param string     $id
-     * @param string|int $key
-     * @param mixed      $value
+     * @param  string               $id
+     * @param  string|int           $key
+     * @param  mixed                $value
      * @return RedisResourceManager Fluent interface
      */
     public function setLibOption($id, $key, $value)
@@ -497,8 +507,8 @@ class RedisResourceManager
     /**
      * Get one Redis option
      *
-     * @param string     $id
-     * @param string|int $key
+     * @param  string                     $id
+     * @param  string|int                 $key
      * @return mixed
      * @throws Exception\RuntimeException
      */
@@ -521,7 +531,7 @@ class RedisResourceManager
     /**
      * Normalize Redis options
      *
-     * @param array|Traversable $libOptions
+     * @param  array|Traversable                  $libOptions
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeLibOptions(& $libOptions)
@@ -544,14 +554,14 @@ class RedisResourceManager
     /**
      * Convert option name into it's constant value
      *
-     * @param string|int $key
+     * @param  string|int                         $key
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeLibOptionKey(& $key)
     {
         // convert option name into it's constant value
         if (is_string($key)) {
-            $const = 'Redis::OPT_' . str_replace(array(' ', '-'), '_', strtoupper($key));
+            $const = 'Redis::OPT_'.str_replace(array(' ', '-'), '_', strtoupper($key));
             if (!defined($const)) {
                 throw new Exception\InvalidArgumentException("Unknown redis option '{$key}' ({$const})");
             }
@@ -569,15 +579,15 @@ class RedisResourceManager
      * - Assoc: array('host' => <host>[, 'port' => <port>[, 'timeout' => <timeout>]])
      * - List:  array(<host>[, <port>, [, <timeout>]])
      *
-     * @param string       $id
-     * @param string|array $server
+     * @param  string               $id
+     * @param  string|array         $server
      * @return RedisResourceManager
      */
     public function setServer($id, $server)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'server' => $server
+                'server' => $server,
             ));
         }
 
@@ -604,8 +614,8 @@ class RedisResourceManager
     /**
      * Set redis password
      *
-     * @param string $id
-     * @param string $password
+     * @param  string        $id
+     * @param  string        $password
      * @return RedisResource
      */
     public function setPassword($id, $password)
@@ -619,14 +629,15 @@ class RedisResourceManager
         $resource = & $this->resources[$id];
         $resource['password']    = $password;
         $resource['initialized'] = false;
+
         return $this;
     }
 
     /**
      * Set redis database number
      *
-     * @param string $id
-     * @param int $database
+     * @param  string        $id
+     * @param  int           $database
      * @return RedisResource
      */
     public function setDatabase($id, $database)
@@ -640,6 +651,7 @@ class RedisResourceManager
         $resource = & $this->resources[$id];
         $resource['database']    = $database;
         $resource['initialized'] = false;
+
         return $this;
     }
 }

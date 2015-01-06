@@ -84,8 +84,8 @@ class FormCaptchaTest extends CommonTestCase
         $element->setAttribute('id', 'foo');
         $markup = $this->helper->render($element);
         $this->assertContains($captcha->getLabel(), $markup);
-        $this->assertRegExp('#<[^>]*(id="' . $element->getAttribute('id') . '")[^>]*(type="text")[^>]*>#', $markup);
-        $this->assertRegExp('#<[^>]*(id="' . $element->getAttribute('id') . '-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
+        $this->assertRegExp('#<[^>]*(id="'.$element->getAttribute('id').'")[^>]*(type="text")[^>]*>#', $markup);
+        $this->assertRegExp('#<[^>]*(id="'.$element->getAttribute('id').'-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
     }
 
     public function testPassingElementWithFigletCaptchaRendersCorrectly()
@@ -97,9 +97,9 @@ class FormCaptchaTest extends CommonTestCase
         $element->setCaptcha($captcha);
         $element->setAttribute('id', 'foo');
         $markup = $this->helper->render($element);
-        $this->assertContains('<pre>' . $captcha->getFiglet()->render($captcha->getWord()) . '</pre>', $markup);
-        $this->assertRegExp('#<[^>]*(id="' . $element->getAttribute('id') . '")[^>]*(type="text")[^>]*>#', $markup);
-        $this->assertRegExp('#<[^>]*(id="' . $element->getAttribute('id') . '-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
+        $this->assertContains('<pre>'.$captcha->getFiglet()->render($captcha->getWord()).'</pre>', $markup);
+        $this->assertRegExp('#<[^>]*(id="'.$element->getAttribute('id').'")[^>]*(type="text")[^>]*>#', $markup);
+        $this->assertRegExp('#<[^>]*(id="'.$element->getAttribute('id').'-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
     }
 
     public function testPassingElementWithImageCaptchaRendersCorrectly()
@@ -116,7 +116,7 @@ class FormCaptchaTest extends CommonTestCase
             $this->markTestSkipped("Image CAPTCHA requires FT fonts support");
         }
 
-        $this->testDir = $this->getTmpDir() . '/ZF_test_images';
+        $this->testDir = $this->getTmpDir().'/ZF_test_images';
         if (!is_dir($this->testDir)) {
             @mkdir($this->testDir);
         }
@@ -124,7 +124,7 @@ class FormCaptchaTest extends CommonTestCase
         $captcha = new Captcha\Image(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
             'imgDir'       => $this->testDir,
-            'font'         => __DIR__. '/Captcha/_files/Vera.ttf',
+            'font'         => __DIR__.'/Captcha/_files/Vera.ttf',
         ));
         $element = $this->getElement();
         $element->setCaptcha($captcha);
@@ -135,9 +135,9 @@ class FormCaptchaTest extends CommonTestCase
         $this->assertContains('<img ', $markup);
         $this->assertContains(str_replace('/', '&#x2F;', $captcha->getImgUrl()), $markup);
         $this->assertContains($captcha->getId(), $markup);
-        $this->assertRegExp('#<img[^>]*(id="' . $element->getAttribute('id') . '-image")[^>]*>#', $markup);
-        $this->assertRegExp('#<input[^>]*(id="' . $element->getAttribute('id') . '")[^>]*(type="text")[^>]*>#', $markup);
-        $this->assertRegExp('#<input[^>]*(id="' . $element->getAttribute('id') . '-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
+        $this->assertRegExp('#<img[^>]*(id="'.$element->getAttribute('id').'-image")[^>]*>#', $markup);
+        $this->assertRegExp('#<input[^>]*(id="'.$element->getAttribute('id').'")[^>]*(type="text")[^>]*>#', $markup);
+        $this->assertRegExp('#<input[^>]*(id="'.$element->getAttribute('id').'-hidden")[^>]*(type="hidden")[^>]*>#', $markup);
     }
 
     public function testPassingElementWithReCaptchaRendersCorrectly()

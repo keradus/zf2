@@ -47,5 +47,5 @@ class ReceivedTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Received: xxx', $receivedHeader->toString());
     }
 
-    /** Implementation specific tests here */
+/** Implementation specific tests here */
 }

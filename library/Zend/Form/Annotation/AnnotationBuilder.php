@@ -69,18 +69,19 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         'Required',
         'Type',
         'ValidationGroup',
-        'Validator'
+        'Validator',
     );
 
     /**
      * Set form factory to use when building form from annotations
      *
-     * @param  Factory $formFactory
+     * @param  Factory           $formFactory
      * @return AnnotationBuilder
      */
     public function setFormFactory(Factory $formFactory)
     {
         $this->formFactory = $formFactory;
+
         return $this;
     }
 
@@ -94,11 +95,12 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     {
         $parser = new Parser\DoctrineAnnotationParser();
         foreach ($this->defaultAnnotations as $annotationName) {
-            $class = __NAMESPACE__ . '\\' . $annotationName;
+            $class = __NAMESPACE__.'\\'.$annotationName;
             $parser->registerAnnotation($class);
         }
         $annotationManager->attach($parser);
         $this->annotationManager = $annotationManager;
+
         return $this;
     }
 
@@ -117,6 +119,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         $events->attach(new ElementAnnotationsListener());
         $events->attach(new FormAnnotationsListener());
         $this->events = $events;
+
         return $this;
     }
 
@@ -134,6 +137,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         }
 
         $this->formFactory = new Factory();
+
         return $this->formFactory;
     }
 
@@ -151,6 +155,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         }
 
         $this->setAnnotationManager(new AnnotationManager());
+
         return $this->annotationManager;
     }
 
@@ -164,6 +169,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         if (null === $this->events) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->events;
     }
 
@@ -174,7 +180,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      * all properties. Information from annotations is then used to create
      * specifications for a form, its elements, and its input filter.
      *
-     * @param  string|object $entity Either an instance or a valid class name for an entity
+     * @param  string|object                      $entity Either an instance or a valid class name for an entity
      * @throws Exception\InvalidArgumentException if $entity is not an object or class name
      * @return ArrayObject
      */
@@ -224,13 +230,14 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     /**
      * Create a form from an object.
      *
-     * @param  string|object $entity
+     * @param  string|object   $entity
      * @return \Zend\Form\Form
      */
     public function createForm($entity)
     {
         $formSpec    = ArrayUtils::iteratorToArray($this->getFormSpecification($entity));
         $formFactory = $this->getFormFactory();
+
         return $formFactory->createForm($formSpec);
     }
 
@@ -248,9 +255,9 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      * Configure the form specification from annotations
      *
      * @param  AnnotationCollection $annotations
-     * @param  ClassReflection $reflection
-     * @param  ArrayObject $formSpec
-     * @param  ArrayObject $filterSpec
+     * @param  ClassReflection      $reflection
+     * @param  ArrayObject          $formSpec
+     * @param  ArrayObject          $filterSpec
      * @return void
      * @triggers discoverName
      * @triggers configureForm
@@ -277,10 +284,10 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     /**
      * Configure an element from annotations
      *
-     * @param  AnnotationCollection $annotations
+     * @param  AnnotationCollection                     $annotations
      * @param  \Zend\Code\Reflection\PropertyReflection $reflection
-     * @param  ArrayObject $formSpec
-     * @param  ArrayObject $filterSpec
+     * @param  ArrayObject                              $formSpec
+     * @param  ArrayObject                              $filterSpec
      * @return void
      * @triggers checkForExclude
      * @triggers discoverName
@@ -299,7 +306,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         $elementSpec = new ArrayObject(array(
             'flags' => array(),
             'spec'  => array(
-                'name' => $name
+                'name' => $name,
             ),
         ));
         $inputSpec = new ArrayObject(array(
@@ -353,7 +360,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      * Discover the name of the given form or element
      *
      * @param  AnnotationCollection $annotations
-     * @param  \Reflector $reflection
+     * @param  \Reflector           $reflection
      * @return string
      */
     protected function discoverName($annotations, $reflection)
@@ -364,6 +371,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         ), function ($r) {
             return (is_string($r) && !empty($r));
         });
+
         return $results->last();
     }
 
@@ -380,6 +388,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         ), function ($r) {
             return (true === $r);
         });
+
         return (bool) $results->last();
     }
 
@@ -391,8 +400,8 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      *
      * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *
-     * @param string $className
-     * @param string $type
+     * @param  string $className
+     * @param  string $type
      * @return bool
      */
     protected static function isSubclassOf($className, $type)

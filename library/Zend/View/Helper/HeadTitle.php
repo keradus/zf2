@@ -57,8 +57,8 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Retrieve placeholder for title element and optionally set state
      *
-     * @param  string $title
-     * @param  string $setType
+     * @param  string    $title
+     * @param  string    $setType
      * @return HeadTitle
      */
     public function __invoke($title = null, $setType = null)
@@ -97,7 +97,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
 
         $output = $this->renderTitle();
 
-        return $indent . '<title>' . $output . '</title>';
+        return $indent.'<title>'.$output.'</title>';
     }
 
     /**
@@ -142,7 +142,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Set a default order to add titles
      *
-     * @param  string $setType
+     * @param  string                    $setType
      * @throws Exception\DomainException
      * @return HeadTitle
      */
@@ -151,7 +151,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
         if (!in_array($setType, array(
             Placeholder\Container\AbstractContainer::APPEND,
             Placeholder\Container\AbstractContainer::SET,
-            Placeholder\Container\AbstractContainer::PREPEND
+            Placeholder\Container\AbstractContainer::PREPEND,
         ))) {
             throw new Exception\DomainException(
                 "You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'"
@@ -177,10 +177,10 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Sets translator to use in helper
      *
-     * @param  Translator $translator  [optional] translator.
-     *                                 Default is null, which sets no translator.
-     * @param  string     $textDomain  [optional] text domain
-     *                                 Default is null, which skips setTranslatorTextDomain
+     * @param  Translator $translator [optional] translator.
+     *                                Default is null, which sets no translator.
+     * @param  string     $textDomain [optional] text domain
+     *                                Default is null, which skips setTranslatorTextDomain
      * @return HeadTitle
      */
     public function setTranslator(Translator $translator = null, $textDomain = null)
@@ -189,6 +189,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
         if (null !== $textDomain) {
             $this->setTranslatorTextDomain($textDomain);
         }
+
         return $this;
     }
 
@@ -219,13 +220,14 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Sets whether translator is enabled and should be used
      *
-     * @param  bool $enabled [optional] whether translator should be used.
-     *                       Default is true.
+     * @param  bool      $enabled [optional] whether translator should be used.
+     *                            Default is true.
      * @return HeadTitle
      */
     public function setTranslatorEnabled($enabled = true)
     {
         $this->translatorEnabled = (bool) $enabled;
+
         return $this;
     }
 
@@ -242,12 +244,13 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Set translation text domain
      *
-     * @param  string $textDomain
+     * @param  string    $textDomain
      * @return HeadTitle
      */
     public function setTranslatorTextDomain($textDomain = 'default')
     {
         $this->translatorTextDomain = $textDomain;
+
         return $this;
     }
 

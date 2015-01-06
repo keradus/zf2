@@ -41,7 +41,7 @@ class ColorTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\Regex'
+            'Zend\Validator\Regex',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);

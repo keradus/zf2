@@ -16,7 +16,7 @@ class HttpResponseSender extends AbstractResponseSender
     /**
      * Send content
      *
-     * @param  SendResponseEvent $event
+     * @param  SendResponseEvent  $event
      * @return HttpResponseSender
      */
     public function sendContent(SendResponseEvent $event)
@@ -27,13 +27,14 @@ class HttpResponseSender extends AbstractResponseSender
         $response = $event->getResponse();
         echo $response->getContent();
         $event->setContentSent();
+
         return $this;
     }
 
     /**
      * Send HTTP response
      *
-     * @param  SendResponseEvent $event
+     * @param  SendResponseEvent  $event
      * @return HttpResponseSender
      */
     public function __invoke(SendResponseEvent $event)
@@ -46,6 +47,7 @@ class HttpResponseSender extends AbstractResponseSender
         $this->sendHeaders($event)
              ->sendContent($event);
         $event->stopPropagation(true);
+
         return $this;
     }
 }

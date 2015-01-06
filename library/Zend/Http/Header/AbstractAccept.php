@@ -84,13 +84,14 @@ abstract class AbstractAccept implements HeaderInterface
     {
         $obj = new static();
         $obj->parseHeaderLine($headerLine);
+
         return $obj;
     }
 
     /**
      * Parse the Field Value Parts represented by a header line
      *
-     * @param string  $headerLine
+     * @param  string                             $headerLine
      * @throws Exception\InvalidArgumentException If header is invalid
      * @return array
      */
@@ -101,7 +102,7 @@ abstract class AbstractAccept implements HeaderInterface
                 || !isset($values[0])
         ) {
             throw new Exception\InvalidArgumentException(
-                'Invalid header line for ' . $this->getFieldName() . ' header string'
+                'Invalid header line for '.$this->getFieldName().' header string'
             );
         }
 
@@ -118,7 +119,7 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Parse the accept params belonging to a media range
      *
-     * @param string $fieldValuePart
+     * @param  string   $fieldValuePart
      * @return stdClass
      */
     protected function parseFieldValuePart($fieldValuePart)
@@ -145,14 +146,14 @@ abstract class AbstractAccept implements HeaderInterface
                             'format'     => $format,
                             'priority'   => isset($params['q']) ? $params['q'] : 1,
                             'params'     => $params,
-                            'raw'        => trim($raw)
+                            'raw'        => trim($raw),
         );
     }
 
     /**
      * Parse the keys contained in the header line
      *
-     * @param string $fieldValuePart
+     * @param  string $fieldValuePart
      * @return array
      */
     protected function getParametersFromFieldValuePart($fieldValuePart)
@@ -184,7 +185,7 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Get field value
      *
-     * @param array|null $values
+     * @param  array|null $values
      * @return string
      */
     public function getFieldValue($values = null)
@@ -207,27 +208,27 @@ abstract class AbstractAccept implements HeaderInterface
      * Assemble and escape the field value parameters based on RFC 2616 section 2.1
      *
      * @todo someone should review this thoroughly
-     * @param string $value
-     * @param string $key
+     * @param  string $value
+     * @param  string $key
      * @return string
      */
     protected function assembleAcceptParam(&$value, $key)
     {
         $separators = array('(', ')', '<', '>', '@', ',', ';', ':',
-                            '/', '[', ']', '?', '=', '{', '}',  ' ',  "\t");
+                            '/', '[', ']', '?', '=', '{', '}',  ' ',  "\t", );
 
         $escaped = preg_replace_callback(
             '/[[:cntrl:]"\\\\]/', // escape cntrl, ", \
             function ($v) {
-                return '\\' . $v[0];
+                return '\\'.$v[0];
             },
             $value
         );
 
         if ($escaped == $value && !array_intersect(str_split($value), $separators)) {
-            $value = $key . '=' . $value;
+            $value = $key.'='.$value;
         } else {
-            $value = $key . '="' . $escaped . '"';
+            $value = $key.'="'.$escaped.'"';
         }
 
         return $value;
@@ -236,9 +237,9 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Add a type, with the given priority
      *
-     * @param  string $type
-     * @param  int|float $priority
-     * @param  array (optional) $params
+     * @param  string                             $type
+     * @param  int|float                          $priority
+     * @param  array (optional)                   $params
      * @throws Exception\InvalidArgumentException
      * @return Accept
      */
@@ -272,6 +273,7 @@ abstract class AbstractAccept implements HeaderInterface
 
         $value = $this->parseFieldValuePart($assembledString);
         $this->addFieldValuePartToQueue($value);
+
         return $this;
     }
 
@@ -289,7 +291,7 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Match a media string against this header
      *
-     * @param array|string $matchAgainst
+     * @param  array|string                                    $matchAgainst
      * @return Accept\FieldValuePArt\AcceptFieldValuePart|bool The matched value or false
      */
     public function match($matchAgainst)
@@ -328,8 +330,8 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Return a match where all parameters in argument #1 match those in argument #2
      *
-     * @param array $match1
-     * @param array $match2
+     * @param  array      $match1
+     * @param  array      $match2
      * @return bool|array
      */
     protected function matchAcceptParams($match1, $match2)
@@ -375,7 +377,7 @@ abstract class AbstractAccept implements HeaderInterface
     /**
      * Add a key/value combination to the internal queue
      *
-     * @param stdClass $value
+     * @param  stdClass $value
      * @return number
      */
     protected function addFieldValuePartToQueue($value)
@@ -434,6 +436,7 @@ abstract class AbstractAccept implements HeaderInterface
             if (strlen($a->raw) == strlen($b->raw)) {
                 return 0;
             }
+
             return (strlen($a->raw) > strlen($b->raw)) ? -1 : 1;
         };
 

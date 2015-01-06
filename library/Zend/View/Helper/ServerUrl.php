@@ -46,11 +46,11 @@ class ServerUrl extends AbstractHelper
      * View helper entry point:
      * Returns the current host's URL like http://site.com
      *
-     * @param  string|bool $requestUri  [optional] if true, the request URI
-     *                                     found in $_SERVER will be appended
-     *                                     as a path. If a string is given, it
-     *                                     will be appended as a path. Default
-     *                                     is to not append any path.
+     * @param  string|bool $requestUri [optional] if true, the request URI
+     *                                 found in $_SERVER will be appended
+     *                                 as a path. If a string is given, it
+     *                                 will be appended as a path. Default
+     *                                 is to not append any path.
      * @return string
      */
     public function __invoke($requestUri = null)
@@ -63,7 +63,7 @@ class ServerUrl extends AbstractHelper
             $path = '';
         }
 
-        return $this->getScheme() . '://' . $this->getHost() . $path;
+        return $this->getScheme().'://'.$this->getHost().$path;
     }
 
     /**
@@ -80,9 +80,10 @@ class ServerUrl extends AbstractHelper
         if (isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])) {
             // Detect if the port is set in SERVER_PORT and included in HTTP_HOST
             if (isset($_SERVER['SERVER_PORT'])) {
-                $portStr = ':' . $_SERVER['SERVER_PORT'];
+                $portStr = ':'.$_SERVER['SERVER_PORT'];
                 if (substr($_SERVER['HTTP_HOST'], 0-strlen($portStr), strlen($portStr)) == $portStr) {
                     $this->setHost(substr($_SERVER['HTTP_HOST'], 0, 0-strlen($portStr)));
+
                     return;
                 }
             }
@@ -113,6 +114,7 @@ class ServerUrl extends AbstractHelper
 
         if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT']) {
             $this->setPort($_SERVER['SERVER_PORT']);
+
             return;
         }
     }
@@ -206,6 +208,7 @@ class ServerUrl extends AbstractHelper
             $sslHttps = strtolower($_SERVER['SSL_HTTPS']);
             if (in_array($sslHttps, array('on', 1))) {
                 $this->setScheme('https');
+
                 return true;
             }
         }
@@ -227,7 +230,7 @@ class ServerUrl extends AbstractHelper
     /**
      * Sets host
      *
-     * @param  string $host
+     * @param  string    $host
      * @return ServerUrl
      */
     public function setHost($host)
@@ -239,10 +242,11 @@ class ServerUrl extends AbstractHelper
             || ($scheme == 'https' && (null === $port || $port == 443))
         ) {
             $this->host = $host;
+
             return $this;
         }
 
-        $this->host = $host . ':' . $port;
+        $this->host = $host.':'.$port;
 
         return $this;
     }
@@ -264,7 +268,7 @@ class ServerUrl extends AbstractHelper
     /**
      * Set server port
      *
-     * @param  int $port
+     * @param  int       $port
      * @return ServerUrl
      */
     public function setPort($port)
@@ -291,7 +295,7 @@ class ServerUrl extends AbstractHelper
     /**
      * Sets scheme (typically http or https)
      *
-     * @param  string $scheme
+     * @param  string    $scheme
      * @return ServerUrl
      */
     public function setScheme($scheme)
@@ -318,7 +322,7 @@ class ServerUrl extends AbstractHelper
     /**
      * Set flag indicating whether or not to query proxy servers
      *
-     * @param  bool $useProxy
+     * @param  bool      $useProxy
      * @return ServerUrl
      */
     public function setUseProxy($useProxy = false)

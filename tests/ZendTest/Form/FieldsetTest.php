@@ -123,7 +123,7 @@ class FieldsetTest extends TestCase
     public function testCanSetCustomOptionFromConstructor()
     {
         $fieldset = new Fieldset('foo', array(
-            'custom' => 'option'
+            'custom' => 'option',
         ));
         $options = $fieldset->getOptions();
         $this->assertArrayHasKey('custom', $options);
@@ -375,7 +375,7 @@ class FieldsetTest extends TestCase
     {
         $this->fieldset->add(new Element('foo'));
         $this->fieldset->add(new Element('bar'));
-        $this->fieldset->setObject(new \stdClass);
+        $this->fieldset->setObject(new \stdClass());
 
         $fieldsetClone = clone $this->fieldset;
 
@@ -393,7 +393,7 @@ class FieldsetTest extends TestCase
             'foobar' => 'abc',
         ));
         $value['foobar'] = new \ArrayObject(array(
-            'foo' => 'abc'
+            'foo' => 'abc',
         ));
         $form->bind($value);
         $this->assertSame($fieldset, $form->get('foobar'));
@@ -436,7 +436,7 @@ class FieldsetTest extends TestCase
     public function testSetOptions()
     {
         $this->fieldset->setOptions(array(
-                                   'foo' => 'bar'
+                                   'foo' => 'bar',
                               ));
         $option = $this->fieldset->getOption('foo');
 
@@ -446,7 +446,7 @@ class FieldsetTest extends TestCase
     public function testSetOptionsUseAsBaseFieldset()
     {
         $this->fieldset->setOptions(array(
-                                   'use_as_base_fieldset' => 'bar'
+                                   'use_as_base_fieldset' => 'bar',
                               ));
         $option = $this->fieldset->getOption('use_as_base_fieldset');
 
@@ -456,7 +456,7 @@ class FieldsetTest extends TestCase
     public function testSetOptionAllowedObjectBindingClass()
     {
         $this->fieldset->setOptions(array(
-                                         'allowed_object_binding_class' => 'bar'
+                                         'allowed_object_binding_class' => 'bar',
                                     ));
         $option = $this->fieldset->getOption('allowed_object_binding_class');
 
@@ -531,14 +531,14 @@ class FieldsetTest extends TestCase
     {
         $form = new Form();
         $form->add(new Element('foo'));
-        $form->setHydrator(new Hydrator\ObjectProperty);
+        $form->setHydrator(new Hydrator\ObjectProperty());
 
         $object      = new \stdClass();
         $object->foo = 'Initial value';
         $form->bind($object);
 
         $form->setData(array(
-            'foo' => 'New value'
+            'foo' => 'New value',
         ));
 
         $this->assertSame('New value', $form->get('foo')->getValue());

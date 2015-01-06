@@ -68,7 +68,6 @@ class MongoDBOptions extends AbstractOptions
      */
     protected $modifiedField = 'modified';
 
-
     /**
      * {@inheritdoc}
      */
@@ -84,7 +83,7 @@ class MongoDBOptions extends AbstractOptions
     /**
      * Set database name
      *
-     * @param string $database
+     * @param  string                   $database
      * @return MongoDBOptions
      * @throws InvalidArgumentException
      */
@@ -95,6 +94,7 @@ class MongoDBOptions extends AbstractOptions
             throw new InvalidArgumentException('$database must be a non-empty string');
         }
         $this->database = $database;
+
         return $this;
     }
 
@@ -111,7 +111,7 @@ class MongoDBOptions extends AbstractOptions
     /**
      * Set collection name
      *
-     * @param string $collection
+     * @param  string                   $collection
      * @return MongoDBOptions
      * @throws InvalidArgumentException
      */
@@ -122,6 +122,7 @@ class MongoDBOptions extends AbstractOptions
             throw new InvalidArgumentException('$collection must be a non-empty string');
         }
         $this->collection = $collection;
+
         return $this;
     }
 
@@ -139,12 +140,13 @@ class MongoDBOptions extends AbstractOptions
      * Set save options
      *
      * @see http://php.net/manual/en/mongocollection.save.php
-     * @param array $saveOptions
+     * @param  array          $saveOptions
      * @return MongoDBOptions
      */
     public function setSaveOptions(array $saveOptions)
     {
         $this->saveOptions = $saveOptions;
+
         return $this;
     }
 
@@ -161,7 +163,7 @@ class MongoDBOptions extends AbstractOptions
     /**
      * Set name field
      *
-     * @param string $nameField
+     * @param  string                   $nameField
      * @return MongoDBOptions
      * @throws InvalidArgumentException
      */
@@ -172,6 +174,7 @@ class MongoDBOptions extends AbstractOptions
             throw new InvalidArgumentException('$nameField must be a non-empty string');
         }
         $this->nameField = $nameField;
+
         return $this;
     }
 
@@ -188,7 +191,7 @@ class MongoDBOptions extends AbstractOptions
     /**
      * Set data field
      *
-     * @param string $dataField
+     * @param  string                   $dataField
      * @return MongoDBOptions
      * @throws InvalidArgumentException
      */
@@ -199,6 +202,7 @@ class MongoDBOptions extends AbstractOptions
             throw new InvalidArgumentException('$dataField must be a non-empty string');
         }
         $this->dataField = $dataField;
+
         return $this;
     }
 
@@ -215,7 +219,7 @@ class MongoDBOptions extends AbstractOptions
     /**
      * Set lifetime field
      *
-     * @param string $lifetimeField
+     * @param  string                   $lifetimeField
      * @return MongoDBOptions
      * @throws InvalidArgumentException
      */
@@ -226,6 +230,7 @@ class MongoDBOptions extends AbstractOptions
             throw new InvalidArgumentException('$lifetimeField must be a non-empty string');
         }
         $this->lifetimeField = $lifetimeField;
+
         return $this;
     }
 
@@ -242,7 +247,7 @@ class MongoDBOptions extends AbstractOptions
     /**
      * Set Modified Field
      *
-     * @param string $modifiedField
+     * @param  string                   $modifiedField
      * @return MongoDBOptions
      * @throws InvalidArgumentException
      */
@@ -253,6 +258,7 @@ class MongoDBOptions extends AbstractOptions
             throw new InvalidArgumentException('$modifiedField must be a non-empty string');
         }
         $this->modifiedField = $modifiedField;
+
         return $this;
     }
 

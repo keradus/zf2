@@ -55,12 +55,13 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
     /**
      * Set flag indicating whether or not to display the routing failure
      *
-     * @param  bool $displayNotFoundReason
+     * @param  bool                  $displayNotFoundReason
      * @return RouteNotFoundStrategy
      */
     public function setDisplayNotFoundReason($displayNotFoundReason)
     {
         $this->displayNotFoundReason = (bool) $displayNotFoundReason;
+
         return $this;
     }
 
@@ -80,7 +81,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      * If a "controller not found" or "invalid controller" error type is
      * encountered, sets the response status code to 404.
      *
-     * @param  MvcEvent $e
+     * @param  MvcEvent                 $e
      * @throws RuntimeException
      * @throws ServiceNotFoundException
      * @return void
@@ -156,7 +157,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
 
         // Inject the text into view
         $result  = $banner ? rtrim($banner, "\r\n")        : '';
-        $result .= $usage  ? "\n\n" . trim($usage, "\r\n") : '';
+        $result .= $usage  ? "\n\n".trim($usage, "\r\n") : '';
         $result .= "\n"; // to ensure we output a final newline
         $result .= $this->reportNotFoundReason($e);
         $model->setResult($result);
@@ -169,8 +170,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      * Build Console application banner text by querying currently loaded
      * modules.
      *
-     * @param ModuleManagerInterface $moduleManager
-     * @param ConsoleAdapter         $console
+     * @param  ModuleManagerInterface $moduleManager
+     * @param  ConsoleAdapter         $console
      * @return string
      */
     protected function getConsoleBanner(ConsoleAdapter $console, ModuleManagerInterface $moduleManager = null)
@@ -216,9 +217,9 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
     /**
      * Build Console usage information by querying currently loaded modules.
      *
-     * @param ConsoleAdapter         $console
-     * @param string                 $scriptName
-     * @param ModuleManagerInterface $moduleManager
+     * @param  ConsoleAdapter         $console
+     * @param  string                 $scriptName
+     * @param  ModuleManagerInterface $moduleManager
      * @return string
      * @throws RuntimeException
      */
@@ -289,7 +290,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
 
             if (is_string($usage)) {
                 // It's a plain string - output as is
-                $result .= $usage . "\n";
+                $result .= $usage."\n";
                 continue;
             }
 
@@ -309,7 +310,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
                     }
 
                     // Colorize the command
-                    $a = $console->colorize($scriptName . ' ' . $a, ColorInterface::GREEN);
+                    $a = $console->colorize($scriptName.' '.$a, ColorInterface::GREEN);
 
                     $tableCols = 2;
                     $tableType = 1;
@@ -349,7 +350,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
                 }
 
                 $tableType = 0;
-                $result   .= $b . "\n";
+                $result   .= $b."\n";
             }
         }
 
@@ -374,15 +375,15 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         $result  = '';
         $padding = 2;
 
-
         // If there is only 1 column, just concatenate it
         if ($cols == 1) {
             foreach ($data as $row) {
                 if (! isset($row[0])) {
                     continue;
                 }
-                $result .= $row[0] . "\n";
+                $result .= $row[0]."\n";
             }
+
             return $result;
         }
 
@@ -410,8 +411,9 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
 
         if ($width >= $consoleWidth - 10) {
             foreach ($data as $row) {
-                $result .= implode("    ", $row) . "\n";
+                $result .= implode("    ", $row)."\n";
             }
+
             return $result;
         }
 
@@ -463,6 +465,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
             $report   .= sprintf("Exception: %s\nTrace:\n%s\n", $exception->getMessage(), $exception->getTraceAsString());
             $exception = $exception->getPrevious();
         }
+
         return $report;
     }
 }

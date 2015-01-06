@@ -42,7 +42,6 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implementation specific tests here */
-
     public function wildcardMatches()
     {
         return array(
@@ -102,6 +101,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
             'application/vendor.foobar+xml',
             '*/vnd.foobar+json',
         );
+
         return array(
             'array' => array($criteria),
             'string' => array(implode(',', $criteria)),

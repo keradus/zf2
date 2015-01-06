@@ -20,7 +20,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->tempDir = sys_get_temp_dir() . '/mail_file_transport';
+        $this->tempDir = sys_get_temp_dir().'/mail_file_transport';
         if (!is_dir($this->tempDir)) {
             mkdir($this->tempDir);
         } else {
@@ -41,7 +41,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     protected function cleanup($dir)
     {
-        foreach (glob($dir . '/*.*') as $file) {
+        foreach (glob($dir.'/*.*') as $file) {
             unlink($file);
         }
     }
@@ -62,6 +62,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
+
         return $message;
     }
 

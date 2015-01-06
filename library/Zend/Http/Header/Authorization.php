@@ -24,7 +24,7 @@ class Authorization implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'authorization') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Authorization string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Authorization string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Authorization implements HeaderInterface
 
     public function toString()
     {
-        return 'Authorization: ' . $this->getFieldValue();
+        return 'Authorization: '.$this->getFieldValue();
     }
 }

@@ -22,13 +22,13 @@ class AnnotationScannerTest extends \PHPUnit_Framework_TestCase
         $parser = new GenericAnnotationParser();
         $parser->registerAnnotations(array(
             $foo = new TestAsset\Annotation\Foo(),
-            $bar = new TestAsset\Annotation\Bar()
+            $bar = new TestAsset\Annotation\Bar(),
         ));
         $annotationManager->attach($parser);
 
-        $docComment = '/**' . "\n"
-            . ' * @Test\Foo(\'anything I want()' . "\n" . ' * to be\')' . "\n"
-            . ' * @Test\Bar' . "\n */";
+        $docComment = '/**'."\n"
+            .' * @Test\Foo(\'anything I want()'."\n".' * to be\')'."\n"
+            .' * @Test\Bar'."\n */";
 
         $nameInfo = new NameInformation();
         $nameInfo->addUse('ZendTest\Code\Scanner\TestAsset\Annotation', 'Test');

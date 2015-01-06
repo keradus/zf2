@@ -84,15 +84,15 @@ class ChainTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Chain   $route
-     * @param        string  $path
-     * @param        integer $offset
-     * @param        array   $params
+     * @param Chain   $route
+     * @param string  $path
+     * @param integer $offset
+     * @param array   $params
      */
     public function testMatching(Chain $route, $path, $offset, array $params = null)
     {
         $request = new Request();
-        $request->setUri('http://example.com' . $path);
+        $request->setUri('http://example.com'.$path);
         $match = $route->match($request, $offset);
 
         if ($params === null) {
@@ -112,11 +112,11 @@ class ChainTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Chain   $route
-     * @param        string  $path
-     * @param        integer $offset
-     * @param        string  $routeName
-     * @param        array   $params
+     * @param Chain   $route
+     * @param string  $path
+     * @param integer $offset
+     * @param string  $routeName
+     * @param array   $params
      */
     public function testAssembling(Chain $route, $path, $offset, array $params = null)
     {

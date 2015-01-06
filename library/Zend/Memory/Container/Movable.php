@@ -56,8 +56,8 @@ class Movable extends AbstractContainer
      * Object constructor
      *
      * @param \Zend\Memory\MemoryManager $memoryManager
-     * @param int $id
-     * @param string $value
+     * @param int                        $id
+     * @param string                     $value
      */
     public function __construct(Memory\MemoryManager $memoryManager, $id, $value)
     {
@@ -79,11 +79,11 @@ class Movable extends AbstractContainer
 
         $this->state |= self::LOCKED;
 
-        /**
-         * @todo
-         * It's possible to set "value" container attribute to avoid modification tracing, while it's locked
-         * Check, if it's  more effective
-         */
+    /**
+     * @todo
+     * It's possible to set "value" container attribute to avoid modification tracing, while it's locked
+     * Check, if it's  more effective
+     */
     }
 
     /**
@@ -111,14 +111,14 @@ class Movable extends AbstractContainer
      * Loads object if necessary and moves it to the top of loaded objects list.
      * Swaps objects from the bottom of loaded objects list, if necessary.
      *
-     * @param string $property
+     * @param  string                             $property
      * @return string
      * @throws Exception\InvalidArgumentException
      */
     public function __get($property)
     {
         if ($property != 'value') {
-            throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
+            throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$'.$property);
         }
 
         if (!($this->state & self::LOADED)) {
@@ -132,14 +132,14 @@ class Movable extends AbstractContainer
     /**
      * Set handler
      *
-     * @param string $property
-     * @param  string $value
+     * @param  string                             $property
+     * @param  string                             $value
      * @throws Exception\InvalidArgumentException
      */
     public function __set($property, $value)
     {
         if ($property != 'value') {
-            throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
+            throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$'.$property);
         }
 
         $this->state = self::LOADED;
@@ -147,7 +147,6 @@ class Movable extends AbstractContainer
 
         $this->memManager->processUpdate($this, $this->id);
     }
-
 
     /**
      * Get string value reference
@@ -272,7 +271,6 @@ class Movable extends AbstractContainer
          * We don't clean up swap because of performance considerations
          * Cleaning is performed by Memory Manager destructor
          */
-
         $this->memManager->unlink($this, $this->id);
     }
 }

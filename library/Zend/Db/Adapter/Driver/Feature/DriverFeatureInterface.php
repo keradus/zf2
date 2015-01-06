@@ -21,8 +21,8 @@ interface DriverFeatureInterface
     /**
      * Add feature
      *
-     * @param string $name
-     * @param mixed $feature
+     * @param  string                 $name
+     * @param  mixed                  $feature
      * @return DriverFeatureInterface
      */
     public function addFeature($name, $feature);

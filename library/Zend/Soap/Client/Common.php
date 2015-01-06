@@ -28,8 +28,8 @@ class Common extends SoapClient
      * Common Soap Client constructor
      *
      * @param callable $doRequestCallback
-     * @param string $wsdl
-     * @param array $options
+     * @param string   $wsdl
+     * @param array    $options
      */
     public function __construct($doRequestCallback, $wsdl, $options)
     {

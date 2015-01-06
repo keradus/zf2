@@ -77,13 +77,13 @@ class ContentTransferEncoding implements HeaderInterface
 
     public function toString()
     {
-        return 'Content-Transfer-Encoding: ' . $this->getFieldValue();
+        return 'Content-Transfer-Encoding: '.$this->getFieldValue();
     }
 
     /**
      * Set the content transfer encoding
      *
-     * @param  string $transferEncoding
+     * @param  string                             $transferEncoding
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -94,12 +94,13 @@ class ContentTransferEncoding implements HeaderInterface
 
         if (!in_array($transferEncoding, static::$allowedTransferEncodings)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects one of "'. implode(', ', static::$allowedTransferEncodings) . '"; received "%s"',
+                '%s expects one of "'.implode(', ', static::$allowedTransferEncodings).'"; received "%s"',
                 __METHOD__,
                 (string) $transferEncoding
             ));
         }
         $this->transferEncoding = $transferEncoding;
+
         return $this;
     }
 

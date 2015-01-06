@@ -35,7 +35,7 @@ class Zip extends AbstractCompressionAlgorithm
     /**
      * Class constructor
      *
-     * @param  null|array|\Traversable $options (Optional) Options to set
+     * @param  null|array|\Traversable               $options (Optional) Options to set
      * @throws Exception\ExtensionNotLoadedException if zip extension not loaded
      */
     public function __construct($options = null)
@@ -83,7 +83,7 @@ class Zip extends AbstractCompressionAlgorithm
     /**
      * Sets the target to use
      *
-     * @param  string $target
+     * @param  string                             $target
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -95,14 +95,15 @@ class Zip extends AbstractCompressionAlgorithm
 
         $target = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, (string) $target);
         $this->options['target'] = $target;
+
         return $this;
     }
 
     /**
      * Compresses the given content
      *
-     * @param  string $content
-     * @return string Compressed archive
+     * @param  string                     $content
+     * @return string                     Compressed archive
      * @throws Exception\RuntimeException if unable to open zip archive, or error during compression
      */
     public function compress($content)
@@ -131,11 +132,11 @@ class Zip extends AbstractCompressionAlgorithm
                             continue;
                         }
 
-                        if (is_dir($current . $node)) {
-                            array_push($stack, $current . $node . DIRECTORY_SEPARATOR);
+                        if (is_dir($current.$node)) {
+                            array_push($stack, $current.$node.DIRECTORY_SEPARATOR);
                         }
 
-                        if (is_file($current . $node)) {
+                        if (is_file($current.$node)) {
                             $files[] = $node;
                         }
                     }
@@ -144,7 +145,7 @@ class Zip extends AbstractCompressionAlgorithm
                     $zip->addEmptyDir(substr($local, 0, -1));
 
                     foreach ($files as $file) {
-                        $zip->addFile($current . $file, $local . $file);
+                        $zip->addFile($current.$file, $local.$file);
                         if ($res !== true) {
                             throw new Exception\RuntimeException($this->errorString($res));
                         }
@@ -171,16 +172,17 @@ class Zip extends AbstractCompressionAlgorithm
         }
 
         $zip->close();
+
         return $this->options['archive'];
     }
 
     /**
      * Decompresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException If archive file not found, target directory not found,
-     *                                    or error during decompression
+     *                                            or error during decompression
      */
     public function decompress($content)
     {
@@ -199,7 +201,7 @@ class Zip extends AbstractCompressionAlgorithm
         }
 
         if (!empty($target)) {
-            $target = rtrim($target, '/\\') . DIRECTORY_SEPARATOR;
+            $target = rtrim($target, '/\\').DIRECTORY_SEPARATOR;
         }
 
         if (empty($target) || !is_dir($target)) {
@@ -216,6 +218,7 @@ class Zip extends AbstractCompressionAlgorithm
         }
 
         $zip->close();
+
         return $target;
     }
 

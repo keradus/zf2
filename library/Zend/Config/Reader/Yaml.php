@@ -49,7 +49,7 @@ class Yaml implements ReaderInterface
     /**
      * Set callback for decoding YAML
      *
-     * @param  string|callable $yamlDecoder the decoder to set
+     * @param  string|callable            $yamlDecoder the decoder to set
      * @return Yaml
      * @throws Exception\RuntimeException
      */
@@ -61,6 +61,7 @@ class Yaml implements ReaderInterface
             );
         }
         $this->yamlDecoder = $yamlDecoder;
+
         return $this;
     }
 
@@ -78,7 +79,7 @@ class Yaml implements ReaderInterface
      * fromFile(): defined by Reader interface.
      *
      * @see    ReaderInterface::fromFile()
-     * @param  string $filename
+     * @param  string                     $filename
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -109,7 +110,7 @@ class Yaml implements ReaderInterface
      * fromString(): defined by Reader interface.
      *
      * @see    ReaderInterface::fromString()
-     * @param  string $string
+     * @param  string                     $string
      * @return array|bool
      * @throws Exception\RuntimeException
      */
@@ -135,7 +136,7 @@ class Yaml implements ReaderInterface
     /**
      * Process the array for @include
      *
-     * @param  array $data
+     * @param  array                      $data
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -151,9 +152,10 @@ class Yaml implements ReaderInterface
                 }
                 $reader = clone $this;
                 unset($data[$key]);
-                $data = array_replace_recursive($data, $reader->fromFile($this->directory . '/' . $value));
+                $data = array_replace_recursive($data, $reader->fromFile($this->directory.'/'.$value));
             }
         }
+
         return $data;
     }
 }

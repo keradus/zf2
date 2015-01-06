@@ -24,7 +24,7 @@ class RootDse extends AbstractNode
     /**
      * Factory method to create the RootDse.
      *
-     * @param \Zend\Ldap\Ldap $ldap
+     * @param  \Zend\Ldap\Ldap $ldap
      * @return RootDse
      */
     public static function create(Ldap\Ldap $ldap)
@@ -117,6 +117,7 @@ class RootDse extends AbstractNode
     public function getSchemaDn()
     {
         $schemaDn = $this->getSubschemaSubentry();
+
         return Ldap\Dn::fromString($schemaDn);
     }
 }

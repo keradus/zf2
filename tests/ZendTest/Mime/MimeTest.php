@@ -65,11 +65,11 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     public function testQP()
     {
         $text = "This is a cool Test Text with special chars: ����\n"
-              . "and with multiple lines���� some of the Lines are long, long"
-              . ", long, long, long, long, long, long, long, long, long, long"
-              . ", long, long, long, long, long, long, long, long, long, long"
-              . ", long, long, long, long, long, long, long, long, long, long"
-              . ", long, long, long, long and with ����";
+              ."and with multiple lines���� some of the Lines are long, long"
+              .", long, long, long, long, long, long, long, long, long, long"
+              .", long, long, long, long, long, long, long, long, long, long"
+              .", long, long, long, long, long, long, long, long, long, long"
+              .", long, long, long, long and with ����";
 
         $qp = Mime\Mime::encodeQuotedPrintable($text);
         $this->assertEquals(quoted_printable_decode($qp), $text);
@@ -196,13 +196,13 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'),
         $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
         foreach (explode(Mime\Mime::LINEEND, $encoded) as $line) {
             if (strlen($line) > 100) {
-                $this->fail("Line '" . $line . "' is " . strlen($line) . " chars long, only 100 allowed.");
+                $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 100 allowed.");
             }
         }
         $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 40);
         foreach (explode(Mime\Mime::LINEEND, $encoded) as $line) {
             if (strlen($line) > 40) {
-                $this->fail("Line '" . $line . "' is " . strlen($line) . " chars long, only 40 allowed.");
+                $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 40 allowed.");
             }
         }
     }

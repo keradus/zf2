@@ -105,29 +105,31 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Set renderer state from options array
-     * @param  array $options
+     * @param  array            $options
      * @return AbstractRenderer
      */
     public function setOptions($options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . $key;
+            $method = 'set'.$key;
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
     /**
      * Set renderer namespace for autoloading
      *
-     * @param string $namespace
+     * @param  string           $namespace
      * @return AbstractRenderer
      */
     public function setRendererNamespace($namespace)
     {
         $this->rendererNamespace = $namespace;
+
         return $this;
     }
 
@@ -174,7 +176,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Manually adjust top position
-     * @param  int $value
+     * @param  int                           $value
      * @return AbstractRenderer
      * @throws Exception\OutOfRangeException
      */
@@ -186,6 +188,7 @@ abstract class AbstractRenderer implements RendererInterface
             );
         }
         $this->topOffset = intval($value);
+
         return $this;
     }
 
@@ -200,7 +203,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Manually adjust left position
-     * @param  int $value
+     * @param  int                           $value
      * @return AbstractRenderer
      * @throws Exception\OutOfRangeException
      */
@@ -212,6 +215,7 @@ abstract class AbstractRenderer implements RendererInterface
             );
         }
         $this->leftOffset = intval($value);
+
         return $this;
     }
 
@@ -226,18 +230,19 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Activate/Deactivate the automatic rendering of exception
-     * @param  bool $value
+     * @param  bool             $value
      * @return AbstractRenderer
      */
     public function setAutomaticRenderError($value)
     {
         $this->automaticRenderError = (bool) $value;
+
         return $this;
     }
 
     /**
      * Horizontal position of the barcode in the rendering resource
-     * @param  string $value
+     * @param  string                             $value
      * @return AbstractRenderer
      * @throws Exception\UnexpectedValueException
      */
@@ -249,6 +254,7 @@ abstract class AbstractRenderer implements RendererInterface
             );
         }
         $this->horizontalPosition = $value;
+
         return $this;
     }
 
@@ -263,7 +269,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Vertical position of the barcode in the rendering resource
-     * @param  string $value
+     * @param  string                             $value
      * @return AbstractRenderer
      * @throws Exception\UnexpectedValueException
      */
@@ -275,6 +281,7 @@ abstract class AbstractRenderer implements RendererInterface
             );
         }
         $this->verticalPosition = $value;
+
         return $this;
     }
 
@@ -289,7 +296,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Set the size of a module
-     * @param float $value
+     * @param  float                         $value
      * @return AbstractRenderer
      * @throws Exception\OutOfRangeException
      */
@@ -301,6 +308,7 @@ abstract class AbstractRenderer implements RendererInterface
             );
         }
         $this->moduleSize = floatval($value);
+
         return $this;
     }
 
@@ -330,6 +338,7 @@ abstract class AbstractRenderer implements RendererInterface
     public function setBarcode(Object\ObjectInterface $barcode)
     {
         $this->barcode = $barcode;
+
         return $this;
     }
 
@@ -350,6 +359,7 @@ abstract class AbstractRenderer implements RendererInterface
     {
         $this->checkBarcodeObject();
         $this->checkSpecificParams();
+
         return true;
     }
 
@@ -435,6 +445,7 @@ abstract class AbstractRenderer implements RendererInterface
                 throw $e;
             }
         }
+
         return $this->resource;
     }
 
@@ -488,20 +499,20 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Draw a polygon in the rendering resource
      * @param array $points
-     * @param int $color
-     * @param  bool $filled
+     * @param int   $color
+     * @param bool  $filled
      */
     abstract protected function drawPolygon($points, $color, $filled = true);
 
     /**
      * Draw a polygon in the rendering resource
      * @param string $text
-     * @param float $size
-     * @param array $position
+     * @param float  $size
+     * @param array  $position
      * @param string $font
-     * @param int $color
+     * @param int    $color
      * @param string $alignment
-     * @param float $orientation
+     * @param float  $orientation
      */
     abstract protected function drawText(
         $text,

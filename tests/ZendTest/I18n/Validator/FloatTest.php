@@ -49,9 +49,9 @@ class FloatTest extends \PHPUnit_Framework_TestCase
      * Test float and interger type variables. Includes decimal and scientific notation NumberFormatter-formatted
      * versions. Should return true for all locales.
      *
-     * @param string  $value    that will be tested
-     * @param boolean $expected expected result of assertion
-     * @param string  $locale   locale for validation
+     * @param  string  $value    that will be tested
+     * @param  boolean $expected expected result of assertion
+     * @param  string  $locale   locale for validation
      * @dataProvider floatAndIntegerProvider
      * @return void
      */
@@ -62,8 +62,8 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') .
-            sprintf(" (locale:%s, type:%s)", $locale, $type) . ', ICU Version:' . INTL_ICU_VERSION . '-' .
+            'Failed expecting '.$value.' being '.($expected ? 'true' : 'false').
+            sprintf(" (locale:%s, type:%s)", $locale, $type).', ICU Version:'.INTL_ICU_VERSION.'-'.
             INTL_ICU_DATA_VERSION
         );
     }
@@ -73,7 +73,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         $trueArray       = array();
         $testingLocales  = array('ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru');
         $testingExamples = array(1000, -2000, +398.00, 0.04, -0.5, .6, -.70, 8E10, -9.3456E-2, 10.23E6,
-            123.1234567890987654321);
+            123.1234567890987654321, );
 
         //Loop locales and examples for a more thorough set of "true" test data
         foreach ($testingLocales as $locale) {
@@ -85,7 +85,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
                         ->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
                     $locale,
-                    'decimal'
+                    'decimal',
                 );
                 //Scientific Notation Formatted
                 $trueArray[] = array(
@@ -93,10 +93,11 @@ class FloatTest extends \PHPUnit_Framework_TestCase
                         ->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
                     $locale,
-                    'scientific'
+                    'scientific',
                 );
             }
         }
+
         return $trueArray;
     }
 
@@ -105,9 +106,9 @@ class FloatTest extends \PHPUnit_Framework_TestCase
      * NO-BREAK SPACE, ARABIC THOUSANDS SEPARATOR, and ARABIC DECIMAL SEPARATOR are replaced with more typical ASCII
      * characters.
      *
-     * @param string  $value    that will be tested
-     * @param boolean $expected expected result of assertion
-     * @param string  $locale   locale for validation
+     * @param  string  $value    that will be tested
+     * @param  boolean $expected expected result of assertion
+     * @param  string  $locale   locale for validation
      * @dataProvider lookAlikeProvider
      * @return void
      */
@@ -118,7 +119,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') . sprintf(" (locale:%s)", $locale)
+            'Failed expecting '.$value.' being '.($expected ? 'true' : 'false').sprintf(" (locale:%s)", $locale)
         );
     }
 
@@ -127,13 +128,14 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         $trueArray     = array();
         $testingArray  = array(
             'ar' => "\xD9\xA1'\xD9\xA1\xD9\xA1\xD9\xA1,\xD9\xA2\xD9\xA3",
-            'ru' => '2 000,00'
+            'ru' => '2 000,00',
         );
 
         //Loop locales and examples for a more thorough set of "true" test data
         foreach ($testingArray as $locale => $example) {
             $trueArray[] = array($example, true, $locale);
         }
+
         return $trueArray;
     }
 
@@ -142,9 +144,9 @@ class FloatTest extends \PHPUnit_Framework_TestCase
      * NO-BREAK SPACE, ARABIC THOUSANDS SEPARATOR, and ARABIC DECIMAL SEPARATOR are replaced with more typical ASCII
      * characters.
      *
-     * @param string  $value    that will be tested
-     * @param boolean $expected expected result of assertion
-     * @param string  $locale   locale for validation
+     * @param  string  $value    that will be tested
+     * @param  boolean $expected expected result of assertion
+     * @param  string  $locale   locale for validation
      * @dataProvider validationFailureProvider
      * @return void
      */
@@ -155,7 +157,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') . sprintf(" (locale:%s)", $locale)
+            'Failed expecting '.$value.' being '.($expected ? 'true' : 'false').sprintf(" (locale:%s)", $locale)
         );
     }
 
@@ -166,7 +168,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
             'ar'    => array('10.1', '66notflot.6'),
             'ru'    => array('10.1', '66notflot.6', '2,000.00', '2 00'),
             'en'    => array('10,1', '66notflot.6', '2.000,00', '2 000', '2,00'),
-            'fr-CH' => array('10,1', '66notflot.6', '2,000.00', '2 000', "2'00")
+            'fr-CH' => array('10,1', '66notflot.6', '2,000.00', '2 000', "2'00"),
         );
 
         //Loop locales and examples for a more thorough set of "true" test data
@@ -175,6 +177,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
                 $trueArray[] = array($example, false, $locale);
             }
         }
+
         return $trueArray;
     }
 

@@ -39,9 +39,9 @@ class Chain extends TreeRouteStack implements RouteInterface
     /**
      * Create a new part route.
      *
-     * @param  array              $routes
-     * @param  RoutePluginManager $routePlugins
-     * @param  ArrayObject|null   $prototypes
+     * @param array              $routes
+     * @param RoutePluginManager $routePlugins
+     * @param ArrayObject|null   $prototypes
      */
     public function __construct(array $routes, RoutePluginManager $routePlugins, ArrayObject $prototypes = null)
     {
@@ -55,7 +55,7 @@ class Chain extends TreeRouteStack implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
-     * @param  mixed $options
+     * @param  mixed                              $options
      * @throws Exception\InvalidArgumentException
      * @return Part
      */
@@ -64,7 +64,7 @@ class Chain extends TreeRouteStack implements RouteInterface
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable set of options');
         }
 
         if (!isset($options['routes'])) {
@@ -94,9 +94,9 @@ class Chain extends TreeRouteStack implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request  $request
-     * @param  int|null $pathOffset
-     * @param  array    $options
+     * @param  Request         $request
+     * @param  int|null        $pathOffset
+     * @param  array           $options
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null, array $options = array())

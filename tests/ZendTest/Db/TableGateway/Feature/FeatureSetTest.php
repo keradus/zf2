@@ -47,7 +47,7 @@ class FeatureSetTest extends \PHPUnit_Framework_TestCase
         //feature doesn't have tableGateway, but FeatureSet has
         $feature = new MasterSlaveFeature($mockSlaveAdapter);
 
-        $featureSet = new FeatureSet;
+        $featureSet = new FeatureSet();
         $featureSet->setTableGateway($tableGatewayMock);
 
         $this->assertInstanceOf('Zend\Db\TableGateway\Feature\FeatureSet', $featureSet->addFeature($feature));
@@ -74,7 +74,7 @@ class FeatureSetTest extends \PHPUnit_Framework_TestCase
         $feature = new MetadataFeature($metadataMock);
         $feature->setTableGateway($tableGatewayMock);
 
-        $featureSet = new FeatureSet;
+        $featureSet = new FeatureSet();
         $this->assertInstanceOf('Zend\Db\TableGateway\Feature\FeatureSet', $featureSet->addFeature($feature));
     }
 }

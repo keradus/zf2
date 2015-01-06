@@ -17,19 +17,20 @@ use Zend\ModuleManager\ModuleEvent;
 class ModuleResolverListener extends AbstractListener
 {
     /**
-     * @param  ModuleEvent $e
+     * @param  ModuleEvent  $e
      * @return object|false False if module class does not exist
      */
     public function __invoke(ModuleEvent $e)
     {
         $moduleName = $e->getModuleName();
-        $class      = $moduleName . '\Module';
+        $class      = $moduleName.'\Module';
 
         if (!class_exists($class)) {
             return false;
         }
 
-        $module = new $class;
+        $module = new $class();
+
         return $module;
     }
 }

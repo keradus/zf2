@@ -27,16 +27,16 @@ class MemcachedTest extends CommonAdapterTest
         }
 
         $this->_options  = new Cache\Storage\Adapter\MemcachedOptions(array(
-            'resource_id' => __CLASS__
+            'resource_id' => __CLASS__,
         ));
 
         if (defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') && defined('TESTS_ZEND_CACHE_MEMCACHED_PORT')) {
             $this->_options->getResourceManager()->setServers(__CLASS__, array(
-                array(TESTS_ZEND_CACHE_MEMCACHED_HOST, TESTS_ZEND_CACHE_MEMCACHED_PORT)
+                array(TESTS_ZEND_CACHE_MEMCACHED_HOST, TESTS_ZEND_CACHE_MEMCACHED_PORT),
             ));
         } elseif (defined('TESTS_ZEND_CACHE_MEMCACHED_HOST')) {
             $this->_options->getResourceManager()->setServers(__CLASS__, array(
-                array(TESTS_ZEND_CACHE_MEMCACHED_HOST)
+                array(TESTS_ZEND_CACHE_MEMCACHED_HOST),
             ));
         }
 
@@ -139,7 +139,7 @@ class MemcachedTest extends CommonAdapterTest
         $options = new Cache\Storage\Adapter\MemcachedOptions();
 
         $options->setLibOptions(array(
-            'COMPRESSION' => false
+            'COMPRESSION' => false,
         ));
 
         $this->assertEquals($options->getResourceManager()->getLibOption(
@@ -148,7 +148,7 @@ class MemcachedTest extends CommonAdapterTest
 
         $memcached = new Cache\Storage\Adapter\Memcached($options);
         $this->assertEquals($memcached->getOptions()->getLibOptions(), array(
-            \Memcached::OPT_COMPRESSION => false
+            \Memcached::OPT_COMPRESSION => false,
         ));
     }
 
@@ -175,7 +175,7 @@ class MemcachedTest extends CommonAdapterTest
 
         $memcached = new Cache\Storage\Adapter\Memcached($options);
         $this->assertEquals($memcached->getOptions()->getLibOptions(), array(
-                \Memcached::OPT_COMPRESSION => false
+                \Memcached::OPT_COMPRESSION => false,
         ));
     }
 

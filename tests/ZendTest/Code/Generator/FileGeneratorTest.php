@@ -48,10 +48,9 @@ class FileGeneratorTest extends \PHPUnit_Framework_TestCase
                 'flags' => ClassGenerator::FLAG_ABSTRACT,
                 'name' => 'SampleClass',
                 'extendedClass' => 'ExtendedClassName',
-                'implementedInterfaces' => array('Iterator', 'Traversable')
-            )
+                'implementedInterfaces' => array('Iterator', 'Traversable'),
+            ),
         ));
-
 
         $expectedOutput = <<<EOS
 <?php
@@ -77,8 +76,8 @@ EOS;
 
         $codeGenFile = FileGenerator::fromArray(array(
             'class' => array(
-                'name' => 'SampleClass'
-            )
+                'name' => 'SampleClass',
+            ),
         ));
 
         file_put_contents($tempFile, $codeGenFile->generate());
@@ -95,7 +94,7 @@ EOS;
 
     public function testFromFileReflection()
     {
-        $file = __DIR__ . '/TestAsset/TestSampleSingleClass.php';
+        $file = __DIR__.'/TestAsset/TestSampleSingleClass.php';
         require_once $file;
 
         $codeGenFileFromDisk = FileGenerator::fromReflection($fileRefl = new FileReflection($file));
@@ -225,7 +224,7 @@ EOS;
         $file = new FileGenerator();
         $file->setUses(array(
                  array('use' => 'Your\\Bar', 'as' => 'bar'),
-                 array('use' => 'My\\Baz', 'as' => 'FooBaz')
+                 array('use' => 'My\\Baz', 'as' => 'FooBaz'),
              ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz as FooBaz;', $generated);
@@ -238,7 +237,7 @@ EOS;
         $file->setUses(array(
             'Your\\Bar',
             'My\\Baz',
-            array('use' => 'Another\\Baz', 'as' => 'Baz2')
+            array('use' => 'Another\\Baz', 'as' => 'Baz2'),
         ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz;', $generated);
@@ -252,7 +251,7 @@ EOS;
         $uses = array(
             'Your\\Bar',
             'My\\Baz',
-            array('use' => 'Another\\Baz', 'as' => 'Baz2')
+            array('use' => 'Another\\Baz', 'as' => 'Baz2'),
         );
         $file->setUses($uses);
         $file->setUses($file->getUses());
@@ -286,13 +285,13 @@ EOS;
 
     public function testGeneratingFromAReflectedFileName()
     {
-        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/OneInterface.php');
+        $generator = FileGenerator::fromReflectedFileName(__DIR__.'/TestAsset/OneInterface.php');
         $this->assertInstanceOf('Zend\Code\Generator\FileGenerator', $generator);
     }
 
     public function testGeneratedClassesHaveUses()
     {
-        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
+        $generator = FileGenerator::fromReflectedFileName(__DIR__.'/TestAsset/ClassWithUses.php');
         $class = $generator->getClass();
 
         $expectedUses = array('ZendTest\Code\Generator\TestAsset\ClassWithNamespace');
@@ -306,8 +305,8 @@ EOS;
     public function testIssue4747FileGenerationWithAddedMethodIsCorrectlyFormatted()
     {
         $g = new \Zend\Code\Generator\FileGenerator();
-        $g = $g->fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
-        $g->setFilename(sys_get_temp_dir() . '/result_class.php');
+        $g = $g->fromReflectedFileName(__DIR__.'/TestAsset/ClassWithUses.php');
+        $g->setFilename(sys_get_temp_dir().'/result_class.php');
         $g->getClass()->addMethod('added');
         $g->write();
 
@@ -341,7 +340,7 @@ class ClassWithUses
 
 
 CODE;
-        $actual = file_get_contents(sys_get_temp_dir() . '/result_class.php');
+        $actual = file_get_contents(sys_get_temp_dir().'/result_class.php');
         $this->assertEquals($expected, $actual);
     }
 
@@ -351,8 +350,8 @@ CODE;
     public function testCanAppendToBodyOfReflectedFile()
     {
         $g = new \Zend\Code\Generator\FileGenerator();
-        $g = $g->fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
-        $g->setFilename(sys_get_temp_dir() . '/result_class.php');
+        $g = $g->fromReflectedFileName(__DIR__.'/TestAsset/ClassWithUses.php');
+        $g->setFilename(sys_get_temp_dir().'/result_class.php');
         $g->getClass()->addMethod('added');
         $g->setBody("\$foo->bar();");
         $g->write();
@@ -388,7 +387,7 @@ class ClassWithUses
 
 $foo->bar();
 CODE;
-        $actual = file_get_contents(sys_get_temp_dir() . '/result_class.php');
+        $actual = file_get_contents(sys_get_temp_dir().'/result_class.php');
         $this->assertEquals($expected, $actual);
     }
 }

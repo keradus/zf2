@@ -13,9 +13,9 @@ use Zend\Feed\Reader\Extension;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class CommonTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -23,7 +23,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/Common';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/Common';
     }
 
     /**
@@ -119,8 +119,8 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * When not passing the optional argument type
-    */
+     * When not passing the optional argument type
+     */
     public function testFeedEntryCanDetectFeedType()
     {
         $feed = Reader\Reader::importString(
@@ -135,8 +135,8 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * When passing a newly created DOMElement without any DOMDocument assigned
-    */
+     * When passing a newly created DOMElement without any DOMDocument assigned
+     */
     public function testFeedEntryCanSetAnyType()
     {
         $feed = Reader\Reader::importString(

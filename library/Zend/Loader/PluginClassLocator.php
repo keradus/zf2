@@ -20,8 +20,8 @@ interface PluginClassLocator extends ShortNameLocator, IteratorAggregate
     /**
      * Register a class to a given short name
      *
-     * @param  string $shortName
-     * @param  string $className
+     * @param  string             $shortName
+     * @param  string             $className
      * @return PluginClassLocator
      */
     public function registerPlugin($shortName, $className);

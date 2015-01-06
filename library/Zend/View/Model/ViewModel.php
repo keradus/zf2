@@ -68,8 +68,8 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     /**
      * Constructor
      *
-     * @param  null|array|Traversable $variables
-     * @param  array|Traversable $options
+     * @param null|array|Traversable $variables
+     * @param array|Traversable      $options
      */
     public function __construct($variables = null, $options = null)
     {
@@ -89,7 +89,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
      * Property overloading: set variable value
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function __set($name, $value)
@@ -110,6 +110,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
         }
 
         $variables = $this->getVariables();
+
         return $variables[$name];
     }
 
@@ -122,6 +123,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     public function __isset($name)
     {
         $variables = $this->getVariables();
+
         return isset($variables[$name]);
     }
 
@@ -143,33 +145,35 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     /**
      * Set a single option
      *
-     * @param  string $name
-     * @param  mixed $value
+     * @param  string    $name
+     * @param  mixed     $value
      * @return ViewModel
      */
     public function setOption($name, $value)
     {
         $this->options[(string) $name] = $value;
+
         return $this;
     }
 
     /**
      * Get a single option
      *
-     * @param  string       $name           The option to get.
-     * @param  mixed|null   $default        (optional) A default value if the option is not yet set.
+     * @param  string     $name    The option to get.
+     * @param  mixed|null $default (optional) A default value if the option is not yet set.
      * @return mixed
      */
     public function getOption($name, $default = null)
     {
         $name = (string) $name;
+
         return array_key_exists($name, $this->options) ? $this->options[$name] : $default;
     }
 
     /**
      * Set renderer options/hints en masse
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable                             $options
      * @throws \Zend\View\Exception\InvalidArgumentException
      * @return ViewModel
      */
@@ -190,6 +194,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
         }
 
         $this->options = $options;
+
         return $this;
     }
 
@@ -211,14 +216,15 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     public function clearOptions()
     {
         $this->options = array();
+
         return $this;
     }
 
     /**
      * Get a single view variable
      *
-     * @param  string       $name
-     * @param  mixed|null   $default (optional) default value if the variable is not present.
+     * @param  string     $name
+     * @param  mixed|null $default (optional) default value if the variable is not present.
      * @return mixed
      */
     public function getVariable($name, $default = null)
@@ -234,13 +240,14 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     /**
      * Set view variable
      *
-     * @param  string $name
-     * @param  mixed $value
+     * @param  string    $name
+     * @param  mixed     $value
      * @return ViewModel
      */
     public function setVariable($name, $value)
     {
         $this->variables[(string) $name] = $value;
+
         return $this;
     }
 
@@ -249,8 +256,8 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
      *
      * Can be an array or a Traversable + ArrayAccess object.
      *
-     * @param  array|ArrayAccess|Traversable $variables
-     * @param  bool $overwrite Whether or not to overwrite the internal container with $variables
+     * @param  array|ArrayAccess|Traversable      $variables
+     * @param  bool                               $overwrite Whether or not to overwrite the internal container with $variables
      * @throws Exception\InvalidArgumentException
      * @return ViewModel
      */
@@ -270,6 +277,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
             }
 
             $this->variables = $variables;
+
             return $this;
         }
 
@@ -300,18 +308,20 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     public function clearVariables()
     {
         $this->variables = new ViewVariables();
+
         return $this;
     }
 
     /**
      * Set the template to be used by this model
      *
-     * @param  string $template
+     * @param  string    $template
      * @return ViewModel
      */
     public function setTemplate($template)
     {
         $this->template = (string) $template;
+
         return $this;
     }
 
@@ -329,8 +339,8 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
      * Add a child model
      *
      * @param  ModelInterface $child
-     * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
-     * @param  null|bool $append Optional; if specified, append to child  with the same capture
+     * @param  null|string    $captureTo Optional; if specified, the "capture to" value to set on the child
+     * @param  null|bool      $append    Optional; if specified, append to child  with the same capture
      * @return ViewModel
      */
     public function addChild(ModelInterface $child, $captureTo = null, $append = null)
@@ -376,14 +386,15 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     public function clearChildren()
     {
         $this->children = array();
+
         return $this;
     }
 
     /**
      * Returns an array of Viewmodels with captureTo value $capture
      *
-     * @param string $capture
-     * @param bool $recursive search recursive through children, default true
+     * @param  string $capture
+     * @param  bool   $recursive search recursive through children, default true
      * @return array
      */
     public function getChildrenByCaptureTo($capture, $recursive = true)
@@ -406,12 +417,13 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     /**
      * Set the name of the variable to capture this model to, if it is a child model
      *
-     * @param  string $capture
+     * @param  string    $capture
      * @return ViewModel
      */
     public function setCaptureTo($capture)
     {
         $this->captureTo = (string) $capture;
+
         return $this;
     }
 
@@ -428,12 +440,13 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     /**
      * Set flag indicating whether or not this is considered a terminal or standalone model
      *
-     * @param  bool $terminate
+     * @param  bool      $terminate
      * @return ViewModel
      */
     public function setTerminal($terminate)
     {
         $this->terminate = (bool) $terminate;
+
         return $this;
     }
 
@@ -450,12 +463,13 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     /**
      * Set flag indicating whether or not append to child  with the same capture
      *
-     * @param  bool $append
+     * @param  bool      $append
      * @return ViewModel
      */
     public function setAppend($append)
     {
         $this->append = (bool) $append;
+
         return $this;
     }
 

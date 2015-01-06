@@ -26,8 +26,9 @@ class TestCallbackCache
         ++static::$fooCounter;
         $args = func_get_args();
 
-        echo   'foobar_output('.implode(', ', $args) . ') : ' . static::$fooCounter;
-        return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
+        echo   'foobar_output('.implode(', ', $args).') : '.static::$fooCounter;
+
+        return 'foobar_return('.implode(', ', $args).') : '.static::$fooCounter;
     }
 
     public static function emptyMethod()
@@ -49,7 +50,7 @@ class FailableCallback
  */
 function bar()
 {
-    return call_user_func_array(__NAMESPACE__ . '\TestCallbackCache::bar', func_get_args());
+    return call_user_func_array(__NAMESPACE__.'\TestCallbackCache::bar', func_get_args());
 }
 
 /**
@@ -65,7 +66,7 @@ class CallbackCacheTest extends CommonPatternTest
     public function setUp()
     {
         $this->_storage = new Cache\Storage\Adapter\Memory(array(
-            'memory_limit' => 0
+            'memory_limit' => 0,
         ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
             'storage' => $this->_storage,
@@ -84,7 +85,7 @@ class CallbackCacheTest extends CommonPatternTest
     public function testCallEnabledCacheOutputByDefault()
     {
         $this->_testCall(
-            __NAMESPACE__ . '\TestCallbackCache::bar',
+            __NAMESPACE__.'\TestCallbackCache::bar',
             array('testCallEnabledCacheOutputByDefault', 'arg2')
         );
     }
@@ -94,7 +95,7 @@ class CallbackCacheTest extends CommonPatternTest
         $options = $this->_pattern->getOptions();
         $options->setCacheOutput(false);
         $this->_testCall(
-            __NAMESPACE__ . '\TestCallbackCache::bar',
+            __NAMESPACE__.'\TestCallbackCache::bar',
             array('testCallDisabledCacheOutput', 'arg2')
         );
     }
@@ -102,14 +103,14 @@ class CallbackCacheTest extends CommonPatternTest
     public function testMagicFunctionCall()
     {
         $this->_testCall(
-            __NAMESPACE__ . '\bar',
+            __NAMESPACE__.'\bar',
             array('testMagicFunctionCall', 'arg2')
         );
     }
 
     public function testGenerateKey()
     {
-        $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
+        $callback = __NAMESPACE__.'\TestCallbackCache::emptyMethod';
         $args     = array('arg1', 2, 3.33, null);
 
         $generatedKey = $this->_pattern->generateKey($callback, $args);
@@ -141,8 +142,8 @@ class CallbackCacheTest extends CommonPatternTest
      */
     protected function _testCall($callback, array $args)
     {
-        $returnSpec = 'foobar_return(' . implode(', ', $args) . ') : ';
-        $outputSpec = 'foobar_output(' . implode(', ', $args) . ') : ';
+        $returnSpec = 'foobar_return('.implode(', ', $args).') : ';
+        $outputSpec = 'foobar_output('.implode(', ', $args).') : ';
 
         // first call - not cached
         $firstCounter = TestCallbackCache::$fooCounter + 1;
@@ -152,8 +153,8 @@ class CallbackCacheTest extends CommonPatternTest
         $return = $this->_pattern->call($callback, $args);
         $data = ob_get_clean();
 
-        $this->assertEquals($returnSpec . $firstCounter, $return);
-        $this->assertEquals($outputSpec . $firstCounter, $data);
+        $this->assertEquals($returnSpec.$firstCounter, $return);
+        $this->assertEquals($outputSpec.$firstCounter, $data);
 
         // second call - cached
         ob_start();
@@ -161,10 +162,10 @@ class CallbackCacheTest extends CommonPatternTest
         $return = $this->_pattern->call($callback, $args);
         $data = ob_get_clean();
 
-        $this->assertEquals($returnSpec . $firstCounter, $return);
+        $this->assertEquals($returnSpec.$firstCounter, $return);
         $options = $this->_pattern->getOptions();
         if ($options->getCacheOutput()) {
-            $this->assertEquals($outputSpec . $firstCounter, $data);
+            $this->assertEquals($outputSpec.$firstCounter, $data);
         } else {
             $this->assertEquals('', $data);
         }

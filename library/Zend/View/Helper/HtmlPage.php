@@ -46,6 +46,7 @@ class HtmlPage extends AbstractHtmlElement
         $params = array_merge(array('data' => $data), $params);
 
         $htmlObject = $this->getView()->plugin('htmlObject');
+
         return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

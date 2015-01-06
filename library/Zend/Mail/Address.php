@@ -17,8 +17,8 @@ class Address implements Address\AddressInterface
     /**
      * Constructor
      *
-     * @param  string $email
-     * @param  null|string $name
+     * @param  string                             $email
+     * @param  null|string                        $name
      * @throws Exception\InvalidArgumentException
      * @return Address
      */
@@ -62,13 +62,14 @@ class Address implements Address\AddressInterface
      */
     public function toString()
     {
-        $string = '<' . $this->getEmail() . '>';
+        $string = '<'.$this->getEmail().'>';
         $name   = $this->getName();
         if (null === $name) {
             return $string;
         }
 
-        $string = $name . ' ' . $string;
+        $string = $name.' '.$string;
+
         return $string;
     }
 }

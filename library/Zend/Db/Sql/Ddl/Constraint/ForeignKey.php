@@ -41,7 +41,7 @@ class ForeignKey extends AbstractConstraint
      */
     protected $referenceSpecification = array(
         'REFERENCES %s ',
-        'ON DELETE %s ON UPDATE %s'
+        'ON DELETE %s ON UPDATE %s',
     );
 
     /**
@@ -75,6 +75,7 @@ class ForeignKey extends AbstractConstraint
     public function setReferenceTable($referenceTable)
     {
         $this->referenceTable = (string) $referenceTable;
+
         return $this;
     }
 

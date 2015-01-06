@@ -23,7 +23,7 @@ class EventManagerAwareTraitTest extends TestCase
 
         $this->assertAttributeEquals(null, 'events', $object);
 
-        $eventManager = new EventManager;
+        $eventManager = new EventManager();
 
         $object->setEventManager($eventManager);
 
@@ -36,7 +36,7 @@ class EventManagerAwareTraitTest extends TestCase
 
         $this->assertInstanceOf('\Zend\EventManager\EventManagerInterface', $object->getEventManager());
 
-        $eventManager = new EventManager;
+        $eventManager = new EventManager();
 
         $object->setEventManager($eventManager);
 

@@ -23,7 +23,7 @@ class TarLoadArchiveTarTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('PEAR Archive_Tar is present; skipping test that expects its absence');
         }
         try {
-            $tar = new TarCompression;
+            $tar = new TarCompression();
             $this->fail('ExtensionNotLoadedException was expected but not thrown');
         } catch (ExtensionNotLoadedException $e) {
         }

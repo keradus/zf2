@@ -55,7 +55,7 @@ class FormElementManagerFactoryTest extends TestCase
         $ref = new \ReflectionClass('Zend\Validator\Csrf');
         $hashCache = $ref->getProperty('hashCache');
         $hashCache->setAccessible(true);
-        $hashCache->setValue(new Csrf, array());
+        $hashCache->setValue(new Csrf(), array());
         SessionContainer::setDefaultManager(null);
     }
 
@@ -92,7 +92,7 @@ class FormElementManagerFactoryTest extends TestCase
         $hashPropRef = $ref->getProperty('hash');
         $hashPropRef->setAccessible(true);
         //check bare born
-        $preForm = new $formClass;
+        $preForm = new $formClass();
         $csrf = $preForm->get('csrf')->getCsrfValidator();
         $this->assertNull($hashPropRef->getValue($csrf), 'Test "new Form" has no hash');
         //check FormElementManager
@@ -106,7 +106,7 @@ class FormElementManagerFactoryTest extends TestCase
         $_SESSION = array();
         $formClass = 'ZendTest\Form\TestAsset\CustomForm';
 
-        $preForm = new $formClass;
+        $preForm = new $formClass();
         $preForm->prepare();
         $requestHash = $preForm->get('csrf')->getValue();
 

@@ -20,9 +20,9 @@ class Util
     /**
      * Resolve imports
      *
-     * @param  string $value
-     * @param  null|string $key
-     * @param  \stdClass $data
+     * @param  string                             $value
+     * @param  null|string                        $key
+     * @param  \stdClass                          $data
      * @return void
      * @throws Exception\InvalidArgumentException
      */
@@ -39,7 +39,7 @@ class Util
         }
 
         if ($data->namespace && !$data->uses && strlen($value) > 0 && $value{0} != '\\') {
-            $value = $data->namespace . '\\' . $value;
+            $value = $data->namespace.'\\'.$value;
 
             return;
         }
@@ -65,7 +65,7 @@ class Util
             }
 
             if ($data->namespace) {
-                $value = $data->namespace . '\\' . $value;
+                $value = $data->namespace.'\\'.$value;
 
                 return;
             }

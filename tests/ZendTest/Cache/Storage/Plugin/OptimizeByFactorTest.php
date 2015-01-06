@@ -78,7 +78,7 @@ class OptimizeByFactorTest extends CommonPluginTest
         // call event callback
         $result = true;
         $event = new PostEvent('removeItem.post', $adapter, new ArrayObject(array(
-            'options' => array()
+            'options' => array(),
         )), $result);
 
         $this->_plugin->optimizeByFactor($event);

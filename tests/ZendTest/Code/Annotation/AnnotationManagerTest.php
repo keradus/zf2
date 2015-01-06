@@ -29,32 +29,32 @@ class AnnotationManagerTest extends TestCase
     public function testAllowsMultipleParsingStrategies()
     {
         $genericParser = new Annotation\Parser\GenericAnnotationParser();
-        $genericParser->registerAnnotation(__NAMESPACE__ . '\TestAsset\Foo');
+        $genericParser->registerAnnotation(__NAMESPACE__.'\TestAsset\Foo');
 
         $doctrineParser = new Annotation\Parser\DoctrineAnnotationParser();
-        $doctrineParser->registerAnnotation(__NAMESPACE__ . '\TestAsset\DoctrineAnnotation');
+        $doctrineParser->registerAnnotation(__NAMESPACE__.'\TestAsset\DoctrineAnnotation');
 
         $this->manager->attach($genericParser);
         $this->manager->attach($doctrineParser);
 
-        $reflection = new Reflection\ClassReflection(__NAMESPACE__ . '\TestAsset\EntityWithMixedAnnotations');
+        $reflection = new Reflection\ClassReflection(__NAMESPACE__.'\TestAsset\EntityWithMixedAnnotations');
         $prop = $reflection->getProperty('test');
         $annotations = $prop->getAnnotations($this->manager);
 
-        $this->assertTrue($annotations->hasAnnotation(__NAMESPACE__ . '\TestAsset\Foo'));
-        $this->assertTrue($annotations->hasAnnotation(__NAMESPACE__ . '\TestAsset\DoctrineAnnotation'));
-        $this->assertFalse($annotations->hasAnnotation(__NAMESPACE__ . '\TestAsset\Bar'));
+        $this->assertTrue($annotations->hasAnnotation(__NAMESPACE__.'\TestAsset\Foo'));
+        $this->assertTrue($annotations->hasAnnotation(__NAMESPACE__.'\TestAsset\DoctrineAnnotation'));
+        $this->assertFalse($annotations->hasAnnotation(__NAMESPACE__.'\TestAsset\Bar'));
 
         foreach ($annotations as $annotation) {
             switch (get_class($annotation)) {
-                case __NAMESPACE__ . '\TestAsset\Foo':
+                case __NAMESPACE__.'\TestAsset\Foo':
                     $this->assertEquals('first', $annotation->content);
                     break;
-                case __NAMESPACE__ . '\TestAsset\DoctrineAnnotation':
+                case __NAMESPACE__.'\TestAsset\DoctrineAnnotation':
                     $this->assertEquals(array('foo' => 'bar', 'bar' => 'baz'), $annotation->value);
                     break;
                 default:
-                    $this->fail('Received unexpected annotation "' . get_class($annotation) . '"');
+                    $this->fail('Received unexpected annotation "'.get_class($annotation).'"');
             }
         }
     }

@@ -76,9 +76,9 @@ abstract class AbstractAdapter extends BaseAdapter
      * __construct() - Sets configuration options
      *
      * @param DbAdapter $zendDb
-     * @param string    $tableName           Optional
-     * @param string    $identityColumn      Optional
-     * @param string    $credentialColumn    Optional
+     * @param string    $tableName        Optional
+     * @param string    $identityColumn   Optional
+     * @param string    $credentialColumn Optional
      */
     public function __construct(
         DbAdapter $zendDb,
@@ -105,11 +105,12 @@ abstract class AbstractAdapter extends BaseAdapter
      * setTableName() - set the table name to be used in the select query
      *
      * @param  string $tableName
-     * @return self Provides a fluent interface
+     * @return self   Provides a fluent interface
      */
     public function setTableName($tableName)
     {
         $this->tableName = $tableName;
+
         return $this;
     }
 
@@ -117,11 +118,12 @@ abstract class AbstractAdapter extends BaseAdapter
      * setIdentityColumn() - set the column name to be used as the identity column
      *
      * @param  string $identityColumn
-     * @return self Provides a fluent interface
+     * @return self   Provides a fluent interface
      */
     public function setIdentityColumn($identityColumn)
     {
         $this->identityColumn = $identityColumn;
+
         return $this;
     }
 
@@ -129,11 +131,12 @@ abstract class AbstractAdapter extends BaseAdapter
      * setCredentialColumn() - set the column name to be used as the credential column
      *
      * @param  string $credentialColumn
-     * @return self Provides a fluent interface
+     * @return self   Provides a fluent interface
      */
     public function setCredentialColumn($credentialColumn)
     {
         $this->credentialColumn = $credentialColumn;
+
         return $this;
     }
 
@@ -143,7 +146,7 @@ abstract class AbstractAdapter extends BaseAdapter
      * false) parameters. Default is false.
      *
      * @param  int|bool $flag
-     * @return self Provides a fluent interface
+     * @return self     Provides a fluent interface
      */
     public function setAmbiguityIdentity($flag)
     {
@@ -152,6 +155,7 @@ abstract class AbstractAdapter extends BaseAdapter
         } elseif (is_bool($flag)) {
             $this->ambiguityIdentity = $flag;
         }
+
         return $this;
     }
 
@@ -176,14 +180,15 @@ abstract class AbstractAdapter extends BaseAdapter
         if ($this->dbSelect == null) {
             $this->dbSelect = new Sql\Select();
         }
+
         return $this->dbSelect;
     }
 
     /**
      * getResultRowObject() - Returns the result row as a stdClass object
      *
-     * @param  string|array $returnColumns
-     * @param  string|array $omitColumns
+     * @param  string|array  $returnColumns
+     * @param  string|array  $omitColumns
      * @return stdClass|bool
      */
     public function getResultRowObject($returnColumns = null, $omitColumns = null)
@@ -201,6 +206,7 @@ abstract class AbstractAdapter extends BaseAdapter
                     $returnObject->{$returnColumn} = $this->resultRow[$returnColumn];
                 }
             }
+
             return $returnObject;
         } elseif (null !== $omitColumns) {
             $omitColumns = (array) $omitColumns;
@@ -209,12 +215,14 @@ abstract class AbstractAdapter extends BaseAdapter
                     $returnObject->{$resultColumn} = $resultValue;
                 }
             }
+
             return $returnObject;
         }
 
         foreach ($this->resultRow as $resultColumn => $resultValue) {
             $returnObject->{$resultColumn} = $resultValue;
         }
+
         return $returnObject;
     }
 
@@ -253,7 +261,7 @@ abstract class AbstractAdapter extends BaseAdapter
      * the record in the resultset is indeed a record that matched the
      * identity provided to this adapter.
      *
-     * @param  array $resultIdentity
+     * @param  array                $resultIdentity
      * @return AuthenticationResult
      */
     abstract protected function authenticateValidateResult($resultIdentity);
@@ -297,7 +305,7 @@ abstract class AbstractAdapter extends BaseAdapter
         $this->authenticateResultInfo = array(
             'code'     => AuthenticationResult::FAILURE,
             'identity' => $this->identity,
-            'messages' => array()
+            'messages' => array(),
         );
 
         return true;
@@ -307,7 +315,7 @@ abstract class AbstractAdapter extends BaseAdapter
      * _authenticateQuerySelect() - This method accepts a Zend\Db\Sql\Select object and
      * performs a query against the database with that object.
      *
-     * @param  Sql\Select $dbSelect
+     * @param  Sql\Select                 $dbSelect
      * @throws Exception\RuntimeException when an invalid select object is encountered
      * @return array
      */
@@ -330,12 +338,13 @@ abstract class AbstractAdapter extends BaseAdapter
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(
                 'The supplied parameters to DbTable failed to '
-                . 'produce a valid sql statement, please check table and column names '
-                . 'for validity.',
+                .'produce a valid sql statement, please check table and column names '
+                .'for validity.',
                 0,
                 $e
             );
         }
+
         return $resultIdentities;
     }
 
@@ -343,7 +352,7 @@ abstract class AbstractAdapter extends BaseAdapter
      * _authenticateValidateResultSet() - This method attempts to make
      * certain that only one record was returned in the resultset
      *
-     * @param  array $resultIdentities
+     * @param  array                            $resultIdentities
      * @return bool|\Zend\Authentication\Result
      */
     protected function authenticateValidateResultSet(array $resultIdentities)
@@ -351,10 +360,12 @@ abstract class AbstractAdapter extends BaseAdapter
         if (count($resultIdentities) < 1) {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
             $this->authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
+
             return $this->authenticateCreateAuthResult();
         } elseif (count($resultIdentities) > 1 && false === $this->getAmbiguityIdentity()) {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS;
             $this->authenticateResultInfo['messages'][] = 'More than one record matches the supplied identity.';
+
             return $this->authenticateCreateAuthResult();
         }
 

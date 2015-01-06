@@ -103,7 +103,7 @@ class AccessController implements ContainerInterface
      * Loads object if necessary and moves it to the top of loaded objects list.
      * Swaps objects from the bottom of loaded objects list, if necessary.
      *
-     * @param string $property
+     * @param  string $property
      * @return string
      */
     public function __get($property)
@@ -115,7 +115,7 @@ class AccessController implements ContainerInterface
      * Set handler
      *
      * @param string $property
-     * @param  string $value
+     * @param string $value
      */
     public function __set($property, $value)
     {

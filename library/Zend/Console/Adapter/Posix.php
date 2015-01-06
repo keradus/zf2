@@ -219,15 +219,15 @@ class Posix extends AbstractAdapter
      */
     public function setPos($x, $y)
     {
-        echo "\x1b[" . $y . ';' . $x . 'f';
+        echo "\x1b[".$y.';'.$x.'f';
     }
 
     /**
      * Prepare a string that will be rendered in color.
      *
-     * @param  string   $string
-     * @param  int      $color
-     * @param  null|int $bgColor
+     * @param  string                           $string
+     * @param  int                              $color
+     * @param  null|int                         $bgColor
      * @throws Exception\BadMethodCallException
      * @return string
      */
@@ -235,34 +235,35 @@ class Posix extends AbstractAdapter
     {
         $color   = $this->getColorCode($color, 'fg');
         $bgColor = $this->getColorCode($bgColor, 'bg');
-        return ($color !== null ? "\x1b[" . $color   . 'm' : '')
-            . ($bgColor !== null ? "\x1b[" . $bgColor . 'm' : '')
-            . $string
-            . "\x1b[22;39m\x1b[0;49m";
+
+        return ($color !== null ? "\x1b[".$color.'m' : '')
+            .($bgColor !== null ? "\x1b[".$bgColor.'m' : '')
+            .$string
+            ."\x1b[22;39m\x1b[0;49m";
     }
 
     /**
      * Change current drawing color.
      *
-     * @param int $color
+     * @param  int                              $color
      * @throws Exception\BadMethodCallException
      */
     public function setColor($color)
     {
         $color = $this->getColorCode($color, 'fg');
-        echo "\x1b[" . $color . 'm';
+        echo "\x1b[".$color.'m';
     }
 
     /**
      * Change current drawing background color
      *
-     * @param int $bgColor
+     * @param  int                              $bgColor
      * @throws Exception\BadMethodCallException
      */
     public function setBgColor($bgColor)
     {
         $bgColor = $this->getColorCode($bgColor, 'bg');
-        echo "\x1b[" . ($bgColor) . 'm';
+        echo "\x1b[".($bgColor).'m';
     }
 
     /**
@@ -306,15 +307,16 @@ class Posix extends AbstractAdapter
     public function getDefaultCharset()
     {
         if ($this->isUtf8()) {
-            return new Charset\Utf8;
+            return new Charset\Utf8();
         }
+
         return new Charset\DECSG();
     }
 
     /**
      * Read a single character from the console input
      *
-     * @param  string|null $mask   A list of allowed chars
+     * @param  string|null $mask A list of allowed chars
      * @return string
      */
     public function readChar($mask = null)
@@ -328,6 +330,7 @@ class Posix extends AbstractAdapter
         fclose($stream);
 
         $this->restoreTTYMode();
+
         return $char;
     }
 
@@ -351,7 +354,7 @@ class Posix extends AbstractAdapter
             return;
         }
 
-        shell_exec('stty ' . escapeshellarg($this->lastTTYMode));
+        shell_exec('stty '.escapeshellarg($this->lastTTYMode));
     }
 
     /**
@@ -372,8 +375,8 @@ class Posix extends AbstractAdapter
     /**
      * Get the final color code and throw exception on error
      *
-     * @param  null|int|Xterm256 $color
-     * @param  string            $type  (optional) Foreground 'fg' or background 'bg'.
+     * @param  null|int|Xterm256                $color
+     * @param  string                           $type  (optional) Foreground 'fg' or background 'bg'.
      * @throws Exception\BadMethodCallException
      * @return string
      */
@@ -387,6 +390,7 @@ class Posix extends AbstractAdapter
             } else {
                 $code = sprintf($code, $color::BACKGROUND);
             }
+
             return $code;
         }
 
@@ -394,7 +398,7 @@ class Posix extends AbstractAdapter
             if (!isset(static::$ansiColorMap[$type][$color])) {
                 throw new Exception\BadMethodCallException(sprintf(
                     'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants '
-                    . 'or use Zend\Console\Color\Xterm256::calculate',
+                    .'or use Zend\Console\Color\Xterm256::calculate',
                     $color
                 ));
             }

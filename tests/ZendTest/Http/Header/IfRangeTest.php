@@ -44,5 +44,5 @@ class IfRangeTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('If-Range: xxx', $ifRangeHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

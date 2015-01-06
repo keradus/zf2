@@ -12,7 +12,6 @@ namespace ZendTest\Http\Client;
 use Zend\Http\ClientStatic as HTTPClient;
 use Zend\Http\Client;
 
-
 /**
  * This are the test for the prototype of Zend\Http\Client
  *
@@ -50,7 +49,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpSimpleGet()
     {
-        $response = HTTPClient::get($this->baseuri . 'testSimpleRequests.php');
+        $response = HTTPClient::get($this->baseuri.'testSimpleRequests.php');
         $this->assertTrue($response->isSuccess());
     }
 
@@ -59,7 +58,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpGetWithParamsInUri()
     {
-        $response = HTTPClient::get($this->baseuri . 'testGetData.php?foo');
+        $response = HTTPClient::get($this->baseuri.'testGetData.php?foo');
         $this->assertTrue($response->isSuccess());
         $this->assertContains('foo', $response->getBody());
     }
@@ -69,7 +68,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpMultiGetWithParam()
     {
-        $response = HTTPClient::get($this->baseuri . 'testGetData.php', array('foo' => 'bar'));
+        $response = HTTPClient::get($this->baseuri.'testGetData.php', array('foo' => 'bar'));
         $this->assertTrue($response->isSuccess());
         $this->assertContains('foo', $response->getBody());
         $this->assertContains('bar', $response->getBody());
@@ -82,7 +81,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
     {
         $getBody = 'baz';
 
-        $response = HTTPClient::get($this->baseuri . 'testRawGetData.php',
+        $response = HTTPClient::get($this->baseuri.'testRawGetData.php',
                                    array('foo' => 'bar'),
                                    array(),
                                    $getBody);
@@ -98,7 +97,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpSimplePost()
     {
-        $response = HTTPClient::post($this->baseuri . 'testPostData.php', array('foo' => 'bar'));
+        $response = HTTPClient::post($this->baseuri.'testPostData.php', array('foo' => 'bar'));
         $this->assertTrue($response->isSuccess());
         $this->assertContains('foo', $response->getBody());
         $this->assertContains('bar', $response->getBody());
@@ -109,7 +108,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpPostContentType()
     {
-        $response = HTTPClient::post($this->baseuri . 'testPostData.php',
+        $response = HTTPClient::post($this->baseuri.'testPostData.php',
                                     array('foo' => 'bar'),
                                     array('Content-Type' => Client::ENC_URLENCODED));
         $this->assertTrue($response->isSuccess());
@@ -124,7 +123,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
     {
         $postBody = 'foo';
 
-        $response = HTTPClient::post($this->baseuri . 'testRawPostData.php',
+        $response = HTTPClient::post($this->baseuri.'testRawPostData.php',
                                     array('foo' => 'bar'),
                                     array('Content-Type' => Client::ENC_URLENCODED),
                                     $postBody);
@@ -140,10 +139,10 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpGetUsesAdapterConfig()
     {
-        $testUri = $this->baseuri . 'testSimpleRequests.php';
+        $testUri = $this->baseuri.'testSimpleRequests.php';
 
         $config = array(
-            'useragent' => 'simplegettest'
+            'useragent' => 'simplegettest',
         );
 
         HTTPClient::get($testUri, array(), array(), null, $config);
@@ -165,10 +164,10 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpPostUsesAdapterConfig()
     {
-        $testUri = $this->baseuri . 'testPostData.php';
+        $testUri = $this->baseuri.'testPostData.php';
 
         $config = array(
-            'useragent' => 'simpleposttest'
+            'useragent' => 'simpleposttest',
         );
 
         HTTPClient::post($testUri, array('foo' => 'bar'), array(), null, $config);

@@ -36,7 +36,7 @@ class ProcessorPluginManager extends AbstractPluginManager
      *
      * Checks that the processor loaded is an instance of Processor\ProcessorInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

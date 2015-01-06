@@ -37,20 +37,20 @@ class AbstractSourceTest extends \PHPUnit_Framework_TestCase
                         'update_rule' => 'UP',
                         'delete_rule' => 'DOWN',
                         'referenced_table_name' => 'another_table',
-                        'referenced_column_name' => 'another_column'
-                    )
-                )
+                        'referenced_column_name' => 'another_column',
+                    ),
+                ),
             ),
             'constraint_keys' => array(
                 'foo_schema' => array(
                     array(
-                        'table_name'=> 'bar_table',
+                        'table_name' => 'bar_table',
                         'constraint_name' => 'bam_constraint',
                         'column_name' => 'a',
                         'ordinal_position' => 1,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $refProp->setValue($this->abstractSourceMock, $data);

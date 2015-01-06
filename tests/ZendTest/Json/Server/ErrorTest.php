@@ -54,7 +54,7 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
 
     public function testCodeShouldBeLimitedToStandardIntegers()
     {
-        foreach (array(null, true, 'foo', array(), new \stdClass, 2.0) as $code) {
+        foreach (array(null, true, 'foo', array(), new \stdClass(), 2.0) as $code) {
             $this->error->setCode($code);
             $this->assertEquals(Server\Error::ERROR_OTHER, $this->error->getCode());
         }
@@ -101,7 +101,7 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
 
     public function testSetMessageToNonScalarShouldSilentlyFail()
     {
-        foreach (array(array(), new \stdClass) as $message) {
+        foreach (array(array(), new \stdClass()) as $message) {
             $this->error->setMessage($message);
             $this->assertNull($this->error->getMessage());
         }
@@ -114,7 +114,7 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAllowArbitraryData()
     {
-        foreach (array(true, 'foo', 2, 2.0, array(), new \stdClass) as $datum) {
+        foreach (array(true, 'foo', 2, 2.0, array(), new \stdClass()) as $datum) {
             $this->error->setData($datum);
             $this->assertEquals($datum, $this->error->getData());
         }

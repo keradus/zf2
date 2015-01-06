@@ -28,10 +28,10 @@ class GettextTest extends TestCase
         $this->originalLocale = Locale::getDefault();
         Locale::setDefault('en_EN');
 
-        $this->testFilesDir = realpath(__DIR__ . '/../_files');
+        $this->testFilesDir = realpath(__DIR__.'/../_files');
 
         $this->originalIncludePath = get_include_path();
-        set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
+        set_include_path($this->testFilesDir.PATH_SEPARATOR.$this->testFilesDir.'/translations.phar');
     }
 
     public function tearDown()
@@ -54,27 +54,27 @@ class GettextTest extends TestCase
         $loader = new GettextLoader();
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
                                     'is not a valid gettext file');
-        $loader->load('en_EN', $this->testFilesDir . '/failed.mo');
+        $loader->load('en_EN', $this->testFilesDir.'/failed.mo');
     }
 
     public function testLoaderLoadsEmptyFile()
     {
         $loader = new GettextLoader();
-        $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.mo');
+        $domain = $loader->load('en_EN', $this->testFilesDir.'/translation_empty.mo');
         $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $domain);
     }
 
     public function testLoaderLoadsBigEndianFile()
     {
         $loader = new GettextLoader();
-        $domain = $loader->load('en_EN', $this->testFilesDir . '/translation_bigendian.mo');
+        $domain = $loader->load('en_EN', $this->testFilesDir.'/translation_bigendian.mo');
         $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $domain);
     }
 
     public function testLoaderReturnsValidTextDomain()
     {
         $loader = new GettextLoader();
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
+        $textDomain = $loader->load('en_EN', $this->testFilesDir.'/translation_en.mo');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -83,7 +83,7 @@ class GettextTest extends TestCase
     public function testLoaderLoadsPluralRules()
     {
         $loader     = new GettextLoader();
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
+        $textDomain = $loader->load('en_EN', $this->testFilesDir.'/translation_en.mo');
 
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
         $this->assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
@@ -105,7 +105,7 @@ class GettextTest extends TestCase
     {
         $loader = new GettextLoader();
         $loader->setUseIncludePath(true);
-        $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.mo');
+        $textDomain = $loader->load('en_EN', 'phar://'.$this->testFilesDir.'/translations.phar/translation_en.mo');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -121,7 +121,7 @@ class GettextTest extends TestCase
 
         $loader->setUseIncludePath(true);
 
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
+        $textDomain = $loader->load('en_EN', $this->testFilesDir.'/translation_en.mo');
 
         $this->assertEquals(
             array(

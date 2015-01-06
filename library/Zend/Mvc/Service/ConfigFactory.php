@@ -32,6 +32,7 @@ class ConfigFactory implements FactoryInterface
         $mm->loadModules();
         $moduleParams = $mm->getEvent()->getParams();
         $config       = $moduleParams['configListener']->getMergedConfig(false);
+
         return $config;
     }
 }

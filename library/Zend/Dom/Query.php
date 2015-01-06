@@ -82,6 +82,7 @@ class Query
     public function setEncoding($encoding)
     {
         $this->encoding = (null === $encoding) ? null : (string) $encoding;
+
         return $this;
     }
 
@@ -98,7 +99,7 @@ class Query
     /**
      * Set document to query
      *
-     * @param  string $document
+     * @param  string      $document
      * @param  null|string $encoding Document encoding
      * @return Query
      */
@@ -108,23 +109,26 @@ class Query
             return $this;
         }
         // breaking XML declaration to make syntax highlighting work
-        if ('<' . '?xml' == substr(trim($document), 0, 5)) {
+        if ('<'.'?xml' == substr(trim($document), 0, 5)) {
             if (preg_match('/<html[^>]*xmlns="([^"]+)"[^>]*>/i', $document, $matches)) {
                 $this->xpathNamespaces[] = $matches[1];
+
                 return $this->setDocumentXhtml($document, $encoding);
             }
+
             return $this->setDocumentXml($document, $encoding);
         }
         if (strstr($document, 'DTD XHTML')) {
             return $this->setDocumentXhtml($document, $encoding);
         }
+
         return $this->setDocumentHtml($document, $encoding);
     }
 
     /**
      * Register HTML document
      *
-     * @param  string $document
+     * @param  string      $document
      * @param  null|string $encoding Document encoding
      * @return Query
      */
@@ -135,13 +139,14 @@ class Query
         if (null !== $encoding) {
             $this->setEncoding($encoding);
         }
+
         return $this;
     }
 
     /**
      * Register XHTML document
      *
-     * @param  string $document
+     * @param  string      $document
      * @param  null|string $encoding Document encoding
      * @return Query
      */
@@ -152,13 +157,14 @@ class Query
         if (null !== $encoding) {
             $this->setEncoding($encoding);
         }
+
         return $this;
     }
 
     /**
      * Register XML document
      *
-     * @param  string $document
+     * @param  string      $document
      * @param  null|string $encoding Document encoding
      * @return Query
      */
@@ -169,6 +175,7 @@ class Query
         if (null !== $encoding) {
             $this->setEncoding($encoding);
         }
+
         return $this;
     }
 
@@ -205,20 +212,21 @@ class Query
     /**
      * Perform a CSS selector query
      *
-     * @param  string $query
+     * @param  string   $query
      * @return NodeList
      */
     public function execute($query)
     {
         $xpathQuery = Document\Query::cssToXpath($query);
+
         return $this->queryXpath($xpathQuery, $query);
     }
 
     /**
      * Perform an XPath query
      *
-     * @param  string|array $xpathQuery
-     * @param  string|null  $query      CSS selector query
+     * @param  string|array               $xpathQuery
+     * @param  string|null                $query      CSS selector query
      * @throws Exception\RuntimeException
      * @return NodeList
      */
@@ -267,6 +275,7 @@ class Query
         }
 
         $nodeList   = $this->getNodeList($domDoc, $xpathQuery);
+
         return new NodeList($query, $xpathQuery, $domDoc, $nodeList);
     }
 
@@ -295,8 +304,8 @@ class Query
     /**
      * Prepare node list
      *
-     * @param  DOMDocument $document
-     * @param  string|array $xpathQuery
+     * @param  DOMDocument     $document
+     * @param  string|array    $xpathQuery
      * @return \DOMNodeList
      * @throws \ErrorException If query cannot be executed
      */
@@ -315,6 +324,7 @@ class Query
         $xpathQuery = (string) $xpathQuery;
 
         $nodeList = $xpath->queryWithErrorException($xpathQuery);
+
         return $nodeList;
     }
 }

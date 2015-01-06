@@ -29,6 +29,7 @@ class FormRadioTest extends CommonTestCase
             'value3' => 'This is the third label',
         );
         $element->setValueOptions($options);
+
         return $element;
     }
 
@@ -47,6 +48,7 @@ class FormRadioTest extends CommonTestCase
             'value3' => 'This is the third label',
         );
         $element->setValueOptions($options);
+
         return $element;
     }
 

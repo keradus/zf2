@@ -19,7 +19,7 @@ class Radio extends MultiCheckbox
      * @var array
      */
     protected $attributes = array(
-        'type' => 'radio'
+        'type' => 'radio',
     );
 
     /**
@@ -35,6 +35,7 @@ class Radio extends MultiCheckbox
                 'strict'    => false,
             ));
         }
+
         return $this->validator;
     }
 }

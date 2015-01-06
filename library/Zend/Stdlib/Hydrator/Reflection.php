@@ -45,7 +45,7 @@ class Reflection extends AbstractHydrator
     /**
      * Hydrate $object with the provided $data.
      *
-     * @param  array $data
+     * @param  array  $data
      * @param  object $object
      * @return object
      */
@@ -58,6 +58,7 @@ class Reflection extends AbstractHydrator
                 $reflProperties[$name]->setValue($object, $this->hydrateValue($name, $value, $data));
             }
         }
+
         return $object;
     }
 
@@ -65,7 +66,7 @@ class Reflection extends AbstractHydrator
      * Get a reflection properties from in-memory cache and lazy-load if
      * class has not been loaded.
      *
-     * @param  string|object $input
+     * @param  string|object                      $input
      * @throws Exception\InvalidArgumentException
      * @return \ReflectionProperty[]
      */

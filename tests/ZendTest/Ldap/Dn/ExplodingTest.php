@@ -50,6 +50,7 @@ class ExplodingTest extends \PHPUnit_Framework_TestCase
             array('+OU=Sales,O=Widget Inc.,C=US', false),
             array('OU=Sa+les,O=Widget Inc.,C=US', false),
         );
+
         return $testData;
     }
 
@@ -87,7 +88,7 @@ class ExplodingTest extends \PHPUnit_Framework_TestCase
             array("cn" => "name1"),
             array("cn" => "name2"),
             array("dc" => "example"),
-            array("dc" => "org")
+            array("dc" => "org"),
         );
         $ke       = array('cn', 'cn', 'dc', 'dc');
         $ve       = array('name1', 'name2', 'example', 'org');
@@ -163,10 +164,10 @@ class ExplodingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($ve, $v);
         $expected = array(
             array("cn"  => "Surname, Firstname",
-                  "uid" => "userid"),
+                  "uid" => "userid", ),
             array("cn" => "name2"),
             array("dc" => "example"),
-            array("dc" => "org")
+            array("dc" => "org"),
         );
         $this->assertEquals($expected, $dnArray);
     }
@@ -184,10 +185,10 @@ class ExplodingTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             array("cn"  => "Surname, Firstname",
                   "uid" => "userid",
-                  "sn"  => "Surname"),
+                  "sn"  => "Surname", ),
             array("cn" => "name2"),
             array("dc" => "example"),
-            array("dc" => "org")
+            array("dc" => "org"),
         );
         $this->assertEquals($expected, $dnArray);
     }
@@ -208,32 +209,33 @@ class ExplodingTest extends \PHPUnit_Framework_TestCase
                   array(
                       array('CN' => 'Steve Kille'),
                       array('O'  => 'Isode Limited'),
-                      array('C'  => 'GB')
-                  )),
+                      array('C'  => 'GB'),
+                  ), ),
             array('OU=Sales+CN=J. Smith,O=Widget Inc.,C=US',
                   array(
                       array('OU' => 'Sales',
-                            'CN' => 'J. Smith'),
+                            'CN' => 'J. Smith', ),
                       array('O'  => 'Widget Inc.'),
-                      array('C'  => 'US')
-                  )),
+                      array('C'  => 'US'),
+                  ), ),
             array('CN=L. Eagle,O=Sue\, Grabbit and Runn,C=GB',
                   array(
                       array('CN' => 'L. Eagle'),
                       array('O'  => 'Sue, Grabbit and Runn'),
-                      array('C'  => 'GB')
-                  )),
+                      array('C'  => 'GB'),
+                  ), ),
             array('CN=Before\0DAfter,O=Test,C=GB',
                   array(
                       array('CN' => "Before\rAfter"),
                       array('O'  => 'Test'),
-                      array('C'  => 'GB')
-                  )),
+                      array('C'  => 'GB'),
+                  ), ),
             array('SN=Lu\C4\8Di\C4\87',
                   array(
-                      array('SN' => 'Lučić')
-                  ))
+                      array('SN' => 'Lučić'),
+                  ), ),
         );
+
         return $testData;
     }
 

@@ -114,10 +114,10 @@ class Mvc extends AbstractPage
      * This method will compare the page properties against the route matches
      * composed in the object.
      *
-     * @param  bool $recursive  [optional] whether page should be considered
-     *                          active if any child pages are active. Default is
-     *                          false.
-     * @return bool             whether page should be considered active or not
+     * @param  bool $recursive [optional] whether page should be considered
+     *                         active if any child pages are active. Default is
+     *                         false.
+     * @return bool whether page should be considered active or not
      */
     public function isActive($recursive = false)
     {
@@ -144,6 +144,7 @@ class Mvc extends AbstractPage
                         && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
                     ) {
                         $this->active = true;
+
                         return $this->active;
                     } else {
                         return parent::isActive($recursive);
@@ -173,6 +174,7 @@ class Mvc extends AbstractPage
 
             if (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams)) {
                 $this->active = true;
+
                 return true;
             }
         }
@@ -187,7 +189,7 @@ class Mvc extends AbstractPage
      * the href based on the page's properties.
      *
      * @see RouteStackInterface
-     * @return string  page href
+     * @return string                    page href
      * @throws Exception\DomainException if no router is set
      */
     public function getHref()
@@ -204,7 +206,7 @@ class Mvc extends AbstractPage
         if (!$router instanceof RouteStackInterface) {
             throw new Exception\DomainException(
                 __METHOD__
-                . ' cannot execute as no Zend\Mvc\Router\RouteStackInterface instance is composed'
+                .' cannot execute as no Zend\Mvc\Router\RouteStackInterface instance is composed'
             );
         }
 
@@ -224,7 +226,6 @@ class Mvc extends AbstractPage
         } else {
             $params = $this->getParams();
         }
-
 
         if (($param = $this->getController()) != null) {
             $params['controller'] = $param;
@@ -267,9 +268,9 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string $action             action name
-     * @return Mvc   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if invalid $action is given
+     * @param  string                             $action action name
+     * @return Mvc                                fluent interface, returns self
+     * @throws Exception\InvalidArgumentException if invalid $action is given
      */
     public function setAction($action)
     {
@@ -281,6 +282,7 @@ class Mvc extends AbstractPage
 
         $this->action    = $action;
         $this->hrefCache = null;
+
         return $this;
     }
 
@@ -289,7 +291,7 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @return string|null  action name
+     * @return string|null action name
      */
     public function getAction()
     {
@@ -301,9 +303,9 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string|null $controller    controller name
-     * @return Mvc   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if invalid controller name is given
+     * @param  string|null                        $controller controller name
+     * @return Mvc                                fluent interface, returns self
+     * @throws Exception\InvalidArgumentException if invalid controller name is given
      */
     public function setController($controller)
     {
@@ -315,6 +317,7 @@ class Mvc extends AbstractPage
 
         $this->controller = $controller;
         $this->hrefCache  = null;
+
         return $this;
     }
 
@@ -323,7 +326,7 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @return string|null  controller name or null
+     * @return string|null controller name or null
      */
     public function getController()
     {
@@ -334,13 +337,14 @@ class Mvc extends AbstractPage
      * Sets URL query part to use when assembling URL
      *
      * @see getHref()
-     * @param  array|string|null $query    URL query part
-     * @return self   fluent interface, returns self
+     * @param  array|string|null $query URL query part
+     * @return self              fluent interface, returns self
      */
     public function setQuery($query)
     {
         $this->query      = $query;
         $this->hrefCache  = null;
+
         return $this;
     }
 
@@ -349,7 +353,7 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @return array|string|null  URL query part (as an array or string) or null
+     * @return array|string|null URL query part (as an array or string) or null
      */
     public function getQuery()
     {
@@ -362,12 +366,13 @@ class Mvc extends AbstractPage
      * @see getHref()
      * @param  array|null $params [optional] page params. Default is null
      *                            which sets no params.
-     * @return Mvc  fluent interface, returns self
+     * @return Mvc        fluent interface, returns self
      */
     public function setParams(array $params = null)
     {
         $this->params = empty($params) ? array() : $params;
         $this->hrefCache = null;
+
         return $this;
     }
 
@@ -376,7 +381,7 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @return array  page params
+     * @return array page params
      */
     public function getParams()
     {
@@ -388,9 +393,9 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string $route              route name to use when assembling URL
-     * @return Mvc   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if invalid $route is given
+     * @param  string                             $route route name to use when assembling URL
+     * @return Mvc                                fluent interface, returns self
+     * @throws Exception\InvalidArgumentException if invalid $route is given
      */
     public function setRoute($route)
     {
@@ -402,6 +407,7 @@ class Mvc extends AbstractPage
 
         $this->route     = $route;
         $this->hrefCache = null;
+
         return $this;
     }
 
@@ -410,7 +416,7 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @return string  route name
+     * @return string route name
      */
     public function getRoute()
     {
@@ -431,11 +437,12 @@ class Mvc extends AbstractPage
      * Set route match object from which parameters will be retrieved
      *
      * @param  RouteMatch $matches
-     * @return Mvc fluent interface, returns self
+     * @return Mvc        fluent interface, returns self
      */
     public function setRouteMatch(RouteMatch $matches)
     {
         $this->routeMatch = $matches;
+
         return $this;
     }
 
@@ -453,13 +460,14 @@ class Mvc extends AbstractPage
      * Set whether the page should use route match params for assembling link uri
      *
      * @see getHref()
-     * @param bool $useRouteMatch [optional]
+     * @param  bool $useRouteMatch [optional]
      * @return Mvc
      */
     public function setUseRouteMatch($useRouteMatch = true)
     {
         $this->useRouteMatch = (bool) $useRouteMatch;
         $this->hrefCache = null;
+
         return $this;
     }
 
@@ -479,11 +487,12 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  RouteStackInterface $router Router
-     * @return Mvc    fluent interface, returns self
+     * @return Mvc                 fluent interface, returns self
      */
     public function setRouter(RouteStackInterface $router)
     {
         $this->router = $router;
+
         return $this;
     }
 
@@ -512,7 +521,7 @@ class Mvc extends AbstractPage
     /**
      * Set default route name
      *
-     * @param string $route
+     * @param  string $route
      * @return void
      */
     public static function setDefaultRoute($route)
@@ -535,7 +544,7 @@ class Mvc extends AbstractPage
     /**
      * Returns an array representation of the page
      *
-     * @return array  associative array containing all page properties
+     * @return array associative array containing all page properties
      */
     public function toArray()
     {

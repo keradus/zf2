@@ -30,7 +30,7 @@ class SeparatorToCamelCase extends AbstractSeparator
 
         if (StringUtils::hasPcreUnicodeSupport()) {
             $patterns = array(
-                '#(' . $pregQuotedSeparator.')(\P{Z}{1})#u',
+                '#('.$pregQuotedSeparator.')(\P{Z}{1})#u',
                 '#(^\P{Z}{1})#u',
             );
             if (!extension_loaded('mbstring')) {
@@ -54,7 +54,7 @@ class SeparatorToCamelCase extends AbstractSeparator
             }
         } else {
             $patterns = array(
-                '#(' . $pregQuotedSeparator.')([\S]{1})#',
+                '#('.$pregQuotedSeparator.')([\S]{1})#',
                 '#(^[\S]{1})#',
             );
             $replacements = array(
@@ -71,6 +71,7 @@ class SeparatorToCamelCase extends AbstractSeparator
         foreach ($patterns as $index => $pattern) {
             $filtered = preg_replace_callback($pattern, $replacements[$index], $filtered);
         }
+
         return $filtered;
     }
 }

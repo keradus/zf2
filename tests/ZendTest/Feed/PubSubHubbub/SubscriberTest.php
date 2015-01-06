@@ -29,9 +29,9 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $client = new HttpClient;
+        $client = new HttpClient();
         PubSubHubbub::setHttpClient($client);
-        $this->subscriber = new Subscriber;
+        $this->subscriber = new Subscriber();
         $this->adapter = $this->_getCleanMock(
             '\Zend\Db\Adapter\Adapter'
         );
@@ -42,7 +42,6 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->adapter));
     }
 
-
     public function testAddsHubServerUrl()
     {
         $this->subscriber->addHubUrl('http://www.example.com/hub');
@@ -52,31 +51,31 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
     public function testAddsHubServerUrlsFromArray()
     {
         $this->subscriber->addHubUrls(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ));
         $this->assertEquals(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ), $this->subscriber->getHubUrls());
     }
 
     public function testAddsHubServerUrlsFromArrayUsingSetOptions()
     {
         $this->subscriber->setOptions(array('hubUrls' => array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         )));
         $this->assertEquals(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ), $this->subscriber->getHubUrls());
     }
 
     public function testRemovesHubServerUrl()
     {
         $this->subscriber->addHubUrls(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ));
         $this->subscriber->removeHubUrl('http://www.example.com/hub');
         $this->assertEquals(array(
-            1 => 'http://www.example.com/hub2'
+            1 => 'http://www.example.com/hub2',
         ), $this->subscriber->getHubUrls());
     }
 
@@ -84,10 +83,10 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
     {
         $this->subscriber->addHubUrls(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2',
-            'http://www.example.com/hub'
+            'http://www.example.com/hub',
         ));
         $this->assertEquals(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ), $this->subscriber->getHubUrls());
     }
 
@@ -112,58 +111,58 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
     public function testAddsParameter()
     {
         $this->subscriber->setParameter('foo', 'bar');
-        $this->assertEquals(array('foo'=>'bar'), $this->subscriber->getParameters());
+        $this->assertEquals(array('foo' => 'bar'), $this->subscriber->getParameters());
     }
 
     public function testAddsParametersFromArray()
     {
         $this->subscriber->setParameters(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ));
         $this->assertEquals(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ), $this->subscriber->getParameters());
     }
 
     public function testAddsParametersFromArrayInSingleMethod()
     {
         $this->subscriber->setParameter(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ));
         $this->assertEquals(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ), $this->subscriber->getParameters());
     }
 
     public function testAddsParametersFromArrayUsingSetOptions()
     {
         $this->subscriber->setOptions(array('parameters' => array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         )));
         $this->assertEquals(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ), $this->subscriber->getParameters());
     }
 
     public function testRemovesParameter()
     {
         $this->subscriber->setParameters(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ));
         $this->subscriber->removeParameter('boo');
         $this->assertEquals(array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         ), $this->subscriber->getParameters());
     }
 
     public function testRemovesParameterIfSetToNull()
     {
         $this->subscriber->setParameters(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ));
         $this->subscriber->setParameter('boo', null);
         $this->assertEquals(array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         ), $this->subscriber->getParameters());
     }
 
@@ -179,13 +178,11 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         $this->subscriber->setTopicUrl('');
     }
 
-
     public function testThrowsExceptionOnSettingNonStringTopicUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
         $this->subscriber->setTopicUrl(123);
     }
-
 
     public function testThrowsExceptionOnSettingInvalidTopicUrl()
     {
@@ -211,13 +208,11 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         $this->subscriber->setCallbackUrl('');
     }
 
-
     public function testThrowsExceptionOnSettingNonStringCallbackUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
         $this->subscriber->setCallbackUrl(123);
     }
-
 
     public function testThrowsExceptionOnSettingInvalidCallbackUrl()
     {
@@ -279,7 +274,6 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         $this->assertThat($this->subscriber->getStorage(), $this->identicalTo($storage));
     }
 
-
     public function testGetStorageThrowsExceptionIfNoneSet()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
@@ -301,9 +295,10 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
             $className,
             $stubMethods,
             array(),
-            str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
+            str_replace('\\', '_', ($className.'_PubsubSubscriberMock_'.uniqid())),
             false
         );
+
         return $mocked;
     }
 }

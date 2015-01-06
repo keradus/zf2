@@ -33,9 +33,9 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
     /**
      * Construct a Zend\Paginator\SerializableLimitIterator
      *
-     * @param Iterator $it Iterator to limit (must be serializable by un-/serialize)
-     * @param int $offset Offset to first element
-     * @param int $count Maximum number of elements to show or -1 for all
+     * @param Iterator $it     Iterator to limit (must be serializable by un-/serialize)
+     * @param int      $offset Offset to first element
+     * @param int      $count  Maximum number of elements to show or -1 for all
      * @see LimitIterator::__construct
      */
     public function __construct(Iterator $it, $offset = 0, $count = -1)
@@ -59,7 +59,7 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
     }
 
     /**
-     * @param string $data representation of the instance
+     * @param  string $data representation of the instance
      * @return void
      */
     public function unserialize($data)
@@ -72,7 +72,7 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
     /**
      * Returns value of the Iterator
      *
-     * @param int $offset
+     * @param  int   $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -81,6 +81,7 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
         $this->seek($offset);
         $current = $this->current();
         $this->seek($currentOffset);
+
         return $current;
     }
 
@@ -88,7 +89,7 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
      * Does nothing
      * Required by the ArrayAccess implementation
      *
-     * @param int $offset
+     * @param int   $offset
      * @param mixed $value
      */
     public function offsetSet($offset, $value)
@@ -98,7 +99,7 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
     /**
      * Determine if a value of Iterator is set and is not NULL
      *
-     * @param int $offset
+     * @param  int  $offset
      * @return bool
      */
     public function offsetExists($offset)
@@ -109,13 +110,16 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
                 $this->seek($offset);
                 $current = $this->current();
                 $this->seek($currentOffset);
+
                 return null !== $current;
             } catch (\OutOfBoundsException $e) {
                 // reset position in case of exception is assigned null
                 $this->seek($currentOffset);
+
                 return false;
             }
         }
+
         return false;
     }
 

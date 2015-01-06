@@ -29,9 +29,9 @@ class MemcachedResourceManager
 
     /**
      * Get servers
-     * @param string $id
+     * @param  string                     $id
      * @throws Exception\RuntimeException
-     * @return array array('host' => <host>, 'port' => <port>, 'weight' => <weight>)
+     * @return array                      array('host' => <host>, 'port' => <port>, 'weight' => <weight>)
      */
     public function getServers($id)
     {
@@ -44,6 +44,7 @@ class MemcachedResourceManager
         if ($resource instanceof MemcachedResource) {
             return $resource->getServerList();
         }
+
         return $resource['servers'];
     }
 
@@ -51,7 +52,7 @@ class MemcachedResourceManager
      * Normalize one server into the following format:
      * array('host' => <host>, 'port' => <port>, 'weight' => <weight>)
      *
-     * @param string|array &$server
+     * @param  string|array                       &$server
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeServer(&$server)
@@ -83,7 +84,7 @@ class MemcachedResourceManager
             // parse server from URI host{:?port}{?weight}
             $server = trim($server);
             if (strpos($server, '://') === false) {
-                $server = 'tcp://' . $server;
+                $server = 'tcp://'.$server;
             }
 
             $server = parse_url($server);
@@ -117,7 +118,7 @@ class MemcachedResourceManager
     /**
      * Check if a resource exists
      *
-     * @param string $id
+     * @param  string $id
      * @return bool
      */
     public function hasResource($id)
@@ -128,7 +129,7 @@ class MemcachedResourceManager
     /**
      * Gets a memcached resource
      *
-     * @param string $id
+     * @param  string                     $id
      * @return MemcachedResource
      * @throws Exception\RuntimeException
      */
@@ -165,15 +166,16 @@ class MemcachedResourceManager
 
         // buffer and return
         $this->resources[$id] = $memc;
+
         return $memc;
     }
 
     /**
      * Set a resource
      *
-     * @param string $id
-     * @param array|Traversable|MemcachedResource $resource
-     * @return MemcachedResourceManager Fluent interface
+     * @param  string                              $id
+     * @param  array|Traversable|MemcachedResource $resource
+     * @return MemcachedResourceManager            Fluent interface
      */
     public function setResource($id, $resource)
     {
@@ -201,34 +203,36 @@ class MemcachedResourceManager
         }
 
         $this->resources[$id] = $resource;
+
         return $this;
     }
 
     /**
      * Remove a resource
      *
-     * @param string $id
+     * @param  string                   $id
      * @return MemcachedResourceManager Fluent interface
      */
     public function removeResource($id)
     {
         unset($this->resources[$id]);
+
         return $this;
     }
 
     /**
      * Set the persistent id
      *
-     * @param string $id
-     * @param string $persistentId
-     * @return MemcachedResourceManager Fluent interface
+     * @param  string                     $id
+     * @param  string                     $persistentId
+     * @return MemcachedResourceManager   Fluent interface
      * @throws Exception\RuntimeException
      */
     public function setPersistentId($id, $persistentId)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'persistent_id' => $persistentId
+                'persistent_id' => $persistentId,
             ));
         }
 
@@ -248,7 +252,7 @@ class MemcachedResourceManager
     /**
      * Get the persistent id
      *
-     * @param string $id
+     * @param  string                     $id
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -282,15 +286,15 @@ class MemcachedResourceManager
     /**
      * Set Libmemcached options
      *
-     * @param string $id
-     * @param array  $libOptions
+     * @param  string                   $id
+     * @param  array                    $libOptions
      * @return MemcachedResourceManager Fluent interface
      */
     public function setLibOptions($id, array $libOptions)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'lib_options' => $libOptions
+                'lib_options' => $libOptions,
             ));
         }
 
@@ -315,7 +319,7 @@ class MemcachedResourceManager
     /**
      * Get Libmemcached options
      *
-     * @param string $id
+     * @param  string                     $id
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -336,17 +340,19 @@ class MemcachedResourceManager
                     $libOptions[$constValue] = $resource->getOption($constValue);
                 }
             }
+
             return $libOptions;
         }
+
         return $resource['lib_options'];
     }
 
     /**
      * Set one Libmemcached option
      *
-     * @param string     $id
-     * @param string|int $key
-     * @param mixed      $value
+     * @param  string                   $id
+     * @param  string|int               $key
+     * @param  mixed                    $value
      * @return MemcachedResourceManager Fluent interface
      */
     public function setLibOption($id, $key, $value)
@@ -357,8 +363,8 @@ class MemcachedResourceManager
     /**
      * Get one Libmemcached option
      *
-     * @param string     $id
-     * @param string|int $key
+     * @param  string                     $id
+     * @param  string|int                 $key
      * @return mixed
      * @throws Exception\RuntimeException
      */
@@ -381,7 +387,7 @@ class MemcachedResourceManager
     /**
      * Normalize libmemcached options
      *
-     * @param array|Traversable $libOptions
+     * @param  array|Traversable                  $libOptions
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeLibOptions(& $libOptions)
@@ -404,14 +410,14 @@ class MemcachedResourceManager
     /**
      * Convert option name into it's constant value
      *
-     * @param string|int $key
+     * @param  string|int                         $key
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeLibOptionKey(& $key)
     {
         // convert option name into it's constant value
         if (is_string($key)) {
-            $const = 'Memcached::OPT_' . str_replace(array(' ', '-'), '_', strtoupper($key));
+            $const = 'Memcached::OPT_'.str_replace(array(' ', '-'), '_', strtoupper($key));
             if (!defined($const)) {
                 throw new Exception\InvalidArgumentException("Unknown libmemcached option '{$key}' ({$const})");
             }
@@ -430,15 +436,15 @@ class MemcachedResourceManager
      * - Assoc: array('host' => <host>[, 'port' => <port>][, 'weight' => <weight>])
      * - List:  array(<host>[, <port>][, <weight>])
      *
-     * @param string       $id
-     * @param string|array $servers
+     * @param  string                   $id
+     * @param  string|array             $servers
      * @return MemcachedResourceManager
      */
     public function setServers($id, $servers)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'servers' => $servers
+                'servers' => $servers,
             ));
         }
 
@@ -461,15 +467,15 @@ class MemcachedResourceManager
     /**
      * Add servers
      *
-     * @param string       $id
-     * @param string|array $servers
+     * @param  string                   $id
+     * @param  string|array             $servers
      * @return MemcachedResourceManager
      */
     public function addServers($id, $servers)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'servers' => $servers
+                'servers' => $servers,
             ));
         }
 
@@ -496,8 +502,8 @@ class MemcachedResourceManager
     /**
      * Add one server
      *
-     * @param string       $id
-     * @param string|array $server
+     * @param  string                   $id
+     * @param  string|array             $server
      * @return MemcachedResourceManager
      */
     public function addServer($id, $server)
@@ -521,7 +527,7 @@ class MemcachedResourceManager
         $result = array();
         foreach ($servers as $server) {
             $this->normalizeServer($server);
-            $result[$server['host'] . ':' . $server['port']] = $server;
+            $result[$server['host'].':'.$server['port']] = $server;
         }
 
         $servers = array_values($result);
@@ -531,17 +537,18 @@ class MemcachedResourceManager
      * Compare 2 normalized server arrays
      * (Compares only the host and the port)
      *
-     * @param array $serverA
-     * @param array $serverB
+     * @param  array $serverA
+     * @param  array $serverB
      * @return int
      */
     protected function compareServers(array $serverA, array $serverB)
     {
-        $keyA = $serverA['host'] . ':' . $serverA['port'];
-        $keyB = $serverB['host'] . ':' . $serverB['port'];
+        $keyA = $serverA['host'].':'.$serverA['port'];
+        $keyB = $serverB['host'].':'.$serverB['port'];
         if ($keyA === $keyB) {
             return 0;
         }
+
         return $keyA > $keyB ? 1 : -1;
     }
 }

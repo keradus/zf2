@@ -48,7 +48,7 @@ class Sendmail implements TransportInterface
     /**
      * Constructor.
      *
-     * @param  null|string|array|Traversable $parameters OPTIONAL (Default: null)
+     * @param null|string|array|Traversable $parameters OPTIONAL (Default: null)
      */
     public function __construct($parameters = null)
     {
@@ -63,7 +63,7 @@ class Sendmail implements TransportInterface
      *
      * Used to populate the additional_parameters argument to mail()
      *
-     * @param  null|string|array|Traversable $parameters
+     * @param  null|string|array|Traversable                 $parameters
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return Sendmail
      */
@@ -71,6 +71,7 @@ class Sendmail implements TransportInterface
     {
         if ($parameters === null || is_string($parameters)) {
             $this->parameters = $parameters;
+
             return $this;
         }
 
@@ -84,11 +85,12 @@ class Sendmail implements TransportInterface
 
         $string = '';
         foreach ($parameters as $param) {
-            $string .= ' ' . $param;
+            $string .= ' '.$param;
         }
         trim($string);
 
         $this->parameters = $string;
+
         return $this;
     }
 
@@ -97,7 +99,7 @@ class Sendmail implements TransportInterface
      *
      * Primarily for testing purposes, but could be used to curry arguments.
      *
-     * @param  callable $callable
+     * @param  callable                                      $callable
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return Sendmail
      */
@@ -111,13 +113,14 @@ class Sendmail implements TransportInterface
             ));
         }
         $this->callable = $callable;
+
         return $this;
     }
 
     /**
      * Send a message
      *
-     * @param  \Zend\Mail\Message $message
+     * @param \Zend\Mail\Message $message
      */
     public function send(Mail\Message $message)
     {
@@ -142,7 +145,7 @@ class Sendmail implements TransportInterface
     /**
      * Prepare recipients list
      *
-     * @param  \Zend\Mail\Message $message
+     * @param  \Zend\Mail\Message                    $message
      * @throws \Zend\Mail\Exception\RuntimeException
      * @return string
      */
@@ -171,6 +174,7 @@ class Sendmail implements TransportInterface
             $addresses[] = $address->getEmail();
         }
         $addresses = implode(', ', $addresses);
+
         return $addresses;
     }
 
@@ -187,6 +191,7 @@ class Sendmail implements TransportInterface
             return;
         }
         $header = $headers->get('subject');
+
         return $header->getFieldValue(HeaderInterface::FORMAT_ENCODED);
     }
 
@@ -206,6 +211,7 @@ class Sendmail implements TransportInterface
         // On windows, lines beginning with a full stop need to be fixed
         $text = $message->getBodyText();
         $text = str_replace("\n.", "\n..", $text);
+
         return $text;
     }
 
@@ -226,6 +232,7 @@ class Sendmail implements TransportInterface
         $headers = clone $message->getHeaders();
         $headers->removeHeader('To');
         $headers->removeHeader('Subject');
+
         return $headers->toString();
     }
 
@@ -248,7 +255,8 @@ class Sendmail implements TransportInterface
 
         $sender = $message->getSender();
         if ($sender instanceof AddressInterface) {
-            $parameters .= ' -f' . $sender->getEmail();
+            $parameters .= ' -f'.$sender->getEmail();
+
             return $parameters;
         }
 
@@ -256,7 +264,8 @@ class Sendmail implements TransportInterface
         if (count($from)) {
             $from->rewind();
             $sender      = $from->current();
-            $parameters .= ' -f' . $sender->getEmail();
+            $parameters .= ' -f'.$sender->getEmail();
+
             return $parameters;
         }
 
@@ -266,10 +275,10 @@ class Sendmail implements TransportInterface
     /**
      * Send mail using PHP native mail()
      *
-     * @param  string $to
-     * @param  string $subject
-     * @param  string $message
-     * @param  string $headers
+     * @param  string                                $to
+     * @param  string                                $subject
+     * @param  string                                $message
+     * @param  string                                $headers
      * @param  $parameters
      * @throws \Zend\Mail\Exception\RuntimeException
      */
@@ -288,23 +297,24 @@ class Sendmail implements TransportInterface
             if (empty($errstr)) {
                 $errstr = 'Unknown error';
             }
-            throw new Exception\RuntimeException('Unable to send mail: ' . $errstr);
+            throw new Exception\RuntimeException('Unable to send mail: '.$errstr);
         }
     }
 
     /**
      * Temporary error handler for PHP native mail().
      *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param string $errline
-     * @param array  $errcontext
-     * @return bool always true
+     * @param  int    $errno
+     * @param  string $errstr
+     * @param  string $errfile
+     * @param  string $errline
+     * @param  array  $errcontext
+     * @return bool   always true
      */
     public function handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {
         $this->errstr = $errstr;
+
         return true;
     }
 
@@ -318,6 +328,7 @@ class Sendmail implements TransportInterface
         if (!$this->operatingSystem) {
             $this->operatingSystem = strtoupper(substr(PHP_OS, 0, 3));
         }
+
         return ($this->operatingSystem == 'WIN');
     }
 }

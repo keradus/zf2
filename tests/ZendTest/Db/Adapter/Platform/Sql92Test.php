@@ -24,7 +24,7 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->platform = new Sql92;
+        $this->platform = new Sql92();
     }
 
     /**

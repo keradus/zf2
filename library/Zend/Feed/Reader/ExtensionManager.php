@@ -24,7 +24,7 @@ class ExtensionManager implements ExtensionManagerInterface
      * Seeds the extension manager with a plugin manager; if none provided,
      * creates an instance.
      *
-     * @param  null|ExtensionPluginManager $pluginManager
+     * @param null|ExtensionPluginManager $pluginManager
      */
     public function __construct(ExtensionPluginManager $pluginManager = null)
     {
@@ -39,8 +39,8 @@ class ExtensionManager implements ExtensionManagerInterface
      *
      * Proxy to composed ExtensionPluginManager instance.
      *
-     * @param  string $method
-     * @param  array $args
+     * @param  string                           $method
+     * @param  array                            $args
      * @return mixed
      * @throws Exception\BadMethodCallException
      */
@@ -53,13 +53,14 @@ class ExtensionManager implements ExtensionManagerInterface
                 __CLASS__
             ));
         }
+
         return call_user_func_array(array($this->pluginManager, $method), $args);
     }
 
     /**
      * Get the named extension
      *
-     * @param  string $name
+     * @param  string                                         $name
      * @return Extension\AbstractEntry|Extension\AbstractFeed
      */
     public function get($name)

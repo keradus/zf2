@@ -61,7 +61,7 @@ class RoutePluginManagerTest extends TestCase
         }
 
         // Add DI abstract factory
-        $di                = new Di;
+        $di                = new Di();
         $diAbstractFactory = new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI);
         $routes->addAbstractFactory($diAbstractFactory);
 
@@ -73,7 +73,7 @@ class RoutePluginManagerTest extends TestCase
         } catch (\Exception $e) {
             $messages = array();
             do {
-                $messages[] = $e->getMessage() . "\n" . $e->getTraceAsString();
+                $messages[] = $e->getMessage()."\n".$e->getTraceAsString();
             } while ($e = $e->getPrevious());
             $this->fail(implode("\n\n", $messages));
         }
@@ -91,7 +91,7 @@ class RoutePluginManagerTest extends TestCase
         }
 
         // Add DI abstract factory
-        $di                = new Di;
+        $di                = new Di();
         $diAbstractFactory = new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI);
         $routes->addAbstractFactory($diAbstractFactory);
 
@@ -105,7 +105,7 @@ class RoutePluginManagerTest extends TestCase
         } catch (\Exception $e) {
             $messages = array();
             do {
-                $messages[] = $e->getMessage() . "\n" . $e->getTraceAsString();
+                $messages[] = $e->getMessage()."\n".$e->getTraceAsString();
             } while ($e = $e->getPrevious());
             $this->fail(implode("\n\n", $messages));
         }

@@ -70,24 +70,24 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filesPath      = __DIR__ . '/TestAsset';
+        $this->_filesPath      = __DIR__.'/TestAsset';
         $this->_basicResolver  = new Http\FileResolver("$this->_filesPath/htbasic.1");
         $this->_digestResolver = new Http\FileResolver("$this->_filesPath/htdigest.3");
         $this->_basicConfig    = array(
             'accept_schemes' => 'basic',
-            'realm'          => 'Test Realm'
+            'realm'          => 'Test Realm',
         );
         $this->_digestConfig   = array(
             'accept_schemes' => 'digest',
             'realm'          => 'Test Realm',
             'digest_domains' => '/ http://localhost/',
-            'nonce_timeout'  => 300
+            'nonce_timeout'  => 300,
         );
         $this->_bothConfig     = array(
             'accept_schemes' => 'basic digest',
             'realm'          => 'Test Realm',
             'digest_domains' => '/ http://localhost/',
-            'nonce_timeout'  => 300
+            'nonce_timeout'  => 300,
         );
     }
 
@@ -108,26 +108,26 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $badConfigs = array(
             'bad1' => array(
                 'auth_type' => 'bogus',
-                'realm'     => 'Test Realm'
+                'realm'     => 'Test Realm',
             ),
             'bad2' => array(
                 'auth_type'      => 'digest',
                 'realm'          => 'Bad: "Chars"'."\n",
                 'digest_domains' => '/ /admin',
-                'nonce_timeout'  => 300
+                'nonce_timeout'  => 300,
             ),
             'bad3' => array(
                 'auth_type'      => 'digest',
                 'realm'          => 'Test Realm',
                 'digest_domains' => 'no"quotes'."\tor tabs",
-                'nonce_timeout'  => 300
+                'nonce_timeout'  => 300,
             ),
             'bad4' => array(
                 'auth_type'      => 'digest',
                 'realm'          => 'Test Realm',
                 'digest_domains' => '/ /admin',
-                'nonce_timeout'  => 'junk'
-            )
+                'nonce_timeout'  => 'junk',
+            ),
         );
 
         foreach ($badConfigs as $cfg) {
@@ -152,8 +152,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             // Good, it threw an exception
         }
 
-        $request  = new Request;
-        $response = new Response;
+        $request  = new Request();
+        $response = new Response();
 
         // If this throws an exception, it fails
         $a->setRequest($request)
@@ -164,11 +164,11 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testNoResolvers()
     {
         // Stub request for Basic auth
-        $headers  = new Headers;
+        $headers  = new Headers();
         $headers->addHeaderLine('Authorization', 'Basic <followed by a space character');
-        $request  = new Request;
+        $request  = new Request();
         $request->setHeaders($headers);
-        $response = new Response;
+        $response = new Response();
 
         // Once for Basic
         try {
@@ -176,16 +176,16 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             $a->setRequest($request)
               ->setResponse($response);
             $result = $a->authenticate();
-            $this->fail("Tried Basic authentication without a resolver.\n" . \Zend\Debug::dump($result->getMessages(), null, false));
+            $this->fail("Tried Basic authentication without a resolver.\n".\Zend\Debug::dump($result->getMessages(), null, false));
         } catch (Adapter\Exception\ExceptionInterface $e) {
             // Good, it threw an exception
             unset($a);
         }
 
         // Stub request for Digest auth, must be reseted (recreated)
-        $headers  = new Headers;
+        $headers  = new Headers();
         $headers->addHeaderLine('Authorization', 'Digest <followed by a space character');
-        $request  = new Request;
+        $request  = new Request();
         $request->setHeaders($headers);
 
         // Once for Digest
@@ -194,7 +194,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             $a->setRequest($request)
               ->setResponse($response);
             $result = $a->authenticate();
-            $this->fail("Tried Digest authentication without a resolver.\n" . \Zend\Debug::dump($result->getMessages(), null, false));
+            $this->fail("Tried Digest authentication without a resolver.\n".\Zend\Debug::dump($result->getMessages(), null, false));
         } catch (Adapter\Exception\ExceptionInterface $e) {
             // Good, it threw an exception
             unset($a);

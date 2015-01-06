@@ -153,7 +153,7 @@ class Filter extends Filter\StringFilter
     /**
      * Creates a simple custom string filter.
      *
-     * @param  string $filter
+     * @param  string              $filter
      * @return Filter\StringFilter
      */
     public static function string($filter)
@@ -164,8 +164,8 @@ class Filter extends Filter\StringFilter
     /**
      * Creates a simple string filter to be used with a mask.
      *
-     * @param string $mask
-     * @param string $value
+     * @param  string            $mask
+     * @param  string            $value
      * @return Filter\MaskFilter
      */
     public static function mask($mask, $value)
@@ -207,7 +207,7 @@ class Filter extends Filter\StringFilter
      */
     private static function createFilterString($attr, $value, $filtertype, $prepend = null, $append = null)
     {
-        $str = $attr . $filtertype;
+        $str = $attr.$filtertype;
         if ($prepend !== null) {
             $str .= $prepend;
         }
@@ -215,6 +215,7 @@ class Filter extends Filter\StringFilter
         if ($append !== null) {
             $str .= $append;
         }
+
         return $str;
     }
 

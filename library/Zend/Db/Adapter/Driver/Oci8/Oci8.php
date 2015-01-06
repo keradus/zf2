@@ -37,8 +37,8 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
 
     /**
      * @param array|Connection|\oci8 $connection
-     * @param null|Statement $statementPrototype
-     * @param null|Result $resultPrototype
+     * @param null|Statement         $statementPrototype
+     * @param null|Result            $resultPrototype
      */
     public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null)
     {
@@ -52,7 +52,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Oci8
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
@@ -64,6 +64,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -91,7 +92,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Register statement prototype
      *
-     * @param Statement $statementPrototype
+     * @param  Statement $statementPrototype
      * @return Oci8
      */
     public function registerStatementPrototype(Statement $statementPrototype)
@@ -112,12 +113,13 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Register result prototype
      *
-     * @param Result $resultPrototype
+     * @param  Result $resultPrototype
      * @return Oci8
      */
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
+
         return $this;
     }
 
@@ -159,7 +161,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string $sqlOrResource
+     * @param  string    $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
@@ -172,7 +174,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
                 $statement->setSql($sqlOrResource);
             } elseif ($sqlOrResource !== null) {
                 throw new Exception\InvalidArgumentException(
-                    'Oci8 only accepts an SQL string or an oci8 resource in ' . __FUNCTION__
+                    'Oci8 only accepts an SQL string or an oci8 resource in '.__FUNCTION__
                 );
             }
             if (!$this->connection->isConnected()) {
@@ -180,6 +182,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
             }
             $statement->initialize($this->connection->getResource());
         }
+
         return $statement;
     }
 
@@ -192,6 +195,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue(), $isBuffered);
+
         return $result;
     }
 
@@ -204,13 +208,13 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string $name
-     * @param mixed  $type
+     * @param  string $name
+     * @param  mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)
     {
-        return ':' . $name;
+        return ':'.$name;
     }
 
     /**

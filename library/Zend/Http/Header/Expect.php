@@ -24,7 +24,7 @@ class Expect implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'expect') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Expect string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Expect string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Expect implements HeaderInterface
 
     public function toString()
     {
-        return 'Expect: ' . $this->getFieldValue();
+        return 'Expect: '.$this->getFieldValue();
     }
 }

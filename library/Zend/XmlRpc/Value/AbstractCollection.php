@@ -42,6 +42,7 @@ abstract class AbstractCollection extends AbstractValue
         foreach ($values as $key => $value) {
             $values[$key] = $value->getValue();
         }
+
         return $values;
     }
 }

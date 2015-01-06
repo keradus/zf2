@@ -15,16 +15,16 @@ use Zend\ServiceManager\ServiceManager;
 interface ServiceListenerInterface extends ListenerAggregateInterface
 {
     /**
-     * @param  ServiceManager|string $serviceManager  Service Manager instance or name
-     * @param  string                $key             Configuration key
-     * @param  string                $moduleInterface FQCN as string
-     * @param  string                $method          Method name
+     * @param  ServiceManager|string    $serviceManager  Service Manager instance or name
+     * @param  string                   $key             Configuration key
+     * @param  string                   $moduleInterface FQCN as string
+     * @param  string                   $method          Method name
      * @return ServiceListenerInterface
      */
     public function addServiceManager($serviceManager, $key, $moduleInterface, $method);
 
     /**
-     * @param  array $configuration
+     * @param  array                    $configuration
      * @return ServiceListenerInterface
      */
     public function setDefaultServiceConfig($configuration);

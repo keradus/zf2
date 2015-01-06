@@ -12,7 +12,7 @@ namespace Zend\Feed\Reader\Extension\WellFormedWeb;
 use Zend\Feed\Reader\Extension;
 
 /**
-*/
+ */
 class Entry extends Extension\AbstractEntry
 {
     /**
@@ -27,7 +27,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data[$name];
         }
 
-        $data = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/wfw:' . $name . ')');
+        $data = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/wfw:'.$name.')');
 
         if (!$data) {
             $data = null;

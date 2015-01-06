@@ -38,7 +38,7 @@ class IniTest extends AbstractWriterTestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.ini');
+        $config = $this->reader->fromFile(__DIR__.'/_files/allsections.ini');
 
         $this->writer->toFile($this->getTestAssetFileName(), $config);
 

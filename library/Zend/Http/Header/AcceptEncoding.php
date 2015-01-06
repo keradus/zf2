@@ -37,13 +37,13 @@ class AcceptEncoding extends AbstractAccept
      */
     public function toString()
     {
-        return 'Accept-Encoding: ' . $this->getFieldValue();
+        return 'Accept-Encoding: '.$this->getFieldValue();
     }
 
     /**
      * Add an encoding, with the given priority
      *
-     * @param  string $type
+     * @param  string    $type
      * @param  int|float $priority
      * @return Accept
      */
@@ -66,7 +66,7 @@ class AcceptEncoding extends AbstractAccept
     /**
      * Parse the keys contained in the header line
      *
-     * @param string $fieldValuePart
+     * @param  string                                                         $fieldValuePart
      * @return \Zend\Http\Header\Accept\FieldValuePart\EncodingFieldValuePart
      * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
      */

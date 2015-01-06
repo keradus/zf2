@@ -21,7 +21,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
         Date::setDateFormat(Date::DATE_RFC1123);
     }
 
-
     public function testDateFromStringCreatesValidDateHeader()
     {
         $dateHeader = Date::fromString('Date: Sun, 06 Nov 1994 08:49:37 GMT');
@@ -88,7 +87,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implementation specific tests */
-
     public function testDateReturnsDateTimeObject()
     {
         $dateHeader = new Date();

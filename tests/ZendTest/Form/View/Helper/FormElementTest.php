@@ -28,7 +28,7 @@ class FormElementTest extends TestCase
 
         Doctype::unsetDoctypeRegistry();
 
-        $this->renderer = new PhpRenderer;
+        $this->renderer = new PhpRenderer();
         $helpers = $this->renderer->getHelperPluginManager();
         $config  = new HelperConfig();
         $config->configureServiceManager($helpers);
@@ -86,7 +86,7 @@ class FormElementTest extends TestCase
         $markup  = $this->helper->render($element);
 
         $this->assertContains('<input', $markup);
-        $this->assertContains('type="' . $type . '"', $markup);
+        $this->assertContains('type="'.$type.'"', $markup);
     }
 
     public function getMultiElements()
@@ -125,7 +125,7 @@ class FormElementTest extends TestCase
         $element->setAttribute('value', 'value2');
         $markup  = $this->helper->render($element);
 
-        $this->assertEquals(3, substr_count($markup, '<' . $inputType), $markup);
+        $this->assertEquals(3, substr_count($markup, '<'.$inputType), $markup);
         $this->assertContains($additionalMarkup, $markup);
         if ($type == 'select') {
             $this->assertRegexp('#value="value2"[^>]*?(selected="selected")#', $markup);
@@ -164,7 +164,7 @@ class FormElementTest extends TestCase
         $markup    = $this->helper->render($element);
 
         $this->assertRegexp('#<input[^>]*(type="hidden")#', $markup);
-        $this->assertRegexp('#<input[^>]*(value="' . $hash . '")#', $markup);
+        $this->assertRegexp('#<input[^>]*(value="'.$hash.'")#', $markup);
     }
 
     public function testRendersTextareaAsExpected()

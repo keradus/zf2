@@ -25,7 +25,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
     /**
      * Save subscription to RDMBS
      *
-     * @param array $data
+     * @param  array                                           $data
      * @return bool
      * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
@@ -43,24 +43,26 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
             if (array_key_exists('lease_seconds', $data)
                 && $data['lease_seconds']
             ) {
-                $data['expiration_time'] = $now->add(new DateInterval('PT' . $data['lease_seconds'] . 'S'))
+                $data['expiration_time'] = $now->add(new DateInterval('PT'.$data['lease_seconds'].'S'))
                     ->format('Y-m-d H:i:s');
             }
             $this->db->update(
                 $data,
                 array('id' => $data['id'])
             );
+
             return false;
         }
 
         $this->db->insert($data);
+
         return true;
     }
 
     /**
      * Get subscription by ID/key
      *
-     * @param  string $key
+     * @param  string                                          $key
      * @return array
      * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
@@ -68,19 +70,20 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
     {
         if (empty($key) || !is_string($key)) {
             throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
-                .' of "' . $key . '" must be a non-empty string');
+                .' of "'.$key.'" must be a non-empty string');
         }
         $result = $this->db->select(array('id' => $key));
         if (count($result)) {
             return $result->current()->getArrayCopy();
         }
+
         return false;
     }
 
     /**
      * Determine if a subscription matching the key exists
      *
-     * @param  string $key
+     * @param  string                                          $key
      * @return bool
      * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
@@ -88,19 +91,20 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
     {
         if (empty($key) || !is_string($key)) {
             throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
-                .' of "' . $key . '" must be a non-empty string');
+                .' of "'.$key.'" must be a non-empty string');
         }
         $result = $this->db->select(array('id' => $key));
         if (count($result)) {
             return true;
         }
+
         return false;
     }
 
     /**
      * Delete a subscription
      *
-     * @param string $key
+     * @param  string $key
      * @return bool
      */
     public function deleteSubscription($key)
@@ -110,8 +114,10 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
             $this->db->delete(
                 array('id' => $key)
             );
+
             return true;
         }
+
         return false;
     }
 
@@ -125,18 +131,20 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
         if (null === $this->now) {
             return new DateTime();
         }
+
         return $this->now;
     }
 
     /**
      * Set a DateTime instance for assisting with unit testing
      *
-     * @param DateTime $now
+     * @param  DateTime     $now
      * @return Subscription
      */
     public function setNow(DateTime $now)
     {
         $this->now = $now;
+
         return $this;
     }
 }

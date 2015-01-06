@@ -22,20 +22,20 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This adapter needs the zip extension');
         }
 
-        $this->tmp = sys_get_temp_dir() . DIRECTORY_SEPARATOR . str_replace('\\', '_', __CLASS__);
+        $this->tmp = sys_get_temp_dir().DIRECTORY_SEPARATOR.str_replace('\\', '_', __CLASS__);
 
         $files = array(
-            $this->tmp . '/compressed.zip',
-            $this->tmp . '/zipextracted.txt',
-            $this->tmp . '/zip.tmp',
-            $this->tmp . '/_files/_compress/Compress/First/Second/zipextracted.txt',
-            $this->tmp . '/_files/_compress/Compress/First/Second',
-            $this->tmp . '/_files/_compress/Compress/First/zipextracted.txt',
-            $this->tmp . '/_files/_compress/Compress/First',
-            $this->tmp . '/_files/_compress/Compress/zipextracted.txt',
-            $this->tmp . '/_files/_compress/Compress',
-            $this->tmp . '/_files/_compress/zipextracted.txt',
-            $this->tmp . '/_files/_compress'
+            $this->tmp.'/compressed.zip',
+            $this->tmp.'/zipextracted.txt',
+            $this->tmp.'/zip.tmp',
+            $this->tmp.'/_files/_compress/Compress/First/Second/zipextracted.txt',
+            $this->tmp.'/_files/_compress/Compress/First/Second',
+            $this->tmp.'/_files/_compress/Compress/First/zipextracted.txt',
+            $this->tmp.'/_files/_compress/Compress/First',
+            $this->tmp.'/_files/_compress/Compress/zipextracted.txt',
+            $this->tmp.'/_files/_compress/Compress',
+            $this->tmp.'/_files/_compress/zipextracted.txt',
+            $this->tmp.'/_files/_compress',
         );
 
         foreach ($files as $file) {
@@ -48,28 +48,28 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        if (!file_exists($this->tmp . '/Compress/First/Second')) {
-            mkdir($this->tmp . '/Compress/First/Second', 0777, true);
-            file_put_contents($this->tmp . '/Compress/First/Second/zipextracted.txt', 'compress me');
-            file_put_contents($this->tmp . '/Compress/First/zipextracted.txt', 'compress me');
-            file_put_contents($this->tmp . '/Compress/zipextracted.txt', 'compress me');
+        if (!file_exists($this->tmp.'/Compress/First/Second')) {
+            mkdir($this->tmp.'/Compress/First/Second', 0777, true);
+            file_put_contents($this->tmp.'/Compress/First/Second/zipextracted.txt', 'compress me');
+            file_put_contents($this->tmp.'/Compress/First/zipextracted.txt', 'compress me');
+            file_put_contents($this->tmp.'/Compress/zipextracted.txt', 'compress me');
         }
     }
 
     public function tearDown()
     {
         $files = array(
-            $this->tmp . '/compressed.zip',
-            $this->tmp . '/zipextracted.txt',
-            $this->tmp . '/zip.tmp',
-            $this->tmp . '/_compress/Compress/First/Second/zipextracted.txt',
-            $this->tmp . '/_compress/Compress/First/Second',
-            $this->tmp . '/_compress/Compress/First/zipextracted.txt',
-            $this->tmp . '/_compress/Compress/First',
-            $this->tmp . '/_compress/Compress/zipextracted.txt',
-            $this->tmp . '/_compress/Compress',
-            $this->tmp . '/_compress/zipextracted.txt',
-            $this->tmp . '/_compress'
+            $this->tmp.'/compressed.zip',
+            $this->tmp.'/zipextracted.txt',
+            $this->tmp.'/zip.tmp',
+            $this->tmp.'/_compress/Compress/First/Second/zipextracted.txt',
+            $this->tmp.'/_compress/Compress/First/Second',
+            $this->tmp.'/_compress/Compress/First/zipextracted.txt',
+            $this->tmp.'/_compress/Compress/First',
+            $this->tmp.'/_compress/Compress/zipextracted.txt',
+            $this->tmp.'/_compress/Compress',
+            $this->tmp.'/_compress/zipextracted.txt',
+            $this->tmp.'/_compress',
         );
 
         foreach ($files as $file) {
@@ -82,11 +82,11 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        if (!file_exists($this->tmp . '/Compress/First/Second')) {
-            mkdir($this->tmp . '/Compress/First/Second', 0777, true);
-            file_put_contents($this->tmp . '/Compress/First/Second/zipextracted.txt', 'compress me');
-            file_put_contents($this->tmp . '/Compress/First/zipextracted.txt', 'compress me');
-            file_put_contents($this->tmp . '/Compress/zipextracted.txt', 'compress me');
+        if (!file_exists($this->tmp.'/Compress/First/Second')) {
+            mkdir($this->tmp.'/Compress/First/Second', 0777, true);
+            file_put_contents($this->tmp.'/Compress/First/Second/zipextracted.txt', 'compress me');
+            file_put_contents($this->tmp.'/Compress/First/zipextracted.txt', 'compress me');
+            file_put_contents($this->tmp.'/Compress/zipextracted.txt', 'compress me');
         }
     }
 
@@ -103,17 +103,17 @@ class ZipTest extends \PHPUnit_Framework_TestCase
 
         $filter  = new ZipCompression(
             array(
-                'archive' => $this->tmp . '/compressed.zip',
-                'target'  => $this->tmp . '/zipextracted.txt'
+                'archive' => $this->tmp.'/compressed.zip',
+                'target'  => $this->tmp.'/zipextracted.txt',
             )
         );
 
         $content = $filter->compress('compress me');
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR.'compressed.zip', $content);
 
         $content = $filter->decompress($content);
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR, $content);
-        $content = file_get_contents($this->tmp . '/zipextracted.txt');
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents($this->tmp.'/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }
 
@@ -181,18 +181,18 @@ class ZipTest extends \PHPUnit_Framework_TestCase
 
         $filter  = new ZipCompression(
             array(
-                'archive' => $this->tmp . '/compressed.zip',
-                'target'  => $this->tmp . '/zipextracted.txt'
+                'archive' => $this->tmp.'/compressed.zip',
+                'target'  => $this->tmp.'/zipextracted.txt',
             )
         );
-        file_put_contents($this->tmp . '/zipextracted.txt', 'compress me');
+        file_put_contents($this->tmp.'/zipextracted.txt', 'compress me');
 
-        $content = $filter->compress($this->tmp . '/zipextracted.txt');
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+        $content = $filter->compress($this->tmp.'/zipextracted.txt');
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR.'compressed.zip', $content);
 
         $content = $filter->decompress($content);
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR, $content);
-        $content = file_get_contents($this->tmp . '/zipextracted.txt');
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents($this->tmp.'/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }
 
@@ -209,17 +209,17 @@ class ZipTest extends \PHPUnit_Framework_TestCase
 
         $filter  = new ZipCompression(
             array(
-                'archive' => $this->tmp . '/compressed.zip',
-                'target'  => $this->tmp
+                'archive' => $this->tmp.'/compressed.zip',
+                'target'  => $this->tmp,
             )
         );
 
         $content = $filter->compress('compress me');
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR.'compressed.zip', $content);
 
         $content = $filter->decompress($content);
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR, $content);
-        $content = file_get_contents($this->tmp . '/zip.tmp');
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents($this->tmp.'/zip.tmp');
         $this->assertEquals('compress me', $content);
     }
 
@@ -236,25 +236,25 @@ class ZipTest extends \PHPUnit_Framework_TestCase
 
         $filter  = new ZipCompression(
             array(
-                'archive' => $this->tmp . '/compressed.zip',
-                'target'  => $this->tmp . '/_compress'
+                'archive' => $this->tmp.'/compressed.zip',
+                'target'  => $this->tmp.'/_compress',
             )
         );
-        $content = $filter->compress($this->tmp . '/Compress');
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+        $content = $filter->compress($this->tmp.'/Compress');
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR.'compressed.zip', $content);
 
-        mkdir($this->tmp . DIRECTORY_SEPARATOR . '_compress');
+        mkdir($this->tmp.DIRECTORY_SEPARATOR.'_compress');
         $content = $filter->decompress($content);
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . '_compress'
-                            . DIRECTORY_SEPARATOR, $content);
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR.'_compress'
+                            .DIRECTORY_SEPARATOR, $content);
 
-        $base = $this->tmp . DIRECTORY_SEPARATOR . '_compress' . DIRECTORY_SEPARATOR . 'Compress' . DIRECTORY_SEPARATOR;
+        $base = $this->tmp.DIRECTORY_SEPARATOR.'_compress'.DIRECTORY_SEPARATOR.'Compress'.DIRECTORY_SEPARATOR;
         $this->assertTrue(file_exists($base));
-        $this->assertTrue(file_exists($base . 'zipextracted.txt'));
-        $this->assertTrue(file_exists($base . 'First' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
-        $this->assertTrue(file_exists($base . 'First' . DIRECTORY_SEPARATOR .
-                          'Second' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
-        $content = file_get_contents($this->tmp . '/Compress/zipextracted.txt');
+        $this->assertTrue(file_exists($base.'zipextracted.txt'));
+        $this->assertTrue(file_exists($base.'First'.DIRECTORY_SEPARATOR.'zipextracted.txt'));
+        $this->assertTrue(file_exists($base.'First'.DIRECTORY_SEPARATOR.
+                          'Second'.DIRECTORY_SEPARATOR.'zipextracted.txt'));
+        $content = file_get_contents($this->tmp.'/Compress/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }
 
@@ -277,23 +277,23 @@ class ZipTest extends \PHPUnit_Framework_TestCase
 
         $filter  = new ZipCompression(
             array(
-                'archive' => $this->tmp . '/compressed.zip',
-                'target'  => $this->tmp . '/_compress'
+                'archive' => $this->tmp.'/compressed.zip',
+                'target'  => $this->tmp.'/_compress',
             )
         );
 
         $content = $filter->compress('compress me');
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR.'compressed.zip', $content);
 
         $filter  = new ZipCompression(
             array(
-                'archive' => $this->tmp . '/compressed.zip',
-                'target'  => $this->tmp . '/_compress'
+                'archive' => $this->tmp.'/compressed.zip',
+                'target'  => $this->tmp.'/_compress',
             )
         );
         $content = $filter->decompress($content);
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR, $content);
-        $content = file_get_contents($this->tmp . '/_compress');
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents($this->tmp.'/_compress');
         $this->assertEquals('compress me', $content);
     }
 
@@ -310,22 +310,22 @@ class ZipTest extends \PHPUnit_Framework_TestCase
 
         $filter  = new ZipCompression(
             array(
-                'archive' => $this->tmp . '/compressed.zip',
-                'target'  => $this->tmp . '/_compress'
+                'archive' => $this->tmp.'/compressed.zip',
+                'target'  => $this->tmp.'/_compress',
             )
         );
 
         $content = $filter->compress('compress me');
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR.'compressed.zip', $content);
 
         $filter  = new ZipCompression(
             array(
-                'target'  => $this->tmp . '/_compress'
+                'target'  => $this->tmp.'/_compress',
             )
         );
         $content = $filter->decompress($content);
-        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR, $content);
-        $content = file_get_contents($this->tmp . '/_compress');
+        $this->assertEquals($this->tmp.DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents($this->tmp.'/_compress');
         $this->assertEquals('compress me', $content);
     }
 }

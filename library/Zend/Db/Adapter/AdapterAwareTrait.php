@@ -19,7 +19,7 @@ trait AdapterAwareTrait
     /**
      * Set db adapter
      *
-     * @param Adapter $adapter
+     * @param  Adapter $adapter
      * @return mixed
      */
     public function setDbAdapter(Adapter $adapter)

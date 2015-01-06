@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Filter;
 
 use Zend\Filter\BaseName as BaseNameFilter;
@@ -25,7 +26,7 @@ class BaseNameTest extends \PHPUnit_Framework_TestCase
         $filter = new BaseNameFilter();
         $valuesExpected = array(
             '/path/to/filename' => 'filename',
-            '/path/to/filename.ext' => 'filename.ext'
+            '/path/to/filename.ext' => 'filename.ext',
         );
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
@@ -39,8 +40,8 @@ class BaseNameTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 '/path/to/filename',
-                '/path/to/filename.ext'
-            ))
+                '/path/to/filename.ext',
+            )),
         );
     }
 

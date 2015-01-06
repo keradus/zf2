@@ -44,5 +44,5 @@ class ProxyAuthenticateTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Proxy-Authenticate: xxx', $proxyAuthenticateHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

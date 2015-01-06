@@ -94,7 +94,7 @@ class LocatorRegistrationListener extends AbstractListener implements
      *
      * @TODO: Check the application / locator / etc a bit better to make sure
      * the env looks how we're expecting it to?
-     * @param Event $e
+     * @param  Event $e
      * @return void
      */
     public function onBootstrap(Event $e)
@@ -117,6 +117,7 @@ class LocatorRegistrationListener extends AbstractListener implements
     {
         $this->callbacks[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
         $this->callbacks[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModules'), -1000);
+
         return $this;
     }
 

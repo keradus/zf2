@@ -33,9 +33,9 @@ class Imap
     /**
      * Public constructor
      *
-     * @param  string   $host  hostname or IP address of IMAP server, if given connect() is called
-     * @param  int|null $port  port of IMAP server, null for default (143 or 993 for ssl)
-     * @param  bool     $ssl   use ssl? 'SSL', 'TLS' or false
+     * @param  string                                           $host hostname or IP address of IMAP server, if given connect() is called
+     * @param  int|null                                         $port port of IMAP server, null for default (143 or 993 for ssl)
+     * @param  bool                                             $ssl  use ssl? 'SSL', 'TLS' or false
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function __construct($host = '', $port = null, $ssl = false)
@@ -56,11 +56,11 @@ class Imap
     /**
      * Open connection to IMAP server
      *
-     * @param  string      $host  hostname or IP address of IMAP server
-     * @param  int|null    $port  of IMAP server, default is 143 (993 for ssl)
-     * @param  string|bool $ssl   use 'SSL', 'TLS' or false
+     * @param  string                     $host hostname or IP address of IMAP server
+     * @param  int|null                   $port of IMAP server, default is 143 (993 for ssl)
+     * @param  string|bool                $ssl  use 'SSL', 'TLS' or false
      * @throws Exception\RuntimeException
-     * @return string welcome message
+     * @return string                     welcome message
      */
     public function connect($host, $port = null, $ssl = false)
     {
@@ -72,7 +72,7 @@ class Imap
 
         switch ($ssl) {
             case 'ssl':
-                $host = 'ssl://' . $host;
+                $host = 'ssl://'.$host;
                 if (!$port) {
                     $port = 993;
                 }
@@ -113,7 +113,7 @@ class Imap
      * get the next line from socket with error checking, but nothing else
      *
      * @throws Exception\RuntimeException
-     * @return string next line
+     * @return string                     next line
      */
     protected function _nextLine()
     {
@@ -130,11 +130,12 @@ class Imap
      * feedback so we can quickly check if we can go on.
      *
      * @param  string $start the first bytes we assume to be in the next line
-     * @return bool line starts with $start
+     * @return bool   line starts with $start
      */
     protected function _assumedNextLine($start)
     {
         $line = $this->_nextLine();
+
         return strpos($line, $start) === 0;
     }
 
@@ -158,7 +159,7 @@ class Imap
      * split a given line in tokens. a token is literal of any form or a list
      *
      * @param  string $line line to decode
-     * @return array tokens, literals are returned as string, lists as array
+     * @return array  tokens, literals are returned as string, lists as array
      */
     protected function _decodeLine($line)
     {
@@ -180,7 +181,7 @@ class Imap
             // TODO: add handling of '[' and ']' to parser for easier handling of response text
         */
         //  replace any trailing <NL> including spaces with a single space
-        $line = rtrim($line) . ' ';
+        $line = rtrim($line).' ';
         while (($pos = strpos($line, ' ')) !== false) {
             $token = substr($line, 0, $pos);
             while ($token[0] == '(') {
@@ -211,7 +212,7 @@ class Imap
                         $line .= $this->_nextLine();
                     }
                     $tokens[] = $token;
-                    $line = trim($line) . ' ';
+                    $line = trim($line).' ';
                     continue;
                 }
             }
@@ -252,12 +253,12 @@ class Imap
      * read a response "line" (could also be more than one real line if response has {..}<NL>)
      * and do a simple decode
      *
-     * @param  array|string  $tokens    decoded tokens are returned by reference, if $dontParse
-     *                                  is true the unparsed line is returned here
-     * @param  string        $wantedTag check for this tag for response code. Default '*' is
-     *                                  continuation tag.
-     * @param  bool          $dontParse if true only the unparsed line is returned $tokens
-     * @return bool if returned tag matches wanted tag
+     * @param  array|string $tokens    decoded tokens are returned by reference, if $dontParse
+     *                                 is true the unparsed line is returned here
+     * @param  string       $wantedTag check for this tag for response code. Default '*' is
+     *                                 continuation tag.
+     * @param  bool         $dontParse if true only the unparsed line is returned $tokens
+     * @return bool         if returned tag matches wanted tag
      */
     public function readLine(&$tokens = array(), $wantedTag = '*', $dontParse = false)
     {
@@ -276,9 +277,9 @@ class Imap
     /**
      * read all lines of response until given tag is found (last line of response)
      *
-     * @param  string       $tag       the tag of your request
-     * @param  bool         $dontParse if true every line is returned unparsed instead of
-     *                                 the decoded tokens
+     * @param  string          $tag       the tag of your request
+     * @param  bool            $dontParse if true every line is returned unparsed instead of
+     *                                    the decoded tokens
      * @return null|bool|array tokens if success, false if error, null if bad request
      */
     public function readResponse($tag, $dontParse = false)
@@ -299,29 +300,30 @@ class Imap
         } elseif ($tokens[0] == 'NO') {
             return false;
         }
+
         return;
     }
 
     /**
      * send a request
      *
-     * @param  string $command your request command
-     * @param  array  $tokens  additional parameters to command, use escapeString() to prepare
-     * @param  string $tag     provide a tag otherwise an autogenerated is returned
+     * @param  string                     $command your request command
+     * @param  array                      $tokens  additional parameters to command, use escapeString() to prepare
+     * @param  string                     $tag     provide a tag otherwise an autogenerated is returned
      * @throws Exception\RuntimeException
      */
     public function sendRequest($command, $tokens = array(), &$tag = null)
     {
         if (!$tag) {
             ++$this->tagCount;
-            $tag = 'TAG' . $this->tagCount;
+            $tag = 'TAG'.$this->tagCount;
         }
 
-        $line = $tag . ' ' . $command;
+        $line = $tag.' '.$command;
 
         foreach ($tokens as $token) {
             if (is_array($token)) {
-                if (fwrite($this->socket, $line . ' ' . $token[0] . "\r\n") === false) {
+                if (fwrite($this->socket, $line.' '.$token[0]."\r\n") === false) {
                     throw new Exception\RuntimeException('cannot write - connection closed?');
                 }
                 if (!$this->_assumedNextLine('+ ')) {
@@ -329,11 +331,11 @@ class Imap
                 }
                 $line = $token[1];
             } else {
-                $line .= ' ' . $token;
+                $line .= ' '.$token;
             }
         }
 
-        if (fwrite($this->socket, $line . "\r\n") === false) {
+        if (fwrite($this->socket, $line."\r\n") === false) {
             throw new Exception\RuntimeException('cannot write - connection closed?');
         }
     }
@@ -344,7 +346,7 @@ class Imap
      * @param  string $command   command as in sendRequest()
      * @param  array  $tokens    parameters as in sendRequest()
      * @param  bool   $dontParse if true unparsed lines are returned instead of tokens
-     * @return mixed response as in readResponse()
+     * @return mixed  response as in readResponse()
      */
     public function requestAndResponse($command, $tokens = array(), $dontParse = false)
     {
@@ -360,28 +362,29 @@ class Imap
      *
      * @param  string|array $string the literal/-s
      * @return string|array escape literals, literals with newline ar returned
-     *                      as array('{size}', 'string');
+     *                             as array('{size}', 'string');
      */
     public function escapeString($string)
     {
         if (func_num_args() < 2) {
             if (strpos($string, "\n") !== false) {
-                return array('{' . strlen($string) . '}', $string);
+                return array('{'.strlen($string).'}', $string);
             } else {
-                return '"' . str_replace(array('\\', '"'), array('\\\\', '\\"'), $string) . '"';
+                return '"'.str_replace(array('\\', '"'), array('\\\\', '\\"'), $string).'"';
             }
         }
         $result = array();
         foreach (func_get_args() as $string) {
             $result[] = $this->escapeString($string);
         }
+
         return $result;
     }
 
     /**
      * escape a list with literals or lists
      *
-     * @param  array $list list with literals or lists as PHP array
+     * @param  array  $list list with literals or lists as PHP array
      * @return string escaped list for imap
      */
     public function escapeList($list)
@@ -394,15 +397,16 @@ class Imap
             }
             $result[] = $this->escapeList($v);
         }
-        return '(' . implode(' ', $result) . ')';
+
+        return '('.implode(' ', $result).')';
     }
 
     /**
      * Login to IMAP server.
      *
-     * @param  string $user      username
-     * @param  string $password  password
-     * @return bool success
+     * @param  string $user     username
+     * @param  string $password password
+     * @return bool   success
      */
     public function login($user, $password)
     {
@@ -426,13 +430,14 @@ class Imap
             fclose($this->socket);
             $this->socket = null;
         }
+
         return $result;
     }
 
     /**
      * Get capabilities from IMAP server
      *
-     * @return array list of capabilities
+     * @return array                                            list of capabilities
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function capability()
@@ -447,6 +452,7 @@ class Imap
         foreach ($response as $line) {
             $capabilities = array_merge($capabilities, $line);
         }
+
         return $capabilities;
     }
 
@@ -454,10 +460,10 @@ class Imap
      * Examine and select have the same response. The common code for both
      * is in this method
      *
-     * @param  string $command can be 'EXAMINE' or 'SELECT' and this is used as command
-     * @param  string $box which folder to change to or examine
-     * @return bool|array false if error, array with returned information
-     *                    otherwise (flags, exists, recent, uidvalidity)
+     * @param  string                                           $command can be 'EXAMINE' or 'SELECT' and this is used as command
+     * @param  string                                           $box     which folder to change to or examine
+     * @return bool|array                                       false if error, array with returned information
+     *                                                                  otherwise (flags, exists, recent, uidvalidity)
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function examineOrSelect($command = 'EXAMINE', $box = 'INBOX')
@@ -489,14 +495,15 @@ class Imap
         if ($tokens[0] != 'OK') {
             return false;
         }
+
         return $result;
     }
 
     /**
      * change folder
      *
-     * @param  string $box change to this folder
-     * @return bool|array see examineOrselect()
+     * @param  string                                           $box change to this folder
+     * @return bool|array                                       see examineOrselect()
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function select($box = 'INBOX')
@@ -507,8 +514,8 @@ class Imap
     /**
      * examine folder
      *
-     * @param  string $box examine this folder
-     * @return bool|array see examineOrselect()
+     * @param  string                                           $box examine this folder
+     * @return bool|array                                       see examineOrselect()
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function examine($box = 'INBOX')
@@ -519,16 +526,16 @@ class Imap
     /**
      * fetch one or more items of one or more messages
      *
-     * @param  string|array $items items to fetch from message(s) as string (if only one item)
-     *                             or array of strings
-     * @param  int|array    $from  message for items or start message if $to !== null
-     * @param  int|null     $to    if null only one message ($from) is fetched, else it's the
-     *                             last message, INF means last message available
+     * @param  string|array               $items items to fetch from message(s) as string (if only one item)
+     *                                           or array of strings
+     * @param  int|array                  $from  message for items or start message if $to !== null
+     * @param  int|null                   $to    if null only one message ($from) is fetched, else it's the
+     *                                           last message, INF means last message available
      * @throws Exception\RuntimeException
-     * @return string|array if only one item of one message is fetched it's returned as string
-     *                      if items of one message are fetched it's returned as (name => value)
-     *                      if one items of messages are fetched it's returned as (msgno => value)
-     *                      if items of messages are fetched it's returned as (msgno => (name => value))
+     * @return string|array               if only one item of one message is fetched it's returned as string
+     *                                          if items of one message are fetched it's returned as (name => value)
+     *                                          if one items of messages are fetched it's returned as (msgno => value)
+     *                                          if items of messages are fetched it's returned as (msgno => (name => value))
      */
     public function fetch($items, $from, $to = null)
     {
@@ -537,9 +544,9 @@ class Imap
         } elseif ($to === null) {
             $set = (int) $from;
         } elseif ($to === INF) {
-            $set = (int) $from . ':*';
+            $set = (int) $from.':*';
         } else {
-            $set = (int) $from . ':' . (int) $to;
+            $set = (int) $from.':'.(int) $to;
         }
 
         $items = (array) $items;
@@ -587,6 +594,7 @@ class Imap
                 // we still need to read all lines
                 while (!$this->readLine($tokens, $tag)) {
                 }
+
                 return $data;
             }
             $result[$tokens[0]] = $data;
@@ -604,9 +612,9 @@ class Imap
      *
      * this method can't be named after the IMAP command 'LIST', as list is a reserved keyword
      *
-     * @param  string $reference mailbox reference for list
-     * @param  string $mailbox   mailbox name match with wildcards
-     * @return array mailboxes that matched $mailbox as array(globalName => array('delim' => .., 'flags' => ..))
+     * @param  string                                           $reference mailbox reference for list
+     * @param  string                                           $mailbox   mailbox name match with wildcards
+     * @return array                                            mailboxes that matched $mailbox as array(globalName => array('delim' => .., 'flags' => ..))
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function listMailbox($reference = '', $mailbox = '*')
@@ -630,20 +638,20 @@ class Imap
     /**
      * set flags
      *
-     * @param  array       $flags  flags to set, add or remove - see $mode
-     * @param  int         $from   message for items or start message if $to !== null
-     * @param  int|null    $to     if null only one message ($from) is fetched, else it's the
-     *                             last message, INF means last message available
-     * @param  string|null $mode   '+' to add flags, '-' to remove flags, everything else sets the flags as given
-     * @param  bool        $silent if false the return values are the new flags for the wanted messages
-     * @return bool|array new flags if $silent is false, else true or false depending on success
+     * @param  array                                            $flags  flags to set, add or remove - see $mode
+     * @param  int                                              $from   message for items or start message if $to !== null
+     * @param  int|null                                         $to     if null only one message ($from) is fetched, else it's the
+     *                                                                  last message, INF means last message available
+     * @param  string|null                                      $mode   '+' to add flags, '-' to remove flags, everything else sets the flags as given
+     * @param  bool                                             $silent if false the return values are the new flags for the wanted messages
+     * @return bool|array                                       new flags if $silent is false, else true or false depending on success
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function store(array $flags, $from, $to = null, $mode = null, $silent = true)
     {
         $item = 'FLAGS';
         if ($mode == '+' || $mode == '-') {
-            $item = $mode . $item;
+            $item = $mode.$item;
         }
         if ($silent) {
             $item .= '.SILENT';
@@ -652,7 +660,7 @@ class Imap
         $flags = $this->escapeList($flags);
         $set = (int) $from;
         if ($to != null) {
-            $set .= ':' . ($to == INF ? '*' : (int) $to);
+            $set .= ':'.($to == INF ? '*' : (int) $to);
         }
 
         $result = $this->requestAndResponse('STORE', array($set, $item, $flags), $silent);
@@ -676,11 +684,11 @@ class Imap
     /**
      * append a new message to given folder
      *
-     * @param string $folder  name of target folder
-     * @param string $message full message content
-     * @param array  $flags   flags for new message
-     * @param string $date    date for new message
-     * @return bool success
+     * @param  string                                           $folder  name of target folder
+     * @param  string                                           $message full message content
+     * @param  array                                            $flags   flags for new message
+     * @param  string                                           $date    date for new message
+     * @return bool                                             success
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function append($folder, $message, $flags = null, $date = null)
@@ -701,17 +709,17 @@ class Imap
     /**
      * copy message set from current folder to other folder
      *
-     * @param string   $folder destination folder
+     * @param  string   $folder destination folder
      * @param $from
-     * @param int|null $to     if null only one message ($from) is fetched, else it's the
-     *                         last message, INF means last message available
-     * @return bool success
+     * @param  int|null $to     if null only one message ($from) is fetched, else it's the
+     *                          last message, INF means last message available
+     * @return bool     success
      */
     public function copy($folder, $from, $to = null)
     {
         $set = (int) $from;
         if ($to != null) {
-            $set .= ':' . ($to == INF ? '*' : (int) $to);
+            $set .= ':'.($to == INF ? '*' : (int) $to);
         }
 
         return $this->requestAndResponse('COPY', array($set, $this->escapeString($folder)), true);
@@ -720,8 +728,8 @@ class Imap
     /**
      * create a new folder (and parent folders if needed)
      *
-     * @param string $folder folder name
-     * @return bool success
+     * @param  string $folder folder name
+     * @return bool   success
      */
     public function create($folder)
     {
@@ -731,9 +739,9 @@ class Imap
     /**
      * rename an existing folder
      *
-     * @param string $old old name
-     * @param string $new new name
-     * @return bool success
+     * @param  string $old old name
+     * @param  string $new new name
+     * @return bool   success
      */
     public function rename($old, $new)
     {
@@ -743,8 +751,8 @@ class Imap
     /**
      * remove a folder
      *
-     * @param string $folder folder name
-     * @return bool success
+     * @param  string $folder folder name
+     * @return bool   success
      */
     public function delete($folder)
     {
@@ -779,7 +787,7 @@ class Imap
      * This method is currently marked as internal as the API might change and is not
      * safe if you don't take precautions.
      *
-     * @param array $params
+     * @param  array $params
      * @return array message ids
      */
     public function search(array $params)
@@ -792,9 +800,11 @@ class Imap
         foreach ($response as $ids) {
             if ($ids[0] == 'SEARCH') {
                 array_shift($ids);
+
                 return $ids;
             }
         }
+
         return array();
     }
 }

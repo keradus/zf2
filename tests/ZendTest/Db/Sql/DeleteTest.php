@@ -27,7 +27,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->delete = new Delete;
+        $this->delete = new Delete();
     }
 
     /**
@@ -96,7 +96,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('AND', $predicates[8][0]);
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[8][1]);
 
-        $where = new Where;
+        $where = new Where();
         $this->delete->where($where);
         $this->assertSame($where, $this->delete->where);
 
@@ -125,7 +125,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $this->delete->prepareStatement($mockAdapter, $mockStatement);
 
         // with TableIdentifier
-        $this->delete = new Delete;
+        $this->delete = new Delete();
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
 
@@ -150,7 +150,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('DELETE FROM "foo" WHERE x = y', $this->delete->getSqlString());
 
         // with TableIdentifier
-        $this->delete = new Delete;
+        $this->delete = new Delete();
         $this->delete->from(new TableIdentifier('foo', 'sch'))
             ->where('x = y');
         $this->assertEquals('DELETE FROM "sch"."foo" WHERE x = y', $this->delete->getSqlString());
@@ -175,8 +175,6 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
             ->where('x = y');
 
         $deleteIgnore->prepareStatement($mockAdapter, $mockStatement);
-
-
 
         // with TableIdentifier
         $deleteIgnore = new DeleteIgnore();

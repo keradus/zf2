@@ -323,12 +323,13 @@ class FormInputTest extends CommonTestCase
             'role'               => 'value',
         ));
         $element->setValue('value');
+
         return $element;
     }
 
     /**
      * @dataProvider validAttributes
-     * @return       void
+     * @return void
      */
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
     {

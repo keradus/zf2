@@ -123,7 +123,7 @@ class FormCollection extends AbstractHelper
         if ($this->shouldWrap) {
             $attributes = $element->getAttributes();
             unset($attributes['name']);
-            $attributesString = count($attributes) ? ' ' . $this->createAttributesString($attributes) : '';
+            $attributesString = count($attributes) ? ' '.$this->createAttributesString($attributes) : '';
 
             $label = $element->getLabel();
             $legend = '';
@@ -192,12 +192,13 @@ class FormCollection extends AbstractHelper
     /**
      * If set to true, collections are automatically wrapped around a fieldset
      *
-     * @param  bool $wrap
+     * @param  bool           $wrap
      * @return FormCollection
      */
     public function setShouldWrap($wrap)
     {
         $this->shouldWrap = (bool) $wrap;
+
         return $this;
     }
 
@@ -214,12 +215,13 @@ class FormCollection extends AbstractHelper
     /**
      * Sets the name of the view helper that should be used to render sub elements.
      *
-     * @param  string $defaultSubHelper The name of the view helper to set.
+     * @param  string         $defaultSubHelper The name of the view helper to set.
      * @return FormCollection
      */
     public function setDefaultElementHelper($defaultSubHelper)
     {
         $this->defaultElementHelper = $defaultSubHelper;
+
         return $this;
     }
 
@@ -242,6 +244,7 @@ class FormCollection extends AbstractHelper
     public function setElementHelper(AbstractHelper $elementHelper)
     {
         $this->elementHelper = $elementHelper;
+
         return $this;
     }
 
@@ -278,6 +281,7 @@ class FormCollection extends AbstractHelper
     public function setFieldsetHelper(AbstractHelper $fieldsetHelper)
     {
         $this->fieldsetHelper = $fieldsetHelper;
+
         return $this;
     }
 

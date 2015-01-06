@@ -263,7 +263,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     {
         $headers = new Mail\Headers();
         $headers->addHeaders(array('Foo' => 'bar', 'Baz' => 'baz'));
-        $this->assertEquals('Foo: bar' . "\r\n" . 'Baz: baz' . "\r\n", $headers->toString());
+        $this->assertEquals('Foo: bar'."\r\n".'Baz: baz'."\r\n", $headers->toString());
     }
 
     public function testHeadersCanBeCastToArray()
@@ -299,10 +299,10 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $headers->addHeader($received2);
         $string  = $headers->toString();
         $expected = array(
-            'Received: ' . $received1->getFieldValue(),
-            'Received: ' . $received2->getFieldValue(),
+            'Received: '.$received1->getFieldValue(),
+            'Received: '.$received2->getFieldValue(),
         );
-        $expected = implode("\r\n", $expected) . "\r\n";
+        $expected = implode("\r\n", $expected)."\r\n";
         $this->assertEquals($expected, $string);
     }
 

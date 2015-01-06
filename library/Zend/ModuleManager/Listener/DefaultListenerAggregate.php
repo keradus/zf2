@@ -33,7 +33,7 @@ class DefaultListenerAggregate extends AbstractListener implements
     /**
      * Attach one or more listeners
      *
-     * @param  EventManagerInterface $events
+     * @param  EventManagerInterface    $events
      * @return DefaultListenerAggregate
      */
     public function attach(EventManagerInterface $events)
@@ -44,18 +44,19 @@ class DefaultListenerAggregate extends AbstractListener implements
 
         // High priority, we assume module autoloading (for FooNamespace\Module classes) should be available before anything else
         $this->listeners[] = $events->attach(new ModuleLoaderListener($options));
-        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener);
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener());
         // High priority, because most other loadModule listeners will assume the module's classes are available via autoloading
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener($options), 9000);
 
         if ($options->getCheckDependencies()) {
-            $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new ModuleDependencyCheckerListener, 8000);
+            $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new ModuleDependencyCheckerListener(), 8000);
         }
 
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new InitTrigger($options));
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener($options));
         $this->listeners[] = $events->attach($locatorRegistrationListener);
         $this->listeners[] = $events->attach($configListener);
+
         return $this;
     }
 
@@ -94,18 +95,20 @@ class DefaultListenerAggregate extends AbstractListener implements
         if (!$this->configListener instanceof ConfigMergerInterface) {
             $this->setConfigListener(new ConfigListener($this->getOptions()));
         }
+
         return $this->configListener;
     }
 
     /**
      * Set the config merger to use.
      *
-     * @param  ConfigMergerInterface $configListener
+     * @param  ConfigMergerInterface    $configListener
      * @return DefaultListenerAggregate
      */
     public function setConfigListener(ConfigMergerInterface $configListener)
     {
         $this->configListener = $configListener;
+
         return $this;
     }
 }

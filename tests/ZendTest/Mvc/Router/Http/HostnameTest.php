@@ -24,37 +24,37 @@ class HostnameTest extends TestCase
             'simple-match' => array(
                 new Hostname(':foo.example.com'),
                 'bar.example.com',
-                array('foo' => 'bar')
+                array('foo' => 'bar'),
             ),
             'no-match-on-different-hostname' => array(
                 new Hostname('foo.example.com'),
                 'bar.example.com',
-                null
+                null,
             ),
             'no-match-with-different-number-of-parts' => array(
                 new Hostname('foo.example.com'),
                 'example.com',
-                null
+                null,
             ),
             'no-match-with-different-number-of-parts-2' => array(
                 new Hostname('example.com'),
                 'foo.example.com',
-                null
+                null,
             ),
             'match-overrides-default' => array(
                 new Hostname(':foo.example.com', array(), array('foo' => 'baz')),
                 'bat.example.com',
-                array('foo' => 'bat')
+                array('foo' => 'bat'),
             ),
             'constraints-prevent-match' => array(
                 new Hostname(':foo.example.com', array('foo' => '\d+')),
                 'bar.example.com',
-                null
+                null,
             ),
             'constraints-allow-match' => array(
                 new Hostname(':foo.example.com', array('foo' => '\d+')),
                 '123.example.com',
-                array('foo' => '123')
+                array('foo' => '123'),
             ),
             'constraints-allow-match-2' => array(
                 new Hostname(
@@ -63,7 +63,7 @@ class HostnameTest extends TestCase
                     array('domain'    => 'mydomain')
                 ),
                 'www.mydomain.com',
-                array('domain' => 'mydomain')
+                array('domain' => 'mydomain'),
             ),
             'optional-subdomain' => array(
                 new Hostname('[:foo.]example.com'),
@@ -160,14 +160,14 @@ class HostnameTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Hostname $route
-     * @param        string   $hostname
-     * @param        array    $params
+     * @param Hostname $route
+     * @param string   $hostname
+     * @param array    $params
      */
     public function testMatching(Hostname $route, $hostname, array $params = null)
     {
         $request = new Request();
-        $request->setUri('http://' . $hostname . '/');
+        $request->setUri('http://'.$hostname.'/');
         $match = $route->match($request);
 
         if ($params === null) {
@@ -183,9 +183,9 @@ class HostnameTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Hostname $route
-     * @param        string   $hostname
-     * @param        array    $params
+     * @param Hostname $route
+     * @param string   $hostname
+     * @param array    $params
      */
     public function testAssembling(Hostname $route, $hostname, array $params = null)
     {
@@ -233,10 +233,10 @@ class HostnameTest extends TestCase
         $tester->testFactory(
             'Zend\Mvc\Router\Http\Hostname',
             array(
-                'route' => 'Missing "route" in options array'
+                'route' => 'Missing "route" in options array',
             ),
             array(
-                'route' => 'example.com'
+                'route' => 'example.com',
             )
         );
     }

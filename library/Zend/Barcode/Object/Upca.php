@@ -36,10 +36,11 @@ class Upca extends Ean13
         $middleCharacter = (5 * $this->barThinWidth) * $this->factor;
         $stopCharacter   = (3 * $this->barThinWidth) * $this->factor;
         $encodedData     = (7 * $this->barThinWidth) * $this->factor * 12;
+
         return $quietZone + $startCharacter + $middleCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
-        /**
+    /**
      * Prepare array to draw barcode
      * @return array
      */
@@ -94,6 +95,7 @@ class Upca extends Ean13
         $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
         $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
         $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+
         return $barcodeTable;
     }
 

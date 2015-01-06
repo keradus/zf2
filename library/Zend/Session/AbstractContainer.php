@@ -536,7 +536,7 @@ abstract class AbstractContainer extends ArrayObject
             $data = array('EXPIRE_KEYS' => $expires);
         } else {
             throw new Exception\InvalidArgumentException(
-                'Unknown data provided as second argument to ' . __METHOD__
+                'Unknown data provided as second argument to '.__METHOD__
             );
         }
 
@@ -587,7 +587,7 @@ abstract class AbstractContainer extends ArrayObject
             $data = array('EXPIRE_HOPS_KEYS' => $expires);
         } else {
             throw new Exception\InvalidArgumentException(
-                'Unknown data provided as second argument to ' . __METHOD__
+                'Unknown data provided as second argument to '.__METHOD__
             );
         }
 

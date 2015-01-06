@@ -44,5 +44,5 @@ class ViaTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Via: xxx', $viaHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

@@ -29,6 +29,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('gd')) {
             $this->markTestSkipped('The GD extension is not available.');
+
             return;
         }
         if (!function_exists("imagepng")) {
@@ -42,7 +43,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             unset($this->word);
         }
 
-        $this->testDir = $this->getTmpDir() . '/ZF_test_images';
+        $this->testDir = $this->getTmpDir().'/ZF_test_images';
         if (!is_dir($this->testDir)) {
             @mkdir($this->testDir);
         }
@@ -50,7 +51,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->captcha = new ImageCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
             'imgDir'       => $this->testDir,
-            'font'         => __DIR__. '/_files/Vera.ttf',
+            'font'         => __DIR__.'/_files/Vera.ttf',
         ));
     }
 
@@ -81,6 +82,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         if (null === $this->tmpDir) {
             $this->tmpDir = sys_get_temp_dir();
         }
+
         return $this->tmpDir;
     }
 
@@ -99,7 +101,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testCaptchaCreatesImage()
     {
         $this->captcha->generate();
-        $this->assertTrue(file_exists($this->testDir . "/" . $this->captcha->getId() . ".png"));
+        $this->assertTrue(file_exists($this->testDir."/".$this->captcha->getId().".png"));
     }
 
     public function testCaptchaSetExpiration()
@@ -112,7 +114,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testCaptchaImageCleanup()
     {
         $this->captcha->generate();
-        $filename = $this->testDir . "/" . $this->captcha->getId() . ".png";
+        $filename = $this->testDir."/".$this->captcha->getId().".png";
         $this->assertTrue(file_exists($filename));
         $this->captcha->setExpiration(1);
         $this->captcha->setGcFreq(1);
@@ -133,11 +135,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Enable TESTS_ZEND_CAPTCHA_GC to run this test');
         }
         $this->captcha->generate();
-        $filename = $this->testDir . "/" . $this->captcha->getId() . ".png";
+        $filename = $this->testDir."/".$this->captcha->getId().".png";
         $this->assertTrue(file_exists($filename));
 
         //Create other cache file
-        $otherFile = $this->testDir . "/zf10006.cache";
+        $otherFile = $this->testDir."/zf10006.cache";
         file_put_contents($otherFile, '');
         $this->assertTrue(file_exists($otherFile));
         $this->captcha->setExpiration(1);
@@ -232,7 +234,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Captcha\Exception\ImageNotLoadableException');
         $captcha = new ImageCaptcha(array(
-            'font'       => __DIR__. '/../Pdf/_fonts/Vera.ttf',
+            'font'       => __DIR__.'/../Pdf/_fonts/Vera.ttf',
             'startImage' => 'file_not_found.png',
         ));
         $captcha->generate();

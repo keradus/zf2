@@ -50,7 +50,7 @@ class Svg extends AbstractRenderer
 
     /**
      * Set height of the result image
-     * @param null|int $value
+     * @param  null|int                      $value
      * @throws Exception\OutOfRangeException
      * @return Svg
      */
@@ -62,6 +62,7 @@ class Svg extends AbstractRenderer
             );
         }
         $this->userHeight = intval($value);
+
         return $this;
     }
 
@@ -78,7 +79,7 @@ class Svg extends AbstractRenderer
     /**
      * Set barcode width
      *
-     * @param mixed $value
+     * @param  mixed                         $value
      * @throws Exception\OutOfRangeException
      * @return self
      */
@@ -90,6 +91,7 @@ class Svg extends AbstractRenderer
             );
         }
         $this->userWidth = intval($value);
+
         return $this;
     }
 
@@ -112,6 +114,7 @@ class Svg extends AbstractRenderer
     public function setResource(DOMDocument $svg)
     {
         $this->resource = $svg;
+
         return $this;
     }
 
@@ -126,9 +129,9 @@ class Svg extends AbstractRenderer
         $barcodeHeight = $this->barcode->getHeight(true);
 
         $backgroundColor = $this->barcode->getBackgroundColor();
-        $imageBackgroundColor = 'rgb(' . implode(', ', array(($backgroundColor & 0xFF0000) >> 16,
+        $imageBackgroundColor = 'rgb('.implode(', ', array(($backgroundColor & 0xFF0000) >> 16,
                                                              ($backgroundColor & 0x00FF00) >> 8,
-                                                             ($backgroundColor & 0x0000FF))) . ')';
+                                                             ($backgroundColor & 0x0000FF), )).')';
 
         $width = $barcodeWidth;
         $height = $barcodeHeight;
@@ -150,7 +153,7 @@ class Svg extends AbstractRenderer
             $this->appendRootElement(
                 'title',
                 array(),
-                "Barcode " . strtoupper($this->barcode->getType()) . " " . $this->barcode->getText()
+                "Barcode ".strtoupper($this->barcode->getType())." ".$this->barcode->getText()
             );
         } else {
             $this->readRootElement();
@@ -163,7 +166,7 @@ class Svg extends AbstractRenderer
             'y' => $this->topOffset,
             'width' => ($this->leftOffset + $barcodeWidth - 1),
             'height' => ($this->topOffset + $barcodeHeight - 1),
-            'fill' => $imageBackgroundColor);
+            'fill' => $imageBackgroundColor, );
 
         if ($this->transparentBackground) {
             $rect['fill-opacity'] = 0;
@@ -183,7 +186,7 @@ class Svg extends AbstractRenderer
      * Append a new DOMElement to the root element
      *
      * @param string $tagName
-     * @param array $attributes
+     * @param array  $attributes
      * @param string $textContent
      */
     protected function appendRootElement($tagName, $attributes = array(), $textContent = null)
@@ -195,9 +198,9 @@ class Svg extends AbstractRenderer
     /**
      * Create DOMElement
      *
-     * @param string $tagName
-     * @param array $attributes
-     * @param string $textContent
+     * @param  string     $tagName
+     * @param  array      $attributes
+     * @param  string     $textContent
      * @return DOMElement
      */
     protected function createElement($tagName, $attributes = array(), $textContent = null)
@@ -209,6 +212,7 @@ class Svg extends AbstractRenderer
         if ($textContent !== null) {
             $element->appendChild(new DOMText((string) $textContent));
         }
+
         return $element;
     }
 
@@ -280,6 +284,7 @@ class Svg extends AbstractRenderer
     {
         parent::draw();
         $this->resource->appendChild($this->rootElement);
+
         return $this->resource;
     }
 
@@ -299,14 +304,14 @@ class Svg extends AbstractRenderer
      * Draw a polygon in the svg resource
      *
      * @param array $points
-     * @param int $color
-     * @param  bool $filled
+     * @param int   $color
+     * @param bool  $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
-        $color = 'rgb(' . implode(', ', array(($color & 0xFF0000) >> 16,
+        $color = 'rgb('.implode(', ', array(($color & 0xFF0000) >> 16,
                                               ($color & 0x00FF00) >> 8,
-                                              ($color & 0x0000FF))) . ')';
+                                              ($color & 0x0000FF), )).')';
         $orientation = $this->getBarcode()->getOrientation();
         $newPoints = array(
             $points[0][0] + $this->leftOffset,
@@ -339,18 +344,18 @@ class Svg extends AbstractRenderer
      * Draw a polygon in the svg resource
      *
      * @param string $text
-     * @param float $size
-     * @param array $position
+     * @param float  $size
+     * @param array  $position
      * @param string $font
-     * @param int $color
+     * @param int    $color
      * @param string $alignment
-     * @param float $orientation
+     * @param float  $orientation
      */
     protected function drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
     {
-        $color = 'rgb(' . implode(', ', array(($color & 0xFF0000) >> 16,
+        $color = 'rgb('.implode(', ', array(($color & 0xFF0000) >> 16,
                                               ($color & 0x00FF00) >> 8,
-                                              ($color & 0x0000FF))) . ')';
+                                              ($color & 0x0000FF), )).')';
         $attributes = array();
         $attributes['x'] = $position[0] + $this->leftOffset;
         $attributes['y'] = $position[1] + $this->topOffset;
@@ -368,13 +373,13 @@ class Svg extends AbstractRenderer
             default:
                 $textAnchor = 'middle';
         }
-        $attributes['style'] = 'text-anchor: ' . $textAnchor;
+        $attributes['style'] = 'text-anchor: '.$textAnchor;
         $attributes['transform'] = 'rotate('
-                                 . (- $orientation)
-                                 . ', '
-                                 . ($position[0] + $this->leftOffset)
-                                 . ', ' . ($position[1] + $this->topOffset)
-                                 . ')';
+                                 .(- $orientation)
+                                 .', '
+                                 .($position[0] + $this->leftOffset)
+                                 .', '.($position[1] + $this->topOffset)
+                                 .')';
         $this->appendRootElement('text', $attributes, $text);
     }
 }

@@ -28,7 +28,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->insert = new Insert;
+        $this->insert = new Insert();
     }
 
     /**
@@ -96,7 +96,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
             'Zend\Db\Sql\Exception\InvalidArgumentException',
             'A Zend\Db\Sql\Select instance cannot be provided with the merge flag'
         );
-        $this->insert->values(new Select, Insert::VALUES_MERGE);
+        $this->insert->values(new Select(), Insert::VALUES_MERGE);
     }
 
     /**
@@ -104,7 +104,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
      */
     public function testValuesThrowsExceptionWhenArrayMergeOverSelect()
     {
-        $this->insert->values(new Select);
+        $this->insert->values(new Select());
 
         $this->setExpectedException(
             'Zend\Db\Sql\Exception\InvalidArgumentException',
@@ -146,7 +146,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert->prepareStatement($mockAdapter, $mockStatement);
 
         // with TableIdentifier
-        $this->insert = new Insert;
+        $this->insert = new Insert();
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
@@ -181,7 +181,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert
                 ->into('foo')
                 ->columns(array('col1'))
-                ->select($select->where(array('x'=>5)))
+                ->select($select->where(array('x' => 5)))
                 ->prepareStatement($mockAdapter, $mockStatement);
 
         $this->assertEquals(
@@ -189,7 +189,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
             $mockStatement->getSql()
         );
         $parameters = $mockStatement->getParameterContainer()->getNamedArray();
-        $this->assertSame(array('subselect1where1'=>5), $parameters);
+        $this->assertSame(array('subselect1where1' => 5), $parameters);
     }
 
     /**
@@ -203,14 +203,14 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString(new TrustingSql92Platform()));
 
         // with TableIdentifier
-        $this->insert = new Insert;
+        $this->insert = new Insert();
         $this->insert->into(new TableIdentifier('foo', 'sch'))
             ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
 
         $this->assertEquals('INSERT INTO "sch"."foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString(new TrustingSql92Platform()));
 
         // with Select
-        $this->insert = new Insert;
+        $this->insert = new Insert();
         $select = new Select();
         $this->insert->into('foo')->select($select->from('bar'));
 

@@ -33,7 +33,7 @@ abstract class AbstractAdapter
      * $options may be either be an array or a Zend\Config object which
      * specifies adapter related options.
      *
-     * @param  array|Traversable $options
+     * @param array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -48,7 +48,7 @@ abstract class AbstractAdapter
     /**
      * Set options via an array
      *
-     * @param  array $options
+     * @param  array           $options
      * @return AbstractAdapter
      */
     public function setOptions(array $options)
@@ -58,7 +58,7 @@ abstract class AbstractAdapter
                 continue;
             }
 
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -70,12 +70,12 @@ abstract class AbstractAdapter
     /**
      * Notify the adapter about an update
      *
-     * @param  float   $current       Current progress value
-     * @param  float   $max           Max progress value
-     * @param  float   $percent       Current percent value
-     * @param  int $timeTaken     Taken time in seconds
-     * @param  int $timeRemaining Remaining time in seconds
-     * @param  string  $text          Status text
+     * @param  float  $current       Current progress value
+     * @param  float  $max           Max progress value
+     * @param  float  $percent       Current percent value
+     * @param  int    $timeTaken     Taken time in seconds
+     * @param  int    $timeRemaining Remaining time in seconds
+     * @param  string $text          Status text
      * @return void
      */
     abstract public function notify($current, $max, $percent, $timeTaken, $timeRemaining, $text);

@@ -57,7 +57,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
 
         $setCookieHeader = SetCookie::fromString(
             'set-cookie: myname=myvalue; Domain=docs.foo.com; Path=/accounts;'
-            . 'Expires=Wed, 13-Jan-2021 22:23:01 GMT; Secure; HttpOnly'
+            .'Expires=Wed, 13-Jan-2021 22:23:01 GMT; Secure; HttpOnly'
         );
         $this->assertInstanceOf('Zend\Http\Header\MultipleHeaderInterface', $setCookieHeader);
         $this->assertEquals('myname', $setCookieHeader->getName());
@@ -73,8 +73,8 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     {
         $setCookieHeaders = SetCookie::fromString(
             'Set-Cookie: myname=myvalue, '
-            . 'someothername=someothervalue; Domain=docs.foo.com; Path=/accounts;'
-            . 'Expires=Wed, 13-Jan-2021 22:23:01 GMT; Secure; HttpOnly'
+            .'someothername=someothervalue; Domain=docs.foo.com; Path=/accounts;'
+            .'Expires=Wed, 13-Jan-2021 22:23:01 GMT; Secure; HttpOnly'
         );
 
         $this->assertInternalType('array', $setCookieHeaders);
@@ -113,8 +113,8 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setHttponly(true);
 
         $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
-            . ' Domain=docs.foo.com; Path=/accounts;'
-            . ' Secure; HttpOnly';
+            .' Domain=docs.foo.com; Path=/accounts;'
+            .' Secure; HttpOnly';
 
         $this->assertEquals($target, $setCookieHeader->getFieldValue());
     }
@@ -135,8 +135,8 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setHttponly(true);
 
         $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
-            . ' Domain=docs.foo.com; Path=/accounts;'
-            . ' Secure; HttpOnly';
+            .' Domain=docs.foo.com; Path=/accounts;'
+            .' Secure; HttpOnly';
 
         $this->assertEquals($target, $setCookieHeader->getFieldValue());
     }
@@ -153,8 +153,8 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setHttponly(true);
 
         $target = 'Set-Cookie: myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
-            . ' Domain=docs.foo.com; Path=/accounts;'
-            . ' Secure; HttpOnly';
+            .' Domain=docs.foo.com; Path=/accounts;'
+            .' Secure; HttpOnly';
 
         $this->assertEquals($target, $setCookieHeader->toString());
     }
@@ -174,15 +174,15 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $headerLine = $setCookieHeader->toStringMultipleHeaders(array($appendCookie));
 
         $target = 'Set-Cookie: myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
-            . ' Domain=docs.foo.com; Path=/accounts;'
-            . ' Secure; HttpOnly, othername=othervalue';
+            .' Domain=docs.foo.com; Path=/accounts;'
+            .' Secure; HttpOnly, othername=othervalue';
         $this->assertNotEquals($target, $headerLine);
 
         $target = 'Set-Cookie: myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
-            . ' Domain=docs.foo.com; Path=/accounts;'
-            . ' Secure; HttpOnly';
-        $target.= "\n";
-        $target.= 'Set-Cookie: othername=othervalue';
+            .' Domain=docs.foo.com; Path=/accounts;'
+            .' Secure; HttpOnly';
+        $target .= "\n";
+        $target .= 'Set-Cookie: othername=othervalue';
         $this->assertEquals($target, $headerLine);
     }
 
@@ -198,18 +198,18 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setHttponly(true);
 
         $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
-            . ' Domain=docs.foo.com; Path=/accounts;'
-            . ' Secure; HttpOnly';
+            .' Domain=docs.foo.com; Path=/accounts;'
+            .' Secure; HttpOnly';
         $this->assertSame($target, $setCookieHeader->getFieldValue()); // attributes set
 
-        $setCookieHeader->setExpires(NULL);
-        $setCookieHeader->setDomain(NULL);
-        $setCookieHeader->setPath(NULL);
-        $setCookieHeader->setSecure(NULL);
-        $setCookieHeader->setHttponly(NULL);
+        $setCookieHeader->setExpires(null);
+        $setCookieHeader->setDomain(null);
+        $setCookieHeader->setPath(null);
+        $setCookieHeader->setSecure(null);
+        $setCookieHeader->setHttponly(null);
         $this->assertSame('myname=myvalue', $setCookieHeader->getFieldValue()); // attributes unset
 
-        $setCookieHeader->setValue(NULL);
+        $setCookieHeader->setValue(null);
         $this->assertSame('myname=', $setCookieHeader->getFieldValue());
         $this->assertNull($setCookieHeader->getValue());
         $this->assertNull($setCookieHeader->getExpires());
@@ -233,8 +233,8 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setHttponly(true);
 
         $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
-            . ' Domain=docs.foo.com; Path=/accounts;'
-            . ' Secure; HttpOnly';
+            .' Domain=docs.foo.com; Path=/accounts;'
+            .' Secure; HttpOnly';
         $this->assertSame($target, $setCookieHeader->getFieldValue()); // not empty
 
         $setCookieHeader->setName(null);
@@ -281,6 +281,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     {
         if (PHP_INT_SIZE !== 4) {
             $this->markTestSkipped('Testing set cookie expiry which is over 2038 is only relevant on 32bit systems');
+
             return;
         }
         $setCookieHeader = new SetCookie('myname', 'myvalue', 'Thu, 01-Jan-2040 00:00:00 GMT');
@@ -337,7 +338,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
         $this->assertEquals($expected, $cookie->getFieldValue());
-        $this->assertEquals($cookie->getFieldName() . ': ' . $expected, $cookie->toString());
+        $this->assertEquals($cookie->getFieldName().': '.$expected, $cookie->toString());
     }
 
     /**
@@ -349,7 +350,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         if (! $cookie instanceof SetCookie) {
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
-        $this->assertEquals($cookie->getFieldName() . ': ' . $expected, $cookie->toString());
+        $this->assertEquals($cookie->getFieldName().': '.$expected, $cookie->toString());
     }
 
     public function testRfcCompatibility()
@@ -375,18 +376,18 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
 
     public function testSetJsonValue()
     {
-        $cookieName ="fooCookie";
-        $jsonData = json_encode(array('foo'=>'bar'));
+        $cookieName = "fooCookie";
+        $jsonData = json_encode(array('foo' => 'bar'));
 
-        $cookie= new SetCookie($cookieName, $jsonData);
+        $cookie = new SetCookie($cookieName, $jsonData);
 
         $regExp = sprintf('#^%s=%s#', $cookieName, urlencode($jsonData));
         $this->assertRegExp($regExp, $cookie->getFieldValue());
 
-        $cookieName ="fooCookie";
-        $jsonData = json_encode(array('foo'=>'bar'));
+        $cookieName = "fooCookie";
+        $jsonData = json_encode(array('foo' => 'bar'));
 
-        $cookie= new SetCookie($cookieName, $jsonData);
+        $cookie = new SetCookie($cookieName, $jsonData);
         $cookie->setDomain('example.org');
 
         $regExp = sprintf('#^%s=%s; Domain=#', $cookieName, urlencode($jsonData));
@@ -413,9 +414,9 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'path'    => '/',
                     'expires' => null,
                     'secure'  => false,
-                    'httponly'=> false
+                    'httponly' => false,
                 ),
-                'justacookie=foo; Domain=example.com'
+                'justacookie=foo; Domain=example.com',
             ),
             array(
                 'Set-Cookie: expires=tomorrow; secure; path=/Space Out/; expires=Tue, 21-Nov-2006 08:33:44 GMT; domain=.example.com',
@@ -426,12 +427,12 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'path'    => '/Space Out/',
                     'expires' => strtotime('Tue, 21-Nov-2006 08:33:44 GMT'),
                     'secure'  => true,
-                    'httponly'=> false
+                    'httponly' => false,
                 ),
-                'expires=tomorrow; Expires=Tue, 21-Nov-2006 08:33:44 GMT; Domain=.example.com; Path=/Space Out/; Secure'
+                'expires=tomorrow; Expires=Tue, 21-Nov-2006 08:33:44 GMT; Domain=.example.com; Path=/Space Out/; Secure',
             ),
             array(
-                'Set-Cookie: domain=unittests; expires=' . gmdate('D, d-M-Y H:i:s', $now) . ' GMT; domain=example.com; path=/some%20value/',
+                'Set-Cookie: domain=unittests; expires='.gmdate('D, d-M-Y H:i:s', $now).' GMT; domain=example.com; path=/some%20value/',
                 array(
                     'name'    => 'domain',
                     'value'   => 'unittests',
@@ -439,12 +440,12 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'path'    => '/some%20value/',
                     'expires' => $now,
                     'secure'  => false,
-                    'httponly'=> false
+                    'httponly' => false,
                 ),
-                'domain=unittests; Expires=' . gmdate('D, d-M-Y H:i:s', $now) . ' GMT; Domain=example.com; Path=/some%20value/'
+                'domain=unittests; Expires='.gmdate('D, d-M-Y H:i:s', $now).' GMT; Domain=example.com; Path=/some%20value/',
             ),
             array(
-                'Set-Cookie: path=indexAction; path=/; domain=.foo.com; expires=' . gmdate('D, d-M-Y H:i:s', $yesterday) . ' GMT',
+                'Set-Cookie: path=indexAction; path=/; domain=.foo.com; expires='.gmdate('D, d-M-Y H:i:s', $yesterday).' GMT',
                 array(
                     'name'    => 'path',
                     'value'   => 'indexAction',
@@ -452,9 +453,9 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'path'    => '/',
                     'expires' => $yesterday,
                     'secure'  => false,
-                    'httponly'=> false
+                    'httponly' => false,
                 ),
-                'path=indexAction; Expires=' . gmdate('D, d-M-Y H:i:s', $yesterday) . ' GMT; Domain=.foo.com; Path=/'
+                'path=indexAction; Expires='.gmdate('D, d-M-Y H:i:s', $yesterday).' GMT; Domain=.foo.com; Path=/',
             ),
 
             array(
@@ -466,9 +467,9 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'path'    => '/',
                     'expires' => null,
                     'secure'  => true,
-                    'httponly'=> false
+                    'httponly' => false,
                 ),
-                'secure=sha1; Domain=some.really.deep.domain.com; Secure'
+                'secure=sha1; Domain=some.really.deep.domain.com; Secure',
             ),
             array(
                 'Set-Cookie: justacookie=foo; domain=example.com; httpOnly',
@@ -479,9 +480,9 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'path'    => '/',
                     'expires' => null,
                     'secure'  => false,
-                    'httponly'=> true
+                    'httponly' => true,
                 ),
-                'justacookie=foo; Domain=example.com; HttpOnly'
+                'justacookie=foo; Domain=example.com; HttpOnly',
             ),
             array(
                 'Set-Cookie: PHPSESSID=123456789+abcd%2Cef; secure; domain=.localdomain; path=/foo/baz; expires=Tue, 21-Nov-2006 08:33:44 GMT;',
@@ -492,9 +493,9 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'path'    => '/foo/baz',
                     'expires' => 'Tue, 21-Nov-2006 08:33:44 GMT',
                     'secure'  => true,
-                    'httponly'=> false
+                    'httponly' => false,
                 ),
-                'PHPSESSID=123456789+abcd%2Cef; Expires=Tue, 21-Nov-2006 08:33:44 GMT; Domain=.localdomain; Path=/foo/baz; Secure'
+                'PHPSESSID=123456789+abcd%2Cef; Expires=Tue, 21-Nov-2006 08:33:44 GMT; Domain=.localdomain; Path=/foo/baz; Secure',
             ),
             array(
                 'Set-Cookie: myname=myvalue; Domain=docs.foo.com; Path=/accounts; Expires=Wed, 13-Jan-2021 22:23:01 GMT; Secure; HttpOnly',
@@ -505,19 +506,19 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'path'    => '/accounts',
                     'expires' => 'Wed, 13-Jan-2021 22:23:01 GMT',
                     'secure'  => true,
-                    'httponly'=> true
+                    'httponly' => true,
                 ),
-                'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT; Domain=docs.foo.com; Path=/accounts; Secure; HttpOnly'
+                'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT; Domain=docs.foo.com; Path=/accounts; Secure; HttpOnly',
             ),
             array(
                 'Set-Cookie:',
                 array(),
-                ''
+                '',
             ),
             array(
                 'Set-Cookie: ',
                 array(),
-                ''
+                '',
             ),
             array(
                 'Set-Cookie: emptykey=    ; Domain=docs.foo.com;',
@@ -526,7 +527,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'value'   => '',
                     'domain'  => 'docs.foo.com',
                 ),
-                'emptykey=; Domain=docs.foo.com'
+                'emptykey=; Domain=docs.foo.com',
             ),
             array(
                 'Set-Cookie: emptykey= ; Domain=docs.foo.com;',
@@ -535,7 +536,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'value'   => '',
                     'domain'  => 'docs.foo.com',
                 ),
-                'emptykey=; Domain=docs.foo.com'
+                'emptykey=; Domain=docs.foo.com',
             ),
             array(
                 'Set-Cookie: emptykey=; Domain=docs.foo.com;',
@@ -544,7 +545,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'value'   => '',
                     'domain'  => 'docs.foo.com',
                 ),
-                'emptykey=; Domain=docs.foo.com'
+                'emptykey=; Domain=docs.foo.com',
             ),
             array(
                 'Set-Cookie: emptykey; Domain=docs.foo.com;',
@@ -553,7 +554,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                     'value'   => '',
                     'domain'  => 'docs.foo.com',
                 ),
-                'emptykey=; Domain=docs.foo.com'
+                'emptykey=; Domain=docs.foo.com',
             ),
         );
     }

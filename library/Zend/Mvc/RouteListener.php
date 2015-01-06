@@ -33,7 +33,7 @@ class RouteListener extends AbstractListenerAggregate
      *
      * Seeds the event with the route match on completion.
      *
-     * @param  MvcEvent $e
+     * @param  MvcEvent               $e
      * @return null|Router\RouteMatch
      */
     public function onRoute($e)
@@ -55,6 +55,7 @@ class RouteListener extends AbstractListenerAggregate
         }
 
         $e->setRouteMatch($routeMatch);
+
         return $routeMatch;
     }
 }

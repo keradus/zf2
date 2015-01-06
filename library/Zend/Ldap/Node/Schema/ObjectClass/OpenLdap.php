@@ -61,6 +61,7 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
         if ($this->inheritedMust === null) {
             $this->resolveInheritance();
         }
+
         return $this->inheritedMust;
     }
 
@@ -74,6 +75,7 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
         if ($this->inheritedMay === null) {
             $this->resolveInheritance();
         }
+
         return $this->inheritedMay;
     }
 

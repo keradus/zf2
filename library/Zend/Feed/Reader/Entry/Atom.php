@@ -25,16 +25,16 @@ class Atom extends AbstractEntry implements EntryInterface
     /**
      * Constructor
      *
-     * @param  DOMElement $entry
-     * @param  int $entryKey
-     * @param  string $type
+     * @param DOMElement $entry
+     * @param int        $entryKey
+     * @param string     $type
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         parent::__construct($entry, $entryKey, $type);
 
         // Everyone by now should know XPath indices start from 1 not 0
-        $this->xpathQuery = '//atom:entry[' . ($this->entryKey + 1) . ']';
+        $this->xpathQuery = '//atom:entry['.($this->entryKey + 1).']';
 
         $manager    = Reader\Reader::getExtensionManager();
         $extensions = array('Atom\Entry', 'Thread\Entry', 'DublinCore\Entry');
@@ -51,7 +51,7 @@ class Atom extends AbstractEntry implements EntryInterface
     /**
      * Get the specified author
      *
-     * @param  int $index
+     * @param  int         $index
      * @return string|null
      */
     public function getAuthor($index = 0)
@@ -194,7 +194,7 @@ class Atom extends AbstractEntry implements EntryInterface
     /**
      * Get a specific link
      *
-     * @param  int $index
+     * @param  int    $index
      * @return string
      */
     public function getLink($index = 0)
@@ -357,7 +357,7 @@ class Atom extends AbstractEntry implements EntryInterface
     /**
      * Set the XPath query (incl. on all Extensions)
      *
-     * @param DOMXPath $xpath
+     * @param  DOMXPath $xpath
      * @return void
      */
     public function setXpath(DOMXPath $xpath)

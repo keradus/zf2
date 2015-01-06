@@ -25,9 +25,9 @@ class Transfer
     /**
      * Creates a file processing handler
      *
-     * @param  string  $adapter   Adapter to use
-     * @param  bool $direction OPTIONAL False means Download, true means upload
-     * @param  array   $options   OPTIONAL Options to set for this adapter
+     * @param  string                             $adapter   Adapter to use
+     * @param  bool                               $direction OPTIONAL False means Download, true means upload
+     * @param  array                              $options   OPTIONAL Options to set for this adapter
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($adapter = 'Http', $direction = false, $options = array())
@@ -38,9 +38,9 @@ class Transfer
     /**
      * Sets a new adapter
      *
-     * @param  string  $adapter   Adapter to use
-     * @param  bool $direction OPTIONAL False means Download, true means upload
-     * @param  array   $options   OPTIONAL Options to set for this adapter
+     * @param  string                             $adapter   Adapter to use
+     * @param  bool                               $direction OPTIONAL False means Download, true means upload
+     * @param  array                              $options   OPTIONAL Options to set for this adapter
      * @return Transfer
      * @throws Exception\InvalidArgumentException
      */
@@ -51,14 +51,14 @@ class Transfer
         }
 
         if ($adapter[0] != '\\') {
-            $adapter = '\Zend\File\Transfer\Adapter\\' . ucfirst($adapter);
+            $adapter = '\Zend\File\Transfer\Adapter\\'.ucfirst($adapter);
         }
 
         $direction = (int) $direction;
         $this->adapter[$direction] = new $adapter($options);
         if (!$this->adapter[$direction] instanceof Adapter\AbstractAdapter) {
             throw new Exception\InvalidArgumentException(
-                'Adapter ' . $adapter . ' does not extend Zend\File\Transfer\Adapter\AbstractAdapter'
+                'Adapter '.$adapter.' does not extend Zend\File\Transfer\Adapter\AbstractAdapter'
             );
         }
 
@@ -68,9 +68,9 @@ class Transfer
     /**
      * Returns all set adapters
      *
-     * @param  bool $direction On null, all directions are returned
-     *                           On false, download direction is returned
-     *                           On true, upload direction is returned
+     * @param  bool                          $direction On null, all directions are returned
+     *                                                  On false, download direction is returned
+     *                                                  On true, upload direction is returned
      * @return array|Adapter\AbstractAdapter
      */
     public function getAdapter($direction = null)
@@ -80,14 +80,15 @@ class Transfer
         }
 
         $direction = (int) $direction;
+
         return $this->adapter[$direction];
     }
 
     /**
      * Calls all methods from the adapter
      *
-     * @param  string $method  Method to call
-     * @param  array  $options Options for this method
+     * @param  string                           $method  Method to call
+     * @param  array                            $options Options for this method
      * @throws Exception\BadMethodCallException if unknown method
      * @return mixed
      */
@@ -103,6 +104,6 @@ class Transfer
             return call_user_func_array(array($this->adapter[$direction], $method), $options);
         }
 
-        throw new Exception\BadMethodCallException("Unknown method '" . $method . "' called!");
+        throw new Exception\BadMethodCallException("Unknown method '".$method."' called!");
     }
 }

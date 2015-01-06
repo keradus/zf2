@@ -14,7 +14,7 @@ interface ConfigInterface
     /**
      * Configure service manager
      *
-     * @param ServiceManager $serviceManager
+     * @param  ServiceManager $serviceManager
      * @return void
      */
     public function configureServiceManager(ServiceManager $serviceManager);

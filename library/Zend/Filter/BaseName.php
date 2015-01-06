@@ -18,7 +18,7 @@ class BaseName extends AbstractFilter
      *
      * If the value provided is non-scalar, the value will remain unfiltered
      *
-     * @param  string $value
+     * @param  string       $value
      * @return string|mixed
      */
     public function filter($value)

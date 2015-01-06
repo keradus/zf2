@@ -40,7 +40,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
      * Creates an instance of the ModuleAutoloader and injects the module paths
      * into it.
      *
-     * @param  ListenerOptions $options
+     * @param ListenerOptions $options
      */
     public function __construct(ListenerOptions $options = null)
     {
@@ -114,7 +114,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
      *
      * Unregisters the ModuleLoader and generates the module class map cache.
      *
-     * @param  ModuleEvent $event
+     * @param ModuleEvent $event
      */
     public function onLoadModulesPost(ModuleEvent $event)
     {

@@ -24,7 +24,7 @@ class PregReplace extends AbstractFilter
      *     'pattern'     => matching pattern
      *     'replacement' => replace with this
      *
-     * @param  array|Traversable|string|null $options
+     * @param array|Traversable|string|null $options
      */
     public function __construct($options = null)
     {
@@ -49,7 +49,7 @@ class PregReplace extends AbstractFilter
      * Set the regex pattern to search for
      * @see preg_replace()
      *
-     * @param  string|array $pattern - same as the first argument of preg_replace
+     * @param  string|array                       $pattern - same as the first argument of preg_replace
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -74,6 +74,7 @@ class PregReplace extends AbstractFilter
         }
 
         $this->options['pattern'] = $pattern;
+
         return $this;
     }
 
@@ -91,7 +92,7 @@ class PregReplace extends AbstractFilter
      * Set the replacement array/string
      * @see preg_replace()
      *
-     * @param  array|string $replacement - same as the second argument of preg_replace
+     * @param  array|string                       $replacement - same as the second argument of preg_replace
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -105,6 +106,7 @@ class PregReplace extends AbstractFilter
             ));
         }
         $this->options['replacement'] = $replacement;
+
         return $this;
     }
 
@@ -121,7 +123,7 @@ class PregReplace extends AbstractFilter
     /**
      * Perform regexp replacement as filter
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @return mixed
      * @throws Exception\RuntimeException
      */
@@ -144,7 +146,7 @@ class PregReplace extends AbstractFilter
     /**
      * Validate a pattern and ensure it does not contain the "e" modifier
      *
-     * @param  string $pattern
+     * @param  string                             $pattern
      * @return bool
      * @throws Exception\InvalidArgumentException
      */

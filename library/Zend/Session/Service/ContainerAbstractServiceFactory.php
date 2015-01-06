@@ -69,6 +69,7 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
         }
 
         $containerName = $this->normalizeContainerName($requestedName);
+
         return array_key_exists($containerName, $config);
     }
 
@@ -81,6 +82,7 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
         $manager = $this->getSessionManager($services);
+
         return new Container($requestedName, $manager);
     }
 
@@ -98,12 +100,14 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 
         if (!$services->has('Config')) {
             $this->config = array();
+
             return $this->config;
         }
 
         $config = $services->get('Config');
         if (!isset($config[$this->configKey]) || !is_array($config[$this->configKey])) {
             $this->config = array();
+
             return $this->config;
         }
 
@@ -118,7 +122,7 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
     /**
      * Retrieve the session manager instance, if any
      *
-     * @param  ServiceLocatorInterface $services
+     * @param  ServiceLocatorInterface             $services
      * @return null|\Zend\Session\ManagerInterface
      */
     protected function getSessionManager(ServiceLocatorInterface $services)

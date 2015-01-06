@@ -43,10 +43,10 @@ final class Version
      * Compare the specified Zend Framework version string $version
      * with the current Zend\Version\Version::VERSION of Zend Framework.
      *
-     * @param  string  $version  A version string (e.g. "0.7.1").
-     * @return int           -1 if the $version is older,
-     *                           0 if they are the same,
-     *                           and +1 if $version is newer.
+     * @param  string $version A version string (e.g. "0.7.1").
+     * @return int    -1 if the $version is older,
+     *                        0 if they are the same,
+     *                        and +1 if $version is newer.
      *
      */
     public static function compareVersion($version)
@@ -87,9 +87,9 @@ final class Version
         if (null === $httpClient && !ini_get('allow_url_fopen')) {
             trigger_error(
                 sprintf(
-                    'allow_url_fopen is not set, and no Zend\Http\Client ' .
-                    'was passed. You must either set allow_url_fopen in ' .
-                    'your PHP configuration or pass a configured ' .
+                    'allow_url_fopen is not set, and no Zend\Http\Client '.
+                    'was passed. You must either set allow_url_fopen in '.
+                    'your PHP configuration or pass a configured '.
                     'Zend\Http\Client as the second argument to %s.',
                     __METHOD__
                 ),

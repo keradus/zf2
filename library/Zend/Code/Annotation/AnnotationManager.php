@@ -69,7 +69,7 @@ class AnnotationManager implements EventManagerAwareInterface
     /**
      * Attach a parser to listen to the createAnnotation event
      *
-     * @param  ParserInterface $parser
+     * @param  ParserInterface   $parser
      * @return AnnotationManager
      */
     public function attach(ParserInterface $parser)
@@ -83,7 +83,7 @@ class AnnotationManager implements EventManagerAwareInterface
     /**
      * Create Annotation
      *
-     * @param  string[] $annotationData
+     * @param  string[]        $annotationData
      * @return false|\stdClass
      */
     public function createAnnotation(array $annotationData)

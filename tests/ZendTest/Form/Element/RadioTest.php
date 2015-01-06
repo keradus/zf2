@@ -40,7 +40,7 @@ class RadioTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\InArray'
+            'Zend\Validator\InArray',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
@@ -56,14 +56,14 @@ class RadioTest extends TestCase
                 array(
                     'foo' => 'My Foo Label',
                     'bar' => 'My Bar Label',
-                )
+                ),
             ),
             array(
                 array('foo', 'bar'),
                 array(
                     0 => array('label' => 'My Foo Label', 'value' => 'foo'),
                     1 => array('label' => 'My Bar Label', 'value' => 'bar'),
-                )
+                ),
             ),
         );
     }

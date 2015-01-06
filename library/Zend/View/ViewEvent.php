@@ -54,48 +54,52 @@ class ViewEvent extends Event
     /**
      * Set the view model
      *
-     * @param  Model $model
+     * @param  Model     $model
      * @return ViewEvent
      */
     public function setModel(Model $model)
     {
         $this->model = $model;
+
         return $this;
     }
 
     /**
      * Set the MVC request object
      *
-     * @param  Request $request
+     * @param  Request   $request
      * @return ViewEvent
      */
     public function setRequest(Request $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
     /**
      * Set the MVC response object
      *
-     * @param  Response $response
+     * @param  Response  $response
      * @return ViewEvent
      */
     public function setResponse(Response $response)
     {
         $this->response = $response;
+
         return $this;
     }
 
     /**
      * Set result of rendering
      *
-     * @param  mixed $result
+     * @param  mixed     $result
      * @return ViewEvent
      */
     public function setResult($result)
     {
         $this->result = $result;
+
         return $this;
     }
 
@@ -112,12 +116,13 @@ class ViewEvent extends Event
     /**
      * Set value for renderer
      *
-     * @param  Renderer $renderer
+     * @param  Renderer  $renderer
      * @return ViewEvent
      */
     public function setRenderer(Renderer $renderer)
     {
         $this->renderer = $renderer;
+
         return $this;
     }
 
@@ -165,7 +170,7 @@ class ViewEvent extends Event
      * Get event parameter
      *
      * @param  string $name
-     * @param  mixed $default
+     * @param  mixed  $default
      * @return mixed
      */
     public function getParam($name, $default = null)
@@ -199,6 +204,7 @@ class ViewEvent extends Event
         $params['request']  = $this->getRequest();
         $params['response'] = $this->getResponse();
         $params['result']   = $this->getResult();
+
         return $params;
     }
 
@@ -217,18 +223,19 @@ class ViewEvent extends Event
 
         foreach (array('model', 'renderer', 'request', 'response', 'result') as $param) {
             if (isset($params[$param])) {
-                $method = 'set' . $param;
+                $method = 'set'.$param;
                 $this->$method($params[$param]);
             }
         }
+
         return $this;
     }
 
     /**
      * Set an individual event parameter
      *
-     * @param  string $name
-     * @param  mixed $value
+     * @param  string    $name
+     * @param  mixed     $value
      * @return ViewEvent
      */
     public function setParam($name, $value)
@@ -253,6 +260,7 @@ class ViewEvent extends Event
                 parent::setParam($name, $value);
                 break;
         }
+
         return $this;
     }
 }

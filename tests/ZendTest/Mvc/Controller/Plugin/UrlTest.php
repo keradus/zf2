@@ -23,7 +23,7 @@ class UrlTest extends TestCase
 {
     public function setUp()
     {
-        $router = new SimpleRouteStack;
+        $router = new SimpleRouteStack();
         $router->addRoute('home', LiteralRoute::factory(array(
             'route'    => '/',
             'defaults' => array(
@@ -34,7 +34,7 @@ class UrlTest extends TestCase
             'type' => 'Zend\Mvc\Router\Http\Segment',
             'options' => array(
                 'route' => '/:controller[/:action]',
-            )
+            ),
         ));
         $this->router = $router;
 
@@ -145,7 +145,7 @@ class UrlTest extends TestCase
 
     public function testRemovesModuleRouteListenerParamsWhenReusingMatchedParameters()
     {
-        $router = new \Zend\Mvc\Router\Http\TreeRouteStack;
+        $router = new \Zend\Mvc\Router\Http\TreeRouteStack();
         $router->addRoute('default', array(
             'type' => 'Zend\Mvc\Router\Http\Segment',
             'options' => array(
@@ -153,23 +153,23 @@ class UrlTest extends TestCase
                 'defaults' => array(
                     ModuleRouteListener::MODULE_NAMESPACE => 'ZendTest\Mvc\Controller\TestAsset',
                     'controller' => 'SampleController',
-                    'action'     => 'Dash'
-                )
+                    'action'     => 'Dash',
+                ),
             ),
             'child_routes' => array(
                 'wildcard' => array(
                     'type'    => 'Zend\Mvc\Router\Http\Wildcard',
                     'options' => array(
                         'param_delimiter'     => '=',
-                        'key_value_delimiter' => '%'
-                    )
-                )
-            )
+                        'key_value_delimiter' => '%',
+                    ),
+                ),
+            ),
         ));
 
         $routeMatch = new RouteMatch(array(
             ModuleRouteListener::MODULE_NAMESPACE => 'ZendTest\Mvc\Controller\TestAsset',
-            'controller' => 'Rainbow'
+            'controller' => 'Rainbow',
         ));
         $routeMatch->setMatchedRouteName('default/wildcard');
 

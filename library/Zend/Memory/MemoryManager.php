@@ -115,7 +115,7 @@ class MemoryManager
          * it should be changed by something else
          * (Ex. backend interface should be extended to provide this functionality)
          */
-        $this->managerId = str_replace('.', '_', uniqid('ZendMemManager', true)) . '_';
+        $this->managerId = str_replace('.', '_', uniqid('ZendMemManager', true)).'_';
     }
 
     /**
@@ -123,7 +123,7 @@ class MemoryManager
      *
      * If cache is not specified, then memory objects are never swapped
      *
-     * @param  CacheStorage $cache
+     * @param CacheStorage $cache
      */
     public function __construct(CacheStorage $cache = null)
     {
@@ -216,7 +216,7 @@ class MemoryManager
     /**
      * Create new Zend\Memory value container
      *
-     * @param string $value
+     * @param  string                       $value
      * @return Container\ContainerInterface
      * @throws Exception\ExceptionInterface
      */
@@ -229,7 +229,7 @@ class MemoryManager
      * Create new Zend\Memory value container, which has value always
      * locked in memory
      *
-     * @param string $value
+     * @param  string                       $value
      * @return Container\ContainerInterface
      * @throws Exception\ExceptionInterface
      */
@@ -241,8 +241,8 @@ class MemoryManager
     /**
      * Create new Zend\Memory object
      *
-     * @param string $value
-     * @param  bool $locked
+     * @param  string                                    $value
+     * @param  bool                                      $locked
      * @return \Zend\Memory\Container\ContainerInterface
      * @throws \Zend\Memory\Exception\ExceptionInterface
      */
@@ -273,8 +273,8 @@ class MemoryManager
      * Used by Memory container destroy() method
      *
      * @internal
-     * @param Container\Movable $container
-     * @param int $id
+     * @param  Container\Movable $container
+     * @param  int               $id
      * @return null
      */
     public function unlink(Container\Movable $container, $id)
@@ -283,6 +283,7 @@ class MemoryManager
             // Drop all object modifications
             $this->lastModified = null;
             unset($this->sizes[$id]);
+
             return;
         }
 
@@ -299,7 +300,7 @@ class MemoryManager
      *
      * @internal
      * @param \Zend\Memory\Container\Movable $container
-     * @param int $id
+     * @param int                            $id
      */
     public function processUpdate(Container\Movable $container, $id)
     {
@@ -386,7 +387,7 @@ class MemoryManager
      * if object is not changed since last swap
      *
      * @param \Zend\Memory\Container\Movable $container
-     * @param int $id
+     * @param int                            $id
      */
     private function swap(Container\Movable $container, $id)
     {
@@ -395,7 +396,7 @@ class MemoryManager
         }
 
         if (!$container->isSwapped()) {
-            $this->cache->setItem($this->managerId . $id, $container->getRef());
+            $this->cache->setItem($this->managerId.$id, $container->getRef());
         }
 
         $this->memorySize -= $this->sizes[$id];
@@ -409,11 +410,11 @@ class MemoryManager
      *
      * @internal
      * @param \Zend\Memory\Container\Movable $container
-     * @param int $id
+     * @param int                            $id
      */
     public function load(Container\Movable $container, $id)
     {
-        $value = $this->cache->getItem($this->managerId . $id);
+        $value = $this->cache->getItem($this->managerId.$id);
 
         // Try to swap other objects if necessary
         // (do not include specified object into check)

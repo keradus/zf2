@@ -23,7 +23,7 @@ class Image extends AbstractRenderer
      */
     protected $allowedImageType = array('png',
         'jpeg',
-        'gif'  );
+        'gif',  );
 
     /**
      * Image format
@@ -64,13 +64,13 @@ class Image extends AbstractRenderer
     /**
      * Constructor
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable        $options
      * @throws RendererCreationException
      */
     public function __construct($options = null)
     {
         if (!function_exists('gd_info')) {
-            throw new RendererCreationException(__CLASS__ . ' requires the GD extension');
+            throw new RendererCreationException(__CLASS__.' requires the GD extension');
         }
 
         parent::__construct($options);
@@ -79,7 +79,7 @@ class Image extends AbstractRenderer
     /**
      * Set height of the result image
      *
-     * @param null|int $value
+     * @param  null|int                      $value
      * @throws Exception\OutOfRangeException
      * @return Image
      */
@@ -91,6 +91,7 @@ class Image extends AbstractRenderer
             );
         }
         $this->userHeight = intval($value);
+
         return $this;
     }
 
@@ -107,7 +108,7 @@ class Image extends AbstractRenderer
     /**
      * Set barcode width
      *
-     * @param mixed $value
+     * @param  mixed                         $value
      * @throws Exception\OutOfRangeException
      * @return self
      */
@@ -119,6 +120,7 @@ class Image extends AbstractRenderer
             );
         }
         $this->userWidth = intval($value);
+
         return $this;
     }
 
@@ -135,7 +137,7 @@ class Image extends AbstractRenderer
     /**
      * Set an image resource to draw the barcode inside
      *
-     * @param resource $image
+     * @param  resource                           $image
      * @return Image
      * @throws Exception\InvalidArgumentException
      */
@@ -147,13 +149,14 @@ class Image extends AbstractRenderer
             );
         }
         $this->resource = $image;
+
         return $this;
     }
 
     /**
      * Set the image type to produce (png, jpeg, gif)
      *
-     * @param string $value
+     * @param  string                             $value
      * @throws Exception\InvalidArgumentException
      * @return Image
      */
@@ -171,6 +174,7 @@ class Image extends AbstractRenderer
         }
 
         $this->imageType = $value;
+
         return $this;
     }
 
@@ -308,8 +312,8 @@ class Image extends AbstractRenderer
     public function render()
     {
         $this->draw();
-        header("Content-Type: image/" . $this->imageType);
-        $functionName = 'image' . $this->imageType;
+        header("Content-Type: image/".$this->imageType);
+        $functionName = 'image'.$this->imageType;
         $functionName($this->resource);
 
         ErrorHandler::start(E_WARNING);
@@ -321,8 +325,8 @@ class Image extends AbstractRenderer
      * Draw a polygon in the image resource
      *
      * @param array $points
-     * @param int $color
-     * @param  bool $filled
+     * @param int   $color
+     * @param bool  $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
@@ -352,13 +356,13 @@ class Image extends AbstractRenderer
     /**
      * Draw a polygon in the image resource
      *
-     * @param string $text
-     * @param float $size
-     * @param array $position
-     * @param string $font
-     * @param int $color
-     * @param string $alignment
-     * @param float $orientation
+     * @param  string                     $text
+     * @param  float                      $size
+     * @param  array                      $position
+     * @param  string                     $font
+     * @param  int                        $color
+     * @param  string                     $alignment
+     * @param  float                      $orientation
      * @throws Exception\RuntimeException
      */
     protected function drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)

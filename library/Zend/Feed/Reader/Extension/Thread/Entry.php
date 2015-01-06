@@ -12,7 +12,7 @@ namespace Zend\Feed\Reader\Extension\Thread;
 use Zend\Feed\Reader\Extension;
 
 /**
-*/
+ */
 class Entry extends Extension\AbstractEntry
 {
     /**
@@ -40,7 +40,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get the entry data specified by name
      *
-     * @param  string $name
+     * @param  string     $name
      * @return mixed|null
      */
     protected function getData($name)
@@ -49,7 +49,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data[$name];
         }
 
-        $data = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/thread10:' . $name . ')');
+        $data = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/thread10:'.$name.')');
 
         if (!$data) {
             $data = null;

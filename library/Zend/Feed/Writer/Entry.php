@@ -13,7 +13,7 @@ use DateTime;
 use Zend\Feed\Uri;
 
 /**
-*/
+ */
 class Entry
 {
     /**
@@ -57,7 +57,7 @@ class Entry
      * 'email' => (string) An optional email
      * 'uri'   => (string) An optional and valid URI
      *
-     * @param array $author
+     * @param  array                              $author
      * @throws Exception\InvalidArgumentException If any value of $author not follow the format.
      * @return Entry
      */
@@ -96,7 +96,7 @@ class Entry
      * Set an array with feed authors
      *
      * @see addAuthor
-     * @param array $authors
+     * @param  array $authors
      * @return Entry
      */
     public function addAuthors(array $authors)
@@ -111,7 +111,7 @@ class Entry
     /**
      * Set the feed character encoding
      *
-     * @param string $encoding
+     * @param  string                             $encoding
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -135,13 +135,14 @@ class Entry
         if (!array_key_exists('encoding', $this->data)) {
             return 'UTF-8';
         }
+
         return $this->data['encoding'];
     }
 
     /**
      * Set the copyright entry
      *
-     * @param string $copyright
+     * @param  string                             $copyright
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -158,7 +159,7 @@ class Entry
     /**
      * Set the entry's content
      *
-     * @param string $content
+     * @param  string                             $content
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -175,7 +176,7 @@ class Entry
     /**
      * Set the feed creation date
      *
-     * @param null|int|DateTime $date
+     * @param  null|int|DateTime                  $date
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -184,7 +185,7 @@ class Entry
         if ($date === null) {
             $date = new DateTime();
         } elseif (is_int($date)) {
-            $date = new DateTime('@' . $date);
+            $date = new DateTime('@'.$date);
         } elseif (!$date instanceof DateTime) {
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp passed as parameter');
         }
@@ -196,7 +197,7 @@ class Entry
     /**
      * Set the feed modification date
      *
-     * @param null|int|DateTime $date
+     * @param  null|int|DateTime                  $date
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -205,7 +206,7 @@ class Entry
         if ($date === null) {
             $date = new DateTime();
         } elseif (is_int($date)) {
-            $date = new DateTime('@' . $date);
+            $date = new DateTime('@'.$date);
         } elseif (!$date instanceof DateTime) {
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp passed as parameter');
         }
@@ -217,7 +218,7 @@ class Entry
     /**
      * Set the feed description
      *
-     * @param string $description
+     * @param  string                             $description
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -234,7 +235,7 @@ class Entry
     /**
      * Set the feed ID
      *
-     * @param string $id
+     * @param  string                             $id
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -251,7 +252,7 @@ class Entry
     /**
      * Set a link to the HTML source of this entry
      *
-     * @param string $link
+     * @param  string                             $link
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -268,7 +269,7 @@ class Entry
     /**
      * Set the number of comments associated with this entry
      *
-     * @param int $count
+     * @param  int                                $count
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -285,7 +286,7 @@ class Entry
     /**
      * Set a link to a HTML page containing comments associated with this entry
      *
-     * @param string $link
+     * @param  string                             $link
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -302,7 +303,7 @@ class Entry
     /**
      * Set a link to an XML feed for any comments associated with this entry
      *
-     * @param array $link
+     * @param  array                              $link
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -313,7 +314,7 @@ class Entry
         }
         if (!isset($link['type']) || !in_array($link['type'], array('atom', 'rss', 'rdf'))) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "type" must be one'
-            . ' of "atom", "rss" or "rdf"');
+            .' of "atom", "rss" or "rdf"');
         }
         if (!isset($this->data['commentFeedLinks'])) {
             $this->data['commentFeedLinks'] = array();
@@ -328,7 +329,7 @@ class Entry
      * Each link is an array with keys "uri" and "type", where type is one of:
      * "atom", "rss" or "rdf".
      *
-     * @param array $links
+     * @param  array $links
      * @return Entry
      */
     public function setCommentFeedLinks(array $links)
@@ -343,7 +344,7 @@ class Entry
     /**
      * Set the feed title
      *
-     * @param string $title
+     * @param  string                             $title
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -367,6 +368,7 @@ class Entry
         if (!array_key_exists('authors', $this->data)) {
             return;
         }
+
         return $this->data['authors'];
     }
 
@@ -380,6 +382,7 @@ class Entry
         if (!array_key_exists('content', $this->data)) {
             return;
         }
+
         return $this->data['content'];
     }
 
@@ -393,6 +396,7 @@ class Entry
         if (!array_key_exists('copyright', $this->data)) {
             return;
         }
+
         return $this->data['copyright'];
     }
 
@@ -406,6 +410,7 @@ class Entry
         if (!array_key_exists('dateCreated', $this->data)) {
             return;
         }
+
         return $this->data['dateCreated'];
     }
 
@@ -419,6 +424,7 @@ class Entry
         if (!array_key_exists('dateModified', $this->data)) {
             return;
         }
+
         return $this->data['dateModified'];
     }
 
@@ -432,6 +438,7 @@ class Entry
         if (!array_key_exists('description', $this->data)) {
             return;
         }
+
         return $this->data['description'];
     }
 
@@ -445,6 +452,7 @@ class Entry
         if (!array_key_exists('id', $this->data)) {
             return;
         }
+
         return $this->data['id'];
     }
 
@@ -458,9 +466,9 @@ class Entry
         if (!array_key_exists('link', $this->data)) {
             return;
         }
+
         return $this->data['link'];
     }
-
 
     /**
      * Get all links
@@ -472,6 +480,7 @@ class Entry
         if (!array_key_exists('links', $this->data)) {
             return;
         }
+
         return $this->data['links'];
     }
 
@@ -485,6 +494,7 @@ class Entry
         if (!array_key_exists('title', $this->data)) {
             return;
         }
+
         return $this->data['title'];
     }
 
@@ -498,6 +508,7 @@ class Entry
         if (!array_key_exists('commentCount', $this->data)) {
             return;
         }
+
         return $this->data['commentCount'];
     }
 
@@ -511,6 +522,7 @@ class Entry
         if (!array_key_exists('commentLink', $this->data)) {
             return;
         }
+
         return $this->data['commentLink'];
     }
 
@@ -525,13 +537,14 @@ class Entry
         if (!array_key_exists('commentFeedLinks', $this->data)) {
             return;
         }
+
         return $this->data['commentFeedLinks'];
     }
 
     /**
      * Add an entry category
      *
-     * @param array $category
+     * @param  array                              $category
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -539,8 +552,8 @@ class Entry
     {
         if (!isset($category['term'])) {
             throw new Exception\InvalidArgumentException('Each category must be an array and '
-            . 'contain at least a "term" element containing the machine '
-            . ' readable category name');
+            .'contain at least a "term" element containing the machine '
+            .' readable category name');
         }
         if (isset($category['scheme'])) {
             if (empty($category['scheme'])
@@ -548,7 +561,7 @@ class Entry
                 || !Uri::factory($category['scheme'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('The Atom scheme or RSS domain of'
-                . ' a category must be a valid URI');
+                .' a category must be a valid URI');
             }
         }
         if (!isset($this->data['categories'])) {
@@ -562,7 +575,7 @@ class Entry
     /**
      * Set an array of entry categories
      *
-     * @param array $categories
+     * @param  array $categories
      * @return Entry
      */
     public function addCategories(array $categories)
@@ -584,6 +597,7 @@ class Entry
         if (!array_key_exists('categories', $this->data)) {
             return;
         }
+
         return $this->data['categories'];
     }
 
@@ -593,7 +607,7 @@ class Entry
      * others must also be provided or RSS rendering (where they are required)
      * will throw an Exception.
      *
-     * @param array $enclosure
+     * @param  array                              $enclosure
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -620,13 +634,14 @@ class Entry
         if (!array_key_exists('enclosure', $this->data)) {
             return;
         }
+
         return $this->data['enclosure'];
     }
 
     /**
      * Unset a specific data point
      *
-     * @param string $name
+     * @param  string $name
      * @return Entry
      */
     public function remove($name)
@@ -651,14 +666,15 @@ class Entry
     /**
      * Return an Extension object with the matching name (postfixed with _Entry)
      *
-     * @param string $name
+     * @param  string $name
      * @return object
      */
     public function getExtension($name)
     {
-        if (array_key_exists($name . '\\Entry', $this->extensions)) {
-            return $this->extensions[$name . '\\Entry'];
+        if (array_key_exists($name.'\\Entry', $this->extensions)) {
+            return $this->extensions[$name.'\\Entry'];
         }
+
         return;
     }
 
@@ -667,12 +683,13 @@ class Entry
      * other objects to gracefully choose whether to execute or not, depending
      * on their appropriateness for the current type, e.g. renderers.
      *
-     * @param string $type
+     * @param  string $type
      * @return Entry
      */
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -689,8 +706,8 @@ class Entry
     /**
      * Method overloading: call given method on first extension implementing it
      *
-     * @param  string $method
-     * @param  array $args
+     * @param  string                           $method
+     * @param  array                            $args
      * @return mixed
      * @throws Exception\BadMethodCallException if no extensions implements the method
      */
@@ -702,8 +719,8 @@ class Entry
             } catch (\BadMethodCallException $e) {
             }
         }
-        throw new Exception\BadMethodCallException('Method: ' . $method
-            . ' does not exist and could not be located on a registered Extension');
+        throw new Exception\BadMethodCallException('Method: '.$method
+            .' does not exist and could not be located on a registered Extension');
     }
 
     /**
@@ -715,11 +732,12 @@ class Entry
      */
     public function createSource()
     {
-        $source = new Source;
+        $source = new Source();
         if ($this->getEncoding()) {
             $source->setEncoding($this->getEncoding());
         }
         $source->setType($this->getType());
+
         return $source;
     }
 
@@ -727,12 +745,13 @@ class Entry
      * Appends a Zend\Feed\Writer\Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
-     * @param Source $source
+     * @param  Source $source
      * @return Entry
      */
     public function setSource(Source $source)
     {
         $this->data['source'] = $source;
+
         return $this;
     }
 
@@ -744,6 +763,7 @@ class Entry
         if (isset($this->data['source'])) {
             return $this->data['source'];
         }
+
         return;
     }
 

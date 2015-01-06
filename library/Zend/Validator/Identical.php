@@ -35,7 +35,7 @@ class Identical extends AbstractValidator
      * @var array
      */
     protected $messageVariables = array(
-        'token' => 'tokenString'
+        'token' => 'tokenString',
     );
 
     /**
@@ -50,7 +50,7 @@ class Identical extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  mixed $token
+     * @param mixed $token
      */
     public function __construct($token = null)
     {
@@ -88,13 +88,14 @@ class Identical extends AbstractValidator
     /**
      * Set token against which to compare
      *
-     * @param  mixed $token
+     * @param  mixed     $token
      * @return Identical
      */
     public function setToken($token)
     {
         $this->tokenString = (is_array($token) ? var_export($token, true) : (string) $token);
         $this->token       = $token;
+
         return $this;
     }
 
@@ -111,12 +112,13 @@ class Identical extends AbstractValidator
     /**
      * Sets the strict parameter
      *
-     * @param  bool $strict
+     * @param  bool      $strict
      * @return Identical
      */
     public function setStrict($strict)
     {
         $this->strict = (bool) $strict;
+
         return $this;
     }
 
@@ -133,12 +135,13 @@ class Identical extends AbstractValidator
     /**
      * Sets the literal parameter
      *
-     * @param  bool $literal
+     * @param  bool      $literal
      * @return Identical
      */
     public function setLiteral($literal)
     {
         $this->literal = (bool) $literal;
+
         return $this;
     }
 
@@ -146,8 +149,8 @@ class Identical extends AbstractValidator
      * Returns true if and only if a token has been set and the provided value
      * matches that token.
      *
-     * @param  mixed $value
-     * @param  array|ArrayAccess $context
+     * @param  mixed                              $value
+     * @param  array|ArrayAccess                  $context
      * @throws Exception\InvalidArgumentException If context is not array or ArrayObject
      * @return bool
      */
@@ -188,12 +191,14 @@ class Identical extends AbstractValidator
 
         if ($token === null) {
             $this->error(self::MISSING_TOKEN);
+
             return false;
         }
 
         $strict = $this->getStrict();
         if (($strict && ($value !== $token)) || (!$strict && ($value != $token))) {
             $this->error(self::NOT_SAME);
+
             return false;
         }
 

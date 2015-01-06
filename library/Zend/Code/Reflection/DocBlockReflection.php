@@ -76,8 +76,8 @@ class DocBlockReflection implements ReflectionInterface
     }
 
     /**
-     * @param  Reflector|string $commentOrReflector
-     * @param  null|DocBlockTagManager $tagManager
+     * @param  Reflector|string                   $commentOrReflector
+     * @param  null|DocBlockTagManager            $tagManager
      * @throws Exception\InvalidArgumentException
      * @return DocBlockReflection
      */
@@ -198,7 +198,7 @@ class DocBlockReflection implements ReflectionInterface
     /**
      * Retrieve the given DocBlock tag
      *
-     * @param  string $name
+     * @param  string                     $name
      * @return DocBlockTagInterface|false
      */
     public function getTag($name)
@@ -216,7 +216,7 @@ class DocBlockReflection implements ReflectionInterface
     /**
      * Get all DocBlock annotation tags
      *
-     * @param  string $filter
+     * @param  string                 $filter
      * @return DocBlockTagInterface[]
      */
     public function getTags($filter = null)
@@ -266,15 +266,15 @@ class DocBlockReflection implements ReflectionInterface
 
     public function toString()
     {
-        $str = "DocBlock [ /* DocBlock */ ] {" . PHP_EOL . PHP_EOL;
-        $str .= "  - Tags [" . count($this->tags) . "] {" . PHP_EOL;
+        $str = "DocBlock [ /* DocBlock */ ] {".PHP_EOL.PHP_EOL;
+        $str .= "  - Tags [".count($this->tags)."] {".PHP_EOL;
 
         foreach ($this->tags as $tag) {
-            $str .= "    " . $tag;
+            $str .= "    ".$tag;
         }
 
-        $str .= "  }" . PHP_EOL;
-        $str .= "}" . PHP_EOL;
+        $str .= "  }".PHP_EOL;
+        $str .= "}".PHP_EOL;
 
         return $str;
     }

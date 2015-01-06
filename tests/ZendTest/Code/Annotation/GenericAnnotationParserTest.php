@@ -24,10 +24,11 @@ class GenericAnnotationParserTest extends TestCase
     {
         $event = new Event();
         $event->setParams(array(
-            'class' => __NAMESPACE__ . '\TestAsset\Foo',
+            'class' => __NAMESPACE__.'\TestAsset\Foo',
             'content' => '(test content)',
-            'raw' => '@' . __NAMESPACE__ . '\TestAsset\Foo(test content)',
+            'raw' => '@'.__NAMESPACE__.'\TestAsset\Foo(test content)',
         ));
+
         return $event;
     }
 
@@ -36,9 +37,9 @@ class GenericAnnotationParserTest extends TestCase
         $this->parser->registerAnnotation(new TestAsset\Foo());
         $this->parser->registerAnnotation(new TestAsset\Bar());
 
-        $this->assertTrue($this->parser->hasAnnotation(__NAMESPACE__ . '\TestAsset\Foo'));
-        $this->assertTrue($this->parser->hasAnnotation(__NAMESPACE__ . '\TestAsset\Bar'));
-        $this->assertFalse($this->parser->hasAnnotation(__NAMESPACE__ . '\TestAsset\Bogus'));
+        $this->assertTrue($this->parser->hasAnnotation(__NAMESPACE__.'\TestAsset\Foo'));
+        $this->assertTrue($this->parser->hasAnnotation(__NAMESPACE__.'\TestAsset\Bar'));
+        $this->assertFalse($this->parser->hasAnnotation(__NAMESPACE__.'\TestAsset\Bogus'));
     }
 
     public function testParserCreatesNewAnnotationInstances()
@@ -48,7 +49,7 @@ class GenericAnnotationParserTest extends TestCase
 
         $event = $this->getFooEvent();
         $test = $this->parser->onCreateAnnotation($event);
-        $this->assertInstanceOf(__NAMESPACE__ . '\TestAsset\Foo', $test);
+        $this->assertInstanceOf(__NAMESPACE__.'\TestAsset\Foo', $test);
         $this->assertNotSame($foo, $test);
         $this->assertEquals('test content', $test->content);
     }
@@ -65,19 +66,19 @@ class GenericAnnotationParserTest extends TestCase
             new TestAsset\Foo(),
             new TestAsset\Bar(),
         ));
-        $this->assertTrue($this->parser->hasAnnotation(__NAMESPACE__ . '\TestAsset\Foo'));
-        $this->assertTrue($this->parser->hasAnnotation(__NAMESPACE__ . '\TestAsset\Bar'));
+        $this->assertTrue($this->parser->hasAnnotation(__NAMESPACE__.'\TestAsset\Foo'));
+        $this->assertTrue($this->parser->hasAnnotation(__NAMESPACE__.'\TestAsset\Bar'));
     }
 
     public function testAllowsSpecifyingAliases()
     {
         $bar = new TestAsset\Bar();
         $this->parser->registerAnnotation($bar);
-        $this->parser->setAlias(__NAMESPACE__ . '\TestAsset\Foo', get_class($bar));
+        $this->parser->setAlias(__NAMESPACE__.'\TestAsset\Foo', get_class($bar));
 
         $event = $this->getFooEvent();
         $test  = $this->parser->onCreateAnnotation($event);
-        $this->assertInstanceOf(__NAMESPACE__ . '\TestAsset\Bar', $test);
+        $this->assertInstanceOf(__NAMESPACE__.'\TestAsset\Bar', $test);
         $this->assertNotSame($bar, $test);
         $this->assertEquals('test content', $test->content);
     }

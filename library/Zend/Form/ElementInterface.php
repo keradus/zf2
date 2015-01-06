@@ -17,7 +17,7 @@ interface ElementInterface
      * In most cases, this will proxy to the attributes for storage, but is
      * present to indicate that elements are generally named.
      *
-     * @param  string $name
+     * @param  string           $name
      * @return ElementInterface
      */
     public function setName($name);
@@ -41,7 +41,7 @@ interface ElementInterface
      * Set a single option for an element
      *
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return self
      */
     public function setOption($key, $value);
@@ -56,7 +56,7 @@ interface ElementInterface
     /**
      * return the specified option
      *
-     * @param string $option
+     * @param  string     $option
      * @return null|mixed
      */
     public function getOption($option);
@@ -64,8 +64,8 @@ interface ElementInterface
     /**
      * Set a single element attribute
      *
-     * @param  string $key
-     * @param  mixed $value
+     * @param  string           $key
+     * @param  mixed            $value
      * @return ElementInterface
      */
     public function setAttribute($key, $value);
@@ -106,7 +106,7 @@ interface ElementInterface
     /**
      * Set the value of the element
      *
-     * @param  mixed $value
+     * @param  mixed            $value
      * @return ElementInterface
      */
     public function setValue($value);

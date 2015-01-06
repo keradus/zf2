@@ -223,6 +223,7 @@ class FormTextareaTest extends CommonTestCase
             'meta'               => 'value',
             'role'               => 'value',
         ));
+
         return $element;
     }
 

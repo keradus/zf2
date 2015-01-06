@@ -24,8 +24,8 @@ class PrivateKey extends AbstractKey
     /**
      * Create private key instance from PEM formatted key file
      *
-     * @param  string      $pemFile
-     * @param  string|null $passPhrase
+     * @param  string                             $pemFile
+     * @param  string|null                        $passPhrase
      * @return PrivateKey
      * @throws Exception\InvalidArgumentException
      */
@@ -43,8 +43,8 @@ class PrivateKey extends AbstractKey
     /**
      * Constructor
      *
-     * @param  string $pemString
-     * @param  string $passPhrase
+     * @param  string                     $pemString
+     * @param  string                     $passPhrase
      * @throws Exception\RuntimeException
      */
     public function __construct($pemString, $passPhrase = null)
@@ -52,7 +52,7 @@ class PrivateKey extends AbstractKey
         $result = openssl_pkey_get_private($pemString, $passPhrase);
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Unable to load private key; openssl ' . openssl_error_string()
+                'Unable to load private key; openssl '.openssl_error_string()
             );
         }
 
@@ -78,7 +78,7 @@ class PrivateKey extends AbstractKey
     /**
      * Encrypt using this key
      *
-     * @param  string $data
+     * @param  string                             $data
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
@@ -93,7 +93,7 @@ class PrivateKey extends AbstractKey
         $result = openssl_private_encrypt($data, $encrypted, $this->getOpensslKeyResource());
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Can not encrypt; openssl ' . openssl_error_string()
+                'Can not encrypt; openssl '.openssl_error_string()
             );
         }
 
@@ -103,7 +103,7 @@ class PrivateKey extends AbstractKey
     /**
      * Decrypt using this key
      *
-     * @param  string $data
+     * @param  string                             $data
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
@@ -121,7 +121,7 @@ class PrivateKey extends AbstractKey
         $result = openssl_private_decrypt($data, $decrypted, $this->getOpensslKeyResource());
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Can not decrypt; openssl ' . openssl_error_string()
+                'Can not decrypt; openssl '.openssl_error_string()
             );
         }
 

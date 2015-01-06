@@ -342,7 +342,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     /**
      * Cast the object to an array
      *
-     * @param  bool $metaData Whether to include metadata
+     * @param  bool  $metaData Whether to include metadata
      * @return array
      */
     public function toArray($metaData = false)

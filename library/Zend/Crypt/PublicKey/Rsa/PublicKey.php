@@ -25,7 +25,7 @@ class PublicKey extends AbstractKey
      * Create public key instance public key from PEM formatted key file
      * or X.509 certificate file
      *
-     * @param  string      $pemOrCertificateFile
+     * @param  string                             $pemOrCertificateFile
      * @return PublicKey
      * @throws Exception\InvalidArgumentException
      */
@@ -43,7 +43,7 @@ class PublicKey extends AbstractKey
     /**
      * Construct public key with PEM formatted string or X.509 certificate
      *
-     * @param  string $pemStringOrCertificate
+     * @param  string                     $pemStringOrCertificate
      * @throws Exception\RuntimeException
      */
     public function __construct($pemStringOrCertificate)
@@ -51,7 +51,7 @@ class PublicKey extends AbstractKey
         $result = openssl_pkey_get_public($pemStringOrCertificate);
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Unable to load public key; openssl ' . openssl_error_string()
+                'Unable to load public key; openssl '.openssl_error_string()
             );
         }
 
@@ -68,7 +68,7 @@ class PublicKey extends AbstractKey
     /**
      * Encrypt using this key
      *
-     * @param  string $data
+     * @param  string                             $data
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      * @return string
@@ -83,7 +83,7 @@ class PublicKey extends AbstractKey
         $result = openssl_public_encrypt($data, $encrypted, $this->getOpensslKeyResource());
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Can not encrypt; openssl ' . openssl_error_string()
+                'Can not encrypt; openssl '.openssl_error_string()
             );
         }
 
@@ -93,7 +93,7 @@ class PublicKey extends AbstractKey
     /**
      * Decrypt using this key
      *
-     * @param  string $data
+     * @param  string                             $data
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      * @return string
@@ -111,7 +111,7 @@ class PublicKey extends AbstractKey
         $result = openssl_public_decrypt($data, $decrypted, $this->getOpensslKeyResource());
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Can not decrypt; openssl ' . openssl_error_string()
+                'Can not decrypt; openssl '.openssl_error_string()
             );
         }
 

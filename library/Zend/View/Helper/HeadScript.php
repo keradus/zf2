@@ -124,11 +124,11 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * Returns headScript helper object; optionally, allows specifying a script
      * or script file to include.
      *
-     * @param  string $mode      Script or file
-     * @param  string $spec      Script/url
-     * @param  string $placement Append, prepend, or set
-     * @param  array  $attrs     Array of script attributes
-     * @param  string $type      Script type and/or array of script attributes
+     * @param  string     $mode      Script or file
+     * @param  string     $spec      Script/url
+     * @param  string     $placement Append, prepend, or set
+     * @param  array      $attrs     Array of script attributes
+     * @param  string     $type      Script type and/or array of script attributes
      * @return HeadScript
      */
     public function __invoke(
@@ -145,10 +145,10 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
                 case 'set':
                 case 'prepend':
                 case 'append':
-                    $action = $placement . $action;
+                    $action = $placement.$action;
                     break;
                 default:
-                    $action = 'append' . $action;
+                    $action = 'append'.$action;
                     break;
             }
             $this->$action($spec, $type, $attrs);
@@ -160,8 +160,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Overload method access
      *
-     * @param  string $method Method to call
-     * @param  array  $args   Arguments of method
+     * @param  string                           $method Method to call
+     * @param  array                            $args   Arguments of method
      * @throws Exception\BadMethodCallException if too few arguments or invalid method
      * @return HeadScript
      */
@@ -265,9 +265,9 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Start capture action
      *
-     * @param  mixed  $captureType Type of capture
-     * @param  string $type        Type of script
-     * @param  array  $attrs       Attributes of capture
+     * @param  mixed                      $captureType Type of capture
+     * @param  string                     $type        Type of script
+     * @param  array                      $attrs       Attributes of capture
      * @throws Exception\RuntimeException
      * @return void
      */
@@ -305,7 +305,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             case Placeholder\Container\AbstractContainer::SET:
             case Placeholder\Container\AbstractContainer::PREPEND:
             case Placeholder\Container\AbstractContainer::APPEND:
-                $action = strtolower($this->captureType) . 'Script';
+                $action = strtolower($this->captureType).'Script';
                 break;
             default:
                 $action = 'appendScript';
@@ -318,9 +318,9 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Create data item containing all necessary components of script
      *
-     * @param  string $type       Type of data
-     * @param  array  $attributes Attributes of data
-     * @param  string $content    Content of data
+     * @param  string   $type       Type of data
+     * @param  array    $attributes Attributes of data
+     * @param  string   $content    Content of data
      * @return stdClass
      */
     public function createData($type, array $attributes, $content = null)
@@ -356,7 +356,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Is the script provided valid?
      *
-     * @param  mixed  $value  Is the given script valid?
+     * @param  mixed $value Is the given script valid?
      * @return bool
      */
     protected function isValid($value)
@@ -401,21 +401,21 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             && filter_var($item->attributes['noescape'], FILTER_VALIDATE_BOOLEAN));
 
         $type = ($this->autoEscape) ? $this->escape($item->type) : $item->type;
-        $html = '<script type="' . $type . '"' . $attrString . '>';
+        $html = '<script type="'.$type.'"'.$attrString.'>';
         if (!empty($item->source)) {
             $html .= PHP_EOL;
 
             if ($addScriptEscape) {
-                $html .= $indent . '    ' . $escapeStart . PHP_EOL;
+                $html .= $indent.'    '.$escapeStart.PHP_EOL;
             }
 
-            $html .= $indent . '    ' . $item->source;
+            $html .= $indent.'    '.$item->source;
 
             if ($addScriptEscape) {
-                $html .= PHP_EOL . $indent . '    ' . $escapeEnd;
+                $html .= PHP_EOL.$indent.'    '.$escapeEnd;
             }
 
-            $html .= PHP_EOL . $indent;
+            $html .= PHP_EOL.$indent;
         }
         $html .= '</script>';
 
@@ -425,11 +425,11 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $item->attributes['conditional']) === '!IE') {
-                $html = '<!-->' . $html . '<!--';
+                $html = '<!-->'.$html.'<!--';
             }
-            $html = $indent . '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
+            $html = $indent.'<!--[if '.$item->attributes['conditional'].']>'.$html.'<![endif]-->';
         } else {
-            $html = $indent . $html;
+            $html = $indent.$html;
         }
 
         return $html;
@@ -438,7 +438,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Override append
      *
-     * @param  string $value Append script or file
+     * @param  string                             $value Append script or file
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -447,7 +447,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'Invalid argument passed to append(); '
-                . 'please use one of the helper methods, appendScript() or appendFile()'
+                .'please use one of the helper methods, appendScript() or appendFile()'
             );
         }
 
@@ -457,7 +457,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Override prepend
      *
-     * @param  string $value Prepend script or file
+     * @param  string                             $value Prepend script or file
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -466,7 +466,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'Invalid argument passed to prepend(); '
-                . 'please use one of the helper methods, prependScript() or prependFile()'
+                .'please use one of the helper methods, prependScript() or prependFile()'
             );
         }
 
@@ -476,7 +476,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Override set
      *
-     * @param  string $value Set script or file
+     * @param  string                             $value Set script or file
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -494,8 +494,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Override offsetSet
      *
-     * @param  string|int $index Set script of file offset
-     * @param  mixed      $value
+     * @param  string|int                         $index Set script of file offset
+     * @param  mixed                              $value
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -504,7 +504,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
                 'Invalid argument passed to offsetSet(); '
-                . 'please use one of the helper methods, offsetSetScript() or offsetSetFile()'
+                .'please use one of the helper methods, offsetSetScript() or offsetSetFile()'
             );
         }
 
@@ -514,12 +514,13 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Set flag indicating if arbitrary attributes are allowed
      *
-     * @param  bool $flag Set flag
+     * @param  bool       $flag Set flag
      * @return HeadScript
      */
     public function setAllowArbitraryAttributes($flag)
     {
         $this->arbitraryAttributes = (bool) $flag;
+
         return $this;
     }
 

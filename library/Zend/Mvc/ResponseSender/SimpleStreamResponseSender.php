@@ -16,7 +16,7 @@ class SimpleStreamResponseSender extends AbstractResponseSender
     /**
      * Send the stream
      *
-     * @param  SendResponseEvent $event
+     * @param  SendResponseEvent          $event
      * @return SimpleStreamResponseSender
      */
     public function sendStream(SendResponseEvent $event)
@@ -33,7 +33,7 @@ class SimpleStreamResponseSender extends AbstractResponseSender
     /**
      * Send stream response
      *
-     * @param  SendResponseEvent $event
+     * @param  SendResponseEvent          $event
      * @return SimpleStreamResponseSender
      */
     public function __invoke(SendResponseEvent $event)
@@ -46,6 +46,7 @@ class SimpleStreamResponseSender extends AbstractResponseSender
         $this->sendHeaders($event);
         $this->sendStream($event);
         $event->stopPropagation(true);
+
         return $this;
     }
 }

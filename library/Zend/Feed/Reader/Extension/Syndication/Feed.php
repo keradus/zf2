@@ -28,6 +28,7 @@ class Feed extends Extension\AbstractFeed
 
         if ($period === null) {
             $this->data[$name] = 'daily';
+
             return 'daily'; //Default specified by spec
         }
 
@@ -39,7 +40,7 @@ class Feed extends Extension\AbstractFeed
                 return $period;
             default:
                 throw new Reader\Exception\InvalidArgumentException("Feed specified invalid update period: '$period'."
-                    .  " Must be one of hourly, daily, weekly or yearly"
+                    ." Must be one of hourly, daily, weekly or yearly"
                 );
         }
     }
@@ -56,6 +57,7 @@ class Feed extends Extension\AbstractFeed
 
         if (!$freq || $freq < 1) {
             $this->data[$name] = 1;
+
             return 1;
         }
 
@@ -112,14 +114,15 @@ class Feed extends Extension\AbstractFeed
         if ($updateBase) {
             $date = DateTime::createFromFormat(DateTime::W3C, $updateBase);
         }
+
         return $date;
     }
 
     /**
      * Get the entry data specified by name
      *
-     * @param string $name
-     * @param string $type
+     * @param  string     $name
+     * @param  string     $type
      * @return mixed|null
      */
     private function getData($name, $type = 'string')
@@ -128,7 +131,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data[$name];
         }
 
-        $data = $this->xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/syn10:' . $name . ')');
+        $data = $this->xpath->evaluate($type.'('.$this->getXpathPrefix().'/syn10:'.$name.')');
 
         if (!$data) {
             $data = null;

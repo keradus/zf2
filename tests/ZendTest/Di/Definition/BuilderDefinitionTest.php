@@ -73,7 +73,7 @@ class BuilderDefinitionTest extends TestCase
 
     public function testBuilderCanBuildFromArray()
     {
-        $ini = ConfigFactory::fromFile(__DIR__ . '/../_files/sample.ini');
+        $ini = ConfigFactory::fromFile(__DIR__.'/../_files/sample.ini');
         $iniAsArray = $ini['section-b'];
         $definitionArray = $iniAsArray['di']['definitions'][1];
         unset($definitionArray['class']);

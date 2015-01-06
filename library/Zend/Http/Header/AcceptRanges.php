@@ -50,6 +50,7 @@ class AcceptRanges implements HeaderInterface
     public function setRangeUnit($rangeUnit)
     {
         $this->rangeUnit = $rangeUnit;
+
         return $this;
     }
 
@@ -60,6 +61,6 @@ class AcceptRanges implements HeaderInterface
 
     public function toString()
     {
-        return 'Accept-Ranges: ' . $this->getFieldValue();
+        return 'Accept-Ranges: '.$this->getFieldValue();
     }
 }

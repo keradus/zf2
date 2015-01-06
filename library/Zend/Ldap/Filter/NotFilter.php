@@ -48,6 +48,6 @@ class NotFilter extends AbstractFilter
      */
     public function toString()
     {
-        return '(!' . $this->filter->toString() . ')';
+        return '(!'.$this->filter->toString().')';
     }
 }

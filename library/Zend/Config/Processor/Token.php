@@ -47,12 +47,12 @@ class Token implements ProcessorInterface
      * Token Processor walks through a Config structure and replaces all
      * occurrences of tokens with supplied values.
      *
-     * @param  array|Config|Traversable   $tokens  Associative array of TOKEN => value
-     *                                             to replace it with
-     * @param    string $prefix
-     * @param    string $suffix
+     * @param  array|Config|Traversable $tokens Associative array of TOKEN => value
+     *                                          to replace it with
+     * @param  string                   $prefix
+     * @param  string                   $suffix
      * @internal param array $options
-     * @return   Token
+     * @return Token
      */
     public function __construct($tokens = array(), $prefix = '', $suffix = '')
     {
@@ -70,6 +70,7 @@ class Token implements ProcessorInterface
         // reset map
         $this->map = null;
         $this->prefix = $prefix;
+
         return $this;
     }
 
@@ -105,8 +106,8 @@ class Token implements ProcessorInterface
     /**
      * Set token registry.
      *
-     * @param  array|Config|Traversable  $tokens  Associative array of TOKEN => value
-     *                                            to replace it with
+     * @param  array|Config|Traversable           $tokens Associative array of TOKEN => value
+     *                                                    to replace it with
      * @return Token
      * @throws Exception\InvalidArgumentException
      */
@@ -122,7 +123,7 @@ class Token implements ProcessorInterface
                 $this->tokens[$key] = $val;
             }
         } else {
-            throw new Exception\InvalidArgumentException('Cannot use ' . gettype($tokens) . ' as token registry.');
+            throw new Exception\InvalidArgumentException('Cannot use '.gettype($tokens).' as token registry.');
         }
 
         // reset map
@@ -144,15 +145,15 @@ class Token implements ProcessorInterface
     /**
      * Add new token.
      *
-     * @param  string $token
-     * @param  mixed $value
+     * @param  string                             $token
+     * @param  mixed                              $value
      * @return Token
      * @throws Exception\InvalidArgumentException
      */
     public function addToken($token, $value)
     {
         if (!is_scalar($token)) {
-            throw new Exception\InvalidArgumentException('Cannot use ' . gettype($token) . ' as token name.');
+            throw new Exception\InvalidArgumentException('Cannot use '.gettype($token).' as token name.');
         }
         $this->tokens[$token] = $value;
 
@@ -165,8 +166,8 @@ class Token implements ProcessorInterface
     /**
      * Add new token.
      *
-     * @param string $token
-     * @param mixed $value
+     * @param  string $token
+     * @param  mixed  $value
      * @return Token
      */
     public function setToken($token, $value)
@@ -188,7 +189,7 @@ class Token implements ProcessorInterface
                 $this->map = array();
 
                 foreach ($this->tokens as $token => $value) {
-                    $this->map[$this->prefix . $token . $this->suffix] = $value;
+                    $this->map[$this->prefix.$token.$this->suffix] = $value;
                 }
             }
 
@@ -205,7 +206,7 @@ class Token implements ProcessorInterface
     /**
      * Process
      *
-     * @param  Config $config
+     * @param  Config                             $config
      * @return Config
      * @throws Exception\InvalidArgumentException
      */

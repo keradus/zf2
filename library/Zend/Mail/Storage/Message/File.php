@@ -25,7 +25,7 @@ class File extends Part\File implements MessageInterface
      * In addition to the parameters of Zend\Mail\Storage\Part::__construct() this constructor supports:
      * - flags array with flags for message, keys are ignored, use constants defined in Zend\Mail\Storage
      *
-     * @param  array $params
+     * @param  array                                           $params
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function __construct(array $params)
@@ -51,8 +51,8 @@ class File extends Part\File implements MessageInterface
     /**
      * check if flag is set
      *
-     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage
-     * @return bool true if set, otherwise false
+     * @param  mixed $flag a flag name, use constants defined in \Zend\Mail\Storage
+     * @return bool  true if set, otherwise false
      */
     public function hasFlag($flag)
     {

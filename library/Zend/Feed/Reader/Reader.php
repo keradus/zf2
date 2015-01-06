@@ -16,7 +16,7 @@ use Zend\Http as ZendHttp;
 use Zend\Stdlib\ErrorHandler;
 
 /**
-*/
+ */
 class Reader
 {
     /**
@@ -75,20 +75,20 @@ class Reader
     protected static $extensions = array(
         'feed' => array(
             'DublinCore\Feed',
-            'Atom\Feed'
+            'Atom\Feed',
         ),
         'entry' => array(
             'Content\Entry',
             'DublinCore\Entry',
-            'Atom\Entry'
+            'Atom\Entry',
         ),
         'core' => array(
             'DublinCore\Feed',
             'Atom\Feed',
             'Content\Entry',
             'DublinCore\Entry',
-            'Atom\Entry'
-        )
+            'Atom\Entry',
+        ),
     );
 
     /**
@@ -181,9 +181,9 @@ class Reader
     /**
      * Import a feed by providing a URI
      *
-     * @param  string $uri The URI to the feed
-     * @param  string $etag OPTIONAL Last received ETag for this resource
-     * @param  string $lastModified OPTIONAL Last-Modified value for this resource
+     * @param  string                     $uri          The URI to the feed
+     * @param  string                     $etag         OPTIONAL Last received ETag for this resource
+     * @param  string                     $lastModified OPTIONAL Last-Modified value for this resource
      * @return Feed\FeedInterface
      * @throws Exception\RuntimeException
      */
@@ -195,16 +195,16 @@ class Reader
         $headers = new ZendHttp\Headers();
         $client->setHeaders($headers);
         $client->setUri($uri);
-        $cacheId = 'Zend_Feed_Reader_' . md5($uri);
+        $cacheId = 'Zend_Feed_Reader_'.md5($uri);
 
         if (static::$httpConditionalGet && $cache) {
             $data = $cache->getItem($cacheId);
             if ($data) {
                 if ($etag === null) {
-                    $etag = $cache->getItem($cacheId . '_etag');
+                    $etag = $cache->getItem($cacheId.'_etag');
                 }
                 if ($lastModified === null) {
-                    $lastModified = $cache->getItem($cacheId . '_lastmodified');
+                    $lastModified = $cache->getItem($cacheId.'_lastmodified');
                 }
                 if ($etag) {
                     $headers->addHeaderLine('If-None-Match', $etag);
@@ -215,7 +215,7 @@ class Reader
             }
             $response = $client->send();
             if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 304) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException('Feed failed to load, got response code '.$response->getStatusCode());
             }
             if ($response->getStatusCode() == 304) {
                 $responseXml = $data;
@@ -223,12 +223,13 @@ class Reader
                 $responseXml = $response->getBody();
                 $cache->setItem($cacheId, $responseXml);
                 if ($response->getHeaders()->get('ETag')) {
-                    $cache->setItem($cacheId . '_etag', $response->getHeaders()->get('ETag')->getFieldValue());
+                    $cache->setItem($cacheId.'_etag', $response->getHeaders()->get('ETag')->getFieldValue());
                 }
                 if ($response->getHeaders()->get('Last-Modified')) {
-                    $cache->setItem($cacheId . '_lastmodified', $response->getHeaders()->get('Last-Modified')->getFieldValue());
+                    $cache->setItem($cacheId.'_lastmodified', $response->getHeaders()->get('Last-Modified')->getFieldValue());
                 }
             }
+
             return static::importString($responseXml);
         } elseif ($cache) {
             $data = $cache->getItem($cacheId);
@@ -237,18 +238,20 @@ class Reader
             }
             $response = $client->send();
             if ((int) $response->getStatusCode() !== 200) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException('Feed failed to load, got response code '.$response->getStatusCode());
             }
             $responseXml = $response->getBody();
             $cache->setItem($cacheId, $responseXml);
+
             return static::importString($responseXml);
         } else {
             $response = $client->send();
             if ((int) $response->getStatusCode() !== 200) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException('Feed failed to load, got response code '.$response->getStatusCode());
             }
             $reader = static::importString($response->getBody());
             $reader->setOriginalSourceUri($uri);
+
             return $reader;
         }
     }
@@ -262,8 +265,8 @@ class Reader
      * Primary purpose is to make it possible to use the Reader with alternate
      * HTTP client implementations.
      *
-     * @param  string $uri
-     * @param  Http\ClientInterface $client
+     * @param  string                     $uri
+     * @param  Http\ClientInterface       $client
      * @return self
      * @throws Exception\RuntimeException if response is not an Http\ResponseInterface
      */
@@ -279,17 +282,18 @@ class Reader
         }
 
         if ((int) $response->getStatusCode() !== 200) {
-            throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+            throw new Exception\RuntimeException('Feed failed to load, got response code '.$response->getStatusCode());
         }
         $reader = static::importString($response->getBody());
         $reader->setOriginalSourceUri($uri);
+
         return $reader;
     }
 
     /**
      * Import a feed from a string
      *
-     * @param  string $string
+     * @param  string                             $string
      * @return Feed\FeedInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -303,7 +307,7 @@ class Reader
 
         $libxmlErrflag = libxml_use_internal_errors(true);
         $oldValue = libxml_disable_entity_loader(true);
-        $dom = new DOMDocument;
+        $dom = new DOMDocument();
         $status = $dom->loadXML(trim($string));
         foreach ($dom->childNodes as $child) {
             if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
@@ -339,15 +343,16 @@ class Reader
             $reader = new Feed\Atom($dom, $type);
         } else {
             throw new Exception\RuntimeException('The URI used does not point to a '
-            . 'valid Atom, RSS or RDF feed that Zend\Feed\Reader can parse.');
+            .'valid Atom, RSS or RDF feed that Zend\Feed\Reader can parse.');
         }
+
         return $reader;
     }
 
     /**
      * Imports a feed from a file located at $filename.
      *
-     * @param  string $filename
+     * @param  string                     $filename
      * @throws Exception\RuntimeException
      * @return Feed\FeedInterface
      */
@@ -359,6 +364,7 @@ class Reader
         if ($feed === false) {
             throw new Exception\RuntimeException("File '{$filename}' could not be loaded", 0, $err);
         }
+
         return static::importString($feed);
     }
 
@@ -375,12 +381,12 @@ class Reader
         $client->setUri($uri);
         $response = $client->send();
         if ($response->getStatusCode() !== 200) {
-            throw new Exception\RuntimeException("Failed to access $uri, got response code " . $response->getStatusCode());
+            throw new Exception\RuntimeException("Failed to access $uri, got response code ".$response->getStatusCode());
         }
         $responseHtml = $response->getBody();
         $libxmlErrflag = libxml_use_internal_errors(true);
         $oldValue = libxml_disable_entity_loader(true);
-        $dom = new DOMDocument;
+        $dom = new DOMDocument();
         $status = $dom->loadHTML(trim($responseHtml));
         libxml_disable_entity_loader($oldValue);
         libxml_use_internal_errors($libxmlErrflag);
@@ -395,9 +401,10 @@ class Reader
             }
             throw new Exception\RuntimeException($errormsg);
         }
-        $feedSet = new FeedSet;
+        $feedSet = new FeedSet();
         $links = $dom->getElementsByTagName('link');
         $feedSet->addLinks($links, $uri);
+
         return $feedSet;
     }
 
@@ -405,7 +412,7 @@ class Reader
      * Detect the feed type of the provided feed
      *
      * @param  Feed\AbstractFeed|DOMDocument|string $feed
-     * @param  bool $specOnly
+     * @param  bool                                 $specOnly
      * @return string
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -420,7 +427,7 @@ class Reader
             ErrorHandler::start(E_NOTICE|E_WARNING);
             ini_set('track_errors', 1);
             $oldValue = libxml_disable_entity_loader(true);
-            $dom = new DOMDocument;
+            $dom = new DOMDocument();
             $status = $dom->loadXML($feed);
             foreach ($dom->childNodes as $child) {
                 if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
@@ -444,7 +451,7 @@ class Reader
             }
         } else {
             throw new Exception\InvalidArgumentException('Invalid object/scalar provided: must'
-            . ' be of type Zend\Feed\Reader\Feed, DomDocument or string');
+            .' be of type Zend\Feed\Reader\Feed, DomDocument or string');
         }
         $xpath = new DOMXPath($dom);
 
@@ -546,20 +553,21 @@ class Reader
         if (!isset(static::$extensionManager)) {
             static::setExtensionManager(new ExtensionManager());
         }
+
         return static::$extensionManager;
     }
 
     /**
      * Register an Extension by name
      *
-     * @param  string $name
+     * @param  string                     $name
      * @return void
      * @throws Exception\RuntimeException if unable to resolve Extension class
      */
     public static function registerExtension($name)
     {
-        $feedName  = $name . '\Feed';
-        $entryName = $name . '\Entry';
+        $feedName  = $name.'\Feed';
+        $entryName = $name.'\Entry';
         $manager   = static::getExtensionManager();
         if (static::isRegistered($name)) {
             if ($manager->has($feedName) || $manager->has($entryName)) {
@@ -568,8 +576,8 @@ class Reader
         }
 
         if (!$manager->has($feedName) && !$manager->has($entryName)) {
-            throw new Exception\RuntimeException('Could not load extension: ' . $name
-                . ' using Plugin Loader. Check prefix paths are configured and extension exists.');
+            throw new Exception\RuntimeException('Could not load extension: '.$name
+                .' using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
         if ($manager->has($feedName)) {
             static::$extensions['feed'][] = $feedName;
@@ -587,13 +595,14 @@ class Reader
      */
     public static function isRegistered($extensionName)
     {
-        $feedName  = $extensionName . '\Feed';
-        $entryName = $extensionName . '\Entry';
+        $feedName  = $extensionName.'\Feed';
+        $entryName = $extensionName.'\Entry';
         if (in_array($feedName, static::$extensions['feed'])
             || in_array($entryName, static::$extensions['entry'])
         ) {
             return true;
         }
+
         return false;
     }
 
@@ -622,20 +631,20 @@ class Reader
         static::$extensions         = array(
             'feed' => array(
                 'DublinCore\Feed',
-                'Atom\Feed'
+                'Atom\Feed',
             ),
             'entry' => array(
                 'Content\Entry',
                 'DublinCore\Entry',
-                'Atom\Entry'
+                'Atom\Entry',
             ),
             'core' => array(
                 'DublinCore\Feed',
                 'Atom\Feed',
                 'Content\Entry',
                 'DublinCore\Entry',
-                'Atom\Entry'
-            )
+                'Atom\Entry',
+            ),
         );
     }
 
@@ -671,6 +680,7 @@ class Reader
         foreach ($array as &$value) {
             $value = unserialize($value);
         }
+
         return $array;
     }
 }

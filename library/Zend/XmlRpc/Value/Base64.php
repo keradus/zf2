@@ -16,7 +16,7 @@ class Base64 extends AbstractScalar
      * We keep this value in base64 encoding
      *
      * @param string $value
-     * @param bool $alreadyEncoded If set, it means that the given string is already base64 encoded
+     * @param bool   $alreadyEncoded If set, it means that the given string is already base64 encoded
      */
     public function __construct($value, $alreadyEncoded = false)
     {

@@ -6,6 +6,7 @@
  * @copyright      Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license        http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Stdlib\Hydrator\Filter;
 
 use ArrayObject;
@@ -45,7 +46,7 @@ class FilterComposite implements FilterInterface
             function ($value, $key) {
                 if (!is_callable($value) && !$value instanceof FilterInterface) {
                     throw new InvalidArgumentException(
-                        'The value of ' . $key . ' should be either a callable or ' .
+                        'The value of '.$key.' should be either a callable or '.
                         'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
                     );
                 }
@@ -57,7 +58,7 @@ class FilterComposite implements FilterInterface
             function ($value, $key) {
                 if (!is_callable($value) && !$value instanceof FilterInterface) {
                     throw new InvalidArgumentException(
-                        'The value of ' . $key . '  should be either a callable or ' .
+                        'The value of '.$key.'  should be either a callable or '.
                         'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
                     );
                 }
@@ -94,7 +95,7 @@ class FilterComposite implements FilterInterface
     {
         if (!is_callable($filter) && !($filter instanceof FilterInterface)) {
             throw new InvalidArgumentException(
-                'The value of ' . $name . ' should be either a callable or ' .
+                'The value of '.$name.' should be either a callable or '.
                 'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
             );
         }

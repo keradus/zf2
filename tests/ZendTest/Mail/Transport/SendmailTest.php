@@ -63,6 +63,7 @@ class SendmailTest extends \PHPUnit_Framework_TestCase
         $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
+
         return $message;
     }
 

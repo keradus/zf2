@@ -182,7 +182,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     public function testInvalidParamTypeShouldThrowException()
     {
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid param type');
-        $this->service->addParam(new \stdClass);
+        $this->service->addParam(new \stdClass());
     }
 
     public function testShouldBeAbleToOrderParams()
@@ -280,7 +280,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     public function testInvalidReturnTypeShouldThrowException()
     {
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid param type');
-        $this->service->setReturn(new \stdClass);
+        $this->service->setReturn(new \stdClass());
     }
 
     public function testToArrayShouldCreateSmdCompatibleHash()

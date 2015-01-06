@@ -12,9 +12,9 @@ namespace ZendTest\Feed\Reader\Integration;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -22,7 +22,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/wordpress-atom10.xml';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/wordpress-atom10.xml';
     }
 
     public function testGetsTitle()
@@ -39,7 +39,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(array(
-            array('name'=>'norm2782', 'uri'=>'http://www.norm2782.com')
+            array('name' => 'norm2782', 'uri' => 'http://www.norm2782.com'),
         ), (array) $feed->getAuthors());
     }
 
@@ -48,7 +48,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(array('name'=>'norm2782', 'uri'=>'http://www.norm2782.com'), $feed->getAuthor());
+        $this->assertEquals(array('name' => 'norm2782', 'uri' => 'http://www.norm2782.com'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -102,7 +102,6 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
     /**
      * Entry level testing
      */
-
     public function testGetsEntryId()
     {
         $feed = Reader\Reader::importString(
@@ -131,7 +130,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array(array('name'=>'norm2782', 'uri'=>'http://www.norm2782.com')), (array) $entry->getAuthors());
+        $this->assertEquals(array(array('name' => 'norm2782', 'uri' => 'http://www.norm2782.com')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -140,7 +139,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array('name'=>'norm2782', 'uri'=>'http://www.norm2782.com'), $entry->getAuthor());
+        $this->assertEquals(array('name' => 'norm2782', 'uri' => 'http://www.norm2782.com'), $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()

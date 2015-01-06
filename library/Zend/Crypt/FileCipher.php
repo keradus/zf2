@@ -64,7 +64,7 @@ class FileCipher
      */
     public function __construct()
     {
-        $this->cipher = new Mcrypt;
+        $this->cipher = new Mcrypt();
     }
 
     /**
@@ -90,7 +90,7 @@ class FileCipher
     /**
      * Set the number of iterations for Pbkdf2
      *
-     * @param  int  $num
+     * @param int $num
      */
     public function setKeyIteration($num)
     {
@@ -134,7 +134,7 @@ class FileCipher
     /**
      * Set algorithm of the symmetric cipher
      *
-     * @param  string                             $algo
+     * @param string $algo
      */
     public function setCipherAlgorithm($algo)
     {
@@ -242,7 +242,7 @@ class FileCipher
         $padding = $this->cipher->getPadding();
 
         $this->cipher->setKey(substr($keys, 0, $this->cipher->getKeySize()));
-        $this->cipher->setPadding(new Symmetric\Padding\NoPadding);
+        $this->cipher->setPadding(new Symmetric\Padding\NoPadding());
         $this->cipher->setSalt($iv);
         $this->cipher->setMode('cbc');
 
@@ -266,7 +266,7 @@ class FileCipher
             }
             $hmac = Hmac::compute($keyHmac,
                                   $hashAlgo,
-                                  $algorithm . $hmac . $result);
+                                  $algorithm.$hmac.$result);
             $this->cipher->setSalt(substr($result, -1 * $saltSize));
             if (fwrite($write, $result) !== strlen($result)) {
                 return false;
@@ -313,7 +313,7 @@ class FileCipher
                                  $this->getKeyIteration(),
                                  $this->cipher->getKeySize() * 2);
         $padding  = $this->cipher->getPadding();
-        $this->cipher->setPadding(new Symmetric\Padding\NoPadding);
+        $this->cipher->setPadding(new Symmetric\Padding\NoPadding());
         $this->cipher->setKey(substr($keys, 0, $this->cipher->getKeySize()));
         $this->cipher->setMode('cbc');
 
@@ -330,10 +330,10 @@ class FileCipher
                 $this->cipher->setPadding($padding);
                 $data .= fread($read, $blockSize);
             }
-            $result = $this->cipher->decrypt($iv . $data);
+            $result = $this->cipher->decrypt($iv.$data);
             $hmac   = Hmac::compute($keyHmac,
                                     $hashAlgo,
-                                    $algorithm . $hmac . $data);
+                                    $algorithm.$hmac.$data);
             $iv     = substr($data, -1 * $saltSize);
             if (fwrite($write, $result) !== strlen($result)) {
                 return false;
@@ -345,6 +345,7 @@ class FileCipher
         // check for data integrity
         if (!Utils::compareStrings($hmac, $hmacRead)) {
             unlink($fileOut);
+
             return false;
         }
 
@@ -354,8 +355,8 @@ class FileCipher
     /**
      * Check that input file exists and output file dont
      *
-     * @param  string $fileIn
-     * @param  string $fileOut
+     * @param  string                             $fileIn
+     * @param  string                             $fileOut
      * @throws Exception\InvalidArgumentException
      */
     protected function checkFileInOut($fileIn, $fileOut)

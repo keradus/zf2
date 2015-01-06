@@ -55,7 +55,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
         // log to the mock db adapter
         $fields = array(
             'message'  => 'foo',
-            'priority' => 42
+            'priority' => 42,
         );
 
         $this->writer->write($fields);
@@ -75,12 +75,12 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $priority = 2;
         $events = array(
             'file' => 'test',
-            'line' => 1
+            'line' => 1,
         );
         $this->writer->write(array(
             'message'  => $message,
             'priority' => $priority,
-            'events'   => $events
+            'events'   => $events,
         ));
         $this->assertContains('query', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['query']));
@@ -89,7 +89,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
             'message' => $message,
             'priority' => $priority,
             'events_line' => $events['line'],
-            'events_file' => $events['file']
+            'events_file' => $events['file'],
         );
         $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
@@ -103,12 +103,12 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $priority = 2;
         $events = array(
             'file' => 'test',
-            'line' => 1
+            'line' => 1,
         );
         $this->writer->write(array(
             'message'  => $message,
             'priority' => $priority,
-            'events'   => $events
+            'events'   => $events,
         ));
         $this->assertContains('query', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['query']));
@@ -117,7 +117,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
             'message' => $message,
             'priority' => $priority,
             'events-line' => $events['line'],
-            'events-file' => $events['file']
+            'events-file' => $events['file'],
         );
         $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
@@ -126,7 +126,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
             'message' => 'new-message-field',
-            'priority' => 'new-priority-field'
+            'priority' => 'new-priority-field',
         ));
 
         // log to the mock db adapter
@@ -134,7 +134,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $priority = 2;
         $this->writer->write(array(
             'message' => $message,
-            'priority' => $priority
+            'priority' => $priority,
         ));
 
         // insert should be called once...
@@ -144,7 +144,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
         // ...with the correct table and binds for the database
         $binds = array(
             'new-message-field' => $message,
-            'new-priority-field' => $priority
+            'new-priority-field' => $priority,
         );
         $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
@@ -156,8 +156,8 @@ class DbTest extends \PHPUnit_Framework_TestCase
             'priority' => 'new-priority-field',
             'events' => array(
                 'line' => 'new-line',
-                'file' => 'new-file'
-            )
+                'file' => 'new-file',
+            ),
         ));
 
         // log to the mock db adapter
@@ -165,12 +165,12 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $priority = 2;
         $events = array(
             'file' => 'test',
-            'line' => 1
+            'line' => 1,
         );
         $this->writer->write(array(
             'message'  => $message,
             'priority' => $priority,
-            'events'   => $events
+            'events'   => $events,
         ));
         $this->assertContains('query', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['query']));
@@ -179,7 +179,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
             'new-message-field' => $message,
             'new-priority-field' => $priority,
             'new-line' => $events['line'],
-            'new-file' => $events['file']
+            'new-file' => $events['file'],
         );
         $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
@@ -196,14 +196,14 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteDateTimeAsTimestamp()
     {
         $date = new DateTime();
-        $event = array('timestamp'=> $date);
+        $event = array('timestamp' => $date);
         $this->writer->write($event);
 
         $this->assertContains('query', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['query']));
 
         $this->assertEquals(array(array(
-            'timestamp' => $date->format(FormatterInterface::DEFAULT_DATETIME_FORMAT)
+            'timestamp' => $date->format(FormatterInterface::DEFAULT_DATETIME_FORMAT),
         )), $this->db->calls['execute'][0]);
     }
 
@@ -211,9 +211,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
     {
         $date = new DateTime();
         $event = array(
-            'extra'=> array(
-                'request_time' => $date
-            )
+            'extra' => array(
+                'request_time' => $date,
+            ),
         );
         $this->writer->write($event);
 
@@ -221,7 +221,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($this->db->calls['query']));
 
         $this->assertEquals(array(array(
-            'extra_request_time' => $date->format(FormatterInterface::DEFAULT_DATETIME_FORMAT)
+            'extra_request_time' => $date->format(FormatterInterface::DEFAULT_DATETIME_FORMAT),
         )), $this->db->calls['execute'][0]);
     }
 

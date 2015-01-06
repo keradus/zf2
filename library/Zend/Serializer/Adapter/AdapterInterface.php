@@ -14,7 +14,7 @@ interface AdapterInterface
     /**
      * Generates a storable representation of a value.
      *
-     * @param  mixed $value Data to serialize
+     * @param  mixed                                         $value Data to serialize
      * @return string
      * @throws \Zend\Serializer\Exception\ExceptionInterface
      */
@@ -23,7 +23,7 @@ interface AdapterInterface
     /**
      * Creates a PHP value from a stored representation.
      *
-     * @param  string $serialized Serialized string
+     * @param  string                                        $serialized Serialized string
      * @return mixed
      * @throws \Zend\Serializer\Exception\ExceptionInterface
      */

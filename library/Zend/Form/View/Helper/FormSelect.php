@@ -39,7 +39,7 @@ class FormSelect extends AbstractHelper
         'form'         => true,
         'multiple'     => true,
         'required'     => true,
-        'size'         => true
+        'size'         => true,
     );
 
     /**
@@ -93,7 +93,7 @@ class FormSelect extends AbstractHelper
     /**
      * Render a form <select> element from the provided $element
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface                   $element
      * @throws Exception\InvalidArgumentException
      * @throws Exception\DomainException
      * @return string
@@ -142,7 +142,7 @@ class FormSelect extends AbstractHelper
             && $element->useHiddenElement();
 
         if ($useHiddenElement) {
-            $rendered = $this->renderHiddenElement($element) . $rendered;
+            $rendered = $this->renderHiddenElement($element).$rendered;
         }
 
         return $rendered;
@@ -162,8 +162,8 @@ class FormSelect extends AbstractHelper
      * )
      * </code>
      *
-     * @param  array $options
-     * @param  array $selectedOptions Option values that should be marked as selected
+     * @param  array  $options
+     * @param  array  $selectedOptions Option values that should be marked as selected
      * @return string
      */
     public function renderOptions(array $options, array $selectedOptions = array())
@@ -181,7 +181,7 @@ class FormSelect extends AbstractHelper
             if (is_scalar($optionSpec)) {
                 $optionSpec = array(
                     'label' => $optionSpec,
-                    'value' => $key
+                    'value' => $key,
                 );
             }
 
@@ -238,8 +238,8 @@ class FormSelect extends AbstractHelper
      * an optgroup is simply an option that has an additional "options" key
      * with an array following the specification for renderOptions().
      *
-     * @param  array $optgroup
-     * @param  array $selectedOptions
+     * @param  array  $optgroup
+     * @param  array  $selectedOptions
      * @return string
      */
     public function renderOptgroup(array $optgroup, array $selectedOptions = array())
@@ -255,7 +255,7 @@ class FormSelect extends AbstractHelper
         $this->validTagAttributes = $this->validOptgroupAttributes;
         $attributes = $this->createAttributesString($optgroup);
         if (!empty($attributes)) {
-            $attributes = ' ' . $attributes;
+            $attributes = ' '.$attributes;
         }
 
         return sprintf(
@@ -273,8 +273,8 @@ class FormSelect extends AbstractHelper
      * a domain issue -- you cannot have multiple options selected unless the
      * multiple attribute is present and enabled.
      *
-     * @param  mixed $value
-     * @param  array $attributes
+     * @param  mixed                     $value
+     * @param  array                     $attributes
      * @return array
      * @throws Exception\DomainException
      */

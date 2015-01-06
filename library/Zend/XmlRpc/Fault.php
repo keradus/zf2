@@ -100,12 +100,13 @@ class Fault
     /**
      * Set the fault code
      *
-     * @param int $code
+     * @param  int   $code
      * @return Fault
      */
     public function setCode($code)
     {
         $this->code = (int) $code;
+
         return $this;
     }
 
@@ -128,6 +129,7 @@ class Fault
     public function setMessage($message)
     {
         $this->message = (string) $message;
+
         return $this;
     }
 
@@ -144,13 +146,14 @@ class Fault
     /**
      * Set encoding to use in fault response
      *
-     * @param string $encoding
+     * @param  string $encoding
      * @return Fault
      */
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         AbstractValue::setEncoding($encoding);
+
         return $this;
     }
 
@@ -167,11 +170,11 @@ class Fault
     /**
      * Load an XMLRPC fault from XML
      *
-     * @param string $fault
-     * @return bool Returns true if successfully loaded fault response, false
-     * if response was not a fault response
+     * @param  string                       $fault
+     * @return bool                         Returns true if successfully loaded fault response, false
+     *                                            if response was not a fault response
      * @throws Exception\ExceptionInterface if no or faulty XML provided, or if fault
-     * response does not contain either code or message
+     *                                            response does not contain either code or message
      */
     public function loadXml($fault)
     {
@@ -184,7 +187,7 @@ class Fault
             $xml = XmlSecurity::scan($fault);
         } catch (\ZendXml\Exception\RuntimeException $e) {
             // Unsecure XML
-            throw new Exception\RuntimeException('Failed to parse XML fault: ' .  $e->getMessage(), 500, $e);
+            throw new Exception\RuntimeException('Failed to parse XML fault: '.$e->getMessage(), 500, $e);
         }
         if (!$xml instanceof SimpleXMLElement) {
             $errors = libxml_get_errors();
@@ -192,10 +195,11 @@ class Fault
                 if (empty($result)) {
                     return $item->message;
                 }
-                return $result . '; ' . $item->message;
+
+                return $result.'; '.$item->message;
             }, '');
             libxml_use_internal_errors($xmlErrorsFlag);
-            throw new Exception\InvalidArgumentException('Failed to parse XML fault: ' . $errors, 500);
+            throw new Exception\InvalidArgumentException('Failed to parse XML fault: '.$errors, 500);
         }
         libxml_use_internal_errors($xmlErrorsFlag);
 
@@ -246,7 +250,7 @@ class Fault
     /**
      * Determine if an XML response is an XMLRPC fault
      *
-     * @param string $xml
+     * @param  string $xml
      * @return bool
      */
     public static function isFault($xml)
@@ -271,7 +275,7 @@ class Fault
         // Create fault value
         $faultStruct = array(
             'faultCode'   => $this->getCode(),
-            'faultString' => $this->getMessage()
+            'faultString' => $this->getMessage(),
         );
         $value = AbstractValue::getXmlRpcValue($faultStruct);
 

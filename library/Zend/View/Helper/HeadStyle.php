@@ -45,7 +45,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      */
     protected $mediaTypes = array(
         'all', 'aural', 'braille', 'handheld', 'print',
-        'projection', 'screen', 'tty', 'tv'
+        'projection', 'screen', 'tty', 'tv',
     );
 
     /**
@@ -115,8 +115,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Overload method calls
      *
-     * @param  string $method
-     * @param  array  $args
+     * @param  string                           $method
+     * @param  array                            $args
      * @throws Exception\BadMethodCallException When no $content provided or invalid method
      * @return void
      */
@@ -182,8 +182,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
             $items[] = $this->itemToString($item, $indent);
         }
 
-        $return = $indent . implode($this->getSeparator() . $indent, $items);
-        $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
+        $return = $indent.implode($this->getSeparator().$indent, $items);
+        $return = preg_replace("/(\r\n?|\n)/", '$1'.$indent, $return);
 
         return $return;
     }
@@ -191,8 +191,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Start capture action
      *
-     * @param  string $type
-     * @param  string $attrs
+     * @param  string                     $type
+     * @param  string                     $attrs
      * @throws Exception\RuntimeException
      * @return void
      */
@@ -237,8 +237,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Create data item for use in stack
      *
-     * @param  string $content
-     * @param  array  $attributes
+     * @param  string   $content
+     * @param  array    $attributes
      * @return stdClass
      */
     public function createData($content, array $attributes)
@@ -306,7 +306,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
                             if (!in_array($type, $this->mediaTypes)) {
                                 continue;
                             }
-                            $value .= $type .',';
+                            $value .= $type.',';
                         }
                         $value = substr($value, 0, -1);
                     }
@@ -315,8 +315,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
             }
         }
 
-        $escapeStart = $indent . '<!--' . PHP_EOL;
-        $escapeEnd = $indent . '-->' . PHP_EOL;
+        $escapeStart = $indent.'<!--'.PHP_EOL;
+        $escapeEnd = $indent.'-->'.PHP_EOL;
         if (isset($item->attributes['conditional'])
             && !empty($item->attributes['conditional'])
             && is_string($item->attributes['conditional'])
@@ -325,16 +325,16 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
             $escapeEnd = null;
         }
 
-        $html = '<style type="text/css"' . $attrString . '>' . PHP_EOL
-            . $escapeStart . $indent . $item->content . PHP_EOL . $escapeEnd
-            . '</style>';
+        $html = '<style type="text/css"'.$attrString.'>'.PHP_EOL
+            .$escapeStart.$indent.$item->content.PHP_EOL.$escapeEnd
+            .'</style>';
 
         if (null == $escapeStart && null == $escapeEnd) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $item->attributes['conditional']) === '!IE') {
-                $html = '<!-->' . $html . '<!--';
+                $html = '<!-->'.$html.'<!--';
             }
-            $html = '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
+            $html = '<!--[if '.$item->attributes['conditional'].']>'.$html.'<![endif]-->';
         }
 
         return $html;
@@ -343,7 +343,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Override append to enforce style creation
      *
-     * @param  mixed $value
+     * @param  mixed                              $value
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -361,8 +361,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Override offsetSet to enforce style creation
      *
-     * @param  string|int $index
-     * @param  mixed      $value
+     * @param  string|int                         $index
+     * @param  mixed                              $value
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -380,7 +380,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Override prepend to enforce style creation
      *
-     * @param  mixed $value
+     * @param  mixed                              $value
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -398,7 +398,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Override set to enforce style creation
      *
-     * @param  mixed $value
+     * @param  mixed                              $value
      * @throws Exception\InvalidArgumentException
      * @return void
      */

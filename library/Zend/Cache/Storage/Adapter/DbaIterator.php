@@ -88,12 +88,13 @@ class DbaIterator implements IteratorInterface
     /**
      * Set iterator mode
      *
-     * @param int $mode
+     * @param  int         $mode
      * @return ApcIterator Fluent interface
      */
     public function setMode($mode)
     {
         $this->mode = (int) $mode;
+
         return $this;
     }
 

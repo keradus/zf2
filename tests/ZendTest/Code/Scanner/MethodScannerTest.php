@@ -16,7 +16,7 @@ class MethodScannerTest extends TestCase
 {
     public function testMethodScannerHasMethodInformation()
     {
-        $file   = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $file   = new FileScanner(__DIR__.'/../TestAsset/FooClass.php');
         $class  = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $method = $class->getMethod('fooBarBaz');
         $this->assertEquals('fooBarBaz', $method->getName());
@@ -30,7 +30,7 @@ class MethodScannerTest extends TestCase
 
     public function testMethodScannerReturnsParameters()
     {
-        $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $file       = new FileScanner(__DIR__.'/../TestAsset/BarClass.php');
         $class      = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $method     = $class->getMethod('three');
         $parameters = $method->getParameters();
@@ -39,7 +39,7 @@ class MethodScannerTest extends TestCase
 
     public function testMethodScannerReturnsParameterScanner()
     {
-        $file   = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $file   = new FileScanner(__DIR__.'/../TestAsset/BarClass.php');
         $class  = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $method = $class->getMethod('three');
         $this->assertEquals(array('o', 't', 'bbf'), $method->getParameters());
@@ -50,7 +50,7 @@ class MethodScannerTest extends TestCase
 
     public function testMethodScannerReturnsPropertyWithNoDefault()
     {
-        $file  = new FileScanner(__DIR__ . '/../TestAsset/BazClass.php');
+        $file  = new FileScanner(__DIR__.'/../TestAsset/BazClass.php');
         $class = $file->getClass('BazClass');
         $method = $class->getMethod('__construct');
         $this->assertTrue($method->isPublic());
@@ -58,7 +58,7 @@ class MethodScannerTest extends TestCase
 
     public function testMethodScannerReturnsLineNumbersForMethods()
     {
-        $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $file       = new FileScanner(__DIR__.'/../TestAsset/BarClass.php');
         $class      = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $method     = $class->getMethod('three');
         $this->assertEquals(27, $method->getLineStart());
@@ -67,16 +67,16 @@ class MethodScannerTest extends TestCase
 
     public function testMethodScannerReturnsBodyMethods()
     {
-        $file     = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $file     = new FileScanner(__DIR__.'/../TestAsset/BarClass.php');
         $class    = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $method   = $class->getMethod('three');
-        $expected = "\n" . '        $x = 5 + 5;' . "\n" . '        $y = \'this string\';' . "\n    ";
+        $expected = "\n".'        $x = 5 + 5;'."\n".'        $y = \'this string\';'."\n    ";
         $this->assertEquals($expected, $method->getBody());
     }
 
     public function testMethodScannerMethodSignatureLatestOptionalParamHasParentheses()
     {
-        $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $file       = new FileScanner(__DIR__.'/../TestAsset/BarClass.php');
         $class      = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $method = $class->getMethod('four');
         $paramTwo = $method->getParameter(1);
@@ -89,7 +89,7 @@ class MethodScannerTest extends TestCase
      */
     public function testMethodScannerWorksWithSingleAbstractFunction()
     {
-        $file = new FileScanner(__DIR__ . '/../TestAsset/AbstractClass.php');
+        $file = new FileScanner(__DIR__.'/../TestAsset/AbstractClass.php');
 
         $class = $file->getClass('ZendTest\Code\TestAsset\AbstractClass');
         $method = $class->getMethod('helloWorld');

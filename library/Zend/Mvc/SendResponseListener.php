@@ -47,6 +47,7 @@ class SendResponseListener extends AbstractListenerAggregate implements
         ));
         $this->eventManager = $eventManager;
         $this->attachDefaultListeners();
+
         return $this;
     }
 
@@ -62,6 +63,7 @@ class SendResponseListener extends AbstractListenerAggregate implements
         if (!$this->eventManager instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->eventManager;
     }
 
@@ -104,18 +106,20 @@ class SendResponseListener extends AbstractListenerAggregate implements
         if (!$this->event instanceof SendResponseEvent) {
             $this->setEvent(new SendResponseEvent());
         }
+
         return $this->event;
     }
 
     /**
      * Set the send response event
      *
-     * @param SendResponseEvent $e
+     * @param  SendResponseEvent $e
      * @return SendResponseEvent
      */
     public function setEvent(SendResponseEvent $e)
     {
         $this->event = $e;
+
         return $this;
     }
 

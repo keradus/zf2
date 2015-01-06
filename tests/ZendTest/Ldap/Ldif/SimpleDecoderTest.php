@@ -28,7 +28,7 @@ attr3: foo";
         $expected = array(
             'dn'          => 'cn=test3,ou=example,dc=cno',
             'objectclass' => array('oc1'),
-            'attr3'       => array('foo'));
+            'attr3'       => array('foo'), );
         $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
@@ -55,8 +55,8 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
             'attr3'       => array('foo', 'bar'),
             'cn'          => array('test blabla'),
             'verylong'    => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8'
-                                 . 'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
-                                 . '5789thvngwr789cghm738'),
+                                 .'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
+                                 .'5789thvngwr789cghm738', ),
         );
         $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
@@ -184,7 +184,7 @@ title:Product Manager, Rod and Reel Division";
             'uid'               => array('bjensen'),
             'telephonenumber'   => array('+1 408 555 1212'),
             'description'       => array('Babs is a big sailing fan, and travels extensively'
-                                       . ' in search of perfect sailing conditions.'),
+                                       .' in search of perfect sailing conditions.', ),
             'title'             => array('Product Manager, Rod and Reel Division'),
         );
         $actual   = Ldif\Encoder::decode($data);
@@ -216,9 +216,9 @@ description:: V2hhdCBhIGNhcmVmdWwgcmVhZGVyIHlvdSBhcmUhICBUaGlzIHZhbHVl
             'uid'             => array('gernj'),
             'telephonenumber' => array('+1 408 555 1212'),
             'description'     => array('What a careful reader you are!'
-                                     . '  This value is base-64-encoded because it has a '
-                                     . 'control character in it (a CR).' . "\r"
-                                     . '  By the way, you should really get out more.'),
+                                     .'  This value is base-64-encoded because it has a '
+                                     .'control character in it (a CR).'."\r"
+                                     .'  By the way, you should really get out more.', ),
         );
         $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
@@ -347,12 +347,12 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
             'dn'          => 'cn=test blabla,ou=example,dc=cno',
             'objectclass' => array('top', 'person', 'organizationalPerson'),
             'description' => array('What a careful reader you are!'
-                                 . '  This value is base-64-encoded because it has a '
-                                 . 'control character in it (a CR).' . "\r"
-                                 . '  By the way, you should really get out more.'),
+                                 .'  This value is base-64-encoded because it has a '
+                                 .'control character in it (a CR).'."\r"
+                                 .'  By the way, you should really get out more.', ),
             'verylong'    => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8'
-                                 . 'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
-                                 . '5789thvngwr789cghm738'),
+                                 .'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
+                                 .'5789thvngwr789cghm738', ),
         );
         $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
@@ -377,11 +377,10 @@ memberurl: ldap:///(&(cn=myName)(uid=something))";
         $expected = array(
             'dn'          => 'cn=test3,ou=example,dc=cno',
             'objectclass' => array('oc1'),
-            'memberurl'   => array('ldap:///(&(cn=myName)(uid=something))'));
+            'memberurl'   => array('ldap:///(&(cn=myName)(uid=something))'), );
         $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
-
 
     public function testDecodeSimpleSingleItemWithMultilineComment()
     {
@@ -400,7 +399,7 @@ attr3:: w7bDpMO8";
         $expected = array(
             'dn'          => 'cn=test3,ou=example,dc=cno',
             'objectclass' => array('oc1'),
-            'attr3'       => array('öäü'));
+            'attr3'       => array('öäü'), );
         $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual[0]);
     }

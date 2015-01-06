@@ -58,7 +58,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
                 '1９2八3四８'     => '123',
                 'Ｃ 4.5B　6'      => '456',
                 '9壱8＠7．6，5＃4' => '987654',
-                '789'              => '789'
+                '789'              => '789',
                 );
         } else {
             // POSIX named classes are not supported, use alternative 0-9 match
@@ -69,7 +69,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
                 'abcxyz'  => '',
                 'AZ@#4.3' => '43',
                 '1.23'    => '123',
-                '0x9f'    => '09'
+                '0x9f'    => '09',
                 );
         }
 
@@ -89,7 +89,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 'abc123',
-                'abc 123'
+                'abc 123',
             )),
             array(true),
             array(false),

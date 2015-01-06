@@ -34,6 +34,6 @@ class SocketKeepaliveTest extends SocketTest
      */
     protected $config = array(
         'adapter'     => 'Zend\Http\Client\Adapter\Socket',
-        'keepalive'   => true
+        'keepalive'   => true,
     );
 }

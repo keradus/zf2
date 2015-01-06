@@ -42,5 +42,5 @@ class AcceptRangesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Accept-Ranges: bytes', $acceptRangesHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

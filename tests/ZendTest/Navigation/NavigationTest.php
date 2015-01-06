@@ -21,7 +21,7 @@ use Zend\Navigation\Page;
 class NavigationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var     Zend_Navigation
+     * @var Zend_Navigation
      */
     private $_navigation;
 

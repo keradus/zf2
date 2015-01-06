@@ -75,10 +75,10 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  Dn      $dn
-     * @param  array   $data
-     * @param  bool $fromDataSource
-     * @param  Ldap    $ldap
+     * @param  Dn                      $dn
+     * @param  array                   $data
+     * @param  bool                    $fromDataSource
+     * @param  Ldap                    $ldap
      * @throws Exception\LdapException
      */
     protected function __construct(Dn $dn, array $data, $fromDataSource, Ldap $ldap = null)
@@ -101,7 +101,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     public function __sleep()
     {
         return array('dn', 'currentData', 'newDn', 'originalData',
-                     'new', 'delete', 'children');
+                     'new', 'delete', 'children', );
     }
 
     /**
@@ -135,8 +135,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  Ldap $ldap
-     * @return Node Provides a fluid interface
+     * @param  Ldap                    $ldap
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function attachLdap(Ldap $ldap)
@@ -192,8 +192,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Trigger an event
      *
-     * @param  string             $event Event name
-     * @param  array|\ArrayAccess $argv  Array of arguments; typically, should be associative
+     * @param string             $event Event name
+     * @param array|\ArrayAccess $argv  Array of arguments; typically, should be associative
      */
     protected function triggerEvent($event, $argv = array())
     {
@@ -208,8 +208,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     }
 
     /**
-     * @param  array   $data
-     * @param  bool $fromDataSource
+     * @param  array                   $data
+     * @param  bool                    $fromDataSource
      * @throws Exception\LdapException
      */
     protected function loadData(array $data, $fromDataSource)
@@ -228,8 +228,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Factory method to create a new detached Zend\Ldap\Node for a given DN.
      *
-     * @param  string|array|Dn $dn
-     * @param  array           $objectClass
+     * @param  string|array|Dn         $dn
+     * @param  array                   $objectClass
      * @return Node
      * @throws Exception\LdapException
      */
@@ -252,8 +252,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Factory method to create an attached Zend\Ldap\Node for a given DN.
      *
-     * @param  string|array|Dn $dn
-     * @param  Ldap            $ldap
+     * @param  string|array|Dn         $dn
+     * @param  Ldap                    $ldap
      * @return Node|null
      * @throws Exception\LdapException
      */
@@ -278,8 +278,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Factory method to create a detached Zend\Ldap\Node from array data.
      *
-     * @param  array   $data
-     * @param  bool $fromDataSource
+     * @param  array                   $data
+     * @param  bool                    $fromDataSource
      * @return Node
      * @throws Exception\LdapException
      */
@@ -324,7 +324,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * Node will be added (instead of updated) on calling update() if $new is true.
      *
-     * @param  bool $new
+     * @param bool $new
      */
     protected function markAsNew($new)
     {
@@ -349,13 +349,12 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * Node will be deleted on calling update() if $delete is true.
      *
-     * @param  bool $delete
+     * @param bool $delete
      */
     protected function markAsToBeDeleted($delete)
     {
         $this->delete = ($delete === true) ? true : false;
     }
-
 
     /**
      * Is this node going to be deleted once update() is called?
@@ -400,8 +399,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Sends all pending changes to the LDAP server
      *
-     * @param  Ldap $ldap
-     * @return Node Provides a fluid interface
+     * @param  Ldap                    $ldap
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      * @trigger pre-delete
      * @trigger post-delete
@@ -428,6 +427,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
                 $ldap->delete($this->dn);
                 $this->triggerEvent('post-delete');
             }
+
             return $this;
         }
 
@@ -497,9 +497,9 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  Dn|string|array $newDn
+     * @param  Dn|string|array         $newDn
      * @throws Exception\LdapException
-     * @return Node Provides a fluid interface
+     * @return Node                    Provides a fluid interface
      */
     public function setDn($newDn)
     {
@@ -518,9 +518,9 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  Dn|string|array $newDn
+     * @param  Dn|string|array         $newDn
      * @throws Exception\LdapException
-     * @return Node Provides a fluid interface
+     * @return Node                    Provides a fluid interface
      */
     public function move($newDn)
     {
@@ -532,9 +532,9 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  Dn|string|array $newDn
+     * @param  Dn|string|array         $newDn
      * @throws Exception\LdapException
-     * @return Node Provides a fluid interface
+     * @return Node                    Provides a fluid interface
      */
     public function rename($newDn)
     {
@@ -546,8 +546,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  array|string $value
-     * @return Node Provides a fluid interface
+     * @param  array|string            $value
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function setObjectClass($value)
@@ -562,8 +562,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  array|string $value
-     * @return Node Provides a fluid interface
+     * @param  array|string            $value
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function appendObjectClass($value)
@@ -576,7 +576,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Returns a LDIF representation of the current node
      *
-     * @param  array $options Additional options used during encoding
+     * @param  array  $options Additional options used during encoding
      * @return string
      */
     public function toLdif(array $options = array())
@@ -622,7 +622,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
         $changes = array(
             'add'     => array(),
             'delete'  => array(),
-            'replace' => array());
+            'replace' => array(), );
         foreach ($this->currentData as $key => $value) {
             if (!array_key_exists($key, $this->originalData) && !empty($value)) {
                 $changes['add'][$key] = $value;
@@ -645,14 +645,15 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @param  mixed  $value
-     * @return Node Provides a fluid interface
+     * @param  string                  $name
+     * @param  mixed                   $value
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function setAttribute($name, $value)
     {
         $this->_setAttribute($name, $value, false);
+
         return $this;
     }
 
@@ -661,9 +662,9 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @param  mixed  $value
-     * @return Node Provides a fluid interface
+     * @param  string                  $name
+     * @param  mixed                   $value
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function appendToAttribute($name, $value)
@@ -676,9 +677,9 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Checks if the attribute can be set and sets it accordingly.
      *
-     * @param  string  $name
-     * @param  mixed   $value
-     * @param  bool $append
+     * @param  string                  $name
+     * @param  mixed                   $value
+     * @param  bool                    $append
      * @throws Exception\LdapException
      */
     protected function _setAttribute($name, $value, $append)
@@ -692,15 +693,16 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string        $name
-     * @param  int|array $value
-     * @param  bool       $utc
-     * @return Node Provides a fluid interface
+     * @param  string                  $name
+     * @param  int|array               $value
+     * @param  bool                    $utc
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function setDateTimeAttribute($name, $value, $utc = false)
     {
         $this->_setDateTimeAttribute($name, $value, $utc, false);
+
         return $this;
     }
 
@@ -709,10 +711,10 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string        $name
-     * @param  int|array $value
-     * @param  bool       $utc
-     * @return Node Provides a fluid interface
+     * @param  string                  $name
+     * @param  int|array               $value
+     * @param  bool                    $utc
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function appendToDateTimeAttribute($name, $value, $utc = false)
@@ -725,10 +727,10 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Checks if the attribute can be set and sets it accordingly.
      *
-     * @param  string        $name
-     * @param  int|array $value
-     * @param  bool       $utc
-     * @param  bool       $append
+     * @param  string                  $name
+     * @param  int|array               $value
+     * @param  bool                    $utc
+     * @param  bool                    $append
      * @throws Exception\LdapException
      */
     protected function _setDateTimeAttribute($name, $value, $utc, $append)
@@ -740,10 +742,10 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Sets a LDAP password.
      *
-     * @param  string $password
-     * @param  string $hashType
-     * @param  string $attribName
-     * @return Node Provides a fluid interface
+     * @param  string                  $password
+     * @param  string                  $hashType
+     * @param  string                  $attribName
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function setPasswordAttribute($password, $hashType = Attribute::PASSWORD_HASH_MD5,
@@ -762,8 +764,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @return Node Provides a fluid interface
+     * @param  string                  $name
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function deleteAttribute($name)
@@ -799,7 +801,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     }
 
     /**
-     * @param  string $name
+     * @param  string                  $name
      * @return bool
      * @throws Exception\LdapException
      */
@@ -823,8 +825,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @param         $value
+     * @param string $name
+     * @param        $value
      */
     public function __set($name, $value)
     {
@@ -838,7 +840,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string $name
+     * @param  string                  $name
      * @throws Exception\LdapException
      */
     public function __unset($name)
@@ -852,8 +854,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @param  mixed  $value
+     * @param  string                  $name
+     * @param  mixed                   $value
      * @throws Exception\LdapException
      */
     public function offsetSet($name, $value)
@@ -869,7 +871,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  string $name
+     * @param  string                  $name
      * @throws Exception\LdapException
      */
     public function offsetUnset($name)
@@ -882,7 +884,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an online method.
      *
-     * @param  Ldap $ldap
+     * @param  Ldap                    $ldap
      * @return bool
      * @throws Exception\LdapException
      */
@@ -901,8 +903,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * This is an online method.
      *
-     * @param  Ldap $ldap
-     * @return Node Provides a fluid interface
+     * @param  Ldap                    $ldap
+     * @return Node                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function reload(Ldap $ldap = null)
@@ -922,7 +924,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * This is an online method.
      *
      * @param  string|Filter\AbstractFilter $filter
-     * @param  int                      $scope
+     * @param  int                          $scope
      * @param  string                       $sort
      * @return Node\Collection
      * @throws Exception\LdapException
@@ -941,7 +943,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * This is an online method.
      *
      * @param  string|Filter\AbstractFilter $filter
-     * @param  int                      $scope
+     * @param  int                          $scope
      * @return int
      * @throws Exception\LdapException
      */
@@ -993,8 +995,10 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
             if ($this->isAttached()) {
                 return ($this->countChildren() > 0);
             }
+
             return false;
         }
+
         return (count($this->children) > 0);
     }
 
@@ -1024,7 +1028,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Returns the parent of the current node.
      *
-     * @param  Ldap $ldap
+     * @param  Ldap                    $ldap
      * @return Node
      * @throws Exception\LdapException
      */

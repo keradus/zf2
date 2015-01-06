@@ -65,7 +65,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testInvalidKeysShouldBeIgnored()
     {
         $count = 0;
-        foreach (array(array('foo', true), array('foo', new \stdClass), array('foo', array())) as $spec) {
+        foreach (array(array('foo', true), array('foo', new \stdClass()), array('foo', array())) as $spec) {
             $this->request->addParam($spec[0], $spec[1]);
             $this->assertNull($this->request->getParam('foo'));
             $params = $this->request->getParams();
@@ -245,7 +245,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 'four',
                 true,
             ),
-            'id'     => 'foobar'
+            'id'     => 'foobar',
         );
     }
 

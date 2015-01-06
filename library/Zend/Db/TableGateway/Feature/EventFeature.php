@@ -48,7 +48,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
     protected $event = null;
 
     /**
-     * @param EventManagerInterface $eventManager
+     * @param EventManagerInterface          $eventManager
      * @param EventFeature\TableGatewayEvent $tableGatewayEvent
      */
     public function __construct(
@@ -57,7 +57,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
     ) {
         $this->eventManager = ($eventManager instanceof EventManagerInterface)
                             ? $eventManager
-                            : new EventManager;
+                            : new EventManager();
 
         $this->eventManager->addIdentifiers(array(
             'Zend\Db\TableGateway\TableGateway',
@@ -142,7 +142,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      * - $resultSet as "result_set"
      *
      * @param  StatementInterface $statement
-     * @param  ResultInterface $result
+     * @param  ResultInterface    $result
      * @param  ResultSetInterface $resultSet
      * @return void
      */
@@ -152,7 +152,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
         $this->event->setParams(array(
             'statement' => $statement,
             'result' => $result,
-            'result_set' => $resultSet
+            'result_set' => $resultSet,
         ));
         $this->eventManager->trigger($this->event);
     }
@@ -181,7 +181,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      * - $result as "result"
      *
      * @param  StatementInterface $statement
-     * @param  ResultInterface $result
+     * @param  ResultInterface    $result
      * @return void
      */
     public function postInsert(StatementInterface $statement, ResultInterface $result)
@@ -218,7 +218,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      * - $result as "result"
      *
      * @param  StatementInterface $statement
-     * @param  ResultInterface $result
+     * @param  ResultInterface    $result
      * @return void
      */
     public function postUpdate(StatementInterface $statement, ResultInterface $result)
@@ -255,7 +255,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      * - $result as "result"
      *
      * @param  StatementInterface $statement
-     * @param  ResultInterface $result
+     * @param  ResultInterface    $result
      * @return void
      */
     public function postDelete(StatementInterface $statement, ResultInterface $result)

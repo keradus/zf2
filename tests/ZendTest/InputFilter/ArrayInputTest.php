@@ -191,7 +191,7 @@ class ArrayInputTest extends InputTest
     {
         return array(
             array(
-                'fallbackValue' => array()
+                'fallbackValue' => array(),
             ),
             array(
                 'fallbackValue' => array(''),

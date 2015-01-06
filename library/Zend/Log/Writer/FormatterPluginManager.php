@@ -41,7 +41,7 @@ class FormatterPluginManager extends AbstractPluginManager
      *
      * Checks that the formatter loaded is an instance of Formatter\FormatterInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

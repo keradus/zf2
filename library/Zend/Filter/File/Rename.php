@@ -31,7 +31,7 @@ class Rename extends Filter\AbstractFilter
      * 'overwrite' => Shall existing files be overwritten ?
      * 'randomize' => Shall target files have a random postfix attached?
      *
-     * @param  string|array|Traversable $options Target file or directory to be renamed
+     * @param  string|array|Traversable           $options Target file or directory to be renamed
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options)
@@ -88,7 +88,7 @@ class Rename extends Filter\AbstractFilter
      * 'overwrite' => Shall existing files be overwritten?
      * 'randomize' => Shall target files have a random postfix attached?
      *
-     * @param  string|array $options Old file or directory to be rewritten
+     * @param  string|array                       $options Old file or directory to be rewritten
      * @return Rename
      * @throws Exception\InvalidArgumentException
      */
@@ -111,9 +111,9 @@ class Rename extends Filter\AbstractFilter
      * Returns only the new filename without moving it
      * But existing files will be erased when the overwrite option is true
      *
-     * @param  string  $value  Full path of file to change
-     * @param  bool $source Return internal informations
-     * @return string The new filename which has been set
+     * @param  string                             $value  Full path of file to change
+     * @param  bool                               $source Return internal informations
+     * @return string                             The new filename which has been set
      * @throws Exception\InvalidArgumentException If the target file already exists.
      */
     public function getNewName($value, $source = false)
@@ -154,9 +154,9 @@ class Rename extends Filter\AbstractFilter
      * Renames the file $value to the new name set before
      * Returns the file $value, removing all but digit characters
      *
-     * @param  string|array $value Full path of file to change or $_FILES data array
+     * @param  string|array               $value Full path of file to change or $_FILES data array
      * @throws Exception\RuntimeException
-     * @return string|array The new filename which has been set
+     * @return string|array               The new filename which has been set
      */
     public function filter($value)
     {
@@ -190,7 +190,7 @@ class Rename extends Filter\AbstractFilter
         if ($result !== true) {
             throw new Exception\RuntimeException(
                 sprintf(
-                    "File '%s' could not be renamed. " .
+                    "File '%s' could not be renamed. ".
                     "An error occurred while processing the file.",
                     $value
                 )
@@ -199,8 +199,10 @@ class Rename extends Filter\AbstractFilter
 
         if ($isFileUpload) {
             $uploadData['tmp_name'] = $file['target'];
+
             return $uploadData;
         }
+
         return $file['target'];
     }
 
@@ -282,7 +284,7 @@ class Rename extends Filter\AbstractFilter
      * Internal method to resolve the requested source
      * and return all other related parameters
      *
-     * @param  string $file Filename to get the informations for
+     * @param  string       $file Filename to get the informations for
      * @return array|string
      */
     protected function _getFileName($file)
@@ -322,10 +324,10 @@ class Rename extends Filter\AbstractFilter
 
         if ($rename['randomize']) {
             $info = pathinfo($rename['target']);
-            $newTarget = $info['dirname'] . DIRECTORY_SEPARATOR .
-                $info['filename'] . uniqid('_');
+            $newTarget = $info['dirname'].DIRECTORY_SEPARATOR.
+                $info['filename'].uniqid('_');
             if (isset($info['extension'])) {
-                $newTarget .= '.' . $info['extension'];
+                $newTarget .= '.'.$info['extension'];
             }
             $rename['target'] = $newTarget;
         }

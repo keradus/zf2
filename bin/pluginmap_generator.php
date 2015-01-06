@@ -10,7 +10,6 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 use Zend\Console;
 use Zend\Loader\StandardAutoloader;
 
@@ -27,18 +26,17 @@ use Zend\Loader\StandardAutoloader;
  * --overwrite|-w               Whether or not to overwrite existing autoload
  *                              file
  */
-
-$libPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
+$libPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__.'/../library';
 if (!is_dir($libPath)) {
     // Try to load StandardAutoloader from include_path
     if (false === (include 'Zend/Loader/StandardAutoloader.php')) {
-        echo "Unable to locate autoloader via include_path; aborting" . PHP_EOL;
+        echo "Unable to locate autoloader via include_path; aborting".PHP_EOL;
         exit(2);
     }
 } else {
     // Try to load StandardAutoloader from library
-    if (false === (include $libPath . '/Zend/Loader/StandardAutoloader.php')) {
-        echo "Unable to locate autoloader via library; aborting" . PHP_EOL;
+    if (false === (include $libPath.'/Zend/Loader/StandardAutoloader.php')) {
+        echo "Unable to locate autoloader via library; aborting".PHP_EOL;
         exit(2);
     }
 }
@@ -75,9 +73,9 @@ if (array_key_exists('PWD', $_SERVER)) {
 
 if (isset($opts->l)) {
     $libraryPath = $opts->l;
-    $libraryPath = rtrim($libraryPath, '/\\') . DIRECTORY_SEPARATOR;
+    $libraryPath = rtrim($libraryPath, '/\\').DIRECTORY_SEPARATOR;
     if (!is_dir($libraryPath)) {
-        echo "Invalid library directory provided" . PHP_EOL . PHP_EOL;
+        echo "Invalid library directory provided".PHP_EOL.PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);
     }
@@ -86,23 +84,23 @@ if (isset($opts->l)) {
 
 $usingStdout = false;
 $appending = $opts->getOption('a');
-$output = $path . DIRECTORY_SEPARATOR . 'plugin_classmap.php';
+$output = $path.DIRECTORY_SEPARATOR.'plugin_classmap.php';
 if (isset($opts->o)) {
     $output = $opts->o;
     if ('-' == $output) {
         $output = STDOUT;
         $usingStdout = true;
     } elseif (!is_writeable(dirname($output))) {
-        echo "Cannot write to '$output'; aborting." . PHP_EOL
-            . PHP_EOL
-            . $opts->getUsageMessage();
+        echo "Cannot write to '$output'; aborting.".PHP_EOL
+            .PHP_EOL
+            .$opts->getUsageMessage();
         exit(2);
     } elseif (file_exists($output)) {
         if (!$opts->getOption('w') && !$appending) {
-            echo "Plugin map file already exists at '$output'," . PHP_EOL
-                . "but 'overwrite' flag was not specified; aborting." . PHP_EOL
-                . PHP_EOL
-                . $opts->getUsageMessage();
+            echo "Plugin map file already exists at '$output',".PHP_EOL
+                ."but 'overwrite' flag was not specified; aborting.".PHP_EOL
+                .PHP_EOL
+                .$opts->getUsageMessage();
             exit(2);
         }
     }
@@ -110,9 +108,9 @@ if (isset($opts->o)) {
 
 if (!$usingStdout) {
     if ($appending) {
-        echo "Appending to plugin class map '$output' for classes in '$path'..." . PHP_EOL;
+        echo "Appending to plugin class map '$output' for classes in '$path'...".PHP_EOL;
     } else {
-        echo "Creating plugin class map for classes in '$path'..." . PHP_EOL;
+        echo "Creating plugin class map for classes in '$path'...".PHP_EOL;
     }
 }
 
@@ -120,10 +118,10 @@ if (!$usingStdout) {
 $l = new \Zend\File\ClassFileLocator($path);
 
 // Iterate over each element in the path, and create a map of pluginname => classname
-$map    = new \stdClass;
+$map    = new \stdClass();
 foreach ($l as $file) {
     $namespaces = $file->getNamespaces();
-    $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
+    $namespace = empty($file->namespace) ? '' : $file->namespace.'\\';
 
     foreach ($file->getClasses() as $classname) {
         $plugin = $classname;
@@ -139,7 +137,7 @@ foreach ($l as $file) {
 }
 
 if ($appending) {
-    $content = var_export((array) $map, true) . ';';
+    $content = var_export((array) $map, true).';';
 
     // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
     $content = str_replace("\\'", "'", $content);
@@ -157,22 +155,22 @@ if ($appending) {
 } else {
     // Create a file with the class/file map.
     // Stupid syntax highlighters make separating < from PHP declaration necessary
-    $content = '<' . "?php\n\n"
-             . "// plugin class map\n"
-             . "// auto-generated using "
-             . basename($_SERVER['argv'][0]) . ', ' . date('Y-m-d H:i:s') . "\n\n"
-             . 'return ' . var_export((array) $map, true) . ';';
+    $content = '<'."?php\n\n"
+             ."// plugin class map\n"
+             ."// auto-generated using "
+             .basename($_SERVER['argv'][0]).', '.date('Y-m-d H:i:s')."\n\n"
+             .'return '.var_export((array) $map, true).';';
 
     // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
     $content = str_replace("\\'", "'", $content);
 }
 
 // Make the file end by EOL
-$content = rtrim($content, "\n") . "\n";
+$content = rtrim($content, "\n")."\n";
 
 // Write the contents to disk
 file_put_contents($output, $content);
 
 if (!$usingStdout) {
-    echo "Wrote plugin classmap file to '" . realpath($output) . "'" . PHP_EOL;
+    echo "Wrote plugin classmap file to '".realpath($output)."'".PHP_EOL;
 }

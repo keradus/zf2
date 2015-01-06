@@ -163,7 +163,7 @@ class Response extends AbstractMessage implements ResponseInterface
     /**
      * Populate object from string
      *
-     * @param  string $string
+     * @param  string                             $string
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -231,13 +231,13 @@ class Response extends AbstractMessage implements ResponseInterface
     /**
      * Set HTTP status code and (optionally) message
      *
-     * @param  int $code
+     * @param  int                                $code
      * @throws Exception\InvalidArgumentException
      * @return self
      */
     public function setStatusCode($code)
     {
-        $const = get_class($this) . '::STATUS_CODE_' . $code;
+        $const = get_class($this).'::STATUS_CODE_'.$code;
         if (!is_numeric($code) || !defined($const)) {
             $code = is_scalar($code) ? $code : gettype($code);
             throw new Exception\InvalidArgumentException(sprintf(
@@ -246,6 +246,7 @@ class Response extends AbstractMessage implements ResponseInterface
             ));
         }
         $this->statusCode = (int) $code;
+
         return $this;
     }
 
@@ -262,7 +263,7 @@ class Response extends AbstractMessage implements ResponseInterface
     /**
      * Set custom HTTP status code
      *
-     * @param  int $code
+     * @param  int                                $code
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -277,16 +278,18 @@ class Response extends AbstractMessage implements ResponseInterface
         }
 
         $this->statusCode = (int) $code;
+
         return $this;
     }
 
     /**
-     * @param string $reasonPhrase
+     * @param  string $reasonPhrase
      * @return self
      */
     public function setReasonPhrase($reasonPhrase)
     {
         $this->reasonPhrase = trim($reasonPhrase);
+
         return $this;
     }
 
@@ -300,6 +303,7 @@ class Response extends AbstractMessage implements ResponseInterface
         if (null == $this->reasonPhrase and isset($this->recommendedReasonPhrases[$this->statusCode])) {
             return $this->recommendedReasonPhrases[$this->statusCode];
         }
+
         return $this->reasonPhrase;
     }
 
@@ -324,7 +328,7 @@ class Response extends AbstractMessage implements ResponseInterface
 
         if (!empty($contentEncoding)) {
             $contentEncoding = $contentEncoding->getFieldValue();
-            if ($contentEncoding =='gzip') {
+            if ($contentEncoding == 'gzip') {
                 $body = $this->decodeGzip($body);
             } elseif ($contentEncoding == 'deflate') {
                 $body = $this->decodeDeflate($body);
@@ -342,6 +346,7 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isClientError()
     {
         $code = $this->getStatusCode();
+
         return ($code < 500 && $code >= 400);
     }
 
@@ -363,6 +368,7 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isInformational()
     {
         $code = $this->getStatusCode();
+
         return ($code >= 100 && $code < 200);
     }
 
@@ -394,6 +400,7 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isServerError()
     {
         $code = $this->getStatusCode();
+
         return (500 <= $code && 600 > $code);
     }
 
@@ -405,6 +412,7 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isRedirect()
     {
         $code = $this->getStatusCode();
+
         return (300 <= $code && 400 > $code);
     }
 
@@ -416,6 +424,7 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isSuccess()
     {
         $code = $this->getStatusCode();
+
         return (200 <= $code && 300 > $code);
     }
 
@@ -432,6 +441,7 @@ class Response extends AbstractMessage implements ResponseInterface
             $this->getStatusCode(),
             $this->getReasonPhrase()
         );
+
         return trim($status);
     }
 
@@ -442,17 +452,18 @@ class Response extends AbstractMessage implements ResponseInterface
      */
     public function toString()
     {
-        $str  = $this->renderStatusLine() . "\r\n";
+        $str  = $this->renderStatusLine()."\r\n";
         $str .= $this->getHeaders()->toString();
         $str .= "\r\n";
         $str .= $this->getContent();
+
         return $str;
     }
 
     /**
      * Decode a "chunked" transfer-encoded body and return the decoded text
      *
-     * @param  string $body
+     * @param  string                     $body
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -481,7 +492,7 @@ class Response extends AbstractMessage implements ResponseInterface
      *
      * Currently requires PHP with zlib support
      *
-     * @param  string $body
+     * @param  string                     $body
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -503,6 +514,7 @@ class Response extends AbstractMessage implements ResponseInterface
                 $test
             );
         }
+
         return $return;
     }
 
@@ -511,7 +523,7 @@ class Response extends AbstractMessage implements ResponseInterface
      *
      * Currently requires PHP with zlib support
      *
-     * @param  string $body
+     * @param  string                     $body
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -539,6 +551,7 @@ class Response extends AbstractMessage implements ResponseInterface
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
         }
+
         return gzinflate($body);
     }
 }

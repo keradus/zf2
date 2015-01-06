@@ -78,7 +78,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $response->setStatusCode(200);
             $event->setError($error);
             $this->strategy->detectNotFoundError($event);
-            $this->assertTrue($response->isNotFound(), 'Failed asserting against ' . $key);
+            $this->assertTrue($response->isNotFound(), 'Failed asserting against '.$key);
         }
     }
 
@@ -270,7 +270,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $this->strategy->detectNotFoundError($event);
             $response = $event->getResponse();
             $this->assertInstanceOf('Zend\Http\Response', $response);
-            $this->assertTrue($response->isNotFound(), 'Failed asserting against ' . $key);
+            $this->assertTrue($response->isNotFound(), 'Failed asserting against '.$key);
         }
     }
 

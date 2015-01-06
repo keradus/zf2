@@ -62,11 +62,12 @@ class CredentialTreatmentAdapter extends AbstractAdapter
      *  'MD5(?)'
      *
      * @param  string $treatment
-     * @return self Provides a fluent interface
+     * @return self   Provides a fluent interface
      */
     public function setCredentialTreatment($treatment)
     {
         $this->credentialTreatment = $treatment;
+
         return $this;
     }
 
@@ -84,7 +85,7 @@ class CredentialTreatmentAdapter extends AbstractAdapter
         }
 
         $credentialExpression = new SqlExpr(
-            '(CASE WHEN ?' . ' = ' . $this->credentialTreatment . ' THEN 1 ELSE 0 END) AS ?',
+            '(CASE WHEN ?'.' = '.$this->credentialTreatment.' THEN 1 ELSE 0 END) AS ?',
             array($this->credentialColumn, $this->credential, 'zend_auth_credential_match'),
             array(SqlExpr::TYPE_IDENTIFIER, SqlExpr::TYPE_VALUE, SqlExpr::TYPE_IDENTIFIER)
         );
@@ -103,7 +104,7 @@ class CredentialTreatmentAdapter extends AbstractAdapter
      * the record in the resultset is indeed a record that matched the
      * identity provided to this adapter.
      *
-     * @param  array $resultIdentity
+     * @param  array                $resultIdentity
      * @return AuthenticationResult
      */
     protected function authenticateValidateResult($resultIdentity)
@@ -111,6 +112,7 @@ class CredentialTreatmentAdapter extends AbstractAdapter
         if ($resultIdentity['zend_auth_credential_match'] != '1') {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
             $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
+
             return $this->authenticateCreateAuthResult();
         }
 
@@ -119,6 +121,7 @@ class CredentialTreatmentAdapter extends AbstractAdapter
 
         $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;
         $this->authenticateResultInfo['messages'][] = 'Authentication successful.';
+
         return $this->authenticateCreateAuthResult();
     }
 }

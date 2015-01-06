@@ -23,7 +23,7 @@ class CreateTableDecoratorTest extends \PHPUnit_Framework_TestCase
     public function testSetSubject()
     {
         $ctd = new CreateTableDecorator();
-        $ct = new CreateTable;
+        $ct = new CreateTable();
         $this->assertSame($ctd, $ctd->setSubject($ct));
     }
 

@@ -68,22 +68,24 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set driver
      *
-     * @param  Pdo $driver
+     * @param  Pdo       $driver
      * @return Statement
      */
     public function setDriver(Pdo $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Statement
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -98,12 +100,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Initialize
      *
-     * @param  \PDO $connectionResource
+     * @param  \PDO      $connectionResource
      * @return Statement
      */
     public function initialize(\PDO $connectionResource)
     {
         $this->pdo = $connectionResource;
+
         return $this;
     }
 
@@ -116,6 +119,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setResource(\PDOStatement $pdoStatement)
     {
         $this->resource = $pdoStatement;
+
         return $this;
     }
 
@@ -132,12 +136,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set sql
      *
-     * @param string $sql
+     * @param  string    $sql
      * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
@@ -152,12 +157,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param ParameterContainer $parameterContainer
+     * @param  ParameterContainer $parameterContainer
      * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -170,7 +176,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string $sql
+     * @param  string                     $sql
      * @throws Exception\RuntimeException
      */
     public function prepare($sql = null)
@@ -202,7 +208,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param null|array|ParameterContainer $parameters
+     * @param  null|array|ParameterContainer   $parameters
      * @throws Exception\InvalidQueryException
      * @return Result
      */
@@ -230,7 +236,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->bindParametersFromContainer();
         }
         /** END Standard ParameterContainer Merging Block */
-
         if ($this->profiler) {
             $this->profiler->profilerStart($this);
         }
@@ -242,7 +247,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                 $this->profiler->profilerFinish();
             }
             throw new Exception\InvalidQueryException(
-                'Statement could not be executed (' . implode(' - ', $this->resource->errorInfo()) . ')',
+                'Statement could not be executed ('.implode(' - ', $this->resource->errorInfo()).')',
                 null,
                 $e
             );
@@ -253,6 +258,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource, $this);
+
         return $result;
     }
 

@@ -50,7 +50,7 @@ class InstanceManager /* implements InstanceManagerInterface */
         /**
          * alias|class => bool
          */
-        'shared' => true
+        'shared' => true,
     );
 
     /**
@@ -93,7 +93,7 @@ class InstanceManager /* implements InstanceManagerInterface */
     public function addSharedInstance($instance, $classOrAlias)
     {
         if (!is_object($instance)) {
-            throw new Exception\InvalidArgumentException('This method requires an object to be shared. Class or Alias given: ' . $classOrAlias);
+            throw new Exception\InvalidArgumentException('This method requires an object to be shared. Class or Alias given: '.$classOrAlias);
         }
 
         $this->sharedInstances[$classOrAlias] = $instance;
@@ -113,8 +113,8 @@ class InstanceManager /* implements InstanceManagerInterface */
         $hashKey = $this->createHashForKeys($classOrAlias, array_keys($params));
         if (isset($this->sharedInstancesWithParams['hashShort'][$hashKey])) {
             $hashValue = $this->createHashForValues($classOrAlias, $params);
-            if (isset($this->sharedInstancesWithParams['hashLong'][$hashKey . '/' . $hashValue])) {
-                return ($returnFastHashLookupKey) ? $hashKey . '/' . $hashValue : true;
+            if (isset($this->sharedInstancesWithParams['hashLong'][$hashKey.'/'.$hashValue])) {
+                return ($returnFastHashLookupKey) ? $hashKey.'/'.$hashValue : true;
             }
         }
 
@@ -141,7 +141,7 @@ class InstanceManager /* implements InstanceManagerInterface */
         }
 
         $this->sharedInstancesWithParams['hashShort'][$hashKey] = true;
-        $this->sharedInstancesWithParams['hashLong'][$hashKey . '/' . $hashValue] = $instance;
+        $this->sharedInstancesWithParams['hashLong'][$hashKey.'/'.$hashValue] = $instance;
     }
 
     /**
@@ -162,8 +162,8 @@ class InstanceManager /* implements InstanceManagerInterface */
         $hashKey = $this->createHashForKeys($classOrAlias, array_keys($params));
         if (isset($this->sharedInstancesWithParams['hashShort'][$hashKey])) {
             $hashValue = $this->createHashForValues($classOrAlias, $params);
-            if (isset($this->sharedInstancesWithParams['hashLong'][$hashKey . '/' . $hashValue])) {
-                return $this->sharedInstancesWithParams['hashLong'][$hashKey . '/' . $hashValue];
+            if (isset($this->sharedInstancesWithParams['hashLong'][$hashKey.'/'.$hashValue])) {
+                return $this->sharedInstancesWithParams['hashLong'][$hashKey.'/'.$hashValue];
             }
         }
 
@@ -273,7 +273,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function hasConfig($aliasOrClass)
     {
-        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:'.$this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (!isset($this->configurations[$key])) {
             return false;
         }
@@ -293,7 +293,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function setConfig($aliasOrClass, array $configuration, $append = false)
     {
-        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:'.$this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (!isset($this->configurations[$key]) || !$append) {
             $this->configurations[$key] = $this->configurationTemplate;
         }
@@ -301,7 +301,7 @@ class InstanceManager /* implements InstanceManagerInterface */
         $configuration = array(
             'parameters' => isset($configuration['parameters']) ? $configuration['parameters'] : array(),
             'injections' => isset($configuration['injections']) ? $configuration['injections'] : array(),
-            'shared'     => isset($configuration['shared'])     ? $configuration['shared']     : true
+            'shared'     => isset($configuration['shared'])     ? $configuration['shared']     : true,
         );
         $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
     }
@@ -331,7 +331,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function getConfig($aliasOrClass)
     {
-        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:'.$this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (isset($this->configurations[$key])) {
             return $this->configurations[$key];
         }
@@ -385,7 +385,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function hasTypePreferences($interfaceOrAbstract)
     {
-        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:'.$interfaceOrAbstract : $interfaceOrAbstract;
 
         return (isset($this->typePreferences[$key]) && $this->typePreferences[$key]);
     }
@@ -399,7 +399,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function setTypePreference($interfaceOrAbstract, array $preferredImplementations)
     {
-        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:'.$interfaceOrAbstract : $interfaceOrAbstract;
         foreach ($preferredImplementations as $preferredImplementation) {
             $this->addTypePreference($key, $preferredImplementation);
         }
@@ -415,7 +415,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function getTypePreferences($interfaceOrAbstract)
     {
-        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:'.$interfaceOrAbstract : $interfaceOrAbstract;
         if (isset($this->typePreferences[$key])) {
             return $this->typePreferences[$key];
         }
@@ -431,7 +431,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function unsetTypePreferences($interfaceOrAbstract)
     {
-        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:'.$interfaceOrAbstract : $interfaceOrAbstract;
         unset($this->typePreferences[$key]);
     }
 
@@ -445,7 +445,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function addTypePreference($interfaceOrAbstract, $preferredImplementation)
     {
-        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:'.$interfaceOrAbstract : $interfaceOrAbstract;
         if (!isset($this->typePreferences[$key])) {
             $this->typePreferences[$key] = array();
         }
@@ -463,7 +463,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function removeTypePreference($interfaceOrAbstract, $preferredType)
     {
-        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
+        $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:'.$interfaceOrAbstract : $interfaceOrAbstract;
         if (!isset($this->typePreferences[$key]) || !in_array($preferredType, $this->typePreferences[$key])) {
             return false;
         }
@@ -479,7 +479,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     protected function createHashForKeys($classOrAlias, $paramKeys)
     {
-        return $classOrAlias . ':' . implode('|', $paramKeys);
+        return $classOrAlias.':'.implode('|', $paramKeys);
     }
 
     /**
@@ -493,14 +493,14 @@ class InstanceManager /* implements InstanceManagerInterface */
         foreach ($paramValues as $param) {
             switch (gettype($param)) {
                 case 'object':
-                    $hashValue .= spl_object_hash($param) . '|';
+                    $hashValue .= spl_object_hash($param).'|';
                     break;
                 case 'integer':
                 case 'string':
                 case 'boolean':
                 case 'NULL':
                 case 'double':
-                    $hashValue .= $param . '|';
+                    $hashValue .= $param.'|';
                     break;
                 case 'array':
                     $hashValue .= 'Array|';

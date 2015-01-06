@@ -72,7 +72,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
                     'journal' => true,
                 ),
                 'server' => 'mongodb://localhost:27017',
-            )
+            ),
         );
 
         $this->assertAttributeEquals($expected, 'resources', $this->object);
@@ -99,7 +99,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
                     'journal' => true,
                 ),
                 'server' => 'mongodb://localhost:27017',
-            )
+            ),
         );
 
         $this->assertAttributeEquals($expected, 'resources', $this->object);
@@ -114,6 +114,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
             $this->object->setResource($id, $resource);
         } catch (Exception\InvalidArgumentException $e) {
             $this->addToAssertionCount(1);
+
             return;
         }
 
@@ -147,6 +148,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
             $this->object->getResource($id);
         } catch (Exception\RuntimeException $e) {
             $this->addToAssertionCount(1);
+
             return;
         }
 
@@ -187,6 +189,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
             $this->object->getResource($id);
         } catch (Exception\RuntimeException $e) {
             $this->addToAssertionCount(1);
+
             return;
         }
 
@@ -199,7 +202,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $id = 'foo';
         $libOptions = array(
-            'server' => 'bar'
+            'server' => 'bar',
         );
 
         $this->object->setLibOptions($id, $libOptions);
@@ -215,7 +218,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
                     'journal' => true,
                 ),
                 'server' => 'bar',
-            )
+            ),
         );
 
         $this->assertAttributeEquals($expected, 'resources', $this->object);
@@ -231,7 +234,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
         $this->object->setResource($id, $resource);
 
         $libOptions = array(
-            'server' => 'bar'
+            'server' => 'bar',
         );
 
         $this->object->setLibOptions($id, $libOptions);
@@ -240,7 +243,7 @@ class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
             $id => array(
                 'initialized' => false,
                 'server' => 'bar',
-            )
+            ),
         );
 
         $this->assertAttributeEquals($expected, 'resources', $this->object);

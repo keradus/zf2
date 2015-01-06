@@ -38,12 +38,13 @@ class FileInput extends Input
     protected $autoPrependUploadValidator = true;
 
     /**
-     * @param  bool $value Enable/Disable automatically prepending an Upload validator
+     * @param  bool      $value Enable/Disable automatically prepending an Upload validator
      * @return FileInput
      */
     public function setAutoPrependUploadValidator($value)
     {
         $this->autoPrependUploadValidator = $value;
+
         return $this;
     }
 
@@ -136,6 +137,7 @@ class FileInput extends Input
             && $validators[0]['instance'] instanceof UploadValidator
         ) {
             $this->autoPrependUploadValidator = false;
+
             return;
         }
 
@@ -164,6 +166,7 @@ class FileInput extends Input
         if ($input instanceof FileInput) {
             $this->setAutoPrependUploadValidator($input->getAutoPrependUploadValidator());
         }
+
         return $this;
     }
 }

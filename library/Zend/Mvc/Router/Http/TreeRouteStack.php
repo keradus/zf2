@@ -50,7 +50,7 @@ class TreeRouteStack extends SimpleRouteStack
      * factory(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return SimpleRouteStack
      * @throws Exception\InvalidArgumentException
      */
@@ -59,7 +59,7 @@ class TreeRouteStack extends SimpleRouteStack
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable set of options');
         }
 
         $instance = parent::factory($options);
@@ -78,20 +78,20 @@ class TreeRouteStack extends SimpleRouteStack
      */
     protected function init()
     {
-        $this->prototypes = new ArrayObject;
+        $this->prototypes = new ArrayObject();
 
         $routes = $this->routePluginManager;
         foreach (array(
-                'chain'    => __NAMESPACE__ . '\Chain',
-                'hostname' => __NAMESPACE__ . '\Hostname',
-                'literal'  => __NAMESPACE__ . '\Literal',
-                'method'   => __NAMESPACE__ . '\Method',
-                'part'     => __NAMESPACE__ . '\Part',
-                'query'    => __NAMESPACE__ . '\Query',
-                'regex'    => __NAMESPACE__ . '\Regex',
-                'scheme'   => __NAMESPACE__ . '\Scheme',
-                'segment'  => __NAMESPACE__ . '\Segment',
-                'wildcard' => __NAMESPACE__ . '\Wildcard',
+                'chain'    => __NAMESPACE__.'\Chain',
+                'hostname' => __NAMESPACE__.'\Hostname',
+                'literal'  => __NAMESPACE__.'\Literal',
+                'method'   => __NAMESPACE__.'\Method',
+                'part'     => __NAMESPACE__.'\Part',
+                'query'    => __NAMESPACE__.'\Query',
+                'regex'    => __NAMESPACE__.'\Regex',
+                'scheme'   => __NAMESPACE__.'\Scheme',
+                'segment'  => __NAMESPACE__.'\Segment',
+                'wildcard' => __NAMESPACE__.'\Wildcard',
             ) as $name => $class
         ) {
             $routes->setInvokableClass($name, $class);
@@ -102,9 +102,9 @@ class TreeRouteStack extends SimpleRouteStack
      * addRoute(): defined by RouteStackInterface interface.
      *
      * @see    RouteStackInterface::addRoute()
-     * @param  string  $name
-     * @param  mixed   $route
-     * @param  int $priority
+     * @param  string         $name
+     * @param  mixed          $route
+     * @param  int            $priority
      * @return TreeRouteStack
      */
     public function addRoute($name, $route, $priority = null)
@@ -120,7 +120,7 @@ class TreeRouteStack extends SimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
-     * @param  string|array|Traversable $specs
+     * @param  string|array|Traversable           $specs
      * @return RouteInterface
      * @throws Exception\InvalidArgumentException When route definition is not an array nor traversable
      * @throws Exception\InvalidArgumentException When chain routes are not an array nor traversable
@@ -188,7 +188,7 @@ class TreeRouteStack extends SimpleRouteStack
     /**
      * Add multiple prototypes at once.
      *
-     * @param  Traversable $routes
+     * @param  Traversable                        $routes
      * @return TreeRouteStack
      * @throws Exception\InvalidArgumentException
      */
@@ -208,8 +208,8 @@ class TreeRouteStack extends SimpleRouteStack
     /**
      * Add a prototype.
      *
-     * @param  string $name
-     * @param  mixed  $route
+     * @param  string         $name
+     * @param  mixed          $route
      * @return TreeRouteStack
      */
     public function addPrototype($name, $route)
@@ -226,7 +226,7 @@ class TreeRouteStack extends SimpleRouteStack
     /**
      * Get a prototype.
      *
-     * @param  string $name
+     * @param  string              $name
      * @return RouteInterface|null
      */
     public function getPrototype($name)
@@ -242,9 +242,9 @@ class TreeRouteStack extends SimpleRouteStack
      * match(): defined by \Zend\Mvc\Router\RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request      $request
-     * @param  integer|null $pathOffset
-     * @param  array        $options
+     * @param  Request         $request
+     * @param  integer|null    $pathOffset
+     * @param  array           $options
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null, array $options = array())
@@ -298,8 +298,8 @@ class TreeRouteStack extends SimpleRouteStack
      * assemble(): defined by \Zend\Mvc\Router\RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::assemble()
-     * @param  array $params
-     * @param  array $options
+     * @param  array                              $params
+     * @param  array                              $options
      * @return mixed
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -327,7 +327,7 @@ class TreeRouteStack extends SimpleRouteStack
         }
 
         if (isset($options['only_return_path']) && $options['only_return_path']) {
-            return $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
+            return $this->baseUrl.$route->assemble(array_merge($this->defaultParams, $params), $options);
         }
 
         if (!isset($options['uri'])) {
@@ -348,7 +348,7 @@ class TreeRouteStack extends SimpleRouteStack
             $uri = $options['uri'];
         }
 
-        $path = $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
+        $path = $this->baseUrl.$route->assemble(array_merge($this->defaultParams, $params), $options);
 
         if (isset($options['query'])) {
             $uri->setQuery($options['query']);
@@ -388,6 +388,7 @@ class TreeRouteStack extends SimpleRouteStack
     public function setBaseUrl($baseUrl)
     {
         $this->baseUrl = rtrim($baseUrl, '/');
+
         return $this;
     }
 
@@ -404,12 +405,13 @@ class TreeRouteStack extends SimpleRouteStack
     /**
      * Set the request URI.
      *
-     * @param  HttpUri $uri
+     * @param  HttpUri        $uri
      * @return TreeRouteStack
      */
     public function setRequestUri(HttpUri $uri)
     {
         $this->requestUri = $uri;
+
         return $this;
     }
 

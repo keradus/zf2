@@ -80,9 +80,9 @@ abstract class AbstractFunction
     /**
      * Constructor
      *
-     * @param ReflectionFunctionAbstract $r
-     * @param null|string $namespace
-     * @param null|array $argv
+     * @param  ReflectionFunctionAbstract         $r
+     * @param  null|string                        $namespace
+     * @param  null|array                         $argv
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
@@ -116,8 +116,8 @@ abstract class AbstractFunction
      * each array in {@link $sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
      *
-     * @param \Zend\Server\Reflection\Node $parent
-     * @param int $level
+     * @param  \Zend\Server\Reflection\Node $parent
+     * @param  int                          $level
      * @return void
      */
     protected function addTree(Node $parent, $level = 0)
@@ -161,10 +161,10 @@ abstract class AbstractFunction
      * Builds method signatures using the array of return types and the array of
      * parameters types
      *
-     * @param array $return Array of return types
-     * @param string $returnDesc Return value description
-     * @param array $paramTypes Array of arguments (each an array of types)
-     * @param array $paramDesc Array of parameter descriptions
+     * @param  array  $return     Array of return types
+     * @param  string $returnDesc Return value description
+     * @param  array  $paramTypes Array of arguments (each an array of types)
+     * @param  array  $paramDesc  Array of parameter descriptions
      * @return array
      */
     protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
@@ -231,7 +231,7 @@ abstract class AbstractFunction
         $function   = $this->reflection;
         $paramCount = $function->getNumberOfParameters();
         $parameters = $function->getParameters();
-        $scanner    = new DocBlockReflection(($function->getDocComment()) ? : '/***/');
+        $scanner    = new DocBlockReflection(($function->getDocComment()) ?: '/***/');
         $helpText   = $scanner->getLongDescription();
         /* @var \Zend\Code\Reflection\DocBlock\Tag\ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
@@ -268,7 +268,7 @@ abstract class AbstractFunction
             $paramDesc = array();
             foreach ($paramTags as $paramTag) {
                 $paramTypesTmp[] = $paramTag->getTypes();
-                $paramDesc[]     = ($paramTag->getDescription()) ? : '';
+                $paramDesc[]     = ($paramTag->getDescription()) ?: '';
             }
         }
 
@@ -283,7 +283,7 @@ abstract class AbstractFunction
         } elseif ($nParamTypesTmp != $paramCount) {
             throw new Exception\RuntimeException(
                 'Variable number of arguments is not supported for services (except optional parameters). '
-                . 'Number of function arguments must correspond to actual number of arguments described in a docblock.'
+                .'Number of function arguments must correspond to actual number of arguments described in a docblock.'
             );
         }
 
@@ -301,8 +301,8 @@ abstract class AbstractFunction
     /**
      * Proxy reflection calls
      *
-     * @param string $method
-     * @param array $args
+     * @param  string                           $method
+     * @param  array                            $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
@@ -312,7 +312,7 @@ abstract class AbstractFunction
             return call_user_func_array(array($this->reflection, $method), $args);
         }
 
-        throw new Exception\BadMethodCallException('Invalid reflection method ("' . $method . '")');
+        throw new Exception\BadMethodCallException('Invalid reflection method ("'.$method.'")');
     }
 
     /**
@@ -321,7 +321,7 @@ abstract class AbstractFunction
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function __get($key)
@@ -338,8 +338,8 @@ abstract class AbstractFunction
      *
      * Values are stored by $key in {@link $config}.
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  string $key
+     * @param  mixed  $value
      * @return void
      */
     public function __set($key, $value)
@@ -350,7 +350,7 @@ abstract class AbstractFunction
     /**
      * Set method's namespace
      *
-     * @param string $namespace
+     * @param  string                             $namespace
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -358,6 +358,7 @@ abstract class AbstractFunction
     {
         if (empty($namespace)) {
             $this->namespace = '';
+
             return;
         }
 
@@ -381,7 +382,7 @@ abstract class AbstractFunction
     /**
      * Set the description
      *
-     * @param string $string
+     * @param  string                             $string
      * @throws Exception\InvalidArgumentException
      * @return void
      */

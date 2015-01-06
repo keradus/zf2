@@ -22,7 +22,7 @@ class PluginManagerTest extends TestCase
     {
         $this->setExpectedException('Zend\Mvc\Exception\InvalidPluginException');
 
-        $pluginManager = new PluginManager;
+        $pluginManager = new PluginManager();
         $pluginManager->setInvokableClass('samplePlugin', 'stdClass');
 
         $plugin = $pluginManager->get('samplePlugin');
@@ -30,8 +30,8 @@ class PluginManagerTest extends TestCase
 
     public function testPluginManagerInjectsControllerInPlugin()
     {
-        $controller    = new SampleController;
-        $pluginManager = new PluginManager;
+        $controller    = new SampleController();
+        $pluginManager = new PluginManager();
         $pluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
         $pluginManager->setController($controller);
 
@@ -41,15 +41,15 @@ class PluginManagerTest extends TestCase
 
     public function testPluginManagerInjectsControllerForExistingPlugin()
     {
-        $controller1   = new SampleController;
-        $pluginManager = new PluginManager;
+        $controller1   = new SampleController();
+        $pluginManager = new PluginManager();
         $pluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
         $pluginManager->setController($controller1);
 
         // Plugin manager registers now instance of SamplePlugin
         $pluginManager->get('samplePlugin');
 
-        $controller2   = new SampleController;
+        $controller2   = new SampleController();
         $pluginManager->setController($controller2);
 
         $plugin = $pluginManager->get('samplePlugin');
@@ -58,7 +58,7 @@ class PluginManagerTest extends TestCase
 
     public function testGetWithConstrutor()
     {
-        $pluginManager = new PluginManager;
+        $pluginManager = new PluginManager();
         $pluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginWithConstructor');
         $plugin = $pluginManager->get('samplePlugin');
         $this->assertEquals($plugin->getBar(), 'baz');
@@ -66,7 +66,7 @@ class PluginManagerTest extends TestCase
 
     public function testGetWithConstrutorAndOptions()
     {
-        $pluginManager = new PluginManager;
+        $pluginManager = new PluginManager();
         $pluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginWithConstructor');
         $plugin = $pluginManager->get('samplePlugin', 'foo');
         $this->assertEquals($plugin->getBar(), 'foo');
@@ -74,7 +74,7 @@ class PluginManagerTest extends TestCase
 
     public function testDefinesFactoryForIdentityPlugin()
     {
-        $pluginManager = new PluginManager;
+        $pluginManager = new PluginManager();
         $this->assertTrue($pluginManager->has('identity'));
     }
 
@@ -82,7 +82,7 @@ class PluginManagerTest extends TestCase
     {
         $services = new ServiceManager();
         $services->setInvokableClass('Zend\Authentication\AuthenticationService', 'Zend\Authentication\AuthenticationService');
-        $pluginManager = new PluginManager;
+        $pluginManager = new PluginManager();
         $pluginManager->setServiceLocator($services);
         $identity = $pluginManager->get('identity');
         $expected = $services->get('Zend\Authentication\AuthenticationService');
@@ -91,7 +91,7 @@ class PluginManagerTest extends TestCase
 
     public function testCanCreateByFactory()
     {
-        $pluginManager = new PluginManager;
+        $pluginManager = new PluginManager();
         $pluginManager->setFactory('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginFactory');
         $plugin = $pluginManager->get('samplePlugin');
         $this->assertInstanceOf('\ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin', $plugin);
@@ -99,7 +99,7 @@ class PluginManagerTest extends TestCase
 
     public function testCanCreateByFactoryWithConstrutor()
     {
-        $pluginManager = new PluginManager;
+        $pluginManager = new PluginManager();
         $pluginManager->setFactory('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginWithConstructorFactory');
         $plugin = $pluginManager->get('samplePlugin', 'foo');
         $this->assertInstanceOf('\ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePluginWithConstructor', $plugin);

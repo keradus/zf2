@@ -36,7 +36,7 @@ interface PlatformInterface
     /**
      * Quote identifier chain
      *
-     * @param string|string[] $identifierChain
+     * @param  string|string[] $identifierChain
      * @return string
      */
     public function quoteIdentifierChain($identifierChain);
@@ -71,7 +71,7 @@ interface PlatformInterface
     /**
      * Quote value list
      *
-     * @param string|string[] $valueList
+     * @param  string|string[] $valueList
      * @return string
      */
     public function quoteValueList($valueList);
@@ -87,7 +87,7 @@ interface PlatformInterface
      * Quote identifier in fragment
      *
      * @param  string $identifier
-     * @param  array $additionalSafeWords
+     * @param  array  $additionalSafeWords
      * @return string
      */
     public function quoteIdentifierInFragment($identifier, array $additionalSafeWords = array());

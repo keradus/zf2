@@ -25,12 +25,13 @@ abstract class AbstractFileLoader implements FileLoaderInterface
     /**
      * Indicate whether or not to use the include_path to resolve translation files
      *
-     * @param bool $flag
+     * @param  bool $flag
      * @return self
      */
     public function setUseIncludePath($flag = true)
     {
         $this->useIncludePath = (bool) $flag;
+
         return $this;
     }
 
@@ -51,7 +52,7 @@ abstract class AbstractFileLoader implements FileLoaderInterface
      * flag is enabled, it will attempt to resolve the file from the
      * include_path if the file does not exist on the current working path.
      *
-     * @param string $filename
+     * @param  string       $filename
      * @return string|false
      */
     protected function resolveFile($filename)
@@ -60,15 +61,17 @@ abstract class AbstractFileLoader implements FileLoaderInterface
             if (!$this->useIncludePath()) {
                 return false;
             }
+
             return $this->resolveViaIncludePath($filename);
         }
+
         return $filename;
     }
 
     /**
      * Resolve a translation file via the include_path
      *
-     * @param string $filename
+     * @param  string       $filename
      * @return string|false
      */
     protected function resolveViaIncludePath($filename)
@@ -77,6 +80,7 @@ abstract class AbstractFileLoader implements FileLoaderInterface
         if (!$resolvedIncludePath || !is_file($resolvedIncludePath) || !is_readable($resolvedIncludePath)) {
             return false;
         }
+
         return $resolvedIncludePath;
     }
 }

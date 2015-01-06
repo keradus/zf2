@@ -28,12 +28,12 @@ interface HelperInterface extends BaseHelperInterface
     /**
      * Renders helper
      *
-     * @param  string|Navigation\AbstractContainer $container [optional] container to render.
-     *                                         Default is null, which indicates
-     *                                         that the helper should render
-     *                                         the container returned by {@link
-     *                                         getContainer()}.
-     * @return string helper output
+     * @param  string|Navigation\AbstractContainer     $container [optional] container to render.
+     *                                                            Default is null, which indicates
+     *                                                            that the helper should render
+     *                                                            the container returned by {@link
+     *                                                            getContainer()}.
+     * @return string                                  helper output
      * @throws \Zend\View\Exception\ExceptionInterface
      */
     public function render($container = null);
@@ -65,9 +65,9 @@ interface HelperInterface extends BaseHelperInterface
      * Sets navigation container the helper should operate on by default
      *
      * @param  string|Navigation\AbstractContainer $container [optional] container to operate
-     *                                         on. Default is null, which
-     *                                         indicates that the container
-     *                                         should be reset.
+     *                                                        on. Default is null, which
+     *                                                        indicates that the container
+     *                                                        should be reset.
      * @return HelperInterface
      */
     public function setContainer($container = null);
@@ -75,7 +75,7 @@ interface HelperInterface extends BaseHelperInterface
     /**
      * Returns the navigation container the helper operates on by default
      *
-     * @return Navigation\AbstractContainer  navigation container
+     * @return Navigation\AbstractContainer navigation container
      */
     public function getContainer();
 
@@ -89,7 +89,7 @@ interface HelperInterface extends BaseHelperInterface
     /**
      * Render invisible items?
      *
-     * @param  bool $renderInvisible [optional] boolean flag
+     * @param  bool            $renderInvisible [optional] boolean flag
      * @return HelperInterface
      */
     public function setRenderInvisible($renderInvisible = true);
@@ -104,9 +104,9 @@ interface HelperInterface extends BaseHelperInterface
     /**
      * Sets ACL role to use when iterating pages
      *
-     * @param  mixed $role [optional] role to set.  Expects a string, an
-     *                     instance of type {@link Acl\Role}, or null. Default
-     *                     is null.
+     * @param  mixed                                   $role [optional] role to set.  Expects a string, an
+     *                                                       instance of type {@link Acl\Role}, or null. Default
+     *                                                       is null.
      * @throws \Zend\View\Exception\ExceptionInterface if $role is invalid
      * @return HelperInterface
      */
@@ -129,7 +129,7 @@ interface HelperInterface extends BaseHelperInterface
     /**
      * Sets whether ACL should be used
      *
-     * @param  bool $useAcl [optional] whether ACL should be used. Default is true.
+     * @param  bool            $useAcl [optional] whether ACL should be used. Default is true.
      * @return HelperInterface
      */
     public function setUseAcl($useAcl = true);

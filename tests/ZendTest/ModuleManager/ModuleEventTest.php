@@ -23,7 +23,7 @@ class ModuleEventTest extends TestCase
 
     public function testCanRetrieveModuleViaGetter()
     {
-        $module = new stdClass;
+        $module = new stdClass();
         $this->event->setModule($module);
         $test = $this->event->getModule();
         $this->assertSame($module, $test);
@@ -46,12 +46,12 @@ class ModuleEventTest extends TestCase
     public function testPassingNonStringToSetModuleNameRaisesException()
     {
         $this->setExpectedException('Zend\ModuleManager\Exception\InvalidArgumentException');
-        $this->event->setModuleName(new stdClass);
+        $this->event->setModuleName(new stdClass());
     }
 
     public function testSettingConfigListenerProxiesToParameters()
     {
-        $configListener = new ConfigListener;
+        $configListener = new ConfigListener();
         $this->event->setConfigListener($configListener);
         $test = $this->event->getParam('configListener');
         $this->assertSame($configListener, $test);
@@ -59,7 +59,7 @@ class ModuleEventTest extends TestCase
 
     public function testCanRetrieveConfigListenerViaGetter()
     {
-        $configListener = new ConfigListener;
+        $configListener = new ConfigListener();
         $this->event->setConfigListener($configListener);
         $test = $this->event->getConfigListener();
         $this->assertSame($configListener, $test);

@@ -44,5 +44,5 @@ class UpgradeTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Upgrade: xxx', $upgradeHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

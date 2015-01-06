@@ -38,7 +38,7 @@ class PluginManager extends HelperPluginManager
      *
      * Checks that the helper loaded is an instance of AbstractHelper.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

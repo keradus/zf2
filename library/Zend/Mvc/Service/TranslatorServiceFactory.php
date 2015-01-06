@@ -23,7 +23,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class TranslatorServiceFactory implements FactoryInterface
 {
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return MvcTranslator
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -50,6 +50,7 @@ class TranslatorServiceFactory implements FactoryInterface
             ) {
                 $i18nTranslator = Translator::factory($config['translator']);
                 $serviceLocator->setService('Zend\I18n\Translator\TranslatorInterface', $i18nTranslator);
+
                 return new MvcTranslator($i18nTranslator);
             }
         }

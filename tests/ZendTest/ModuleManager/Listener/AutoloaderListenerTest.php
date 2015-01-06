@@ -32,13 +32,13 @@ class AutoloaderListenerTest extends TestCase
         $this->includePath = get_include_path();
 
         $autoloader = new ModuleAutoloader(array(
-            dirname(__DIR__) . '/TestAsset',
+            dirname(__DIR__).'/TestAsset',
         ));
         $autoloader->register();
 
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
-        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener, 2000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener(), 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener(), 2000);
     }
 
     public function tearDown()

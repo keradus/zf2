@@ -16,7 +16,7 @@ interface NamingStrategyEnabledInterface
     /**
      * Adds the given naming strategy
      *
-     * @param NamingStrategyInterface $strategy The naming to register.
+     * @param  NamingStrategyInterface        $strategy The naming to register.
      * @return NamingStrategyEnabledInterface
      */
     public function setNamingStrategy(NamingStrategyInterface $strategy);

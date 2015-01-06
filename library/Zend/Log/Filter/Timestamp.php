@@ -41,9 +41,9 @@ class Timestamp implements FilterInterface
     protected $operator;
 
     /**
-     * @param int|DateTime|array|Traversable $value DateTime instance or desired value based on $dateFormatChar
-     * @param string $dateFormatChar PHP idate()-compliant format character
-     * @param string $operator Comparison operator
+     * @param  int|DateTime|array|Traversable     $value          DateTime instance or desired value based on $dateFormatChar
+     * @param  string                             $dateFormatChar PHP idate()-compliant format character
+     * @param  string                             $operator       Comparison operator
      * @return Timestamp
      * @throws Exception\InvalidArgumentException
      */
@@ -96,7 +96,7 @@ class Timestamp implements FilterInterface
     /**
      * Returns TRUE if timestamp is accepted, otherwise FALSE is returned.
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return bool
      */
     public function filter(array $event)

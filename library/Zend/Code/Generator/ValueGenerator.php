@@ -104,7 +104,7 @@ class ValueGenerator extends AbstractGenerator
             '__METHOD__',
             '__FUNCTION__',
             '__NAMESPACE__',
-            '::'
+            '::',
         );
         $constants = array_merge($constants, array_keys(get_defined_constants()), $this->constants->getArrayCopy());
         $this->constants->exchangeArray($constants);
@@ -172,19 +172,20 @@ class ValueGenerator extends AbstractGenerator
             self::TYPE_DOUBLE,
             self::TYPE_STRING,
             self::TYPE_CONSTANT,
-            self::TYPE_NULL
+            self::TYPE_NULL,
         );
 
         return in_array($type, $scalarTypes);
     }
 
     /**
-     * @param  mixed $value
+     * @param  mixed          $value
      * @return ValueGenerator
      */
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -197,12 +198,13 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $type
+     * @param  string         $type
      * @return ValueGenerator
      */
     public function setType($type)
     {
         $this->type = (string) $type;
+
         return $this;
     }
 
@@ -215,12 +217,13 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  int $arrayDepth
+     * @param  int            $arrayDepth
      * @return ValueGenerator
      */
     public function setArrayDepth($arrayDepth)
     {
         $this->arrayDepth = (int) $arrayDepth;
+
         return $this;
     }
 
@@ -252,7 +255,7 @@ class ValueGenerator extends AbstractGenerator
             self::TYPE_CONSTANT,
             self::TYPE_NULL,
             self::TYPE_OBJECT,
-            self::TYPE_OTHER
+            self::TYPE_OTHER,
         );
 
         if (in_array($type, $types)) {
@@ -263,7 +266,7 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return string
      */
     public function getAutoDeterminedType($value)
@@ -277,6 +280,7 @@ class ValueGenerator extends AbstractGenerator
                         return self::TYPE_CONSTANT;
                     }
                 }
+
                 return self::TYPE_STRING;
             case 'double':
             case 'float':
@@ -345,7 +349,7 @@ class ValueGenerator extends AbstractGenerator
             case self::TYPE_ARRAY:
                 $output .= 'array(';
                 if ($this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                    $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1);
+                    $output .= self::LINE_FEED.str_repeat($this->indentation, $this->arrayDepth + 1);
                 }
                 $outputParts = array();
                 $noKeyIndex  = 0;
@@ -366,15 +370,15 @@ class ValueGenerator extends AbstractGenerator
                     if ($short) {
                         $outputParts[] = $partV;
                     } else {
-                        $outputParts[] = (is_int($n) ? $n : self::escape($n)) . ' => ' . $partV;
+                        $outputParts[] = (is_int($n) ? $n : self::escape($n)).' => '.$partV;
                     }
                 }
                 $padding = ($this->outputMode == self::OUTPUT_MULTIPLE_LINE)
-                    ? self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1)
+                    ? self::LINE_FEED.str_repeat($this->indentation, $this->arrayDepth + 1)
                     : ' ';
-                $output .= implode(',' . $padding, $outputParts);
+                $output .= implode(','.$padding, $outputParts);
                 if ($this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                    $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth);
+                    $output .= self::LINE_FEED.str_repeat($this->indentation, $this->arrayDepth);
                 }
                 $output .= ')';
                 break;
@@ -392,7 +396,7 @@ class ValueGenerator extends AbstractGenerator
      * Quotes value for PHP code.
      *
      * @param  string $input Raw string.
-     * @param  bool $quote Whether add surrounding quotes or not.
+     * @param  bool   $quote Whether add surrounding quotes or not.
      * @return string PHP-ready code.
      */
     public static function escape($input, $quote = true)
@@ -401,19 +405,20 @@ class ValueGenerator extends AbstractGenerator
 
         // adds quoting strings
         if ($quote) {
-            $output = "'" . $output . "'";
+            $output = "'".$output."'";
         }
 
         return $output;
     }
 
     /**
-     * @param  string $outputMode
+     * @param  string         $outputMode
      * @return ValueGenerator
      */
     public function setOutputMode($outputMode)
     {
         $this->outputMode = (string) $outputMode;
+
         return $this;
     }
 

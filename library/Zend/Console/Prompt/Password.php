@@ -24,8 +24,8 @@ final class Password extends AbstractPrompt
     /**
      * Ask the user for a password
      *
-     * @param string $promptText   The prompt text to display in console
-     * @param bool   $echo         Display the selection after user presses key
+     * @param string $promptText The prompt text to display in console
+     * @param bool   $echo       Display the selection after user presses key
      */
     public function __construct($promptText = 'Password: ', $echo = false)
     {

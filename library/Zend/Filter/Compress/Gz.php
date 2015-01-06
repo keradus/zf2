@@ -35,7 +35,7 @@ class Gz extends AbstractCompressionAlgorithm
     /**
      * Class constructor
      *
-     * @param null|array|\Traversable $options (Optional) Options to set
+     * @param  null|array|\Traversable               $options (Optional) Options to set
      * @throws Exception\ExtensionNotLoadedException if zlib extension not loaded
      */
     public function __construct($options = null)
@@ -59,7 +59,7 @@ class Gz extends AbstractCompressionAlgorithm
     /**
      * Sets a new compression level
      *
-     * @param int $level
+     * @param  int                                $level
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -70,6 +70,7 @@ class Gz extends AbstractCompressionAlgorithm
         }
 
         $this->options['level'] = (int) $level;
+
         return $this;
     }
 
@@ -86,7 +87,7 @@ class Gz extends AbstractCompressionAlgorithm
     /**
      * Sets a new compression mode
      *
-     * @param  string $mode Supported are 'compress', 'deflate' and 'file'
+     * @param  string                             $mode Supported are 'compress', 'deflate' and 'file'
      * @return self
      * @throws Exception\InvalidArgumentException for invalid $mode value
      */
@@ -97,6 +98,7 @@ class Gz extends AbstractCompressionAlgorithm
         }
 
         $this->options['mode'] = $mode;
+
         return $this;
     }
 
@@ -119,13 +121,14 @@ class Gz extends AbstractCompressionAlgorithm
     public function setArchive($archive)
     {
         $this->options['archive'] = (string) $archive;
+
         return $this;
     }
 
     /**
      * Compresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException if unable to open archive or error during decompression
      */
@@ -133,9 +136,9 @@ class Gz extends AbstractCompressionAlgorithm
     {
         $archive = $this->getArchive();
         if (!empty($archive)) {
-            $file = gzopen($archive, 'w' . $this->getLevel());
+            $file = gzopen($archive, 'w'.$this->getLevel());
             if (!$file) {
-                throw new Exception\RuntimeException("Error opening the archive '" . $this->options['archive'] . "'");
+                throw new Exception\RuntimeException("Error opening the archive '".$this->options['archive']."'");
             }
 
             gzwrite($file, $content);
@@ -157,7 +160,7 @@ class Gz extends AbstractCompressionAlgorithm
     /**
      * Decompresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException if unable to open archive or error during decompression
      */
@@ -174,7 +177,7 @@ class Gz extends AbstractCompressionAlgorithm
         if (file_exists($archive)) {
             $handler = fopen($archive, "rb");
             if (!$handler) {
-                throw new Exception\RuntimeException("Error opening the archive '" . $archive . "'");
+                throw new Exception\RuntimeException("Error opening the archive '".$archive."'");
             }
 
             fseek($handler, -4, SEEK_END);

@@ -24,7 +24,7 @@ interface RendererInterface
 
     /**
      * Set renderer state from options array
-     * @param  array $options
+     * @param  array             $options
      * @return RendererInterface
      */
     public function setOptions($options);
@@ -32,7 +32,7 @@ interface RendererInterface
     /**
      * Set renderer namespace for autoloading
      *
-     * @param string $namespace
+     * @param  string            $namespace
      * @return RendererInterface
      */
     public function setRendererNamespace($namespace);
@@ -52,7 +52,7 @@ interface RendererInterface
 
     /**
      * Manually adjust top position
-     * @param int $value
+     * @param  int               $value
      * @return RendererInterface
      */
     public function setTopOffset($value);
@@ -65,7 +65,7 @@ interface RendererInterface
 
     /**
      * Manually adjust left position
-     * @param int $value
+     * @param  int               $value
      * @return RendererInterface
      */
     public function setLeftOffset($value);
@@ -85,7 +85,7 @@ interface RendererInterface
 
     /**
      * Horizontal position of the barcode in the rendering resource
-     * @param string $value
+     * @param  string            $value
      * @return RendererInterface
      */
     public function setHorizontalPosition($value);
@@ -98,7 +98,7 @@ interface RendererInterface
 
     /**
      * Vertical position of the barcode in the rendering resource
-     * @param string $value
+     * @param  string            $value
      * @return RendererInterface
      */
     public function setVerticalPosition($value);
@@ -111,7 +111,7 @@ interface RendererInterface
 
     /**
      * Set the size of a module
-     * @param float $value
+     * @param  float             $value
      * @return RendererInterface
      */
     public function setModuleSize($value);
@@ -130,7 +130,7 @@ interface RendererInterface
 
     /**
      * Set the barcode object
-     * @param  ObjectInterface $barcode
+     * @param  ObjectInterface   $barcode
      * @return RendererInterface
      */
     public function setBarcode(ObjectInterface $barcode);

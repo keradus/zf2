@@ -59,7 +59,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
      * @access public
      *
      * @param array $attribs From this array, each key-value pair is
-     * converted to an attribute name and value.
+     *                       converted to an attribute name and value.
      *
      * @return string The XHTML for the attributes.
      */

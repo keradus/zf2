@@ -41,7 +41,7 @@ class MimeType extends AbstractValidator
      * @var array
      */
     protected $messageVariables = array(
-        'type' => 'type'
+        'type' => 'type',
     );
 
     /**
@@ -92,7 +92,7 @@ class MimeType extends AbstractValidator
      * - FALSE means disabling searching for mimetype, should be used for PHP 5.3
      * - A string is the mimetype file to use
      *
-     * @param  string|array|Traversable $options
+     * @param string|array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -145,6 +145,7 @@ class MimeType extends AbstractValidator
                 if ($this->options['magicFile'] === null) {
                     $this->options['magicFile'] = false;
                 }
+
                 return $this->options['magicFile'];
             }
 
@@ -180,9 +181,9 @@ class MimeType extends AbstractValidator
      * if the MAGIC file is erroneous, no file will be set
      * if false, the default MAGIC file from PHP will be used
      *
-     * @param  string $file
-     * @return MimeType Provides fluid interface
-     * @throws Exception\RuntimeException When finfo can not read the magicfile
+     * @param  string                                  $file
+     * @return MimeType                                Provides fluid interface
+     * @throws Exception\RuntimeException              When finfo can not read the magicfile
      * @throws Exception\InvalidArgumentException
      * @throws Exception\InvalidMagicMimeFileException
      */
@@ -226,6 +227,7 @@ class MimeType extends AbstractValidator
     public function disableMagicFile($disable)
     {
         $this->options['disableMagicFile'] = (bool) $disable;
+
         return $this;
     }
 
@@ -253,19 +255,20 @@ class MimeType extends AbstractValidator
      * Defines if the http header should be used
      * Note that this is unsafe and therefor the default value is false
      *
-     * @param  bool $headerCheck
+     * @param  bool     $headerCheck
      * @return MimeType Provides fluid interface
      */
     public function enableHeaderCheck($headerCheck = true)
     {
         $this->options['enableHeaderCheck'] = (bool) $headerCheck;
+
         return $this;
     }
 
     /**
      * Returns the set mimetypes
      *
-     * @param  bool $asArray Returns the values as array, when false a concatenated string is returned
+     * @param  bool         $asArray Returns the values as array, when false a concatenated string is returned
      * @return string|array
      */
     public function getMimeType($asArray = false)
@@ -283,20 +286,21 @@ class MimeType extends AbstractValidator
      * Sets the mimetypes
      *
      * @param  string|array $mimetype The mimetypes to validate
-     * @return MimeType Provides a fluent interface
+     * @return MimeType     Provides a fluent interface
      */
     public function setMimeType($mimetype)
     {
         $this->options['mimeType'] = null;
         $this->addMimeType($mimetype);
+
         return $this;
     }
 
     /**
      * Adds the mimetypes
      *
-     * @param  string|array $mimetype The mimetypes to add for validation
-     * @return MimeType Provides a fluent interface
+     * @param  string|array                       $mimetype The mimetypes to add for validation
+     * @return MimeType                           Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function addMimeType($mimetype)
@@ -370,6 +374,7 @@ class MimeType extends AbstractValidator
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(static::NOT_READABLE);
+
             return false;
         }
 
@@ -399,6 +404,7 @@ class MimeType extends AbstractValidator
 
         if (empty($this->type)) {
             $this->error(static::NOT_DETECTED);
+
             return false;
         }
 
@@ -417,6 +423,7 @@ class MimeType extends AbstractValidator
         }
 
         $this->error(static::FALSE_TYPE);
+
         return false;
     }
 }

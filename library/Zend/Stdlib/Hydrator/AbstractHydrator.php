@@ -79,7 +79,7 @@ abstract class AbstractHydrator implements
     /**
      * Checks if the strategy with the given name exists.
      *
-     * @param string $name The name of the strategy to check for.
+     * @param  string $name The name of the strategy to check for.
      * @return bool
      */
     public function hasStrategy($name)
@@ -91,32 +91,34 @@ abstract class AbstractHydrator implements
     /**
      * Adds the given strategy under the given name.
      *
-     * @param string $name The name of the strategy to register.
-     * @param StrategyInterface $strategy The strategy to register.
+     * @param  string            $name     The name of the strategy to register.
+     * @param  StrategyInterface $strategy The strategy to register.
      * @return HydratorInterface
      */
     public function addStrategy($name, StrategyInterface $strategy)
     {
         $this->strategies[$name] = $strategy;
+
         return $this;
     }
 
     /**
      * Removes the strategy with the given name.
      *
-     * @param string $name The name of the strategy to remove.
+     * @param  string            $name The name of the strategy to remove.
      * @return HydratorInterface
      */
     public function removeStrategy($name)
     {
         unset($this->strategies[$name]);
+
         return $this;
     }
 
     /**
      * Converts a value for extraction. If no strategy exists the plain value is returned.
      *
-     * @param  string $name  The name of the strategy to use.
+     * @param  string $name   The name of the strategy to use.
      * @param  mixed  $value  The value that should be converted.
      * @param  mixed  $object The object is optionally provided as context.
      * @return mixed
@@ -127,15 +129,16 @@ abstract class AbstractHydrator implements
             $strategy = $this->getStrategy($name);
             $value = $strategy->extract($value, $object);
         }
+
         return $value;
     }
 
     /**
      * Converts a value for hydration. If no strategy exists the plain value is returned.
      *
-     * @param string $name The name of the strategy to use.
-     * @param mixed $value The value that should be converted.
-     * @param array $data The whole data is optionally provided as context.
+     * @param  string $name  The name of the strategy to use.
+     * @param  mixed  $value The value that should be converted.
+     * @param  array  $data  The whole data is optionally provided as context.
      * @return mixed
      */
     public function hydrateValue($name, $value, $data = null)
@@ -144,14 +147,15 @@ abstract class AbstractHydrator implements
             $strategy = $this->getStrategy($name);
             $value = $strategy->hydrate($value, $data);
         }
+
         return $value;
     }
 
     /**
      * Convert a name for extraction. If no naming strategy exists, the plain value is returned.
      *
-     * @param string $name    The name to convert.
-     * @param null   $object  The object is optionally provided as context.
+     * @param  string $name   The name to convert.
+     * @param  null   $object The object is optionally provided as context.
      * @return mixed
      */
     public function extractName($name, $object = null)
@@ -159,14 +163,15 @@ abstract class AbstractHydrator implements
         if ($this->hasNamingStrategy()) {
             $name = $this->getNamingStrategy()->extract($name, $object);
         }
+
         return $name;
     }
 
     /**
      * Converts a value for hydration. If no naming strategy exists, the plain value is returned.
      *
-     * @param string $name  The name to convert.
-     * @param array  $data  The whole data is optionally provided as context.
+     * @param  string $name The name to convert.
+     * @param  array  $data The whole data is optionally provided as context.
      * @return mixed
      */
     public function hydrateName($name, $data = null)
@@ -174,6 +179,7 @@ abstract class AbstractHydrator implements
         if ($this->hasNamingStrategy()) {
             $name = $this->getNamingStrategy()->hydrate($name, $data);
         }
+
         return $name;
     }
 
@@ -203,9 +209,9 @@ abstract class AbstractHydrator implements
      * );
      * </code>
      *
-     * @param string $name Index in the composite
-     * @param callable|Filter\FilterInterface $filter
-     * @param int $condition
+     * @param  string                          $name      Index in the composite
+     * @param  callable|Filter\FilterInterface $filter
+     * @param  int                             $condition
      * @return Filter\FilterComposite
      */
     public function addFilter($name, $filter, $condition = FilterComposite::CONDITION_OR)
@@ -216,7 +222,7 @@ abstract class AbstractHydrator implements
     /**
      * Check whether a specific filter exists at key $name or not
      *
-     * @param string $name Index in the composite
+     * @param  string $name Index in the composite
      * @return bool
      */
     public function hasFilter($name)
@@ -243,7 +249,7 @@ abstract class AbstractHydrator implements
     /**
      * Adds the given naming strategy
      *
-     * @param NamingStrategyInterface $strategy The naming to register.
+     * @param  NamingStrategyInterface $strategy The naming to register.
      * @return self
      */
     public function setNamingStrategy(NamingStrategyInterface $strategy)

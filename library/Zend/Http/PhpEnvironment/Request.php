@@ -112,6 +112,7 @@ class Request extends HttpRequest
     public function setCookies($cookie)
     {
         $this->getHeaders()->addHeader(new Cookie((array) $cookie));
+
         return $this;
     }
 
@@ -124,6 +125,7 @@ class Request extends HttpRequest
     public function setRequestUri($requestUri)
     {
         $this->requestUri = $requestUri;
+
         return $this;
     }
 
@@ -137,6 +139,7 @@ class Request extends HttpRequest
         if ($this->requestUri === null) {
             $this->requestUri = $this->detectRequestUri();
         }
+
         return $this->requestUri;
     }
 
@@ -149,6 +152,7 @@ class Request extends HttpRequest
     public function setBaseUrl($baseUrl)
     {
         $this->baseUrl = rtrim($baseUrl, '/');
+
         return $this;
     }
 
@@ -162,6 +166,7 @@ class Request extends HttpRequest
         if ($this->baseUrl === null) {
             $this->setBaseUrl($this->detectBaseUrl());
         }
+
         return $this->baseUrl;
     }
 
@@ -174,6 +179,7 @@ class Request extends HttpRequest
     public function setBasePath($basePath)
     {
         $this->basePath = rtrim($basePath, '/');
+
         return $this;
     }
 
@@ -228,7 +234,7 @@ class Request extends HttpRequest
                     $headers[strtr(ucwords(strtolower(strtr(substr($key, 5), '_', ' '))), ' ', '-')] = $value;
                 } elseif (strpos($key, 'CONTENT_') === 0) {
                     $name = substr($key, 8); // Remove "Content-"
-                    $headers['Content-' . (($name == 'MD5') ? $name : ucfirst(strtolower($name)))] = $value;
+                    $headers['Content-'.(($name == 'MD5') ? $name : ucfirst(strtolower($name)))] = $value;
                 }
             }
         }
@@ -295,8 +301,8 @@ class Request extends HttpRequest
             // Check for missinterpreted IPv6-Address
             // Reported at least for Safari on Windows
             if (isset($this->serverParams['SERVER_ADDR']) && preg_match('/^\[[0-9a-fA-F\:]+\]$/', $host)) {
-                $host = '[' . $this->serverParams['SERVER_ADDR'] . ']';
-                if ($port . ']' == substr($host, strrpos($host, ':')+1)) {
+                $host = '['.$this->serverParams['SERVER_ADDR'].']';
+                if ($port.']' == substr($host, strrpos($host, ':')+1)) {
                     // The last digit of the IPv6-Address has been taken as port
                     // Unset the port so the default port can be used
                     $port = null;
@@ -327,8 +333,8 @@ class Request extends HttpRequest
     /**
      * Return the parameter container responsible for server parameters or a single parameter value.
      *
-     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-     * @param mixed|null            $default         Default value to use when the parameter is missing.
+     * @param  string|null                            $name    Parameter name to retrieve, or null to get the whole container.
+     * @param  mixed|null                             $default Default value to use when the parameter is missing.
      * @see http://www.faqs.org/rfcs/rfc3875.html
      * @return \Zend\Stdlib\ParametersInterface|mixed
      */
@@ -355,14 +361,15 @@ class Request extends HttpRequest
     public function setEnv(ParametersInterface $env)
     {
         $this->envParams = $env;
+
         return $this;
     }
 
     /**
      * Return the parameter container responsible for env parameters or a single parameter value.
      *
-     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-     * @param mixed|null            $default         Default value to use when the parameter is missing.     * @return \Zend\Stdlib\ParametersInterface
+     * @param  string|null                            $name    Parameter name to retrieve, or null to get the whole container.
+     * @param  mixed|null                             $default Default value to use when the parameter is missing.     * @return \Zend\Stdlib\ParametersInterface
      * @return \Zend\Stdlib\ParametersInterface|mixed
      */
     public function getEnv($name = null, $default = null)
@@ -468,8 +475,9 @@ class Request extends HttpRequest
         if ($origPathInfo !== null) {
             $queryString = $server->get('QUERY_STRING', '');
             if ($queryString !== '') {
-                $origPathInfo .= '?' . $queryString;
+                $origPathInfo .= '?'.$queryString;
             }
+
             return $origPathInfo;
         }
 
@@ -507,7 +515,7 @@ class Request extends HttpRequest
             $basename = basename($filename);
             if ($basename) {
                 $path     = ($phpSelf ? trim($phpSelf, '/') : '');
-                $baseUrl .= substr($path, 0, strpos($path, $basename)) . $basename;
+                $baseUrl .= substr($path, 0, strpos($path, $basename)).$basename;
             }
         }
 

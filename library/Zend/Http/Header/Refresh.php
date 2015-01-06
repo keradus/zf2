@@ -24,7 +24,7 @@ class Refresh implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'refresh') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Refresh string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Refresh string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Refresh implements HeaderInterface
 
     public function toString()
     {
-        return 'Refresh: ' . $this->getFieldValue();
+        return 'Refresh: '.$this->getFieldValue();
     }
 }

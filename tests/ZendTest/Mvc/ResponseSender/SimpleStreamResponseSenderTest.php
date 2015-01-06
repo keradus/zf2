@@ -27,7 +27,7 @@ class SimpleStreamResponseSenderTest extends TestCase
 
     public function testSendResponseTwoTimesPrintsResponseOnlyOnce()
     {
-        $file = fopen(__DIR__ . '/TestAsset/sample-stream-file.txt', 'rb');
+        $file = fopen(__DIR__.'/TestAsset/sample-stream-file.txt', 'rb');
         $mockResponse = $this->getMock('Zend\Http\Response\Stream');
         $mockResponse->expects($this->once())->method('getStream')->will($this->returnValue($file));
         $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);
@@ -35,7 +35,7 @@ class SimpleStreamResponseSenderTest extends TestCase
         ob_start();
         $responseSender($mockSendResponseEvent);
         $body = ob_get_clean();
-        $expected = file_get_contents(__DIR__ . '/TestAsset/sample-stream-file.txt');
+        $expected = file_get_contents(__DIR__.'/TestAsset/sample-stream-file.txt');
         $this->assertEquals($expected, $body);
 
         ob_start();
@@ -48,6 +48,7 @@ class SimpleStreamResponseSenderTest extends TestCase
     {
         $mockSendResponseEvent = $this->getMock('Zend\Mvc\ResponseSender\SendResponseEvent', array('getResponse'));
         $mockSendResponseEvent->expects($this->any())->method('getResponse')->will($this->returnValue($response));
+
         return $mockSendResponseEvent;
     }
 }

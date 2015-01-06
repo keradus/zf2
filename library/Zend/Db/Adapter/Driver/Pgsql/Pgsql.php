@@ -39,16 +39,16 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
      * @var array
      */
     protected $options = array(
-        'buffer_results' => false
+        'buffer_results' => false,
     );
 
     /**
      * Constructor
      *
      * @param array|Connection|resource $connection
-     * @param null|Statement $statementPrototype
-     * @param null|Result $resultPrototype
-     * @param array $options
+     * @param null|Statement            $statementPrototype
+     * @param null|Result               $resultPrototype
+     * @param array                     $options
      */
     public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $options = null)
     {
@@ -70,6 +70,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -84,20 +85,21 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Register connection
      *
-     * @param Connection $connection
+     * @param  Connection $connection
      * @return Pgsql
      */
     public function registerConnection(Connection $connection)
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
+
         return $this;
     }
 
     /**
      * Register statement prototype
      *
-     * @param Statement $statement
+     * @param  Statement $statement
      * @return Pgsql
      */
     public function registerStatementPrototype(Statement $statement)
@@ -110,19 +112,20 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Register result prototype
      *
-     * @param Result $result
+     * @param  Result $result
      * @return Pgsql
      */
     public function registerResultPrototype(Result $result)
     {
         $this->resultPrototype = $result;
+
         return $this;
     }
 
     /**
      * Get database platform name
      *
-     * @param string $nameFormat
+     * @param  string $nameFormat
      * @return string
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
@@ -160,7 +163,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Create statement
      *
-     * @param string|null $sqlOrResource
+     * @param  string|null $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
@@ -176,19 +179,21 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
         }
 
         $statement->initialize($this->connection->getResource());
+
         return $statement;
     }
 
     /**
      * Create result
      *
-     * @param resource $resource
+     * @param  resource $resource
      * @return Result
      */
     public function createResult($resource)
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue());
+
         return $result;
     }
 
@@ -205,8 +210,8 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Format parameter name
      *
-     * @param string $name
-     * @param mixed  $type
+     * @param  string $name
+     * @param  mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)
@@ -217,7 +222,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Get last generated value
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      */
     public function getLastGeneratedValue($name = null)

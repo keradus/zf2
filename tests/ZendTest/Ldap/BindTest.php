@@ -216,6 +216,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
                 $this->assertTrue(strstr($message, 'Invalid credentials')
                         || strstr($message, 'Server is unwilling to perform')
                 );
+
                 return;
             }
         }

@@ -14,7 +14,7 @@ abstract class AbstractUnicode extends AbstractFilter
     /**
      * Set the input encoding for the given string
      *
-     * @param  string|null $encoding
+     * @param  string|null                           $encoding
      * @return self
      * @throws Exception\InvalidArgumentException
      * @throws Exception\ExtensionNotLoadedException
@@ -40,6 +40,7 @@ abstract class AbstractUnicode extends AbstractFilter
         }
 
         $this->options['encoding'] = $encoding;
+
         return $this;
     }
 

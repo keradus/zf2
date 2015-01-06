@@ -25,9 +25,9 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $client = new HttpClient;
+        $client = new HttpClient();
         PubSubHubbub::setHttpClient($client);
-        $this->publisher = new Publisher;
+        $this->publisher = new Publisher();
     }
 
     public function getClientSuccess()
@@ -61,31 +61,31 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
     public function testAddsHubServerUrlsFromArray()
     {
         $this->publisher->addHubUrls(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ));
         $this->assertEquals(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ), $this->publisher->getHubUrls());
     }
 
     public function testAddsHubServerUrlsFromArrayUsingSetConfig()
     {
         $this->publisher->setOptions(array('hubUrls' => array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         )));
         $this->assertEquals(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ), $this->publisher->getHubUrls());
     }
 
     public function testRemovesHubServerUrl()
     {
         $this->publisher->addHubUrls(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ));
         $this->publisher->removeHubUrl('http://www.example.com/hub');
         $this->assertEquals(array(
-            1 => 'http://www.example.com/hub2'
+            1 => 'http://www.example.com/hub2',
         ), $this->publisher->getHubUrls());
     }
 
@@ -93,10 +93,10 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
     {
         $this->publisher->addHubUrls(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2',
-            'http://www.example.com/hub'
+            'http://www.example.com/hub',
         ));
         $this->assertEquals(array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         ), $this->publisher->getHubUrls());
     }
 
@@ -106,13 +106,11 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         $this->publisher->addHubUrl('');
     }
 
-
     public function testThrowsExceptionOnSettingNonStringHubServerUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
         $this->publisher->addHubUrl(123);
     }
-
 
     public function testThrowsExceptionOnSettingInvalidHubServerUrl()
     {
@@ -129,31 +127,31 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
     public function testAddsUpdatedTopicUrlsFromArray()
     {
         $this->publisher->addUpdatedTopicUrls(array(
-            'http://www.example.com/topic', 'http://www.example.com/topic2'
+            'http://www.example.com/topic', 'http://www.example.com/topic2',
         ));
         $this->assertEquals(array(
-            'http://www.example.com/topic', 'http://www.example.com/topic2'
+            'http://www.example.com/topic', 'http://www.example.com/topic2',
         ), $this->publisher->getUpdatedTopicUrls());
     }
 
     public function testAddsUpdatedTopicUrlsFromArrayUsingSetConfig()
     {
         $this->publisher->setOptions(array('updatedTopicUrls' => array(
-            'http://www.example.com/topic', 'http://www.example.com/topic2'
+            'http://www.example.com/topic', 'http://www.example.com/topic2',
         )));
         $this->assertEquals(array(
-            'http://www.example.com/topic', 'http://www.example.com/topic2'
+            'http://www.example.com/topic', 'http://www.example.com/topic2',
         ), $this->publisher->getUpdatedTopicUrls());
     }
 
     public function testRemovesUpdatedTopicUrl()
     {
         $this->publisher->addUpdatedTopicUrls(array(
-            'http://www.example.com/topic', 'http://www.example.com/topic2'
+            'http://www.example.com/topic', 'http://www.example.com/topic2',
         ));
         $this->publisher->removeUpdatedTopicUrl('http://www.example.com/topic');
         $this->assertEquals(array(
-            1 => 'http://www.example.com/topic2'
+            1 => 'http://www.example.com/topic2',
         ), $this->publisher->getUpdatedTopicUrls());
     }
 
@@ -161,10 +159,10 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
     {
         $this->publisher->addUpdatedTopicUrls(array(
             'http://www.example.com/topic', 'http://www.example.com/topic2',
-            'http://www.example.com/topic'
+            'http://www.example.com/topic',
         ));
         $this->assertEquals(array(
-            'http://www.example.com/topic', 'http://www.example.com/topic2'
+            'http://www.example.com/topic', 'http://www.example.com/topic2',
         ), $this->publisher->getUpdatedTopicUrls());
     }
 
@@ -174,13 +172,11 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         $this->publisher->addUpdatedTopicUrl('');
     }
 
-
     public function testThrowsExceptionOnSettingNonStringUpdatedTopicUrl()
     {
         $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
         $this->publisher->addUpdatedTopicUrl(123);
     }
-
 
     public function testThrowsExceptionOnSettingInvalidUpdatedTopicUrl()
     {
@@ -191,58 +187,58 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
     public function testAddsParameter()
     {
         $this->publisher->setParameter('foo', 'bar');
-        $this->assertEquals(array('foo'=> 'bar'), $this->publisher->getParameters());
+        $this->assertEquals(array('foo' => 'bar'), $this->publisher->getParameters());
     }
 
     public function testAddsParametersFromArray()
     {
         $this->publisher->setParameters(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ));
         $this->assertEquals(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ), $this->publisher->getParameters());
     }
 
     public function testAddsParametersFromArrayInSingleMethod()
     {
         $this->publisher->setParameter(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ));
         $this->assertEquals(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ), $this->publisher->getParameters());
     }
 
     public function testAddsParametersFromArrayUsingSetConfig()
     {
         $this->publisher->setOptions(array('parameters' => array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         )));
         $this->assertEquals(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ), $this->publisher->getParameters());
     }
 
     public function testRemovesParameter()
     {
         $this->publisher->setParameters(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ));
         $this->publisher->removeParameter('boo');
         $this->assertEquals(array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         ), $this->publisher->getParameters());
     }
 
     public function testRemovesParameterIfSetToNull()
     {
         $this->publisher->setParameters(array(
-            'foo' => 'bar', 'boo' => 'baz'
+            'foo' => 'bar', 'boo' => 'baz',
         ));
         $this->publisher->setParameter('boo', null);
         $this->assertEquals(array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         ), $this->publisher->getParameters());
     }
 

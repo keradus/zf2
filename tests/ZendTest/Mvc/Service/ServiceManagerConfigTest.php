@@ -48,10 +48,10 @@ class ServiceManagerConfigTest extends TestCase
         $events = new EventManager();
         TestAsset\EventManagerAwareObject::$defaultEvents = $events;
 
-        $this->services->setInvokableClass('EventManagerAwareObject', __NAMESPACE__ . '\TestAsset\EventManagerAwareObject');
+        $this->services->setInvokableClass('EventManagerAwareObject', __NAMESPACE__.'\TestAsset\EventManagerAwareObject');
 
         $instance = $this->services->get('EventManagerAwareObject');
-        $this->assertInstanceOf(__NAMESPACE__ . '\TestAsset\EventManagerAwareObject', $instance);
+        $this->assertInstanceOf(__NAMESPACE__.'\TestAsset\EventManagerAwareObject', $instance);
         $this->assertSame($events, $instance->getEventManager());
         $this->assertSame($this->services->get('SharedEventManager'), $events->getSharedManager());
     }
@@ -124,7 +124,7 @@ class ServiceManagerConfigTest extends TestCase
 
                         return $service;
                     },
-                )
+                ),
             ),
         );
 
@@ -155,7 +155,7 @@ class ServiceManagerConfigTest extends TestCase
             'factories' => array(
                 'ServiceManager' => function () use ($test) {
                     return $test;
-                }
+                },
             ),
         )));
 
@@ -190,7 +190,7 @@ class ServiceManagerConfigTest extends TestCase
         $initializer    = $this->getMock('stdClass', array('__invoke'));
         $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
             'initializers' => array(
-                'ServiceManagerAwareInitializer' => $initializer
+                'ServiceManagerAwareInitializer' => $initializer,
             ),
             'factories' => array(
                 'service-manager-aware' => function () use ($instance) {
@@ -233,7 +233,7 @@ class ServiceManagerConfigTest extends TestCase
         $initializer    = $this->getMock('stdClass', array('__invoke'));
         $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
             'initializers' => array(
-                'ServiceLocatorAwareInitializer' => $initializer
+                'ServiceLocatorAwareInitializer' => $initializer,
             ),
             'factories' => array(
                 'service-locator-aware' => function () use ($instance) {
@@ -257,7 +257,7 @@ class ServiceManagerConfigTest extends TestCase
         $initializer    = $this->getMock('stdClass', array('__invoke'));
         $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
             'initializers' => array(
-                'EventManagerAwareInitializer' => $initializer
+                'EventManagerAwareInitializer' => $initializer,
             ),
             'factories' => array(
                 'event-manager-aware' => function () use ($instance) {

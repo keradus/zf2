@@ -61,9 +61,9 @@ abstract class ErrorHandler
     /**
      * Stopping the error handler
      *
-     * @param  bool $throw Throw the ErrorException if any
+     * @param  bool                $throw Throw the ErrorException if any
      * @return null|ErrorException
-     * @throws ErrorException If an error has been catched and $throw is true
+     * @throws ErrorException      If an error has been catched and $throw is true
      */
     public static function stop($throw = false)
     {
@@ -101,10 +101,10 @@ abstract class ErrorHandler
     /**
      * Add an error to the stack
      *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param int    $errline
+     * @param  int    $errno
+     * @param  string $errstr
+     * @param  string $errfile
+     * @param  int    $errline
      * @return void
      */
     public static function addError($errno, $errstr = '', $errfile = '', $errline = 0)

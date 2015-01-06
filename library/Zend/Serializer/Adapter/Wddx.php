@@ -26,7 +26,7 @@ class Wddx extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Traversable|WddxOptions $options
+     * @param  array|\Traversable|WddxOptions        $options
      * @throws Exception\ExtensionNotLoadedException if wddx extension not found
      */
     public function __construct($options = null)
@@ -53,6 +53,7 @@ class Wddx extends AbstractAdapter
         }
 
         $this->options = $options;
+
         return $this;
     }
 
@@ -66,13 +67,14 @@ class Wddx extends AbstractAdapter
         if ($this->options === null) {
             $this->options = new WddxOptions();
         }
+
         return $this->options;
     }
 
     /**
      * Serialize PHP to WDDX
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @return string
      * @throws Exception\RuntimeException on wddx error
      */
@@ -98,9 +100,9 @@ class Wddx extends AbstractAdapter
     /**
      * Unserialize from WDDX to PHP
      *
-     * @param  string $wddx
+     * @param  string                             $wddx
      * @return mixed
-     * @throws Exception\RuntimeException on wddx error
+     * @throws Exception\RuntimeException         on wddx error
      * @throws Exception\InvalidArgumentException if invalid xml
      */
     public function unserialize($wddx)
@@ -112,7 +114,7 @@ class Wddx extends AbstractAdapter
             // or based on an invalid wddx string
             try {
                 $oldLibxmlDisableEntityLoader = libxml_disable_entity_loader(true);
-                $dom = new \DOMDocument;
+                $dom = new \DOMDocument();
                 $dom->loadXML($wddx);
                 foreach ($dom->childNodes as $child) {
                     if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
@@ -129,7 +131,7 @@ class Wddx extends AbstractAdapter
                 }
                 throw new Exception\RuntimeException('Unserialization failed: Invalid wddx packet');
             } catch (\Exception $e) {
-                throw new Exception\RuntimeException('Unserialization failed: ' . $e->getMessage(), 0, $e);
+                throw new Exception\RuntimeException('Unserialization failed: '.$e->getMessage(), 0, $e);
             }
         }
 

@@ -46,7 +46,7 @@ class StringLength extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  int|array|\Traversable $options
+     * @param int|array|\Traversable $options
      */
     public function __construct($options = array())
     {
@@ -80,9 +80,9 @@ class StringLength extends AbstractValidator
     /**
      * Sets the min option
      *
-     * @param  int $min
+     * @param  int                                $min
      * @throws Exception\InvalidArgumentException
-     * @return StringLength Provides a fluent interface
+     * @return StringLength                       Provides a fluent interface
      */
     public function setMin($min)
     {
@@ -93,6 +93,7 @@ class StringLength extends AbstractValidator
         }
 
         $this->options['min'] = max(0, (int) $min);
+
         return $this;
     }
 
@@ -109,9 +110,9 @@ class StringLength extends AbstractValidator
     /**
      * Sets the max option
      *
-     * @param  int|null $max
+     * @param  int|null                           $max
      * @throws Exception\InvalidArgumentException
-     * @return StringLength Provides a fluent interface
+     * @return StringLength                       Provides a fluent interface
      */
     public function setMax($max)
     {
@@ -138,13 +139,14 @@ class StringLength extends AbstractValidator
         if (!$this->stringWrapper) {
             $this->stringWrapper = StringUtils::getWrapper($this->getEncoding());
         }
+
         return $this->stringWrapper;
     }
 
     /**
      * Set the string wrapper to detect the string length
      *
-     * @param StringWrapper $stringWrapper
+     * @param  StringWrapper $stringWrapper
      * @return StringLength
      */
     public function setStringWrapper(StringWrapper $stringWrapper)
@@ -166,7 +168,7 @@ class StringLength extends AbstractValidator
     /**
      * Sets a new encoding to use
      *
-     * @param string $encoding
+     * @param  string                             $encoding
      * @return StringLength
      * @throws Exception\InvalidArgumentException
      */
@@ -174,6 +176,7 @@ class StringLength extends AbstractValidator
     {
         $this->stringWrapper = StringUtils::getWrapper($encoding);
         $this->options['encoding'] = $encoding;
+
         return $this;
     }
 
@@ -188,6 +191,7 @@ class StringLength extends AbstractValidator
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 

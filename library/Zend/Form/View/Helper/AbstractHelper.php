@@ -154,12 +154,13 @@ abstract class AbstractHelper extends BaseAbstractHelper
     /**
      * Set value for doctype
      *
-     * @param  string $doctype
+     * @param  string         $doctype
      * @return AbstractHelper
      */
     public function setDoctype($doctype)
     {
         $this->getDoctypeHelper()->setDoctype($doctype);
+
         return $this;
     }
 
@@ -176,13 +177,14 @@ abstract class AbstractHelper extends BaseAbstractHelper
     /**
      * Set value for character encoding
      *
-     * @param  string $encoding
+     * @param  string         $encoding
      * @return AbstractHelper
      */
     public function setEncoding($encoding)
     {
         $this->getEscapeHtmlHelper()->setEncoding($encoding);
         $this->getEscapeHtmlAttrHelper()->setEncoding($encoding);
+
         return $this;
     }
 
@@ -201,7 +203,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
      *
      * Escapes all attribute values
      *
-     * @param  array $attributes
+     * @param  array  $attributes
      * @return string
      */
     public function createAttributesString(array $attributes)
@@ -267,6 +269,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
         if ($doctypeHelper->isXhtml()) {
             return '/>';
         }
+
         return '>';
     }
 
@@ -383,7 +386,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
      * Prepares the expected representation for the boolean attribute specified.
      *
      * @param  string $attribute
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return string
      */
     protected function prepareBooleanAttributeValue($attribute, $value)
@@ -393,6 +396,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
         }
 
         $value = (bool) $value;
+
         return ($value
             ? $this->booleanAttributes[$attribute]['on']
             : $this->booleanAttributes[$attribute]['off']

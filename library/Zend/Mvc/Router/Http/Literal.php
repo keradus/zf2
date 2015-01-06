@@ -36,8 +36,8 @@ class Literal implements RouteInterface
     /**
      * Create a new literal route.
      *
-     * @param  string $route
-     * @param  array  $defaults
+     * @param string $route
+     * @param array  $defaults
      */
     public function __construct($route, array $defaults = array())
     {
@@ -49,7 +49,7 @@ class Literal implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return Literal
      * @throws Exception\InvalidArgumentException
      */
@@ -58,7 +58,7 @@ class Literal implements RouteInterface
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable set of options');
         }
 
         if (!isset($options['route'])) {
@@ -76,8 +76,8 @@ class Literal implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request      $request
-     * @param  integer|null $pathOffset
+     * @param  Request         $request
+     * @param  integer|null    $pathOffset
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null)

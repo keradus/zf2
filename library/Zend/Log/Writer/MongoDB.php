@@ -41,10 +41,10 @@ class MongoDB extends AbstractWriter
     /**
      * Constructor
      *
-     * @param Mongo|MongoClient|array|Traversable $mongo
-     * @param string|MongoDB $database
-     * @param string $collection
-     * @param array $saveOptions
+     * @param  Mongo|MongoClient|array|Traversable $mongo
+     * @param  string|MongoDB                      $database
+     * @param  string                              $collection
+     * @param  array                               $saveOptions
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($mongo, $database = null, $collection = null, array $saveOptions = array())
@@ -83,7 +83,7 @@ class MongoDB extends AbstractWriter
     /**
      * This writer does not support formatting.
      *
-     * @param string|FormatterInterface $formatter
+     * @param  string|FormatterInterface $formatter
      * @return WriterInterface
      */
     public function setFormatter($formatter)
@@ -94,7 +94,7 @@ class MongoDB extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param array $event Event data
+     * @param  array                      $event Event data
      * @return void
      * @throws Exception\RuntimeException
      */

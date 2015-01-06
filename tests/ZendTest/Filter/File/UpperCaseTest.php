@@ -44,9 +44,9 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filesPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
-        $this->_origFile  = $this->_filesPath . 'testfile2.txt';
-        $this->_newFile   = $this->_filesPath . 'newtestfile2.txt';
+        $this->_filesPath = dirname(__DIR__).DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR;
+        $this->_origFile  = $this->_filesPath.'testfile2.txt';
+        $this->_newFile   = $this->_filesPath.'newtestfile2.txt';
 
         if (!file_exists($this->_newFile)) {
             copy($this->_origFile, $this->_newFile);
@@ -94,7 +94,7 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileUpperCase();
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
-        $filter($this->_newFile . 'unknown');
+        $filter($this->_newFile.'unknown');
     }
 
     /**
@@ -135,8 +135,8 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 $this->_newFile,
-                'something invalid'
-            ))
+                'something invalid',
+            )),
         );
     }
 

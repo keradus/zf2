@@ -60,12 +60,13 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
     /**
      * Set value indicating whether or not to display exceptions related to a not-found condition
      *
-     * @param  bool $displayExceptions
+     * @param  bool                  $displayExceptions
      * @return RouteNotFoundStrategy
      */
     public function setDisplayExceptions($displayExceptions)
     {
         $this->displayExceptions = (bool) $displayExceptions;
+
         return $this;
     }
 
@@ -82,12 +83,13 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
     /**
      * Set value indicating whether or not to display the reason for a not-found condition
      *
-     * @param  bool $displayNotFoundReason
+     * @param  bool                  $displayNotFoundReason
      * @return RouteNotFoundStrategy
      */
     public function setDisplayNotFoundReason($displayNotFoundReason)
     {
         $this->displayNotFoundReason = (bool) $displayNotFoundReason;
+
         return $this;
     }
 
@@ -104,12 +106,13 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
     /**
      * Get template for not found conditions
      *
-     * @param  string $notFoundTemplate
+     * @param  string                $notFoundTemplate
      * @return RouteNotFoundStrategy
      */
     public function setNotFoundTemplate($notFoundTemplate)
     {
         $this->notFoundTemplate = (string) $notFoundTemplate;
+
         return $this;
     }
 
@@ -223,6 +226,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         // no route match, controller not found, or controller invalid
         if ($this->reason) {
             $model->setVariable('reason', $this->reason);
+
             return;
         }
 
@@ -238,7 +242,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      * event, inject it into the model.
      *
      * @param  ViewModel $model
-     * @param  MvcEvent $e
+     * @param  MvcEvent  $e
      * @return void
      */
     protected function injectException($model, $e)
@@ -267,7 +271,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      * the model.
      *
      * @param  ViewModel $model
-     * @param  MvcEvent $e
+     * @param  MvcEvent  $e
      * @return void
      */
     protected function injectController($model, $e)

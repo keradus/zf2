@@ -19,7 +19,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get an author entry
      *
-     * @param int $index
+     * @param  int    $index
      * @return string
      */
     public function getAuthor($index = 0)
@@ -45,23 +45,23 @@ class Entry extends Extension\AbstractEntry
         }
 
         $authors = array();
-        $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc11:creator');
+        $list = $this->getXpath()->evaluate($this->getXpathPrefix().'//dc11:creator');
 
         if (!$list->length) {
-            $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc10:creator');
+            $list = $this->getXpath()->evaluate($this->getXpathPrefix().'//dc10:creator');
         }
         if (!$list->length) {
-            $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc11:publisher');
+            $list = $this->getXpath()->evaluate($this->getXpathPrefix().'//dc11:publisher');
 
             if (!$list->length) {
-                $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc10:publisher');
+                $list = $this->getXpath()->evaluate($this->getXpathPrefix().'//dc10:publisher');
             }
         }
 
         if ($list->length) {
             foreach ($list as $author) {
                 $authors[] = array(
-                    'name' => $author->nodeValue
+                    'name' => $author->nodeValue,
                 );
             }
             $authors = new Collection\Author(
@@ -87,14 +87,14 @@ class Entry extends Extension\AbstractEntry
             return $this->data['categories'];
         }
 
-        $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc11:subject');
+        $list = $this->getXpath()->evaluate($this->getXpathPrefix().'//dc11:subject');
 
         if (!$list->length) {
-            $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc10:subject');
+            $list = $this->getXpath()->evaluate($this->getXpathPrefix().'//dc10:subject');
         }
 
         if ($list->length) {
-            $categoryCollection = new Collection\Category;
+            $categoryCollection = new Collection\Category();
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->nodeValue,
@@ -103,10 +103,11 @@ class Entry extends Extension\AbstractEntry
                 );
             }
         } else {
-            $categoryCollection = new Collection\Category;
+            $categoryCollection = new Collection\Category();
         }
 
         $this->data['categories'] = $categoryCollection;
+
         return $this->data['categories'];
     }
 
@@ -131,10 +132,10 @@ class Entry extends Extension\AbstractEntry
             return $this->data['description'];
         }
 
-        $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:description)');
+        $description = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:description)');
 
         if (!$description) {
-            $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:description)');
+            $description = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:description)');
         }
 
         if (!$description) {
@@ -157,10 +158,10 @@ class Entry extends Extension\AbstractEntry
             return $this->data['id'];
         }
 
-        $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:identifier)');
+        $id = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:identifier)');
 
         if (!$id) {
-            $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:identifier)');
+            $id = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:identifier)');
         }
 
         $this->data['id'] = $id;
@@ -179,10 +180,10 @@ class Entry extends Extension\AbstractEntry
             return $this->data['title'];
         }
 
-        $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:title)');
+        $title = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:title)');
 
         if (!$title) {
-            $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:title)');
+            $title = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:title)');
         }
 
         if (!$title) {
@@ -206,10 +207,10 @@ class Entry extends Extension\AbstractEntry
         }
 
         $d    = null;
-        $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:date)');
+        $date = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:date)');
 
         if (!$date) {
-            $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:date)');
+            $date = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:date)');
         }
 
         if ($date) {

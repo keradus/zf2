@@ -54,6 +54,7 @@ abstract class AbstractFilter
     {
         $fa   = func_get_args();
         $args = array_merge(array($this), $fa);
+
         return new AndFilter($args);
     }
 
@@ -67,6 +68,7 @@ abstract class AbstractFilter
     {
         $fa   = func_get_args();
         $args = array_merge(array($this), $fa);
+
         return new OrFilter($args);
     }
 
@@ -81,7 +83,7 @@ abstract class AbstractFilter
      * @author Benedikt Hallinger <beni@php.net>
      *
      * @param  string|array $values Array of values to escape
-     * @return array Array $values, but escaped
+     * @return array        Array $values, but escaped
      */
     public static function escapeValue($values = array())
     {
@@ -98,6 +100,7 @@ abstract class AbstractFilter
             }
             $values[$key] = $val;
         }
+
         return (count($values) == 1) ? $values[0] : $values;
     }
 
@@ -110,7 +113,7 @@ abstract class AbstractFilter
      * @author Benedikt Hallinger <beni@php.net>
      *
      * @param  string|array $values Array of values to escape
-     * @return array Array $values, but unescaped
+     * @return array        Array $values, but unescaped
      */
     public static function unescapeValue($values = array())
     {
@@ -121,6 +124,7 @@ abstract class AbstractFilter
             // Translate hex code into ascii
             $values[$key] = Converter::hex32ToAsc($value);
         }
+
         return (count($values) == 1) ? $values[0] : $values;
     }
 }

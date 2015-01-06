@@ -58,17 +58,17 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filesPath  = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'RenameUploadTest';
-        $this->_newDir = $this->_filesPath . DIRECTORY_SEPARATOR . '_testDir2';
+        $this->_filesPath  = dirname(__DIR__).DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'RenameUploadTest';
+        $this->_newDir = $this->_filesPath.DIRECTORY_SEPARATOR.'_testDir2';
 
         $this->tearDown();
 
         mkdir($this->_filesPath);
         mkdir($this->_newDir);
 
-        $this->_oldFile    = $this->_filesPath . DIRECTORY_SEPARATOR . 'testfile.txt';
-        $this->_newFile    = $this->_filesPath . DIRECTORY_SEPARATOR . 'newfile.xml';
-        $this->_newDirFile = $this->_newDir . DIRECTORY_SEPARATOR . 'testfile.txt';
+        $this->_oldFile    = $this->_filesPath.DIRECTORY_SEPARATOR.'testfile.txt';
+        $this->_newFile    = $this->_filesPath.DIRECTORY_SEPARATOR.'newfile.xml';
+        $this->_newDirFile = $this->_newDir.DIRECTORY_SEPARATOR.'testfile.txt';
 
         touch($this->_oldFile);
     }
@@ -90,7 +90,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        foreach (glob($dir . DIRECTORY_SEPARATOR . '*') as $file) {
+        foreach (glob($dir.DIRECTORY_SEPARATOR.'*') as $file) {
             if (is_file($file)) {
                 unlink($file);
             }
@@ -245,18 +245,18 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomizedFile()
     {
-        $fileNoExt = $this->_filesPath . DIRECTORY_SEPARATOR . 'newfile';
+        $fileNoExt = $this->_filesPath.DIRECTORY_SEPARATOR.'newfile';
         $filter = new RenameUploadMock(array(
             'target'          => $this->_newFile,
             'randomize'       => true,
         ));
 
-        $this->assertRegExp('#' . str_replace('\\', '\\\\', $fileNoExt) . '_.{13}\.xml#', $filter($this->_oldFile));
+        $this->assertRegExp('#'.str_replace('\\', '\\\\', $fileNoExt).'_.{13}\.xml#', $filter($this->_oldFile));
     }
 
     public function testGetFileWithOriginalExtension()
     {
-        $fileNoExt = $this->_filesPath . DIRECTORY_SEPARATOR . 'newfile';
+        $fileNoExt = $this->_filesPath.DIRECTORY_SEPARATOR.'newfile';
         $filter = new RenameUploadMock(array(
             'target'          => $this->_newFile,
             'use_upload_extension' => true,
@@ -266,14 +266,14 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $oldFilePathInfo = pathinfo($this->_oldFile);
 
         $this->assertRegExp(
-            '#' . str_replace('\\', '\\\\', $fileNoExt) . '.'.$oldFilePathInfo['extension'].'#',
+            '#'.str_replace('\\', '\\\\', $fileNoExt).'.'.$oldFilePathInfo['extension'].'#',
             $filter($this->_oldFile)
         );
     }
 
     public function testGetRandomizedFileWithOriginalExtension()
     {
-        $fileNoExt = $this->_filesPath . DIRECTORY_SEPARATOR . 'newfile';
+        $fileNoExt = $this->_filesPath.DIRECTORY_SEPARATOR.'newfile';
         $filter = new RenameUploadMock(array(
             'target'          => $this->_newFile,
             'use_upload_extension' => true,
@@ -283,7 +283,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $oldFilePathInfo = pathinfo($this->_oldFile);
 
         $this->assertRegExp(
-            '#' . str_replace('\\', '\\\\', $fileNoExt) . '_.{13}\.'.$oldFilePathInfo['extension'].'#',
+            '#'.str_replace('\\', '\\\\', $fileNoExt).'_.{13}\.'.$oldFilePathInfo['extension'].'#',
             $filter($this->_oldFile)
         );
     }
@@ -293,13 +293,13 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomizedFileWithoutExtension()
     {
-        $fileNoExt = $this->_filesPath . DIRECTORY_SEPARATOR . 'newfile';
+        $fileNoExt = $this->_filesPath.DIRECTORY_SEPARATOR.'newfile';
         $filter = new RenameUploadMock(array(
             'target'          => $fileNoExt,
             'randomize'       => true,
         ));
 
-        $this->assertRegExp('#' . str_replace('\\', '\\\\', $fileNoExt) . '_.{13}#', $filter($this->_oldFile));
+        $this->assertRegExp('#'.str_replace('\\', '\\\\', $fileNoExt).'_.{13}#', $filter($this->_oldFile));
     }
 
     /**
@@ -330,7 +330,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($firstResult, $secondResult);
     }
 
-
     public function returnUnfilteredDataProvider()
     {
         return array(
@@ -338,8 +337,8 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 $this->_oldFile,
-                'something invalid'
-            ))
+                'something invalid',
+            )),
         );
     }
 

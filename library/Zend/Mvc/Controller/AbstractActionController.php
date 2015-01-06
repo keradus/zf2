@@ -32,7 +32,7 @@ abstract class AbstractActionController extends AbstractController
     public function indexAction()
     {
         return new ViewModel(array(
-            'content' => 'Placeholder page'
+            'content' => 'Placeholder page',
         ));
     }
 
@@ -51,13 +51,14 @@ abstract class AbstractActionController extends AbstractController
         if ($response instanceof HttpResponse) {
             return $this->createHttpNotFoundModel($response);
         }
+
         return $this->createConsoleNotFoundModel($response);
     }
 
     /**
      * Execute the request
      *
-     * @param  MvcEvent $e
+     * @param  MvcEvent                  $e
      * @return mixed
      * @throws Exception\DomainException
      */

@@ -44,7 +44,7 @@ class Callback
     /**
      * Constructor
      *
-     * @param  null|array $options
+     * @param null|array $options
      */
     public function __construct($options = null)
     {
@@ -56,24 +56,25 @@ class Callback
     /**
      * Set object state from array of options
      *
-     * @param  array $options
+     * @param  array                        $options
      * @return \Zend\Server\Method\Callback
      */
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
     /**
      * Set callback class
      *
-     * @param  string $class
+     * @param  string                       $class
      * @return \Zend\Server\Method\Callback
      */
     public function setClass($class)
@@ -82,6 +83,7 @@ class Callback
             $class = get_class($class);
         }
         $this->class = $class;
+
         return $this;
     }
 
@@ -98,13 +100,14 @@ class Callback
     /**
      * Set callback function
      *
-     * @param  string $function
+     * @param  string                       $function
      * @return \Zend\Server\Method\Callback
      */
     public function setFunction($function)
     {
         $this->function = (string) $function;
         $this->setType('function');
+
         return $this;
     }
 
@@ -121,12 +124,13 @@ class Callback
     /**
      * Set callback class method
      *
-     * @param  string $method
+     * @param  string                       $method
      * @return \Zend\Server\Method\Callback
      */
     public function setMethod($method)
     {
         $this->method = $method;
+
         return $this;
     }
 
@@ -143,16 +147,17 @@ class Callback
     /**
      * Set callback type
      *
-     * @param  string $type
+     * @param  string                                    $type
      * @return Callback
      * @throws Server\Exception\InvalidArgumentException
      */
     public function setType($type)
     {
         if (!in_array($type, $this->types)) {
-            throw new Server\Exception\InvalidArgumentException('Invalid method callback type "' . $type . '" passed to ' . __CLASS__ . '::' . __METHOD__);
+            throw new Server\Exception\InvalidArgumentException('Invalid method callback type "'.$type.'" passed to '.__CLASS__.'::'.__METHOD__);
         }
         $this->type = $type;
+
         return $this;
     }
 
@@ -183,6 +188,7 @@ class Callback
             $array['class']  = $this->getClass();
             $array['method'] = $this->getMethod();
         }
+
         return $array;
     }
 }

@@ -28,18 +28,18 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         }
         $this->_params = array('host'     => TESTS_ZEND_MAIL_IMAP_HOST,
                                'user'     => TESTS_ZEND_MAIL_IMAP_USER,
-                               'password' => TESTS_ZEND_MAIL_IMAP_PASSWORD);
+                               'password' => TESTS_ZEND_MAIL_IMAP_PASSWORD, );
         if (defined('TESTS_ZEND_MAIL_SERVER_TESTDIR') && TESTS_ZEND_MAIL_SERVER_TESTDIR) {
-            if (!file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'inbox')
-             && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'INBOX')) {
+            if (!file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR.DIRECTORY_SEPARATOR.'inbox')
+             && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR.DIRECTORY_SEPARATOR.'INBOX')) {
                 $this->markTestSkipped('There is no file name "inbox" or "INBOX" in '
-                                       . TESTS_ZEND_MAIL_SERVER_TESTDIR . '. I won\'t use it for testing. '
-                                       . 'This is you safety net. If you think it is the right directory just '
-                                       . 'create an empty file named INBOX or remove/deactived this message.');
+                                       .TESTS_ZEND_MAIL_SERVER_TESTDIR.'. I won\'t use it for testing. '
+                                       .'This is you safety net. If you think it is the right directory just '
+                                       .'create an empty file named INBOX or remove/deactived this message.');
             }
 
             $this->_cleanDir(TESTS_ZEND_MAIL_SERVER_TESTDIR);
-            $this->_copyDir(__DIR__ . '/../_files/test.' . TESTS_ZEND_MAIL_SERVER_FORMAT,
+            $this->_copyDir(__DIR__.'/../_files/test.'.TESTS_ZEND_MAIL_SERVER_FORMAT,
                             TESTS_ZEND_MAIL_SERVER_TESTDIR);
         }
     }
@@ -51,7 +51,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
             if ($entry == '.' || $entry == '..') {
                 continue;
             }
-            $fullname = $dir . DIRECTORY_SEPARATOR . $entry;
+            $fullname = $dir.DIRECTORY_SEPARATOR.$entry;
             if (is_dir($fullname)) {
                 $this->_cleanDir($fullname);
                 rmdir($fullname);
@@ -69,8 +69,8 @@ class ImapTest extends \PHPUnit_Framework_TestCase
             if ($entry == '.' || $entry == '..' || $entry == '.svn') {
                 continue;
             }
-            $fullname = $dir  . DIRECTORY_SEPARATOR . $entry;
-            $destname = $dest . DIRECTORY_SEPARATOR . $entry;
+            $fullname = $dir.DIRECTORY_SEPARATOR.$entry;
+            $destname = $dest.DIRECTORY_SEPARATOR.$entry;
             if (is_dir($fullname)) {
                 mkdir($destname);
                 $this->_copyDir($fullname, $destname);
@@ -103,7 +103,6 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
         new Storage\Imap(array());
     }
-
 
     public function testConnectSSL()
     {
@@ -177,7 +176,6 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         new Storage\Imap($this->_params);
     }
 
-
     public function testClose()
     {
         $mail = new Storage\Imap($this->_params);
@@ -218,7 +216,6 @@ class ImapTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Imap($this->_params);
         $shouldSizes = array(1 => 397, 89, 694, 452, 497, 101, 139);
-
 
         $sizes = $mail->getSize();
         $this->assertEquals($shouldSizes, $sizes);
@@ -328,7 +325,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         // we search for this folder because we can't assume an order while iterating
         $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder/test' => 'test',
-                                'INBOX'          => 'INBOX');
+                                'INBOX'          => 'INBOX', );
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -352,7 +349,6 @@ class ImapTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($localName, $folder->getLocalName());
         }
     }
-
 
     public function testCountFolder()
     {
@@ -579,7 +575,6 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($status['exists'], 7);
     }
 
-
     public function testExamine()
     {
         $protocol = new Protocol\Imap($this->_params['host']);
@@ -660,7 +655,6 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $mail->selectFolder('INBOX');
         $fromCount = $mail->countMessages();
         $mail->moveMessage(1, 'subfolder/test');
-
 
         $this->assertEquals($fromCount - 1, $mail->countMessages());
         $mail->selectFolder('subfolder/test');

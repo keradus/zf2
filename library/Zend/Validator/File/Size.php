@@ -70,7 +70,7 @@ class Size extends AbstractValidator
      * 'max': Maximum file size
      * 'useByteString': Use bytestring or real size for messages
      *
-     * @param  int|array|\Traversable $options Options for the adapter
+     * @param int|array|\Traversable $options Options for the adapter
      */
     public function __construct($options = null)
     {
@@ -99,6 +99,7 @@ class Size extends AbstractValidator
     public function useByteString($byteString = true)
     {
         $this->options['useByteString'] = (bool) $byteString;
+
         return $this;
     }
 
@@ -115,7 +116,7 @@ class Size extends AbstractValidator
     /**
      * Returns the minimum file size
      *
-     * @param  bool $raw Whether or not to force return of the raw value (defaults off)
+     * @param  bool       $raw Whether or not to force return of the raw value (defaults off)
      * @return int|string
      */
     public function getMin($raw = false)
@@ -135,8 +136,8 @@ class Size extends AbstractValidator
      * This includes 'B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
      * For example: 2000, 2MB, 0.2GB
      *
-     * @param  int|string $min The minimum file size
-     * @return Size Provides a fluent interface
+     * @param  int|string                         $min The minimum file size
+     * @return Size                               Provides a fluent interface
      * @throws Exception\InvalidArgumentException When min is greater than max
      */
     public function setMin($min)
@@ -154,13 +155,14 @@ class Size extends AbstractValidator
         }
 
         $this->options['min'] = $min;
+
         return $this;
     }
 
     /**
      * Returns the maximum file size
      *
-     * @param  bool $raw Whether or not to force return of the raw value (defaults off)
+     * @param  bool       $raw Whether or not to force return of the raw value (defaults off)
      * @return int|string
      */
     public function getMax($raw = false)
@@ -180,8 +182,8 @@ class Size extends AbstractValidator
      * This includes 'B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
      * For example: 2000, 2MB, 0.2GB
      *
-     * @param  int|string $max The maximum file size
-     * @return Size Provides a fluent interface
+     * @param  int|string                         $max The maximum file size
+     * @return Size                               Provides a fluent interface
      * @throws Exception\InvalidArgumentException When max is smaller than min
      */
     public function setMax($max)
@@ -199,6 +201,7 @@ class Size extends AbstractValidator
         }
 
         $this->options['max'] = $max;
+
         return $this;
     }
 
@@ -215,12 +218,13 @@ class Size extends AbstractValidator
     /**
      * Set current size
      *
-     * @param  int $size
+     * @param  int  $size
      * @return Size
      */
     protected function setSize($size)
     {
         $this->size = $size;
+
         return $this;
     }
 
@@ -255,6 +259,7 @@ class Size extends AbstractValidator
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+
             return false;
         }
 
@@ -302,17 +307,17 @@ class Size extends AbstractValidator
     /**
      * Returns the formatted size
      *
-     * @param  int $size
+     * @param  int    $size
      * @return string
      */
     protected function toByteString($size)
     {
         $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-        for ($i=0; $size >= 1024 && $i < 9; $i++) {
+        for ($i = 0; $size >= 1024 && $i < 9; $i++) {
             $size /= 1024;
         }
 
-        return round($size, 2) . $sizes[$i];
+        return round($size, 2).$sizes[$i];
     }
 
     /**

@@ -24,7 +24,7 @@ class Pop3 extends AbstractStorage
     /**
      * Count messages all messages in current box
      *
-     * @return int number of messages
+     * @return int                                              number of messages
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
@@ -33,26 +33,28 @@ class Pop3 extends AbstractStorage
         $count  = 0; // "Declare" variable before first usage.
         $octets = 0; // "Declare" variable since it's passed by reference
         $this->protocol->status($count, $octets);
+
         return (int) $count;
     }
 
     /**
      * get a list of messages with number and size
      *
-     * @param int $id number of message
-     * @return int|array size of given message of list with all messages as array(num => size)
+     * @param  int                                              $id number of message
+     * @return int|array                                        size of given message of list with all messages as array(num => size)
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function getSize($id = 0)
     {
         $id = $id ? $id : null;
+
         return $this->protocol->getList($id);
     }
 
     /**
      * Fetch a message
      *
-     * @param int $id number of message
+     * @param  int                                              $id number of message
      * @return \Zend\Mail\Storage\Message
      * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
@@ -62,7 +64,7 @@ class Pop3 extends AbstractStorage
         $message = $this->protocol->top($id, $bodyLines, true);
 
         return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $message,
-                                              'noToplines' => $bodyLines < 1));
+                                              'noToplines' => $bodyLines < 1, ));
     }
 
     /*
@@ -106,6 +108,7 @@ class Pop3 extends AbstractStorage
         $headers = null; // "Declare" variable since it's passed by reference
         $body    = null; // "Declare" variable before first usage.
         Mime\Decode::splitMessage($content, $headers, $body);
+
         return $body;
     }
 
@@ -134,6 +137,7 @@ class Pop3 extends AbstractStorage
 
         if ($params instanceof Protocol\Pop3) {
             $this->protocol = $params;
+
             return;
         }
 
@@ -175,7 +179,7 @@ class Pop3 extends AbstractStorage
      * you should be careful and use a uniqueid as parameter if possible to
      * identify the message.
      *
-     * @param  int $id number of message
+     * @param  int                                            $id number of message
      * @throws \Zend\Mail\Protocol\Exception\RuntimeException
      */
     public function removeMessage($id)
@@ -188,8 +192,8 @@ class Pop3 extends AbstractStorage
      *
      * if storage does not support unique ids it's the same as the message number
      *
-     * @param int|null $id message number
-     * @return array|string message number for given message or all messages as array
+     * @param  int|null                                        $id message number
+     * @return array|string                                    message number for given message or all messages as array
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getUniqueId($id = null)
@@ -203,6 +207,7 @@ class Pop3 extends AbstractStorage
                 return array();
             }
             $range = range(1, $count);
+
             return array_combine($range, $range);
         }
 
@@ -215,9 +220,9 @@ class Pop3 extends AbstractStorage
      * I.e. if you have a webmailer that supports deleting messages you should use unique ids
      * as parameter and use this method to translate it to message number right before calling removeMessage()
      *
-     * @param string $id unique id
+     * @param  string                             $id unique id
      * @throws Exception\InvalidArgumentException
-     * @return int message number
+     * @return int                                message number
      */
     public function getNumberByUniqueId($id)
     {
@@ -260,6 +265,7 @@ class Pop3 extends AbstractStorage
                 }
             }
             $this->has['top'] = $this->protocol->hasTop;
+
             return $this->protocol->hasTop;
         }
 
@@ -271,6 +277,7 @@ class Pop3 extends AbstractStorage
                 // ignoring error
             }
             $this->has['uniqueid'] = $id ? true : false;
+
             return $this->has['uniqueid'];
         }
 

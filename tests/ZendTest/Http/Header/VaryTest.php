@@ -44,5 +44,5 @@ class VaryTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Vary: xxx', $varyHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

@@ -42,7 +42,7 @@ class ServiceListener implements ServiceListenerInterface
 
     /**
      * @param ServiceManager $serviceManager
-     * @param null|array $configuration
+     * @param null|array     $configuration
      */
     public function __construct(ServiceManager $serviceManager, $configuration = null)
     {
@@ -54,7 +54,7 @@ class ServiceListener implements ServiceListenerInterface
     }
 
     /**
-     * @param  array $configuration
+     * @param  array           $configuration
      * @return ServiceListener
      */
     public function setDefaultServiceConfig($configuration)
@@ -65,10 +65,10 @@ class ServiceListener implements ServiceListenerInterface
     }
 
     /**
-     * @param  ServiceManager|string $serviceManager  Service Manager instance or name
-     * @param  string                $key             Configuration key
-     * @param  string                $moduleInterface FQCN as string
-     * @param  string                $method          Method name
+     * @param  ServiceManager|string      $serviceManager  Service Manager instance or name
+     * @param  string                     $key             Configuration key
+     * @param  string                     $moduleInterface FQCN as string
+     * @param  string                     $method          Method name
      * @throws Exception\RuntimeException
      * @return ServiceListener
      */
@@ -108,6 +108,7 @@ class ServiceListener implements ServiceListenerInterface
     {
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES_POST, array($this, 'onLoadModulesPost'));
+
         return $this;
     }
 
@@ -168,7 +169,7 @@ class ServiceListener implements ServiceListenerInterface
             // We're keeping track of which modules provided which configuration to which service managers.
             // The actual merging takes place later. Doing it this way will enable us to provide more powerful
             // debugging tools for showing which modules overrode what.
-            $fullname = $e->getModuleName() . '::' . $sm['module_class_method'] . '()';
+            $fullname = $e->getModuleName().'::'.$sm['module_class_method'].'()';
             $this->serviceManagers[$key]['configuration'][$fullname] = $config;
         }
     }
@@ -180,7 +181,7 @@ class ServiceListener implements ServiceListenerInterface
      * key, it will be passed to a ServiceManager Config object, and
      * used to configure the service manager.
      *
-     * @param  ModuleEvent $e
+     * @param  ModuleEvent                $e
      * @throws Exception\RuntimeException
      * @return void
      */
@@ -229,7 +230,7 @@ class ServiceListener implements ServiceListenerInterface
      * Extracts the various service configuration arrays, and then merges with
      * the internal service configuration.
      *
-     * @param  ServiceConfig|string $config Instance of ServiceConfig or class name
+     * @param  ServiceConfig|string       $config Instance of ServiceConfig or class name
      * @throws Exception\RuntimeException
      * @return array
      */
@@ -237,7 +238,7 @@ class ServiceListener implements ServiceListenerInterface
     {
         if (is_string($config) && class_exists($config)) {
             $class  = $config;
-            $config = new $class;
+            $config = new $class();
         }
 
         if (!$config instanceof ServiceConfig) {

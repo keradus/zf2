@@ -75,6 +75,7 @@ class CollectionInputFilterTest extends TestCase
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
                ->add($baz, 'baz');
+
         return $filter;
     }
 
@@ -100,7 +101,7 @@ class CollectionInputFilterTest extends TestCase
                     'bar' => '54321',
                     'baz' => '',
                 ),
-            )
+            ),
         );
     }
 
@@ -131,7 +132,7 @@ class CollectionInputFilterTest extends TestCase
     {
         $collectionData = array(
             array('foo' => 'bar'),
-            array('foo' => 'baz')
+            array('foo' => 'baz'),
         );
 
         $this->filter->setData($collectionData);
@@ -142,7 +143,7 @@ class CollectionInputFilterTest extends TestCase
     {
         $collectionData = array(
             array('foo' => 'bar'),
-            array('foo' => 'baz')
+            array('foo' => 'baz'),
         );
 
         $this->filter->setCount(3);
@@ -157,11 +158,11 @@ class CollectionInputFilterTest extends TestCase
     {
         $collectionData1 = array(
             array('foo' => 'bar'),
-            array('foo' => 'baz')
+            array('foo' => 'baz'),
         );
 
         $collectionData2 = array(
-            array('foo' => 'bar')
+            array('foo' => 'bar'),
         );
 
         $this->filter->setData($collectionData1);
@@ -211,7 +212,7 @@ class CollectionInputFilterTest extends TestCase
                 'foo' => ' bazbat ',
                 'bar' => '12345',
                 'baz' => '',
-            )
+            ),
         );
 
         $this->filter->setInputFilter($this->getBaseInputFilter());
@@ -270,7 +271,7 @@ class CollectionInputFilterTest extends TestCase
                     'bar' => '54321',
                     'baz' => '',
                 ),
-            )
+            ),
         );
 
         $this->filter->setInputFilter($this->getBaseInputFilter());
@@ -311,7 +312,7 @@ class CollectionInputFilterTest extends TestCase
                     'bar' => '54321',
                     'baz' => '',
                 ),
-            )
+            ),
         );
 
         $this->filter->setInputFilter($this->getBaseInputFilter());
@@ -401,22 +402,22 @@ class CollectionInputFilterTest extends TestCase
             array(
                 'foo',
                 'bar',
-            )
+            ),
         );
 
         $data = array(
             array(
                 'foo' => ' bazbat ',
-                'bar' => '12345'
+                'bar' => '12345',
             ),
             array(
                 'foo' => ' batbaz ',
-                'bar' => '54321'
+                'bar' => '54321',
             ),
             array(
                 'foo' => ' batbaz ',
-                'bar' => '54321'
-            )
+                'bar' => '54321',
+            ),
         );
 
         $this->filter->setInputFilter($this->getBaseInputFilter());
@@ -473,7 +474,7 @@ class CollectionInputFilterTest extends TestCase
                     'bar' => '12345',
                     'baz' => '',
                 ),
-            )
+            ),
         );
 
         $this->filter->setInputFilter($this->getBaseInputFilter());
@@ -704,20 +705,20 @@ class CollectionInputFilterTest extends TestCase
         return array(
             'count not specified' => array(
                 'count' => null,
-                'isValid' => true
+                'isValid' => true,
             ),
             'count = 1' =>  array(
                 'count' => 1,
-                'isValid' => true
+                'isValid' => true,
             ),
             'count = 2' => array(
                 'count' => 2,
-                'isValid' => false
+                'isValid' => false,
             ),
             'count = 3' => array(
                 'count' => 3,
-                'isValid' => false
-            )
+                'isValid' => false,
+            ),
         );
     }
 
@@ -751,21 +752,21 @@ class CollectionInputFilterTest extends TestCase
                 array(
                     'second_collection' => array(
                         array(
-                            'input' => 'some value'
+                            'input' => 'some value',
                         ),
                         array(
-                            'input' => 'some value'
-                        )
-                    )
+                            'input' => 'some value',
+                        ),
+                    ),
                 ),
                 array(
                     'second_collection' => array(
                         array(
-                            'input' => 'some value'
+                            'input' => 'some value',
                         ),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $mainInputFilter->setData($data);

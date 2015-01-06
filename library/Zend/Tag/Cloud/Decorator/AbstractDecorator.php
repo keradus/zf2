@@ -43,7 +43,7 @@ abstract class AbstractDecorator implements Decorator
     /**
      * Create a new decorator with options
      *
-     * @param  array|Traversable $options
+     * @param array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -58,7 +58,7 @@ abstract class AbstractDecorator implements Decorator
     /**
      * Set options from array
      *
-     * @param  array $options Configuration for the decorator
+     * @param  array       $options Configuration for the decorator
      * @return AbstractTag
      */
     public function setOptions(array $options)
@@ -68,7 +68,7 @@ abstract class AbstractDecorator implements Decorator
                 continue;
             }
 
-            $method = 'set' . $key;
+            $method = 'set'.$key;
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -96,18 +96,20 @@ abstract class AbstractDecorator implements Decorator
     public function setEncoding($value)
     {
         $this->encoding = (string) $value;
+
         return $this;
     }
 
     /**
      * Set Escaper instance
      *
-     * @param  Escaper $escaper
+     * @param  Escaper   $escaper
      * @return HtmlCloud
      */
     public function setEscaper($escaper)
     {
         $this->escaper = $escaper;
+
         return $this;
     }
 
@@ -123,13 +125,14 @@ abstract class AbstractDecorator implements Decorator
         if (null === $this->escaper) {
             $this->setEscaper(new Escaper($this->getEncoding()));
         }
+
         return $this->escaper;
     }
 
     /**
      * Validate an HTML element name
      *
-     * @param  string $name
+     * @param  string                                $name
      * @throws Exception\InvalidElementNameException
      */
     protected function validateElementName($name)
@@ -146,7 +149,7 @@ abstract class AbstractDecorator implements Decorator
     /**
      * Validate an HTML attribute name
      *
-     * @param  string $name
+     * @param  string                                  $name
      * @throws Exception\InvalidAttributeNameException
      */
     protected function validateAttributeName($name)
@@ -171,7 +174,7 @@ abstract class AbstractDecorator implements Decorator
 
                 foreach ($data as $param => $value) {
                     $this->validateAttributeName($param);
-                    $attributes .= ' ' . $param . '="' . $escaper->escapeHtmlAttr($value) . '"';
+                    $attributes .= ' '.$param.'="'.$escaper->escapeHtmlAttr($value).'"';
                 }
             } else {
                 $attributes = '';
@@ -181,6 +184,7 @@ abstract class AbstractDecorator implements Decorator
 
             $html = sprintf('<%1$s%3$s>%2$s</%1$s>', $htmlTag, $html, $attributes);
         }
+
         return $html;
     }
 }

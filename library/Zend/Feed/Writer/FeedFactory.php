@@ -16,7 +16,7 @@ abstract class FeedFactory
     /**
      * Create and return a Feed based on data provided.
      *
-     * @param  array|Traversable $data
+     * @param  array|Traversable                  $data
      * @throws Exception\InvalidArgumentException
      * @return Feed
      */
@@ -35,7 +35,7 @@ abstract class FeedFactory
         foreach ($data as $key => $value) {
             // Setters
             $key    = static::convertKey($key);
-            $method = 'set' . $key;
+            $method = 'set'.$key;
             if (method_exists($feed, $method)) {
                 switch ($method) {
                     case 'setfeedlink':
@@ -75,14 +75,15 @@ abstract class FeedFactory
     protected static function convertKey($key)
     {
         $key = str_replace('_', '', strtolower($key));
+
         return $key;
     }
 
     /**
      * Create and attach entries to a feed
      *
-     * @param  array|Traversable $entries
-     * @param  Feed $feed
+     * @param  array|Traversable                  $entries
+     * @param  Feed                               $feed
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -115,7 +116,7 @@ abstract class FeedFactory
             $entry = $feed->createEntry();
             foreach ($data as $key => $value) {
                 $key    = static::convertKey($key);
-                $method = 'set' . $key;
+                $method = 'set'.$key;
                 if (!method_exists($entry, $method)) {
                     continue;
                 }

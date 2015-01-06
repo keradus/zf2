@@ -76,7 +76,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      * - content    content as string
      * - strict     strictly parse raw content
      *
-     * @param   array $params  full message with or without headers
+     * @param  array                              $params full message with or without headers
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(array $params)
@@ -129,14 +129,13 @@ class Part implements RecursiveIterator, Part\PartInterface
         }
     }
 
-
     /**
      * Body of part
      *
      * If part is multipart the raw content of this part with all sub parts is returned
      *
      * @throws Exception\RuntimeException
-     * @return string body
+     * @return string                     body
      */
     public function getContent()
     {
@@ -162,7 +161,6 @@ class Part implements RecursiveIterator, Part\PartInterface
     {
         return strlen($this->getContent());
     }
-
 
     /**
      * Cache content and split in parts if multipart
@@ -199,9 +197,9 @@ class Part implements RecursiveIterator, Part\PartInterface
     /**
      * Get part of multipart message
      *
-     * @param  int $num number of part starting with 1 for first part
+     * @param  int                        $num number of part starting with 1 for first part
      * @throws Exception\RuntimeException
-     * @return Part wanted part
+     * @return Part                       wanted part
      */
     public function getPart($num)
     {
@@ -251,6 +249,7 @@ class Part implements RecursiveIterator, Part\PartInterface
         $this->_cacheContent();
 
         $this->countParts = count($this->parts);
+
         return $this->countParts;
     }
 
@@ -281,8 +280,8 @@ class Part implements RecursiveIterator, Part\PartInterface
      * Internally headers that occur more than once are saved as array, all other as string. If $format
      * is set to string implode is used to concat the values (with Mime::LINEEND as delim).
      *
-     * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
-     * @param  string $format change type of return value to 'string' or 'array'
+     * @param  string                                      $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
+     * @param  string                                      $format change type of return value to 'string' or 'array'
      * @throws Exception\InvalidArgumentException
      * @return string|array|HeaderInterface|\ArrayIterator value of header in wanted or internal format
      */
@@ -307,7 +306,7 @@ class Part implements RecursiveIterator, Part\PartInterface
                     $return = '';
                     foreach ($header as $h) {
                         $return .= $h->getFieldValue(HeaderInterface::FORMAT_RAW)
-                                 . Mime\Mime::LINEEND;
+                                 .Mime\Mime::LINEEND;
                     }
                     $return = trim($return, Mime\Mime::LINEEND);
                 }
@@ -338,10 +337,10 @@ class Part implements RecursiveIterator, Part\PartInterface
      * Throws an Exception if the requested header does not exist. If
      * the specific header field does not exist, returns null.
      *
-     * @param  string $name       name of header, like in getHeader()
-     * @param  string $wantedPart the wanted part, default is first, if null an array with all parts is returned
-     * @param  string $firstName  key name for the first part
-     * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
+     * @param  string                                $name       name of header, like in getHeader()
+     * @param  string                                $wantedPart the wanted part, default is first, if null an array with all parts is returned
+     * @param  string                                $firstName  key name for the first part
+     * @return string|array                          wanted part or all parts as array($firstName => firstPart, partname => value)
      * @throws \Zend\Mime\Exception\RuntimeException
      */
     public function getHeaderField($name, $wantedPart = '0', $firstName = '0')
@@ -356,8 +355,8 @@ class Part implements RecursiveIterator, Part\PartInterface
      *
      * @see Part::getHeader()
      *
-     * @param  string $name header name
-     * @return string value of header
+     * @param  string                       $name header name
+     * @return string                       value of header
      * @throws Exception\ExceptionInterface
      */
     public function __get($name)
@@ -398,6 +397,7 @@ class Part implements RecursiveIterator, Part\PartInterface
     public function hasChildren()
     {
         $current = $this->current();
+
         return $current && $current instanceof Part && $current->isMultipart();
     }
 
@@ -421,6 +421,7 @@ class Part implements RecursiveIterator, Part\PartInterface
         if ($this->countParts === null) {
             $this->countParts();
         }
+
         return $this->iterationPos && $this->iterationPos <= $this->countParts;
     }
 

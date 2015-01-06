@@ -13,7 +13,7 @@ use DOMText;
 use Zend\Feed\Reader\Extension;
 
 /**
-*/
+ */
 class Feed extends Extension\AbstractFeed
 {
     /**
@@ -27,7 +27,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['author'];
         }
 
-        $author = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:author)');
+        $author = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:author)');
 
         if (!$author) {
             $author = null;
@@ -49,7 +49,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['block'];
         }
 
-        $block = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:block)');
+        $block = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:block)');
 
         if (!$block) {
             $block = null;
@@ -71,7 +71,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['categories'];
         }
 
-        $categoryList = $this->xpath->query($this->getXpathPrefix() . '/itunes:category');
+        $categoryList = $this->xpath->query($this->getXpathPrefix().'/itunes:category');
 
         $categories = array();
 
@@ -113,7 +113,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['explicit'];
         }
 
-        $explicit = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:explicit)');
+        $explicit = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:explicit)');
 
         if (!$explicit) {
             $explicit = null;
@@ -135,7 +135,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['image'];
         }
 
-        $image = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:image/@href)');
+        $image = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:image/@href)');
 
         if (!$image) {
             $image = null;
@@ -157,7 +157,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['keywords'];
         }
 
-        $keywords = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:keywords)');
+        $keywords = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:keywords)');
 
         if (!$keywords) {
             $keywords = null;
@@ -179,7 +179,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['new-feed-url'];
         }
 
-        $newFeedUrl = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:new-feed-url)');
+        $newFeedUrl = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:new-feed-url)');
 
         if (!$newFeedUrl) {
             $newFeedUrl = null;
@@ -203,11 +203,11 @@ class Feed extends Extension\AbstractFeed
 
         $owner = null;
 
-        $email = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:owner/itunes:email)');
-        $name  = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:owner/itunes:name)');
+        $email = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:owner/itunes:email)');
+        $name  = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:owner/itunes:name)');
 
         if (!empty($email)) {
-            $owner = $email . (empty($name) ? '' : ' (' . $name . ')');
+            $owner = $email.(empty($name) ? '' : ' ('.$name.')');
         } elseif (!empty($name)) {
             $owner = $name;
         }
@@ -232,7 +232,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['subtitle'];
         }
 
-        $subtitle = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:subtitle)');
+        $subtitle = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:subtitle)');
 
         if (!$subtitle) {
             $subtitle = null;
@@ -254,7 +254,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['summary'];
         }
 
-        $summary = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:summary)');
+        $summary = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/itunes:summary)');
 
         if (!$summary) {
             $summary = null;

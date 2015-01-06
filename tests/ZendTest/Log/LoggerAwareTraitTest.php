@@ -23,7 +23,7 @@ class LoggerAwareTraitTest extends TestCase
 
         $this->assertAttributeEquals(null, 'logger', $object);
 
-        $logger = new Logger;
+        $logger = new Logger();
 
         $object->setLogger($logger);
 

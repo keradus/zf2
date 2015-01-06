@@ -42,7 +42,6 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
     public function testCanParseCommaSeparatedValues()
     {
         $header = AcceptEncoding::fromString('Accept-Encoding: compress;q=0.5,gzip');
@@ -56,7 +55,7 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'gzip',
             'compress',
-            '*'
+            '*',
         );
 
         $test = array();

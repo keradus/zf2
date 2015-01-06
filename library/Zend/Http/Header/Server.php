@@ -24,7 +24,7 @@ class Server implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'server') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Server string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Server string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Server implements HeaderInterface
 
     public function toString()
     {
-        return 'Server: ' . $this->getFieldValue();
+        return 'Server: '.$this->getFieldValue();
     }
 }

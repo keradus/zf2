@@ -69,6 +69,7 @@ class Column implements ColumnInterface
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
@@ -87,6 +88,7 @@ class Column implements ColumnInterface
     public function setNullable($nullable)
     {
         $this->isNullable = (bool) $nullable;
+
         return $this;
     }
 
@@ -105,6 +107,7 @@ class Column implements ColumnInterface
     public function setDefault($default)
     {
         $this->default = $default;
+
         return $this;
     }
 
@@ -123,6 +126,7 @@ class Column implements ColumnInterface
     public function setOptions(array $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -134,6 +138,7 @@ class Column implements ColumnInterface
     public function setOption($name, $value)
     {
         $this->options[$name] = $value;
+
         return $this;
     }
 

@@ -36,7 +36,7 @@ class SocketTest extends CommonHttpTests
      * @var array
      */
     protected $config = array(
-        'adapter' => 'Zend\Http\Client\Adapter\Socket'
+        'adapter' => 'Zend\Http\Client\Adapter\Socket',
     );
 
     /**
@@ -51,7 +51,7 @@ class SocketTest extends CommonHttpTests
     {
         $config = array(
             'timeout'    => 500,
-            'someoption' => 'hasvalue'
+            'someoption' => 'hasvalue',
         );
 
         $this->_adapter->setOptions($config);
@@ -65,8 +65,8 @@ class SocketTest extends CommonHttpTests
     public function testDefaultConfig()
     {
         $config = $this->_adapter->getConfig();
-        $this->assertEquals(TRUE, $config['sslverifypeer']);
-        $this->assertEquals(FALSE, $config['sslallowselfsigned']);
+        $this->assertEquals(true, $config['sslverifypeer']);
+        $this->assertEquals(false, $config['sslallowselfsigned']);
     }
 
     public function testConnectingViaSslEnforcesDefaultSslOptionsOnContext()
@@ -85,7 +85,6 @@ class SocketTest extends CommonHttpTests
         $this->assertFalse($options['ssl']['allow_self_signed']);
     }
 
-
     /**
      * Test Certificate File Option
      * The configuration is set to a legitimate certificate bundle file,
@@ -95,7 +94,7 @@ class SocketTest extends CommonHttpTests
     {
         $config = array(
           'timeout' => 30,
-          'sslcafile' => __DIR__ . '/_files/ca-bundle.crt',
+          'sslcafile' => __DIR__.'/_files/ca-bundle.crt',
         );
         $this->_adapter->setOptions($config);
         try {
@@ -120,7 +119,7 @@ class SocketTest extends CommonHttpTests
             'timeout'  => 400,
             'nested'   => array(
                 'item' => 'value',
-            )
+            ),
         ));
 
         $this->_adapter->setOptions($config);
@@ -147,11 +146,10 @@ class SocketTest extends CommonHttpTests
     /**
      * Stream context related tests
      */
-
     public function testGetNewStreamContext()
     {
         $adapterClass = $this->config['adapter'];
-        $adapter = new $adapterClass;
+        $adapter = new $adapterClass();
         $context = $adapter->getStreamContext();
 
         $this->assertEquals('stream-context', get_resource_type($context));
@@ -160,7 +158,7 @@ class SocketTest extends CommonHttpTests
     public function testSetNewStreamContextResource()
     {
         $adapterClass = $this->config['adapter'];
-        $adapter = new $adapterClass;
+        $adapter = new $adapterClass();
         $context = stream_context_create();
 
         $adapter->setStreamContext($context);
@@ -171,16 +169,16 @@ class SocketTest extends CommonHttpTests
     public function testSetNewStreamContextOptions()
     {
         $adapterClass = $this->config['adapter'];
-        $adapter = new $adapterClass;
+        $adapter = new $adapterClass();
         $options = array(
             'socket' => array(
-                'bindto' => '1.2.3.4:0'
+                'bindto' => '1.2.3.4:0',
             ),
             'ssl' => array(
                 'capath'            => null,
                 'verify_peer'       => true,
-                'allow_self_signed' => false
-            )
+                'allow_self_signed' => false,
+            ),
         );
 
         $adapter->setStreamContext($options);
@@ -200,7 +198,7 @@ class SocketTest extends CommonHttpTests
             'Expecting either a stream context resource or array');
 
         $adapterClass = $this->config['adapter'];
-        $adapter = new $adapterClass;
+        $adapter = new $adapterClass();
         $adapter->setStreamContext($invalid);
     }
 
@@ -211,16 +209,16 @@ class SocketTest extends CommonHttpTests
         }
 
         $adapterClass = $this->config['adapter'];
-        $adapter = new $adapterClass;
+        $adapter = new $adapterClass();
         $adapter->setStreamContext(array(
             'ssl' => array(
                 'capture_peer_cert' => true,
-                'capture_peer_chain' => true
-            )
+                'capture_peer_chain' => true,
+            ),
         ));
 
         $this->client->setAdapter($adapter);
-        $this->client->setUri($this->baseuri . '/testSimpleRequests.php');
+        $this->client->setUri($this->baseuri.'/testSimpleRequests.php');
         $this->client->request();
 
         $opts = stream_context_get_options($adapter->getStreamContext());
@@ -276,7 +274,7 @@ class SocketTest extends CommonHttpTests
     public function testAllowsZeroWrittenBytes()
     {
         $this->_adapter->connect('localhost');
-        require_once __DIR__ . '/_files/fwrite.php';
+        require_once __DIR__.'/_files/fwrite.php';
         $this->_adapter->write('GET', new Uri('tcp://localhost:80/'), '1.1', array(), 'test body');
     }
 
@@ -295,7 +293,7 @@ class SocketTest extends CommonHttpTests
             array(new \stdClass()),
             array(fopen('data://text/plain,', 'r')),
             array(false),
-            array(null)
+            array(null),
         );
     }
 }

@@ -21,7 +21,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
 
     /**
      * @param string $variableName
-     * @param array $types
+     * @param array  $types
      * @param string $description
      */
     public function __construct($variableName = null, $types = array(), $description = null)
@@ -34,7 +34,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     }
 
     /**
-     * @param ReflectionTagInterface $reflectionTag
+     * @param  ReflectionTagInterface $reflectionTag
      * @return ReturnTag
      * @deprecated Deprecated in 2.3. Use TagManager::createTagFromReflection() instead
      */
@@ -42,6 +42,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     {
         $tagManager = new TagManager();
         $tagManager->initializeDefaultTags();
+
         return $tagManager->createTagFromReflection($reflectionTag);
     }
 
@@ -54,12 +55,13 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     }
 
     /**
-     * @param string $variableName
+     * @param  string   $variableName
      * @return ParamTag
      */
     public function setVariableName($variableName)
     {
         $this->variableName = ltrim($variableName, '$');
+
         return $this;
     }
 
@@ -72,7 +74,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     }
 
     /**
-     * @param string $datatype
+     * @param  string    $datatype
      * @return ReturnTag
      * @deprecated Deprecated in 2.3. Use setTypes() instead
      */
@@ -91,7 +93,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     }
 
     /**
-     * @param  string $paramName
+     * @param  string   $paramName
      * @return ParamTag
      * @deprecated Deprecated in 2.3. Use setVariableName() instead
      */
@@ -115,9 +117,9 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@param'
-            . ((!empty($this->types)) ? ' ' . $this->getTypesAsString() : '')
-            . ((!empty($this->variableName)) ? ' $' . $this->variableName : '')
-            . ((!empty($this->description)) ? ' ' . $this->description : '');
+            .((!empty($this->types)) ? ' '.$this->getTypesAsString() : '')
+            .((!empty($this->variableName)) ? ' $'.$this->variableName : '')
+            .((!empty($this->description)) ? ' '.$this->description : '');
 
         return $output;
     }

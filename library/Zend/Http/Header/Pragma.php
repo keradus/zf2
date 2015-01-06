@@ -24,7 +24,7 @@ class Pragma implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'pragma') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Pragma string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Pragma string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Pragma implements HeaderInterface
 
     public function toString()
     {
-        return 'Pragma: ' . $this->getFieldValue();
+        return 'Pragma: '.$this->getFieldValue();
     }
 }

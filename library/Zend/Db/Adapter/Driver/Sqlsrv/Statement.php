@@ -76,22 +76,24 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set driver
      *
-     * @param  Sqlsrv $driver
+     * @param  Sqlsrv    $driver
      * @return Statement
      */
     public function setDriver(Sqlsrv $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Statement
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -110,7 +112,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
      * b) "SQL Server Statement" when a prepared statement has been already produced
      * (there will need to already be a bound param set if it applies to this query)
      *
-     * @param resource $resource
+     * @param  resource                           $resource
      * @throws Exception\InvalidArgumentException
      * @return Statement
      */
@@ -124,7 +126,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->resource = $resource;
             $this->isPrepared = true;
         } else {
-            throw new Exception\InvalidArgumentException('Invalid resource provided to ' . __CLASS__);
+            throw new Exception\InvalidArgumentException('Invalid resource provided to '.__CLASS__);
         }
 
         return $this;
@@ -133,12 +135,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set parameter container
      *
-     * @param ParameterContainer $parameterContainer
+     * @param  ParameterContainer $parameterContainer
      * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -157,6 +160,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setResource($resource)
     {
         $this->resource = $resource;
+
         return $this;
     }
 
@@ -171,12 +175,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string $sql
+     * @param  string    $sql
      * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
@@ -191,8 +196,8 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string $sql
-     * @param array $options
+     * @param  string                     $sql
+     * @param  array                      $options
      * @throws Exception\RuntimeException
      * @return Statement
      */
@@ -231,7 +236,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Execute
      *
-     * @param null|array|ParameterContainer $parameters
+     * @param  null|array|ParameterContainer $parameters
      * @throws Exception\RuntimeException
      * @return Result
      */
@@ -279,6 +284,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource);
+
         return $result;
     }
 

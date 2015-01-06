@@ -27,7 +27,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->testText = 'safdsafsa�lg ��gd�� sd�jg�sdjg�ld�gksd�gj�sdfg�dsj�gjsd�gj�dfsjg�dsfj�djs�g kjhdkj '
-                       . 'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
+                       .'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
         $this->part = new Mime\Part($this->testText);
         $this->part->encoding = Mime\Mime::ENCODING_BASE64;
         $this->part->type = "text/plain";
@@ -40,11 +40,11 @@ class PartTest extends \PHPUnit_Framework_TestCase
     public function testHeaders()
     {
         $expectedHeaders = array('Content-Type: text/plain',
-                                 'Content-Transfer-Encoding: ' . Mime\Mime::ENCODING_BASE64,
+                                 'Content-Transfer-Encoding: '.Mime\Mime::ENCODING_BASE64,
                                  'Content-Disposition: attachment',
                                  'filename="test.txt"',
                                  'charset=iso8859-1',
-                                 'Content-ID: <4711>');
+                                 'Content-ID: <4711>', );
 
         $actual = $this->part->getHeaders();
 

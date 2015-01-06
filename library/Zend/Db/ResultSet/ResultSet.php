@@ -55,7 +55,7 @@ class ResultSet extends AbstractResultSet
     /**
      * Set the row object prototype
      *
-     * @param  ArrayObject $arrayObjectPrototype
+     * @param  ArrayObject                        $arrayObjectPrototype
      * @throws Exception\InvalidArgumentException
      * @return ResultSet
      */
@@ -68,6 +68,7 @@ class ResultSet extends AbstractResultSet
             throw new Exception\InvalidArgumentException('Object must be of type ArrayObject, or at least implement exchangeArray');
         }
         $this->arrayObjectPrototype = $arrayObjectPrototype;
+
         return $this;
     }
 
@@ -104,6 +105,7 @@ class ResultSet extends AbstractResultSet
             if ($ao instanceof ArrayObject || method_exists($ao, 'exchangeArray')) {
                 $ao->exchangeArray($data);
             }
+
             return $ao;
         }
 

@@ -31,7 +31,7 @@ interface ConsoleUsageProviderInterface
      *                ...
      *            )
      *
-     * @param AdapterInterface $console
+     * @param  AdapterInterface  $console
      * @return array|string|null
      */
     public function getConsoleUsage(AdapterInterface $console);

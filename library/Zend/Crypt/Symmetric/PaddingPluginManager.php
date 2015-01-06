@@ -26,7 +26,7 @@ class PaddingPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'pkcs7' => 'Zend\Crypt\Symmetric\Padding\Pkcs7'
+        'pkcs7' => 'Zend\Crypt\Symmetric\Padding\Pkcs7',
     );
 
     /**
@@ -41,7 +41,7 @@ class PaddingPluginManager extends AbstractPluginManager
      *
      * Checks that the padding adapter loaded is an instance of Padding\PaddingInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

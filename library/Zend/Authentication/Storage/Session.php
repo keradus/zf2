@@ -48,9 +48,9 @@ class Session implements StorageInterface
     /**
      * Sets session storage options and initializes session namespace object
      *
-     * @param  mixed $namespace
-     * @param  mixed $member
-     * @param  SessionManager $manager
+     * @param mixed          $namespace
+     * @param mixed          $member
+     * @param SessionManager $manager
      */
     public function __construct($namespace = null, $member = null, SessionManager $manager = null)
     {

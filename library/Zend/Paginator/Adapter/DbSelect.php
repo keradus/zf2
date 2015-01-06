@@ -54,10 +54,10 @@ class DbSelect implements AdapterInterface
     /**
      * Constructor.
      *
-     * @param Select $select The select query
-     * @param Adapter|Sql $adapterOrSqlObject DB adapter or Sql object
+     * @param Select                  $select             The select query
+     * @param Adapter|Sql             $adapterOrSqlObject DB adapter or Sql object
      * @param null|ResultSetInterface $resultSetPrototype
-     * @param null|Select $countSelect
+     * @param null|Select             $countSelect
      *
      * @throws Exception\InvalidArgumentException
      */
@@ -81,14 +81,14 @@ class DbSelect implements AdapterInterface
         }
 
         $this->sql                = $adapterOrSqlObject;
-        $this->resultSetPrototype = ($resultSetPrototype) ?: new ResultSet;
+        $this->resultSetPrototype = ($resultSetPrototype) ?: new ResultSet();
     }
 
     /**
      * Returns an array of items for a page.
      *
-     * @param  int $offset           Page offset
-     * @param  int $itemCountPerPage Number of items per page
+     * @param  int   $offset           Page offset
+     * @param  int   $itemCountPerPage Number of items per page
      * @return array
      */
     public function getItems($offset, $itemCountPerPage)
@@ -144,7 +144,7 @@ class DbSelect implements AdapterInterface
         $select->reset(Select::OFFSET);
         $select->reset(Select::ORDER);
 
-        $countSelect = new Select;
+        $countSelect = new Select();
 
         $countSelect->columns(array(self::ROW_COUNT_COLUMN_NAME => new Expression('COUNT(1)')));
         $countSelect->from(array('original_select' => $select));

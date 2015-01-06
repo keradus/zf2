@@ -39,13 +39,14 @@ class System
     public function listMethods()
     {
         $table = $this->server->getDispatchTable()->getMethods();
+
         return array_keys($table);
     }
 
     /**
      * Display help message for an XMLRPC method
      *
-     * @param string $method
+     * @param  string                             $method
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -53,7 +54,7 @@ class System
     {
         $table = $this->server->getDispatchTable();
         if (!$table->hasMethod($method)) {
-            throw new Exception\InvalidArgumentException('Method "' . $method . '" does not exist', 640);
+            throw new Exception\InvalidArgumentException('Method "'.$method.'" does not exist', 640);
         }
 
         return $table->getMethod($method)->getMethodHelp();
@@ -62,7 +63,7 @@ class System
     /**
      * Return a method signature
      *
-     * @param string $method
+     * @param  string                             $method
      * @throws Exception\InvalidArgumentException
      * @return array
      */
@@ -70,9 +71,10 @@ class System
     {
         $table = $this->server->getDispatchTable();
         if (!$table->hasMethod($method)) {
-            throw new Exception\InvalidArgumentException('Method "' . $method . '" does not exist', 640);
+            throw new Exception\InvalidArgumentException('Method "'.$method.'" does not exist', 640);
         }
         $method = $table->getMethod($method)->toArray();
+
         return $method['prototypes'];
     }
 
@@ -101,7 +103,7 @@ class System
             if (!is_array($method)) {
                 $fault = $this->server->fault('system.multicall expects each method to be a struct', 601);
             } elseif (!isset($method['methodName'])) {
-                $fault = $this->server->fault('Missing methodName: ' . var_export($methods, 1), 602);
+                $fault = $this->server->fault('Missing methodName: '.var_export($methods, 1), 602);
             } elseif (!isset($method['params'])) {
                 $fault = $this->server->fault('Missing params', 603);
             } elseif (!is_array($method['params'])) {
@@ -134,7 +136,7 @@ class System
             if ($fault) {
                 $responses[] = array(
                     'faultCode'   => $fault->getCode(),
-                    'faultString' => $fault->getMessage()
+                    'faultString' => $fault->getMessage(),
                 );
             }
         }

@@ -19,7 +19,7 @@ trait FormFactoryAwareTrait
     /**
      * Compose a form factory into the object
      *
-     * @param Factory $factory
+     * @param  Factory $factory
      * @return mixed
      */
     public function setFormFactory(Factory $factory)

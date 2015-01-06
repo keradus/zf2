@@ -98,6 +98,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $elementSpec = $e->getParam('elementSpec');
         if (isset($elementSpec['spec']['attributes'])) {
             $elementSpec['spec']['attributes'] = array_merge($elementSpec['spec']['attributes'], $annotation->getAttributes());
+
             return;
         }
 
@@ -204,6 +205,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         if ($annotations->hasAnnotation('Zend\Form\Annotation\Exclude')) {
             return true;
         }
+
         return false;
     }
 

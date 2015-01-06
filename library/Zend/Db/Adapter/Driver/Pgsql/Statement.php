@@ -57,22 +57,24 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     protected $parameterContainer;
 
     /**
-     * @param  Pgsql $driver
+     * @param  Pgsql     $driver
      * @return Statement
      */
     public function setDriver(Pgsql $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Statement
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -87,7 +89,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Initialize
      *
-     * @param  resource $pgsql
+     * @param  resource                   $pgsql
      * @return void
      * @throws Exception\RuntimeException for invalid or missing postgresql connection
      */
@@ -116,12 +118,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set sql
      *
-     * @param string $sql
+     * @param  string    $sql
      * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
@@ -138,12 +141,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set parameter container
      *
-     * @param ParameterContainer $parameterContainer
+     * @param  ParameterContainer $parameterContainer
      * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -169,13 +173,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         $pCount = 1;
         $sql = preg_replace_callback(
             '#\$\##', function () use (&$pCount) {
-                return '$' . $pCount++;
+                return '$'.$pCount++;
             },
             $sql
         );
 
         $this->sql = $sql;
-        $this->statementName = 'statement' . ++static::$statementIndex;
+        $this->statementName = 'statement'.++static::$statementIndex;
         $this->resource = pg_prepare($this->pgsql, $this->statementName, $sql);
     }
 
@@ -192,7 +196,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Execute
      *
-     * @param null|array|ParameterContainer $parameters
+     * @param  null|array|ParameterContainer   $parameters
      * @throws Exception\InvalidQueryException
      * @return Result
      */
@@ -220,7 +224,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $parameters = $this->parameterContainer->getPositionalArray();
         }
         /** END Standard ParameterContainer Merging Block */
-
         if ($this->profiler) {
             $this->profiler->profilerStart($this);
         }
@@ -236,6 +239,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($resultResource);
+
         return $result;
     }
 }

@@ -20,8 +20,8 @@ class ModuleRouteListener extends AbstractListenerAggregate
     /**
      * Attach to an event manager
      *
-     * @param  EventManagerInterface $events
-     * @param  int $priority
+     * @param EventManagerInterface $events
+     * @param int                   $priority
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
@@ -69,7 +69,7 @@ class ModuleRouteListener extends AbstractListenerAggregate
 
         // Prepend the controllername with the module, and replace it in the
         // matches
-        $controller = $module . '\\' . str_replace(' ', '', ucwords(str_replace('-', ' ', $controller)));
+        $controller = $module.'\\'.str_replace(' ', '', ucwords(str_replace('-', ' ', $controller)));
         $matches->setParam('controller', $controller);
     }
 }

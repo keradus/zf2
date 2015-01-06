@@ -55,7 +55,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request();
         $p = new \Zend\Stdlib\Parameters(array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         ));
         $request->setQuery($p);
         $request->setPost($p);
@@ -79,7 +79,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $request = new Request();
         $p = new \Zend\Stdlib\Parameters(array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         ));
         $request->setQuery($p);
         $request->setPost($p);
@@ -148,7 +148,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         return array(
             array('/foo'),
             array('/foo#test'),
-            array('/hello?what=true#noway')
+            array('/hello?what=true#noway'),
         );
     }
 
@@ -182,11 +182,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testRequestMethodCheckWorksForAllMethods($methodName)
     {
-        $request = new Request;
+        $request = new Request();
         $request->setMethod($methodName);
 
         foreach ($this->getMethods(false, $methodName) as $testMethodName => $testMethodValue) {
-            $this->assertEquals($testMethodValue, $request->{'is' . $testMethodName}());
+            $this->assertEquals($testMethodValue, $request->{'is'.$testMethodName}());
         }
     }
 
@@ -241,7 +241,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      * PHPUNIT DATA PROVIDER
      *
      * @param $providerContext
-     * @param null $trueMethod
+     * @param  null  $trueMethod
      * @return array
      */
     public function getMethods($providerContext, $trueMethod = null)
@@ -257,6 +257,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
+
         return $return;
     }
 

@@ -276,13 +276,13 @@ class InputTest extends TestCase
     {
         return array(
             array(
-                'fallbackValue' => null
+                'fallbackValue' => null,
             ),
             array(
-                'fallbackValue' => ''
+                'fallbackValue' => '',
             ),
             array(
-                'fallbackValue' => 'some value'
+                'fallbackValue' => 'some value',
             ),
         );
     }

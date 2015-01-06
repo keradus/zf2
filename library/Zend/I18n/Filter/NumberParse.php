@@ -19,7 +19,7 @@ class NumberParse extends AbstractLocale
     protected $options = array(
         'locale' => null,
         'style'  => NumberFormatter::DEFAULT_STYLE,
-        'type'   => NumberFormatter::TYPE_DOUBLE
+        'type'   => NumberFormatter::TYPE_DOUBLE,
     );
 
     /**
@@ -29,8 +29,8 @@ class NumberParse extends AbstractLocale
 
     /**
      * @param array|Traversable|string|null $localeOrOptions
-     * @param int  $style
-     * @param int  $type
+     * @param int                           $style
+     * @param int                           $type
      */
     public function __construct(
         $localeOrOptions = null,
@@ -54,24 +54,26 @@ class NumberParse extends AbstractLocale
     }
 
     /**
-     * @param  string|null $locale
+     * @param  string|null  $locale
      * @return NumberFormat
      */
     public function setLocale($locale = null)
     {
         $this->options['locale'] = $locale;
         $this->formatter = null;
+
         return $this;
     }
 
     /**
-     * @param  int $style
+     * @param  int          $style
      * @return NumberFormat
      */
     public function setStyle($style)
     {
         $this->options['style'] = (int) $style;
         $this->formatter = null;
+
         return $this;
     }
 
@@ -84,12 +86,13 @@ class NumberParse extends AbstractLocale
     }
 
     /**
-     * @param  int $type
+     * @param  int          $type
      * @return NumberFormat
      */
     public function setType($type)
     {
         $this->options['type'] = (int) $type;
+
         return $this;
     }
 
@@ -108,6 +111,7 @@ class NumberParse extends AbstractLocale
     public function setFormatter(NumberFormatter $formatter)
     {
         $this->formatter = $formatter;
+
         return $this;
     }
 
@@ -121,7 +125,7 @@ class NumberParse extends AbstractLocale
             $formatter = NumberFormatter::create($this->getLocale(), $this->getStyle());
             if (!$formatter) {
                 throw new Exception\RuntimeException(
-                    'Can not create NumberFormatter instance; ' . intl_get_error_message()
+                    'Can not create NumberFormatter instance; '.intl_get_error_message()
                 );
             }
 

@@ -88,12 +88,13 @@ class ConstraintKeyObject
     /**
      * Set column name
      *
-     * @param  string $columnName
+     * @param  string              $columnName
      * @return ConstraintKeyObject
      */
     public function setColumnName($columnName)
     {
         $this->columnName = $columnName;
+
         return $this;
     }
 
@@ -110,12 +111,13 @@ class ConstraintKeyObject
     /**
      * Set ordinal position
      *
-     * @param  int $ordinalPosition
+     * @param  int                 $ordinalPosition
      * @return ConstraintKeyObject
      */
     public function setOrdinalPosition($ordinalPosition)
     {
         $this->ordinalPosition = $ordinalPosition;
+
         return $this;
     }
 
@@ -132,12 +134,13 @@ class ConstraintKeyObject
     /**
      * Set position in unique constraint
      *
-     * @param  bool $positionInUniqueConstraint
+     * @param  bool                $positionInUniqueConstraint
      * @return ConstraintKeyObject
      */
     public function setPositionInUniqueConstraint($positionInUniqueConstraint)
     {
         $this->positionInUniqueConstraint = $positionInUniqueConstraint;
+
         return $this;
     }
 
@@ -154,12 +157,13 @@ class ConstraintKeyObject
     /**
      * Set referenced table schema
      *
-     * @param string $referencedTableSchema
+     * @param  string              $referencedTableSchema
      * @return ConstraintKeyObject
      */
     public function setReferencedTableSchema($referencedTableSchema)
     {
         $this->referencedTableSchema = $referencedTableSchema;
+
         return $this;
     }
 
@@ -176,12 +180,13 @@ class ConstraintKeyObject
     /**
      * Set Referenced table name
      *
-     * @param  string $referencedTableName
+     * @param  string              $referencedTableName
      * @return ConstraintKeyObject
      */
     public function setReferencedTableName($referencedTableName)
     {
         $this->referencedTableName = $referencedTableName;
+
         return $this;
     }
 
@@ -198,12 +203,13 @@ class ConstraintKeyObject
     /**
      * Set referenced column name
      *
-     * @param  string $referencedColumnName
+     * @param  string              $referencedColumnName
      * @return ConstraintKeyObject
      */
     public function setReferencedColumnName($referencedColumnName)
     {
         $this->referencedColumnName = $referencedColumnName;
+
         return $this;
     }
 

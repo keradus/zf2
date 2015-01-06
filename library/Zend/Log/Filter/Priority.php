@@ -28,8 +28,8 @@ class Priority implements FilterInterface
      * Filter logging by $priority. By default, it will accept any log
      * event whose priority value is less than or equal to $priority.
      *
-     * @param  int|array|Traversable $priority Priority
-     * @param  string $operator Comparison operator
+     * @param  int|array|Traversable              $priority Priority
+     * @param  string                             $operator Comparison operator
      * @return Priority
      * @throws Exception\InvalidArgumentException
      */
@@ -56,8 +56,8 @@ class Priority implements FilterInterface
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param array $event event data
-     * @return bool accepted?
+     * @param  array $event event data
+     * @return bool  accepted?
      */
     public function filter(array $event)
     {

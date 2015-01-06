@@ -29,7 +29,7 @@ class StorageFactory implements FactoryInterface
      * @param  ServiceLocatorInterface    $services
      * @return StorageInterface
      * @throws ServiceNotCreatedException if session_storage is missing, or the
-     *         factory cannot create the storage instance.
+     *                                             factory cannot create the storage instance.
      */
     public function createService(ServiceLocatorInterface $services)
     {

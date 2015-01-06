@@ -40,13 +40,14 @@ class Priority extends AbstractValidator
      *
      * @link http://www.sitemaps.org/protocol.php#prioritydef <priority>
      *
-     * @param  string  $value  value to validate
+     * @param  string $value value to validate
      * @return bool
      */
     public function isValid($value)
     {
         if (!is_numeric($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -54,6 +55,7 @@ class Priority extends AbstractValidator
         $value = (float) $value;
         if ($value < 0 || $value > 1) {
             $this->error(self::NOT_VALID);
+
             return false;
         }
 

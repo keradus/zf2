@@ -79,7 +79,7 @@ class RenderChildModel extends AbstractHelper
      * has a captureTo value matching the requested $child. If found, that child
      * model is returned; otherwise, a boolean false is returned.
      *
-     * @param  string $child
+     * @param  string      $child
      * @return false|Model
      */
     protected function findChild($child)

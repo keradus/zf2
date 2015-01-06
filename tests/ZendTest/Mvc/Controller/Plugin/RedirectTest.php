@@ -25,7 +25,7 @@ class RedirectTest extends TestCase
     {
         $this->response = new Response();
 
-        $router = new SimpleRouteStack;
+        $router = new SimpleRouteStack();
         $router->addRoute('home', LiteralRoute::factory(array(
             'route'    => '/',
             'defaults' => array(

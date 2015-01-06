@@ -48,7 +48,7 @@ class Exists extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array|\Traversable $options
+     * @param string|array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -66,7 +66,7 @@ class Exists extends AbstractValidator
     /**
      * Returns the set file directories which are checked
      *
-     * @param  bool $asArray Returns the values as array; when false, a concatenated string is returned
+     * @param  bool        $asArray Returns the values as array; when false, a concatenated string is returned
      * @return string|null
      */
     public function getDirectory($asArray = false)
@@ -84,20 +84,21 @@ class Exists extends AbstractValidator
      * Sets the file directory which will be checked
      *
      * @param  string|array $directory The directories to validate
-     * @return Extension Provides a fluent interface
+     * @return Extension    Provides a fluent interface
      */
     public function setDirectory($directory)
     {
         $this->options['directory'] = null;
         $this->addDirectory($directory);
+
         return $this;
     }
 
     /**
      * Adds the file directory which will be checked
      *
-     * @param  string|array $directory The directory to add for validation
-     * @return Extension Provides a fluent interface
+     * @param  string|array                       $directory The directory to add for validation
+     * @return Extension                          Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function addDirectory($directory)
@@ -170,6 +171,7 @@ class Exists extends AbstractValidator
             $check = true;
             if (!file_exists($file)) {
                 $this->error(self::DOES_NOT_EXIST);
+
                 return false;
             }
         } else {
@@ -179,8 +181,9 @@ class Exists extends AbstractValidator
                 }
 
                 $check = true;
-                if (!file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+                if (!file_exists($directory.DIRECTORY_SEPARATOR.$filename)) {
                     $this->error(self::DOES_NOT_EXIST);
+
                     return false;
                 }
             }
@@ -188,6 +191,7 @@ class Exists extends AbstractValidator
 
         if (!$check) {
             $this->error(self::DOES_NOT_EXIST);
+
             return false;
         }
 

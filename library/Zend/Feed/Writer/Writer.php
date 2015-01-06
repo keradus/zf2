@@ -10,7 +10,7 @@
 namespace Zend\Feed\Writer;
 
 /**
-*/
+ */
 class Writer
 {
     /**
@@ -79,22 +79,23 @@ class Writer
         if (!isset(static::$extensionManager)) {
             static::setExtensionManager(new ExtensionManager());
         }
+
         return static::$extensionManager;
     }
 
     /**
      * Register an Extension by name
      *
-     * @param  string $name
+     * @param  string                     $name
      * @return void
      * @throws Exception\RuntimeException if unable to resolve Extension class
      */
     public static function registerExtension($name)
     {
-        $feedName          = $name . '\Feed';
-        $entryName         = $name . '\Entry';
-        $feedRendererName  = $name . '\Renderer\Feed';
-        $entryRendererName = $name . '\Renderer\Entry';
+        $feedName          = $name.'\Feed';
+        $entryName         = $name.'\Entry';
+        $feedRendererName  = $name.'\Renderer\Feed';
+        $entryRendererName = $name.'\Renderer\Entry';
         $manager           = static::getExtensionManager();
         if (static::isRegistered($name)) {
             if ($manager->has($feedName)
@@ -110,8 +111,8 @@ class Writer
             && !$manager->has($feedRendererName)
             && !$manager->has($entryRendererName)
         ) {
-            throw new Exception\RuntimeException('Could not load extension: ' . $name
-                . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
+            throw new Exception\RuntimeException('Could not load extension: '.$name
+                .'using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
         if ($manager->has($feedName)) {
             static::$extensions['feed'][] = $feedName;
@@ -135,10 +136,10 @@ class Writer
      */
     public static function isRegistered($extensionName)
     {
-        $feedName          = $extensionName . '\Feed';
-        $entryName         = $extensionName . '\Entry';
-        $feedRendererName  = $extensionName . '\Renderer\Feed';
-        $entryRendererName = $extensionName . '\Renderer\Entry';
+        $feedName          = $extensionName.'\Feed';
+        $entryName         = $extensionName.'\Entry';
+        $feedRendererName  = $extensionName.'\Renderer\Feed';
+        $entryRendererName = $extensionName.'\Renderer\Entry';
         if (in_array($feedName, static::$extensions['feed'])
             || in_array($entryName, static::$extensions['entry'])
             || in_array($feedRendererName, static::$extensions['feedRenderer'])
@@ -146,6 +147,7 @@ class Writer
         ) {
             return true;
         }
+
         return false;
     }
 
@@ -194,6 +196,7 @@ class Writer
     public static function lcfirst($str)
     {
         $str[0] = strtolower($str[0]);
+
         return $str;
     }
 }

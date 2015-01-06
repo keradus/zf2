@@ -46,7 +46,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     protected $flags = self::FLAG_PUBLIC;
 
     /**
-     * @param  int|array $flags
+     * @param  int|array               $flags
      * @return AbstractMemberGenerator
      */
     public function setFlags($flags)
@@ -65,27 +65,29 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  int $flag
+     * @param  int                     $flag
      * @return AbstractMemberGenerator
      */
     public function addFlag($flag)
     {
         $this->setFlags($this->flags | $flag);
+
         return $this;
     }
 
     /**
-     * @param  int $flag
+     * @param  int                     $flag
      * @return AbstractMemberGenerator
      */
     public function removeFlag($flag)
     {
         $this->setFlags($this->flags & ~$flag);
+
         return $this;
     }
 
     /**
-     * @param  bool $isAbstract
+     * @param  bool                    $isAbstract
      * @return AbstractMemberGenerator
      */
     public function setAbstract($isAbstract)
@@ -102,7 +104,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  bool $isFinal
+     * @param  bool                    $isFinal
      * @return AbstractMemberGenerator
      */
     public function setFinal($isFinal)
@@ -119,7 +121,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  bool $isStatic
+     * @param  bool                    $isStatic
      * @return AbstractMemberGenerator
      */
     public function setStatic($isStatic)
@@ -136,7 +138,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $visibility
+     * @param  string                  $visibility
      * @return AbstractMemberGenerator
      */
     public function setVisibility($visibility)
@@ -175,12 +177,13 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $name
+     * @param  string                  $name
      * @return AbstractMemberGenerator
      */
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
@@ -193,7 +196,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  DocBlockGenerator|string $docBlock
+     * @param  DocBlockGenerator|string           $docBlock
      * @throws Exception\InvalidArgumentException
      * @return AbstractMemberGenerator
      */

@@ -43,12 +43,13 @@ class ExceptionStrategy extends AbstractListenerAggregate
     /**
      * Flag: display exceptions in error pages?
      *
-     * @param  bool $displayExceptions
+     * @param  bool              $displayExceptions
      * @return ExceptionStrategy
      */
     public function setDisplayExceptions($displayExceptions)
     {
         $this->displayExceptions = (bool) $displayExceptions;
+
         return $this;
     }
 
@@ -65,12 +66,13 @@ class ExceptionStrategy extends AbstractListenerAggregate
     /**
      * Set the exception template
      *
-     * @param  string $exceptionTemplate
+     * @param  string            $exceptionTemplate
      * @return ExceptionStrategy
      */
     public function setExceptionTemplate($exceptionTemplate)
     {
         $this->exceptionTemplate = (string) $exceptionTemplate;
+
         return $this;
     }
 

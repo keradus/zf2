@@ -39,7 +39,6 @@ class RefererTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implementation specific tests  */
-
     public function testRefererCanSetAndAccessAbsoluteUri()
     {
         $refererHeader = Referer::fromString('Referer: http://www.example.com/path');

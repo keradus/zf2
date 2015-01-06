@@ -41,7 +41,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * @param \Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo|resource|\PDO $driver
+     * @param  \Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo|resource|\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      *
      * @return self
@@ -53,6 +53,7 @@ class SqlServer extends AbstractPlatform
             || (($driver instanceof \PDO && in_array($driver->getAttribute(\PDO::ATTR_DRIVER_NAME), array('sqlsrv', 'dblib'))))
         ) {
             $this->resource = $driver;
+
             return $this;
         }
 
@@ -80,7 +81,7 @@ class SqlServer extends AbstractPlatform
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        return '[' . implode('].[', (array) $identifierChain) . ']';
+        return '['.implode('].[', (array) $identifierChain).']';
     }
 
     /**
@@ -103,11 +104,11 @@ class SqlServer extends AbstractPlatform
             return $this->resource->quote($value);
         }
         trigger_error(
-            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-                . 'can introduce security vulnerabilities in a production environment.'
+            'Attempting to quote a value in '.__CLASS__.' without extension/driver support '
+                .'can introduce security vulnerabilities in a production environment.'
         );
 
-        return '\'' . str_replace('\'', '\'\'', addcslashes($value, "\000\032")) . '\'';
+        return '\''.str_replace('\'', '\'\'', addcslashes($value, "\000\032")).'\'';
     }
 
     /**
@@ -121,7 +122,8 @@ class SqlServer extends AbstractPlatform
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
-        return '\'' . str_replace('\'', '\'\'', $value) . '\'';
+
+        return '\''.str_replace('\'', '\'\'', $value).'\'';
     }
 
     /**

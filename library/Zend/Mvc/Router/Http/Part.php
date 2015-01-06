@@ -46,11 +46,11 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * Create a new part route.
      *
-     * @param  mixed              $route
-     * @param  bool               $mayTerminate
-     * @param  RoutePluginManager $routePlugins
-     * @param  array|null         $childRoutes
-     * @param  ArrayObject|null   $prototypes
+     * @param  mixed                              $route
+     * @param  bool                               $mayTerminate
+     * @param  RoutePluginManager                 $routePlugins
+     * @param  array|null                         $childRoutes
+     * @param  ArrayObject|null                   $prototypes
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($route, $mayTerminate, RoutePluginManager $routePlugins, array $childRoutes = null, ArrayObject $prototypes = null)
@@ -76,7 +76,7 @@ class Part extends TreeRouteStack implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
-     * @param  mixed $options
+     * @param  mixed                              $options
      * @return Part
      * @throws Exception\InvalidArgumentException
      */
@@ -85,7 +85,7 @@ class Part extends TreeRouteStack implements RouteInterface
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable set of options');
         }
 
         if (!isset($options['route'])) {
@@ -125,9 +125,9 @@ class Part extends TreeRouteStack implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request      $request
-     * @param  integer|null $pathOffset
-     * @param  array        $options
+     * @param  Request         $request
+     * @param  integer|null    $pathOffset
+     * @param  array           $options
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null, array $options = array())
@@ -176,8 +176,8 @@ class Part extends TreeRouteStack implements RouteInterface
      * assemble(): Defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::assemble()
-     * @param  array $params
-     * @param  array $options
+     * @param  array                      $params
+     * @param  array                      $options
      * @return mixed
      * @throws Exception\RuntimeException
      */
@@ -237,6 +237,7 @@ class Part extends TreeRouteStack implements RouteInterface
                 return true;
             }
         }
+
         return false;
     }
 }

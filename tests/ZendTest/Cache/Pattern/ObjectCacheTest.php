@@ -28,8 +28,9 @@ class TestObjectCache
         ++static::$fooCounter;
         $args = func_get_args();
 
-        echo 'foobar_output('.implode(', ', $args) . ') : ' . static::$fooCounter;
-        return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
+        echo 'foobar_output('.implode(', ', $args).') : '.static::$fooCounter;
+
+        return 'foobar_return('.implode(', ', $args).') : '.static::$fooCounter;
     }
 
     public function __invoke()
@@ -54,9 +55,9 @@ class ObjectCacheTest extends CommonPatternTest
 
     public function setUp()
     {
-        $class = __NAMESPACE__ . '\TestObjectCache';
+        $class = __NAMESPACE__.'\TestObjectCache';
         $this->_storage = new Cache\Storage\Adapter\Memory(array(
-            'memory_limit' => 0
+            'memory_limit' => 0,
         ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
             'object'  => new $class(),
@@ -151,8 +152,8 @@ class ObjectCacheTest extends CommonPatternTest
 
     protected function _testCall($method, array $args)
     {
-        $returnSpec = 'foobar_return(' . implode(', ', $args) . ') : ';
-        $outputSpec = 'foobar_output(' . implode(', ', $args) . ') : ';
+        $returnSpec = 'foobar_return('.implode(', ', $args).') : ';
+        $outputSpec = 'foobar_output('.implode(', ', $args).') : ';
         $callback   = array($this->_pattern, $method);
 
         // first call - not cached
@@ -164,8 +165,8 @@ class ObjectCacheTest extends CommonPatternTest
         $data = ob_get_contents();
         ob_end_clean();
 
-        $this->assertEquals($returnSpec . $firstCounter, $return);
-        $this->assertEquals($outputSpec . $firstCounter, $data);
+        $this->assertEquals($returnSpec.$firstCounter, $return);
+        $this->assertEquals($outputSpec.$firstCounter, $data);
 
         // second call - cached
         ob_start();
@@ -174,9 +175,9 @@ class ObjectCacheTest extends CommonPatternTest
         $data = ob_get_contents();
         ob_end_clean();
 
-        $this->assertEquals($returnSpec . $firstCounter, $return);
+        $this->assertEquals($returnSpec.$firstCounter, $return);
         if ($this->_options->getCacheOutput()) {
-            $this->assertEquals($outputSpec . $firstCounter, $data);
+            $this->assertEquals($outputSpec.$firstCounter, $data);
         } else {
             $this->assertEquals('', $data);
         }

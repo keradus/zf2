@@ -50,7 +50,7 @@ class Xml implements FormatterInterface
      * Class constructor
      * (the default encoding is UTF-8)
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable $options
      * @return Xml
      */
     public function __construct($options = array())
@@ -63,7 +63,7 @@ class Xml implements FormatterInterface
             $args = func_get_args();
 
             $options = array(
-                'rootElement' => array_shift($args)
+                'rootElement' => array_shift($args),
             );
 
             if (count($args)) {
@@ -112,12 +112,13 @@ class Xml implements FormatterInterface
     /**
      * Set encoding
      *
-     * @param string $value
+     * @param  string $value
      * @return Xml
      */
     public function setEncoding($value)
     {
         $this->encoding = (string) $value;
+
         return $this;
     }
 
@@ -130,6 +131,7 @@ class Xml implements FormatterInterface
     public function setEscaper(Escaper $escaper)
     {
         $this->escaper = $escaper;
+
         return $this;
     }
 
@@ -145,13 +147,14 @@ class Xml implements FormatterInterface
         if (null === $this->escaper) {
             $this->setEscaper(new Escaper($this->getEncoding()));
         }
+
         return $this->escaper;
     }
 
     /**
      * Formats data into a single line to be written by the writer.
      *
-     * @param array $event event data
+     * @param  array  $event event data
      * @return string formatted line to write to the log
      */
     public function format($event)
@@ -199,15 +202,15 @@ class Xml implements FormatterInterface
             }
         }
 
-        return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $dom->saveXML()) . PHP_EOL;
+        return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $dom->saveXML()).PHP_EOL;
     }
 
     /**
      * Recursion function to create an xml tree structure out of array structure
-     * @param DomDocument $doc - DomDocument where the current nodes will be generated
-     * @param DomElement $rootElement - root element the tree will be attached to
+     * @param  DomDocument $doc         - DomDocument where the current nodes will be generated
+     * @param  DomElement  $rootElement - root element the tree will be attached to
      * @param $mixedData array|Traversable - mixedData
-     * @return DomElement $domElement - DOM Element with appended child nodes
+     * @return DomElement  $domElement - DOM Element with appended child nodes
      */
     protected function buildElementTree(DOMDocument $doc, DOMElement $rootElement, $mixedData)
     {
@@ -231,7 +234,7 @@ class Xml implements FormatterInterface
             if (is_object($value) && ! method_exists($value, '__toString')) {
                 // object does not support __toString() method, manually convert the value
                 $value = $this->getEscaper()->escapeHtml(
-                    '"Object" of type ' . get_class($value) . " does not support __toString() method"
+                    '"Object" of type '.get_class($value)." does not support __toString() method"
                 );
             }
 
@@ -266,6 +269,7 @@ class Xml implements FormatterInterface
     public function setDateTimeFormat($dateTimeFormat)
     {
         $this->dateTimeFormat = (string) $dateTimeFormat;
+
         return $this;
     }
 }

@@ -19,7 +19,7 @@ class Http extends Uri
      */
     protected static $validSchemes = array(
         'http',
-        'https'
+        'https',
     );
 
     /**
@@ -96,7 +96,7 @@ class Http extends Uri
     /**
      * Set the password part (after the ':') of the userInfo URI part
      *
-     * @param  string $password
+     * @param string $password
      *
      * @return self
      */
@@ -112,7 +112,7 @@ class Http extends Uri
     /**
      * Set the URI User-info part (usually user:password)
      *
-     * @param  string|null $userInfo
+     * @param string|null $userInfo
      *
      * @return self
      *
@@ -133,8 +133,8 @@ class Http extends Uri
      * This overrides the common URI validation method with a DNS or IP only
      * default. Users may still enforce allowing other host types.
      *
-     * @param  string  $host
-     * @param  int $allowed
+     * @param  string $host
+     * @param  int    $allowed
      * @return bool
      */
     public static function validateHost($host, $allowed = self::HOST_DNS_OR_IPV4_OR_IPV6)
@@ -164,6 +164,7 @@ class Http extends Uri
         if (false === strpos($this->userInfo, ':')) {
             $this->setUser($this->userInfo);
             $this->setPassword(null);
+
             return;
         }
 
@@ -181,7 +182,7 @@ class Http extends Uri
     protected function buildUserInfo()
     {
         if (null !== $this->password) {
-            $this->userInfo = $this->user . ':' . $this->password;
+            $this->userInfo = $this->user.':'.$this->password;
         } else {
             $this->userInfo = $this->user;
         }
@@ -202,6 +203,7 @@ class Http extends Uri
                 return static::$defaultPorts[$this->scheme];
             }
         }
+
         return $this->port;
     }
 

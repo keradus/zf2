@@ -17,7 +17,7 @@ class AbstractLengthColumnTest extends \PHPUnit_Framework_TestCase
     public function testSetLength()
     {
         $column = $this->getMockForAbstractClass('Zend\Db\Sql\Ddl\Column\AbstractLengthColumn', array(
-            'foo', 55
+            'foo', 55,
         ));
         $this->assertEquals(55, $column->getLength());
         $this->assertSame($column, $column->setLength(20));
@@ -30,7 +30,7 @@ class AbstractLengthColumnTest extends \PHPUnit_Framework_TestCase
     public function testGetLength()
     {
         $column = $this->getMockForAbstractClass('Zend\Db\Sql\Ddl\Column\AbstractLengthColumn', array(
-            'foo', 55
+            'foo', 55,
         ));
         $this->assertEquals(55, $column->getLength());
     }
@@ -41,7 +41,7 @@ class AbstractLengthColumnTest extends \PHPUnit_Framework_TestCase
     public function testGetExpressionData()
     {
         $column = $this->getMockForAbstractClass('Zend\Db\Sql\Ddl\Column\AbstractLengthColumn', array(
-            'foo', 4
+            'foo', 4,
         ));
 
         $this->assertEquals(

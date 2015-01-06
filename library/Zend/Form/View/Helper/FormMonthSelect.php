@@ -90,7 +90,7 @@ class FormMonthSelect extends AbstractHelper
     /**
      * Render a month element that is composed of two selects
      *
-     * @param  \Zend\Form\ElementInterface $element
+     * @param  \Zend\Form\ElementInterface                   $element
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @throws \Zend\Form\Exception\DomainException
      * @return string
@@ -150,7 +150,7 @@ class FormMonthSelect extends AbstractHelper
     /**
      * Parse the pattern
      *
-     * @param  bool $renderDelimiters
+     * @param  bool  $renderDelimiters
      * @return array
      */
     protected function parsePattern($renderDelimiters = true)
@@ -192,7 +192,7 @@ class FormMonthSelect extends AbstractHelper
     /**
      * Set date formatter
      *
-     * @param  int $dateType
+     * @param  int            $dateType
      * @return FormDateSelect
      */
     public function setDateType($dateType)
@@ -220,12 +220,13 @@ class FormMonthSelect extends AbstractHelper
     /**
      * Set locale
      *
-     * @param  string $locale
+     * @param  string         $locale
      * @return FormDateSelect
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
         return $this;
     }
 
@@ -246,7 +247,7 @@ class FormMonthSelect extends AbstractHelper
     /**
      * Create a key => value options for months
      *
-     * @param string $pattern Pattern to use for months
+     * @param  string $pattern Pattern to use for months
      * @return array
      */
     protected function getMonthsOptions($pattern)
@@ -272,8 +273,8 @@ class FormMonthSelect extends AbstractHelper
      * NOTE: we don't use a pattern for years, as years written as two digits can lead to hard to
      * read date for users, so we only use four digits years
      *
-     * @param int $minYear
-     * @param int $maxYear
+     * @param  int   $minYear
+     * @param  int   $maxYear
      * @return array
      */
     protected function getYearsOptions($minYear, $maxYear)

@@ -100,12 +100,13 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
     public function getStringHeaders()
     {
         $value = $this->getExpectedFieldValue();
+
         return array(
-            'cc'       => array('Cc: ' . $value, 'Zend\Mail\Header\Cc'),
-            'bcc'      => array('Bcc: ' . $value, 'Zend\Mail\Header\Bcc'),
-            'from'     => array('From: ' . $value, 'Zend\Mail\Header\From'),
-            'reply-to' => array('Reply-To: ' . $value, 'Zend\Mail\Header\ReplyTo'),
-            'to'       => array('To: ' . $value, 'Zend\Mail\Header\To'),
+            'cc'       => array('Cc: '.$value, 'Zend\Mail\Header\Cc'),
+            'bcc'      => array('Bcc: '.$value, 'Zend\Mail\Header\Bcc'),
+            'from'     => array('From: '.$value, 'Zend\Mail\Header\From'),
+            'reply-to' => array('Reply-To: '.$value, 'Zend\Mail\Header\ReplyTo'),
+            'to'       => array('To: '.$value, 'Zend\Mail\Header\To'),
         );
     }
 
@@ -133,12 +134,13 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
     public function getStringHeadersWithNoWhitespaceSeparator()
     {
         $value = $this->getExpectedFieldValue();
+
         return array(
-            'cc'       => array('Cc:' . $value, 'Zend\Mail\Header\Cc'),
-            'bcc'      => array('Bcc:' . $value, 'Zend\Mail\Header\Bcc'),
-            'from'     => array('From:' . $value, 'Zend\Mail\Header\From'),
-            'reply-to' => array('Reply-To:' . $value, 'Zend\Mail\Header\ReplyTo'),
-            'to'       => array('To:' . $value, 'Zend\Mail\Header\To'),
+            'cc'       => array('Cc:'.$value, 'Zend\Mail\Header\Cc'),
+            'bcc'      => array('Bcc:'.$value, 'Zend\Mail\Header\Bcc'),
+            'from'     => array('From:'.$value, 'Zend\Mail\Header\From'),
+            'reply-to' => array('Reply-To:'.$value, 'Zend\Mail\Header\ReplyTo'),
+            'to'       => array('To:'.$value, 'Zend\Mail\Header\To'),
         );
     }
 

@@ -505,7 +505,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             array(array('foo')),
             array(true),
             array(false),
-            array(new stdClass),
+            array(new stdClass()),
         );
     }
 
@@ -555,8 +555,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->message->setBody($body);
 
         $this->assertContains(
-            'Content-Type: text/plain;' . Headers::FOLDING . 'charset="utf-8"' . Headers::EOL
-            . 'Content-Transfer-Encoding: quoted-printable' . Headers::EOL,
+            'Content-Type: text/plain;'.Headers::FOLDING.'charset="utf-8"'.Headers::EOL
+            .'Content-Transfer-Encoding: quoted-printable'.Headers::EOL,
             $this->message->getHeaders()->toString()
         );
     }

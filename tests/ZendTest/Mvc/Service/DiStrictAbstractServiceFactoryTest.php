@@ -44,7 +44,7 @@ class DiStrictAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testWillFetchDependenciesFromServiceManagerBeforeDi()
     {
-        $controllerName = __NAMESPACE__ . '\TestAsset\ControllerWithDependencies';
+        $controllerName = __NAMESPACE__.'\TestAsset\ControllerWithDependencies';
         $config = new Config(array(
             'instance' => array(
                 $controllerName => array('parameters' => array('injected' => 'stdClass')),
@@ -54,7 +54,7 @@ class DiStrictAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $testService = new \stdClass();
         $locator->setService('stdClass', $testService);
 
-        $di = new Di;
+        $di = new Di();
         $config->configure($di);
         $instance = new DiStrictAbstractServiceFactory($di, DiStrictAbstractServiceFactory::USE_SL_BEFORE_DI);
         $instance->setAllowedServiceNames(array($controllerName));

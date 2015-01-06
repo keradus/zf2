@@ -96,7 +96,7 @@ class ClassScanner implements ScannerInterface
     protected $infos = array();
 
     /**
-     * @param  array $classTokens
+     * @param  array                $classTokens
      * @param  NameInformation|null $nameInformation
      * @return ClassScanner
      */
@@ -109,7 +109,7 @@ class ClassScanner implements ScannerInterface
     /**
      * Get annotations
      *
-     * @param  Annotation\AnnotationManager $annotationManager
+     * @param  Annotation\AnnotationManager    $annotationManager
      * @return Annotation\AnnotationCollection
      */
     public function getAnnotations(Annotation\AnnotationManager $annotationManager)
@@ -155,6 +155,7 @@ class ClassScanner implements ScannerInterface
     public function getName()
     {
         $this->scan();
+
         return $this->name;
     }
 
@@ -166,6 +167,7 @@ class ClassScanner implements ScannerInterface
     public function getShortName()
     {
         $this->scan();
+
         return $this->shortName;
     }
 
@@ -177,6 +179,7 @@ class ClassScanner implements ScannerInterface
     public function getLineStart()
     {
         $this->scan();
+
         return $this->lineStart;
     }
 
@@ -188,6 +191,7 @@ class ClassScanner implements ScannerInterface
     public function getLineEnd()
     {
         $this->scan();
+
         return $this->lineEnd;
     }
 
@@ -199,6 +203,7 @@ class ClassScanner implements ScannerInterface
     public function isFinal()
     {
         $this->scan();
+
         return $this->isFinal;
     }
 
@@ -210,6 +215,7 @@ class ClassScanner implements ScannerInterface
     public function isInstantiable()
     {
         $this->scan();
+
         return (!$this->isAbstract && !$this->isInterface);
     }
 
@@ -221,6 +227,7 @@ class ClassScanner implements ScannerInterface
     public function isAbstract()
     {
         $this->scan();
+
         return $this->isAbstract;
     }
 
@@ -232,6 +239,7 @@ class ClassScanner implements ScannerInterface
     public function isInterface()
     {
         $this->scan();
+
         return $this->isInterface;
     }
 
@@ -243,6 +251,7 @@ class ClassScanner implements ScannerInterface
     public function hasParentClass()
     {
         $this->scan();
+
         return ($this->parentClass != null);
     }
 
@@ -254,6 +263,7 @@ class ClassScanner implements ScannerInterface
     public function getParentClass()
     {
         $this->scan();
+
         return $this->parentClass;
     }
 
@@ -265,6 +275,7 @@ class ClassScanner implements ScannerInterface
     public function getInterfaces()
     {
         $this->scan();
+
         return $this->interfaces;
     }
 
@@ -292,13 +303,14 @@ class ClassScanner implements ScannerInterface
     /**
      * Return a list of constants
      *
-     * @param  bool $namesOnly Set false to return instances of ConstantScanner
+     * @param  bool                    $namesOnly Set false to return instances of ConstantScanner
      * @return array|ConstantScanner[]
      */
     public function getConstants($namesOnly = true)
     {
         if (true === $namesOnly) {
             trigger_error('Use method getConstantNames() instead', E_USER_DEPRECATED);
+
             return $this->getConstantNames();
         }
 
@@ -319,7 +331,7 @@ class ClassScanner implements ScannerInterface
     /**
      * Return a single constant by given name or index of info
      *
-     * @param  string|int $constantNameOrInfoIndex
+     * @param  string|int                         $constantNameOrInfoIndex
      * @throws Exception\InvalidArgumentException
      * @return bool|ConstantScanner
      */
@@ -355,6 +367,7 @@ class ClassScanner implements ScannerInterface
         );
         $p->setClass($this->name);
         $p->setScannerClass($this);
+
         return $p;
     }
 
@@ -422,7 +435,7 @@ class ClassScanner implements ScannerInterface
     /**
      * Return a single property by given name or index of info
      *
-     * @param  string|int $propertyNameOrInfoIndex
+     * @param  string|int                         $propertyNameOrInfoIndex
      * @throws Exception\InvalidArgumentException
      * @return bool|PropertyScanner
      */
@@ -458,6 +471,7 @@ class ClassScanner implements ScannerInterface
         );
         $p->setClass($this->name);
         $p->setScannerClass($this);
+
         return $p;
     }
 
@@ -525,7 +539,7 @@ class ClassScanner implements ScannerInterface
     /**
      * Return a single method by given name or index of info
      *
-     * @param  string|int $methodNameOrInfoIndex
+     * @param  string|int                         $methodNameOrInfoIndex
      * @throws Exception\InvalidArgumentException
      * @return MethodScanner
      */
@@ -613,7 +627,6 @@ class ClassScanner implements ScannerInterface
         /**
          * Variables & Setup
          */
-
         $tokens       = &$this->tokens; // localize
         $infos        = &$this->infos; // localize
         $tokenIndex   = null;
@@ -716,7 +729,7 @@ class ClassScanner implements ScannerInterface
                     case T_CLASS:
                         $this->shortName = $tokens[$tokenIndex + 2][1];
                         if ($this->nameInformation && $this->nameInformation->hasNamespace()) {
-                            $this->name = $this->nameInformation->getNamespace() . '\\' . $this->shortName;
+                            $this->name = $this->nameInformation->getNamespace().'\\'.$this->shortName;
                         } else {
                             $this->name = $this->shortName;
                         }

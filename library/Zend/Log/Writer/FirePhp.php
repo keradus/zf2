@@ -29,7 +29,7 @@ class FirePhp extends AbstractWriter
      * Initializes a new instance of this class.
      *
      * @param null|FirePhp\FirePhpInterface|array|Traversable $instance An instance of FirePhpInterface
-     *        that should be used for logging
+     *                                                                  that should be used for logging
      */
     public function __construct($instance = null)
     {

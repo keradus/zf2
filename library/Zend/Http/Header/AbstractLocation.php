@@ -36,7 +36,7 @@ abstract class AbstractLocation implements HeaderInterface
     /**
      * Create location-based header from string
      *
-     * @param string $headerLine
+     * @param  string                             $headerLine
      * @return AbstractLocation
      * @throws Exception\InvalidArgumentException
      */
@@ -50,7 +50,7 @@ abstract class AbstractLocation implements HeaderInterface
         // check to ensure proper header type for this factory
         if (strtolower($name) !== strtolower($locationHeader->getFieldName())) {
             throw new Exception\InvalidArgumentException(
-                'Invalid header line for "' . $locationHeader->getFieldName() . '" header string'
+                'Invalid header line for "'.$locationHeader->getFieldName().'" header string'
             );
         }
 
@@ -62,7 +62,7 @@ abstract class AbstractLocation implements HeaderInterface
     /**
      * Set the URI/URL for this header, this can be a string or an instance of Zend\Uri\Http
      *
-     * @param string|UriInterface $uri
+     * @param  string|UriInterface                $uri
      * @return AbstractLocation
      * @throws Exception\InvalidArgumentException
      */
@@ -96,6 +96,7 @@ abstract class AbstractLocation implements HeaderInterface
         if ($this->uri instanceof UriInterface) {
             return $this->uri->toString();
         }
+
         return $this->uri;
     }
 
@@ -109,6 +110,7 @@ abstract class AbstractLocation implements HeaderInterface
         if ($this->uri === null || is_string($this->uri)) {
             $this->uri = UriFactory::factory($this->uri);
         }
+
         return $this->uri;
     }
 
@@ -129,7 +131,7 @@ abstract class AbstractLocation implements HeaderInterface
      */
     public function toString()
     {
-        return $this->getFieldName() . ': ' . $this->getUri();
+        return $this->getFieldName().': '.$this->getUri();
     }
 
     /**

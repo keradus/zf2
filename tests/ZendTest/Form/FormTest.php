@@ -220,7 +220,6 @@ class FormTest extends TestCase
         $form->setData(array());
         $form->isValid();
 
-
         $this->assertTrue($form->hasValidated());
     }
 
@@ -282,16 +281,16 @@ class FormTest extends TestCase
         $form = new TestAsset\NewProductForm();
         $form->setData(array(
             'product' => array(
-                'name' => 'Chair'
-            )
+                'name' => 'Chair',
+            ),
         ));
 
         $this->assertFalse($form->isValid());
 
         $form->setValidationGroup(array(
             'product' => array(
-                'name'
-            )
+                'name',
+            ),
         ));
 
         $this->assertTrue($form->isValid());
@@ -435,7 +434,7 @@ class FormTest extends TestCase
 
     public function testGetDataReturnsBoundModel()
     {
-        $model = new stdClass;
+        $model = new stdClass();
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->populateForm();
         $this->form->setData(array());
@@ -447,7 +446,7 @@ class FormTest extends TestCase
 
     public function testGetDataCanReturnValuesAsArrayWhenModelIsBound()
     {
-        $model = new stdClass;
+        $model = new stdClass();
         $validSet = array(
             'foo' => 'abcde',
             'bar' => 'always valid',
@@ -467,7 +466,7 @@ class FormTest extends TestCase
 
     public function testValuesBoundToModelAreNormalizedByDefault()
     {
-        $model = new stdClass;
+        $model = new stdClass();
         $validSet = array(
             'foo' => 'abcde',
             'bar' => ' ALWAYS valid ',
@@ -495,7 +494,7 @@ class FormTest extends TestCase
 
     public function testCanBindRawValuesToModel()
     {
-        $model = new stdClass;
+        $model = new stdClass();
         $validSet = array(
             'foo' => 'abcde',
             'bar' => ' ALWAYS valid ',
@@ -544,7 +543,7 @@ class FormTest extends TestCase
 
     public function testSettingValidationGroupBindsOnlyThoseValuesToModel()
     {
-        $model = new stdClass;
+        $model = new stdClass();
         $validSet = array(
             'foo' => 'abcde',
             'bar' => ' ALWAYS valid ',
@@ -681,7 +680,7 @@ class FormTest extends TestCase
 
     public function testCallingBindValuesWhenBindOnValidateIsDisabledPopulatesBoundObject()
     {
-        $model = new stdClass;
+        $model = new stdClass();
         $validSet = array(
             'foo' => 'abcde',
             'bar' => ' ALWAYS valid ',
@@ -785,8 +784,8 @@ class FormTest extends TestCase
         $data = array(
             'parentId' => 'mpinkston was here',
             'child' => array(
-                'childId' => 'testing 123'
-            )
+                'childId' => 'testing 123',
+            ),
         );
 
         $parentForm->setData($data);
@@ -938,12 +937,12 @@ class FormTest extends TestCase
         $this->form->add(array(
             'name'       => 'foo',
             'attributes' => array(
-                'type'         => 'text'
-            )
+                'type'         => 'text',
+            ),
         ));
 
         $this->form->add(array(
-            'type' => 'ZendTest\Form\TestAsset\BasicFieldset'
+            'type' => 'ZendTest\Form\TestAsset\BasicFieldset',
         ));
 
         $this->form->prepare();
@@ -986,16 +985,16 @@ class FormTest extends TestCase
                     'zipCode' => '75008',
                     'country' => array(
                         'name' => 'France',
-                        'continent' => 'Europe'
-                    )
-                )
-            )
+                        'continent' => 'Europe',
+                    ),
+                ),
+            ),
         );
 
         $form->setData($data);
 
         $this->assertEquals(true, $form->isValid());
-        $this->assertEquals($address, $emptyAddress, var_export($address, 1) . "\n\n" . var_export($emptyAddress, 1));
+        $this->assertEquals($address, $emptyAddress, var_export($address, 1)."\n\n".var_export($emptyAddress, 1));
     }
 
     public function testCanCorrectlyExtractDataFromOneToManyRelationship()
@@ -1032,19 +1031,19 @@ class FormTest extends TestCase
                 'price' => 10,
                 'categories' => array(
                     array(
-                        'name' => 'Office'
+                        'name' => 'Office',
                     ),
                     array(
-                        'name' => 'Armchair'
-                    )
-                )
-            )
+                        'name' => 'Armchair',
+                    ),
+                ),
+            ),
         );
 
         $form->setData($data);
 
         $this->assertEquals(true, $form->isValid());
-        $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
+        $this->assertEquals($product, $emptyProduct, var_export($product, 1)."\n\n".var_export($emptyProduct, 1));
     }
 
     public function testCanCorrectlyPopulateOrphanedEntities()
@@ -1058,12 +1057,12 @@ class FormTest extends TestCase
         $data = array(
             'test' => array(
                 array(
-                    'name' => 'Foo'
+                    'name' => 'Foo',
                 ),
                 array(
-                    'name' => 'Bar'
+                    'name' => 'Bar',
                 ),
-            )
+            ),
         );
 
         $form->setData($data);
@@ -1125,7 +1124,7 @@ class FormTest extends TestCase
 
     public function testUnsetValuesNotBound()
     {
-        $model = new stdClass;
+        $model = new stdClass();
         $validSet = array(
             'bar' => 'always valid',
             'foobar' => array(
@@ -1146,7 +1145,7 @@ class FormTest extends TestCase
     public function testRemoveCollectionFromValidationGroupWhenZeroCountAndNoData()
     {
         $dataWithoutCollection = array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         );
         $this->populateForm();
         $this->form->add(array(
@@ -1155,15 +1154,15 @@ class FormTest extends TestCase
             'options' => array(
                 'count' => 0,
                 'target_element' => array(
-                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset'
-                )
-            )
+                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset',
+                ),
+            ),
         ));
         $this->form->setValidationGroup(array(
             'foo',
             'categories' => array(
-                'name'
-            )
+                'name',
+            ),
         ));
         $this->form->setData($dataWithoutCollection);
         $this->assertTrue($this->form->isValid());
@@ -1180,17 +1179,17 @@ class FormTest extends TestCase
             'options' => array(
                 'count' => 0,
                 'target_element' => array(
-                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset'
-                )
-            )
+                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset',
+                ),
+            ),
         ));
 
         $this->form->setValidationGroup(array(
             'foobar' => array(
                 'categories' => array(
-                    'name'
-                )
-            )
+                    'name',
+                ),
+            ),
         ));
 
         $this->form->setData($emptyData);
@@ -1204,9 +1203,9 @@ class FormTest extends TestCase
         $fieldset->setUseAsBaseFieldset(true);
         $this->form->add($fieldset);
         $this->form->setValidationGroup(array(
-            'foobar'=> array(
+            'foobar' => array(
                 'foo',
-            )
+            ),
         ));
 
         $inputFilterFactory = new InputFilterFactory();
@@ -1226,7 +1225,7 @@ class FormTest extends TestCase
         $validSet = array(
             'foobar' => array(
                 'foo' => 'abcde',
-            )
+            ),
         );
         $this->form->setData($validSet);
         $this->assertTrue($this->form->isValid());
@@ -1274,15 +1273,15 @@ class FormTest extends TestCase
                 'count' => 1,
                 'allow_add' => true,
                 'target_element' => array(
-                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset'
-                )
-            )
+                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset',
+                ),
+            ),
         ));
         $this->form->setValidationGroup(array(
             'foo',
             'categories' => array(
-                'name'
-            )
+                'name',
+            ),
         ));
         $this->form->setData($dataWithCollection);
         $this->assertTrue($this->form->isValid());
@@ -1324,7 +1323,7 @@ class FormTest extends TestCase
         $validSet = array(
             'entities' => array(
                 111,
-                333
+                333,
             ),
         );
 
@@ -1374,7 +1373,7 @@ class FormTest extends TestCase
 
     public function testBindWithWrongFlagRaisesException()
     {
-        $model = new stdClass;
+        $model = new stdClass();
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $this->form->bind($model, Form::VALUES_AS_ARRAY);
     }
@@ -1401,17 +1400,17 @@ class FormTest extends TestCase
     {
         $this->form->add(array(
             'type' => 'Zend\Form\Element\Password',
-            'name' => 'password'
+            'name' => 'password',
         ));
 
         $this->form->add(array(
             'type' => 'Zend\Form\Element\Email',
-            'name' => 'email'
+            'name' => 'email',
         ));
 
         $this->form->setData(array(
             'password' => 'azerty',
-            'email'    => 'wrongEmail'
+            'email'    => 'wrongEmail',
         ));
 
         $this->assertFalse($this->form->isValid());
@@ -1424,7 +1423,7 @@ class FormTest extends TestCase
     {
         $fieldset = new Fieldset('example');
         $fieldset->add(array(
-            'name' => 'foo'
+            'name' => 'foo',
         ));
 
         // Add a hydrator that ignores if values does not exist in the
@@ -1438,7 +1437,7 @@ class FormTest extends TestCase
         // Add some inputs that do not belong to the base fieldset
         $this->form->add(array(
             'type' => 'Zend\Form\Element\Submit',
-            'name' => 'submit'
+            'name' => 'submit',
         ));
 
         $object = new Entity\SimplePublicProperty();
@@ -1447,8 +1446,8 @@ class FormTest extends TestCase
         $this->form->setData(array(
             'submit' => 'Confirm',
             'example' => array(
-                'foo' => 'value example'
-            )
+                'foo' => 'value example',
+            ),
         ));
 
         $this->assertTrue($this->form->isValid());
@@ -1464,7 +1463,7 @@ class FormTest extends TestCase
         );
 
         $filteredData = array(
-            'foo' => array(1, 2)
+            'foo' => array(1, 2),
         );
 
         $element = new TestAsset\ElementWithStringToArrayFilter('foo');
@@ -1557,7 +1556,7 @@ class FormTest extends TestCase
     public function testNestedFormElementNameWrapping()
     {
         //build form
-        $rootForm = new Form;
+        $rootForm = new Form();
         $leafForm = new Form('form');
         $element = new Element('element');
         $leafForm->setWrapElements(true);
@@ -1597,7 +1596,7 @@ class FormTest extends TestCase
                 'empty_option' => '',
                 'value_options' => array(
                     'normal' => 'Normal',
-                    'important' => 'Important'
+                    'important' => 'Important',
                 ),
             ),
         ));
@@ -1631,18 +1630,18 @@ class FormTest extends TestCase
                         'options' => array(
                             'use_hidden_element' => true,
                             'checked_value' => '1',
-                            'unchecked_value' => '0'
-                        )
-                    )
-                )
+                            'unchecked_value' => '0',
+                        ),
+                    ),
+                ),
             ),
             'input_filter' => array(
                 'element' => array(
                     'required' => false,
                     'filters' => array(
                         array(
-                            'name' => 'Boolean'
-                        )
+                            'name' => 'Boolean',
+                        ),
                     ),
                     'validators' => array(
                         array(
@@ -1650,13 +1649,13 @@ class FormTest extends TestCase
                             'options' => array(
                                 'haystack' => array(
                                     "0",
-                                    "1"
-                                )
-                            )
-                        )
-                    )
-                )
-            )
+                                    "1",
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         );
 
         $factory = new Factory();
@@ -1783,8 +1782,8 @@ class FormTest extends TestCase
                                 ),
                             ),
                         ),
-                    )
-                )
+                    ),
+                ),
             ),
             'input_filter' => array(
                 'type' => 'Zend\InputFilter\InputFilter',
@@ -1881,7 +1880,7 @@ class FormTest extends TestCase
                 'empty_option' => '',
                 'value_options' => array(
                     'normal' => 'Normal',
-                    'important' => 'Important'
+                    'important' => 'Important',
                 ),
             ),
         ));
@@ -1894,7 +1893,7 @@ class FormTest extends TestCase
         )));
 
         $data = array(
-            'importance' => 'unimporant'
+            'importance' => 'unimporant',
         );
 
         $this->form->setInputFilter($inputFilter);
@@ -1908,11 +1907,11 @@ class FormTest extends TestCase
     }
 
     /**
-     * @param bool $expectedIsValid
-     * @param array $expectedFormData
-     * @param array $data
+     * @param bool   $expectedIsValid
+     * @param array  $expectedFormData
+     * @param array  $data
      * @param string $unselectedValue
-     * @param bool $useHiddenElement
+     * @param bool   $useHiddenElement
      * @dataProvider formWithSelectMultipleAndEmptyUnselectedValueDataProvider
      */
     public function testFormWithSelectMultipleAndEmptyUnselectedValue(
@@ -1932,7 +1931,7 @@ class FormTest extends TestCase
                 'unselected_value' => $unselectedValue,
                 'value_options' => array(
                     'foo' => 'Foo',
-                    'bar' => 'Bar'
+                    'bar' => 'Bar',
                 ),
             ),
         ));
@@ -1955,42 +1954,42 @@ class FormTest extends TestCase
                 array('multipleSelect' => array('foo')),
                 array('multipleSelect' => array('foo')),
                 '',
-                true
+                true,
             ),
             array(
                 true,
                 array('multipleSelect' => array()),
                 array('multipleSelect' => ''),
                 '',
-                true
+                true,
             ),
             array(
                 true,
                 array('multipleSelect' => array()),
                 array('multipleSelect' => 'empty'),
                 'empty',
-                true
+                true,
             ),
             array(
                 false,
                 array('multipleSelect' => ''),
                 array('multipleSelect' => ''),
                 'empty',
-                true
+                true,
             ),
             array(
                 false,
                 array('multipleSelect' => ''),
                 array('multipleSelect' => ''),
                 '',
-                false
+                false,
             ),
             array(
                 true,
                 array('multipleSelect' => array()),
                 array('multipleSelect' => 'foo'),
                 'foo',
-                true
+                true,
             ),
         );
     }
@@ -2000,8 +1999,8 @@ class FormTest extends TestCase
         $spec = array(
             'name' => 'test',
             'options' => array(
-                'use_input_filter_defaults' => false
-            )
+                'use_input_filter_defaults' => false,
+            ),
         );
 
         $factory = new Factory();
@@ -2009,14 +2008,12 @@ class FormTest extends TestCase
         $this->assertFalse($this->form->useInputFilterDefaults());
     }
 
-
-
     /**
      * Error test for https://github.com/zendframework/zf2/issues/6363 comment #1
      */
     public function testSetValidationGroupOnFormWithNestedCollectionsRaisesInvalidArgumentException()
     {
-        $this->form = new TestAsset\NestedCollectionsForm;
+        $this->form = new TestAsset\NestedCollectionsForm();
 
         $data = array(
             'testFieldset' => array(
@@ -2054,13 +2051,12 @@ class FormTest extends TestCase
         $this->assertEquals($data, $this->form->getData());
     }
 
-
     /**
      * Test for https://github.com/zendframework/zf2/issues/6363 comment #2
      */
     public function testSetValidationGroupOnFormWithNestedCollectionsPopulatesOnlyFirstNestedCollectionElement()
     {
-        $this->form = new TestAsset\NestedCollectionsForm;
+        $this->form = new TestAsset\NestedCollectionsForm();
 
         $data = array(
             'testFieldset' => array(

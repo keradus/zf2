@@ -32,13 +32,13 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
                 'errno' => 1,
                 'file'  => 'test.php',
                 'line'  => 1,
-                'context' => array('object' => new DateTime(), 'string' => 'test')
-            )
+                'context' => array('object' => new DateTime(), 'string' => 'test'),
+            ),
         );
         $formatter = new ErrorHandler();
         $output = $formatter->format($event);
 
-        $this->assertEquals($date->format('c') . ' CRIT (1) test (errno 1) in test.php on line 1', $output);
+        $this->assertEquals($date->format('c').' CRIT (1) test (errno 1) in test.php on line 1', $output);
     }
 
     public function testSetDateTimeFormat()
@@ -68,14 +68,14 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
                                 'object2' => new NotStringObject(),
                                 'string' => 'test1',
                                 'array' => array(
-                                        'key' => 'test2'
-                                )
-                        )
-                )
+                                        'key' => 'test2',
+                                ),
+                        ),
+                ),
         );
         $formatString = '%extra[context][object1]% %extra[context][object2]% %extra[context][string]% %extra[context][array]% %extra[context][array][key]%';
         $formatter = new ErrorHandler($formatString);
         $output = $formatter->format($event);
-        $this->assertEquals($stringObject->__toString() .' %extra[context][object2]% test1 %extra[context][array]% test2', $output);
+        $this->assertEquals($stringObject->__toString().' %extra[context][object2]% test1 %extra[context][array]% test2', $output);
     }
 }

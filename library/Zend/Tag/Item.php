@@ -42,13 +42,13 @@ class Item implements TaggableInterface
      */
     protected $skipOptions = array(
         'options',
-        'param'
+        'param',
     );
 
     /**
      * Create a new tag according to the options
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                            $options
      * @throws \Zend\Tag\Exception\InvalidArgumentException When invalid options are provided
      * @throws \Zend\Tag\Exception\InvalidArgumentException When title was not set
      * @throws \Zend\Tag\Exception\InvalidArgumentException When weight was not set
@@ -77,7 +77,7 @@ class Item implements TaggableInterface
     /**
      * Set options of the tag
      *
-     * @param  array $options
+     * @param  array          $options
      * @return \Zend\Tag\Item
      */
     public function setOptions(array $options)
@@ -87,7 +87,7 @@ class Item implements TaggableInterface
                 continue;
             }
 
-            $method = 'set' . $key;
+            $method = 'set'.$key;
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -109,7 +109,7 @@ class Item implements TaggableInterface
     /**
      * Set the title
      *
-     * @param  string $title
+     * @param  string                                       $title
      * @throws \Zend\Tag\Exception\InvalidArgumentException When title is no string
      * @return \Zend\Tag\Item
      */
@@ -120,6 +120,7 @@ class Item implements TaggableInterface
         }
 
         $this->title = (string) $title;
+
         return $this;
     }
 
@@ -136,7 +137,7 @@ class Item implements TaggableInterface
     /**
      * Set the weight
      *
-     * @param  float $weight
+     * @param  float                                        $weight
      * @throws \Zend\Tag\Exception\InvalidArgumentException When weight is not numeric
      * @return \Zend\Tag\Item
      */
@@ -147,13 +148,14 @@ class Item implements TaggableInterface
         }
 
         $this->weight = (float) $weight;
+
         return $this;
     }
 
     /**
      * Set multiple params at once
      *
-     * @param  array $params
+     * @param  array          $params
      * @return \Zend\Tag\Item
      */
     public function setParams(array $params)
@@ -168,13 +170,14 @@ class Item implements TaggableInterface
     /**
      * Defined by Zend\Tag\TaggableInterface
      *
-     * @param  string $name
-     * @param  mixed  $value
+     * @param  string         $name
+     * @param  mixed          $value
      * @return \Zend\Tag\Item
      */
     public function setParam($name, $value)
     {
         $this->params[$name] = $value;
+
         return $this;
     }
 
@@ -189,6 +192,7 @@ class Item implements TaggableInterface
         if (isset($this->params[$name])) {
             return $this->params[$name];
         }
+
         return;
     }
 }

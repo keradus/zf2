@@ -29,7 +29,7 @@ abstract class AbstractLengthColumn extends Column
     }
 
     /**
-     * @param  int $length
+     * @param int $length
      *
      * @return self
      */
@@ -64,7 +64,7 @@ abstract class AbstractLengthColumn extends Column
         $data = parent::getExpressionData();
 
         if ($this->getLengthExpression()) {
-            $data[0][1][1] .= '(' . $this->getLengthExpression() . ')';
+            $data[0][1][1] .= '('.$this->getLengthExpression().')';
         }
 
         return $data;

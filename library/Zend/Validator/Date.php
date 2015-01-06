@@ -58,7 +58,7 @@ class Date extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array|Traversable $options OPTIONAL
+     * @param string|array|Traversable $options OPTIONAL
      */
     public function __construct($options = array())
     {
@@ -90,12 +90,13 @@ class Date extends AbstractValidator
      * if null is provided.
      *
      * @param  string $format
-     * @return Date provides a fluent interface
+     * @return Date   provides a fluent interface
      * @todo   validate the format
      */
     public function setFormat($format = self::FORMAT_DEFAULT)
     {
         $this->format = (empty($format)) ? self::FORMAT_DEFAULT : $format;
+
         return $this;
     }
 
@@ -111,6 +112,7 @@ class Date extends AbstractValidator
 
         if (!$this->convertToDateTime($value)) {
             $this->error(self::INVALID_DATE);
+
             return false;
         }
 
@@ -135,17 +137,19 @@ class Date extends AbstractValidator
             if ($addErrors) {
                 $this->error(self::INVALID);
             }
+
             return false;
         }
 
-        $convertMethod = 'convert' . ucfirst($type);
+        $convertMethod = 'convert'.ucfirst($type);
+
         return $this->{$convertMethod}($param, $addErrors);
     }
 
     /**
      * Attempts to convert an integer into a DateTime object
      *
-     * @param  integer $value
+     * @param  integer       $value
      * @return bool|DateTime
      */
     protected function convertInteger($value)
@@ -156,8 +160,8 @@ class Date extends AbstractValidator
     /**
      * Attempts to convert a string into a DateTime object
      *
-     * @param  string $value
-     * @param  bool   $addErrors
+     * @param  string        $value
+     * @param  bool          $addErrors
      * @return bool|DateTime
      */
     protected function convertString($value, $addErrors = true)
@@ -171,6 +175,7 @@ class Date extends AbstractValidator
             if ($addErrors) {
                 $this->error(self::FALSEFORMAT);
             }
+
             return false;
         }
 
@@ -180,8 +185,8 @@ class Date extends AbstractValidator
     /**
      * Implodes the array into a string and proxies to {@link convertString()}.
      *
-     * @param  array $value
-     * @param  bool  $addErrors
+     * @param  array         $value
+     * @param  bool          $addErrors
      * @return bool|DateTime
      * @todo   enhance the implosion
      */

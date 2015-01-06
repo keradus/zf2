@@ -54,7 +54,7 @@ class Forward extends AbstractPlugin
     /**
      * Set maximum number of nested forwards allowed
      *
-     * @param  int $maxNestedForwards
+     * @param  int  $maxNestedForwards
      * @return self
      */
     public function setMaxNestedForwards($maxNestedForwards)
@@ -88,13 +88,14 @@ class Forward extends AbstractPlugin
                 'class' => 'Zend\Mvc\View\Http\InjectViewModelListener',
             ));
         }
+
         return $this->listenersToDetach;
     }
 
     /**
      * Set information on listeners that need to be detached before dispatching.
      *
-     * @param  array $listeners Listener information; see getListenersToDetach() for details on format.
+     * @param array $listeners Listener information; see getListenersToDetach() for details on format.
      *
      * @return self
      */
@@ -108,11 +109,11 @@ class Forward extends AbstractPlugin
     /**
      * Dispatch another controller
      *
-     * @param  string $name Controller name; either a class name or an alias used in the controller manager
-     * @param  null|array $params Parameters with which to seed a custom RouteMatch object for the new controller
+     * @param  string                    $name   Controller name; either a class name or an alias used in the controller manager
+     * @param  null|array                $params Parameters with which to seed a custom RouteMatch object for the new controller
      * @return mixed
      * @throws Exception\DomainException if composed controller does not define InjectApplicationEventInterface
-     *         or Locator aware; or if the discovered controller is not dispatchable
+     *                                          or Locator aware; or if the discovered controller is not dispatchable
      */
     public function dispatch($name, array $params = null)
     {

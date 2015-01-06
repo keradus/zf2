@@ -39,7 +39,7 @@ abstract class AbstractMessage extends Message
      * Set the HTTP version for this object, one of 1.0 or 1.1
      * (AbstractMessage::VERSION_10, AbstractMessage::VERSION_11)
      *
-     * @param  string $version (Must be 1.0 or 1.1)
+     * @param  string                             $version (Must be 1.0 or 1.1)
      * @return AbstractMessage
      * @throws Exception\InvalidArgumentException
      */
@@ -47,10 +47,11 @@ abstract class AbstractMessage extends Message
     {
         if ($version != self::VERSION_10 && $version != self::VERSION_11) {
             throw new Exception\InvalidArgumentException(
-                'Not valid or not supported HTTP version: ' . $version
+                'Not valid or not supported HTTP version: '.$version
             );
         }
         $this->version = $version;
+
         return $this;
     }
 
@@ -69,12 +70,13 @@ abstract class AbstractMessage extends Message
      * (this is NOT the primary API for value setting, for that see getHeaders())
      *
      * @see    getHeaders()
-     * @param  Headers $headers
+     * @param  Headers         $headers
      * @return AbstractMessage
      */
     public function setHeaders(Headers $headers)
     {
         $this->headers = $headers;
+
         return $this;
     }
 

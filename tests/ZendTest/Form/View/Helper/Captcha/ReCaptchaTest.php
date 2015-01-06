@@ -39,6 +39,7 @@ class ReCaptchaTest extends CommonTestCase
     {
         $element = new CaptchaElement('foo');
         $element->setCaptcha($this->captcha);
+
         return $element;
     }
 
@@ -54,16 +55,16 @@ class ReCaptchaTest extends CommonTestCase
     {
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
-        $this->assertRegExp('#(type="hidden").*?(name="' . $element->getName() . '\[recaptcha_challenge_field\]")#', $markup);
-        $this->assertRegExp('#(type="hidden").*?(id="' . $element->getName() . '-challenge")#', $markup);
+        $this->assertRegExp('#(type="hidden").*?(name="'.$element->getName().'\[recaptcha_challenge_field\]")#', $markup);
+        $this->assertRegExp('#(type="hidden").*?(id="'.$element->getName().'-challenge")#', $markup);
     }
 
     public function testRendersHiddenInputForResponseField()
     {
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
-        $this->assertRegExp('#(type="hidden").*?(name="' . $element->getName() . '\[recaptcha_response_field\]")#', $markup);
-        $this->assertRegExp('#(type="hidden").*?(id="' . $element->getName() . '-response")#', $markup);
+        $this->assertRegExp('#(type="hidden").*?(name="'.$element->getName().'\[recaptcha_response_field\]")#', $markup);
+        $this->assertRegExp('#(type="hidden").*?(id="'.$element->getName().'-response")#', $markup);
     }
 
     public function testRendersReCaptchaMarkup()
@@ -78,7 +79,7 @@ class ReCaptchaTest extends CommonTestCase
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
         $this->assertContains('function zendBindEvent', $markup);
-        $this->assertContains('document.getElementById("' . $element->getName() . '-challenge")', $markup);
-        $this->assertContains('document.getElementById("' . $element->getName() . '-response")', $markup);
+        $this->assertContains('document.getElementById("'.$element->getName().'-challenge")', $markup);
+        $this->assertContains('document.getElementById("'.$element->getName().'-response")', $markup);
     }
 }

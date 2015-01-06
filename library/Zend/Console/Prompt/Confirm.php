@@ -39,9 +39,9 @@ class Confirm extends Char
     /**
      * Ask the user for a single key stroke
      *
-     * @param string    $promptText     The prompt text to display in console
-     * @param string    $yesChar        The "yes" key (defaults to Y)
-     * @param string    $noChar         The "no" key (defaults to N)
+     * @param string $promptText The prompt text to display in console
+     * @param string $yesChar    The "yes" key (defaults to Y)
+     * @param string $noChar     The "no" key (defaults to N)
      */
     public function __construct(
         $promptText = 'Are you sure?',
@@ -74,6 +74,7 @@ class Confirm extends Char
         } else {
             $response = $char === $this->yesChar;
         }
+
         return $this->lastResponse = $response;
     }
 
@@ -83,7 +84,7 @@ class Confirm extends Char
     public function setNoChar($noChar)
     {
         $this->noChar = $noChar;
-        $this->setAllowedChars($this->yesChar . $this->noChar);
+        $this->setAllowedChars($this->yesChar.$this->noChar);
     }
 
     /**
@@ -100,7 +101,7 @@ class Confirm extends Char
     public function setYesChar($yesChar)
     {
         $this->yesChar = $yesChar;
-        $this->setAllowedChars($this->yesChar . $this->noChar);
+        $this->setAllowedChars($this->yesChar.$this->noChar);
     }
 
     /**

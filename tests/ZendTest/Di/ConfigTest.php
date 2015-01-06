@@ -18,7 +18,7 @@ class ConfigTest extends TestCase
 {
     public function testConfigCanConfigureInstanceManagerWithIniFile()
     {
-        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-a');
+        $ini = ConfigFactory::fromFile(__DIR__.'/_files/sample.ini', true)->get('section-a');
         $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
@@ -52,7 +52,7 @@ class ConfigTest extends TestCase
     public function testConfigCanConfigureBuilderDefinitionFromIni()
     {
         $this->markTestIncomplete('Builder not updated to new DI yet');
-        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-b');
+        $ini = ConfigFactory::fromFile(__DIR__.'/_files/sample.ini', true)->get('section-b');
         $config = new Config($ini->di);
         $di = new Di($config);
         $definition = $di->getDefinition();
@@ -81,7 +81,7 @@ class ConfigTest extends TestCase
 
     public function testConfigCanConfigureRuntimeDefinitionDefaultFromIni()
     {
-        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-c');
+        $ini = ConfigFactory::fromFile(__DIR__.'/_files/sample.ini', true)->get('section-c');
         $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
@@ -92,7 +92,7 @@ class ConfigTest extends TestCase
 
     public function testConfigCanConfigureRuntimeDefinitionDisabledFromIni()
     {
-        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-d');
+        $ini = ConfigFactory::fromFile(__DIR__.'/_files/sample.ini', true)->get('section-d');
         $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
@@ -102,7 +102,7 @@ class ConfigTest extends TestCase
 
     public function testConfigCanConfigureRuntimeDefinitionUseAnnotationFromIni()
     {
-        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-e');
+        $ini = ConfigFactory::fromFile(__DIR__.'/_files/sample.ini', true)->get('section-e');
         $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
@@ -112,7 +112,7 @@ class ConfigTest extends TestCase
 
     public function testConfigCanConfigureCompiledDefinition()
     {
-        $config = ConfigFactory::fromFile(__DIR__ . '/_files/sample.php', true);
+        $config = ConfigFactory::fromFile(__DIR__.'/_files/sample.php', true);
         $config = new Config($config->di);
         $di = new Di();
         $di->configure($config);

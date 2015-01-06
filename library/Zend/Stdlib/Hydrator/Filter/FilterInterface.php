@@ -6,6 +6,7 @@
  * @copyright      Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license        http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Stdlib\Hydrator\Filter;
 
 interface FilterInterface
@@ -14,7 +15,7 @@ interface FilterInterface
      * Should return true, if the given filter
      * does not match
      *
-     * @param string $property The name of the property
+     * @param  string $property The name of the property
      * @return bool
      */
     public function filter($property);

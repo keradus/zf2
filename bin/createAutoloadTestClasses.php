@@ -7,7 +7,6 @@
  * generated 2 levels deep, giving a total of 16^3 classes to use in
  * autoloading tests.
  */
-
 function createClasses($depth, $namespace)
 {
     foreach (range('a', 'p') as $letter) {
@@ -17,16 +16,16 @@ function createClasses($depth, $namespace)
         // Write content to disk
         $dir = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
         file_put_contents(
-            $dir . DIRECTORY_SEPARATOR . $letter . '.php',
+            $dir.DIRECTORY_SEPARATOR.$letter.'.php',
             $content
         );
 
         // If we still have depth, recurse and create more classes using the
         // current letter as a sub-namespace.
         if ($depth > 0) {
-            $childDir = $dir . DIRECTORY_SEPARATOR . $letter;
+            $childDir = $dir.DIRECTORY_SEPARATOR.$letter;
             mkdir($childDir);
-            createClasses($depth - 1, $namespace . '\\' . $letter);
+            createClasses($depth - 1, $namespace.'\\'.$letter);
         }
     }
 }

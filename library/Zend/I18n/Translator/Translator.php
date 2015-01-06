@@ -420,10 +420,10 @@ class Translator implements TranslatorInterface
      * Get a translated message.
      *
      * @triggers getTranslatedMessage.missing-translation
-     * @param    string $message
-     * @param    string $locale
-     * @param    string $textDomain
-     * @return   string|null
+     * @param  string      $message
+     * @param  string      $locale
+     * @param  string      $textDomain
+     * @return string|null
      */
     protected function getTranslatedMessage(
         $message,
@@ -543,10 +543,10 @@ class Translator implements TranslatorInterface
      * Load messages for a given language and domain.
      *
      * @triggers loadMessages.no-messages-loaded
-     * @param    string $textDomain
-     * @param    string $locale
-     * @throws   Exception\RuntimeException
-     * @return   void
+     * @param  string                     $textDomain
+     * @param  string                     $locale
+     * @throws Exception\RuntimeException
+     * @return void
      */
     protected function loadMessages($textDomain, $locale)
     {
@@ -555,7 +555,7 @@ class Translator implements TranslatorInterface
         }
 
         if (null !== ($cache = $this->getCache())) {
-            $cacheId = 'Zend_I18n_Translator_Messages_' . md5($textDomain . $locale);
+            $cacheId = 'Zend_I18n_Translator_Messages_'.md5($textDomain.$locale);
 
             if (null !== ($result = $cache->getItem($cacheId))) {
                 $this->messages[$textDomain][$locale] = $result;
@@ -601,8 +601,8 @@ class Translator implements TranslatorInterface
     /**
      * Load messages from remote sources.
      *
-     * @param  string $textDomain
-     * @param  string $locale
+     * @param  string                     $textDomain
+     * @param  string                     $locale
      * @return bool
      * @throws Exception\RuntimeException When specified loader is not a remote loader
      */
@@ -634,8 +634,8 @@ class Translator implements TranslatorInterface
     /**
      * Load messages from patterns.
      *
-     * @param  string $textDomain
-     * @param  string $locale
+     * @param  string                     $textDomain
+     * @param  string                     $locale
      * @return bool
      * @throws Exception\RuntimeException When specified loader is not a file loader
      */
@@ -645,7 +645,7 @@ class Translator implements TranslatorInterface
 
         if (isset($this->patterns[$textDomain])) {
             foreach ($this->patterns[$textDomain] as $pattern) {
-                $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
+                $filename = $pattern['baseDir'].'/'.sprintf($pattern['pattern'], $locale);
 
                 if (is_file($filename)) {
                     $loader = $this->getPluginManager()->get($pattern['type']);
@@ -671,8 +671,8 @@ class Translator implements TranslatorInterface
     /**
      * Load messages from files.
      *
-     * @param  string $textDomain
-     * @param  string $locale
+     * @param  string                     $textDomain
+     * @param  string                     $locale
      * @return bool
      * @throws Exception\RuntimeException When specified loader is not a file loader
      */
@@ -735,6 +735,7 @@ class Translator implements TranslatorInterface
             'translator',
         ));
         $this->events = $events;
+
         return $this;
     }
 
@@ -756,6 +757,7 @@ class Translator implements TranslatorInterface
     public function enableEventManager()
     {
         $this->eventsEnabled = true;
+
         return $this;
     }
 
@@ -767,6 +769,7 @@ class Translator implements TranslatorInterface
     public function disableEventManager()
     {
         $this->eventsEnabled = false;
+
         return $this;
     }
 }

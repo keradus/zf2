@@ -24,7 +24,7 @@ class ZendMonitorTest extends \PHPUnit_Framework_TestCase
         $writer = new ZendMonitor();
         $writer->write(array(
             'message' => 'my mess',
-            'priority' => 1
+            'priority' => 1,
         ));
     }
 

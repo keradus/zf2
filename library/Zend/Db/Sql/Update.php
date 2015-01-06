@@ -32,7 +32,7 @@ class Update extends AbstractPreparableSql
 
     protected $specifications = array(
         self::SPECIFICATION_UPDATE => 'UPDATE %1$s SET %2$s',
-        self::SPECIFICATION_WHERE => 'WHERE %1$s'
+        self::SPECIFICATION_WHERE => 'WHERE %1$s',
     );
 
     /**
@@ -58,7 +58,7 @@ class Update extends AbstractPreparableSql
     /**
      * Constructor
      *
-     * @param  null|string|TableIdentifier $table
+     * @param null|string|TableIdentifier $table
      */
     public function __construct($table = null)
     {
@@ -79,14 +79,15 @@ class Update extends AbstractPreparableSql
     public function table($table)
     {
         $this->table = $table;
+
         return $this;
     }
 
     /**
      * Set key/value pairs to update
      *
-     * @param  array $values Associative array of key values
-     * @param  string $flag One of the VALUES_* constants
+     * @param  array                              $values Associative array of key values
+     * @param  string                             $flag   One of the VALUES_* constants
      * @throws Exception\InvalidArgumentException
      * @return Update
      */
@@ -106,14 +107,15 @@ class Update extends AbstractPreparableSql
             }
             $this->set->insert($k, $v, $priority);
         }
+
         return $this;
     }
 
     /**
      * Create where clause
      *
-     * @param  Where|\Closure|string|array $predicate
-     * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     * @param  Where|\Closure|string|array        $predicate
+     * @param  string                             $combination One of the OP_* constants from Predicate\PredicateSet
      * @throws Exception\InvalidArgumentException
      * @return Update
      */
@@ -124,6 +126,7 @@ class Update extends AbstractPreparableSql
         } else {
             $this->where->addPredicates($predicate, $combination);
         }
+
         return $this;
     }
 
@@ -133,8 +136,9 @@ class Update extends AbstractPreparableSql
             'emptyWhereProtection' => $this->emptyWhereProtection,
             'table' => $this->table,
             'set' => $this->set->toArray(),
-            'where' => $this->where
+            'where' => $this->where,
         );
+
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
@@ -142,12 +146,12 @@ class Update extends AbstractPreparableSql
     {
         $setSql = array();
         foreach ($this->set as $column => $value) {
-            $prefix = $platform->quoteIdentifier($column) . ' = ';
+            $prefix = $platform->quoteIdentifier($column).' = ';
             if (is_scalar($value) && $parameterContainer) {
-                $setSql[] = $prefix . $driver->formatParameterName($column);
+                $setSql[] = $prefix.$driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $value);
             } else {
-                $setSql[] = $prefix . $this->resolveColumnValue(
+                $setSql[] = $prefix.$this->resolveColumnValue(
                     $value,
                     $platform,
                     $driver,
@@ -168,6 +172,7 @@ class Update extends AbstractPreparableSql
         if ($this->where->count() == 0) {
             return;
         }
+
         return sprintf(
             $this->specifications[static::SPECIFICATION_WHERE],
             $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where')

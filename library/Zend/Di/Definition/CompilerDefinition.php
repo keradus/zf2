@@ -155,7 +155,7 @@ class CompilerDefinition implements DefinitionInterface
             'supertypes'   => array(),
             'instantiator' => null,
             'methods'      => array(),
-            'parameters'   => array()
+            'parameters'   => array(),
         );
 
         $def = &$this->classes[$className]; // localize for brevity
@@ -284,13 +284,13 @@ class CompilerDefinition implements DefinitionInterface
         foreach ($rMethod->getParameters() as $p) {
             /** @var $p \ReflectionParameter  */
             $actualParamName = $p->getName();
-            $fqName = $rClass->getName() . '::' . $rMethod->getName() . ':' . $p->getPosition();
+            $fqName = $rClass->getName().'::'.$rMethod->getName().':'.$p->getPosition();
             $def['parameters'][$methodName][$fqName] = array();
 
             // set the class name, if it exists
             $def['parameters'][$methodName][$fqName][] = $actualParamName;
             $def['parameters'][$methodName][$fqName][] = ($p->getClass() !== null) ? $p->getClass()->getName() : null;
-            $def['parameters'][$methodName][$fqName][] = !($optional =$p->isOptional());
+            $def['parameters'][$methodName][$fqName][] = !($optional = $p->isOptional());
             $def['parameters'][$methodName][$fqName][] = $optional && $p->isDefaultValueAvailable() ? $p->getDefaultValue() : null;
         }
     }

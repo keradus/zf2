@@ -38,21 +38,21 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
         $config = array(
             'MyModule' => array(
                 'foo' => array(
-                    'bar'
-                )
+                    'bar',
+                ),
             ),
             'phly-blog' => array(
                 'foo' => array(
-                    'bar'
-                )
-            )
+                    'bar',
+                ),
+            ),
         );
 
         $sm = $this->serviceManager = new ServiceManager\ServiceManager(
             new ServiceManagerConfig(array(
             'abstract_factories' => array(
                 'Zend\Config\AbstractConfigFactory',
-            )
+            ),
             ))
         );
 

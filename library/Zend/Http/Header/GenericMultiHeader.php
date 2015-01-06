@@ -20,9 +20,11 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeaderInterfac
             foreach (explode(',', $fieldValue) as $multiValue) {
                 $headers[] = new static($fieldName, $multiValue);
             }
+
             return $headers;
         } else {
             $header = new static($fieldName, $fieldValue);
+
             return $header;
         }
     }
@@ -37,6 +39,7 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeaderInterfac
             }
             $values[] = $header->getFieldValue();
         }
-        return $name . ': ' . implode(',', $values) . "\r\n";
+
+        return $name.': '.implode(',', $values)."\r\n";
     }
 }

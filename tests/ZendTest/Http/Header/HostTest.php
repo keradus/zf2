@@ -44,5 +44,5 @@ class HostTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Host: xxx', $hostHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

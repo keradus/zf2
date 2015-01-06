@@ -41,7 +41,7 @@ interface SaveHandlerInterface
      * Write Session - commit data to resource
      *
      * @param string $id
-     * @param mixed $data
+     * @param mixed  $data
      */
     public function write($id, $data);
 

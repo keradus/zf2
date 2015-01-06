@@ -33,7 +33,7 @@ class Part
      * The (unencoded) content of the Part as passed
      * as a string or stream
      *
-     * @param mixed $content  String or Stream containing the content
+     * @param mixed $content String or Stream containing the content
      */
     public function __construct($content)
     {
@@ -66,7 +66,7 @@ class Part
      * if this was created with a stream, return a filtered stream for
      * reading the content. very useful for large file attachments.
      *
-     * @param string $EOL
+     * @param  string                     $EOL
      * @return resource
      * @throws Exception\RuntimeException if not a stream or unable to append filter
      */
@@ -88,7 +88,7 @@ class Part
                     STREAM_FILTER_READ,
                     array(
                         'line-length'      => 76,
-                        'line-break-chars' => $EOL
+                        'line-break-chars' => $EOL,
                     )
                 );
                 $this->filters[Mime::ENCODING_QUOTEDPRINTABLE] = $filter;
@@ -106,7 +106,7 @@ class Part
                     STREAM_FILTER_READ,
                     array(
                         'line-length'      => 76,
-                        'line-break-chars' => $EOL
+                        'line-break-chars' => $EOL,
                     )
                 );
                 $this->filters[Mime::ENCODING_BASE64] = $filter;
@@ -116,13 +116,14 @@ class Part
                 break;
             default:
         }
+
         return $this->content;
     }
 
     /**
      * Get the Content of the current Mime Part in the given encoding.
      *
-     * @param string $EOL
+     * @param  string $EOL
      * @return string
      */
     public function getContent($EOL = Mime::LINEEND)
@@ -138,6 +139,7 @@ class Part
 
             return $encodedStreamContents;
         }
+
         return Mime::encode($this->content, $this->encoding, $EOL);
     }
 
@@ -150,6 +152,7 @@ class Part
         if ($this->isStream) {
             return stream_get_contents($this->content);
         }
+
         return $this->content;
     }
 
@@ -157,7 +160,7 @@ class Part
      * Create and return the array of headers for this MIME part
      *
      * @access public
-     * @param string $EOL
+     * @param  string $EOL
      * @return array
      */
     public function getHeadersArray($EOL = Mime::LINEEND)
@@ -166,12 +169,12 @@ class Part
 
         $contentType = $this->type;
         if ($this->charset) {
-            $contentType .= '; charset=' . $this->charset;
+            $contentType .= '; charset='.$this->charset;
         }
 
         if ($this->boundary) {
-            $contentType .= ';' . $EOL
-                          . " boundary=\"" . $this->boundary . '"';
+            $contentType .= ';'.$EOL
+                          ." boundary=\"".$this->boundary.'"';
         }
 
         $headers[] = array('Content-Type', $contentType);
@@ -181,13 +184,13 @@ class Part
         }
 
         if ($this->id) {
-            $headers[]  = array('Content-ID', '<' . $this->id . '>');
+            $headers[]  = array('Content-ID', '<'.$this->id.'>');
         }
 
         if ($this->disposition) {
             $disposition = $this->disposition;
             if ($this->filename) {
-                $disposition .= '; filename="' . $this->filename . '"';
+                $disposition .= '; filename="'.$this->filename.'"';
             }
             $headers[] = array('Content-Disposition', $disposition);
         }
@@ -210,14 +213,14 @@ class Part
     /**
      * Return the headers for this part as a string
      *
-     * @param string $EOL
+     * @param  string $EOL
      * @return String
      */
     public function getHeaders($EOL = Mime::LINEEND)
     {
         $res = '';
         foreach ($this->getHeadersArray($EOL) as $header) {
-            $res .= $header[0] . ': ' . $header[1] . $EOL;
+            $res .= $header[0].': '.$header[1].$EOL;
         }
 
         return $res;

@@ -128,7 +128,7 @@ class DefaultRendereringStrategyTest extends TestCase
     public function testTriggersRenderErrorEventInCaseOfRenderingException()
     {
         $resolver = new TemplateMapResolver();
-        $resolver->add('exception', __DIR__ . '/_files/exception.phtml');
+        $resolver->add('exception', __DIR__.'/_files/exception.phtml');
         $this->renderer->setResolver($resolver);
 
         $strategy = new PhpRendererStrategy($this->renderer);
@@ -146,6 +146,7 @@ class DefaultRendereringStrategyTest extends TestCase
             $sharedEvents = $services->get('SharedEventManager');
             $events = new EventManager();
             $events->setSharedManager($sharedEvents);
+
             return $events;
         }, false);
 

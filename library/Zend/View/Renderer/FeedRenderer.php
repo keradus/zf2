@@ -47,7 +47,7 @@ class FeedRenderer implements RendererInterface
      * Set the resolver used to map a template name to a resource the renderer may consume.
      *
      * @todo   Determine use case for resolvers for feeds
-     * @param  Resolver $resolver
+     * @param  Resolver     $resolver
      * @return FeedRenderer
      */
     public function setResolver(Resolver $resolver)
@@ -59,10 +59,10 @@ class FeedRenderer implements RendererInterface
      * Renders values as JSON
      *
      * @todo   Determine what use case exists for accepting only $nameOrModel
-     * @param  string|Model $nameOrModel The script/resource process, or a view model
-     * @param  null|array|\ArrayAccess $values Values to use during rendering
+     * @param  string|Model                       $nameOrModel The script/resource process, or a view model
+     * @param  null|array|\ArrayAccess            $values      Values to use during rendering
      * @throws Exception\InvalidArgumentException
-     * @return string The script output.
+     * @return string                             The script output.
      */
     public function render($nameOrModel, $values = null)
     {
@@ -108,7 +108,7 @@ class FeedRenderer implements RendererInterface
     /**
      * Set feed type ('rss' or 'atom')
      *
-     * @param  string $feedType
+     * @param  string                             $feedType
      * @throws Exception\InvalidArgumentException
      * @return FeedRenderer
      */
@@ -123,6 +123,7 @@ class FeedRenderer implements RendererInterface
         }
 
         $this->feedType = $feedType;
+
         return $this;
     }
 

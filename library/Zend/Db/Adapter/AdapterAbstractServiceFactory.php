@@ -28,8 +28,8 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
      * Can we create an adapter by the requested name?
      *
      * @param  ServiceLocatorInterface $services
-     * @param  string $name
-     * @param  string $requestedName
+     * @param  string                  $name
+     * @param  string                  $requestedName
      * @return bool
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
@@ -50,13 +50,14 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
      * Create a DB adapter
      *
      * @param  ServiceLocatorInterface $services
-     * @param  string $name
-     * @param  string $requestedName
+     * @param  string                  $name
+     * @param  string                  $requestedName
      * @return Adapter
      */
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
         $config = $this->getConfig($services);
+
         return new Adapter($config[$requestedName]);
     }
 
@@ -74,6 +75,7 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
 
         if (!$services->has('Config')) {
             $this->config = array();
+
             return $this->config;
         }
 
@@ -82,6 +84,7 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
             || !is_array($config['db'])
         ) {
             $this->config = array();
+
             return $this->config;
         }
 
@@ -90,10 +93,12 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
             || !is_array($config['adapters'])
         ) {
             $this->config = array();
+
             return $this->config;
         }
 
         $this->config = $config['adapters'];
+
         return $this->config;
     }
 }

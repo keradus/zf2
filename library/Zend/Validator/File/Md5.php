@@ -56,11 +56,12 @@ class Md5 extends Hash
      * Sets the md5 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return Hash Provides a fluent interface
+     * @return Hash         Provides a fluent interface
      */
     public function setMd5($options)
     {
         $this->setHash($options);
+
         return $this;
     }
 
@@ -68,11 +69,12 @@ class Md5 extends Hash
      * Adds the md5 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return Hash Provides a fluent interface
+     * @return Hash         Provides a fluent interface
      */
     public function addMd5($options)
     {
         $this->addHash($options);
+
         return $this;
     }
 
@@ -106,6 +108,7 @@ class Md5 extends Hash
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+
             return false;
         }
 
@@ -113,6 +116,7 @@ class Md5 extends Hash
         $filehash = hash_file('md5', $file);
         if ($filehash === false) {
             $this->error(self::NOT_DETECTED);
+
             return false;
         }
 
@@ -123,6 +127,7 @@ class Md5 extends Hash
         }
 
         $this->error(self::DOES_NOT_MATCH);
+
         return false;
     }
 }

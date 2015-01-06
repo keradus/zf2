@@ -50,7 +50,7 @@ class DbTableGatewayOptions extends AbstractOptions
     /**
      * Set Id Column
      *
-     * @param string $idColumn
+     * @param  string                             $idColumn
      * @return DbTableGatewayOptions
      * @throws Exception\InvalidArgumentException
      */
@@ -61,6 +61,7 @@ class DbTableGatewayOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException('$idColumn must be a non-empty string');
         }
         $this->idColumn = $idColumn;
+
         return $this;
     }
 
@@ -77,7 +78,7 @@ class DbTableGatewayOptions extends AbstractOptions
     /**
      * Set Name Column
      *
-     * @param string $nameColumn
+     * @param  string                             $nameColumn
      * @return DbTableGatewayOptions
      * @throws Exception\InvalidArgumentException
      */
@@ -88,6 +89,7 @@ class DbTableGatewayOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException('$nameColumn must be a non-empty string');
         }
         $this->nameColumn = $nameColumn;
+
         return $this;
     }
 
@@ -104,7 +106,7 @@ class DbTableGatewayOptions extends AbstractOptions
     /**
      * Set Data Column
      *
-     * @param string $dataColumn
+     * @param  string                             $dataColumn
      * @return DbTableGatewayOptions
      * @throws Exception\InvalidArgumentException
      */
@@ -115,6 +117,7 @@ class DbTableGatewayOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException('$dataColumn must be a non-empty string');
         }
         $this->dataColumn = $dataColumn;
+
         return $this;
     }
 
@@ -131,7 +134,7 @@ class DbTableGatewayOptions extends AbstractOptions
     /**
      * Set Lifetime Column
      *
-     * @param string $lifetimeColumn
+     * @param  string                             $lifetimeColumn
      * @return DbTableGatewayOptions
      * @throws Exception\InvalidArgumentException
      */
@@ -142,6 +145,7 @@ class DbTableGatewayOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException('$lifetimeColumn must be a non-empty string');
         }
         $this->lifetimeColumn = $lifetimeColumn;
+
         return $this;
     }
 
@@ -158,7 +162,7 @@ class DbTableGatewayOptions extends AbstractOptions
     /**
      * Set Modified Column
      *
-     * @param string $modifiedColumn
+     * @param  string                             $modifiedColumn
      * @return DbTableGatewayOptions
      * @throws Exception\InvalidArgumentException
      */
@@ -169,6 +173,7 @@ class DbTableGatewayOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException('$modifiedColumn must be a non-empty string');
         }
         $this->modifiedColumn = $modifiedColumn;
+
         return $this;
     }
 

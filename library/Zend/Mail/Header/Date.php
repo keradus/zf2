@@ -61,6 +61,6 @@ class Date implements HeaderInterface
 
     public function toString()
     {
-        return 'Date: ' . $this->getFieldValue();
+        return 'Date: '.$this->getFieldValue();
     }
 }

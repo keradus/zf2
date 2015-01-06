@@ -37,8 +37,8 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
 
     /**
      * @param array|Connection|resource $connection
-     * @param null|Statement $statementPrototype
-     * @param null|Result $resultPrototype
+     * @param null|Statement            $statementPrototype
+     * @param null|Result               $resultPrototype
      */
     public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null)
     {
@@ -52,7 +52,7 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Sqlsrv
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
@@ -64,6 +64,7 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -85,31 +86,34 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
+
         return $this;
     }
 
     /**
      * Register statement prototype
      *
-     * @param Statement $statementPrototype
+     * @param  Statement $statementPrototype
      * @return Sqlsrv
      */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
+
         return $this;
     }
 
     /**
      * Register result prototype
      *
-     * @param Result $resultPrototype
+     * @param  Result $resultPrototype
      * @return Sqlsrv
      */
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
+
         return $this;
     }
 
@@ -150,7 +154,7 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string|resource $sqlOrResource
+     * @param  string|resource $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
@@ -169,17 +173,19 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
                 throw new Exception\InvalidArgumentException('createStatement() only accepts an SQL string or a Sqlsrv resource');
             }
         }
+
         return $statement;
     }
 
     /**
-     * @param resource $resource
+     * @param  resource $resource
      * @return Result
      */
     public function createResult($resource)
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue());
+
         return $result;
     }
 
@@ -192,8 +198,8 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string $name
-     * @param mixed  $type
+     * @param  string $name
+     * @param  mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)

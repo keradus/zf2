@@ -44,5 +44,5 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Range: xxx', $rangeHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

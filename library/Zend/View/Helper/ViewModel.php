@@ -29,12 +29,13 @@ class ViewModel extends AbstractHelper
     /**
      * Set the current view model
      *
-     * @param  Model $model
+     * @param  Model     $model
      * @return ViewModel
      */
     public function setCurrent(Model $model)
     {
         $this->current = $model;
+
         return $this;
     }
 
@@ -61,12 +62,13 @@ class ViewModel extends AbstractHelper
     /**
      * Set the root view model
      *
-     * @param  Model $model
+     * @param  Model     $model
      * @return ViewModel
      */
     public function setRoot(Model $model)
     {
         $this->root = $model;
+
         return $this;
     }
 

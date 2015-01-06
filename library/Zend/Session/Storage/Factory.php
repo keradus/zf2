@@ -35,7 +35,7 @@ abstract class Factory
             ));
         }
         if (!class_exists($type)) {
-            $class = __NAMESPACE__ . '\\' . $type;
+            $class = __NAMESPACE__.'\\'.$type;
             if (!class_exists($class)) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     '%s expects the $type argument to be a valid class name; received "%s"',

@@ -58,7 +58,7 @@ class BlackHole implements
     /**
      * Constructor
      *
-     * @param  null|array|\Traversable|AdapterOptions $options
+     * @param null|array|\Traversable|AdapterOptions $options
      */
     public function __construct($options = null)
     {
@@ -70,8 +70,8 @@ class BlackHole implements
     /**
      * Set options.
      *
-     * @param array|\Traversable|AdapterOptions $options
-     * @return StorageInterface Fluent interface
+     * @param  array|\Traversable|AdapterOptions $options
+     * @return StorageInterface                  Fluent interface
      */
     public function setOptions($options)
     {
@@ -86,6 +86,7 @@ class BlackHole implements
             $options->setAdapter($this);
             $this->options = $options;
         }
+
         return $this;
     }
 
@@ -99,20 +100,22 @@ class BlackHole implements
         if (!$this->options) {
             $this->setOptions(new AdapterOptions());
         }
+
         return $this->options;
     }
 
     /**
      * Get an item.
      *
-     * @param  string  $key
-     * @param  bool $success
-     * @param  mixed   $casToken
-     * @return mixed Data on success, null on failure
+     * @param  string $key
+     * @param  bool   $success
+     * @param  mixed  $casToken
+     * @return mixed  Data on success, null on failure
      */
     public function getItem($key, & $success = null, & $casToken = null)
     {
         $success = false;
+
         return;
     }
 
@@ -152,7 +155,7 @@ class BlackHole implements
     /**
      * Get metadata of an item.
      *
-     * @param  string $key
+     * @param  string     $key
      * @return array|bool Metadata on success, false on failure
      */
     public function getMetadata($key)
@@ -303,8 +306,8 @@ class BlackHole implements
     /**
      * Increment an item.
      *
-     * @param  string $key
-     * @param  int    $value
+     * @param  string   $key
+     * @param  int      $value
      * @return int|bool The new value on success, false on failure
      */
     public function incrementItem($key, $value)
@@ -326,8 +329,8 @@ class BlackHole implements
     /**
      * Decrement an item.
      *
-     * @param  string $key
-     * @param  int    $value
+     * @param  string   $key
+     * @param  int      $value
      * @return int|bool The new value on success, false on failure
      */
     public function decrementItem($key, $value)
@@ -358,6 +361,7 @@ class BlackHole implements
             $this->capabilityMarker = new stdClass();
             $this->capabilities     = new Capabilities($this, $this->capabilityMarker);
         }
+
         return $this->capabilities;
     }
 
@@ -378,7 +382,7 @@ class BlackHole implements
     /**
      * Remove items of given namespace
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return bool
      */
     public function clearByNamespace($namespace)
@@ -391,7 +395,7 @@ class BlackHole implements
     /**
      * Remove items matching given prefix
      *
-     * @param string $prefix
+     * @param  string $prefix
      * @return bool
      */
     public function clearByPrefix($prefix)
@@ -453,8 +457,8 @@ class BlackHole implements
      * Set tags to an item by given key.
      * An empty array will remove all tags.
      *
-     * @param string   $key
-     * @param string[] $tags
+     * @param  string   $key
+     * @param  string[] $tags
      * @return bool
      */
     public function setTags($key, array $tags)
@@ -465,7 +469,7 @@ class BlackHole implements
     /**
      * Get tags of an item by given key
      *
-     * @param string $key
+     * @param  string         $key
      * @return string[]|FALSE
      */
     public function getTags($key)
@@ -479,8 +483,8 @@ class BlackHole implements
      * If $disjunction only one of the given tags must match
      * else all given tags must match.
      *
-     * @param string[] $tags
-     * @param  bool  $disjunction
+     * @param  string[] $tags
+     * @param  bool     $disjunction
      * @return bool
      */
     public function clearByTags(array $tags, $disjunction = false)

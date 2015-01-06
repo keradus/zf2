@@ -49,7 +49,7 @@ class ExtensionPluginManager extends AbstractPluginManager
      *
      * Checks that the extension loaded is of a valid type.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */
@@ -72,7 +72,7 @@ class ExtensionPluginManager extends AbstractPluginManager
 
         throw new Exception\InvalidArgumentException(sprintf(
             'Plugin of type %s is invalid; must implement %s\Extension\RendererInterface '
-            . 'or the classname must end in "Feed" or "Entry"',
+            .'or the classname must end in "Feed" or "Entry"',
             (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
             __NAMESPACE__
         ));

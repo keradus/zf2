@@ -30,9 +30,9 @@ class CreateViewModelListener extends AbstractListenerAggregate
     /**
      * Inspect the result, and cast it to a ViewModel if a string is detected
      *
-     * @param MvcEvent $e
+     * @param  MvcEvent $e
      * @return void
-    */
+     */
     public function createViewModelFromString(MvcEvent $e)
     {
         $result = $e->getResult();
@@ -41,7 +41,7 @@ class CreateViewModelListener extends AbstractListenerAggregate
         }
 
         // create Console model
-        $model = new ConsoleModel;
+        $model = new ConsoleModel();
 
         // store the result in a model variable
         $model->setVariable(ConsoleModel::RESULT, $result);
@@ -68,9 +68,9 @@ class CreateViewModelListener extends AbstractListenerAggregate
     /**
      * Inspect the result, and cast it to a ViewModel if null is detected
      *
-     * @param MvcEvent $e
+     * @param  MvcEvent $e
      * @return void
-    */
+     */
     public function createViewModelFromNull(MvcEvent $e)
     {
         $result = $e->getResult();
@@ -78,7 +78,7 @@ class CreateViewModelListener extends AbstractListenerAggregate
             return;
         }
 
-        $model = new ConsoleModel;
+        $model = new ConsoleModel();
         $e->setResult($model);
     }
 }

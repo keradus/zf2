@@ -140,12 +140,12 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         }
 
         if ($format == MethodReflection::PROTOTYPE_AS_STRING) {
-            $line = $prototype['visibility'] . ' ' . $prototype['return'] . ' ' . $prototype['name'] . '(';
+            $line = $prototype['visibility'].' '.$prototype['return'].' '.$prototype['name'].'(';
             $args = array();
             foreach ($prototype['arguments'] as $name => $argument) {
-                $argsLine = ($argument['type'] ? $argument['type'] . ' ' : '') . ($argument['by_ref'] ? '&' : '') . '$' . $name;
+                $argsLine = ($argument['type'] ? $argument['type'].' ' : '').($argument['by_ref'] ? '&' : '').'$'.$name;
                 if (!$argument['required']) {
-                    $argsLine .= ' = ' . var_export($argument['default'], true);
+                    $argsLine .= ' = '.var_export($argument['default'], true);
                 }
                 $args[] = $argsLine;
             }
@@ -183,13 +183,13 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Get method contents
      *
-     * @param  bool $includeDocBlock
+     * @param  bool        $includeDocBlock
      * @return string|bool
      */
     public function getContents($includeDocBlock = true)
     {
         $docComment = $this->getDocComment();
-        $content  = ($includeDocBlock && !empty($docComment)) ? $docComment . "\n" : '';
+        $content  = ($includeDocBlock && !empty($docComment)) ? $docComment."\n" : '';
         $content .= $this->extractMethodContents();
 
         return $content;
@@ -208,7 +208,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Tokenize method string and return concatenated body
      *
-     * @param bool $bodyOnly
+     * @param  bool   $bodyOnly
      * @return string
      */
     protected function extractMethodContents($bodyOnly = false)
@@ -227,7 +227,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         );
 
         $functionLine = implode("\n", $lines);
-        $tokens = token_get_all("<?php ". $functionLine);
+        $tokens = token_get_all("<?php ".$functionLine);
 
         //remove first entry which is php open tag
         array_shift($tokens);
@@ -393,6 +393,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                     if ($this->isValidFunction($haystack, $i)) {
                         return true;
                     }
+
                     return false;
 
                 case "}":
@@ -476,7 +477,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      * By having this as a seperate method it allows the method to be overridden
      * if a different FileScanner is needed.
      *
-     * @param  string $filename
+     * @param string $filename
      *
      * @return CachingFileScanner
      */

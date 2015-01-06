@@ -76,8 +76,8 @@ class Barcode extends AbstractValidator
     /**
      * Sets a new barcode adapter
      *
-     * @param  string|Barcode\AbstractAdapter $adapter Barcode adapter to use
-     * @param  array  $options Options for this adapter
+     * @param  string|Barcode\AbstractAdapter     $adapter Barcode adapter to use
+     * @param  array                              $options Options for this adapter
      * @return Barcode
      * @throws Exception\InvalidArgumentException
      */
@@ -85,10 +85,10 @@ class Barcode extends AbstractValidator
     {
         if (is_string($adapter)) {
             $adapter = ucfirst(strtolower($adapter));
-            $adapter = 'Zend\\Validator\\Barcode\\' . $adapter;
+            $adapter = 'Zend\\Validator\\Barcode\\'.$adapter;
 
             if (!class_exists($adapter)) {
-                throw new Exception\InvalidArgumentException('Barcode adapter matching "' . $adapter . '" not found');
+                throw new Exception\InvalidArgumentException('Barcode adapter matching "'.$adapter.'" not found');
             }
 
             $adapter = new $adapter($options);
@@ -141,6 +141,7 @@ class Barcode extends AbstractValidator
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -161,12 +162,14 @@ class Barcode extends AbstractValidator
             }
 
             $this->error(self::INVALID_LENGTH);
+
             return false;
         }
 
         $result = $adapter->hasValidCharacters($value);
         if (!$result) {
             $this->error(self::INVALID_CHARS);
+
             return false;
         }
 
@@ -174,6 +177,7 @@ class Barcode extends AbstractValidator
             $result = $adapter->hasValidChecksum($value);
             if (!$result) {
                 $this->error(self::FAILED);
+
                 return false;
             }
         }

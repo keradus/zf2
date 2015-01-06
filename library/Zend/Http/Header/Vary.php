@@ -24,7 +24,7 @@ class Vary implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'vary') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Vary string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Vary string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Vary implements HeaderInterface
 
     public function toString()
     {
-        return 'Vary: ' . $this->getFieldValue();
+        return 'Vary: '.$this->getFieldValue();
     }
 }

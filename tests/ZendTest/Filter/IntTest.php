@@ -32,7 +32,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
             '1.1'    => 1,
             '-1.1'   => -1,
             '0.9'    => 0,
-            '-0.9'   => 0
+            '-0.9'   => 0,
             );
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
@@ -46,8 +46,8 @@ class IntTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 '1',
-                -1
-            ))
+                -1,
+            )),
         );
     }
 

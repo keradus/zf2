@@ -58,8 +58,8 @@ class ContentSecurityPolicy implements HeaderInterface
      *
      * Reverses http://www.w3.org/TR/CSP/#parsing-1
      *
-     * @param string $name The directive name.
-     * @param array $sources The source list.
+     * @param  string                             $name    The directive name.
+     * @param  array                              $sources The source list.
      * @return self
      * @throws Exception\InvalidArgumentException If the name is not a valid directive name.
      */
@@ -77,13 +77,14 @@ class ContentSecurityPolicy implements HeaderInterface
         } else {
             $this->directives[$name] = implode(' ', $sources);
         }
+
         return $this;
     }
 
     /**
      * Create Content Security Policy header from a given header line
      *
-     * @param string $headerLine The header line to parse.
+     * @param  string                             $headerLine The header line to parse.
      * @return self
      * @throws Exception\InvalidArgumentException If the name field in the given header line does not match.
      */
@@ -111,6 +112,7 @@ class ContentSecurityPolicy implements HeaderInterface
                 }
             }
         }
+
         return $header;
     }
 
@@ -135,6 +137,7 @@ class ContentSecurityPolicy implements HeaderInterface
         foreach ($this->directives as $name => $value) {
             $directives[] = sprintf('%s %s;', $name, $value);
         }
+
         return implode(' ', $directives);
     }
 

@@ -43,7 +43,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         $keys = array('id', 'topic_url', 'hub_url',
                       'created_time', 'lease_seconds',
                       'verify_token', 'secret',
-                      'expiration_time', 'subscription_state');
+                      'expiration_time', 'subscription_state', );
 
         $this->assertSame($keys, array_keys($dataSubscription));
         $this->assertFalse($subscription->setSubscription(array('id' => $id)));
@@ -81,16 +81,16 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
     protected function createTable(DbAdapter $db)
     {
         $sql = "CREATE TABLE subscription ("
-             .      "id varchar(32) PRIMARY KEY NOT NULL DEFAULT '', "
-             .      "topic_url varchar(255) DEFAULT NULL, "
-             .      "hub_url varchar(255) DEFAULT NULL, "
-             .      "created_time datetime DEFAULT NULL, "
-             .      "lease_seconds bigint(20) DEFAULT NULL, "
-             .      "verify_token varchar(255) DEFAULT NULL, "
-             .      "secret varchar(255) DEFAULT NULL, "
-             .      "expiration_time datetime DEFAULT NULL, "
-             .      "subscription_state varchar(12) DEFAULT NULL"
-             . ");";
+             ."id varchar(32) PRIMARY KEY NOT NULL DEFAULT '', "
+             ."topic_url varchar(255) DEFAULT NULL, "
+             ."hub_url varchar(255) DEFAULT NULL, "
+             ."created_time datetime DEFAULT NULL, "
+             ."lease_seconds bigint(20) DEFAULT NULL, "
+             ."verify_token varchar(255) DEFAULT NULL, "
+             ."secret varchar(255) DEFAULT NULL, "
+             ."expiration_time datetime DEFAULT NULL, "
+             ."subscription_state varchar(12) DEFAULT NULL"
+             .");";
 
         $db->query($sql)->execute();
     }

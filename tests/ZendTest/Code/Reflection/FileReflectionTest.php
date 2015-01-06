@@ -35,7 +35,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
     public function testFileConstructorFromAReflectedFilenameInIncludePathWithoutIncludeFlagEnabled()
     {
         $this->setExpectedException('Zend\Code\Reflection\Exception\RuntimeException', 'must be required');
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+        $oldIncludePath = set_include_path(get_include_path().PATH_SEPARATOR.__DIR__.'/TestAsset/');
 
         try {
             new FileReflection('an_empty_file.php', false);
@@ -49,8 +49,8 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileConstructorFromAReflectedFilenameIncluded()
     {
-        include_once __DIR__ . '/TestAsset/an_empty_file.php';
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+        include_once __DIR__.'/TestAsset/an_empty_file.php';
+        $oldIncludePath = set_include_path(get_include_path().PATH_SEPARATOR.__DIR__.'/TestAsset/');
 
         try {
             new FileReflection('an_empty_file.php', false);
@@ -63,8 +63,8 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileConstructorFromAReflectedFilenameInIncludePath()
     {
-        $this->assertFalse(in_array(realpath(__DIR__ . '/TestAsset/a_second_empty_file.php'), get_included_files()));
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+        $this->assertFalse(in_array(realpath(__DIR__.'/TestAsset/a_second_empty_file.php'), get_included_files()));
+        $oldIncludePath = set_include_path(get_include_path().PATH_SEPARATOR.__DIR__.'/TestAsset/');
 
         try {
             new FileReflection('a_second_empty_file.php', true);
@@ -77,7 +77,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileGetClassReturnsClassReflectionObject()
     {
-        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass.php';
+        $fileToReflect = __DIR__.'/TestAsset/TestSampleClass.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
         $this->assertEquals(get_class($reflectionFile), 'Zend\Code\Reflection\FileReflection');
@@ -86,7 +86,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileGetClassReturnsFirstClassWithNoOptions()
     {
-        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass.php';
+        $fileToReflect = __DIR__.'/TestAsset/TestSampleClass.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
         $this->assertEquals('ZendTest\Code\Reflection\TestAsset\TestSampleClass', $reflectionFile->getClass()->getName());
@@ -94,7 +94,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileGetClassThrowsExceptionOnNonExistentClassName()
     {
-        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass.php';
+        $fileToReflect = __DIR__.'/TestAsset/TestSampleClass.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
         $nonExistentClass = 'Some_Non_Existent_Class';
@@ -124,7 +124,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('Line numbering not implemented yet');
 
-        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass.php';
+        $fileToReflect = __DIR__.'/TestAsset/TestSampleClass.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
         $this->assertEquals(9, $reflectionFile->getStartLine());
@@ -133,7 +133,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileGetDocBlockReturnsFileDocBlock()
     {
-        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass7.php';
+        $fileToReflect = __DIR__.'/TestAsset/TestSampleClass7.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
 
@@ -149,7 +149,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('Function scanning not implemented yet');
 
-        $fileToRequire = __DIR__ . '/TestAsset/FileOfFunctions.php';
+        $fileToRequire = __DIR__.'/TestAsset/FileOfFunctions.php';
         include_once $fileToRequire;
         $reflectionFile = new FileReflection($fileToRequire);
         $funcs = $reflectionFile->getFunctions();
@@ -158,7 +158,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileCanReflectFileWithInterface()
     {
-        $fileToReflect = __DIR__ . '/TestAsset/TestSampleInterface.php';
+        $fileToReflect = __DIR__.'/TestAsset/TestSampleInterface.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
         $class = $reflectionFile->getClass();
@@ -168,13 +168,13 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFileCanReflectFileWithUses()
     {
-        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass8.php';
+        $fileToReflect = __DIR__.'/TestAsset/TestSampleClass8.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
         $expected = array(
             array('use' => 'Zend\Config', 'as' => 'ZendConfig'),
             array('use' => 'FooBar\Foo\Bar', 'as' => null),
-            array('use' => 'One\Two\Three\Four\Five', 'as' => 'ottff')
+            array('use' => 'One\Two\Three\Four\Five', 'as' => 'ottff'),
             );
         $this->assertSame($expected, $reflectionFile->getUses());
     }

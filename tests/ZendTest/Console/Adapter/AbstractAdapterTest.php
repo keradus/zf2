@@ -50,15 +50,15 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         ob_start();
         $this->adapter->writeLine('foo');
-        $this->assertEquals("foo" . PHP_EOL, ob_get_clean());
+        $this->assertEquals("foo".PHP_EOL, ob_get_clean());
 
         ob_start();
         $this->adapter->writeLine("foo\nbar");
-        $this->assertEquals("foo\nbar" . PHP_EOL, ob_get_clean());
+        $this->assertEquals("foo\nbar".PHP_EOL, ob_get_clean());
 
         ob_start();
         $this->adapter->writeLine("\rfoo\r");
-        $this->assertEquals("\rfoo\r" . PHP_EOL, ob_get_clean());
+        $this->assertEquals("\rfoo\r".PHP_EOL, ob_get_clean());
     }
 
     /**
@@ -73,12 +73,12 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         ob_start();
         $line = str_repeat('#', 80);
         $this->adapter->writeLine($line);
-        $this->assertEquals($line . PHP_EOL, ob_get_clean());
+        $this->assertEquals($line.PHP_EOL, ob_get_clean());
 
         ob_start();
-        $line2 = $line . '#';
+        $line2 = $line.'#';
         $this->adapter->writeLine($line2);
-        $this->assertEquals($line2 . PHP_EOL, ob_get_clean());
+        $this->assertEquals($line2.PHP_EOL, ob_get_clean());
     }
 
     public function testReadLine()
@@ -161,7 +161,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $text = 'thisisaverylongwordthatwontbreakproperlysothereyouhaveit and here is some more text';
         $expected = array('thisisaver', 'ylongwordt', 'hatwontbre', 'akproperly'
            , 'sothereyou', 'haveit and', 'here is', 'some more'
-           , 'text');
+           , 'text', );
 
         ob_start();
         $this->adapter->writeTextBlock($text, 10);

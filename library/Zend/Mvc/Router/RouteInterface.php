@@ -20,7 +20,7 @@ interface RouteInterface
      * Priority used for route stacks.
      *
      * @var int
-     * public $priority;
+     *          public $priority;
      */
 
     /**
@@ -34,7 +34,7 @@ interface RouteInterface
     /**
      * Match a given request.
      *
-     * @param  Request $request
+     * @param  Request         $request
      * @return RouteMatch|null
      */
     public function match(Request $request);

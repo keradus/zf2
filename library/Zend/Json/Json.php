@@ -27,11 +27,11 @@ class Json
     const TYPE_ARRAY  = 1;
     const TYPE_OBJECT = 0;
 
-     /**
-      * To check the allowed nesting depth of the XML tree during xml2json conversion.
-      *
-      * @var int
-      */
+    /**
+     * To check the allowed nesting depth of the XML tree during xml2json conversion.
+     *
+     * @var int
+     */
     public static $maxRecursionDepthAllowed = 25;
 
     /**
@@ -45,9 +45,9 @@ class Json
      *
      * Uses ext/json's json_decode if available.
      *
-     * @param string $encodedValue Encoded in JSON format
-     * @param int $objectDecodeType Optional; flag indicating how to decode
-     * objects. See {@link Zend\Json\Decoder::decode()} for details.
+     * @param  string           $encodedValue     Encoded in JSON format
+     * @param  int              $objectDecodeType Optional; flag indicating how to decode
+     *                                            objects. See {@link Zend\Json\Decoder::decode()} for details.
      * @return mixed
      * @throws RuntimeException
      */
@@ -91,9 +91,9 @@ class Json
      *
      * @see Zend\Json\Expr
      *
-     * @param  mixed $valueToEncode
-     * @param  bool $cycleCheck Optional; whether or not to check for object recursion; off by default
-     * @param  array $options Additional options used during encoding
+     * @param  mixed  $valueToEncode
+     * @param  bool   $cycleCheck    Optional; whether or not to check for object recursion; off by default
+     * @param  array  $options       Additional options used during encoding
      * @return string JSON encoded object
      */
     public static function encode($valueToEncode, $cycleCheck = false, $options = array())
@@ -133,7 +133,7 @@ class Json
 
                 $encodedResult = str_replace(
                     //instead of replacing "key:magicKey", we replace directly magicKey by value because "key" never changes.
-                    '"' . $magicKey . '"',
+                    '"'.$magicKey.'"',
                     $value,
                     $encodedResult
                 );
@@ -154,9 +154,9 @@ class Json
      * NOTE: This method is used internally by the encode method.
      *
      * @see encode
-     * @param mixed $value a string - object property to be encoded
-     * @param array $javascriptExpressions
-     * @param null|string|int $currentKey
+     * @param  mixed           $value                 a string - object property to be encoded
+     * @param  array           $javascriptExpressions
+     * @param  null|string|int $currentKey
      * @return mixed
      */
     protected static function _recursiveJsonExprFinder(
@@ -166,7 +166,7 @@ class Json
     ) {
         if ($value instanceof Expr) {
             // TODO: Optimize with ascii keys, if performance is bad
-            $magicKey = "____" . $currentKey . "_" . (count($javascriptExpressions));
+            $magicKey = "____".$currentKey."_".(count($javascriptExpressions));
             $javascriptExpressions[] = array(
 
                 //if currentKey is integer, encodeUnicodeString call is not required.
@@ -183,6 +183,7 @@ class Json
                 $value->$k = static::_recursiveJsonExprFinder($value->$k, $javascriptExpressions, $k);
             }
         }
+
         return $value;
     }
     /**
@@ -193,7 +194,7 @@ class Json
      * matches the pattern that try to detect if it is a new Zend\Json\Expr
      * if it matches, we return a new Zend\Json\Expr instead of a text node
      *
-     * @param SimpleXMLElement $simpleXmlElementObject
+     * @param  SimpleXMLElement $simpleXmlElementObject
      * @return Expr|string
      */
     protected static function _getXmlValue($simpleXmlElementObject)
@@ -204,6 +205,7 @@ class Json
         if ($match) {
             return new Expr($matchings[1]);
         }
+
         return (trim(strval($simpleXmlElementObject)));
     }
 
@@ -221,9 +223,9 @@ class Json
      * calling a recursive (protected static) function in this class. Once all
      * the XML elements are stored in the PHP array, it is returned to the caller.
      *
-     * @param SimpleXMLElement $simpleXmlElementObject
-     * @param  bool $ignoreXmlAttributes
-     * @param int $recursionDepth
+     * @param  SimpleXMLElement             $simpleXmlElementObject
+     * @param  bool                         $ignoreXmlAttributes
+     * @param  int                          $recursionDepth
      * @throws Exception\RecursionException if the XML tree is deeper than the allowed limit.
      * @return array
      */
@@ -234,7 +236,7 @@ class Json
             // XML tree is too deep. Exit now by throwing an exception.
             throw new RecursionException(
                 "Function _processXml exceeded the allowed recursion depth of "
-                .  static::$maxRecursionDepthAllowed
+                .static::$maxRecursionDepthAllowed
             );
         }
 
@@ -251,6 +253,7 @@ class Json
                 if (!empty($value)) {
                     $attributes['@text'] = $value;
                 }
+
                 return array($name => $attributes);
             }
 
@@ -306,10 +309,10 @@ class Json
      *
      * @static
      * @access public
-     * @param string $xmlStringContents XML String to be converted
-     * @param  bool $ignoreXmlAttributes Include or exclude XML attributes in
-     * the xml2json conversion process.
-     * @return mixed - JSON formatted string on success
+     * @param  string                                $xmlStringContents   XML String to be converted
+     * @param  bool                                  $ignoreXmlAttributes Include or exclude XML attributes in
+     *                                                                    the xml2json conversion process.
+     * @return mixed                                 - JSON formatted string on success
      * @throws \Zend\Json\Exception\RuntimeException if the input not a XML formatted string
      */
     public static function fromXml($xmlStringContents, $ignoreXmlAttributes = true)
@@ -328,6 +331,7 @@ class Json
         // Convert the PHP array to JSON using Zend\Json\Json encode method.
         // It is just that simple.
         $jsonStringOutput = static::encode($resultArray);
+
         return($jsonStringOutput);
     }
 
@@ -336,8 +340,8 @@ class Json
      *
      * Use 'indent' option to select indentation string - by default it's a tab
      *
-     * @param string $json Original JSON string
-     * @param array $options Encoding options
+     * @param  string $json    Original JSON string
+     * @param  array  $options Encoding options
      * @return string
      */
     public static function prettyPrint($json, $options = array())
@@ -371,7 +375,7 @@ class Json
             } elseif (!$inLiteral && $token == ",") {
                 $result .= "$token\n";
             } else {
-                $result .= ($inLiteral ?  '' : $prefix) . $token;
+                $result .= ($inLiteral ?  '' : $prefix).$token;
 
                 //remove escaped backslash sequences causing false positives in next check
                 $token = str_replace('\\', '', $token);
@@ -383,6 +387,7 @@ class Json
                 }
             }
         }
+
         return $result;
     }
 }

@@ -56,11 +56,12 @@ class Crc32 extends Hash
      * Sets the crc32 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return Crc32 Provides a fluent interface
+     * @return Crc32        Provides a fluent interface
      */
     public function setCrc32($options)
     {
         $this->setHash($options);
+
         return $this;
     }
 
@@ -68,11 +69,12 @@ class Crc32 extends Hash
      * Adds the crc32 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return Crc32 Provides a fluent interface
+     * @return Crc32        Provides a fluent interface
      */
     public function addCrc32($options)
     {
         $this->addHash($options);
+
         return $this;
     }
 
@@ -106,6 +108,7 @@ class Crc32 extends Hash
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+
             return false;
         }
 
@@ -113,6 +116,7 @@ class Crc32 extends Hash
         $filehash = hash_file('crc32', $file);
         if ($filehash === false) {
             $this->error(self::NOT_DETECTED);
+
             return false;
         }
 
@@ -123,6 +127,7 @@ class Crc32 extends Hash
         }
 
         $this->error(self::DOES_NOT_MATCH);
+
         return false;
     }
 }

@@ -67,7 +67,7 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
     public function testCallingRegisterPluginsWithValidStringMapResolvingToTraversableClassRegistersPlugins()
     {
         $this->loader->registerPlugins('ZendTest\Loader\TestAsset\TestPluginMap');
-        $pluginMap = new TestAsset\TestPluginMap;
+        $pluginMap = new TestAsset\TestPluginMap();
         $this->assertEquals($pluginMap->map, $this->loader->getRegisteredPlugins());
     }
 
@@ -87,7 +87,7 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
             array(true),
             array(1),
             array(1.0),
-            array(new \stdClass),
+            array(new \stdClass()),
         );
     }
 
@@ -167,7 +167,7 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
     {
         $map = array(
             'foo' => __CLASS__,
-            'FOO' => __NAMESPACE__ . '\TestAsset\TestPluginMap',
+            'FOO' => __NAMESPACE__.'\TestAsset\TestPluginMap',
         );
         $this->loader->registerPlugins($map);
         $this->assertEquals($map['FOO'], $this->loader->getClassName('foo'));
@@ -248,14 +248,14 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterPluginsCanAcceptArrayElementWithClassNameProvidingAMap()
     {
-        $pluginMap = new TestAsset\TestPluginMap;
+        $pluginMap = new TestAsset\TestPluginMap();
         $this->loader->registerPlugins(array('ZendTest\Loader\TestAsset\TestPluginMap'));
         $this->assertEquals($pluginMap->map, $this->loader->getRegisteredPlugins());
     }
 
     public function testRegisterPluginsCanAcceptArrayElementWithObjectProvidingAMap()
     {
-        $pluginMap = new TestAsset\TestPluginMap;
+        $pluginMap = new TestAsset\TestPluginMap();
         $this->loader->registerPlugins(array($pluginMap));
         $this->assertEquals($pluginMap->map, $this->loader->getRegisteredPlugins());
     }

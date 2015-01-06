@@ -28,19 +28,19 @@ class HydratingResultSet extends AbstractResultSet
     /**
      * Constructor
      *
-     * @param  null|HydratorInterface $hydrator
-     * @param  null|object $objectPrototype
+     * @param null|HydratorInterface $hydrator
+     * @param null|object            $objectPrototype
      */
     public function __construct(HydratorInterface $hydrator = null, $objectPrototype = null)
     {
-        $this->setHydrator(($hydrator) ?: new ArraySerializable);
-        $this->setObjectPrototype(($objectPrototype) ?: new ArrayObject);
+        $this->setHydrator(($hydrator) ?: new ArraySerializable());
+        $this->setObjectPrototype(($objectPrototype) ?: new ArrayObject());
     }
 
     /**
      * Set the row object prototype
      *
-     * @param  object $objectPrototype
+     * @param  object                             $objectPrototype
      * @throws Exception\InvalidArgumentException
      * @return ResultSet
      */
@@ -48,22 +48,24 @@ class HydratingResultSet extends AbstractResultSet
     {
         if (!is_object($objectPrototype)) {
             throw new Exception\InvalidArgumentException(
-                'An object must be set as the object prototype, a ' . gettype($objectPrototype) . ' was provided.'
+                'An object must be set as the object prototype, a '.gettype($objectPrototype).' was provided.'
             );
         }
         $this->objectPrototype = $objectPrototype;
+
         return $this;
     }
 
     /**
      * Set the hydrator to use for each row object
      *
-     * @param HydratorInterface $hydrator
+     * @param  HydratorInterface  $hydrator
      * @return HydratingResultSet
      */
     public function setHydrator(HydratorInterface $hydrator)
     {
         $this->hydrator = $hydrator;
+
         return $this;
     }
 
@@ -111,6 +113,7 @@ class HydratingResultSet extends AbstractResultSet
         foreach ($this as $row) {
             $return[] = $this->getHydrator()->extract($row);
         }
+
         return $return;
     }
 }

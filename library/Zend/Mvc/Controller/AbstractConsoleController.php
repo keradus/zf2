@@ -23,7 +23,7 @@ class AbstractConsoleController extends AbstractActionController
     protected $console;
 
     /**
-     * @param ConsoleAdapter $console
+     * @param  ConsoleAdapter $console
      * @return self
      */
     public function setConsole(ConsoleAdapter $console)
@@ -52,6 +52,7 @@ class AbstractConsoleController extends AbstractActionController
                 get_called_class()
             ));
         }
+
         return parent::dispatch($request, $response);
     }
 }

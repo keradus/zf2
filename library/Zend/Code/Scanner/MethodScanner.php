@@ -101,7 +101,7 @@ class MethodScanner implements ScannerInterface
     protected $infos = array();
 
     /**
-     * @param  array $methodTokens
+     * @param array           $methodTokens
      * @param NameInformation $nameInformation
      */
     public function __construct(array $methodTokens, NameInformation $nameInformation = null)
@@ -111,12 +111,13 @@ class MethodScanner implements ScannerInterface
     }
 
     /**
-     * @param  string $class
+     * @param  string        $class
      * @return MethodScanner
      */
     public function setClass($class)
     {
         $this->class = (string) $class;
+
         return $this;
     }
 
@@ -127,6 +128,7 @@ class MethodScanner implements ScannerInterface
     public function setScannerClass(ClassScanner $scannerClass)
     {
         $this->scannerClass = $scannerClass;
+
         return $this;
     }
 
@@ -260,7 +262,7 @@ class MethodScanner implements ScannerInterface
     }
 
     /**
-     * @param  bool $returnScanner
+     * @param  bool  $returnScanner
      * @return array
      */
     public function getParameters($returnScanner = false)
@@ -285,7 +287,7 @@ class MethodScanner implements ScannerInterface
     }
 
     /**
-     * @param  int|string $parameterNameOrInfoIndex
+     * @param  int|string                         $parameterNameOrInfoIndex
      * @return ParameterScanner
      * @throws Exception\InvalidArgumentException
      */
@@ -358,7 +360,6 @@ class MethodScanner implements ScannerInterface
         /**
          * Variables & Setup
          */
-
         $tokens       = &$this->tokens; // localize
         $infos        = &$this->infos; // localize
         $tokenIndex   = null;
@@ -425,7 +426,7 @@ class MethodScanner implements ScannerInterface
 
         SCANNER_TOP:
 
-        $this->lineStart = ($this->lineStart) ? : $tokenLine;
+        $this->lineStart = ($this->lineStart) ?: $tokenLine;
 
         switch ($tokenType) {
             case T_DOC_COMMENT:

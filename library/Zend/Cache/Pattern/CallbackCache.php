@@ -17,7 +17,7 @@ class CallbackCache extends AbstractPattern
     /**
      * Set options
      *
-     * @param  PatternOptions $options
+     * @param  PatternOptions                     $options
      * @return CallbackCache
      * @throws Exception\InvalidArgumentException if missing storage option
      */
@@ -28,15 +28,16 @@ class CallbackCache extends AbstractPattern
         if (!$options->getStorage()) {
             throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
+
         return $this;
     }
 
     /**
      * Call the specified callback or get the result from cache
      *
-     * @param  callable   $callback  A valid callback
-     * @param  array      $args      Callback arguments
-     * @return mixed Result
+     * @param  callable                   $callback A valid callback
+     * @param  array                      $args     Callback arguments
+     * @return mixed                      Result
      * @throws Exception\RuntimeException if invalid cached data
      * @throws \Exception
      */
@@ -53,6 +54,7 @@ class CallbackCache extends AbstractPattern
             }
 
             echo isset($result[1]) ? $result[1] : '';
+
             return $result[0];
         }
 
@@ -91,8 +93,8 @@ class CallbackCache extends AbstractPattern
     /**
      * function call handler
      *
-     * @param  string $function  Function name to call
-     * @param  array  $args      Function arguments
+     * @param  string                     $function Function name to call
+     * @param  array                      $args     Function arguments
      * @return mixed
      * @throws Exception\RuntimeException
      * @throws \Exception
@@ -106,8 +108,8 @@ class CallbackCache extends AbstractPattern
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callable   $callback  A valid callback
-     * @param  array      $args      Callback arguments
+     * @param  callable                           $callback A valid callback
+     * @param  array                              $args     Callback arguments
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
@@ -121,9 +123,9 @@ class CallbackCache extends AbstractPattern
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callable   $callback  A valid callback
-     * @param  array      $args      Callback arguments
-     * @throws Exception\RuntimeException if callback not serializable
+     * @param  callable                           $callback A valid callback
+     * @param  array                              $args     Callback arguments
+     * @throws Exception\RuntimeException         if callback not serializable
      * @throws Exception\InvalidArgumentException if invalid callback
      * @return string
      */
@@ -154,21 +156,21 @@ class CallbackCache extends AbstractPattern
 
             if (!$serializedObject) {
                 throw new Exception\RuntimeException(
-                    sprintf('Cannot serialize callback%s', ($error ? ': ' . $error->getMessage() : '')),
+                    sprintf('Cannot serialize callback%s', ($error ? ': '.$error->getMessage() : '')),
                     0,
                     $error
                 );
             }
-            $callbackKey.= $serializedObject;
+            $callbackKey .= $serializedObject;
         }
 
-        return md5($callbackKey) . $this->generateArgumentsKey($args);
+        return md5($callbackKey).$this->generateArgumentsKey($args);
     }
 
     /**
      * Generate a unique key of the argument part.
      *
-     * @param  array $args
+     * @param  array                      $args
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -189,7 +191,7 @@ class CallbackCache extends AbstractPattern
 
         if (!$serializedArgs) {
             throw new Exception\RuntimeException(
-                sprintf('Cannot serialize arguments%s', ($error ? ': ' . $error->getMessage() : '')),
+                sprintf('Cannot serialize arguments%s', ($error ? ': '.$error->getMessage() : '')),
                 0,
                 $error
             );

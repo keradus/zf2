@@ -19,7 +19,7 @@ interface AdapterInterface
     /**
      * Create adapter-specific representation of a big integer
      *
-     * @param  string $operand
+     * @param  string   $operand
      * @param  int|null $base
      * @return mixed
      */
@@ -121,7 +121,7 @@ interface AdapterInterface
      * Convert big integer into it's binary number representation
      *
      * @param  string $int
-     * @param  bool $twoc
+     * @param  bool   $twoc
      * @return string
      */
     public function intToBin($int, $twoc = false);
@@ -130,7 +130,7 @@ interface AdapterInterface
      * Convert binary number into big integer
      *
      * @param  string $bytes
-     * @param  bool $twoc
+     * @param  bool   $twoc
      * @return string
      */
     public function binToInt($bytes, $twoc = false);
@@ -139,8 +139,8 @@ interface AdapterInterface
      * Convert a number between arbitrary bases
      *
      * @param  string $operand
-     * @param  int $fromBase
-     * @param  int $toBase
+     * @param  int    $fromBase
+     * @param  int    $toBase
      * @return string
      */
     public function baseConvert($operand, $fromBase, $toBase = 10);

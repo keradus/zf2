@@ -36,7 +36,7 @@ class Placeholder extends AbstractHelper
     /**
      * Placeholder helper
      *
-     * @param  string $name
+     * @param  string                                  $name
      * @throws InvalidArgumentException
      * @return Placeholder\Container\AbstractContainer
      */
@@ -49,14 +49,15 @@ class Placeholder extends AbstractHelper
         }
 
         $name = (string) $name;
+
         return $this->getContainer($name);
     }
 
     /**
      * createContainer
      *
-     * @param  string $key
-     * @param  array $value
+     * @param  string                      $key
+     * @param  array                       $value
      * @return Container\AbstractContainer
      */
     public function createContainer($key, array $value = array())
@@ -64,13 +65,14 @@ class Placeholder extends AbstractHelper
         $key = (string) $key;
 
         $this->items[$key] = new $this->containerClass($value);
+
         return $this->items[$key];
     }
 
     /**
      * Retrieve a placeholder container
      *
-     * @param  string $key
+     * @param  string                      $key
      * @return Container\AbstractContainer
      */
     public function getContainer($key)
@@ -95,6 +97,7 @@ class Placeholder extends AbstractHelper
     {
         $key = (string) $key;
         $return =  array_key_exists($key, $this->items);
+
         return $return;
     }
 }

@@ -224,7 +224,7 @@ class Iconv extends AbstractStringWrapper
     /**
      * Returns the length of the given string
      *
-     * @param string $str
+     * @param  string    $str
      * @return int|false
      */
     public function strlen($str)
@@ -235,9 +235,9 @@ class Iconv extends AbstractStringWrapper
     /**
      * Returns the portion of string specified by the start and length parameters
      *
-     * @param string   $str
-     * @param int      $offset
-     * @param int|null $length
+     * @param  string       $str
+     * @param  int          $offset
+     * @param  int|null     $length
      * @return string|false
      */
     public function substr($str, $offset = 0, $length = null)
@@ -248,9 +248,9 @@ class Iconv extends AbstractStringWrapper
     /**
      * Find the position of the first occurrence of a substring in a string
      *
-     * @param string $haystack
-     * @param string $needle
-     * @param int    $offset
+     * @param  string    $haystack
+     * @param  string    $needle
+     * @param  int       $offset
      * @return int|false
      */
     public function strpos($haystack, $needle, $offset = 0)
@@ -261,8 +261,8 @@ class Iconv extends AbstractStringWrapper
     /**
      * Convert a string from defined encoding to the defined convert encoding
      *
-     * @param string  $str
-     * @param bool $reverse
+     * @param  string       $str
+     * @param  bool         $reverse
      * @return string|false
      */
     public function convert($str, $reverse = false)
@@ -284,6 +284,6 @@ class Iconv extends AbstractStringWrapper
 
         // automatically add "//IGNORE" to not stop converting on invalid characters
         // invalid characters triggers a notice anyway
-        return iconv($fromEncoding, $toEncoding . '//IGNORE', $str);
+        return iconv($fromEncoding, $toEncoding.'//IGNORE', $str);
     }
 }

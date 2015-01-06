@@ -17,7 +17,7 @@ use Zend\ProgressBar\Exception;
 class UploadProgress extends AbstractUploadHandler
 {
     /**
-     * @param  string $id
+     * @param  string                            $id
      * @return array|bool
      * @throws Exception\PhpEnvironmentException
      */
@@ -39,7 +39,7 @@ class UploadProgress extends AbstractUploadHandler
             'current'  => 0,
             'rate'     => 0,
             'message'  => '',
-            'done'     => false
+            'done'     => false,
         );
         $status = $uploadInfo + $status;
         $status['total']   = $status['bytes_total'];

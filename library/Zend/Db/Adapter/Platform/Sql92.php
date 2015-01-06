@@ -24,7 +24,7 @@ class Sql92 extends AbstractPlatform
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        return '"' . implode('"."', (array) str_replace('"', '\\"', $identifierChain)) . '"';
+        return '"'.implode('"."', (array) str_replace('"', '\\"', $identifierChain)).'"';
     }
 
     /**
@@ -43,7 +43,8 @@ class Sql92 extends AbstractPlatform
         trigger_error(
             'Attempting to quote a value without specific driver level support can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+
+        return '\''.addcslashes($value, "\x00\n\r\\'\"\x1a").'\'';
     }
 
     /**
@@ -51,7 +52,7 @@ class Sql92 extends AbstractPlatform
      */
     public function quoteTrustedValue($value)
     {
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return '\''.addcslashes($value, "\x00\n\r\\'\"\x1a").'\'';
     }
 
     /**

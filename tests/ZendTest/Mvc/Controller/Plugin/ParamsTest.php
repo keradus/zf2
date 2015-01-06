@@ -21,8 +21,8 @@ class ParamsTest extends TestCase
 {
     public function setUp()
     {
-        $this->request = new Request;
-        $event         = new MvcEvent;
+        $this->request = new Request();
+        $event         = new MvcEvent();
 
         $event->setRequest($this->request);
         $event->setResponse(new Response());
@@ -137,7 +137,7 @@ class ParamsTest extends TestCase
             'name'     => 'test.txt',
             'type'     => 'text/plain',
             'size'     => 0,
-            'tmp_name' => '/tmp/' . uniqid(),
+            'tmp_name' => '/tmp/'.uniqid(),
             'error'    => UPLOAD_ERR_OK,
         );
         $this->request->getFiles()->set('test', $file);
@@ -153,7 +153,7 @@ class ParamsTest extends TestCase
             'name'     => 'test.txt',
             'type'     => 'text/plain',
             'size'     => 0,
-            'tmp_name' => '/tmp/' . uniqid(),
+            'tmp_name' => '/tmp/'.uniqid(),
             'error'    => UPLOAD_ERR_OK,
         );
 
@@ -161,7 +161,7 @@ class ParamsTest extends TestCase
             'name'     => 'file2.txt',
             'type'     => 'text/plain',
             'size'     => 1,
-            'tmp_name' => '/tmp/' . uniqid(),
+            'tmp_name' => '/tmp/'.uniqid(),
             'error'    => UPLOAD_ERR_OK,
         );
         $this->request->getFiles()->set('file', $file);

@@ -53,7 +53,7 @@ class Mbox extends AbstractStorage
     /**
      * Count messages all messages in current box
      *
-     * @return int number of messages
+     * @return int                                             number of messages
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function countMessages()
@@ -64,13 +64,14 @@ class Mbox extends AbstractStorage
     /**
      * Get a list of messages with number and size
      *
-     * @param  int|null $id  number of message or null for all messages
+     * @param  int|null  $id number of message or null for all messages
      * @return int|array size of given message of list with all messages as array(num => size)
      */
     public function getSize($id = 0)
     {
         if ($id) {
             $pos = $this->positions[$id - 1];
+
             return $pos['end'] - $pos['start'];
         }
 
@@ -85,9 +86,9 @@ class Mbox extends AbstractStorage
     /**
      * Get positions for mail message or throw exception if id is invalid
      *
-     * @param int $id number of message
+     * @param  int                                $id number of message
      * @throws Exception\InvalidArgumentException
-     * @return array positions as in positions
+     * @return array                              positions as in positions
      */
     protected function getPos($id)
     {
@@ -101,7 +102,7 @@ class Mbox extends AbstractStorage
     /**
      * Fetch a message
      *
-     * @param  int $id number of message
+     * @param  int                                             $id number of message
      * @return \Zend\Mail\Storage\Message\File
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
@@ -116,7 +117,7 @@ class Mbox extends AbstractStorage
             $messageClassParams = array(
                 'file' => $this->fh,
                 'startPos' => $messagePos['start'],
-                'endPos' => $messagePos['end']
+                'endPos' => $messagePos['end'],
             );
 
             if (isset($this->messageEOL)) {
@@ -177,6 +178,7 @@ class Mbox extends AbstractStorage
             throw new Exception\RuntimeException('not implemented');
         }
         $messagePos = $this->getPos($id);
+
         return stream_get_contents($this->fh, $messagePos['end'] - $messagePos['separator'], $messagePos['separator']);
     }
 
@@ -212,9 +214,9 @@ class Mbox extends AbstractStorage
      *
      * if $file is a resource its file pointer is moved after the first line
      *
-     * @param  resource|string $file stream resource of name of file
-     * @param  bool $fileIsString file is string or resource
-     * @return bool file is mbox file
+     * @param  resource|string $file         stream resource of name of file
+     * @param  bool            $fileIsString file is string or resource
+     * @return bool            file is mbox file
      */
     protected function isMboxFile($file, $fileIsString = true)
     {
@@ -248,7 +250,7 @@ class Mbox extends AbstractStorage
     /**
      * open given file as current mbox file
      *
-     * @param  string $filename filename of mbox file
+     * @param  string                             $filename filename of mbox file
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
@@ -309,7 +311,6 @@ class Mbox extends AbstractStorage
         $this->positions = array();
     }
 
-
     /**
      * Waste some CPU cycles doing nothing.
      *
@@ -319,7 +320,6 @@ class Mbox extends AbstractStorage
     {
         return true;
     }
-
 
     /**
      * stub for not supported message deletion
@@ -339,8 +339,8 @@ class Mbox extends AbstractStorage
      * That shouldn't be a problem, because we can't change mbox files. Therefor the message
      * number is save enough.
      *
-     * @param int|null $id message number
-     * @return array|string message number for given message or all messages as array
+     * @param  int|null                                        $id message number
+     * @return array|string                                    message number for given message or all messages as array
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getUniqueId($id = null)
@@ -348,10 +348,12 @@ class Mbox extends AbstractStorage
         if ($id) {
             // check if id exists
             $this->getPos($id);
+
             return $id;
         }
 
         $range = range(1, $this->countMessages());
+
         return array_combine($range, $range);
     }
 
@@ -361,14 +363,15 @@ class Mbox extends AbstractStorage
      * I.e. if you have a webmailer that supports deleting messages you should use unique ids
      * as parameter and use this method to translate it to message number right before calling removeMessage()
      *
-     * @param string $id unique id
-     * @return int message number
+     * @param  string                                          $id unique id
+     * @return int                                             message number
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getNumberByUniqueId($id)
     {
         // check if id exists
         $this->getPos($id);
+
         return $id;
     }
 

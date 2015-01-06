@@ -88,12 +88,13 @@ class HtmlEntities extends AbstractFilter
     /**
      * Sets the quoteStyle option
      *
-     * @param  int $quoteStyle
+     * @param  int  $quoteStyle
      * @return self Provides a fluent interface
      */
     public function setQuoteStyle($quoteStyle)
     {
         $this->quoteStyle = $quoteStyle;
+
         return $this;
     }
 
@@ -116,6 +117,7 @@ class HtmlEntities extends AbstractFilter
     public function setEncoding($value)
     {
         $this->encoding = (string) $value;
+
         return $this;
     }
 
@@ -137,7 +139,7 @@ class HtmlEntities extends AbstractFilter
      * Proxies to {@link setEncoding()}
      *
      * @param  string $charSet
-     * @return self Provides a fluent interface
+     * @return self   Provides a fluent interface
      */
     public function setCharSet($charSet)
     {
@@ -163,6 +165,7 @@ class HtmlEntities extends AbstractFilter
     public function setDoubleQuote($doubleQuote)
     {
         $this->doubleQuote = (bool) $doubleQuote;
+
         return $this;
     }
 
@@ -174,7 +177,7 @@ class HtmlEntities extends AbstractFilter
      *
      * If the value provided is non-scalar, the value will remain unfiltered
      *
-     * @param  string $value
+     * @param  string                    $value
      * @return string|mixed
      * @throws Exception\DomainException on encoding mismatches
      */
@@ -191,12 +194,13 @@ class HtmlEntities extends AbstractFilter
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
             $enc      = $this->getEncoding();
-            $value    = iconv('', $this->getEncoding() . '//IGNORE', $value);
+            $value    = iconv('', $this->getEncoding().'//IGNORE', $value);
             $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
             if (!strlen($filtered)) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
         }
+
         return $filtered;
     }
 }

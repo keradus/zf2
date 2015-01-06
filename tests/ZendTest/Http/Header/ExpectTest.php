@@ -44,5 +44,5 @@ class ExpectTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Expect: xxx', $expectHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

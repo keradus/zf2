@@ -119,13 +119,13 @@ class Gravatar extends AbstractHtmlElement
     /**
      * Configure state
      *
-     * @param  array $options
+     * @param  array    $options
      * @return Gravatar
      */
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
             if (method_exists($this, $method)) {
                 $this->{$method}($value);
             }
@@ -142,10 +142,11 @@ class Gravatar extends AbstractHtmlElement
     protected function getAvatarUrl()
     {
         $src = $this->getGravatarUrl()
-            . '/'   . ($this->emailIsHashed ? $this->getEmail() : md5($this->getEmail()))
-            . '?s=' . $this->getImgSize()
-            . '&d=' . $this->getDefaultImg()
-            . '&r=' . $this->getRating();
+            .'/'.($this->emailIsHashed ? $this->getEmail() : md5($this->getEmail()))
+            .'?s='.$this->getImgSize()
+            .'&d='.$this->getDefaultImg()
+            .'&r='.$this->getRating();
+
         return $src;
     }
 
@@ -168,8 +169,8 @@ class Gravatar extends AbstractHtmlElement
     {
         $this->setSrcAttribForImg();
         $html = '<img'
-            . $this->htmlAttribs($this->getAttribs())
-            . $this->getClosingBracket();
+            .$this->htmlAttribs($this->getAttribs())
+            .$this->getClosingBracket();
 
         return $html;
     }
@@ -181,12 +182,13 @@ class Gravatar extends AbstractHtmlElement
      * This attrib is overwritten in protected method setSrcAttribForImg().
      * This method(_setSrcAttribForImg) is called in public method getImgTag().
      *
-     * @param  array $attribs
+     * @param  array    $attribs
      * @return Gravatar
      */
     public function setAttribs(array $attribs)
     {
         $this->attribs = $attribs;
+
         return $this;
     }
 
@@ -211,12 +213,13 @@ class Gravatar extends AbstractHtmlElement
      * Can be either an absolute URL to an image, or one of the DEFAULT_* constants
      *
      * @link   http://pl.gravatar.com/site/implement/url More information about default image.
-     * @param  string $defaultImg
+     * @param  string   $defaultImg
      * @return Gravatar
      */
     public function setDefaultImg($defaultImg)
     {
         $this->options['default_img'] = urlencode($defaultImg);
+
         return $this;
     }
 
@@ -233,13 +236,14 @@ class Gravatar extends AbstractHtmlElement
     /**
      * Set email address
      *
-     * @param  string $email
+     * @param  string   $email
      * @return Gravatar
      */
     public function setEmail($email)
     {
         $this->emailIsHashed = (bool) preg_match('/^[A-Za-z0-9]{32}$/', $email);
         $this->email = strtolower(trim($email));
+
         return $this;
     }
 
@@ -256,12 +260,13 @@ class Gravatar extends AbstractHtmlElement
     /**
      * Set img size in pixels
      *
-     * @param  int $imgSize Size of img must be between 1 and 512
+     * @param  int      $imgSize Size of img must be between 1 and 512
      * @return Gravatar
      */
     public function setImgSize($imgSize)
     {
         $this->options['img_size'] = (int) $imgSize;
+
         return $this;
     }
 
@@ -281,7 +286,7 @@ class Gravatar extends AbstractHtmlElement
      * Must be one of the RATING_* constants
      *
      * @link   http://pl.gravatar.com/site/implement/url More information about rating.
-     * @param  string $rating Value for rating. Allowed values are: g, px, r,x
+     * @param  string                    $rating Value for rating. Allowed values are: g, px, r,x
      * @return Gravatar
      * @throws Exception\DomainException
      */
@@ -317,12 +322,13 @@ class Gravatar extends AbstractHtmlElement
     /**
      * Load from an SSL or No-SSL location?
      *
-     * @param  bool $flag
+     * @param  bool     $flag
      * @return Gravatar
      */
     public function setSecure($flag)
     {
         $this->options['secure'] = ($flag === null) ? null : (bool) $flag;
+
         return $this;
     }
 

@@ -30,8 +30,8 @@ class TagManager extends PrototypeClassFactory
     }
 
     /**
-     * @param string $tagName
-     * @param string $content
+     * @param  string       $tagName
+     * @param  string       $content
      * @return TagInterface
      */
     public function createTag($tagName, $content = null)

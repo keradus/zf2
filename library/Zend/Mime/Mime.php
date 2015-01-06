@@ -54,7 +54,7 @@ class Mime
         "\xE7","\xE8","\xE9","\xEA","\xEB","\xEC","\xED","\xEE",
         "\xEF","\xF0","\xF1","\xF2","\xF3","\xF4","\xF5","\xF6",
         "\xF7","\xF8","\xF9","\xFA","\xFB","\xFC","\xFD","\xFE",
-        "\xFF"
+        "\xFF",
     );
 
     public static $qpReplaceValues = array(
@@ -78,7 +78,7 @@ class Mime
         "=E7","=E8","=E9","=EA","=EB","=EC","=ED","=EE",
         "=EF","=F0","=F1","=F2","=F3","=F4","=F5","=F6",
         "=F7","=F8","=F9","=FA","=FB","=FC","=FD","=FE",
-        "=FF"
+        "=FF",
     );
 
     public static $qpKeysString =
@@ -90,7 +90,7 @@ class Mime
      * Checks that a string contains no unprintable characters. If this returns
      * false, encode the string for secure delivery.
      *
-     * @param string $str
+     * @param  string $str
      * @return bool
      */
     public static function isPrintable($str)
@@ -101,9 +101,9 @@ class Mime
     /**
      * Encode a given string with the QUOTED_PRINTABLE mechanism and wrap the lines.
      *
-     * @param string $str
-     * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param string $lineEnd Defaults to {@link LINEEND}
+     * @param  string $str
+     * @param  int    $lineLength Defaults to {@link LINELENGTH}
+     * @param  string $lineEnd    Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeQuotedPrintable($str,
@@ -132,12 +132,13 @@ class Mime
             }
 
             // Add string and continue
-            $out .= substr($str, 0, $ptr) . '=' . $lineEnd;
+            $out .= substr($str, 0, $ptr).'='.$lineEnd;
             $str = substr($str, $ptr);
         }
 
         $out = rtrim($out, $lineEnd);
         $out = rtrim($out, '=');
+
         return $out;
     }
 
@@ -152,6 +153,7 @@ class Mime
         $str = str_replace('=', '=3D', $str);
         $str = str_replace(static::$qpKeys, static::$qpReplaceValues, $str);
         $str = rtrim($str);
+
         return $str;
     }
 
@@ -161,10 +163,10 @@ class Mime
      * Mail headers depend on an extended quoted printable algorithm otherwise
      * a range of bugs can occur.
      *
-     * @param string $str
-     * @param string $charset
-     * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param string $lineEnd Defaults to {@link LINEEND}
+     * @param  string $str
+     * @param  string $charset
+     * @param  int    $lineLength Defaults to {@link LINELENGTH}
+     * @param  string $lineEnd    Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeQuotedPrintableHeader($str, $charset,
@@ -194,7 +196,7 @@ class Mime
             if ($token == '=20') {
                 // only if we have a single char token or space, we can append the
                 // tempstring it to the current line or start a new line if necessary.
-                if (strlen($lines[$currentLine] . $tmp) > $lineLength) {
+                if (strlen($lines[$currentLine].$tmp) > $lineLength) {
                     $lines[$currentLine+1] = $tmp;
                 } else {
                     $lines[$currentLine] .= $tmp;
@@ -209,9 +211,10 @@ class Mime
 
         // assemble the lines together by pre- and appending delimiters, charset, encoding.
         for ($i = 0, $count = count($lines); $i < $count; $i++) {
-            $lines[$i] = " " . $prefix . $lines[$i] . "?=";
+            $lines[$i] = " ".$prefix.$lines[$i]."?=";
         }
         $str = trim(implode($lineEnd, $lines));
+
         return $str;
     }
 
@@ -228,16 +231,17 @@ class Mime
         } else {
             $token = substr($str, 0, 1);
         }
+
         return $token;
     }
 
     /**
      * Encode a given string in mail header compatible base64 encoding.
      *
-     * @param string $str
-     * @param string $charset
-     * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param string $lineEnd Defaults to {@link LINEEND}
+     * @param  string $str
+     * @param  string $charset
+     * @param  int    $lineLength Defaults to {@link LINELENGTH}
+     * @param  string $lineEnd    Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeBase64Header($str,
@@ -245,13 +249,14 @@ class Mime
         $lineLength = self::LINELENGTH,
         $lineEnd = self::LINEEND)
     {
-        $prefix = '=?' . $charset . '?B?';
+        $prefix = '=?'.$charset.'?B?';
         $suffix = '?=';
         $remainingLength = $lineLength - strlen($prefix) - strlen($suffix);
 
         $encodedValue = static::encodeBase64($str, $remainingLength, $lineEnd);
-        $encodedValue = str_replace($lineEnd, $suffix . $lineEnd . ' ' . $prefix, $encodedValue);
-        $encodedValue = $prefix . $encodedValue . $suffix;
+        $encodedValue = str_replace($lineEnd, $suffix.$lineEnd.' '.$prefix, $encodedValue);
+        $encodedValue = $prefix.$encodedValue.$suffix;
+
         return $encodedValue;
     }
 
@@ -259,9 +264,9 @@ class Mime
      * Encode a given string in base64 encoding and break lines
      * according to the maximum linelength.
      *
-     * @param string $str
-     * @param int $lineLength Defaults to {@link LINELENGTH}
-     * @param string $lineEnd Defaults to {@link LINEEND}
+     * @param  string $str
+     * @param  int    $lineLength Defaults to {@link LINELENGTH}
+     * @param  string $lineEnd    Defaults to {@link LINEEND}
      * @return string
      */
     public static function encodeBase64($str,
@@ -281,7 +286,7 @@ class Mime
     {
         // This string needs to be somewhat unique
         if ($boundary === null) {
-            $this->boundary = '=_' . md5(microtime(1) . static::$makeUnique++);
+            $this->boundary = '=_'.md5(microtime(1).static::$makeUnique++);
         } else {
             $this->boundary = $boundary;
         }
@@ -290,9 +295,9 @@ class Mime
     /**
      * Encode the given string with the given encoding.
      *
-     * @param string $str
-     * @param string $encoding
-     * @param string $EOL EOL string; defaults to {@link LINEEND}
+     * @param  string $str
+     * @param  string $encoding
+     * @param  string $EOL      EOL string; defaults to {@link LINEEND}
      * @return string
      */
     public static function encode($str, $encoding, $EOL = self::LINEEND)
@@ -326,24 +331,24 @@ class Mime
     /**
      * Return a MIME boundary line
      *
-     * @param string $EOL Defaults to {@link LINEEND}
+     * @param  string $EOL Defaults to {@link LINEEND}
      * @access public
      * @return string
      */
     public function boundaryLine($EOL = self::LINEEND)
     {
-        return $EOL . '--' . $this->boundary . $EOL;
+        return $EOL.'--'.$this->boundary.$EOL;
     }
 
     /**
      * Return MIME ending
      *
-     * @param string $EOL Defaults to {@link LINEEND}
+     * @param  string $EOL Defaults to {@link LINEEND}
      * @access public
      * @return string
      */
     public function mimeEnd($EOL = self::LINEEND)
     {
-        return $EOL . '--' . $this->boundary . '--' . $EOL;
+        return $EOL.'--'.$this->boundary.'--'.$EOL;
     }
 }

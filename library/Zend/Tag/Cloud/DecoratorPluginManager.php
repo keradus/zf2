@@ -38,7 +38,7 @@ class DecoratorPluginManager extends AbstractPluginManager
      * Checks that the decorator loaded is an instance
      * of Decorator\DecoratorInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

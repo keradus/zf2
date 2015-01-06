@@ -26,8 +26,8 @@ class RouteMatch extends BaseRouteMatch
     /**
      * Create a part RouteMatch with given parameters and length.
      *
-     * @param  array   $params
-     * @param  int $length
+     * @param array $params
+     * @param int   $length
      */
     public function __construct(array $params, $length = 0)
     {
@@ -40,7 +40,7 @@ class RouteMatch extends BaseRouteMatch
      * setMatchedRouteName(): defined by BaseRouteMatch.
      *
      * @see    BaseRouteMatch::setMatchedRouteName()
-     * @param  string $name
+     * @param  string     $name
      * @return RouteMatch
      */
     public function setMatchedRouteName($name)
@@ -48,7 +48,7 @@ class RouteMatch extends BaseRouteMatch
         if ($this->matchedRouteName === null) {
             $this->matchedRouteName = $name;
         } else {
-            $this->matchedRouteName = $name . '/' . $this->matchedRouteName;
+            $this->matchedRouteName = $name.'/'.$this->matchedRouteName;
         }
 
         return $this;

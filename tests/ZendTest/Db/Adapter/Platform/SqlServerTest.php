@@ -25,7 +25,7 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->platform = new SqlServer;
+        $this->platform = new SqlServer();
     }
 
     /**

@@ -32,7 +32,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         foreach ($this->variables as $name => $value) {
             if (!isset($GLOBALS[$value])) {
-                $this->fail('Missing required variable ' . $value . ' from phpunit.xml for this integration test');
+                $this->fail('Missing required variable '.$value.' from phpunit.xml for this integration test');
             }
             $this->variables[$name] = $GLOBALS[$value];
         }
@@ -49,7 +49,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $sqlsrvResource = sqlsrv_connect($this->variables['hostname'], array('UID' => $this->variables['username'], 'PWD' => $this->variables['password']));
 
-        $statement = new Statement;
+        $statement = new Statement();
         $this->assertSame($statement, $statement->initialize($sqlsrvResource));
         unset($stmtResource, $sqlsrvResource);
     }
@@ -61,7 +61,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $sqlsrvResource = sqlsrv_connect($this->variables['hostname'], array('UID' => $this->variables['username'], 'PWD' => $this->variables['password']));
 
-        $statement = new Statement;
+        $statement = new Statement();
         $statement->initialize($sqlsrvResource);
         $statement->prepare("SELECT 'foo'");
         $resource = $statement->getResource();
@@ -77,7 +77,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $sqlsrvResource = sqlsrv_connect($this->variables['hostname'], array('UID' => $this->variables['username'], 'PWD' => $this->variables['password']));
 
-        $statement = new Statement;
+        $statement = new Statement();
         $statement->initialize($sqlsrvResource);
         $this->assertFalse($statement->isPrepared());
         $this->assertSame($statement, $statement->prepare("SELECT 'foo'"));

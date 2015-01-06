@@ -124,7 +124,7 @@ class MongoDbOptionsTest extends \PHPUnit_Framework_TestCase
                     'journal' => true,
                 ),
                 'server' => 'mongodb://localhost:27017',
-            )
+            ),
         );
 
         $this->assertAttributeEquals($expected, 'resources', $this->object->getResourceManager());

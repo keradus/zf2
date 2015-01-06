@@ -40,8 +40,8 @@ class Pdf extends AbstractRenderer
     /**
      * Set a PDF resource to draw the barcode inside
      *
-     * @param PdfDocument $pdf
-     * @param int     $page
+     * @param  PdfDocument $pdf
+     * @param  int         $page
      * @return Pdf
      */
     public function setResource(PdfDocument $pdf, $page = 0)
@@ -55,6 +55,7 @@ class Pdf extends AbstractRenderer
                 Page::SIZE_A4
             );
         }
+
         return $this;
     }
 
@@ -98,8 +99,8 @@ class Pdf extends AbstractRenderer
     /**
      * Draw a polygon in the rendering resource
      * @param array $points
-     * @param int $color
-     * @param  bool $filled
+     * @param int   $color
+     * @param bool  $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
@@ -140,13 +141,13 @@ class Pdf extends AbstractRenderer
 
     /**
      * Draw a polygon in the rendering resource
-     * @param string  $text
-     * @param float   $size
-     * @param array   $position
-     * @param string  $font
-     * @param int     $color
-     * @param string  $alignment
-     * @param float   $orientation
+     * @param string $text
+     * @param float  $size
+     * @param array  $position
+     * @param string $font
+     * @param int    $color
+     * @param string $alignment
+     * @param float  $orientation
      */
     protected function drawText(
         $text,
@@ -195,9 +196,9 @@ class Pdf extends AbstractRenderer
     /**
      * Calculate the width of a string:
      * in case of using alignment parameter in drawText
-     * @param string $text
-     * @param Font $font
-     * @param float $fontSize
+     * @param  string $text
+     * @param  Font   $font
+     * @param  float  $fontSize
      * @return float
      */
     public function widthForStringUsingFontSize($text, $font, $fontSize)
@@ -210,6 +211,7 @@ class Pdf extends AbstractRenderer
         $glyphs = $font->glyphNumbersForCharacters($characters);
         $widths = $font->widthsForGlyphs($glyphs);
         $stringWidth = (array_sum($widths) / $font->getUnitsPerEm()) * $fontSize;
+
         return $stringWidth;
     }
 }

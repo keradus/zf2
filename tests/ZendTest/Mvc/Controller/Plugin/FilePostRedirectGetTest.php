@@ -48,26 +48,26 @@ class FilePostRedirectGetTest extends TestCase
                 ),
         ));
 
-        $router = new SimpleRouteStack;
+        $router = new SimpleRouteStack();
         $router->addRoute('home', LiteralRoute::factory(array(
             'route'    => '/',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
-            )
+            ),
         )));
 
         $router->addRoute('sub', SegmentRoute::factory(array(
             'route' => '/foo/:param',
             'defaults' => array(
-                'param' => 1
-            )
+                'param' => 1,
+            ),
         )));
 
         $router->addRoute('ctl', SegmentRoute::factory(array(
             'route' => '/ctl/:controller',
             'defaults' => array(
                 '__NAMESPACE__' => 'ZendTest\Mvc\Controller\TestAsset',
-            )
+            ),
         )));
 
         $this->controller = new SampleController();
@@ -98,7 +98,7 @@ class FilePostRedirectGetTest extends TestCase
     {
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value'
+            'postval1' => 'value',
         )));
 
         $this->controller->dispatch($this->request, $this->response);
@@ -114,7 +114,7 @@ class FilePostRedirectGetTest extends TestCase
     {
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         )));
 
         $this->controller->dispatch($this->request, $this->response);
@@ -132,11 +132,11 @@ class FilePostRedirectGetTest extends TestCase
     public function testThrowsExceptionOnRouteWithoutRouter()
     {
         $controller = $this->controller;
-        $controller = $controller->getEvent()->setRouter(new SimpleRouteStack);
+        $controller = $controller->getEvent()->setRouter(new SimpleRouteStack());
 
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value'
+            'postval1' => 'value',
         )));
 
         $this->controller->dispatch($this->request, $this->response);
@@ -149,7 +149,7 @@ class FilePostRedirectGetTest extends TestCase
 
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         )));
 
         $this->controller->dispatch($this->request, $this->response);
@@ -167,7 +167,7 @@ class FilePostRedirectGetTest extends TestCase
 
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         )));
 
         $this->controller->dispatch($this->request, $this->response);
@@ -183,13 +183,13 @@ class FilePostRedirectGetTest extends TestCase
     {
         // Do POST
         $params = array(
-            'postval1' => 'value'
+            'postval1' => 'value',
         );
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters($params));
 
         $this->form->add(array(
-            'name' => 'postval1'
+            'name' => 'postval1',
         ));
 
         $this->controller->dispatch($this->request, $this->response);
@@ -224,7 +224,7 @@ class FilePostRedirectGetTest extends TestCase
         $this->request->setPost(new Parameters($params));
 
         $this->form->add(array(
-            'name' => 'postval1'
+            'name' => 'postval1',
         ));
         $inputFilter = new InputFilter();
         $inputFilter->add(array(
@@ -256,13 +256,13 @@ class FilePostRedirectGetTest extends TestCase
         $this->request->setMethod('POST');
         $this->request->setUri($expects);
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         )));
 
         $routeMatch = $this->event->getRouter()->match($this->request);
         $this->event->setRouteMatch($routeMatch);
 
-        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($this->event);
 
         $this->controller->dispatch($this->request, $this->response);
@@ -334,7 +334,7 @@ class FilePostRedirectGetTest extends TestCase
             'name' => 'test_collection',
             'type' => 'collection',
             'options' => array(
-                'target_element' => $fieldset
+                'target_element' => $fieldset,
             ),
         );
 
@@ -344,12 +344,12 @@ class FilePostRedirectGetTest extends TestCase
         $postData = array(
             'test_collection' => array(
                 array(
-                    'test_field' => 'foo'
+                    'test_field' => 'foo',
                 ),
                 array(
-                    'test_field' => 'bar'
-                )
-            )
+                    'test_field' => 'bar',
+                ),
+            ),
         );
 
         // test POST
@@ -388,8 +388,8 @@ class FilePostRedirectGetTest extends TestCase
 
     public function testCorrectInputDataMerging()
     {
-        require_once __DIR__ . '/TestAsset/DisablePhpUploadChecks.php';
-        require_once __DIR__ . '/TestAsset/DisablePhpMoveUploadedFileChecks.php';
+        require_once __DIR__.'/TestAsset/DisablePhpUploadChecks.php';
+        require_once __DIR__.'/TestAsset/DisablePhpMoveUploadedFileChecks.php';
 
         $form = new Form();
         $form->add(array(
@@ -398,10 +398,10 @@ class FilePostRedirectGetTest extends TestCase
             'options' => array(
                 'target_element' => new TestAsset\TestFieldset('target'),
                 'count' => 2,
-            )
+            ),
         ));
 
-        copy(__DIR__ . '/TestAsset/nullfile', __DIR__ . '/TestAsset/nullfile_copy');
+        copy(__DIR__.'/TestAsset/nullfile', __DIR__.'/TestAsset/nullfile_copy');
 
         $request = $this->request;
         $request->setMethod('POST');
@@ -412,8 +412,8 @@ class FilePostRedirectGetTest extends TestCase
                 ),
                 1 => array(
                     'text' => '',
-                )
-            )
+                ),
+            ),
         )));
         $request->setFiles(new Parameters(array(
             'collection' => array(
@@ -422,11 +422,11 @@ class FilePostRedirectGetTest extends TestCase
                         'name' => 'test.jpg',
                         'type' => 'image/jpeg',
                         'size' => 20480,
-                        'tmp_name' => __DIR__ . '/TestAsset/nullfile_copy',
-                        'error' => UPLOAD_ERR_OK
+                        'tmp_name' => __DIR__.'/TestAsset/nullfile_copy',
+                        'error' => UPLOAD_ERR_OK,
                     ),
                 ),
-            )
+            ),
         )));
 
         $this->controller->dispatch($this->request, $this->response);
@@ -443,15 +443,15 @@ class FilePostRedirectGetTest extends TestCase
                         'name' => 'test.jpg',
                         'type' => 'image/jpeg',
                         'size' => 20480,
-                        'tmp_name' => __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'testfile.jpg',
-                        'error' => 0
+                        'tmp_name' => __DIR__.DIRECTORY_SEPARATOR.'TestAsset'.DIRECTORY_SEPARATOR.'testfile.jpg',
+                        'error' => 0,
                     ),
                 ),
                 1 => array(
                     'text' => null,
                     'file' => null,
-                )
-            )
+                ),
+            ),
         ), $data);
 
         $this->assertFileExists($data['collection'][0]['file']['tmp_name']);

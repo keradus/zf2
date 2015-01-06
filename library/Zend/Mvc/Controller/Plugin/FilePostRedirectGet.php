@@ -38,9 +38,9 @@ class FilePostRedirectGet extends AbstractPlugin
     protected $sessionContainer;
 
     /**
-     * @param  FormInterface $form
-     * @param  string        $redirect      Route or URL string (default: current route)
-     * @param  bool          $redirectToUrl Use $redirect as a URL string (default: false)
+     * @param  FormInterface       $form
+     * @param  string              $redirect      Route or URL string (default: current route)
+     * @param  bool                $redirectToUrl Use $redirect as a URL string (default: false)
      * @return bool|array|Response
      */
     public function __invoke(FormInterface $form, $redirect = null, $redirectToUrl = false)
@@ -80,6 +80,7 @@ class FilePostRedirectGet extends AbstractPlugin
                 if ($input instanceof FileInput) {
                     $input->setRequired(false);
                 }
+
                 return $value;
             }
         );
@@ -119,6 +120,7 @@ class FilePostRedirectGet extends AbstractPlugin
         if (null === $container->post) {
             // No previous post, bail early
             unset($container->files);
+
             return false;
         }
 
@@ -143,8 +145,9 @@ class FilePostRedirectGet extends AbstractPlugin
                 if ($input instanceof FileInput) {
                     $input->setAutoPrependUploadValidator(false)
                           ->setValidatorChain(new ValidatorChain())
-                          ->setFilterChain(new FilterChain);
+                          ->setFilterChain(new FilterChain());
                 }
+
                 return $value;
             }
         );
@@ -172,23 +175,25 @@ class FilePostRedirectGet extends AbstractPlugin
         if (!isset($this->sessionContainer)) {
             $this->sessionContainer = new Container('file_prg_post1');
         }
+
         return $this->sessionContainer;
     }
 
     /**
-     * @param  Container $container
+     * @param  Container           $container
      * @return FilePostRedirectGet
      */
     public function setSessionContainer(Container $container)
     {
         $this->sessionContainer = $container;
+
         return $this;
     }
 
     /**
-     * @param  FormInterface $form
-     * @param  string $property
-     * @param  mixed  $value
+     * @param  FormInterface       $form
+     * @param  string              $property
+     * @param  mixed               $value
      * @return FilePostRedirectGet
      */
     protected function setProtectedFormProperty(FormInterface $form, $property, $value)
@@ -197,6 +202,7 @@ class FilePostRedirectGet extends AbstractPlugin
         $property  = $formClass->getProperty($property);
         $property->setAccessible(true);
         $property->setValue($form, $value);
+
         return $this;
     }
 
@@ -230,6 +236,7 @@ class FilePostRedirectGet extends AbstractPlugin
                 $returnValues[$name] = $retVal;
             }
         }
+
         return $returnValues;
     }
 
@@ -256,6 +263,7 @@ class FilePostRedirectGet extends AbstractPlugin
                         return $value;
                     }
                 }
+
                 return;
             }
         );
@@ -283,6 +291,7 @@ class FilePostRedirectGet extends AbstractPlugin
                         return $value;
                     }
                 }
+
                 return;
             }
         );
@@ -291,8 +300,8 @@ class FilePostRedirectGet extends AbstractPlugin
     /**
      * TODO: Good candidate for traits method in PHP 5.4 with PostRedirectGet plugin
      *
-     * @param  string  $redirect
-     * @param  bool    $redirectToUrl
+     * @param  string                               $redirect
+     * @param  bool                                 $redirectToUrl
      * @return Response
      * @throws \Zend\Mvc\Exception\RuntimeException
      */
@@ -329,6 +338,7 @@ class FilePostRedirectGet extends AbstractPlugin
         if ($redirectToUrl === false) {
             $response = $redirector->toRoute($redirect, $params, $options, $reuseMatchedParams);
             $response->setStatusCode(303);
+
             return $response;
         }
 

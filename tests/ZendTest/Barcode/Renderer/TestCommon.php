@@ -37,7 +37,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         // message if timezone is not set within php.ini
         date_default_timezone_set('GMT');
 
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
         $this->renderer = $this->getRendererObject();
     }
 
@@ -146,7 +146,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         $renderer = $this->getRendererObject(
                 array('automaticRenderError' => true,
-                        'unkownProperty' => 'aValue'));
+                        'unkownProperty' => 'aValue', ));
         $this->assertEquals(true, $renderer->getAutomaticRenderError());
     }
 
@@ -154,7 +154,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         $config = new Config\Config(
                 array('automaticRenderError' => true,
-                        'unkownProperty' => 'aValue'));
+                        'unkownProperty' => 'aValue', ));
         $renderer = $this->getRendererObject($config);
         $this->assertEquals(true, $renderer->getAutomaticRenderError());
     }
@@ -164,7 +164,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->renderer->getAutomaticRenderError());
         $this->renderer->setOptions(
                 array('automaticRenderError' => true,
-                        'unkownProperty' => 'aValue'));
+                        'unkownProperty' => 'aValue', ));
         $this->assertEquals(true, $this->renderer->getAutomaticRenderError());
     }
 

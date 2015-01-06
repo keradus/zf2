@@ -7,6 +7,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\View\Model;
 
 /**
@@ -19,8 +20,8 @@ interface RetrievableChildrenInterface
     /**
      * Returns an array of Viewmodels with captureTo value $capture
      *
-     * @param string $capture
-     * @param bool $recursive search recursive through children, default true
+     * @param  string $capture
+     * @param  bool   $recursive search recursive through children, default true
      * @return array
      */
     public function getChildrenByCaptureTo($capture, $recursive = true);

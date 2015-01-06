@@ -23,7 +23,7 @@ class EmailTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedValidators = array(
-            'Zend\Validator\Regex'
+            'Zend\Validator\Regex',
         );
         foreach ($inputSpec['validators'] as $i => $validator) {
             $class = get_class($validator);

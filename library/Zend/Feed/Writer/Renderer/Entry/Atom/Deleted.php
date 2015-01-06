@@ -20,7 +20,7 @@ class Deleted extends Renderer\AbstractRenderer implements Renderer\RendererInte
     /**
      * Constructor
      *
-     * @param  Writer\Deleted $container
+     * @param Writer\Deleted $container
      */
     public function __construct(Writer\Deleted $container)
     {
@@ -52,7 +52,7 @@ class Deleted extends Renderer\AbstractRenderer implements Renderer\RendererInte
      * Set tombstone comment
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setComment(DOMDocument $dom, DOMElement $root)
@@ -71,7 +71,7 @@ class Deleted extends Renderer\AbstractRenderer implements Renderer\RendererInte
      * Set entry authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setBy(DOMDocument $dom, DOMElement $root)

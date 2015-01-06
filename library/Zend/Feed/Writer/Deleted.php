@@ -13,7 +13,7 @@ use DateTime;
 use Zend\Feed\Uri;
 
 /**
-*/
+ */
 class Deleted
 {
     /**
@@ -59,13 +59,14 @@ class Deleted
         if (!array_key_exists('encoding', $this->data)) {
             return 'UTF-8';
         }
+
         return $this->data['encoding'];
     }
 
     /**
      * Unset a specific data point
      *
-     * @param string $name
+     * @param  string  $name
      * @return Deleted
      */
     public function remove($name)
@@ -82,12 +83,13 @@ class Deleted
      * other objects to gracefully choose whether to execute or not, depending
      * on their appropriateness for the current type, e.g. renderers.
      *
-     * @param string $type
+     * @param  string  $type
      * @return Deleted
      */
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -126,13 +128,14 @@ class Deleted
         if (!array_key_exists('reference', $this->data)) {
             return;
         }
+
         return $this->data['reference'];
     }
 
     /**
      * Set when
      *
-     * @param null|string|DateTime $date
+     * @param  null|string|DateTime               $date
      * @throws Exception\InvalidArgumentException
      * @return Deleted
      */
@@ -141,10 +144,10 @@ class Deleted
         if ($date === null) {
             $date = new DateTime();
         } elseif (is_int($date)) {
-            $date = new DateTime('@' . $date);
+            $date = new DateTime('@'.$date);
         } elseif (!$date instanceof DateTime) {
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
-            . ' passed as parameter');
+            .' passed as parameter');
         }
         $this->data['when'] = $date;
 
@@ -159,13 +162,14 @@ class Deleted
         if (!array_key_exists('when', $this->data)) {
             return;
         }
+
         return $this->data['when'];
     }
 
     /**
      * Set by
      *
-     * @param array $by
+     * @param  array                              $by
      * @throws Exception\InvalidArgumentException
      * @return Deleted
      */
@@ -177,13 +181,13 @@ class Deleted
             || !is_string($by['name'])
         ) {
             throw new Exception\InvalidArgumentException('Invalid parameter: author array must include a'
-            . ' "name" key with a non-empty string value');
+            .' "name" key with a non-empty string value');
         }
         $author['name'] = $by['name'];
         if (isset($by['email'])) {
             if (empty($by['email']) || !is_string($by['email'])) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "email" array'
-                . ' value must be a non-empty string');
+                .' value must be a non-empty string');
             }
             $author['email'] = $by['email'];
         }
@@ -193,7 +197,7 @@ class Deleted
                 || !Uri::factory($by['uri'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "uri" array value must'
-                 . ' be a non-empty string and valid URI/IRI');
+                 .' be a non-empty string and valid URI/IRI');
             }
             $author['uri'] = $by['uri'];
         }
@@ -210,16 +214,18 @@ class Deleted
         if (!array_key_exists('by', $this->data)) {
             return;
         }
+
         return $this->data['by'];
     }
 
     /**
-     * @param string $comment
+     * @param  string  $comment
      * @return Deleted
      */
     public function setComment($comment)
     {
         $this->data['comment'] = $comment;
+
         return $this;
     }
 
@@ -231,6 +237,7 @@ class Deleted
         if (!array_key_exists('comment', $this->data)) {
             return;
         }
+
         return $this->data['comment'];
     }
 }

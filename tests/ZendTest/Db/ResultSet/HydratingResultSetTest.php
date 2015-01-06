@@ -18,8 +18,8 @@ class HydratingResultSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetObjectPrototype()
     {
-        $prototype = new \stdClass;
-        $hydratingRs = new HydratingResultSet;
+        $prototype = new \stdClass();
+        $hydratingRs = new HydratingResultSet();
         $this->assertSame($hydratingRs, $hydratingRs->setObjectPrototype($prototype));
     }
 
@@ -28,7 +28,7 @@ class HydratingResultSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetHydrator()
     {
-        $hydratingRs = new HydratingResultSet;
+        $hydratingRs = new HydratingResultSet();
         $this->assertSame($hydratingRs, $hydratingRs->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods()));
     }
 
@@ -37,7 +37,7 @@ class HydratingResultSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHydrator()
     {
-        $hydratingRs = new HydratingResultSet;
+        $hydratingRs = new HydratingResultSet();
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ArraySerializable', $hydratingRs->getHydrator());
     }
 
@@ -46,9 +46,9 @@ class HydratingResultSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrent()
     {
-        $hydratingRs = new HydratingResultSet;
+        $hydratingRs = new HydratingResultSet();
         $hydratingRs->initialize(array(
-            array('id' => 1, 'name' => 'one')
+            array('id' => 1, 'name' => 'one'),
         ));
         $obj = $hydratingRs->current();
         $this->assertInstanceOf('ArrayObject', $obj);
@@ -60,9 +60,9 @@ class HydratingResultSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testToArray()
     {
-        $hydratingRs = new HydratingResultSet;
+        $hydratingRs = new HydratingResultSet();
         $hydratingRs->initialize(array(
-            array('id' => 1, 'name' => 'one')
+            array('id' => 1, 'name' => 'one'),
         ));
         $obj = $hydratingRs->toArray();
         $this->assertInternalType('array', $obj);

@@ -56,7 +56,7 @@ class Iban extends AbstractValidator
     protected static $sepaCountries = array(
         'AT', 'BE', 'BG', 'CY', 'CZ', 'DK', 'FO', 'GL', 'EE', 'FI', 'FR', 'DE',
         'GI', 'GR', 'HU', 'IS', 'IE', 'IT', 'LV', 'LI', 'LT', 'LU', 'MT', 'MC',
-        'NL', 'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'CH', 'GB'
+        'NL', 'NO', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'CH', 'GB',
     );
 
     /**
@@ -134,7 +134,7 @@ class Iban extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  array|Traversable $options OPTIONAL
+     * @param array|Traversable $options OPTIONAL
      */
     public function __construct($options = array())
     {
@@ -166,8 +166,8 @@ class Iban extends AbstractValidator
     /**
      * Sets an optional country code by ISO 3166-1
      *
-     * @param  string|null $countryCode
-     * @return Iban provides a fluent interface
+     * @param  string|null                        $countryCode
+     * @return Iban                               provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function setCountryCode($countryCode = null)
@@ -183,6 +183,7 @@ class Iban extends AbstractValidator
         }
 
         $this->countryCode = $countryCode;
+
         return $this;
     }
 
@@ -205,6 +206,7 @@ class Iban extends AbstractValidator
     public function setAllowNonSepa($allowNonSepa)
     {
         $this->allowNonSepa = (bool) $allowNonSepa;
+
         return $this;
     }
 
@@ -218,6 +220,7 @@ class Iban extends AbstractValidator
     {
         if (!is_string($value)) {
             $this->error(self::FALSEFORMAT);
+
             return false;
         }
 
@@ -232,26 +235,29 @@ class Iban extends AbstractValidator
         if (!array_key_exists($countryCode, static::$ibanRegex)) {
             $this->setValue($countryCode);
             $this->error(self::NOTSUPPORTED);
+
             return false;
         }
 
         if (!$this->allowNonSepa && !in_array($countryCode, static::$sepaCountries)) {
             $this->setValue($countryCode);
             $this->error(self::SEPANOTSUPPORTED);
+
             return false;
         }
 
-        if (!preg_match('/^' . static::$ibanRegex[$countryCode] . '$/', $value)) {
+        if (!preg_match('/^'.static::$ibanRegex[$countryCode].'$/', $value)) {
             $this->error(self::FALSEFORMAT);
+
             return false;
         }
 
-        $format = substr($value, 4) . substr($value, 0, 4);
+        $format = substr($value, 4).substr($value, 0, 4);
         $format = str_replace(
             array('A',  'B',  'C',  'D',  'E',  'F',  'G',  'H',  'I',  'J',  'K',  'L',  'M',
-                  'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'),
+                  'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z', ),
             array('10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
-                  '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'),
+                  '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', ),
             $format
         );
 
@@ -265,6 +271,7 @@ class Iban extends AbstractValidator
 
         if ($temp != 1) {
             $this->error(self::CHECKFAILED);
+
             return false;
         }
 

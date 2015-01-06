@@ -110,8 +110,8 @@ class FormRow extends AbstractHelper
     /**
      * Utility form helper that renders a label (if it exists), an element and errors
      *
-     * @param  ElementInterface $element
-     * @param  null|string      $labelPosition
+     * @param  ElementInterface                     $element
+     * @param  null|string                          $labelPosition
      * @throws \Zend\Form\Exception\DomainException
      * @return string
      */
@@ -138,8 +138,8 @@ class FormRow extends AbstractHelper
 
         // Does this element have errors ?
         if (count($element->getMessages()) > 0 && !empty($inputErrorClass)) {
-            $classAttributes = ($element->hasAttribute('class') ? $element->getAttribute('class') . ' ' : '');
-            $classAttributes = $classAttributes . $inputErrorClass;
+            $classAttributes = ($element->hasAttribute('class') ? $element->getAttribute('class').' ' : '');
+            $classAttributes = $classAttributes.$inputErrorClass;
 
             $element->setAttribute('class', $classAttributes);
         }
@@ -208,7 +208,7 @@ class FormRow extends AbstractHelper
                 if ($label !== '' && (!$element->hasAttribute('id'))
                     || ($element instanceof LabelAwareInterface && $element->getLabelOption('always_wrap'))
                 ) {
-                    $label = '<span>' . $label . '</span>';
+                    $label = '<span>'.$label.'</span>';
                 }
 
                 // Button element is a special case, because label is always rendered inside it
@@ -218,11 +218,11 @@ class FormRow extends AbstractHelper
 
                 switch ($labelPosition) {
                     case self::LABEL_PREPEND:
-                        $markup = $labelOpen . $label . $elementString . $labelClose;
+                        $markup = $labelOpen.$label.$elementString.$labelClose;
                         break;
                     case self::LABEL_APPEND:
                     default:
-                        $markup = $labelOpen . $elementString . $label . $labelClose;
+                        $markup = $labelOpen.$elementString.$label.$labelClose;
                         break;
                 }
             }
@@ -232,7 +232,7 @@ class FormRow extends AbstractHelper
             }
         } else {
             if ($this->renderErrors) {
-                $markup = $elementString . $elementErrors;
+                $markup = $elementString.$elementErrors;
             } else {
                 $markup = $elementString;
             }
@@ -244,12 +244,13 @@ class FormRow extends AbstractHelper
     /**
      * Set the class that is added to element that have errors
      *
-     * @param  string $inputErrorClass
+     * @param  string  $inputErrorClass
      * @return FormRow
      */
     public function setInputErrorClass($inputErrorClass)
     {
         $this->inputErrorClass = $inputErrorClass;
+
         return $this;
     }
 
@@ -266,12 +267,13 @@ class FormRow extends AbstractHelper
     /**
      * Set the attributes for the row label
      *
-     * @param  array $labelAttributes
+     * @param  array   $labelAttributes
      * @return FormRow
      */
     public function setLabelAttributes($labelAttributes)
     {
         $this->labelAttributes = $labelAttributes;
+
         return $this;
     }
 
@@ -288,7 +290,7 @@ class FormRow extends AbstractHelper
     /**
      * Set the label position
      *
-     * @param  string $labelPosition
+     * @param  string                                        $labelPosition
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @return FormRow
      */
@@ -322,12 +324,13 @@ class FormRow extends AbstractHelper
     /**
      * Set if the errors are rendered by this helper
      *
-     * @param  bool $renderErrors
+     * @param  bool    $renderErrors
      * @return FormRow
      */
     public function setRenderErrors($renderErrors)
     {
         $this->renderErrors = (bool) $renderErrors;
+
         return $this;
     }
 
@@ -344,12 +347,13 @@ class FormRow extends AbstractHelper
     /**
      * Set a partial view script to use for rendering the row
      *
-     * @param null|string $partial
+     * @param  null|string $partial
      * @return FormRow
      */
     public function setPartial($partial)
     {
         $this->partial = $partial;
+
         return $this;
     }
 

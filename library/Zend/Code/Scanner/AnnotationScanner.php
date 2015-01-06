@@ -42,8 +42,8 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
 
     /**
      * @param  AnnotationManager $annotationManager
-     * @param  string $docComment
-     * @param  NameInformation $nameInformation
+     * @param  string            $docComment
+     * @param  NameInformation   $nameInformation
      * @return AnnotationScanner
      */
     public function __construct(
@@ -66,7 +66,7 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
     }
 
     /**
-     * @param  array $tokens
+     * @param array $tokens
      */
     protected function scan(array $tokens)
     {
@@ -121,7 +121,7 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
         SCANNER_END:
 
         foreach ($annotations as $annotation) {
-            $annotation[]     = '@' . $annotation[0] . $annotation[1];
+            $annotation[]     = '@'.$annotation[0].$annotation[1];
             $annotationObject = $this->annotationManager->createAnnotation($annotation);
             if ($annotationObject) {
                 $this->append($annotationObject);

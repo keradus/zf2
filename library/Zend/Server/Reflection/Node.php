@@ -35,8 +35,8 @@ class Node
     /**
      * Constructor
      *
-     * @param mixed $value
-     * @param \Zend\Server\Reflection\Node $parent Optional
+     * @param  mixed                        $value
+     * @param  \Zend\Server\Reflection\Node $parent Optional
      * @return \Zend\Server\Reflection\Node
      */
     public function __construct($value, Node $parent = null)
@@ -52,9 +52,9 @@ class Node
     /**
      * Set parent node
      *
-     * @param \Zend\Server\Reflection\Node $node
-     * @param  bool $new Whether or not the child node is newly created
-     * and should always be attached
+     * @param  \Zend\Server\Reflection\Node $node
+     * @param  bool                         $new  Whether or not the child node is newly created
+     *                                            and should always be attached
      * @return void
      */
     public function setParent(Node $node, $new = false)
@@ -63,6 +63,7 @@ class Node
 
         if ($new) {
             $node->attachChild($this);
+
             return;
         }
     }
@@ -70,7 +71,7 @@ class Node
     /**
      * Create and attach a new child node
      *
-     * @param mixed $value
+     * @param  mixed                        $value
      * @access public
      * @return \Zend\Server\Reflection\Node New child node
      */
@@ -84,7 +85,7 @@ class Node
     /**
      * Attach a child node
      *
-     * @param \Zend\Server\Reflection\Node $node
+     * @param  \Zend\Server\Reflection\Node $node
      * @return void
      */
     public function attachChild(Node $node)
@@ -139,7 +140,7 @@ class Node
     /**
      * Set the node value
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return void
      */
     public function setValue($value)

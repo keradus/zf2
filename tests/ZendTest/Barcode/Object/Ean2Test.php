@@ -79,7 +79,6 @@ class Ean2Test extends TestCommon
         $this->assertTrue($this->object->checkParams());
     }
 
-
     public function testGetKnownWidthWithoutOrientation()
     {
         $this->object->setText('43');

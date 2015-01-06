@@ -65,7 +65,7 @@ class IntrospectionStrategy
      */
     public function createDefaultAnnotationManager()
     {
-        $annotationManager = new AnnotationManager;
+        $annotationManager = new AnnotationManager();
         $parser            = new GenericAnnotationParser();
         $parser->registerAnnotation(new Annotation\Inject());
         $annotationManager->attach($parser);

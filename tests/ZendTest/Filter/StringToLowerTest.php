@@ -44,7 +44,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'string' => 'string',
             'aBc1@3' => 'abc1@3',
-            'A b C'  => 'a b c'
+            'A b C'  => 'a b c',
         );
 
         foreach ($valuesExpected as $input => $output) {
@@ -64,7 +64,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'Ü'     => 'ü',
             'Ñ'     => 'ñ',
-            'ÜÑ123' => 'üñ123'
+            'ÜÑ123' => 'üñ123',
         );
 
         try {
@@ -98,7 +98,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'Ü'     => 'ü',
             'Ñ'     => 'ñ',
-            'ÜÑ123' => 'üñ123'
+            'ÜÑ123' => 'üñ123',
         );
 
         try {
@@ -120,7 +120,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'Ü'     => 'ü',
             'Ñ'     => 'ñ',
-            'ÜÑ123' => 'üñ123'
+            'ÜÑ123' => 'üñ123',
         );
 
         try {
@@ -163,9 +163,9 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     'UPPER CASE WRITTEN',
-                    'This should stay the same'
-                )
-            )
+                    'This should stay the same',
+                ),
+            ),
         );
     }
 

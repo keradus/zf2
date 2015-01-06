@@ -17,7 +17,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Start the cache
      *
-     * @param  string $pageId  Page identifier
+     * @param  string $pageId Page identifier
      * @return void
      */
     public function start($pageId = null)
@@ -41,8 +41,8 @@ class CaptureCache extends AbstractPattern
     /**
      * Write content to page identity
      *
-     * @param string      $content
-     * @param null|string $pageId
+     * @param  string                   $content
+     * @param  null|string              $pageId
      * @throws Exception\LogicException
      */
     public function set($content, $pageId = null)
@@ -57,16 +57,16 @@ class CaptureCache extends AbstractPattern
         }
 
         $path = $this->pageId2Path($pageId);
-        $file = $path . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $file = $path.DIRECTORY_SEPARATOR.$this->pageId2Filename($pageId);
 
-        $this->createDirectoryStructure($publicDir . DIRECTORY_SEPARATOR . $path);
-        $this->putFileContent($publicDir . DIRECTORY_SEPARATOR . $file, $content);
+        $this->createDirectoryStructure($publicDir.DIRECTORY_SEPARATOR.$path);
+        $this->putFileContent($publicDir.DIRECTORY_SEPARATOR.$file, $content);
     }
 
     /**
      * Get from cache
      *
-     * @param  null|string $pageId
+     * @param  null|string                $pageId
      * @return string|null
      * @throws Exception\LogicException
      * @throws Exception\RuntimeException
@@ -83,8 +83,8 @@ class CaptureCache extends AbstractPattern
         }
 
         $file = $publicDir
-            . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-            . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+            .DIRECTORY_SEPARATOR.$this->pageId2Path($pageId)
+            .DIRECTORY_SEPARATOR.$this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
             ErrorHandler::start();
@@ -93,6 +93,7 @@ class CaptureCache extends AbstractPattern
             if ($content === false) {
                 throw new Exception\RuntimeException("Failed to read cached pageId '{$pageId}'", 0, $error);
             }
+
             return $content;
         }
     }
@@ -100,7 +101,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Checks if a cache with given id exists
      *
-     * @param  null|string $pageId
+     * @param  null|string              $pageId
      * @throws Exception\LogicException
      * @return bool
      */
@@ -116,8 +117,8 @@ class CaptureCache extends AbstractPattern
         }
 
         $file = $publicDir
-            . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-            . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+            .DIRECTORY_SEPARATOR.$this->pageId2Path($pageId)
+            .DIRECTORY_SEPARATOR.$this->pageId2Filename($pageId);
 
         return file_exists($file);
     }
@@ -125,7 +126,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Remove from cache
      *
-     * @param  null|string $pageId
+     * @param  null|string                $pageId
      * @throws Exception\LogicException
      * @throws Exception\RuntimeException
      * @return bool
@@ -142,8 +143,8 @@ class CaptureCache extends AbstractPattern
         }
 
         $file = $publicDir
-            . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
-            . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+            .DIRECTORY_SEPARATOR.$this->pageId2Path($pageId)
+            .DIRECTORY_SEPARATOR.$this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
             ErrorHandler::start();
@@ -152,6 +153,7 @@ class CaptureCache extends AbstractPattern
             if (!$res) {
                 throw new Exception\RuntimeException("Failed to remove cached pageId '{$pageId}'", 0, $err);
             }
+
             return true;
         }
 
@@ -161,7 +163,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Clear cached pages matching glob pattern
      *
-     * @param string $pattern
+     * @param  string                   $pattern
      * @throws Exception\LogicException
      */
     public function clearByGlob($pattern = '**')
@@ -172,7 +174,7 @@ class CaptureCache extends AbstractPattern
         }
 
         $it = new \GlobIterator(
-            $publicDir . '/' . $pattern,
+            $publicDir.'/'.$pattern,
             \GlobIterator::CURRENT_AS_SELF | \GlobIterator::SKIP_DOTS | \GlobIterator::UNIX_PATHS
         );
         foreach ($it as $pathname => $entry) {
@@ -200,7 +202,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Get filename for page id
      *
-     * @param string $pageId
+     * @param  string $pageId
      * @return string
      */
     protected function pageId2Filename($pageId)
@@ -215,7 +217,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Get path for page id
      *
-     * @param string $pageId
+     * @param  string $pageId
      * @return string
      */
     protected function pageId2Path($pageId)
@@ -237,8 +239,8 @@ class CaptureCache extends AbstractPattern
     /**
      * Write content to a file
      *
-     * @param  string  $file File complete path
-     * @param  string  $data Data to write
+     * @param  string                     $file File complete path
+     * @param  string                     $data Data to write
      * @return void
      * @throws Exception\RuntimeException
      */
@@ -277,7 +279,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Creates directory if not already done.
      *
-     * @param string $pathname
+     * @param  string                     $pathname
      * @return void
      * @throws Exception\RuntimeException
      */
@@ -337,7 +339,7 @@ class CaptureCache extends AbstractPattern
 
             // make all missing path parts
             foreach ($parts as $part) {
-                $path.= DIRECTORY_SEPARATOR . $part;
+                $path .= DIRECTORY_SEPARATOR.$part;
 
                 // create a single directory, set and reset umask immediately
                 $umask = ($umask !== false) ? umask($umask) : false;
@@ -370,7 +372,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Returns the generated file name.
      *
-     * @param null|string $pageId
+     * @param  null|string $pageId
      * @return string
      */
     public function getFilename($pageId = null)
@@ -381,8 +383,8 @@ class CaptureCache extends AbstractPattern
 
         $publicDir = $this->getOptions()->getPublicDir();
         $path      = $this->pageId2Path($pageId);
-        $file      = $path . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $file      = $path.DIRECTORY_SEPARATOR.$this->pageId2Filename($pageId);
 
-        return $publicDir . $file;
+        return $publicDir.$file;
     }
 }

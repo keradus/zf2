@@ -20,7 +20,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     /**
      * Constructor
      *
-     * @param  \Zend\Feed\Writer\Feed $container
+     * @param \Zend\Feed\Writer\Feed $container
      */
     public function __construct($container)
     {
@@ -31,7 +31,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set feed language
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setLanguage(DOMDocument $dom, DOMElement $root)
@@ -45,8 +45,8 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     /**
      * Set feed title
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                             $dom
+     * @param  DOMElement                              $root
      * @return void
      * @throws Feed\Exception\InvalidArgumentException
      */
@@ -54,12 +54,13 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     {
         if (!$this->getDataContainer()->getTitle()) {
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
-                . ' atom:title element but a title has not been set';
+                .' atom:title element but a title has not been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -75,7 +76,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set feed description
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
@@ -93,8 +94,8 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     /**
      * Set date feed was last modified
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                             $dom
+     * @param  DOMElement                              $root
      * @return void
      * @throws Feed\Exception\InvalidArgumentException
      */
@@ -102,12 +103,13 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     {
         if (!$this->getDataContainer()->getDateModified()) {
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
-                . ' atom:updated element but a modification date has not been set';
+                .' atom:updated element but a modification date has not been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -124,7 +126,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set feed generator string
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
@@ -151,7 +153,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set link to feed
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
@@ -169,8 +171,8 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     /**
      * Set feed links
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                             $dom
+     * @param  DOMElement                              $root
      * @return void
      * @throws Feed\Exception\InvalidArgumentException
      */
@@ -179,20 +181,21 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         $flinks = $this->getDataContainer()->getFeedLinks();
         if (!$flinks || !array_key_exists('atom', $flinks)) {
             $message = 'Atom 1.0 feed elements SHOULD contain one atom:link '
-                . 'element with a rel attribute value of "self".  This is the '
-                . 'preferred URI for retrieving Atom Feed Documents representing '
-                . 'this Atom feed but a feed link has not been set';
+                .'element with a rel attribute value of "self".  This is the '
+                .'preferred URI for retrieving Atom Feed Documents representing '
+                .'this Atom feed but a feed link has not been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
 
         foreach ($flinks as $type => $href) {
-            $mime = 'application/' . strtolower($type) . '+xml';
+            $mime = 'application/'.strtolower($type).'+xml';
             $flink = $dom->createElement('link');
             $root->appendChild($flink);
             $flink->setAttribute('rel', 'self');
@@ -205,7 +208,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set feed authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -244,8 +247,8 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
     /**
      * Set feed identifier
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                             $dom
+     * @param  DOMElement                              $root
      * @return void
      * @throws Feed\Exception\InvalidArgumentException
      */
@@ -254,14 +257,15 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         if (!$this->getDataContainer()->getId()
         && !$this->getDataContainer()->getLink()) {
             $message = 'Atom 1.0 feed elements MUST contain exactly one '
-                . 'atom:id element, or as an alternative, we can use the same '
-                . 'value as atom:link however neither a suitable link nor an '
-                . 'id have been set';
+                .'atom:id element, or as an alternative, we can use the same '
+                .'value as atom:link however neither a suitable link nor an '
+                .'id have been set';
             $exception = new Feed\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -280,7 +284,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set feed copyright
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCopyright(DOMDocument $dom, DOMElement $root)
@@ -298,7 +302,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set feed level logo (image)
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setImage(DOMDocument $dom, DOMElement $root)
@@ -317,7 +321,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set date feed was created
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
@@ -336,7 +340,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set base URL to feed links
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setBaseUrl(DOMDocument $dom, DOMElement $root)
@@ -352,7 +356,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set hubs to which this feed pushes
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setHubs(DOMDocument $dom, DOMElement $root)
@@ -373,7 +377,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      * Set feed categories
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)

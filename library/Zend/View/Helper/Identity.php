@@ -48,12 +48,13 @@ class Identity extends AbstractHelper
     /**
      * Set AuthenticationService instance
      *
-     * @param AuthenticationServiceInterface $authenticationService
+     * @param  AuthenticationServiceInterface $authenticationService
      * @return Identity
      */
     public function setAuthenticationService(AuthenticationServiceInterface $authenticationService)
     {
         $this->authenticationService = $authenticationService;
+
         return $this;
     }
 

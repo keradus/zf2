@@ -40,8 +40,8 @@ class Rule
     /**
      * Create a new plural rule.
      *
-     * @param  int $numPlurals
-     * @param  array   $ast
+     * @param  int   $numPlurals
+     * @param  array $ast
      * @return Rule
      */
     protected function __construct($numPlurals, array $ast)
@@ -53,7 +53,7 @@ class Rule
     /**
      * Evaluate a number and return the plural index.
      *
-     * @param  int $number
+     * @param  int                      $number
      * @return int
      * @throws Exception\RangeException
      */
@@ -83,8 +83,8 @@ class Rule
     /**
      * Evaluate a part of an ast.
      *
-     * @param  array   $ast
-     * @param  int $number
+     * @param  array                    $ast
+     * @param  int                      $number
      * @return int
      * @throws Exception\ParseException
      */
@@ -180,7 +180,7 @@ class Rule
     /**
      * Create a new rule from a string.
      *
-     * @param  string $string
+     * @param  string                   $string
      * @throws Exception\ParseException
      * @return Rule
      */

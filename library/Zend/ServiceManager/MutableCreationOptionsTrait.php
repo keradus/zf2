@@ -22,7 +22,7 @@ trait MutableCreationOptionsTrait
     /**
      * Set creation options
      *
-     * @param array $creationOptions
+     * @param  array $creationOptions
      * @return void
      */
     public function setCreationOptions(array $creationOptions)

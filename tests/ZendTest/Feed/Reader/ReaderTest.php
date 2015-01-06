@@ -15,16 +15,16 @@ use Zend\Http\Response as HttpResponse;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class ReaderTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
 
     public function setup()
     {
-        $this->feedSamplePath = dirname(__FILE__) . '/_files';
+        $this->feedSamplePath = dirname(__FILE__).'/_files';
     }
 
     public function tearDown()
@@ -35,7 +35,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testStringImportTrimsContentToAllowSlightlyInvalidXml()
     {
         $feed = Reader\Reader::importString(
-            '   ' . file_get_contents($this->feedSamplePath.'/Reader/rss20.xml')
+            '   '.file_get_contents($this->feedSamplePath.'/Reader/rss20.xml')
         );
     }
 
@@ -124,7 +124,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testGetEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents(dirname(__FILE__) . '/Entry/_files/Atom/title/plain/atom10.xml')
+            file_get_contents(dirname(__FILE__).'/Entry/_files/Atom/title/plain/atom10.xml')
         );
 
         $this->assertEquals('utf-8', $feed->getEncoding());
@@ -134,7 +134,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testImportsFile()
     {
         $feed = Reader\Reader::importFile(
-            dirname(__FILE__) . '/Entry/_files/Atom/title/plain/atom10.xml'
+            dirname(__FILE__).'/Entry/_files/Atom/title/plain/atom10.xml'
         );
         $this->assertInstanceOf('Zend\Feed\Reader\Feed\FeedInterface', $feed);
     }
@@ -180,7 +180,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
         $this->assertTrue($links instanceof Reader\FeedSet);
         $this->assertEquals(array(
-            'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/'
+            'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/',
         ), (array) $links->getIterator()->current());
     }
 
@@ -253,8 +253,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testRegistersUserExtension()
     {
-        require_once __DIR__ . '/_files/My/Extension/JungleBooks/Entry.php';
-        require_once __DIR__ . '/_files/My/Extension/JungleBooks/Feed.php';
+        require_once __DIR__.'/_files/My/Extension/JungleBooks/Entry.php';
+        require_once __DIR__.'/_files/My/Extension/JungleBooks/Feed.php';
         $manager = Reader\Reader::getExtensionManager();
         $manager->setInvokableClass('JungleBooks\Entry', 'My\Extension\JungleBooks\Entry');
         $manager->setInvokableClass('JungleBooks\Feed', 'My\Extension\JungleBooks\Feed');
@@ -280,7 +280,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testImportRemoteFeedMethodPerformsAsExpected()
     {
         $uri = 'http://example.com/feeds/reader.xml';
-        $feedContents = file_get_contents($this->feedSamplePath . '/Reader/rss20.xml');
+        $feedContents = file_get_contents($this->feedSamplePath.'/Reader/rss20.xml');
         $response = $this->getMock('Zend\Feed\Reader\Http\ResponseInterface', array('getStatusCode', 'getBody'));
         $response->expects($this->once())
             ->method('getStatusCode')
@@ -315,7 +315,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
             foreach (array('TMPDIR', 'TEMP', 'TMP', 'windir', 'SystemRoot') as $key) {
                 if (isset($tab[$key])) {
                     if (($key == 'windir') or ($key == 'SystemRoot')) {
-                        $dir = realpath($tab[$key] . '\\temp');
+                        $dir = realpath($tab[$key].'\\temp');
                     } else {
                         $dir = realpath($tab[$key]);
                     }
@@ -331,7 +331,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
                 return $dir;
             }
         }
-        $tempFile = tempnam(md5(uniqid(rand(), TRUE)), '');
+        $tempFile = tempnam(md5(uniqid(rand(), true)), '');
         if ($tempFile) {
             $dir = realpath(dirname($tempFile));
             unlink($tempFile);

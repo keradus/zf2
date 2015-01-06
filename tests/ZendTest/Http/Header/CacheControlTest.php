@@ -45,7 +45,6 @@ class CacheControlTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
     public function testCacheControlIsEmpty()
     {
         $cacheControlHeader = new CacheControl();

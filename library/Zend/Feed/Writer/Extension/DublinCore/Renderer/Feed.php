@@ -14,7 +14,7 @@ use DOMElement;
 use Zend\Feed\Writer\Extension;
 
 /**
-*/
+ */
 class Feed extends Extension\AbstractRenderer
 {
     /**
@@ -57,7 +57,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)

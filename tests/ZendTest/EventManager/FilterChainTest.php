@@ -27,7 +27,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         if (isset($this->message)) {
             unset($this->message);
         }
-        $this->filterchain = new FilterChain;
+        $this->filterchain = new FilterChain();
     }
 
     public function testSubscribeShouldReturnCallbackHandler()
@@ -75,10 +75,12 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
                 $params['string'] = trim($params['string']);
             }
             $return =  $chain->next($context, $params, $chain);
+
             return $return;
         });
         $this->filterchain->attach(function ($context, array $params) {
             $string = isset($params['string']) ? $params['string'] : '';
+
             return str_rot13($string);
         });
         $value = $this->filterchain->run($this, array('string' => ' foo '));
@@ -107,14 +109,17 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
+
             return $chain->next($context, $params, $chain);
         }, 10000);
         $this->filterchain->attach(function ($context, array $params) {
             $string = isset($params['string']) ? $params['string'] : '';
+
             return str_rot13($string);
         }, 1000);
         $this->filterchain->attach(function ($context, $params, $chain) {
             $string = isset($params['string']) ? $params['string'] : '';
+
             return hash('md5', $string);
         }, 100);
         $value = $this->filterchain->run($this, array('string' => ' foo '));
@@ -132,6 +137,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         if (isset($params['object']) && is_object($params['object'])) {
             $params['object']->foo = 'foobarbaz';
         }
+
         return 'filtered';
     }
 

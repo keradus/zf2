@@ -257,7 +257,7 @@ class FactoryTest extends TestCase
         $input = new Input();
 
         $inputFilter = $factory->createInputFilter(array(
-            'foo' => $input
+            'foo' => $input,
         ));
 
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
@@ -271,7 +271,7 @@ class FactoryTest extends TestCase
         $input = new InputFilter();
 
         $inputFilter = $factory->createInputFilter(array(
-            'foo' => $input
+            'foo' => $input,
         ));
 
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
@@ -399,7 +399,7 @@ class FactoryTest extends TestCase
     {
         $factory     = new Factory();
         $inputFilter = $factory->createInputFilter(array(
-            array('name' => 'foo')
+            array('name' => 'foo'),
         ));
 
         $this->assertTrue($inputFilter->has('foo'));
@@ -468,16 +468,16 @@ class FactoryTest extends TestCase
             'filters' => array(
                 array(
                     'name'      => 'string_trim',
-                    'priority'  => \Zend\Filter\FilterChain::DEFAULT_PRIORITY - 1 // 999
+                    'priority'  => \Zend\Filter\FilterChain::DEFAULT_PRIORITY - 1, // 999
                 ),
                 array(
                     'name'      => 'string_to_upper',
-                    'priority'  => \Zend\Filter\FilterChain::DEFAULT_PRIORITY + 1 //1001
+                    'priority'  => \Zend\Filter\FilterChain::DEFAULT_PRIORITY + 1, //1001
                 ),
                 array(
                     'name'      => 'string_to_lower', // default priority 1000
-                )
-            )
+                ),
+            ),
         ));
 
         // We should have 3 filters
@@ -509,8 +509,8 @@ class FactoryTest extends TestCase
         $inputFilter = $factory->createInputFilter(
             array(
                 'type' => array(
-                    'required' => true
-                )
+                    'required' => true,
+                ),
             )
         );
 
@@ -544,10 +544,10 @@ class FactoryTest extends TestCase
 
     public function testSetInputFilterManagerWithServiceManager()
     {
-        $inputFilterManager = new InputFilterPluginManager;
-        $serviceManager = new ServiceManager\ServiceManager;
-        $serviceManager->setService('ValidatorManager', new Validator\ValidatorPluginManager);
-        $serviceManager->setService('FilterManager', new Filter\FilterPluginManager);
+        $inputFilterManager = new InputFilterPluginManager();
+        $serviceManager = new ServiceManager\ServiceManager();
+        $serviceManager->setService('ValidatorManager', new Validator\ValidatorPluginManager());
+        $serviceManager->setService('FilterManager', new Filter\FilterPluginManager());
         $inputFilterManager->setServiceLocator($serviceManager);
         $factory = new Factory();
         $factory->setInputFilterManager($inputFilterManager);

@@ -130,7 +130,7 @@ class Logger implements LoggerInterface
      * - exceptionhandler: if true register this logger as exceptionhandler
      * - errorhandler: if true register this logger as errorhandler
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
@@ -229,20 +229,21 @@ class Logger implements LoggerInterface
         if (null === $this->writerPlugins) {
             $this->setWriterPluginManager(new WriterPluginManager());
         }
+
         return $this->writerPlugins;
     }
 
     /**
      * Set writer plugin manager
      *
-     * @param  string|WriterPluginManager $plugins
+     * @param  string|WriterPluginManager         $plugins
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
     public function setWriterPluginManager($plugins)
     {
         if (is_string($plugins)) {
-            $plugins = new $plugins;
+            $plugins = new $plugins();
         }
         if (!$plugins instanceof WriterPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -253,14 +254,15 @@ class Logger implements LoggerInterface
         }
 
         $this->writerPlugins = $plugins;
+
         return $this;
     }
 
     /**
      * Get writer instance
      *
-     * @param string $name
-     * @param array|null $options
+     * @param  string                 $name
+     * @param  array|null             $options
      * @return Writer\WriterInterface
      */
     public function writerPlugin($name, array $options = null)
@@ -271,9 +273,9 @@ class Logger implements LoggerInterface
     /**
      * Add a writer to a logger
      *
-     * @param  string|Writer\WriterInterface $writer
-     * @param  int $priority
-     * @param  array|null $options
+     * @param  string|Writer\WriterInterface      $writer
+     * @param  int                                $priority
+     * @param  array|null                         $options
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
@@ -306,7 +308,7 @@ class Logger implements LoggerInterface
     /**
      * Set the writers
      *
-     * @param  SplPriorityQueue $writers
+     * @param  SplPriorityQueue                   $writers
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
@@ -318,6 +320,7 @@ class Logger implements LoggerInterface
             }
         }
         $this->writers = $writers;
+
         return $this;
     }
 
@@ -331,20 +334,21 @@ class Logger implements LoggerInterface
         if (null === $this->processorPlugins) {
             $this->setProcessorPluginManager(new ProcessorPluginManager());
         }
+
         return $this->processorPlugins;
     }
 
     /**
      * Set processor plugin manager
      *
-     * @param  string|ProcessorPluginManager $plugins
+     * @param  string|ProcessorPluginManager      $plugins
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
     public function setProcessorPluginManager($plugins)
     {
         if (is_string($plugins)) {
-            $plugins = new $plugins;
+            $plugins = new $plugins();
         }
         if (!$plugins instanceof ProcessorPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -355,14 +359,15 @@ class Logger implements LoggerInterface
         }
 
         $this->processorPlugins = $plugins;
+
         return $this;
     }
 
     /**
      * Get processor instance
      *
-     * @param string $name
-     * @param array|null $options
+     * @param  string                       $name
+     * @param  array|null                   $options
      * @return Processor\ProcessorInterface
      */
     public function processorPlugin($name, array $options = null)
@@ -374,8 +379,8 @@ class Logger implements LoggerInterface
      * Add a processor to a logger
      *
      * @param  string|Processor\ProcessorInterface $processor
-     * @param  int $priority
-     * @param  array|null $options
+     * @param  int                                 $priority
+     * @param  array|null                          $options
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
@@ -407,17 +412,17 @@ class Logger implements LoggerInterface
     /**
      * Add a message as a log entry
      *
-     * @param  int $priority
-     * @param  mixed $message
-     * @param  array|Traversable $extra
+     * @param  int                                $priority
+     * @param  mixed                              $message
+     * @param  array|Traversable                  $extra
      * @return Logger
      * @throws Exception\InvalidArgumentException if message can't be cast to string
      * @throws Exception\InvalidArgumentException if extra can't be iterated over
-     * @throws Exception\RuntimeException if no log writer specified
+     * @throws Exception\RuntimeException         if no log writer specified
      */
     public function log($priority, $message, $extra = array())
     {
-        if (!is_int($priority) || ($priority<0) || ($priority>=count($this->priorities))) {
+        if (!is_int($priority) || ($priority<0) || ($priority >= count($this->priorities))) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '$priority must be an integer > 0 and < %d; received %s',
                 count($this->priorities),
@@ -468,8 +473,8 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  string            $message
+     * @param  array|Traversable $extra
      * @return Logger
      */
     public function emerg($message, $extra = array())
@@ -478,8 +483,8 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  string            $message
+     * @param  array|Traversable $extra
      * @return Logger
      */
     public function alert($message, $extra = array())
@@ -488,8 +493,8 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  string            $message
+     * @param  array|Traversable $extra
      * @return Logger
      */
     public function crit($message, $extra = array())
@@ -498,8 +503,8 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  string            $message
+     * @param  array|Traversable $extra
      * @return Logger
      */
     public function err($message, $extra = array())
@@ -508,8 +513,8 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  string            $message
+     * @param  array|Traversable $extra
      * @return Logger
      */
     public function warn($message, $extra = array())
@@ -518,8 +523,8 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  string            $message
+     * @param  array|Traversable $extra
      * @return Logger
      */
     public function notice($message, $extra = array())
@@ -528,8 +533,8 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  string            $message
+     * @param  array|Traversable $extra
      * @return Logger
      */
     public function info($message, $extra = array())
@@ -538,8 +543,8 @@ class Logger implements LoggerInterface
     }
 
     /**
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  string            $message
+     * @param  array|Traversable $extra
      * @return Logger
      */
     public function debug($message, $extra = array())
@@ -551,9 +556,9 @@ class Logger implements LoggerInterface
      * Register logging system as an error handler to log PHP errors
      *
      * @link http://www.php.net/manual/function.set-error-handler.php
-     * @param  Logger $logger
-     * @param  bool   $continueNativeHandler
-     * @return mixed  Returns result of set_error_handler
+     * @param  Logger                             $logger
+     * @param  bool                               $continueNativeHandler
+     * @return mixed                              Returns result of set_error_handler
      * @throws Exception\InvalidArgumentException if logger is null
      */
     public static function registerErrorHandler(Logger $logger, $continueNativeHandler = false)
@@ -585,6 +590,7 @@ class Logger implements LoggerInterface
         });
 
         static::$registeredErrorHandler = true;
+
         return $previous;
     }
 
@@ -626,7 +632,7 @@ class Logger implements LoggerInterface
                         E_CORE_ERROR,
                         E_CORE_WARNING,
                         E_COMPILE_ERROR,
-                        E_COMPILE_WARNING
+                        E_COMPILE_WARNING,
                     ),
                     true
                 )
@@ -652,7 +658,7 @@ class Logger implements LoggerInterface
      * Register logging system as an exception handler to log PHP exceptions
      *
      * @link http://www.php.net/manual/en/function.set-exception-handler.php
-     * @param Logger $logger
+     * @param  Logger                             $logger
      * @return bool
      * @throws Exception\InvalidArgumentException if logger is null
      */
@@ -701,6 +707,7 @@ class Logger implements LoggerInterface
         });
 
         static::$registeredExceptionHandler = true;
+
         return true;
     }
 

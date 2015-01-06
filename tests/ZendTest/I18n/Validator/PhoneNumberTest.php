@@ -932,21 +932,21 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
             'patterns' => array(
                 'example' => array(
                     'fixed'     => '123456789',
-                    'mobile' => array('612345678', '712345678',),
+                    'mobile' => array('612345678', '712345678'),
                     'tollfree'  => '801234567',
-                    'premium'   => array('3123123456', '891123456', '897123456',),
-                    'shared'    => array('810123456', '820123456',),
+                    'premium'   => array('3123123456', '891123456', '897123456'),
+                    'shared'    => array('810123456', '820123456'),
                     'voip'      => '912345678',
-                    'emergency' => array('15', '17', '18', '112',),
+                    'emergency' => array('15', '17', '18', '112'),
                 ),
                 'invalid' => array(
-                    'fixed'     => array('0123456789', '1234567890', '12345678',),
-                    'mobile'    => array('0612345678', '6123456780', '123456789', '6123456789',),
-                    'tollfree'  => array('0801234567', '8012345670', '101234567', '811234567', '8012345678',),
-                    'premium'   => array('31231234560', '03123123456', '2123123456', '894123456',),
-                    'shared'    => array('812123456', '822123456', '830123456', '881123456', '891123456',),
-                    'voip'      => array('123456789', '812345678', '9123456789',),
-                    'emergency' => array('14', '16', '19', '20', '111', '113',),
+                    'fixed'     => array('0123456789', '1234567890', '12345678'),
+                    'mobile'    => array('0612345678', '6123456780', '123456789', '6123456789'),
+                    'tollfree'  => array('0801234567', '8012345670', '101234567', '811234567', '8012345678'),
+                    'premium'   => array('31231234560', '03123123456', '2123123456', '894123456'),
+                    'shared'    => array('812123456', '822123456', '830123456', '881123456', '891123456'),
+                    'voip'      => array('123456789', '812345678', '9123456789'),
+                    'emergency' => array('14', '16', '19', '20', '111', '113'),
                 ),
             ),
         ),
@@ -3065,17 +3065,17 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
             array(
                 array(),
                 array('country' => Locale::getRegion(Locale::getDefault())),
-                null
+                null,
             ),
             array(
                 array(),
                 array('country' => 'CN'),
-                'zh_CN'
+                'zh_CN',
             ),
             array(
                 array('country' => 'CN'),
                 array('country' => 'CN'),
-                null
+                null,
             ),
         );
     }
@@ -3101,7 +3101,7 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $country
      * @param string $code
-     * @param array $patterns
+     * @param array  $patterns
      */
     public function testExampleNumbers($country, $code, $patterns)
     {
@@ -3113,14 +3113,14 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
                 $this->assertTrue($this->validator->isValid($value));
 
                 // check with country code:
-                $countryCodePrefixed = $code . $value;
+                $countryCodePrefixed = $code.$value;
                 $this->assertTrue($this->validator->isValid($countryCodePrefixed));
 
                 // check fully qualified E.123/E.164 international variants
-                $fullyQualifiedDoubleO = '00' . $code . $value;
+                $fullyQualifiedDoubleO = '00'.$code.$value;
                 $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO));
 
-                $fullyQualifiedPlus = '+' . $code . $value;
+                $fullyQualifiedPlus = '+'.$code.$value;
                 $this->assertTrue($this->validator->isValid($fullyQualifiedPlus));
             }
         }
@@ -3131,7 +3131,7 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $country
      * @param string $code
-     * @param array $patterns
+     * @param array  $patterns
      */
     public function testExampleNumbersAgainstPossible($country, $code, $patterns)
     {
@@ -3144,14 +3144,14 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
                 $this->assertTrue($this->validator->isValid($value));
 
                 // check with country code:
-                $countryCodePrefixed = $code . $value;
+                $countryCodePrefixed = $code.$value;
                 $this->assertTrue($this->validator->isValid($countryCodePrefixed));
 
                 // check fully qualified E.123/E.164 international variants
-                $fullyQualifiedDoubleO = '00' . $code . $value;
+                $fullyQualifiedDoubleO = '00'.$code.$value;
                 $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO), $fullyQualifiedDoubleO);
 
-                $fullyQualifiedPlus = '+' . $code . $value;
+                $fullyQualifiedPlus = '+'.$code.$value;
                 $this->assertTrue($this->validator->isValid($fullyQualifiedPlus), $fullyQualifiedPlus);
             }
         }
@@ -3175,7 +3175,7 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $country
      * @param string $code
-     * @param array $patterns
+     * @param array  $patterns
      */
     public function testInvalidTypes($country, $code, $patterns)
     {
@@ -3190,14 +3190,14 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
                 $this->assertFalse($this->validator->isValid($value));
 
                 // check with country code:
-                $countryCodePrefixed = $code . $value;
+                $countryCodePrefixed = $code.$value;
                 $this->assertFalse($this->validator->isValid($countryCodePrefixed));
 
                 // check fully qualified E.123/E.164 international variants
-                $fullyQualifiedDoubleO = '00' . $code . $value;
+                $fullyQualifiedDoubleO = '00'.$code.$value;
                 $this->assertFalse($this->validator->isValid($fullyQualifiedDoubleO));
 
-                $fullyQualifiedPlus = '+' . $code . $value;
+                $fullyQualifiedPlus = '+'.$code.$value;
                 $this->assertFalse($this->validator->isValid($fullyQualifiedPlus));
             }
         }

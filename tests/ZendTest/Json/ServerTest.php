@@ -14,7 +14,7 @@ use Zend\Json;
 use Zend\Json\Server\Request;
 use Zend\Json\Server\Response;
 
-require_once __DIR__ . '/TestAsset/FooFunc.php';
+require_once __DIR__.'/TestAsset/FooFunc.php';
 
 /**
  * Test class for Zend\Json\Server
@@ -79,7 +79,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             if ('_' == $method[0]) {
                 continue;
             }
-            $this->assertTrue($test->hasMethod($method), 'Testing for method ' . $method . ' against ' . var_export($test, 1));
+            $this->assertTrue($test->hasMethod($method), 'Testing for method '.$method.' against '.var_export($test, 1));
         }
     }
 
@@ -101,7 +101,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             if ('_' == $method[0]) {
                 continue;
             }
-            $this->assertTrue($test->hasMethod($method), 'Testing for method ' . $method . ' against ' . var_export($test, 1));
+            $this->assertTrue($test->hasMethod($method), 'Testing for method '.$method.' against '.var_export($test, 1));
         }
     }
 
@@ -248,7 +248,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof Response);
         $this->assertFalse($response->isError());
 
-
         $request->setMethod('ZendTest\\Json\\TestAsset\\FooFunc')
                 ->setId('foo');
         $response = $this->server->handle();
@@ -263,7 +262,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
-                ->setParams(array(true, NULL, 'bar'))
+                ->setParams(array(true, null, 'bar'))
                 ->setId('foo');
         $response = $this->server->handle();
         $this->assertTrue($response instanceof Response);
@@ -333,7 +332,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                 ->setParams(array(
                     'three' => 3,
                     'two'   => 2,
-                    'one'   => 1
+                    'one'   => 1,
                 ))
                 ->setId('foo');
         $response = $this->server->handle();

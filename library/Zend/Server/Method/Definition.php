@@ -49,7 +49,7 @@ class Definition
     /**
      * Constructor
      *
-     * @param  null|array $options
+     * @param null|array $options
      */
     public function __construct($options = null)
     {
@@ -61,29 +61,31 @@ class Definition
     /**
      * Set object state from options
      *
-     * @param  array $options
+     * @param  array                          $options
      * @return \Zend\Server\Method\Definition
      */
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
     /**
      * Set method name
      *
-     * @param  string $name
+     * @param  string                         $name
      * @return \Zend\Server\Method\Definition
      */
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
@@ -100,7 +102,7 @@ class Definition
     /**
      * Set method callback
      *
-     * @param  array|\Zend\Server\Method\Callback $callback
+     * @param  array|\Zend\Server\Method\Callback        $callback
      * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
@@ -112,6 +114,7 @@ class Definition
             throw new Server\Exception\InvalidArgumentException('Invalid method callback provided');
         }
         $this->callback = $callback;
+
         return $this;
     }
 
@@ -128,7 +131,7 @@ class Definition
     /**
      * Add prototype to method definition
      *
-     * @param  array|\Zend\Server\Method\Prototype $prototype
+     * @param  array|\Zend\Server\Method\Prototype       $prototype
      * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
@@ -140,13 +143,14 @@ class Definition
             throw new Server\Exception\InvalidArgumentException('Invalid method prototype provided');
         }
         $this->prototypes[] = $prototype;
+
         return $this;
     }
 
     /**
      * Add multiple prototypes at once
      *
-     * @param  array $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
+     * @param  array                          $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
      * @return \Zend\Server\Method\Definition
      */
     public function addPrototypes(array $prototypes)
@@ -154,19 +158,21 @@ class Definition
         foreach ($prototypes as $prototype) {
             $this->addPrototype($prototype);
         }
+
         return $this;
     }
 
     /**
      * Set all prototypes at once (overwrites)
      *
-     * @param  array $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
+     * @param  array                          $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
      * @return \Zend\Server\Method\Definition
      */
     public function setPrototypes(array $prototypes)
     {
         $this->prototypes = array();
         $this->addPrototypes($prototypes);
+
         return $this;
     }
 
@@ -183,12 +189,13 @@ class Definition
     /**
      * Set method help
      *
-     * @param  string $methodHelp
+     * @param  string                         $methodHelp
      * @return \Zend\Server\Method\Definition
      */
     public function setMethodHelp($methodHelp)
     {
         $this->methodHelp = (string) $methodHelp;
+
         return $this;
     }
 
@@ -205,16 +212,17 @@ class Definition
     /**
      * Set object to use with method calls
      *
-     * @param  object $object
+     * @param  object                                    $object
      * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
     public function setObject($object)
     {
         if (!is_object($object) && (null !== $object)) {
-            throw new Server\Exception\InvalidArgumentException('Invalid object passed to ' . __CLASS__ . '::' . __METHOD__);
+            throw new Server\Exception\InvalidArgumentException('Invalid object passed to '.__CLASS__.'::'.__METHOD__);
         }
         $this->object = $object;
+
         return $this;
     }
 
@@ -231,12 +239,13 @@ class Definition
     /**
      * Set invoke arguments
      *
-     * @param  array $invokeArguments
+     * @param  array                          $invokeArguments
      * @return \Zend\Server\Method\Definition
      */
     public function setInvokeArguments(array $invokeArguments)
     {
         $this->invokeArguments = $invokeArguments;
+
         return $this;
     }
 

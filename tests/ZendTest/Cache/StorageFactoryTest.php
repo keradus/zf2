@@ -92,7 +92,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         $cache = Cache\StorageFactory::factory(array(
             'adapter' => 'Memory',
             'options' => array(
-                'namespace' => 'test'
+                'namespace' => 'test',
             ),
         ));
 
@@ -105,7 +105,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         $cache = Cache\StorageFactory::factory(array(
             'adapter' => array(
                 'name' => 'Memory',
-            )
+            ),
         ));
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cache);
     }
@@ -126,7 +126,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         // test plugin structure
         $i = 0;
         foreach ($cache->getPluginRegistry() as $plugin) {
-            $this->assertInstanceOf('Zend\Cache\Storage\Plugin\\' . $plugins[$i++], $plugin);
+            $this->assertInstanceOf('Zend\Cache\Storage\Plugin\\'.$plugins[$i++], $plugin);
         }
     }
 
@@ -147,7 +147,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
                  'name' => 'Memory',
                  'options' => array(
                      'ttl' => 123,
-                     'namespace' => 'willBeOverwritten'
+                     'namespace' => 'willBeOverwritten',
                  ),
             ),
             'plugins' => array(
@@ -170,12 +170,12 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
             ),
             'options' => array(
                 'namespace' => 'test',
-            )
+            ),
         );
         $storage = Cache\StorageFactory::factory($factory);
 
         // test adapter
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\\' . $factory['adapter']['name'], $storage);
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\\'.$factory['adapter']['name'], $storage);
         $this->assertEquals(123, $storage->getOptions()->getTtl());
         $this->assertEquals('test', $storage->getOptions()->getNamespace());
 

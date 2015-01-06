@@ -141,7 +141,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanSetFormatter()
     {
-        $formatter = new SimpleFormatter;
+        $formatter = new SimpleFormatter();
         $this->_writer->setFormatter($formatter);
 
         $r = new ReflectionObject($this->_writer);
@@ -160,7 +160,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $m->setAccessible(true);
         $this->assertFalse($m->invoke($this->_writer));
 
-        $this->_writer->setFormatter(new SimpleFormatter);
+        $this->_writer->setFormatter(new SimpleFormatter());
         $this->assertTrue($m->invoke($this->_writer));
     }
 }

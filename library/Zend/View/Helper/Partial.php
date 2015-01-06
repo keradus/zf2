@@ -28,8 +28,8 @@ class Partial extends AbstractHelper
      * Renders a template fragment within a variable scope distinct from the
      * calling View object. It proxies to view's render function
      *
-     * @param  string|ModelInterface $name   Name of view script, or a view model
-     * @param  array|object          $values Variables to populate in the view
+     * @param  string|ModelInterface      $name   Name of view script, or a view model
+     * @param  array|object               $values Variables to populate in the view
      * @throws Exception\RuntimeException
      * @return string|Partial
      */
@@ -72,6 +72,7 @@ class Partial extends AbstractHelper
     {
         if (null === $key) {
             $this->objectKey = null;
+
             return $this;
         }
 

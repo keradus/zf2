@@ -44,5 +44,5 @@ class IfNoneMatchTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('If-None-Match: xxx', $ifNoneMatchHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

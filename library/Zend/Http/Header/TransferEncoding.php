@@ -24,7 +24,7 @@ class TransferEncoding implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'transfer-encoding') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Transfer-Encoding string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Transfer-Encoding string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class TransferEncoding implements HeaderInterface
 
     public function toString()
     {
-        return 'Transfer-Encoding: ' . $this->getFieldValue();
+        return 'Transfer-Encoding: '.$this->getFieldValue();
     }
 }

@@ -40,6 +40,6 @@ class Oci8IntegrationTest extends AbstractIntegrationTest
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\Oci8\Statement', $stmt);
 
         $this->setExpectedException('Zend\Db\Adapter\Exception\InvalidArgumentException', 'only accepts an SQL string or an oci8 resource');
-        $driver->createStatement(new \stdClass);
+        $driver->createStatement(new \stdClass());
     }
 }

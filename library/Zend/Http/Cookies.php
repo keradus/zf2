@@ -82,8 +82,8 @@ class Cookies extends Headers
     public static function fromString($string)
     {
         throw new Exception\RuntimeException(
-            __CLASS__ . '::' . __FUNCTION__ . ' should not be used as a factory, use '
-            . __NAMESPACE__ . '\Headers::fromtString() instead.'
+            __CLASS__.'::'.__FUNCTION__.' should not be used as a factory, use '
+            .__NAMESPACE__.'\Headers::fromtString() instead.'
         );
     }
 
@@ -91,8 +91,8 @@ class Cookies extends Headers
      * Add a cookie to the class. Cookie should be passed either as a Zend\Http\Header\Cookie object
      * or as a string - in which case an object is created from the string.
      *
-     * @param SetCookie|string $cookie
-     * @param Uri\Uri|string $refUri Optional reference URI (for domain, path, secure)
+     * @param  SetCookie|string                   $cookie
+     * @param  Uri\Uri|string                     $refUri Optional reference URI (for domain, path, secure)
      * @throws Exception\InvalidArgumentException
      */
     public function addCookie($cookie, $refUri = null)
@@ -120,8 +120,8 @@ class Cookies extends Headers
     /**
      * Parse an HTTP response, adding all the cookies set in that response
      *
-     * @param Response $response
-     * @param Uri\Uri|string $refUri Requested URI
+     * @param Response       $response
+     * @param Uri\Uri|string $refUri   Requested URI
      */
     public function addCookiesFromResponse(Response $response, $refUri)
     {
@@ -139,12 +139,13 @@ class Cookies extends Headers
     /**
      * Get all cookies in the cookie jar as an array
      *
-     * @param int $retAs Whether to return cookies as objects of \Zend\Http\Header\SetCookie or as strings
+     * @param  int          $retAs Whether to return cookies as objects of \Zend\Http\Header\SetCookie or as strings
      * @return array|string
      */
     public function getAllCookies($retAs = self::COOKIE_OBJECT)
     {
         $cookies = $this->_flattenCookiesArray($this->cookies, $retAs);
+
         return $cookies;
     }
 
@@ -153,10 +154,10 @@ class Cookies extends Headers
      * whether session cookies should be sent or not, and the time to consider as "now" when
      * checking cookie expiry time.
      *
-     * @param string|Uri\Uri $uri URI to check against (secure, domain, path)
-     * @param bool $matchSessionCookies Whether to send session cookies
-     * @param int $retAs Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
-     * @param int $now Override the current time when checking for expiry time
+     * @param  string|Uri\Uri                     $uri                 URI to check against (secure, domain, path)
+     * @param  bool                               $matchSessionCookies Whether to send session cookies
+     * @param  int                                $retAs               Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
+     * @param  int                                $now                 Override the current time when checking for expiry time
      * @throws Exception\InvalidArgumentException if invalid URI specified
      * @return array|string
      */
@@ -198,9 +199,9 @@ class Cookies extends Headers
     /**
      * Get a specific cookie according to a URI and name
      *
-     * @param Uri\Uri|string $uri The uri (domain and path) to match
-     * @param string $cookieName The cookie's name
-     * @param int $retAs Whether to return cookies as objects of \Zend\Http\Header\SetCookie or as strings
+     * @param  Uri\Uri|string                     $uri        The uri (domain and path) to match
+     * @param  string                             $cookieName The cookie's name
+     * @param  int                                $retAs      Whether to return cookies as objects of \Zend\Http\Header\SetCookie or as strings
      * @throws Exception\InvalidArgumentException if invalid URI specified or invalid $retAs value
      * @return SetCookie|string
      */
@@ -247,8 +248,8 @@ class Cookies extends Headers
      * Helper function to recursively flatten an array. Should be used when exporting the
      * cookies array (or parts of it)
      *
-     * @param \Zend\Http\Header\SetCookie|array $ptr
-     * @param int $retAs What value to return
+     * @param  \Zend\Http\Header\SetCookie|array $ptr
+     * @param  int                               $retAs What value to return
      * @return array|string
      */
     protected function _flattenCookiesArray($ptr, $retAs = self::COOKIE_OBJECT)
@@ -262,6 +263,7 @@ class Cookies extends Headers
                     $ret = array_merge($ret, $this->_flattenCookiesArray($item, $retAs));
                 }
             }
+
             return $ret;
         } elseif ($ptr instanceof SetCookie) {
             switch ($retAs) {
@@ -283,7 +285,7 @@ class Cookies extends Headers
     /**
      * Return a subset of the cookies array matching a specific domain
      *
-     * @param string $domain
+     * @param  string $domain
      * @return array
      */
     protected function _matchDomain($domain)
@@ -302,8 +304,8 @@ class Cookies extends Headers
     /**
      * Return a subset of a domain-matching cookies that also match a specified path
      *
-     * @param array $domains
-     * @param string $path
+     * @param  array  $domains
+     * @param  string $path
      * @return array
      */
     protected function _matchPath($domains, $path)
@@ -331,8 +333,8 @@ class Cookies extends Headers
      * considered as the requested URI for setting default domain and path
      * of the cookie.
      *
-     * @param Response $response HTTP Response object
-     * @param Uri\Uri|string $refUri The requested URI
+     * @param  Response       $response HTTP Response object
+     * @param  Uri\Uri|string $refUri   The requested URI
      * @return Cookies
      * @todo Add the $uri functionality.
      */
@@ -340,6 +342,7 @@ class Cookies extends Headers
     {
         $jar = new static();
         $jar->addCookiesFromResponse($response, $refUri);
+
         return $jar;
     }
 
@@ -361,6 +364,7 @@ class Cookies extends Headers
     public function reset()
     {
         $this->cookies = $this->rawCookies = array();
+
         return $this;
     }
 }

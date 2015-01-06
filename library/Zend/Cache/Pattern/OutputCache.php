@@ -23,7 +23,7 @@ class OutputCache extends AbstractPattern
     /**
      * Set options
      *
-     * @param  PatternOptions $options
+     * @param  PatternOptions                     $options
      * @return OutputCache
      * @throws Exception\InvalidArgumentException
      */
@@ -42,7 +42,7 @@ class OutputCache extends AbstractPattern
      * if there is a cached item with the given key display it's data and return true
      * else start buffering output until end() is called or the script ends.
      *
-     * @param  string  $key Key
+     * @param  string                        $key Key
      * @throws Exception\MissingKeyException if key is missing
      * @return bool
      */
@@ -56,12 +56,14 @@ class OutputCache extends AbstractPattern
         $data    = $this->getOptions()->getStorage()->getItem($key, $success);
         if ($success) {
             echo $data;
+
             return true;
         }
 
         ob_start();
         ob_implicit_flush(false);
         $this->keyStack[] = $key;
+
         return false;
     }
 
@@ -70,7 +72,7 @@ class OutputCache extends AbstractPattern
      * and displays the buffer.
      *
      * @throws Exception\RuntimeException if output cache not started or buffering not active
-     * @return bool TRUE on success, FALSE on failure writing to cache
+     * @return bool                       TRUE on success, FALSE on failure writing to cache
      */
     public function end()
     {

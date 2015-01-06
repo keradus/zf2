@@ -34,9 +34,9 @@ class ServiceLocatorUsageException extends ServiceNotFoundException
         return new self(
             sprintf(
                 "Service \"%s\" has been requested to plugin manager of type \"%s\", but couldn't be retrieved.\n"
-                . "A previous exception of type \"%s\" has been raised in the process.\n"
-                . "By the way, a service with the name \"%s\" has been found in the parent service locator \"%s\": "
-                . 'did you forget to use $parentLocator = $serviceLocator->getServiceLocator() in your factory code?',
+                ."A previous exception of type \"%s\" has been raised in the process.\n"
+                ."By the way, a service with the name \"%s\" has been found in the parent service locator \"%s\": "
+                .'did you forget to use $parentLocator = $serviceLocator->getServiceLocator() in your factory code?',
                 $serviceName,
                 get_class($pluginManager),
                 get_class($previousException),

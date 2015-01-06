@@ -37,6 +37,7 @@ class Debug
         if (static::$sapi === null) {
             static::$sapi = PHP_SAPI;
         }
+
         return static::$sapi;
     }
 
@@ -44,7 +45,7 @@ class Debug
      * Set the debug output environment.
      * Setting a value of null causes Zend\Debug\Debug to use PHP_SAPI.
      *
-     * @param string $sapi
+     * @param  string $sapi
      * @return void;
      */
     public static function setSapi($sapi)
@@ -55,7 +56,7 @@ class Debug
     /**
      * Set Escaper instance
      *
-     * @param  Escaper $escaper
+     * @param Escaper $escaper
      */
     public static function setEscaper(Escaper $escaper)
     {
@@ -74,6 +75,7 @@ class Debug
         if (null === static::$escaper) {
             static::setEscaper(new Escaper());
         }
+
         return static::$escaper;
     }
 
@@ -90,7 +92,7 @@ class Debug
     public static function dump($var, $label = null, $echo = true)
     {
         // format the label
-        $label = ($label===null) ? '' : rtrim($label) . ' ';
+        $label = ($label === null) ? '' : rtrim($label).' ';
 
         // var_dump the variable into a buffer and keep the output
         ob_start();
@@ -100,9 +102,9 @@ class Debug
         // neaten the newlines and indents
         $output = preg_replace("/\]\=\>\n(\s+)/m", "] => ", $output);
         if (static::getSapi() == 'cli') {
-            $output = PHP_EOL . $label
-                    . PHP_EOL . $output
-                    . PHP_EOL;
+            $output = PHP_EOL.$label
+                    .PHP_EOL.$output
+                    .PHP_EOL;
         } else {
             if (null !== static::$escaper) {
                 $output = static::$escaper->escapeHtml($output);
@@ -111,14 +113,15 @@ class Debug
             }
 
             $output = '<pre>'
-                    . $label
-                    . $output
-                    . '</pre>';
+                    .$label
+                    .$output
+                    .'</pre>';
         }
 
         if ($echo) {
             echo $output;
         }
+
         return $output;
     }
 }

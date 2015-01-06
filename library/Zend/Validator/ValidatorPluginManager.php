@@ -121,7 +121,7 @@ class ValidatorPluginManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * attached translator, if any, to the currently requested helper.
      *
-     * @param  null|ConfigInterface $configuration
+     * @param null|ConfigInterface $configuration
      */
     public function __construct(ConfigInterface $configuration = null)
     {
@@ -164,7 +164,7 @@ class ValidatorPluginManager extends AbstractPluginManager
      *
      * Checks that the validator loaded is an instance of ValidatorInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                      $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

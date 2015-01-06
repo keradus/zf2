@@ -40,8 +40,8 @@ class CallbackHandler
     /**
      * Constructor
      *
-     * @param  string|array|object|callable $callback PHP callback
-     * @param  array                        $metadata  Callback metadata
+     * @param string|array|object|callable $callback PHP callback
+     * @param array                        $metadata Callback metadata
      */
     public function __construct($callback, array $metadata = array())
     {
@@ -52,7 +52,7 @@ class CallbackHandler
     /**
      * Registers the callback provided in the constructor
      *
-     * @param  callable $callback
+     * @param  callable                           $callback
      * @throws Exception\InvalidCallbackException
      * @return void
      */
@@ -110,11 +110,13 @@ class CallbackHandler
                 if (static::$isPhp54) {
                     return $callback();
                 }
+
                 return call_user_func($callback);
             case 1:
                 if (static::$isPhp54) {
                     return $callback(array_shift($args));
                 }
+
                 return call_user_func($callback, array_shift($args));
             case 2:
                 $arg1 = array_shift($args);
@@ -122,6 +124,7 @@ class CallbackHandler
                 if (static::$isPhp54) {
                     return $callback($arg1, $arg2);
                 }
+
                 return call_user_func($callback, $arg1, $arg2);
             case 3:
                 $arg1 = array_shift($args);
@@ -130,6 +133,7 @@ class CallbackHandler
                 if (static::$isPhp54) {
                     return $callback($arg1, $arg2, $arg3);
                 }
+
                 return call_user_func($callback, $arg1, $arg2, $arg3);
             default:
                 return call_user_func_array($callback, $args);
@@ -167,6 +171,7 @@ class CallbackHandler
         if (array_key_exists($name, $this->metadata)) {
             return $this->metadata[$name];
         }
+
         return;
     }
 
@@ -175,7 +180,7 @@ class CallbackHandler
      *
      * Validates that a static method call in PHP 5.4 will actually work
      *
-     * @param  string $callback
+     * @param  string                             $callback
      * @return true|array
      * @throws Exception\InvalidCallbackException if invalid
      */

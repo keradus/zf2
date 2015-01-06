@@ -14,7 +14,7 @@ interface RouteMatcherInterface
     /**
      * Match parameters against route passed to constructor
      *
-     * @param array $params
+     * @param  array      $params
      * @return array|null
      */
     public function match($params);

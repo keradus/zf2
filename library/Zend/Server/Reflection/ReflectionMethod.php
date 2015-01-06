@@ -29,10 +29,10 @@ class ReflectionMethod extends AbstractFunction
     /**
      * Constructor
      *
-     * @param ReflectionClass $class
+     * @param ReflectionClass   $class
      * @param \ReflectionMethod $r
-     * @param string $namespace
-     * @param array $argv
+     * @param string            $namespace
+     * @param array             $argv
      */
     public function __construct(ReflectionClass $class, \ReflectionMethod $r, $namespace = null, $argv = array())
     {

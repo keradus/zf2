@@ -69,7 +69,7 @@ class Select extends Element implements InputProviderInterface
     }
 
     /**
-     * @param  array $options
+     * @param  array  $options
      * @return Select
      */
     public function setValueOptions(array $options)
@@ -95,7 +95,7 @@ class Select extends Element implements InputProviderInterface
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      * @return self
      */
     public function unsetValueOption($key)
@@ -114,7 +114,7 @@ class Select extends Element implements InputProviderInterface
      * - value_options: list of values and labels for the select options
      * _ empty_option: should an empty option be prepended to the options ?
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable        $options
      * @return Select|ElementInterface
      * @throws InvalidArgumentException
      */
@@ -152,8 +152,8 @@ class Select extends Element implements InputProviderInterface
     /**
      * Set a single element attribute
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  string                  $key
+     * @param  mixed                   $value
      * @return Select|ElementInterface
      */
     public function setAttribute($key, $value)
@@ -162,20 +162,23 @@ class Select extends Element implements InputProviderInterface
         // TODO: Deprecate this
         if ($key === 'options') {
             $this->setValueOptions($value);
+
             return $this;
         }
+
         return parent::setAttribute($key, $value);
     }
 
     /**
      * Set the flag to allow for disabling the automatic addition of an InArray validator.
      *
-     * @param bool $disableOption
+     * @param  bool   $disableOption
      * @return Select
      */
     public function setDisableInArrayValidator($disableOption)
     {
         $this->disableInArrayValidator = (bool) $disableOption;
+
         return $this;
     }
 
@@ -198,6 +201,7 @@ class Select extends Element implements InputProviderInterface
     public function setEmptyOption($emptyOption)
     {
         $this->emptyOption = $emptyOption;
+
         return $this;
     }
 
@@ -221,7 +225,7 @@ class Select extends Element implements InputProviderInterface
         if (null === $this->validator && !$this->disableInArrayValidator()) {
             $validator = new InArrayValidator(array(
                 'haystack' => $this->getValueOptionsValues(),
-                'strict'   => false
+                'strict'   => false,
             ));
 
             if ($this->isMultiple()) {
@@ -233,18 +237,20 @@ class Select extends Element implements InputProviderInterface
 
             $this->validator = $validator;
         }
+
         return $this->validator;
     }
 
     /**
      * Do we render hidden element?
      *
-     * @param  bool $useHiddenElement
+     * @param  bool   $useHiddenElement
      * @return Select
      */
     public function setUseHiddenElement($useHiddenElement)
     {
         $this->useHiddenElement = (bool) $useHiddenElement;
+
         return $this;
     }
 
@@ -261,12 +267,13 @@ class Select extends Element implements InputProviderInterface
     /**
      * Set the value if the select is not selected
      *
-     * @param string $unselectedValue
+     * @param  string $unselectedValue
      * @return Select
      */
     public function setUnselectedValue($unselectedValue)
     {
         $this->unselectedValue = (string) $unselectedValue;
+
         return $this;
     }
 
@@ -304,9 +311,10 @@ class Select extends Element implements InputProviderInterface
                         if ($value === $unselectedValue) {
                             $value = array();
                         }
+
                         return $value;
-                    }
-                )
+                    },
+                ),
             ));
         }
 
@@ -338,6 +346,7 @@ class Select extends Element implements InputProviderInterface
 
             $values[] = $this->getOptionValue($key, $optionSpec);
         }
+
         return $values;
     }
 

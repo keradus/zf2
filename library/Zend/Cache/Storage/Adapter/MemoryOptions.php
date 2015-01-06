@@ -32,7 +32,7 @@ class MemoryOptions extends AdapterOptions
      *   will be thrown.
      *
      * @link http://php.net/manual/faq.using.php#faq.using.shorthandbytes
-     * @param  string|int $memoryLimit
+     * @param  string|int    $memoryLimit
      * @return MemoryOptions
      */
     public function setMemoryLimit($memoryLimit)
@@ -74,7 +74,7 @@ class MemoryOptions extends AdapterOptions
     /**
      * Normalized a given value of memory limit into the number of bytes
      *
-     * @param string|int $value
+     * @param  string|int                         $value
      * @throws Exception\InvalidArgumentException
      * @return int
      */
@@ -95,15 +95,15 @@ class MemoryOptions extends AdapterOptions
 
         switch (strtoupper($matches[2])) {
             case 'G':
-                $value*= 1024;
+                $value *= 1024;
                 // no break
 
             case 'M':
-                $value*= 1024;
+                $value *= 1024;
                 // no break
 
             case 'K':
-                $value*= 1024;
+                $value *= 1024;
                 // no break
         }
 

@@ -52,8 +52,8 @@ class Combine extends AbstractPreparableSql
      * Create combine clause
      *
      * @param Select|array $select
-     * @param string $type
-     * @param string $modifier
+     * @param string       $type
+     * @param string       $modifier
      *
      * @return self
      */
@@ -71,6 +71,7 @@ class Combine extends AbstractPreparableSql
                     isset($combine[2]) ? $combine[2] : $modifier
                 );
             }
+
             return $this;
         }
 
@@ -84,8 +85,9 @@ class Combine extends AbstractPreparableSql
         $this->combine[] = array(
             'select' => $select,
             'type' => $type,
-            'modifier' => $modifier
+            'modifier' => $modifier,
         );
+
         return $this;
     }
 
@@ -118,8 +120,8 @@ class Combine extends AbstractPreparableSql
     /**
      * Create intersect clause
      *
-     * @param Select|array $select
-     * @param string $modifier
+     * @param  Select|array $select
+     * @param  string       $modifier
      * @return self
      */
     public function intersect($select, $modifier = '')
@@ -146,7 +148,7 @@ class Combine extends AbstractPreparableSql
         foreach ($this->combine as $i => $combine) {
             $type = $i == 0
                     ? ''
-                    : strtoupper($combine['type'] . ($combine['modifier'] ? ' ' . $combine['modifier'] : ''));
+                    : strtoupper($combine['type'].($combine['modifier'] ? ' '.$combine['modifier'] : ''));
             $select = $this->processSubSelect($combine['select'], $platform, $driver, $parameterContainer);
             $sql .= sprintf(
                 $this->specifications[self::COMBINE],
@@ -154,6 +156,7 @@ class Combine extends AbstractPreparableSql
                 $select
             );
         }
+
         return trim($sql, ' ');
     }
 
@@ -184,6 +187,7 @@ class Combine extends AbstractPreparableSql
             }
             $combine['select']->columns($aligned, false);
         }
+
         return $this;
     }
 
@@ -202,6 +206,7 @@ class Combine extends AbstractPreparableSql
                                 ? $this->combine[0]['select']->getRawState(self::COLUMNS)
                                 : array(),
         );
+
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 }

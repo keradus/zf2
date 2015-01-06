@@ -21,7 +21,7 @@ interface ConsoleBannerProviderInterface
      * The method is called with active Zend\Console\Adapter\AdapterInterface that can be used to directly access Console and send
      * output.
      *
-     * @param AdapterInterface $console
+     * @param  AdapterInterface $console
      * @return string|null
      */
     public function getConsoleBanner(AdapterInterface $console);

@@ -44,5 +44,5 @@ class UserAgentTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('User-Agent: xxx', $userAgentHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

@@ -31,6 +31,7 @@ class Layout extends AbstractPlugin
     {
         $viewModel = $this->getViewModel();
         $viewModel->setTemplate((string) $template);
+
         return $this;
     }
 
@@ -40,7 +41,7 @@ class Layout extends AbstractPlugin
      * If no arguments are given, grabs the "root" or "layout" view model.
      * Otherwise, attempts to set the template for that view model.
      *
-     * @param  null|string $template
+     * @param  null|string  $template
      * @return Model|Layout
      */
     public function __invoke($template = null)
@@ -48,6 +49,7 @@ class Layout extends AbstractPlugin
         if (null === $template) {
             return $this->getViewModel();
         }
+
         return $this->setTemplate($template);
     }
 
@@ -92,6 +94,7 @@ class Layout extends AbstractPlugin
         if (!$viewModel instanceof Model) {
             throw new Exception\DomainException('Layout plugin requires that event view model is populated');
         }
+
         return $viewModel;
     }
 }

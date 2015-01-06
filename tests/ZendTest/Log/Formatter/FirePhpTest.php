@@ -21,7 +21,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
     public function testFormatWithExtraData()
     {
         $fields = array( 'message' => 'foo',
-                'extra' => new \stdClass() );
+                'extra' => new \stdClass(), );
 
         $f = new FirePhp();
         list($line, $label) = $f->format($fields);
@@ -44,7 +44,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
     public function testFormatWithEmptyExtra()
     {
         $fields = array( 'message' => 'foo',
-                'extra' => array() );
+                'extra' => array(), );
 
         $f = new FirePhp();
         list($line, $label) = $f->format($fields);

@@ -83,7 +83,7 @@ class Registry
     /**
      * Retrieve a placeholder container
      *
-     * @param  string $key
+     * @param  string                      $key
      * @return Container\AbstractContainer
      */
     public function getContainer($key)
@@ -114,8 +114,8 @@ class Registry
     /**
      * createContainer
      *
-     * @param  string $key
-     * @param  array  $value
+     * @param  string                      $key
+     * @param  array                       $value
      * @return Container\AbstractContainer
      */
     public function createContainer($key, array $value = array())
@@ -138,6 +138,7 @@ class Registry
         $key = (string) $key;
         if (isset($this->items[$key])) {
             unset($this->items[$key]);
+
             return true;
         }
 
@@ -147,7 +148,7 @@ class Registry
     /**
      * Set the container class to use
      *
-     * @param  string $name
+     * @param  string                             $name
      * @throws Exception\InvalidArgumentException
      * @throws Exception\DomainException
      * @return Registry

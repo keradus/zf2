@@ -37,8 +37,9 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     public function getHtml()
     {
         if (null === $this->html) {
-            $this->html  = file_get_contents(__DIR__ . '/_files/sample.xhtml');
+            $this->html  = file_get_contents(__DIR__.'/_files/sample.xhtml');
         }
+
         return $this->html;
     }
 
@@ -241,7 +242,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadingDocumentWithErrorsShouldNotRaisePhpErrors()
     {
-        $file = file_get_contents(__DIR__ . '/_files/bad-sample.html');
+        $file = file_get_contents(__DIR__.'/_files/bad-sample.html');
         $this->document = new Document($file);
         $result = Document\Query::execute('p', $this->document, Document\Query::TYPE_CSS);
         $errors = $this->document->getErrors();
@@ -401,7 +402,6 @@ XML;
 
         $result[0] = '<foobar />';
     }
-
 
     /**
      * @expectedException Zend\Dom\Exception\BadMethodCallException

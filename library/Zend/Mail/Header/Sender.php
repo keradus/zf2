@@ -76,12 +76,14 @@ class Sender implements HeaderInterface
             }
             $email = sprintf('%s %s', $name, $email);
         }
+
         return $email;
     }
 
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -92,14 +94,14 @@ class Sender implements HeaderInterface
 
     public function toString()
     {
-        return 'Sender: ' . $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
+        return 'Sender: '.$this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
     }
 
     /**
      * Set the address used in this header
      *
      * @param  string|\Zend\Mail\Address\AddressInterface $emailOrAddress
-     * @param  null|string $name
+     * @param  null|string                                $name
      * @throws Exception\InvalidArgumentException
      * @return Sender
      */
@@ -115,6 +117,7 @@ class Sender implements HeaderInterface
             ));
         }
         $this->address = $emailOrAddress;
+
         return $this;
     }
 

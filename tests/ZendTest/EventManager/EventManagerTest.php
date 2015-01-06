@@ -31,7 +31,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         if (isset($this->message)) {
             unset($this->message);
         }
-        $this->events = new EventManager;
+        $this->events = new EventManager();
         StaticEventManager::resetInstance();
     }
 
@@ -137,10 +137,12 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->events->attach('string.transform', function ($e) {
             $string = $e->getParam('string', '__NOT_FOUND__');
+
             return trim($string);
         });
         $this->events->attach('string.transform', function ($e) {
             $string = $e->getParam('string', '__NOT_FOUND__');
+
             return str_rot13($string);
         });
         $responses = $this->events->trigger('string.transform', $this, array('string' => ' foo '));
@@ -155,11 +157,13 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach('foo.bar', function ($e) {
             $string = $e->getParam('string', '');
             $search = $e->getParam('search', '?');
+
             return strpos($string, $search);
         });
         $this->events->attach('foo.bar', function ($e) {
             $string = $e->getParam('string', '');
             $search = $e->getParam('search', '?');
+
             return strstr($string, $search);
         });
         $responses = $this->events->trigger(
@@ -176,10 +180,12 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->events->attach('string.transform', function ($e) {
             $string = $e->getParam('string', '');
+
             return trim($string);
         });
         $this->events->attach('string.transform', function ($e) {
             $string = $e->getParam('string', '');
+
             return str_rot13($string);
         });
         $responses = $this->events->trigger('string.transform', $this, array('string' => ' foo '));
@@ -371,7 +377,9 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     public function testCallingEventsStopPropagationMethodHaltsEventEmission()
     {
         $this->events->attach('foo.bar', function ($e) { return 'bogus'; }, 4);
-        $this->events->attach('foo.bar', function ($e) { $e->stopPropagation(true); return 'nada'; }, 3);
+        $this->events->attach('foo.bar', function ($e) { $e->stopPropagation(true);
+
+return 'nada'; }, 3);
         $this->events->attach('foo.bar', function ($e) { return 'found'; }, 2);
         $this->events->attach('foo.bar', function ($e) { return 'zero'; }, 1);
         $responses = $this->events->trigger('foo.bar', $this, array());
@@ -390,7 +398,8 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach('foo.bar', function ($e) {
             $foo = $e->getParam('foo', '__NO_FOO__');
             $bar = $e->getParam('bar', '__NO_BAR__');
-            return $foo . ":" . $bar;
+
+            return $foo.":".$bar;
         });
         $responses = $this->events->trigger('foo.bar', $this, array());
         $this->assertEquals('bar:baz', $responses->last());
@@ -598,7 +607,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testListenersAttachedWithWildcardAreTriggeredForAllEvents()
     {
-        $test     = new stdClass;
+        $test     = new stdClass();
         $test->events = array();
         $callback = function ($e) use ($test) {
             $test->events[] = $e->getName();
@@ -621,7 +630,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testSharedEventManagerAttachReturnsCallbackHandler()
     {
-        $shared = new SharedEventManager;
+        $shared = new SharedEventManager();
         $callbackHandler = $shared->attach(
             'foo',
             'bar',

@@ -29,13 +29,13 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
                 'host' => '127.0.0.1',
                 'user' => 'username',
                 'pass' => 'password',
-                'name' => 'live'
+                'name' => 'live',
                 ),
             'one' => array(
                 'two' => array(
-                    'three' => 'multi'
-                    )
-                )
+                    'three' => 'multi',
+                    ),
+                ),
             );
 
         $this->numericData = array(
@@ -48,16 +48,16 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
                 'b0' => array(
                     'L1' => 'button0-1',
                     'L2' => 'button0-2',
-                    'L3' => 'button0-3'
+                    'L3' => 'button0-3',
                 ),
                 'b1' => array(
                     'L1' => 'button1-1',
-                    'L2' => 'button1-2'
+                    'L2' => 'button1-2',
                 ),
                 'b2' => array(
-                    'L1' => 'button2-1'
-                    )
-                )
+                    'L1' => 'button2-1',
+                    ),
+                ),
             );
 
         $this->toCombineA = array(
@@ -68,22 +68,22 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
                 'first',
                 'second',
                 array(
-                    'third'
-                )
+                    'third',
+                ),
             ),
             'misaligned' => array(
                 2 => 'foo',
-                3 => 'bar'
+                3 => 'bar',
             ),
             'mixed' => array(
-                'foo' => 'bar'
+                'foo' => 'bar',
             ),
             'replaceAssoc' => array(
-                'foo' => 'bar'
+                'foo' => 'bar',
             ),
             'replaceNumerical' => array(
-                'foo'
-            )
+                'foo',
+            ),
         );
 
         $this->toCombineB = array(
@@ -93,21 +93,21 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
                 'fourth',
                 'fifth',
                 array(
-                    'sixth'
-                )
+                    'sixth',
+                ),
             ),
             'misaligned' => array(
-                3 => 'baz'
+                3 => 'baz',
             ),
             'mixed' => array(
-                false
+                false,
             ),
             'replaceAssoc' => null,
-            'replaceNumerical' => true
+            'replaceNumerical' => true,
         );
 
         $this->leadingdot = array('.test' => 'dot-test');
-        $this->invalidkey = array(' ' => 'test', ''=>'test2');
+        $this->invalidkey = array(' ' => 'test', '' => 'test2');
     }
 
     public function testLoadSingleSection()
@@ -144,7 +144,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('anothername', $config->one->two->three);
 
         // create a new multi-level key
-        $config->does = array('not'=> array('exist' => 'yet'));
+        $config->does = array('not' => array('exist' => 'yet'));
         $this->assertEquals('yet', $config->does->not->exist);
     }
 
@@ -189,7 +189,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         // top level
         $config = new Config($this->all);
         $var = '';
-        foreach ($config as $key=>$value) {
+        foreach ($config as $key => $value) {
             if (is_string($value)) {
                 $var .= "\nkey = $key, value = $value";
             }
@@ -198,7 +198,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         // 1 nest
         $var = '';
-        foreach ($config->db as $key=>$value) {
+        foreach ($config->db as $key => $value) {
             $var .= "\nkey = $key, value = $value";
         }
         $this->assertContains('key = host, value = 127.0.0.1', $var);
@@ -206,7 +206,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         // 2 nests
         $config = new Config($this->menuData1);
         $var = '';
-        foreach ($config->button->b1 as $key=>$value) {
+        foreach ($config->button->b1 as $key => $value) {
             $var .= "\nkey = $key, value = $value";
         }
         $this->assertContains('key = L1, value = button1-1', $var);
@@ -254,7 +254,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             'data1'  => 'someValue',
             'data2'  => 'someValue',
             'false1' => false,
-            'data3'  => 'someValue'
+            'data3'  => 'someValue',
             );
         $config = new Config($configArray);
         $this->assertTrue(count($config) === count($configArray));
@@ -427,8 +427,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             'a' => new \stdClass(),
             'b' => array(
                 'c' => new \stdClass(),
-                'd' => new \stdClass()
-                )
+                'd' => new \stdClass(),
+                ),
             );
         $config = new Config($configData);
         $this->assertEquals($config->toArray(), $configData);
@@ -444,7 +444,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testSetReadOnly()
     {
         $configData = array(
-            'a' => 'a'
+            'a' => 'a',
             );
         $config = new Config($configData, true);
         $config->b = 'b';
@@ -483,7 +483,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testMergeHonoursAllowModificationsFlagAtAllLevels()
     {
-        $config = new Config(array('key' => array('nested' => 'yes'), 'key2'=>'yes'), false);
+        $config = new Config(array('key' => array('nested' => 'yes'), 'key2' => 'yes'), false);
         $config2 = new Config(array(), true);
 
         $config2->merge($config);
@@ -506,7 +506,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config = new Config(array(
             'first'  => array(1),
             'second' => array(2),
-            'third'  => array(3)
+            'third'  => array(3),
         ), true);
 
         $keyList = array();
@@ -531,7 +531,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config = new Config(array(
             'first'  => array(1),
             'second' => array(2),
-            'third'  => array(3)
+            'third'  => array(3),
         ), true);
 
         $keyList = array();
@@ -556,7 +556,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config = new Config(array(
             'first'  => array(1),
             'second' => array(2),
-            'third'  => array(3)
+            'third'  => array(3),
         ), true);
 
         $keyList = array();
@@ -606,14 +606,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             'flag' => true,
             'text' => 'foo',
             'list' => array( 'a', 'b', 'c' ),
-            'aSpecific' => 12
+            'aSpecific' => 12,
         );
 
         $arrayB = array(
             'flag' => false,
             'text' => 'bar',
             'list' => array( 'd', 'e' ),
-            'bSpecific' => 100
+            'bSpecific' => 100,
         );
 
         $mergeResult = array(
@@ -621,7 +621,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             'text' => 'bar',
             'list' => array( 'a', 'b', 'c', 'd', 'e' ),
             'aSpecific' => 12,
-            'bSpecific' => 100
+            'bSpecific' => 100,
         );
 
         $configA = new Config($arrayA);

@@ -36,7 +36,7 @@ class ReCaptcha extends FormInput
     /**
      * Render ReCaptcha form elements
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface          $element
      * @throws Exception\DomainException
      * @return string
      */
@@ -54,16 +54,16 @@ class ReCaptcha extends FormInput
 
         $name          = $element->getName();
         $id            = isset($attributes['id']) ? $attributes['id'] : $name;
-        $challengeName = empty($name) ? 'recaptcha_challenge_field' : $name . '[recaptcha_challenge_field]';
-        $responseName  = empty($name) ? 'recaptcha_response_field'  : $name . '[recaptcha_response_field]';
-        $challengeId   = $id . '-challenge';
-        $responseId    = $id . '-response';
+        $challengeName = empty($name) ? 'recaptcha_challenge_field' : $name.'[recaptcha_challenge_field]';
+        $responseName  = empty($name) ? 'recaptcha_response_field'  : $name.'[recaptcha_response_field]';
+        $challengeId   = $id.'-challenge';
+        $responseId    = $id.'-response';
 
         $markup = $captcha->getService()->getHtml($name);
         $hidden = $this->renderHiddenInput($challengeName, $challengeId, $responseName, $responseId);
         $js     = $this->renderJsEvents($challengeId, $responseId);
 
-        return $hidden . $markup . $js;
+        return $hidden.$markup.$js;
     }
 
     /**
@@ -92,7 +92,7 @@ class ReCaptcha extends FormInput
         ));
         $response = sprintf($pattern, $attributes, $closingBracket);
 
-        return $challenge . $response;
+        return $challenge.$response;
     }
 
     /**
@@ -105,7 +105,7 @@ class ReCaptcha extends FormInput
     protected function renderJsEvents($challengeId, $responseId)
     {
         $elseif = 'else if'; // php-cs-fixer bug
-        $js =<<<EOJ
+        $js = <<<EOJ
 <script type="text/javascript" language="JavaScript">
 function windowOnLoad(fn)
 {
@@ -137,6 +137,7 @@ windowOnLoad(function () {
 });
 </script>
 EOJ;
+
         return $js;
     }
 }

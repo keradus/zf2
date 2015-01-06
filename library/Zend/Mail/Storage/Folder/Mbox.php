@@ -59,7 +59,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
             throw new Exception\InvalidArgumentException('no valid dirname given in params');
         }
 
-        $this->rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $this->rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 
         $this->_buildFolderTree($this->rootdir);
         $this->selectFolder(!empty($params->folder) ? $params->folder : 'INBOX');
@@ -73,9 +73,9 @@ class Mbox extends Storage\Mbox implements FolderInterface
      * Result is save in \Zend\Mail\Storage\Folder instances with the root in $this->rootFolder.
      * $parentFolder and $parentGlobalName are only used internally for recursion.
      *
-     * @param string $currentDir call with root dir, also used for recursion.
-     * @param \Zend\Mail\Storage\Folder|null $parentFolder used for recursion
-     * @param string $parentGlobalName used for recursion
+     * @param  string                                                $currentDir       call with root dir, also used for recursion.
+     * @param  \Zend\Mail\Storage\Folder|null                        $parentFolder     used for recursion
+     * @param  string                                                $parentGlobalName used for recursion
      * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      */
     protected function _buildFolderTree($currentDir, $parentFolder = null, $parentGlobalName = '')
@@ -96,8 +96,8 @@ class Mbox extends Storage\Mbox implements FolderInterface
             if ($entry[0] == '.') {
                 continue;
             }
-            $absoluteEntry = $currentDir . $entry;
-            $globalName = $parentGlobalName . DIRECTORY_SEPARATOR . $entry;
+            $absoluteEntry = $currentDir.$entry;
+            $globalName = $parentGlobalName.DIRECTORY_SEPARATOR.$entry;
             if (is_file($absoluteEntry) && $this->isMboxFile($absoluteEntry)) {
                 $parentFolder->$entry = new Storage\Folder($entry, $globalName);
                 continue;
@@ -107,7 +107,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
             }
             $folder = new Storage\Folder($entry, $globalName, false);
             $parentFolder->$entry = $folder;
-            $this->_buildFolderTree($absoluteEntry . DIRECTORY_SEPARATOR, $folder, $globalName);
+            $this->_buildFolderTree($absoluteEntry.DIRECTORY_SEPARATOR, $folder, $globalName);
         }
 
         closedir($dh);
@@ -116,9 +116,9 @@ class Mbox extends Storage\Mbox implements FolderInterface
     /**
      * get root folder or given folder
      *
-     * @param string $rootFolder get folder structure for given folder, else root
+     * @param  string                                                $rootFolder get folder structure for given folder, else root
      * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
-     * @return \Zend\Mail\Storage\Folder root or wanted folder
+     * @return \Zend\Mail\Storage\Folder                             root or wanted folder
      */
     public function getFolders($rootFolder = null)
     {
@@ -138,9 +138,10 @@ class Mbox extends Storage\Mbox implements FolderInterface
             }
         }
 
-        if ($currentFolder->getGlobalName() != DIRECTORY_SEPARATOR . trim($rootFolder, DIRECTORY_SEPARATOR)) {
+        if ($currentFolder->getGlobalName() != DIRECTORY_SEPARATOR.trim($rootFolder, DIRECTORY_SEPARATOR)) {
             throw new Exception\InvalidArgumentException("folder $rootFolder not found");
         }
+
         return $currentFolder;
     }
 
@@ -149,7 +150,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
      *
      * folder must be selectable!
      *
-     * @param \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
+     * @param  \Zend\Mail\Storage\Folder|string              $globalName global name of folder or instance for subfolder
      * @throws \Zend\Mail\Storage\Exception\RuntimeException
      */
     public function selectFolder($globalName)
@@ -160,7 +161,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
         $folder = $this->getFolders($this->currentFolder);
 
         try {
-            $this->openMboxFile($this->rootdir . $folder->getGlobalName());
+            $this->openMboxFile($this->rootdir.$folder->getGlobalName());
         } catch (Exception\ExceptionInterface $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
@@ -179,7 +180,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
     /**
      * get \Zend\Mail\Storage\Folder instance for current folder
      *
-     * @return \Zend\Mail\Storage\Folder instance of current folder
+     * @return \Zend\Mail\Storage\Folder                       instance of current folder
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getCurrentFolder()

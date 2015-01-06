@@ -24,7 +24,7 @@ class IfMatch implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-match') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-Match string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-Match string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class IfMatch implements HeaderInterface
 
     public function toString()
     {
-        return 'If-Match: ' . $this->getFieldValue();
+        return 'If-Match: '.$this->getFieldValue();
     }
 }

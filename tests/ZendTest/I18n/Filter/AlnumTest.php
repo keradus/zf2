@@ -78,7 +78,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
                 'abc 123' => 'abc123',
                 'abcxyz'  => 'abcxyz',
                 'AZ@#4.3' => 'AZ43',
-                ''        => ''
+                ''        => '',
             );
         } elseif (static::$meansEnglishAlphabet) {
             // The Alphabet means english alphabet.
@@ -104,7 +104,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
                 'če2t3ně'       => 'če2t3ně',
                 'grz5e4gżółka'  => 'grz5e4gżółka',
                 'Be3l5gië'      => 'Be3l5gië',
-                ''              => ''
+                ''              => '',
             );
         }
 
@@ -132,13 +132,13 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
                 'AZ@#4.3' => 'AZ43',
                 ''        => '',
                 "\n"      => "\n",
-                " \t "    => " \t "
+                " \t "    => " \t ",
             );
         } elseif (static::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
                 'a B ４5' => 'a B 5',
-                'z3　x'   => 'z3x'
+                'z3　x'   => 'z3x',
             );
         } else {
             //The Alphabet means each language's alphabet.
@@ -168,7 +168,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
             'abc 123' => 'abc123',
             'abcxyz'  => 'abcxyz',
             'AZ@#4.3' => 'AZ43',
-            ''        => ''
+            ''        => '',
         );
 
         $actual = $filter->filter(array_keys($values));
@@ -180,7 +180,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
-            array(new \stdClass())
+            array(new \stdClass()),
         );
     }
 

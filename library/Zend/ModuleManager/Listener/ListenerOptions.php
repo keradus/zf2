@@ -80,9 +80,9 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set an array of paths where modules reside
      *
-     * @param  array|Traversable $modulePaths
+     * @param  array|Traversable                  $modulePaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions Provides fluent interface
+     * @return ListenerOptions                    Provides fluent interface
      */
     public function setModulePaths($modulePaths)
     {
@@ -90,8 +90,8 @@ class ListenerOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf(
                     'Argument passed to %s::%s() must be an array, '
-                    . 'implement the Traversable interface, or be an '
-                    . 'instance of Zend\Config\Config. %s given.',
+                    .'implement the Traversable interface, or be an '
+                    .'instance of Zend\Config\Config. %s given.',
                     __CLASS__,
                     __METHOD__,
                     gettype($modulePaths)
@@ -100,6 +100,7 @@ class ListenerOptions extends AbstractOptions
         }
 
         $this->modulePaths = $modulePaths;
+
         return $this;
     }
 
@@ -126,9 +127,9 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set the glob patterns to use for loading additional config files
      *
-     * @param array|Traversable $configGlobPaths
+     * @param  array|Traversable                  $configGlobPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions Provides fluent interface
+     * @return ListenerOptions                    Provides fluent interface
      */
     public function setConfigGlobPaths($configGlobPaths)
     {
@@ -136,8 +137,8 @@ class ListenerOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf(
                     'Argument passed to %s::%s() must be an array, '
-                    . 'implement the Traversable interface, or be an '
-                    . 'instance of Zend\Config\Config. %s given.',
+                    .'implement the Traversable interface, or be an '
+                    .'instance of Zend\Config\Config. %s given.',
                     __CLASS__,
                     __METHOD__,
                     gettype($configGlobPaths)
@@ -146,15 +147,16 @@ class ListenerOptions extends AbstractOptions
         }
 
         $this->configGlobPaths = $configGlobPaths;
+
         return $this;
     }
 
     /**
      * Set the static paths to use for loading additional config files
      *
-     * @param array|Traversable $configStaticPaths
+     * @param  array|Traversable                  $configStaticPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions Provides fluent interface
+     * @return ListenerOptions                    Provides fluent interface
      */
     public function setConfigStaticPaths($configStaticPaths)
     {
@@ -162,8 +164,8 @@ class ListenerOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf(
                     'Argument passed to %s::%s() must be an array, '
-                    . 'implement the Traversable interface, or be an '
-                    . 'instance of Zend\Config\Config. %s given.',
+                    .'implement the Traversable interface, or be an '
+                    .'instance of Zend\Config\Config. %s given.',
                     __CLASS__,
                     __METHOD__,
                     gettype($configStaticPaths)
@@ -172,6 +174,7 @@ class ListenerOptions extends AbstractOptions
         }
 
         $this->configStaticPaths = $configStaticPaths;
+
         return $this;
     }
 
@@ -189,9 +192,9 @@ class ListenerOptions extends AbstractOptions
      * Add some extra config array to the main config. This is mainly useful
      * for unit testing purposes.
      *
-     * @param array|Traversable $extraConfig
+     * @param  array|Traversable                  $extraConfig
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions Provides fluent interface
+     * @return ListenerOptions                    Provides fluent interface
      */
     public function setExtraConfig($extraConfig)
     {
@@ -199,8 +202,8 @@ class ListenerOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf(
                     'Argument passed to %s::%s() must be an array, '
-                    . 'implement the Traversable interface, or be an '
-                    . 'instance of Zend\Config\Config. %s given.',
+                    .'implement the Traversable interface, or be an '
+                    .'instance of Zend\Config\Config. %s given.',
                     __CLASS__,
                     __METHOD__,
                     gettype($extraConfig)
@@ -209,6 +212,7 @@ class ListenerOptions extends AbstractOptions
         }
 
         $this->extraConfig = $extraConfig;
+
         return $this;
     }
 
@@ -225,12 +229,13 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set if the config cache should be enabled or not
      *
-     * @param  bool $enabled
+     * @param  bool            $enabled
      * @return ListenerOptions
      */
     public function setConfigCacheEnabled($enabled)
     {
         $this->configCacheEnabled = (bool) $enabled;
+
         return $this;
     }
 
@@ -247,12 +252,13 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set key used to create the cache file name
      *
-     * @param  string $configCacheKey the value to be set
+     * @param  string          $configCacheKey the value to be set
      * @return ListenerOptions
      */
     public function setConfigCacheKey($configCacheKey)
     {
         $this->configCacheKey = $configCacheKey;
+
         return $this;
     }
 
@@ -267,10 +273,10 @@ class ListenerOptions extends AbstractOptions
     public function getConfigCacheFile()
     {
         if ($this->getConfigCacheKey()) {
-            return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
+            return $this->getCacheDir().'/module-config-cache.'.$this->getConfigCacheKey().'.php';
         }
 
-        return $this->getCacheDir() . '/module-config-cache.php';
+        return $this->getCacheDir().'/module-config-cache.php';
     }
 
     /**
@@ -286,7 +292,7 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set the path where cache files can be stored
      *
-     * @param  string $cacheDir the value to be set
+     * @param  string          $cacheDir the value to be set
      * @return ListenerOptions
      */
     public function setCacheDir($cacheDir)
@@ -296,6 +302,7 @@ class ListenerOptions extends AbstractOptions
         } else {
             $this->cacheDir = static::normalizePath($cacheDir);
         }
+
         return $this;
     }
 
@@ -312,12 +319,13 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set if the module class map cache should be enabled or not
      *
-     * @param  bool $enabled
+     * @param  bool            $enabled
      * @return ListenerOptions
      */
     public function setModuleMapCacheEnabled($enabled)
     {
         $this->moduleMapCacheEnabled = (bool) $enabled;
+
         return $this;
     }
 
@@ -334,12 +342,13 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set key used to create the cache file name
      *
-     * @param  string $moduleMapCacheKey the value to be set
+     * @param  string          $moduleMapCacheKey the value to be set
      * @return ListenerOptions
      */
     public function setModuleMapCacheKey($moduleMapCacheKey)
     {
         $this->moduleMapCacheKey = $moduleMapCacheKey;
+
         return $this;
     }
 
@@ -351,10 +360,10 @@ class ListenerOptions extends AbstractOptions
     public function getModuleMapCacheFile()
     {
         if ($this->getModuleMapCacheKey()) {
-            return $this->getCacheDir() . '/module-classmap-cache.' . $this->getModuleMapCacheKey() . '.php';
+            return $this->getCacheDir().'/module-classmap-cache.'.$this->getModuleMapCacheKey().'.php';
         }
 
-        return $this->getCacheDir() . '/module-classmap-cache.php';
+        return $this->getCacheDir().'/module-classmap-cache.php';
     }
 
     /**
@@ -370,7 +379,7 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set whether to check dependencies during module loading or not
      *
-     * @param  bool $checkDependencies the value to be set
+     * @param bool $checkDependencies the value to be set
      *
      * @return ListenerOptions
      */
@@ -391,6 +400,7 @@ class ListenerOptions extends AbstractOptions
     {
         $path = rtrim($path, '/');
         $path = rtrim($path, '\\');
+
         return $path;
     }
 }

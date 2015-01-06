@@ -31,7 +31,7 @@ class ReflectionReturnValue
     /**
      * Constructor
      *
-     * @param string $type Return value type
+     * @param string $type        Return value type
      * @param string $description Return value type
      */
     public function __construct($type = 'mixed', $description = '')
@@ -53,7 +53,7 @@ class ReflectionReturnValue
     /**
      * Set parameter type
      *
-     * @param string|null $type
+     * @param  string|null                        $type
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -79,7 +79,7 @@ class ReflectionReturnValue
     /**
      * Set parameter description
      *
-     * @param string|null $description
+     * @param  string|null                        $description
      * @throws Exception\InvalidArgumentException
      * @return void
      */

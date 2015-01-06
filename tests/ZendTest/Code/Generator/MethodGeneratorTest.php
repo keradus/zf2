@@ -79,7 +79,6 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($docblockGenerator === $method->getDocBlock());
     }
 
-
     public function testMethodFromReflection()
     {
         $ref = new MethodReflection('ZendTest\Code\Generator\TestAsset\TestSampleSingleClass', 'someMethod');

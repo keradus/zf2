@@ -136,12 +136,13 @@ class ColumnObject
     /**
      * Set table name
      *
-     * @param string $tableName
+     * @param  string       $tableName
      * @return ColumnObject
      */
     public function setTableName($tableName)
     {
         $this->tableName = $tableName;
+
         return $this;
     }
 
@@ -174,12 +175,13 @@ class ColumnObject
     }
 
     /**
-     * @param int $ordinalPosition to set
+     * @param  int          $ordinalPosition to set
      * @return ColumnObject
      */
     public function setOrdinalPosition($ordinalPosition)
     {
         $this->ordinalPosition = $ordinalPosition;
+
         return $this;
     }
 
@@ -192,12 +194,13 @@ class ColumnObject
     }
 
     /**
-     * @param mixed $columnDefault to set
+     * @param  mixed        $columnDefault to set
      * @return ColumnObject
      */
     public function setColumnDefault($columnDefault)
     {
         $this->columnDefault = $columnDefault;
+
         return $this;
     }
 
@@ -210,12 +213,13 @@ class ColumnObject
     }
 
     /**
-     * @param bool $isNullable to set
+     * @param  bool         $isNullable to set
      * @return ColumnObject
      */
     public function setIsNullable($isNullable)
     {
         $this->isNullable = $isNullable;
+
         return $this;
     }
 
@@ -236,12 +240,13 @@ class ColumnObject
     }
 
     /**
-     * @param string $dataType the $dataType to set
+     * @param  string       $dataType the $dataType to set
      * @return ColumnObject
      */
     public function setDataType($dataType)
     {
         $this->dataType = $dataType;
+
         return $this;
     }
 
@@ -254,12 +259,13 @@ class ColumnObject
     }
 
     /**
-     * @param int $characterMaximumLength the $characterMaximumLength to set
+     * @param  int          $characterMaximumLength the $characterMaximumLength to set
      * @return ColumnObject
      */
     public function setCharacterMaximumLength($characterMaximumLength)
     {
         $this->characterMaximumLength = $characterMaximumLength;
+
         return $this;
     }
 
@@ -272,12 +278,13 @@ class ColumnObject
     }
 
     /**
-     * @param int $characterOctetLength the $characterOctetLength to set
+     * @param  int          $characterOctetLength the $characterOctetLength to set
      * @return ColumnObject
      */
     public function setCharacterOctetLength($characterOctetLength)
     {
         $this->characterOctetLength = $characterOctetLength;
+
         return $this;
     }
 
@@ -290,12 +297,13 @@ class ColumnObject
     }
 
     /**
-     * @param int $numericPrecision the $numericPrevision to set
+     * @param  int          $numericPrecision the $numericPrevision to set
      * @return ColumnObject
      */
     public function setNumericPrecision($numericPrecision)
     {
         $this->numericPrecision = $numericPrecision;
+
         return $this;
     }
 
@@ -308,12 +316,13 @@ class ColumnObject
     }
 
     /**
-     * @param int $numericScale the $numericScale to set
+     * @param  int          $numericScale the $numericScale to set
      * @return ColumnObject
      */
     public function setNumericScale($numericScale)
     {
         $this->numericScale = $numericScale;
+
         return $this;
     }
 
@@ -326,12 +335,13 @@ class ColumnObject
     }
 
     /**
-     * @param  bool $numericUnsigned
+     * @param  bool         $numericUnsigned
      * @return ColumnObject
      */
     public function setNumericUnsigned($numericUnsigned)
     {
         $this->numericUnsigned = $numericUnsigned;
+
         return $this;
     }
 
@@ -352,7 +362,7 @@ class ColumnObject
     }
 
     /**
-     * @param array $erratas
+     * @param  array        $erratas
      * @return ColumnObject
      */
     public function setErratas(array $erratas)
@@ -360,11 +370,12 @@ class ColumnObject
         foreach ($erratas as $name => $value) {
             $this->setErrata($name, $value);
         }
+
         return $this;
     }
 
     /**
-     * @param string $errataName
+     * @param  string $errataName
      * @return mixed
      */
     public function getErrata($errataName)
@@ -372,17 +383,19 @@ class ColumnObject
         if (array_key_exists($errataName, $this->errata)) {
             return $this->errata[$errataName];
         }
+
         return;
     }
 
     /**
-     * @param string $errataName
-     * @param mixed $errataValue
+     * @param  string       $errataName
+     * @param  mixed        $errataValue
      * @return ColumnObject
      */
     public function setErrata($errataName, $errataValue)
     {
         $this->errata[$errataName] = $errataValue;
+
         return $this;
     }
 }

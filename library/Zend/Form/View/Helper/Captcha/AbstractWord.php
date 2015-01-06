@@ -62,7 +62,7 @@ abstract class AbstractWord extends FormInput
      *
      * More specific renderers will consume this and render it.
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface          $element
      * @throws Exception\DomainException
      * @return string
      */
@@ -89,7 +89,7 @@ abstract class AbstractWord extends FormInput
         $hidden = $this->renderCaptchaHidden($captcha, $attributes);
         $input  = $this->renderCaptchaInput($captcha, $attributes);
 
-        return $hidden . $input;
+        return $hidden.$input;
     }
 
     /**
@@ -152,7 +152,7 @@ abstract class AbstractWord extends FormInput
     /**
      * Set value for captchaPosition
      *
-     * @param  mixed $captchaPosition
+     * @param  mixed                              $captchaPosition
      * @throws Exception\InvalidArgumentException
      * @return AbstractWord
      */
@@ -186,12 +186,13 @@ abstract class AbstractWord extends FormInput
     /**
      * Set separator string for captcha and inputs
      *
-     * @param  string $separator
+     * @param  string       $separator
      * @return AbstractWord
      */
     public function setSeparator($separator)
     {
         $this->separator = (string) $separator;
+
         return $this;
     }
 

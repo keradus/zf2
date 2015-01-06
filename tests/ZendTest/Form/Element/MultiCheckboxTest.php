@@ -40,7 +40,7 @@ class MultiCheckboxTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\Explode'
+            'Zend\Validator\Explode',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
@@ -64,14 +64,14 @@ class MultiCheckboxTest extends TestCase
                 array(
                     'foo' => 'My Foo Label',
                     'bar' => 'My Bar Label',
-                )
+                ),
             ),
             array(
                 array('foo', 'bar'),
                 array(
                     0 => array('label' => 'My Foo Label', 'value' => 'foo'),
                     1 => array('label' => 'My Bar Label', 'value' => 'bar'),
-                )
+                ),
             ),
         );
     }
@@ -102,15 +102,14 @@ class MultiCheckboxTest extends TestCase
     {
         $element = new MultiCheckboxElement('my-checkbox');
         $inputSpec = $element->getInputSpecification();
-        $inArrayValidator=$inputSpec['validators'][0]->getValidator();
+        $inArrayValidator = $inputSpec['validators'][0]->getValidator();
 
         $element->setAttributes(array(
             'options' => $options,
         ));
-        $haystack=$inArrayValidator->getHaystack();
+        $haystack = $inArrayValidator->getHaystack();
         $this->assertCount(count($options), $haystack);
     }
-
 
     public function testAttributeType()
     {

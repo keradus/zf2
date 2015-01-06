@@ -32,7 +32,7 @@ class Postgresql extends AbstractPlatform
     }
 
     /**
-     * @param \Zend\Db\Adapter\Driver\Pgsql\Pgsql|\Zend\Db\Adapter\Driver\Pdo\Pdo|resource|\PDO $driver
+     * @param  \Zend\Db\Adapter\Driver\Pgsql\Pgsql|\Zend\Db\Adapter\Driver\Pdo\Pdo|resource|\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      * @return $this
      */
@@ -44,6 +44,7 @@ class Postgresql extends AbstractPlatform
             || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'pgsql')
         ) {
             $this->resource = $driver;
+
             return $this;
         }
 
@@ -63,7 +64,7 @@ class Postgresql extends AbstractPlatform
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        return '"' . implode('"."', (array) str_replace('"', '\\"', $identifierChain)) . '"';
+        return '"'.implode('"."', (array) str_replace('"', '\\"', $identifierChain)).'"';
     }
 
     /**
@@ -83,16 +84,17 @@ class Postgresql extends AbstractPlatform
             $this->resource = $this->resource->getConnection()->getResource();
         }
         if (is_resource($this->resource)) {
-            return '\'' . pg_escape_string($this->resource, $value) . '\'';
+            return '\''.pg_escape_string($this->resource, $value).'\'';
         }
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
         trigger_error(
-            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-                . 'can introduce security vulnerabilities in a production environment.'
+            'Attempting to quote a value in '.__CLASS__.' without extension/driver support '
+                .'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+
+        return '\''.addcslashes($value, "\x00\n\r\\'\"\x1a").'\'';
     }
 
     /**
@@ -104,12 +106,13 @@ class Postgresql extends AbstractPlatform
             $this->resource = $this->resource->getConnection()->getResource();
         }
         if (is_resource($this->resource)) {
-            return '\'' . pg_escape_string($this->resource, $value) . '\'';
+            return '\''.pg_escape_string($this->resource, $value).'\'';
         }
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+
+        return '\''.addcslashes($value, "\x00\n\r\\'\"\x1a").'\'';
     }
 
     /**

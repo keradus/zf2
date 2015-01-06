@@ -38,7 +38,7 @@ class JsonTest extends AbstractWriterTestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.json');
+        $config = $this->reader->fromFile(__DIR__.'/_files/allsections.json');
 
         $this->writer->toFile($this->getTestAssetFileName(), $config);
 

@@ -32,7 +32,7 @@ class FormRowTest extends TestCase
     {
         $this->helper = new FormRowHelper();
 
-        $this->renderer = new PhpRenderer;
+        $this->renderer = new PhpRenderer();
         $helpers = $this->renderer->getHelperPluginManager();
         $config  = new HelperConfig();
         $config->configureServiceManager($helpers);
@@ -116,7 +116,6 @@ class FormRowTest extends TestCase
         $this->assertContains("<label>", $markup);
     }
 
-
     public function testRenderAttributeId()
     {
         $element = new Element\Text('foo');
@@ -158,7 +157,7 @@ class FormRowTest extends TestCase
     {
         $element  = new Element('foo');
         $element->setMessages(array(
-            'Error message'
+            'Error message',
         ));
 
         $markup = $this->helper->setInputErrorClass('custom-error-class')->render($element);
@@ -169,7 +168,7 @@ class FormRowTest extends TestCase
     {
         $element  = new Element('foo');
         $element->setMessages(array(
-            'Error message'
+            'Error message',
         ));
         $element->setAttribute('class', 'foo bar');
 
@@ -281,11 +280,11 @@ class FormRowTest extends TestCase
         $element = new Element\MultiCheckbox('hobby');
         $element->setLabel("Hobby");
         $element->setValueOptions(array(
-            '0'=>'working',
-            '1'=>'coding'
+            '0' => 'working',
+            '1' => 'coding',
         ));
         $element->setMessages(array(
-            'Error message'
+            'Error message',
         ));
 
         $markup = $this->helper->__invoke($element);
@@ -297,11 +296,11 @@ class FormRowTest extends TestCase
         $element = new Element\Radio('direction');
         $element->setLabel("Direction");
         $element->setValueOptions(array(
-            '0'=>'programming',
-            '1'=>'design'
+            '0' => 'programming',
+            '1' => 'design',
         ));
         $element->setMessages(array(
-            'Error message'
+            'Error message',
         ));
 
         $markup = $this->helper->__invoke($element);
@@ -358,7 +357,7 @@ class FormRowTest extends TestCase
         $element->setLabel('foolabel');
         $partial = 'formrow-partial.phtml';
 
-        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $this->renderer->resolver()->addPath(__DIR__.'/_templates');
         $markup = $this->helper->__invoke($element, null, null, $partial);
         $this->assertContains('fooname', $markup);
         $this->assertContains('foolabel', $markup);
@@ -479,8 +478,8 @@ class FormRowTest extends TestCase
     {
         $element = new Element('foo', array(
             'label_options' => array(
-                'always_wrap' => true
-            )
+                'always_wrap' => true,
+            ),
         ));
         $element->setAttribute('id', 'bar');
         $element->setLabel('baz');
@@ -496,13 +495,13 @@ class FormRowTest extends TestCase
     {
         $this->assertRegexp(
             '#^<fieldset><legend>baz<\/legend>'
-            . 'Please type this word backwards <b>[a-z0-9]{8}<\/b>'
-            . '<input name="captcha&\#x5B;id&\#x5D;" type="hidden" value="[a-z0-9]{32}"\/?>'
-            . '<input name="captcha&\#x5B;input&\#x5D;" type="text"\/?>'
-            . '<\/fieldset>$#',
+            .'Please type this word backwards <b>[a-z0-9]{8}<\/b>'
+            .'<input name="captcha&\#x5B;id&\#x5D;" type="hidden" value="[a-z0-9]{32}"\/?>'
+            .'<input name="captcha&\#x5B;input&\#x5D;" type="text"\/?>'
+            .'<\/fieldset>$#',
             $this->helper->render(new Captcha('captcha', array(
                 'captcha' => array('class' => 'dumb'),
-                'label' => 'baz'
+                'label' => 'baz',
             )))
         );
     }

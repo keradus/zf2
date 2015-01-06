@@ -43,7 +43,7 @@ class AbstractHelperTest extends CommonTestCase
         $this->helper->setEncoding('iso-8859-1');
 
         $this->assertSame(
-            'data-value="' . $escaper->escapeHtmlAttr('Título') . '"',
+            'data-value="'.$escaper->escapeHtmlAttr('Título').'"',
             $this->helper->createAttributesString(array('data-value' => 'Título'))
         );
     }
@@ -53,7 +53,7 @@ class AbstractHelperTest extends CommonTestCase
         $escaper = new Escaper('iso-8859-1');
 
         $this->assertNotSame(
-            'data-value="' . $escaper->escapeHtmlAttr('Título') . '"',
+            'data-value="'.$escaper->escapeHtmlAttr('Título').'"',
             $this->helper->createAttributesString(array('data-value' => 'Título'))
         );
     }

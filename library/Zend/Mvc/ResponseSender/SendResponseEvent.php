@@ -41,13 +41,14 @@ class SendResponseEvent extends Event
     protected $contentSent = array();
 
     /**
-     * @param ResponseInterface $response
+     * @param  ResponseInterface $response
      * @return SendResponseEvent
      */
     public function setResponse(ResponseInterface $response)
     {
         $this->setParam('response', $response);
         $this->response = $response;
+
         return $this;
     }
 
@@ -71,6 +72,7 @@ class SendResponseEvent extends Event
         $contentSent[spl_object_hash($response)] = true;
         $this->setParam('contentSent', $contentSent);
         $this->contentSent[spl_object_hash($response)] = true;
+
         return $this;
     }
 
@@ -83,6 +85,7 @@ class SendResponseEvent extends Event
         if (isset($this->contentSent[spl_object_hash($response)])) {
             return true;
         }
+
         return false;
     }
 
@@ -98,6 +101,7 @@ class SendResponseEvent extends Event
         $headersSent[spl_object_hash($response)] = true;
         $this->setParam('headersSent', $headersSent);
         $this->headersSent[spl_object_hash($response)] = true;
+
         return $this;
     }
 
@@ -110,6 +114,7 @@ class SendResponseEvent extends Event
         if (isset($this->headersSent[spl_object_hash($response)])) {
             return true;
         }
+
         return false;
     }
 }

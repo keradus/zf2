@@ -61,7 +61,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         }
 
         if (!$this->featureSet instanceof Feature\FeatureSet) {
-            $this->featureSet = new Feature\FeatureSet;
+            $this->featureSet = new Feature\FeatureSet();
         }
 
         $this->featureSet->setRowGateway($this);
@@ -89,8 +89,8 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     /**
      * Populate Data
      *
-     * @param  array $rowData
-     * @param  bool  $rowExistsInDatabase
+     * @param  array              $rowData
+     * @param  bool               $rowExistsInDatabase
      * @return AbstractRowGateway
      */
     public function populate(array $rowData, $rowExistsInDatabase = false)
@@ -108,7 +108,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     }
 
     /**
-     * @param mixed $array
+     * @param  mixed      $array
      * @return array|void
      */
     public function exchangeArray($array)
@@ -246,25 +246,27 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     /**
      * Offset set
      *
-     * @param  string $offset
-     * @param  mixed $value
+     * @param  string     $offset
+     * @param  mixed      $value
      * @return RowGateway
      */
     public function offsetSet($offset, $value)
     {
         $this->data[$offset] = $value;
+
         return $this;
     }
 
     /**
      * Offset unset
      *
-     * @param  string $offset
+     * @param  string             $offset
      * @return AbstractRowGateway
      */
     public function offsetUnset($offset)
     {
         $this->data[$offset] = null;
+
         return $this;
     }
 
@@ -289,7 +291,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     /**
      * __get
      *
-     * @param  string $name
+     * @param  string                             $name
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
@@ -298,7 +300,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         } else {
-            throw new Exception\InvalidArgumentException('Not a valid column in this row: ' . $name);
+            throw new Exception\InvalidArgumentException('Not a valid column in this row: '.$name);
         }
     }
 
@@ -306,7 +308,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
      * __set
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function __set($name, $value)
@@ -352,7 +354,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         $this->primaryKeyData = array();
         foreach ($this->primaryKeyColumn as $column) {
             if (!isset($this->data[$column])) {
-                throw new Exception\RuntimeException('While processing primary key data, a known key ' . $column . ' was not found in the data array');
+                throw new Exception\RuntimeException('While processing primary key data, a known key '.$column.' was not found in the data array');
             }
             $this->primaryKeyData[$column] = $this->data[$column];
         }

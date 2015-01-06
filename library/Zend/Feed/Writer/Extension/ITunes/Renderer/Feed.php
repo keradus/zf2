@@ -14,7 +14,7 @@ use DOMElement;
 use Zend\Feed\Writer\Extension;
 
 /**
-*/
+ */
 class Feed extends Extension\AbstractRenderer
 {
     /**
@@ -64,7 +64,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -86,7 +86,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed itunes block
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setBlock(DOMDocument $dom, DOMElement $root)
@@ -106,7 +106,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed categories
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
@@ -138,7 +138,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed image (icon)
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setImage(DOMDocument $dom, DOMElement $root)
@@ -157,7 +157,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed cumulative duration
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDuration(DOMDocument $dom, DOMElement $root)
@@ -177,7 +177,7 @@ class Feed extends Extension\AbstractRenderer
      * Set explicit flag
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setExplicit(DOMDocument $dom, DOMElement $root)
@@ -197,7 +197,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed keywords
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setKeywords(DOMDocument $dom, DOMElement $root)
@@ -217,7 +217,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed's new URL
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setNewFeedUrl(DOMDocument $dom, DOMElement $root)
@@ -237,7 +237,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed owners
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setOwners(DOMDocument $dom, DOMElement $root)
@@ -265,7 +265,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed subtitle
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
@@ -285,7 +285,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed summary
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setSummary(DOMDocument $dom, DOMElement $root)

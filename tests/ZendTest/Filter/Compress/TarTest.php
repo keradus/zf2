@@ -28,16 +28,16 @@ class TarTest extends \PHPUnit_Framework_TestCase
         }
 
         $files = array(
-            dirname(__DIR__) . '/_files/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress/Compress/First/Second/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress/Compress/First/Second',
-            dirname(__DIR__) . '/_files/_compress/Compress/First/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress/Compress/First',
-            dirname(__DIR__) . '/_files/_compress/Compress/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress/Compress',
-            dirname(__DIR__) . '/_files/_compress/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress',
-            dirname(__DIR__) . '/_files/compressed.tar'
+            dirname(__DIR__).'/_files/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress/Compress/First/Second/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress/Compress/First/Second',
+            dirname(__DIR__).'/_files/_compress/Compress/First/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress/Compress/First',
+            dirname(__DIR__).'/_files/_compress/Compress/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress/Compress',
+            dirname(__DIR__).'/_files/_compress/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress',
+            dirname(__DIR__).'/_files/compressed.tar',
         );
 
         foreach ($files as $file) {
@@ -50,29 +50,29 @@ class TarTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        if (!file_exists(dirname(__DIR__) . '/_files/Compress/First/Second')) {
-            mkdir(dirname(__DIR__) . '/_files/Compress/First/Second', 0777, true);
-            file_put_contents(dirname(__DIR__) . '/_files/Compress/First/Second/zipextracted.txt', 'compress me');
-            file_put_contents(dirname(__DIR__) . '/_files/Compress/First/zipextracted.txt', 'compress me');
-            file_put_contents(dirname(__DIR__) . '/_files/Compress/zipextracted.txt', 'compress me');
+        if (!file_exists(dirname(__DIR__).'/_files/Compress/First/Second')) {
+            mkdir(dirname(__DIR__).'/_files/Compress/First/Second', 0777, true);
+            file_put_contents(dirname(__DIR__).'/_files/Compress/First/Second/zipextracted.txt', 'compress me');
+            file_put_contents(dirname(__DIR__).'/_files/Compress/First/zipextracted.txt', 'compress me');
+            file_put_contents(dirname(__DIR__).'/_files/Compress/zipextracted.txt', 'compress me');
         }
     }
 
     public function tearDown()
     {
         $files = array(
-            dirname(__DIR__) . '/_files/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress/Compress/First/Second/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress/Compress/First/Second',
-            dirname(__DIR__) . '/_files/_compress/Compress/First/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress/Compress/First',
-            dirname(__DIR__) . '/_files/_compress/Compress/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress/Compress',
-            dirname(__DIR__) . '/_files/_compress/zipextracted.txt',
-            dirname(__DIR__) . '/_files/_compress',
-            dirname(__DIR__) . '/_files/compressed.tar',
-            dirname(__DIR__) . '/_files/compressed.tar.gz',
-            dirname(__DIR__) . '/_files/compressed.tar.bz2'
+            dirname(__DIR__).'/_files/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress/Compress/First/Second/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress/Compress/First/Second',
+            dirname(__DIR__).'/_files/_compress/Compress/First/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress/Compress/First',
+            dirname(__DIR__).'/_files/_compress/Compress/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress/Compress',
+            dirname(__DIR__).'/_files/_compress/zipextracted.txt',
+            dirname(__DIR__).'/_files/_compress',
+            dirname(__DIR__).'/_files/compressed.tar',
+            dirname(__DIR__).'/_files/compressed.tar.gz',
+            dirname(__DIR__).'/_files/compressed.tar.bz2',
         );
 
         foreach ($files as $file) {
@@ -85,11 +85,11 @@ class TarTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        if (!file_exists(dirname(__DIR__) . '/_files/Compress/First/Second')) {
-            mkdir(dirname(__DIR__) . '/_files/Compress/First/Second', 0777, true);
-            file_put_contents(dirname(__DIR__) . '/_files/Compress/First/Second/zipextracted.txt', 'compress me');
-            file_put_contents(dirname(__DIR__) . '/_files/Compress/First/zipextracted.txt', 'compress me');
-            file_put_contents(dirname(__DIR__) . '/_files/Compress/zipextracted.txt', 'compress me');
+        if (!file_exists(dirname(__DIR__).'/_files/Compress/First/Second')) {
+            mkdir(dirname(__DIR__).'/_files/Compress/First/Second', 0777, true);
+            file_put_contents(dirname(__DIR__).'/_files/Compress/First/Second/zipextracted.txt', 'compress me');
+            file_put_contents(dirname(__DIR__).'/_files/Compress/First/zipextracted.txt', 'compress me');
+            file_put_contents(dirname(__DIR__).'/_files/Compress/zipextracted.txt', 'compress me');
         }
     }
 
@@ -102,18 +102,18 @@ class TarTest extends \PHPUnit_Framework_TestCase
     {
         $filter  = new TarCompression(
             array(
-                'archive'  => dirname(__DIR__) . '/_files/compressed.tar',
-                'target'   => dirname(__DIR__) . '/_files/zipextracted.txt'
+                'archive'  => dirname(__DIR__).'/_files/compressed.tar',
+                'target'   => dirname(__DIR__).'/_files/zipextracted.txt',
             )
         );
 
         $content = $filter->compress('compress me');
-        $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-                            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
+        $this->assertEquals(dirname(__DIR__).DIRECTORY_SEPARATOR.'_files'
+                            .DIRECTORY_SEPARATOR.'compressed.tar', $content);
 
         $content = $filter->decompress($content);
-        $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR, $content);
-        $content = file_get_contents(dirname(__DIR__) . '/_files/zipextracted.txt');
+        $this->assertEquals(dirname(__DIR__).DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents(dirname(__DIR__).'/_files/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }
 
@@ -129,7 +129,7 @@ class TarTest extends \PHPUnit_Framework_TestCase
             array(
                 'archive' => null,
                 'target'  => '.',
-                'mode'    => null),
+                'mode'    => null, ),
             $filter->getOptions()
         );
 
@@ -183,19 +183,19 @@ class TarTest extends \PHPUnit_Framework_TestCase
     {
         $filter  = new TarCompression(
             array(
-                'archive'  => dirname(__DIR__) . '/_files/compressed.tar',
-                'target'   => dirname(__DIR__) . '/_files/zipextracted.txt'
+                'archive'  => dirname(__DIR__).'/_files/compressed.tar',
+                'target'   => dirname(__DIR__).'/_files/zipextracted.txt',
             )
         );
-        file_put_contents(dirname(__DIR__) . '/_files/zipextracted.txt', 'compress me');
+        file_put_contents(dirname(__DIR__).'/_files/zipextracted.txt', 'compress me');
 
-        $content = $filter->compress(dirname(__DIR__) . '/_files/zipextracted.txt');
-        $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-                            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
+        $content = $filter->compress(dirname(__DIR__).'/_files/zipextracted.txt');
+        $this->assertEquals(dirname(__DIR__).DIRECTORY_SEPARATOR.'_files'
+                            .DIRECTORY_SEPARATOR.'compressed.tar', $content);
 
         $content = $filter->decompress($content);
-        $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR, $content);
-        $content = file_get_contents(dirname(__DIR__) . '/_files/zipextracted.txt');
+        $this->assertEquals(dirname(__DIR__).DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents(dirname(__DIR__).'/_files/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }
 
@@ -208,22 +208,22 @@ class TarTest extends \PHPUnit_Framework_TestCase
     {
         $filter  = new TarCompression(
             array(
-                'archive'  => dirname(__DIR__) . '/_files/compressed.tar',
-                'target'   => dirname(__DIR__) . '/_files/_compress'
+                'archive'  => dirname(__DIR__).'/_files/compressed.tar',
+                'target'   => dirname(__DIR__).'/_files/_compress',
             )
         );
-        $content = $filter->compress(dirname(__DIR__) . '/_files/Compress');
-        $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-                            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
+        $content = $filter->compress(dirname(__DIR__).'/_files/Compress');
+        $this->assertEquals(dirname(__DIR__).DIRECTORY_SEPARATOR.'_files'
+                            .DIRECTORY_SEPARATOR.'compressed.tar', $content);
     }
 
     public function testSetModeShouldWorkWithCaseInsensitive()
     {
-        $filter = new TarCompression;
+        $filter = new TarCompression();
         $filter->setTarget(dirname(__DIR__).'/_files/zipextracted.txt');
 
         foreach (array('GZ', 'Bz2') as $mode) {
-            $archive = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'compressed.tar.'.strtolower($mode);
+            $archive = dirname(__DIR__).DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'compressed.tar.'.strtolower($mode);
             $filter->setArchive($archive);
             $filter->setMode($mode);
             $content = $filter->compress('compress me');

@@ -19,7 +19,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $mysql = new Mysql;
+        $mysql = new Mysql();
         $decorators = $mysql->getDecorators();
 
         list($type, $decorator) = each($decorators);

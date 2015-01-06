@@ -24,7 +24,7 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->platform = new IbmDb2;
+        $this->platform = new IbmDb2();
     }
 
     /**

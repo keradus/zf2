@@ -88,7 +88,7 @@ class Uri extends AbstractValidator
             $this->uriHandler = new UriHandler();
         } elseif (is_string($this->uriHandler) && class_exists($this->uriHandler)) {
             // Instantiate string Uri handler that references a class
-            $this->uriHandler = new $this->uriHandler;
+            $this->uriHandler = new $this->uriHandler();
         }
 
         if (! $this->uriHandler instanceof UriHandler) {
@@ -99,7 +99,7 @@ class Uri extends AbstractValidator
     }
 
     /**
-     * @param  UriHandler $uriHandler
+     * @param  UriHandler               $uriHandler
      * @throws InvalidArgumentException
      * @return Uri
      */
@@ -110,6 +110,7 @@ class Uri extends AbstractValidator
         }
 
         $this->uriHandler = $uriHandler;
+
         return $this;
     }
 
@@ -132,6 +133,7 @@ class Uri extends AbstractValidator
     public function setAllowAbsolute($allowAbsolute)
     {
         $this->allowAbsolute = (bool) $allowAbsolute;
+
         return $this;
     }
 
@@ -154,6 +156,7 @@ class Uri extends AbstractValidator
     public function setAllowRelative($allowRelative)
     {
         $this->allowRelative = (bool) $allowRelative;
+
         return $this;
     }
 
@@ -167,6 +170,7 @@ class Uri extends AbstractValidator
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -187,6 +191,7 @@ class Uri extends AbstractValidator
         }
 
         $this->error(self::NOT_URI);
+
         return false;
     }
 }

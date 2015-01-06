@@ -35,7 +35,7 @@ class MongoDbOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $namespaceSeparator
+     * @param string $namespaceSeparator
      *
      * @return self
      */

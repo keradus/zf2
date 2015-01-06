@@ -51,7 +51,7 @@ class Response
     /**
      * Set response state
      *
-     * @param  array $options
+     * @param  array    $options
      * @return Response
      */
     public function setOptions(array $options)
@@ -64,20 +64,21 @@ class Response
 
         $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (in_array($method, $methods)) {
                 $this->$method($value);
             } elseif ($key == 'jsonrpc') {
                 $this->setVersion($value);
             }
         }
+
         return $this;
     }
 
     /**
      * Set response state based on JSON
      *
-     * @param  string $json
+     * @param  string                     $json
      * @return void
      * @throws Exception\RuntimeException
      */
@@ -95,12 +96,13 @@ class Response
     /**
      * Set result
      *
-     * @param  mixed $value
+     * @param  mixed    $value
      * @return Response
      */
     public function setResult($value)
     {
         $this->result = $value;
+
         return $this;
     }
 
@@ -118,12 +120,13 @@ class Response
     /**
      * Set result error
      *
-     * @param  mixed $error
+     * @param  mixed    $error
      * @return Response
      */
     public function setError(Error $error = null)
     {
         $this->error = $error;
+
         return $this;
     }
 
@@ -150,12 +153,13 @@ class Response
     /**
      * Set request ID
      *
-     * @param  mixed $name
+     * @param  mixed    $name
      * @return Response
      */
     public function setId($name)
     {
         $this->id = $name;
+
         return $this;
     }
 
@@ -172,7 +176,7 @@ class Response
     /**
      * Set JSON-RPC version
      *
-     * @param  string $version
+     * @param  string   $version
      * @return Response
      */
     public function setVersion($version)
@@ -236,24 +240,26 @@ class Response
     /**
      * Set args
      *
-     * @param mixed $args
+     * @param  mixed $args
      * @return self
      */
     public function setArgs($args)
     {
         $this->args = $args;
+
         return $this;
     }
 
     /**
      * Set service map object
      *
-     * @param  Smd $serviceMap
+     * @param  Smd      $serviceMap
      * @return Response
      */
     public function setServiceMap($serviceMap)
     {
         $this->serviceMap = $serviceMap;
+
         return $this;
     }
 

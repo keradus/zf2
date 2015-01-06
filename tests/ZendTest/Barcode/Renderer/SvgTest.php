@@ -30,9 +30,9 @@ class SvgTest extends TestCommon
      */
     public function testSvgNoTransparency()
     {
-        $svgCompare = file_get_contents(__DIR__ . '/_files/svg_transparency.xml');
+        $svgCompare = file_get_contents(__DIR__.'/_files/svg_transparency.xml');
 
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
         $barcode = new Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
 
@@ -48,9 +48,9 @@ class SvgTest extends TestCommon
      */
     public function testSvgTransparency()
     {
-        $svgCompare = file_get_contents(__DIR__ . '/_files/svg_transparency.xml');
+        $svgCompare = file_get_contents(__DIR__.'/_files/svg_transparency.xml');
 
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
         $barcode = new Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $this->renderer->setTransparentBackground(true);
@@ -102,7 +102,7 @@ class SvgTest extends TestCommon
 
     public function testDrawReturnResource()
     {
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
         $barcode = new Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $resource = $this->renderer->draw();
@@ -112,7 +112,7 @@ class SvgTest extends TestCommon
 
     public function testDrawWithExistantResourceReturnResource()
     {
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
         $barcode = new Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $svgResource = new \DOMDocument();
@@ -138,6 +138,7 @@ class SvgTest extends TestCommon
         $rootElement->setAttribute('width', 500);
         $rootElement->setAttribute('height', 300);
         $svg->appendChild($rootElement);
+
         return $this->renderer->setResource($svg);
     }
 }

@@ -21,6 +21,7 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
         $class = new \ReflectionClass('Zend\Crypt\Key\Derivation\Scrypt');
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method;
     }
 
@@ -40,7 +41,6 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
                       04 4b 21 81 a2 fd 33 7d fd 7b 1c 63 96 68 2f 29
                       b4 39 31 68 e3 c9 e6 bc fe 6b c5 b7 a0 6d 96 ba
                       e4 24 cc 10 2c 91 74 5c 24 ad 67 3d c7 61 8f 81';
-
 
         $salsaAlg = 'salsa208Core32';
         if (PHP_INT_SIZE === 8) {
@@ -115,7 +115,6 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
                       ae 12 fd 44 38 f2 03 a0 e4 e1 c4 7e c3 14 86 1f
                       4e 90 87 cb 33 39 6a 68 73 e8 f9 d2 53 9a 4b 8e';
 
-
         $roMix  = self::getMethod('scryptROMix');
         $obj    = $this->getMockForAbstractClass('Zend\Crypt\Key\Derivation\Scrypt');
         $input  = self::hex2bin(str_replace(array(' ', "\n"), '', $hexInput));
@@ -123,7 +122,6 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(str_replace(array(' ', "\n"), '', $hexOutput), bin2hex($result));
     }
-
 
     /**
      * Test Vector Scrypt
@@ -184,8 +182,9 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
         $len    = strlen($hex);
         $result = '';
         for ($i = 0; $i < $len; $i += 2) {
-            $result .=  chr(hexdec($hex[$i] . $hex[$i+1]));
+            $result .=  chr(hexdec($hex[$i].$hex[$i+1]));
         }
+
         return $result;
     }
 }

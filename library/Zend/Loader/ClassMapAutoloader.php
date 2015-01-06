@@ -12,7 +12,7 @@ namespace Zend\Loader;
 use Traversable;
 
 // Grab SplAutoloader interface
-require_once __DIR__ . '/SplAutoloader.php';
+require_once __DIR__.'/SplAutoloader.php';
 
 /**
  * Class-map autoloader
@@ -38,7 +38,7 @@ class ClassMapAutoloader implements SplAutoloader
      *
      * Create a new instance, and optionally configure the autoloader.
      *
-     * @param  null|array|Traversable $options
+     * @param null|array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -52,12 +52,13 @@ class ClassMapAutoloader implements SplAutoloader
      *
      * Proxies to {@link registerAutoloadMaps()}.
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable  $options
      * @return ClassMapAutoloader
      */
     public function setOptions($options)
     {
         $this->registerAutoloadMaps($options);
+
         return $this;
     }
 
@@ -70,7 +71,7 @@ class ClassMapAutoloader implements SplAutoloader
      * An autoload map should be an associative array containing
      * classname/file pairs.
      *
-     * @param  string|array $map
+     * @param  string|array                       $map
      * @throws Exception\InvalidArgumentException
      * @return ClassMapAutoloader
      */
@@ -84,10 +85,10 @@ class ClassMapAutoloader implements SplAutoloader
         }
 
         if (!is_array($map)) {
-            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            require_once __DIR__.'/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf(
                 'Map file provided does not return a map. Map file: "%s"',
-                (isset($location) && is_string($location) ? $location : 'unexpected type: ' . gettype($map))
+                (isset($location) && is_string($location) ? $location : 'unexpected type: '.gettype($map))
             ));
         }
 
@@ -103,19 +104,20 @@ class ClassMapAutoloader implements SplAutoloader
     /**
      * Register many autoload maps at once
      *
-     * @param  array $locations
+     * @param  array                              $locations
      * @throws Exception\InvalidArgumentException
      * @return ClassMapAutoloader
      */
     public function registerAutoloadMaps($locations)
     {
         if (!is_array($locations) && !($locations instanceof Traversable)) {
-            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            require_once __DIR__.'/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Map list must be an array or implement Traversable');
         }
         foreach ($locations as $location) {
             $this->registerAutoloadMap($location);
         }
+
         return $this;
     }
 
@@ -160,17 +162,17 @@ class ClassMapAutoloader implements SplAutoloader
      * otherwise, returns whatever was returned by calling include() on the
      * location.
      *
-     * @param  string $location
+     * @param  string                             $location
      * @return ClassMapAutoloader|mixed
      * @throws Exception\InvalidArgumentException for nonexistent locations
      */
     protected function loadMapFromFile($location)
     {
         if (!file_exists($location)) {
-            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            require_once __DIR__.'/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf(
                 'Map file provided does not exist. Map file: "%s"',
-                (is_string($location) ? $location : 'unexpected type: ' . gettype($location))
+                (is_string($location) ? $location : 'unexpected type: '.gettype($location))
             ));
         }
 
@@ -214,7 +216,7 @@ class ClassMapAutoloader implements SplAutoloader
             }
         });
 
-        if (file_exists($realPath = str_pad('phar:', $prefixLength, '/') . implode('/', $parts))) {
+        if (file_exists($realPath = str_pad('phar:', $prefixLength, '/').implode('/', $parts))) {
             return $realPath;
         }
     }

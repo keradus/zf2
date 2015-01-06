@@ -32,11 +32,11 @@ class HttpTest extends \PHPUnit_Framework_TestCase
     {
         $_FILES = array(
             'txt' => array(
-                'name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
+                'name' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'test.txt',
                 'type' => 'plain/text',
                 'size' => 8,
-                'tmp_name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
-                'error' => 0));
+                'tmp_name' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'test.txt',
+                'error' => 0, ), );
         $this->adapter = new HttpTestMockAdapter();
     }
 
@@ -118,7 +118,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
                 'type' => 'plain/text',
                 'size' => 8,
                 'tmp_name' => 'unknown.txt',
-                'error' => 0));
+                'error' => 0, ), );
         $adapter = new HttpTestMockAdapter();
         $this->assertFalse($adapter->receive());
     }
@@ -148,33 +148,33 @@ class HttpTest extends \PHPUnit_Framework_TestCase
     {
         $_FILES = array(
             'txt' => array(
-                'name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
+                'name' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'test.txt',
                 'type' => 'plain/text',
                 'size' => 8,
-                'tmp_name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
-                'error' => 0),
+                'tmp_name' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'test.txt',
+                'error' => 0, ),
             'exe' => array(
                 'name' => array(
-                    0 => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file1.txt',
-                    1 => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file2.txt'),
+                    0 => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file1.txt',
+                    1 => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file2.txt', ),
                 'type' => array(
                     0 => 'plain/text',
-                    1 => 'plain/text'),
+                    1 => 'plain/text', ),
                 'size' => array(
                     0 => 8,
-                    1 => 8),
+                    1 => 8, ),
                 'tmp_name' => array(
-                    0 => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file1.txt',
-                    1 => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file2.txt'),
+                    0 => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file1.txt',
+                    1 => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file2.txt', ),
                 'error' => array(
                     0 => 0,
-                    1 => 0)));
+                    1 => 0, ), ), );
         $adapter = new HttpTestMockAdapter();
         $adapter->setOptions(array('ignoreNoFile' => true));
         $this->assertTrue($adapter->receive('exe'));
         $this->assertEquals(
-            array('exe_0_' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file1.txt',
-                  'exe_1_' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file2.txt'),
+            array('exe_0_' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file1.txt',
+                  'exe_1_' => __DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.'file2.txt', ),
             $adapter->getFileName('exe', false));
     }
 
@@ -202,7 +202,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
             'rate'    => 10,
             'id'      => 'mykey',
             'done'    => false,
-            'message' => '100B - 100B'
+            'message' => '100B - 100B',
             ), $status);
 
         $this->adapter->switchApcToUP();
@@ -217,7 +217,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
             'cancel_upload'  => true,
             'message'        => 'The upload has been canceled',
             'done'           => true,
-            'id'             => 'mykey'
+            'id'             => 'mykey',
             ), $status);
     }
 

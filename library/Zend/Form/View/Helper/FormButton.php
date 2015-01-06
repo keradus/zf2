@@ -67,8 +67,8 @@ class FormButton extends FormInput
      * Render a form <button> element from the provided $element,
      * using content from $buttonContent or the element's "label" attribute
      *
-     * @param  ElementInterface $element
-     * @param  null|string $buttonContent
+     * @param  ElementInterface          $element
+     * @param  null|string               $buttonContent
      * @throws Exception\DomainException
      * @return string
      */
@@ -81,7 +81,7 @@ class FormButton extends FormInput
             if (null === $buttonContent) {
                 throw new Exception\DomainException(
                     sprintf(
-                        '%s expects either button content as the second argument, ' .
+                        '%s expects either button content as the second argument, '.
                         'or that the element provided has a label value; neither found',
                         __METHOD__
                     )
@@ -101,13 +101,13 @@ class FormButton extends FormInput
             $buttonContent = $escapeHtmlHelper($buttonContent);
         }
 
-        return $openTag . $buttonContent . $this->closeTag();
+        return $openTag.$buttonContent.$this->closeTag();
     }
 
     /**
      * Generate an opening button tag
      *
-     * @param  null|array|ElementInterface $attributesOrElement
+     * @param  null|array|ElementInterface        $attributesOrElement
      * @throws Exception\InvalidArgumentException
      * @throws Exception\DomainException
      * @return string
@@ -120,6 +120,7 @@ class FormButton extends FormInput
 
         if (is_array($attributesOrElement)) {
             $attributes = $this->createAttributesString($attributesOrElement);
+
             return sprintf('<button %s>', $attributes);
         }
 

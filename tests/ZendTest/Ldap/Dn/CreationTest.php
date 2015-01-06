@@ -26,25 +26,25 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $dnArray1  = array(
             array('CN' => 'Baker, Alice'),
             array('CN' => 'Users',
-                  'OU' => 'Lab'),
+                  'OU' => 'Lab', ),
             array('DC' => 'example'),
-            array('DC' => 'com'));
+            array('DC' => 'com'), );
 
         $dnString2 = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
         $dnArray2  = array(
             array('cn' => 'Baker, Alice'),
             array('cn' => 'Users',
-                  'ou' => 'Lab'),
+                  'ou' => 'Lab', ),
             array('dc' => 'example'),
-            array('dc' => 'com'));
+            array('dc' => 'com'), );
 
         $dnString3 = 'Cn=Baker\\, Alice,Cn=Users+Ou=Lab,Dc=example,Dc=com';
         $dnArray3  = array(
             array('Cn' => 'Baker, Alice'),
             array('Cn' => 'Users',
-                  'Ou' => 'Lab'),
+                  'Ou' => 'Lab', ),
             array('Dc' => 'example'),
-            array('Dc' => 'com'));
+            array('Dc' => 'com'), );
 
         $dn11 = Ldap\Dn::fromString($dnString1);
         $dn12 = Ldap\Dn::fromArray($dnArray1);
@@ -158,7 +158,7 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $dnString = 'Cn=Users+Ou=Lab,dc=example,dc=com';
         $dn       = Ldap\Dn::fromString($dnString);
         $this->assertEquals(array('Cn' => 'Users',
-                                 'Ou'  => 'Lab'), $dn->getRdn()
+                                 'Ou'  => 'Lab', ), $dn->getRdn()
         );
         $this->assertEquals('Cn=Users+Ou=Lab', $dn->getRdnString());
     }

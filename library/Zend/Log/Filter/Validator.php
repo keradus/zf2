@@ -25,7 +25,7 @@ class Validator implements FilterInterface
     /**
      * Filter out any log messages not matching the validator
      *
-     * @param  ZendValidator|array|Traversable $validator
+     * @param  ZendValidator|array|Traversable    $validator
      * @throws Exception\InvalidArgumentException
      * @return Validator
      */
@@ -49,7 +49,7 @@ class Validator implements FilterInterface
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return bool
      */
     public function filter(array $event)

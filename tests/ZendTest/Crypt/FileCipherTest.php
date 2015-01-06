@@ -63,7 +63,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
     public function testSetCipher()
     {
         $cipher = new Mcrypt(array(
-            'algo' => 'blowfish'
+            'algo' => 'blowfish',
         ));
         $this->fileCipher->setCipher($cipher);
         $this->assertInstanceOf('Zend\Crypt\Symmetric\SymmetricInterface', $this->fileCipher->getCipher());
@@ -138,9 +138,9 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
         $this->fileCipher->setKey('test');
 
         // Test 5 files with a random size between 1 Kb and 5 Mb
-        for ($i=1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $fileIn  = $this->generateTmpFile(Rand::getInteger(1024, 1048576 * 5), Rand::getBytes(1));
-            $fileOut = $fileIn . '.enc';
+            $fileOut = $fileIn.'.enc';
 
             // encrypt without compression
             $this->assertTrue($this->fileCipher->encrypt($fileIn, $fileOut, false));
@@ -152,7 +152,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
                                 Hmac::getOutputSize($this->fileCipher->getHashAlgorithm()) +
                                 $paddingSize - filesize($fileIn) % $paddingSize);
 
-            $decryptFile = $fileOut . '.dec';
+            $decryptFile = $fileOut.'.dec';
             // decrypt
             $this->assertTrue($this->fileCipher->decrypt($fileOut, $decryptFile));
             $this->assertEquals(filesize($fileIn), filesize($decryptFile));
@@ -167,12 +167,12 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
     public function testDecryptFileNoValidAuthenticate()
     {
         $this->fileIn  = $this->generateTmpFile(1048576, Rand::getBytes(1));
-        $this->fileOut = $this->fileIn . '.enc';
+        $this->fileOut = $this->fileIn.'.enc';
 
         $this->fileCipher->setKey('test');
         $this->assertTrue($this->fileCipher->encrypt($this->fileIn, $this->fileOut, false));
 
-        $fileOut2 = $this->fileIn . '.dec';
+        $fileOut2 = $this->fileIn.'.dec';
         $this->assertTrue($this->fileCipher->decrypt($this->fileOut, $fileOut2, false));
         unlink($fileOut2);
 
@@ -188,7 +188,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
     public function testEncryptFileWithNoKey()
     {
         $this->fileIn  = $this->generateTmpFile(1048576, Rand::getBytes(1));
-        $this->fileOut = $this->fileIn . '.enc';
+        $this->fileOut = $this->fileIn.'.enc';
 
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
                                     'No key specified for encryption');
@@ -198,7 +198,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
     public function testDecryptFileWithNoKey()
     {
         $this->fileIn  = $this->generateTmpFile(1048576, Rand::getBytes(1));
-        $this->fileOut = $this->fileIn . '.enc';
+        $this->fileOut = $this->fileIn.'.enc';
 
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
                                     'No key specified for decryption');
@@ -254,7 +254,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
      */
     protected function generateTmpFile($size, $content = 'A')
     {
-        $fileName = sys_get_temp_dir() . '/' . uniqid('ZF2_FileCipher_test');
+        $fileName = sys_get_temp_dir().'/'.uniqid('ZF2_FileCipher_test');
         $num = $size / strlen($content) + 1;
         $content  = str_repeat('A', $size / strlen($content) + 1);
         file_put_contents($fileName, substr($content, 0, $size));

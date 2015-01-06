@@ -36,8 +36,8 @@ class Scheme implements RouteInterface
     /**
      * Create a new scheme route.
      *
-     * @param  string $scheme
-     * @param  array  $defaults
+     * @param string $scheme
+     * @param array  $defaults
      */
     public function __construct($scheme, array $defaults = array())
     {
@@ -49,7 +49,7 @@ class Scheme implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return Scheme
      * @throws Exception\InvalidArgumentException
      */
@@ -58,7 +58,7 @@ class Scheme implements RouteInterface
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable set of options');
         }
 
         if (!isset($options['scheme'])) {
@@ -76,7 +76,7 @@ class Scheme implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request $request
+     * @param  Request         $request
      * @return RouteMatch|null
      */
     public function match(Request $request)

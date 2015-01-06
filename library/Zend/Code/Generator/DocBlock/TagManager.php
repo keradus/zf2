@@ -39,7 +39,7 @@ class TagManager extends PrototypeClassFactory
     }
 
     /**
-     * @param ReflectionTagInterface $reflectionTag
+     * @param  ReflectionTagInterface $reflectionTag
      * @return TagInterface
      */
     public function createTagFromReflection(ReflectionTagInterface $reflectionTag)
@@ -54,16 +54,17 @@ class TagManager extends PrototypeClassFactory
         foreach ($reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
             if (substr($method->getName(), 0, 3) == 'get') {
                 $propertyName = substr($method->getName(), 3);
-                if (method_exists($newTag, 'set' . $propertyName)) {
-                    $newTag->{'set' . $propertyName}($reflectionTag->{'get' . $propertyName}());
+                if (method_exists($newTag, 'set'.$propertyName)) {
+                    $newTag->{'set'.$propertyName}($reflectionTag->{'get'.$propertyName}());
                 }
             } elseif (substr($method->getName(), 0, 2) == 'is') {
                 $propertyName = ucfirst($method->getName());
-                if (method_exists($newTag, 'set' . $propertyName)) {
-                    $newTag->{'set' . $propertyName}($reflectionTag->{$method->getName()}());
+                if (method_exists($newTag, 'set'.$propertyName)) {
+                    $newTag->{'set'.$propertyName}($reflectionTag->{$method->getName()}());
                 }
             }
         }
+
         return $newTag;
     }
 }

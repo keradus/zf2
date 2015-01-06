@@ -20,7 +20,7 @@ class FormCaptcha extends AbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface   $element
      * @return string|FormCaptcha
      */
     public function __invoke(ElementInterface $element = null)
@@ -35,7 +35,7 @@ class FormCaptcha extends AbstractHelper
     /**
      * Render a form captcha for an element
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface          $element
      * @throws Exception\DomainException if the element does not compose a captcha, or the renderer does not implement plugin()
      * @return string
      */
@@ -61,6 +61,7 @@ class FormCaptcha extends AbstractHelper
         }
 
         $helper = $renderer->plugin($helper);
+
         return $helper($element);
     }
 }

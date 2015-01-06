@@ -61,7 +61,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     }
 
     /**
-     * @param  AnnotationManager $annotationManager
+     * @param  AnnotationManager    $annotationManager
      * @return AnnotationCollection
      */
     public function getAnnotations(AnnotationManager $annotationManager)
@@ -106,7 +106,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Return the contents of the class
      *
-     * @param  bool $includeDocBlock
+     * @param  bool   $includeDocBlock
      * @return string
      */
     public function getContents($includeDocBlock = true)
@@ -150,7 +150,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Return method reflection by name
      *
-     * @param  string $name
+     * @param  string           $name
      * @return MethodReflection
      */
     public function getMethod($name)
@@ -163,7 +163,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Get reflection objects of all methods
      *
-     * @param  int $filter
+     * @param  int                $filter
      * @return MethodReflection[]
      */
     public function getMethods($filter = -1)
@@ -198,7 +198,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Return reflection property of this class by name
      *
-     * @param  string $name
+     * @param  string             $name
      * @return PropertyReflection
      */
     public function getProperty($name)
@@ -213,7 +213,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Return reflection properties of this class
      *
-     * @param  int $filter
+     * @param  int                  $filter
      * @return PropertyReflection[]
      */
     public function getProperties($filter = -1)
@@ -246,7 +246,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
      * By having this as a seperate method it allows the method to be overridden
      * if a different FileScanner is needed.
      *
-     * @param  string $filename
+     * @param string $filename
      *
      * @return FileScanner
      */

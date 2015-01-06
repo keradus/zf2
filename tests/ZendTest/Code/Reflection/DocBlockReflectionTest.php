@@ -31,7 +31,6 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
         $expectedOutput = 'This is a long description for the docblock of this class, it should be longer than 3 lines. It indeed is longer than 3 lines now.';
 
-
         $this->assertEquals($expectedOutput, $classReflection->getDocBlock()->getLongDescription());
     }
 
@@ -125,14 +124,14 @@ EOS;
 
         $classDocBlock = $classReflection->getDocBlock();
 
-        $expectedString = 'DocBlock [ /* DocBlock */ ] {' . PHP_EOL
-                        . PHP_EOL
-                        . '  - Tags [3] {' . PHP_EOL
-                        . '    DocBlock Tag [ * @author ]' . PHP_EOL
-                        . '    DocBlock Tag [ * @method ]' . PHP_EOL
-                        . '    DocBlock Tag [ * @property ]' . PHP_EOL
-                        . '  }' . PHP_EOL
-                        . '}' . PHP_EOL;
+        $expectedString = 'DocBlock [ /* DocBlock */ ] {'.PHP_EOL
+                        .PHP_EOL
+                        .'  - Tags [3] {'.PHP_EOL
+                        .'    DocBlock Tag [ * @author ]'.PHP_EOL
+                        .'    DocBlock Tag [ * @method ]'.PHP_EOL
+                        .'    DocBlock Tag [ * @property ]'.PHP_EOL
+                        .'  }'.PHP_EOL
+                        .'}'.PHP_EOL;
 
         $this->assertEquals($expectedString, (string) $classDocBlock);
     }

@@ -87,7 +87,6 @@ class LeitcodeTest extends TestCommon
         $this->assertTrue($this->object->checkParams());
     }
 
-
     public function testGetKnownWidthWithoutOrientation()
     {
         $this->object->setText('0000123456789');

@@ -91,7 +91,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         if (!$this->featureSet instanceof Feature\FeatureSet) {
-            $this->featureSet = new Feature\FeatureSet;
+            $this->featureSet = new Feature\FeatureSet();
         }
 
         $this->featureSet->setTableGateway($this);
@@ -106,7 +106,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         if (!$this->resultSetPrototype instanceof ResultSetInterface) {
-            $this->resultSetPrototype = new ResultSet;
+            $this->resultSetPrototype = new ResultSet();
         }
 
         if (!$this->sql instanceof Sql) {
@@ -175,7 +175,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * Select
      *
-     * @param Where|\Closure|string|array $where
+     * @param  Where|\Closure|string|array $where
      * @return ResultSet
      */
     public function select($where = null)
@@ -196,7 +196,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     }
 
     /**
-     * @param Select $select
+     * @param  Select                  $select
      * @return null|ResultSetInterface
      * @throws \RuntimeException
      */
@@ -205,11 +205,12 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if (!$this->isInitialized) {
             $this->initialize();
         }
+
         return $this->executeSelect($select);
     }
 
     /**
-     * @param Select $select
+     * @param  Select                     $select
      * @return ResultSet
      * @throws Exception\RuntimeException
      */
@@ -255,11 +256,12 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
         $insert = $this->sql->insert();
         $insert->values($set);
+
         return $this->executeInsert($insert);
     }
 
     /**
-     * @param Insert $insert
+     * @param  Insert $insert
      * @return mixed
      */
     public function insertWith(Insert $insert)
@@ -267,13 +269,14 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if (!$this->isInitialized) {
             $this->initialize();
         }
+
         return $this->executeInsert($insert);
     }
 
     /**
      * @todo add $columns support
      *
-     * @param Insert $insert
+     * @param  Insert                     $insert
      * @return mixed
      * @throws Exception\RuntimeException
      */
@@ -300,7 +303,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * Update
      *
-     * @param  array $set
+     * @param  array                 $set
      * @param  string|array|\Closure $where
      * @return int
      */
@@ -315,11 +318,12 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if ($where !== null) {
             $update->where($where);
         }
+
         return $this->executeUpdate($update);
     }
 
     /**
-     * @param \Zend\Db\Sql\Update $update
+     * @param  \Zend\Db\Sql\Update $update
      * @return mixed
      */
     public function updateWith(Update $update)
@@ -327,13 +331,14 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if (!$this->isInitialized) {
             $this->initialize();
         }
+
         return $this->executeUpdate($update);
     }
 
     /**
      * @todo add $columns support
      *
-     * @param Update $update
+     * @param  Update                     $update
      * @return mixed
      * @throws Exception\RuntimeException
      */
@@ -373,23 +378,25 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         } else {
             $delete->where($where);
         }
+
         return $this->executeDelete($delete);
     }
 
     /**
-     * @param Delete $delete
+     * @param  Delete $delete
      * @return mixed
      */
     public function deleteWith(Delete $delete)
     {
         $this->initialize();
+
         return $this->executeDelete($delete);
     }
 
     /**
      * @todo add $columns support
      *
-     * @param Delete $delete
+     * @param  Delete                     $delete
      * @return mixed
      * @throws Exception\RuntimeException
      */
@@ -425,7 +432,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * __get
      *
-     * @param  string $property
+     * @param  string                             $property
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
@@ -442,12 +449,12 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if ($this->featureSet->canCallMagicGet($property)) {
             return $this->featureSet->callMagicGet($property);
         }
-        throw new Exception\InvalidArgumentException('Invalid magic property access in ' . __CLASS__ . '::__get()');
+        throw new Exception\InvalidArgumentException('Invalid magic property access in '.__CLASS__.'::__get()');
     }
 
     /**
-     * @param string $property
-     * @param mixed $value
+     * @param  string                             $property
+     * @param  mixed                              $value
      * @return mixed
      * @throws Exception\InvalidArgumentException
      */
@@ -456,7 +463,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if ($this->featureSet->canCallMagicSet($property)) {
             return $this->featureSet->callMagicSet($property, $value);
         }
-        throw new Exception\InvalidArgumentException('Invalid magic property access in ' . __CLASS__ . '::__set()');
+        throw new Exception\InvalidArgumentException('Invalid magic property access in '.__CLASS__.'::__set()');
     }
 
     /**
@@ -470,7 +477,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if ($this->featureSet->canCallMagicCall($method)) {
             return $this->featureSet->callMagicCall($method, $arguments);
         }
-        throw new Exception\InvalidArgumentException('Invalid method (' . $method . ') called, caught by ' . __CLASS__ . '::__call()');
+        throw new Exception\InvalidArgumentException('Invalid method ('.$method.') called, caught by '.__CLASS__.'::__call()');
     }
 
     /**

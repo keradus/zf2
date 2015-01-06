@@ -123,8 +123,8 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 dirname(__DIR__).'/_files/nofile.txt',
-                dirname(__DIR__).'/_files/nofile2.txt'
-            ))
+                dirname(__DIR__).'/_files/nofile2.txt',
+            )),
         );
     }
 

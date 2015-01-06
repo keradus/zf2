@@ -58,13 +58,13 @@ class Number extends Element implements InputProviderInterface
         if (isset($this->attributes['min'])) {
             $validators[] = new GreaterThanValidator(array(
                 'min' => $this->attributes['min'],
-                'inclusive' => $inclusive
+                'inclusive' => $inclusive,
             ));
         }
         if (isset($this->attributes['max'])) {
             $validators[] = new LessThanValidator(array(
                 'max' => $this->attributes['max'],
-                'inclusive' => $inclusive
+                'inclusive' => $inclusive,
             ));
         }
 
@@ -78,6 +78,7 @@ class Number extends Element implements InputProviderInterface
         }
 
         $this->validators = $validators;
+
         return $this->validators;
     }
 
@@ -94,7 +95,7 @@ class Number extends Element implements InputProviderInterface
             'name' => $this->getName(),
             'required' => true,
             'filters' => array(
-                array('name' => 'Zend\Filter\StringTrim')
+                array('name' => 'Zend\Filter\StringTrim'),
             ),
             'validators' => $this->getValidators(),
         );

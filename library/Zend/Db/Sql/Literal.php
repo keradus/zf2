@@ -25,12 +25,13 @@ class Literal implements ExpressionInterface
     }
 
     /**
-     * @param string $literal
+     * @param  string  $literal
      * @return Literal
      */
     public function setLiteral($literal)
     {
         $this->literal = $literal;
+
         return $this;
     }
 
@@ -50,7 +51,7 @@ class Literal implements ExpressionInterface
         return array(array(
             str_replace('%', '%%', $this->literal),
             array(),
-            array()
+            array(),
         ));
     }
 }

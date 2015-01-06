@@ -21,11 +21,11 @@ namespace Zend\Uri;
  */
 abstract class UriFactory
 {
-    /**
-     * Registered scheme-specific classes
-     *
-     * @var array
-     */
+     /**
+      * Registered scheme-specific classes
+      *
+      * @var array
+      */
      protected static $schemeClasses = array(
         'http'   => 'Zend\Uri\Http',
         'https'  => 'Zend\Uri\Http',
@@ -65,7 +65,7 @@ abstract class UriFactory
      *
      * If provided scheme is not registered, will return NULL
      *
-     * @param  string $scheme
+     * @param  string      $scheme
      * @return string|null
      */
     public static function getRegisteredSchemeClass($scheme)
@@ -80,8 +80,8 @@ abstract class UriFactory
     /**
      * Create a URI from a string
      *
-     * @param  string $uriString
-     * @param  string $defaultScheme
+     * @param  string                             $uriString
+     * @param  string                             $defaultScheme
      * @throws Exception\InvalidArgumentException
      * @return \Zend\Uri\Uri
      */

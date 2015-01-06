@@ -18,7 +18,7 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     /**
      * Constructor
      *
-     * @param \Zend\Di\Di $di
+     * @param \Zend\Di\Di                          $di
      * @param null|string|\Zend\Di\InstanceManager $useServiceLocator
      */
     public function __construct(Di $di, $useServiceLocator = self::USE_SL_NONE)

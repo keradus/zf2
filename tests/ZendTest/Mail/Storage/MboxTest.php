@@ -28,7 +28,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/../_files/test.tmp/';
+                $this->_tmpdir = __DIR__.'/../_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);
@@ -41,12 +41,13 @@ class MboxTest extends \PHPUnit_Framework_TestCase
             closedir($dh);
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
 
-        $this->_mboxOriginalFile = __DIR__ . '/../_files/test.mbox/INBOX';
-        $this->_mboxFile = $this->_tmpdir . 'INBOX';
+        $this->_mboxOriginalFile = __DIR__.'/../_files/test.mbox/INBOX';
+        $this->_mboxFile = $this->_tmpdir.'INBOX';
 
         copy($this->_mboxOriginalFile, $this->_mboxFile);
     }
@@ -128,7 +129,6 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
         $shouldSizes = array(1 => 397, 89, 694, 452, 497, 101, 139);
-
 
         $sizes = $mail->getSize();
         $this->assertEquals($shouldSizes, $sizes);
@@ -224,7 +224,6 @@ class MboxTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($mail->valid());
     }
 
-
     public function testOutOfBounds()
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
@@ -269,10 +268,9 @@ class MboxTest extends \PHPUnit_Framework_TestCase
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
             chmod($this->_mboxFile, $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
+
             return;
         }
-
-
 
         $check = false;
         try {
@@ -329,9 +327,9 @@ class MboxTest extends \PHPUnit_Framework_TestCase
      */
     private function getUnixMboxFile()
     {
-        $this->_mboxFileUnix = $this->_tmpdir . 'INBOX.unix';
+        $this->_mboxFileUnix = $this->_tmpdir.'INBOX.unix';
 
-        copy(__DIR__ . '/../_files/test.mbox/INBOX.unix', $this->_mboxFileUnix);
+        copy(__DIR__.'/../_files/test.mbox/INBOX.unix', $this->_mboxFileUnix);
 
         return $this->_mboxFileUnix;
     }

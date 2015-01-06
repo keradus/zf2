@@ -30,8 +30,8 @@ class Local extends SOAPClient
      * Local client constructor
      *
      * @param SOAPServer $server
-     * @param string $wsdl
-     * @param array $options
+     * @param string     $wsdl
+     * @param array      $options
      */
     public function __construct(SOAPServer $server, $wsdl, $options = null)
     {

@@ -66,7 +66,7 @@ abstract class AbstractCompressionAlgorithm implements CompressionAlgorithmInter
     public function setOptions(array $options)
     {
         foreach ($options as $key => $option) {
-            $method = 'set' . $key;
+            $method = 'set'.$key;
             if (method_exists($this, $method)) {
                 $this->$method($option);
             }

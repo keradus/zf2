@@ -31,7 +31,7 @@ abstract class AbstractFilter implements FilterInterface
     }
 
     /**
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -46,7 +46,7 @@ abstract class AbstractFilter implements FilterInterface
         }
 
         foreach ($options as $key => $value) {
-            $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            $setter = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
             if (method_exists($this, $setter)) {
                 $this->{$setter}($value);
             } elseif (array_key_exists($key, $this->options)) {
@@ -62,6 +62,7 @@ abstract class AbstractFilter implements FilterInterface
                 );
             }
         }
+
         return $this;
     }
 
@@ -80,7 +81,7 @@ abstract class AbstractFilter implements FilterInterface
      *
      * Proxies to {@link filter()}
      *
-     * @param  mixed $value
+     * @param  mixed                        $value
      * @throws Exception\ExceptionInterface If filtering $value is impossible
      * @return mixed
      */

@@ -17,7 +17,7 @@ class PhpCode extends AbstractAdapter
     /**
      * Serialize PHP using var_export
      *
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return string
      */
     public function serialize($value)
@@ -30,7 +30,7 @@ class PhpCode extends AbstractAdapter
      *
      * Warning: this uses eval(), and should likely be avoided.
      *
-     * @param  string $code
+     * @param  string                     $code
      * @return mixed
      * @throws Exception\RuntimeException on eval error
      */
@@ -40,7 +40,7 @@ class PhpCode extends AbstractAdapter
         $ret  = null;
         // This suppression is due to the fact that the ErrorHandler cannot
         // catch syntax errors, and is intentionally left in place.
-        $eval = @eval('$ret=' . $code . ';');
+        $eval = @eval('$ret='.$code.';');
         $err  = ErrorHandler::stop();
 
         if ($eval === false || $err) {
@@ -49,7 +49,7 @@ class PhpCode extends AbstractAdapter
             // Error handler doesn't catch syntax errors
             if ($eval === false) {
                 $lastErr = error_get_last();
-                $msg    .= ': ' . $lastErr['message'];
+                $msg    .= ': '.$lastErr['message'];
             }
 
             throw new Exception\RuntimeException($msg, 0, $err);

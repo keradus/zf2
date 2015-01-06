@@ -14,7 +14,7 @@ use DOMElement;
 use Zend\Feed\Writer\Extension;
 
 /**
-*/
+ */
 class Entry extends Extension\AbstractRenderer
 {
     /**
@@ -57,7 +57,7 @@ class Entry extends Extension\AbstractRenderer
      * Set entry author elements
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)

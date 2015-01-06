@@ -59,7 +59,7 @@ class NotEmpty extends AbstractValidator
         self::EMPTY_ARRAY,
         self::STRING,
         self::FLOAT,
-        self::BOOLEAN
+        self::BOOLEAN,
     );
 
     /**
@@ -80,7 +80,7 @@ class NotEmpty extends AbstractValidator
     /**
      * Constructor
      *
-     * @param  array|Traversable|int $options OPTIONAL
+     * @param array|Traversable|int $options OPTIONAL
      */
     public function __construct($options = null)
     {
@@ -139,7 +139,7 @@ class NotEmpty extends AbstractValidator
     }
 
     /**
-     * @param array|int|string $type
+     * @param  array|int|string $type
      * @return int
      */
     protected function calculateTypeValue($type)
@@ -165,7 +165,7 @@ class NotEmpty extends AbstractValidator
     /**
      * Set the types
      *
-     * @param  int|array $type
+     * @param  int|array                          $type
      * @throws Exception\InvalidArgumentException
      * @return NotEmpty
      */
@@ -194,6 +194,7 @@ class NotEmpty extends AbstractValidator
             !is_bool($value) && !is_array($value) && !is_object($value)
         ) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -207,6 +208,7 @@ class NotEmpty extends AbstractValidator
 
             if (is_object($value) && ($value instanceof \Countable) && (count($value) == 0)) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -218,6 +220,7 @@ class NotEmpty extends AbstractValidator
             if ((is_object($value) && (!method_exists($value, '__toString'))) ||
                 (is_object($value) && (method_exists($value, '__toString')) && (((string) $value) == ""))) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -229,6 +232,7 @@ class NotEmpty extends AbstractValidator
             // object not allowed but object given -> return false
             if (is_object($value)) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -237,6 +241,7 @@ class NotEmpty extends AbstractValidator
         if ($type & self::SPACE) {
             if (is_string($value) && (preg_match('/^\s+$/s', $value))) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -245,6 +250,7 @@ class NotEmpty extends AbstractValidator
         if ($type & self::NULL) {
             if ($value === null) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -253,6 +259,7 @@ class NotEmpty extends AbstractValidator
         if ($type & self::EMPTY_ARRAY) {
             if (is_array($value) && ($value == array())) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -261,6 +268,7 @@ class NotEmpty extends AbstractValidator
         if ($type & self::ZERO) {
             if (is_string($value) && ($value == '0')) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -269,6 +277,7 @@ class NotEmpty extends AbstractValidator
         if ($type & self::STRING) {
             if (is_string($value) && ($value == '')) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -277,6 +286,7 @@ class NotEmpty extends AbstractValidator
         if ($type & self::FLOAT) {
             if (is_float($value) && ($value == 0.0)) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -285,6 +295,7 @@ class NotEmpty extends AbstractValidator
         if ($type & self::INTEGER) {
             if (is_int($value) && ($value == 0)) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }
@@ -293,6 +304,7 @@ class NotEmpty extends AbstractValidator
         if ($type & self::BOOLEAN) {
             if (is_bool($value) && ($value == false)) {
                 $this->error(self::IS_EMPTY);
+
                 return false;
             }
         }

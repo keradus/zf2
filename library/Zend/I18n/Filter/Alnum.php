@@ -26,7 +26,7 @@ class Alnum extends AbstractLocale
      * Sets default option values for this instance
      *
      * @param array|Traversable|bool|null $allowWhiteSpaceOrOptions
-     * @param string|null $locale
+     * @param string|null                 $locale
      */
     public function __construct($allowWhiteSpaceOrOptions = null, $locale = null)
     {
@@ -44,12 +44,13 @@ class Alnum extends AbstractLocale
     /**
      * Sets the allowWhiteSpace option
      *
-     * @param  bool $flag
+     * @param  bool  $flag
      * @return Alnum Provides a fluent interface
      */
     public function setAllowWhiteSpace($flag = true)
     {
         $this->options['allow_white_space'] = (bool) $flag;
+
         return $this;
     }
 
@@ -82,13 +83,13 @@ class Alnum extends AbstractLocale
 
         if (!static::hasPcreUnicodeSupport()) {
             // POSIX named classes are not supported, use alternative a-zA-Z0-9 match
-            $pattern = '/[^a-zA-Z0-9' . $whiteSpace . ']/';
-        } elseif ($language == 'ja'|| $language == 'ko' || $language == 'zh') {
+            $pattern = '/[^a-zA-Z0-9'.$whiteSpace.']/';
+        } elseif ($language == 'ja' || $language == 'ko' || $language == 'zh') {
             // Use english alphabet
-            $pattern = '/[^a-zA-Z0-9'  . $whiteSpace . ']/u';
+            $pattern = '/[^a-zA-Z0-9'.$whiteSpace.']/u';
         } else {
             // Use native language alphabet
-            $pattern = '/[^\p{L}\p{N}' . $whiteSpace . ']/u';
+            $pattern = '/[^\p{L}\p{N}'.$whiteSpace.']/u';
         }
 
         return preg_replace($pattern, '', $value);

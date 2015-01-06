@@ -28,7 +28,7 @@ class CombineTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->combine = new Combine;
+        $this->combine = new Combine();
     }
 
     public function testRejectsInvalidStatement()
@@ -101,18 +101,18 @@ class CombineTest extends \PHPUnit_Framework_TestCase
     public function testPrepareStatementWithModifier()
     {
         $select1 = new Select('t1');
-        $select1->where(array('x1'=>10));
+        $select1->where(array('x1' => 10));
         $select2 = new Select('t2');
-        $select2->where(array('x2'=>20));
+        $select2->where(array('x2' => 20));
 
         $this->combine->combine(array(
             $select1,
-            $select2
+            $select2,
         ));
 
         $adapter = $this->getMockAdapter();
 
-        $statement = $this->combine->prepareStatement($adapter, new StatementContainer);
+        $statement = $this->combine->prepareStatement($adapter, new StatementContainer());
         $this->assertInstanceOf('Zend\Db\Adapter\StatementContainerInterface', $statement);
         $this->assertEquals(
             '(SELECT "t1".* FROM "t1" WHERE "x1" = ?) UNION (SELECT "t2".* FROM "t2" WHERE "x2" = ?)',
@@ -166,7 +166,7 @@ class CombineTest extends \PHPUnit_Framework_TestCase
                     array(
                         'select'   => $select,
                         'type'     => Combine::COMBINE_UNION,
-                        'modifier' => ''
+                        'modifier' => '',
                     ),
                 ),
                 'columns' => array(
@@ -188,13 +188,14 @@ class CombineTest extends \PHPUnit_Framework_TestCase
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
 
-
         $setGetSqlFunction = function ($sql = null) use ($mockStatement) {
             static $sqlValue;
             if ($sql) {
                 $sqlValue = $sql;
+
                 return $mockStatement;
             }
+
             return $sqlValue;
         };
         $mockStatement->expects($this->any())->method('setSql')->will($this->returnCallback($setGetSqlFunction));

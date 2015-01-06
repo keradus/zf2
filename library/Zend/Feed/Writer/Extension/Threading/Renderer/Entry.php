@@ -14,7 +14,7 @@ use DOMElement;
 use Zend\Feed\Writer\Extension;
 
 /**
-*/
+ */
 class Entry extends Extension\AbstractRenderer
 {
     /**
@@ -59,7 +59,7 @@ class Entry extends Extension\AbstractRenderer
      * Set comment link
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
@@ -84,7 +84,7 @@ class Entry extends Extension\AbstractRenderer
      * Set comment feed links
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCommentFeedLinks(DOMDocument $dom, DOMElement $root)
@@ -96,7 +96,7 @@ class Entry extends Extension\AbstractRenderer
         foreach ($links as $link) {
             $flink = $this->dom->createElement('link');
             $flink->setAttribute('rel', 'replies');
-            $flink->setAttribute('type', 'application/' . $link['type'] . '+xml');
+            $flink->setAttribute('type', 'application/'.$link['type'].'+xml');
             $flink->setAttribute('href', $link['uri']);
             $count = $this->getDataContainer()->getCommentCount();
             if ($count !== null) {
@@ -111,7 +111,7 @@ class Entry extends Extension\AbstractRenderer
      * Set entry comment count
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCommentCount(DOMDocument $dom, DOMElement $root)

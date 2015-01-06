@@ -30,13 +30,13 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
             $cipher = new Mcrypt(array(
                 'algorithm' => 'aes',
                 'mode'      => 'cbc',
-                'padding'   => 'pkcs7'
+                'padding'   => 'pkcs7',
             ));
             $this->blockCipher = new BlockCipher($cipher);
         } catch (Exception\RuntimeException $e) {
             $this->markTestSkipped('Mcrypt is not installed, I cannot execute the BlockCipherTest');
         }
-        $this->plaintext = file_get_contents(__DIR__ . '/_files/plaintext');
+        $this->plaintext = file_get_contents(__DIR__.'/_files/plaintext');
     }
 
     public function testSetCipher()

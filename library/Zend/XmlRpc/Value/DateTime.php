@@ -32,8 +32,8 @@ class DateTime extends AbstractScalar
      *
      * The value is in iso8601 format, minus any timezone information or dashes
      *
-     * @param mixed $value Integer of the unix timestamp or any string that can be parsed
-     *                     to a unix timestamp using the PHP strtotime() function
+     * @param  mixed                    $value Integer of the unix timestamp or any string that can be parsed
+     *                                         to a unix timestamp using the PHP strtotime() function
      * @throws Exception\ValueException if unable to create a DateTime object from $value
      */
     public function __construct($value)

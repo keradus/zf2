@@ -23,7 +23,7 @@ class UniqueKeyTest extends \PHPUnit_Framework_TestCase
             array(array(
                 'CONSTRAINT %s UNIQUE (%s)',
                 array('my_uk', 'foo'),
-                array($uk::TYPE_IDENTIFIER, $uk::TYPE_IDENTIFIER)
+                array($uk::TYPE_IDENTIFIER, $uk::TYPE_IDENTIFIER),
             )),
             $uk->getExpressionData()
         );

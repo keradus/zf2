@@ -57,7 +57,7 @@ class ObjectPluginManager extends AbstractPluginManager
      * Checks that the barcode parser loaded is an instance
      * of Object\AbstractObject.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

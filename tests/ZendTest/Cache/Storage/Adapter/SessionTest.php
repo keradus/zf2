@@ -28,7 +28,7 @@ class SessionTest extends CommonAdapterTest
         $sessionContainer = new SessionContainer('Default', $manager);
 
         $this->_options = new Cache\Storage\Adapter\SessionOptions(array(
-            'session_container' => $sessionContainer
+            'session_container' => $sessionContainer,
         ));
         $this->_storage = new Cache\Storage\Adapter\Session();
         $this->_storage->setOptions($this->_options);

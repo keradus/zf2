@@ -27,7 +27,7 @@ abstract class AbstractStorage implements
                             'create'    => false,
                             'top'       => false,
                             'fetchPart' => true,
-                            'flags'     => false);
+                            'flags'     => false, );
 
     /**
      * current iteration position
@@ -56,18 +56,19 @@ abstract class AbstractStorage implements
      *   - false if a feature is not supported
      *   - null is it's not yet known or it can't be know if a feature is supported
      *
-     * @param  string $var  property name
+     * @param  string                             $var property name
      * @throws Exception\InvalidArgumentException
-     * @return bool         supported or not
+     * @return bool                               supported or not
      */
     public function __get($var)
     {
         if (strpos($var, 'has') === 0) {
             $var = strtolower(substr($var, 3));
+
             return isset($this->has[$var]) ? $this->has[$var] : null;
         }
 
-        throw new Exception\InvalidArgumentException($var . ' not found');
+        throw new Exception\InvalidArgumentException($var.' not found');
     }
 
     /**
@@ -83,7 +84,7 @@ abstract class AbstractStorage implements
     /**
      * Count messages messages in current box/folder
      *
-     * @return int number of messages
+     * @return int                          number of messages
      * @throws Exception\ExceptionInterface
      */
     abstract public function countMessages();
@@ -91,7 +92,7 @@ abstract class AbstractStorage implements
     /**
      * Get a list of messages with number and size
      *
-     * @param  int $id  number of message
+     * @param  int       $id number of message
      * @return int|array size of given message of list with all messages as array(num => size)
      */
     abstract public function getSize($id = 0);
@@ -110,7 +111,7 @@ abstract class AbstractStorage implements
      * @param  int               $id       number of message
      * @param  null|array|string $part     path to part or null for message header
      * @param  int               $topLines include this many lines with header (after an empty line)
-     * @return string raw header
+     * @return string            raw header
      */
     abstract public function getRawHeader($id, $part = null, $topLines = 0);
 
@@ -119,14 +120,14 @@ abstract class AbstractStorage implements
      *
      * @param  int               $id   number of message
      * @param  null|array|string $part path to part or null for message content
-     * @return string raw content
+     * @return string            raw content
      */
     abstract public function getRawContent($id, $part = null);
 
     /**
      * Create instance with parameters
      *
-     * @param  array $params mail reader specific parameters
+     * @param  array                        $params mail reader specific parameters
      * @throws Exception\ExceptionInterface
      */
     abstract public function __construct($params);
@@ -162,8 +163,8 @@ abstract class AbstractStorage implements
      *
      * if storage does not support unique ids it's the same as the message number
      *
-     * @param int|null $id message number
-     * @return array|string message number for given message or all messages as array
+     * @param  int|null                     $id message number
+     * @return array|string                 message number for given message or all messages as array
      * @throws Exception\ExceptionInterface
      */
     abstract public function getUniqueId($id = null);
@@ -174,8 +175,8 @@ abstract class AbstractStorage implements
      * I.e. if you have a webmailer that supports deleting messages you should use unique ids
      * as parameter and use this method to translate it to message number right before calling removeMessage()
      *
-     * @param string $id unique id
-     * @return int message number
+     * @param  string                       $id unique id
+     * @return int                          message number
      * @throws Exception\ExceptionInterface
      */
     abstract public function getNumberByUniqueId($id);
@@ -185,7 +186,7 @@ abstract class AbstractStorage implements
     /**
      * Countable::count()
      *
-     * @return   int
+     * @return int
      */
     public function count()
     {
@@ -213,8 +214,8 @@ abstract class AbstractStorage implements
     /**
      * ArrayAccess::offsetGet()
      *
-     * @param    int $id
-     * @return   \Zend\Mail\Storage\Message message object
+     * @param  int                        $id
+     * @return \Zend\Mail\Storage\Message message object
      */
     public function offsetGet($id)
     {
@@ -224,8 +225,8 @@ abstract class AbstractStorage implements
     /**
      * ArrayAccess::offsetSet()
      *
-     * @param mixed $id
-     * @param mixed $value
+     * @param  mixed                      $id
+     * @param  mixed                      $value
      * @throws Exception\RuntimeException
      */
     public function offsetSet($id, $value)
@@ -236,8 +237,8 @@ abstract class AbstractStorage implements
     /**
      * ArrayAccess::offsetUnset()
      *
-     * @param    int   $id
-     * @return   bool success
+     * @param  int  $id
+     * @return bool success
      */
     public function offsetUnset($id)
     {
@@ -260,7 +261,7 @@ abstract class AbstractStorage implements
     /**
      * Iterator::current()
      *
-     * @return   Message current message
+     * @return Message current message
      */
     public function current()
     {
@@ -270,7 +271,7 @@ abstract class AbstractStorage implements
     /**
      * Iterator::key()
      *
-     * @return   int id of current position
+     * @return int id of current position
      */
     public function key()
     {
@@ -295,13 +296,14 @@ abstract class AbstractStorage implements
         if ($this->iterationMax === null) {
             $this->iterationMax = $this->countMessages();
         }
+
         return $this->iterationPos && $this->iterationPos <= $this->iterationMax;
     }
 
     /**
      * SeekableIterator::seek()
      *
-     * @param  int $pos
+     * @param  int                            $pos
      * @throws Exception\OutOfBoundsException
      */
     public function seek($pos)

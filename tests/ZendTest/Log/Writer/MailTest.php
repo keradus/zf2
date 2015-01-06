@@ -48,8 +48,8 @@ class MailTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        if (file_exists(__DIR__. '/' . self::FILENAME)) {
-            unlink(__DIR__. '/' . self::FILENAME);
+        if (file_exists(__DIR__.'/'.self::FILENAME)) {
+            unlink(__DIR__.'/'.self::FILENAME);
         }
     }
 
@@ -64,7 +64,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->log->info('a second info message');
         unset($this->log);
 
-        $contents = file_get_contents(__DIR__ . '/' . self::FILENAME);
+        $contents = file_get_contents(__DIR__.'/'.self::FILENAME);
         $this->assertContains('an info message', $contents);
         $this->assertContains('a second info message', $contents);
     }
@@ -77,7 +77,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->log->info('a second info message');
         unset($this->log);
 
-        $contents = file_get_contents(__DIR__ . '/' . self::FILENAME);
+        $contents = file_get_contents(__DIR__.'/'.self::FILENAME);
         $this->assertContains('an info message', $contents);
         $this->assertContains('Subject: test', $contents);
     }

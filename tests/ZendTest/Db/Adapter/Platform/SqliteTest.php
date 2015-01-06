@@ -24,7 +24,7 @@ class SqliteTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->platform = new Sqlite;
+        $this->platform = new Sqlite();
     }
 
     /**
@@ -145,14 +145,14 @@ class SqliteTest extends \PHPUnit_Framework_TestCase
     public function testCanCloseConnectionAfterQuoteValue()
     {
         // Creating the SQLite database file
-        $filePath = realpath(__DIR__) . "/_files/sqlite.db";
+        $filePath = realpath(__DIR__)."/_files/sqlite.db";
         if (!file_exists($filePath)) {
             touch($filePath);
         }
 
         $driver = new \Zend\Db\Adapter\Driver\Pdo\Pdo(array(
             'driver' => 'Pdo_Sqlite',
-            'database' => $filePath
+            'database' => $filePath,
         ));
 
         $this->platform->setDriver($driver);

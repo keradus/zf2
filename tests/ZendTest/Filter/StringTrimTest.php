@@ -43,7 +43,7 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'string' => 'string',
             ' str '  => 'str',
-            "\ns\t"  => 's'
+            "\ns\t"  => 's',
             );
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
@@ -110,7 +110,6 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
         $filter = $this->_filter;
         $this->assertEquals('Расчет', $filter('Расчет'));
     }
-
 
     /**
      * @group ZF-7902

@@ -60,7 +60,7 @@ abstract class AbstractIterator implements RecursiveIterator
      * Checks if current position is valid
      * @link http://php.net/manual/en/iterator.valid.php
      * @return bool The return value will be casted to boolean and then evaluated.
-     * Returns true on success or false on failure.
+     *              Returns true on success or false on failure.
      */
     public function valid()
     {

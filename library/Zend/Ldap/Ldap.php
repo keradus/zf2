@@ -70,7 +70,7 @@ class Ldap
     /**
      * Constructor.
      *
-     * @param  array|Traversable $options Options used in connecting, binding, etc.
+     * @param  array|Traversable       $options Options used in connecting, binding, etc.
      * @throws Exception\LdapException
      */
     public function __construct($options = array())
@@ -121,6 +121,7 @@ class Ldap
                  */
                 $err = Exception\LdapException::LDAP_SERVER_DOWN + (-$err - 1);
             }
+
             return $err;
         }
 
@@ -130,8 +131,8 @@ class Ldap
     /**
      * Return the LDAP error message of the last LDAP command
      *
-     * @param  int   $errorCode
-     * @param  array $errorMessages
+     * @param  int    $errorCode
+     * @param  array  $errorMessages
      * @return string
      */
     public function getLastError(&$errorCode = null, array &$errorMessages = null)
@@ -164,11 +165,11 @@ class Ldap
 
         $message = '';
         if ($errorCode > 0) {
-            $message = '0x' . dechex($errorCode) . ' ';
+            $message = '0x'.dechex($errorCode).' ';
         }
 
         if (count($errorMessages) > 0) {
-            $message .= '(' . implode('; ', $errorMessages) . ')';
+            $message .= '('.implode('; ', $errorMessages).')';
         } else {
             $message .= '(no error message from LDAP)';
         }
@@ -211,8 +212,8 @@ class Ldap
      *  tryUsernameSplit
      *  networkTimeout
      *
-     * @param  array|Traversable $options Options used in connecting, binding, etc.
-     * @return Ldap Provides a fluent interface
+     * @param  array|Traversable       $options Options used in connecting, binding, etc.
+     * @return Ldap                    Provides a fluent interface
      * @throws Exception\LdapException
      */
     public function setOptions($options)
@@ -288,7 +289,7 @@ class Ldap
 
     /**
      * @return string The hostname of the LDAP server being used to
-     *  authenticate accounts
+     *                authenticate accounts
      */
     protected function getHost()
     {
@@ -297,7 +298,7 @@ class Ldap
 
     /**
      * @return int The port of the LDAP server or 0 to indicate that no port
-     *  value is set
+     *             value is set
      */
     protected function getPort()
     {
@@ -348,7 +349,7 @@ class Ldap
 
     /**
      * @return int Either ACCTNAME_FORM_BACKSLASH, ACCTNAME_FORM_PRINCIPAL or
-     * ACCTNAME_FORM_USERNAME indicating the form usernames should be canonicalized to.
+     *             ACCTNAME_FORM_USERNAME indicating the form usernames should be canonicalized to.
      */
     protected function getAccountCanonicalForm()
     {
@@ -393,7 +394,7 @@ class Ldap
 
     /**
      * @return string A format string for building an LDAP search filter to match
-     * an account
+     *                an account
      */
     protected function getAccountFilterFormat()
     {
@@ -463,9 +464,9 @@ class Ldap
     }
 
     /**
-     * @param string $name  The name to split
-     * @param string $dname The resulting domain name (this is an out parameter)
-     * @param string $aname The resulting account name (this is an out parameter)
+     * @param  string $name  The name to split
+     * @param  string $dname The resulting domain name (this is an out parameter)
+     * @param  string $aname The resulting account name (this is an out parameter)
      * @return void
      */
     protected function splitName($name, &$dname, &$aname)
@@ -491,8 +492,8 @@ class Ldap
     }
 
     /**
-     * @param  string $acctname The name of the account
-     * @return string The DN of the specified account
+     * @param  string                  $acctname The name of the account
+     * @return string                  The DN of the specified account
      * @throws Exception\LdapException
      */
     protected function getAccountDn($acctname)
@@ -531,9 +532,9 @@ class Ldap
     }
 
     /**
-     * @param  string $acctname The name to canonicalize
-     * @param  int    $form     The desired form of canonicalization
-     * @return string The canonicalized name in the desired form
+     * @param  string                  $acctname The name to canonicalize
+     * @param  int                     $form     The desired form of canonicalization
+     * @return string                  The canonicalized name in the desired form
      * @throws Exception\LdapException
      */
     public function getCanonicalAccountName($acctname, $form = 0)
@@ -573,12 +574,14 @@ class Ldap
                 if (!$accountDomainNameShort) {
                     throw new Exception\LdapException(null, 'Option required: accountDomainNameShort');
                 }
+
                 return "$accountDomainNameShort\\$uname";
             case self::ACCTNAME_FORM_PRINCIPAL:
                 $accountDomainName = $this->getAccountDomainName();
                 if (!$accountDomainName) {
                     throw new Exception\LdapException(null, 'Option required: accountDomainName');
                 }
+
                 return "$uname@$accountDomainName";
             default:
                 throw new Exception\LdapException(null, "Unknown canonical name form: $form");
@@ -586,9 +589,9 @@ class Ldap
     }
 
     /**
-     * @param  string $acctname
-     * @param  array  $attrs An array of names of desired attributes
-     * @return array  An array of the attributes representing the account
+     * @param  string                  $acctname
+     * @param  array                   $attrs    An array of names of desired attributes
+     * @return array                   An array of the attributes representing the account
      * @throws Exception\LdapException
      */
     protected function getAccount($acctname, array $attrs = null)
@@ -651,12 +654,12 @@ class Ldap
      * if you really care about the server's cert you can put a cert on the
      * web server.
      *
-     * @param  string  $host           The hostname of the LDAP server to connect to
-     * @param  int     $port           The port number of the LDAP server to connect to
-     * @param  bool $useSsl         Use SSL
-     * @param  bool $useStartTls    Use STARTTLS
-     * @param  int     $networkTimeout The value for network timeout when connect to the LDAP server.
-     * @return Ldap Provides a fluent interface
+     * @param  string                  $host           The hostname of the LDAP server to connect to
+     * @param  int                     $port           The port number of the LDAP server to connect to
+     * @param  bool                    $useSsl         Use SSL
+     * @param  bool                    $useStartTls    Use STARTTLS
+     * @param  int                     $networkTimeout The value for network timeout when connect to the LDAP server.
+     * @return Ldap                    Provides a fluent interface
      * @throws Exception\LdapException
      */
     public function connect($host = null, $port = null, $useSsl = null, $useStartTls = null, $networkTimeout = null)
@@ -701,18 +704,17 @@ class Ldap
             $useSsl              = false;
         } else {
             if ($useSsl) {
-                $this->connectString = 'ldaps://' . $host;
+                $this->connectString = 'ldaps://'.$host;
                 $useUri              = true;
             } else {
-                $this->connectString = 'ldap://' . $host;
+                $this->connectString = 'ldap://'.$host;
             }
             if ($port) {
-                $this->connectString .= ':' . $port;
+                $this->connectString .= ':'.$port;
             }
         }
 
         $this->disconnect();
-
 
         /* Only OpenLDAP 2.2 + supports URLs so if SSL is not requested, just
          * use the old form.
@@ -735,6 +737,7 @@ class Ldap
                 }
                 if ($useSsl || !$useStartTls || ldap_start_tls($resource)) {
                     ErrorHandler::stop();
+
                     return $this;
                 }
             }
@@ -749,9 +752,9 @@ class Ldap
     }
 
     /**
-     * @param  string $username The username for authenticating the bind
-     * @param  string $password The password for authenticating the bind
-     * @return Ldap Provides a fluent interface
+     * @param  string                  $username The username for authenticating the bind
+     * @param  string                  $password The password for authenticating the bind
+     * @return Ldap                    Provides a fluent interface
      * @throws Exception\LdapException
      */
     public function bind($username = null, $password = null)
@@ -792,8 +795,8 @@ class Ldap
                                     throw $zle;
                             }
                             throw new Exception\LdapException(null,
-                                'Failed to retrieve DN for account: ' . $username .
-                                    ' [' . $zle->getMessage() . ']',
+                                'Failed to retrieve DN for account: '.$username.
+                                    ' ['.$zle->getMessage().']',
                                 Exception\LdapException::LDAP_OPERATIONS_ERROR);
                         }
                     } else {
@@ -821,6 +824,7 @@ class Ldap
             ErrorHandler::stop();
             if ($bind) {
                 $this->boundUser = $username;
+
                 return $this;
             }
 
@@ -856,12 +860,12 @@ class Ldap
      *
      * @param  string|Filter\AbstractFilter|array $filter
      * @param  string|Dn|null                     $basedn
-     * @param  int                            $scope
+     * @param  int                                $scope
      * @param  array                              $attributes
      * @param  string|null                        $sort
      * @param  string|null                        $collectionClass
-     * @param  int                            $sizelimit
-     * @param  int                            $timelimit
+     * @param  int                                $sizelimit
+     * @param  int                                $timelimit
      * @return Collection
      * @throws Exception\LdapException
      */
@@ -921,14 +925,14 @@ class Ldap
         ErrorHandler::stop();
 
         if ($search === false) {
-            throw new Exception\LdapException($this, 'searching: ' . $filter);
+            throw new Exception\LdapException($this, 'searching: '.$filter);
         }
         if ($sort !== null && is_string($sort)) {
             ErrorHandler::start(E_WARNING);
             $isSorted = ldap_sort($resource, $search, $sort);
             ErrorHandler::stop();
             if ($isSorted === false) {
-                throw new Exception\LdapException($this, 'sorting: ' . $sort);
+                throw new Exception\LdapException($this, 'sorting: '.$sort);
             }
         }
 
@@ -969,7 +973,7 @@ class Ldap
      *
      * @param  string|Filter\AbstractFilter $filter
      * @param  string|Dn|null               $basedn
-     * @param  int                      $scope
+     * @param  int                          $scope
      * @return int
      * @throws Exception\LdapException
      */
@@ -990,7 +994,7 @@ class Ldap
     /**
      * Count children for a given DN.
      *
-     * @param  string|Dn $dn
+     * @param  string|Dn               $dn
      * @return int
      * @throws Exception\LdapException
      */
@@ -1002,7 +1006,7 @@ class Ldap
     /**
      * Check if a given DN exists.
      *
-     * @param  string|Dn $dn
+     * @param  string|Dn               $dn
      * @return bool
      * @throws Exception\LdapException
      */
@@ -1027,12 +1031,12 @@ class Ldap
      *
      * @param  string|Filter\AbstractFilter|array $filter
      * @param  string|Dn|null                     $basedn
-     * @param  int                            $scope
+     * @param  int                                $scope
      * @param  array                              $attributes
      * @param  string|null                        $sort
-     * @param  bool                            $reverseSort
-     * @param  int                            $sizelimit
-     * @param  int                            $timelimit
+     * @param  bool                               $reverseSort
+     * @param  int                                $sizelimit
+     * @param  int                                $timelimit
      * @return array
      * @throws Exception\LdapException
      */
@@ -1062,9 +1066,9 @@ class Ldap
     /**
      * Get LDAP entry by DN
      *
-     * @param  string|Dn $dn
-     * @param  array     $attributes
-     * @param  bool   $throwOnNotFound
+     * @param  string|Dn                    $dn
+     * @param  array                        $attributes
+     * @param  bool                         $throwOnNotFound
      * @return array
      * @throws null|Exception\LdapException
      */
@@ -1089,7 +1093,7 @@ class Ldap
     /**
      * Prepares an ldap data entry array for insert/update operation
      *
-     * @param  array $entry
+     * @param  array                              $entry
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -1136,9 +1140,9 @@ class Ldap
     /**
      * Add new information to the LDAP repository
      *
-     * @param  string|Dn $dn
-     * @param  array     $entry
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $dn
+     * @param  array                   $entry
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function add($dn, array $entry)
@@ -1163,7 +1167,7 @@ class Ldap
             }
         }
         $adAttributes = array('distinguishedname', 'instancetype', 'name', 'objectcategory',
-                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
+                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated', );
         foreach ($adAttributes as $attr) {
             if (array_key_exists($attr, $entry)) {
                 unset($entry[$attr]);
@@ -1175,7 +1179,7 @@ class Ldap
         $isAdded = ldap_add($resource, $dn->toString(), $entry);
         ErrorHandler::stop();
         if ($isAdded === false) {
-            throw new Exception\LdapException($this, 'adding: ' . $dn->toString());
+            throw new Exception\LdapException($this, 'adding: '.$dn->toString());
         }
 
         return $this;
@@ -1184,9 +1188,9 @@ class Ldap
     /**
      * Update LDAP registry
      *
-     * @param  string|Dn $dn
-     * @param  array     $entry
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $dn
+     * @param  array                   $entry
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function update($dn, array $entry)
@@ -1204,7 +1208,7 @@ class Ldap
             }
         }
         $adAttributes = array('distinguishedname', 'instancetype', 'name', 'objectcategory',
-                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
+                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated', );
         foreach ($adAttributes as $attr) {
             if (array_key_exists($attr, $entry)) {
                 unset($entry[$attr]);
@@ -1217,7 +1221,7 @@ class Ldap
             $isModified = ldap_modify($resource, $dn->toString(), $entry);
             ErrorHandler::stop();
             if ($isModified === false) {
-                throw new Exception\LdapException($this, 'updating: ' . $dn->toString());
+                throw new Exception\LdapException($this, 'updating: '.$dn->toString());
             }
         }
 
@@ -1230,9 +1234,9 @@ class Ldap
      * Internally decides if entry will be updated to added by calling
      * {@link exists()}.
      *
-     * @param  string|Dn $dn
-     * @param  array     $entry
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $dn
+     * @param  array                   $entry
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function save($dn, array $entry)
@@ -1252,9 +1256,9 @@ class Ldap
     /**
      * Delete an LDAP entry
      *
-     * @param  string|Dn $dn
-     * @param  bool   $recursively
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $dn
+     * @param  bool                    $recursively
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function delete($dn, $recursively = false)
@@ -1276,7 +1280,7 @@ class Ldap
         $isDeleted = ldap_delete($resource, $dn);
         ErrorHandler::stop();
         if ($isDeleted === false) {
-            throw new Exception\LdapException($this, 'deleting: ' . $dn);
+            throw new Exception\LdapException($this, 'deleting: '.$dn);
         }
 
         return $this;
@@ -1288,9 +1292,9 @@ class Ldap
      * This method is used in recursive methods like {@see delete()}
      * or {@see copy()}
      *
-     * @param  string|Dn $parentDn
+     * @param  string|Dn               $parentDn
      * @throws Exception\LdapException
-     * @return array of DNs
+     * @return array                   of DNs
      */
     protected function getChildrenDns($parentDn)
     {
@@ -1323,11 +1327,11 @@ class Ldap
     /**
      * Moves a LDAP entry from one DN to another subtree.
      *
-     * @param  string|Dn $from
-     * @param  string|Dn $to
-     * @param  bool   $recursively
-     * @param  bool   $alwaysEmulate
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $from
+     * @param  string|Dn               $to
+     * @param  bool                    $recursively
+     * @param  bool                    $alwaysEmulate
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function moveToSubtree($from, $to, $recursively = false, $alwaysEmulate = false)
@@ -1355,11 +1359,11 @@ class Ldap
      *
      * This is an alias for {@link rename()}
      *
-     * @param  string|Dn $from
-     * @param  string|Dn $to
-     * @param  bool   $recursively
-     * @param  bool   $alwaysEmulate
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $from
+     * @param  string|Dn               $to
+     * @param  bool                    $recursively
+     * @param  bool                    $alwaysEmulate
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function move($from, $to, $recursively = false, $alwaysEmulate = false)
@@ -1372,11 +1376,11 @@ class Ldap
      *
      * This method implicitly moves the entry to another location within the tree.
      *
-     * @param  string|Dn $from
-     * @param  string|Dn $to
-     * @param  bool   $recursively
-     * @param  bool   $alwaysEmulate
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $from
+     * @param  string|Dn               $to
+     * @param  bool                    $recursively
+     * @param  bool                    $alwaysEmulate
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function rename($from, $to, $recursively = false, $alwaysEmulate = false)
@@ -1407,7 +1411,7 @@ class Ldap
             $isOK = ldap_rename($resource, $from, $newRdn, $newParent, true);
             ErrorHandler::stop();
             if ($isOK === false) {
-                throw new Exception\LdapException($this, 'renaming ' . $from . ' to ' . $to);
+                throw new Exception\LdapException($this, 'renaming '.$from.' to '.$to);
             } elseif (!$this->exists($to)) {
                 $emulate = true;
             }
@@ -1423,10 +1427,10 @@ class Ldap
     /**
      * Copies a LDAP entry from one DN to another subtree.
      *
-     * @param  string|Dn $from
-     * @param  string|Dn $to
-     * @param  bool   $recursively
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $from
+     * @param  string|Dn               $to
+     * @param  bool                    $recursively
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function copyToSubtree($from, $to, $recursively = false)
@@ -1452,10 +1456,10 @@ class Ldap
     /**
      * Copies a LDAP entry from one DN to another DN.
      *
-     * @param  string|Dn $from
-     * @param  string|Dn $to
-     * @param  bool   $recursively
-     * @return Ldap Provides a fluid interface
+     * @param  string|Dn               $from
+     * @param  string|Dn               $to
+     * @param  bool                    $recursively
+     * @return Ldap                    Provides a fluid interface
      * @throws Exception\LdapException
      */
     public function copy($from, $to, $recursively = false)
@@ -1485,7 +1489,7 @@ class Ldap
     /**
      * Returns the specified DN as a Zend\Ldap\Node
      *
-     * @param  string|Dn $dn
+     * @param  string|Dn               $dn
      * @return Node|null
      * @throws Exception\LdapException
      */

@@ -306,14 +306,14 @@ class BuilderDefinition implements DefinitionInterface
         }
 
         if (!$method instanceof Builder\InjectionMethod) {
-            throw new Exception\RuntimeException('Cannot find method object for method ' . $method . ' in this builder definition.');
+            throw new Exception\RuntimeException('Cannot find method object for method '.$method.' in this builder definition.');
         }
 
         $methodParameters = array();
 
         /* @var $method Builder\InjectionMethod */
         foreach ($method->getParameters() as $name => $info) {
-            $methodParameters[$class->getName() . '::' . $method->getName() . ':' . $name] = $info;
+            $methodParameters[$class->getName().'::'.$method->getName().':'.$name] = $info;
         }
 
         return $methodParameters;

@@ -24,14 +24,14 @@ class GreaterThan extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::NOT_GREATER => "The input is not greater than '%min%'",
-        self::NOT_GREATER_INCLUSIVE => "The input is not greater or equal than '%min%'"
+        self::NOT_GREATER_INCLUSIVE => "The input is not greater or equal than '%min%'",
     );
 
     /**
      * @var array
      */
     protected $messageVariables = array(
-        'min' => 'min'
+        'min' => 'min',
     );
 
     /**
@@ -54,7 +54,7 @@ class GreaterThan extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
@@ -100,12 +100,13 @@ class GreaterThan extends AbstractValidator
     /**
      * Sets the min option
      *
-     * @param  mixed $min
+     * @param  mixed       $min
      * @return GreaterThan Provides a fluent interface
      */
     public function setMin($min)
     {
         $this->min = $min;
+
         return $this;
     }
 
@@ -122,12 +123,13 @@ class GreaterThan extends AbstractValidator
     /**
      * Sets the inclusive option
      *
-     * @param  bool $inclusive
+     * @param  bool        $inclusive
      * @return GreaterThan Provides a fluent interface
      */
     public function setInclusive($inclusive)
     {
         $this->inclusive = $inclusive;
+
         return $this;
     }
 
@@ -144,11 +146,13 @@ class GreaterThan extends AbstractValidator
         if ($this->inclusive) {
             if ($this->min > $value) {
                 $this->error(self::NOT_GREATER_INCLUSIVE);
+
                 return false;
             }
         } else {
             if ($this->min >= $value) {
                 $this->error(self::NOT_GREATER);
+
                 return false;
             }
         }

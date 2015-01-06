@@ -52,7 +52,7 @@ class FileGenerator extends AbstractGenerator
     /**
      * Passes $options to {@link setOptions()}.
      *
-     * @param  array|\Traversable $options
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -65,10 +65,10 @@ class FileGenerator extends AbstractGenerator
      * Use this if you intend on generating code generation objects based on the same file.
      * This will keep previous changes to the file in tact during the same PHP process
      *
-     * @param  string $filePath
-     * @param  bool $includeIfNotAlreadyIncluded
+     * @param  string                                       $filePath
+     * @param  bool                                         $includeIfNotAlreadyIncluded
      * @throws ReflectionException\InvalidArgumentException If file does not exists
-     * @throws ReflectionException\RuntimeException If file exists but is not included or required
+     * @throws ReflectionException\RuntimeException         If file exists but is not included or required
      * @return FileGenerator
      */
     public static function fromReflectedFileName($filePath, $includeIfNotAlreadyIncluded = true)
@@ -122,12 +122,12 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array $values
+     * @param  array         $values
      * @return FileGenerator
      */
     public static function fromArray(array $values)
     {
-        $fileGenerator = new static;
+        $fileGenerator = new static();
         foreach ($values as $name => $value) {
             switch (strtolower(str_replace(array('.', '-', '_'), '', $name))) {
                 case 'filename':
@@ -142,8 +142,8 @@ class FileGenerator extends AbstractGenerator
                 default:
                     if (property_exists($fileGenerator, $name)) {
                         $fileGenerator->{$name} = $value;
-                    } elseif (method_exists($fileGenerator, 'set' . $name)) {
-                        $fileGenerator->{'set' . $name}($value);
+                    } elseif (method_exists($fileGenerator, 'set'.$name)) {
+                        $fileGenerator->{'set'.$name}($value);
                     }
             }
         }
@@ -152,7 +152,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  DocBlockGenerator|string $docBlock
+     * @param  DocBlockGenerator|string           $docBlock
      * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */
@@ -173,6 +173,7 @@ class FileGenerator extends AbstractGenerator
         }
 
         $this->docBlock = $docBlock;
+
         return $this;
     }
 
@@ -185,12 +186,13 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array $requiredFiles
+     * @param  array         $requiredFiles
      * @return FileGenerator
      */
     public function setRequiredFiles(array $requiredFiles)
     {
         $this->requiredFiles = $requiredFiles;
+
         return $this;
     }
 
@@ -211,12 +213,13 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $namespace
+     * @param  string        $namespace
      * @return FileGenerator
      */
     public function setNamespace($namespace)
     {
         $this->namespace = (string) $namespace;
+
         return $this;
     }
 
@@ -225,7 +228,7 @@ class FileGenerator extends AbstractGenerator
      * If $withResolvedAs is set to true, there will be a third element that is the
      * "resolved" as statement, as the second part is not required in use statements
      *
-     * @param  bool $withResolvedAs
+     * @param  bool  $withResolvedAs
      * @return array
      */
     public function getUses($withResolvedAs = false)
@@ -249,7 +252,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array $uses
+     * @param  array         $uses
      * @return FileGenerator
      */
     public function setUses(array $uses)
@@ -267,12 +270,13 @@ class FileGenerator extends AbstractGenerator
             }
             $this->setUse($import, $alias);
         }
+
         return $this;
     }
 
     /**
-     * @param  string $use
-     * @param  null|string $as
+     * @param  string        $use
+     * @param  null|string   $as
      * @return FileGenerator
      */
     public function setUse($use, $as = null)
@@ -280,11 +284,12 @@ class FileGenerator extends AbstractGenerator
         if (!in_array(array($use, $as), $this->uses)) {
             $this->uses[] = array($use, $as);
         }
+
         return $this;
     }
 
     /**
-     * @param  array $classes
+     * @param  array         $classes
      * @return FileGenerator
      */
     public function setClasses(array $classes)
@@ -297,7 +302,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $name
+     * @param  string         $name
      * @return ClassGenerator
      */
     public function getClass($name = null)
@@ -312,7 +317,7 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array|string|ClassGenerator $class
+     * @param  array|string|ClassGenerator        $class
      * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */
@@ -338,12 +343,13 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $filename
+     * @param  string        $filename
      * @return FileGenerator
      */
     public function setFilename($filename)
     {
         $this->filename = (string) $filename;
+
         return $this;
     }
 
@@ -364,12 +370,13 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  string $body
+     * @param  string        $body
      * @return FileGenerator
      */
     public function setBody($body)
     {
         $this->body = (string) $body;
+
         return $this;
     }
 
@@ -418,7 +425,7 @@ class FileGenerator extends AbstractGenerator
 
         // start with the body (if there), or open tag
         if (preg_match('#(?:\s*)<\?php#', $body) == false) {
-            $output = '<?php' . self::LINE_FEED;
+            $output = '<?php'.self::LINE_FEED;
         }
 
         // if there are markers, put the body into the output
@@ -440,7 +447,7 @@ class FileGenerator extends AbstractGenerator
             if (preg_match('#/\* Zend_Code_Generator_FileGenerator-DocBlockMarker \*/#m', $output)) {
                 $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-DocBlockMarker \*/#m', $docBlock->generate(), $output, 1);
             } else {
-                $output .= $docBlock->generate() . self::LINE_FEED;
+                $output .= $docBlock->generate().self::LINE_FEED;
             }
         }
 
@@ -468,7 +475,7 @@ class FileGenerator extends AbstractGenerator
         $requiredFiles = $this->getRequiredFiles();
         if (!empty($requiredFiles)) {
             foreach ($requiredFiles as $requiredFile) {
-                $output .= 'require_once \'' . $requiredFile . '\';' . self::LINE_FEED;
+                $output .= 'require_once \''.$requiredFile.'\';'.self::LINE_FEED;
             }
 
             $output .= self::LINE_FEED;
@@ -500,7 +507,7 @@ class FileGenerator extends AbstractGenerator
 
                 //don't duplicate use statements
                 if (!in_array($tempOutput, $classUses)) {
-                    $useOutput .= "use ". $tempOutput .";";
+                    $useOutput .= "use ".$tempOutput.";";
                     $useOutput .= self::LINE_FEED;
                 }
             }
@@ -522,13 +529,13 @@ class FileGenerator extends AbstractGenerator
         if (!empty($classes)) {
             foreach ($classes as $class) {
                 $regex = str_replace('&', $class->getName(), '/\* Zend_Code_Generator_Php_File-ClassMarker: \{[A-Za-z0-9\\\]+?&\} \*/');
-                if (preg_match('#' . $regex . '#m', $output)) {
-                    $output = preg_replace('#' . $regex . '#', $class->generate(), $output, 1);
+                if (preg_match('#'.$regex.'#m', $output)) {
+                    $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);
                 } else {
                     if ($namespace) {
                         $class->setNamespaceName(null);
                     }
-                    $output .= $class->generate() . self::LINE_FEED;
+                    $output .= $class->generate().self::LINE_FEED;
                 }
             }
         }

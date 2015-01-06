@@ -31,12 +31,13 @@ class ResponseCollection extends SplStack
     /**
      * Mark the collection as stopped (or its opposite)
      *
-     * @param  bool $flag
+     * @param  bool               $flag
      * @return ResponseCollection
      */
     public function setStopped($flag)
     {
         $this->stopped = (bool) $flag;
+
         return $this;
     }
 
@@ -63,6 +64,7 @@ class ResponseCollection extends SplStack
         if (count($this) === 0) {
             return;
         }
+
         return parent::top();
     }
 
@@ -79,6 +81,7 @@ class ResponseCollection extends SplStack
                 return true;
             }
         }
+
         return false;
     }
 }

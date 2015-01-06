@@ -39,8 +39,8 @@ class SqliteMetadata extends AbstractSource
 
         $p = $this->adapter->getPlatform();
 
-        $sql = 'SELECT "name", "type", "sql" FROM ' . $p->quoteIdentifierChain(array($schema, 'sqlite_master'))
-             . ' WHERE "type" IN (\'table\',\'view\') AND "name" NOT LIKE \'sqlite_%\'';
+        $sql = 'SELECT "name", "type", "sql" FROM '.$p->quoteIdentifierChain(array($schema, 'sqlite_master'))
+             .' WHERE "type" IN (\'table\',\'view\') AND "name" NOT LIKE \'sqlite_%\'';
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $tables = array();
@@ -149,7 +149,7 @@ class SqliteMetadata extends AbstractSource
         }
 
         if (null !== $primaryKey) {
-            $constraintName = '_zf_' . $table . '_PRIMARY';
+            $constraintName = '_zf_'.$table.'_PRIMARY';
             $constraints[$constraintName] = array(
                 'constraint_name'  => $constraintName,
                 'constraint_type'  => 'PRIMARY KEY',
@@ -164,7 +164,7 @@ class SqliteMetadata extends AbstractSource
         foreach ($foreignKeys as $fk) {
             if ($id !== $fk['id']) {
                 $id = $fk['id'];
-                $name = '_zf_' . $table . '_FOREIGN_KEY_' . ($id + 1);
+                $name = '_zf_'.$table.'_FOREIGN_KEY_'.($id + 1);
                 $constraints[$name] = array(
                     'constraint_name'  => $name,
                     'constraint_type'  => 'FOREIGN KEY',
@@ -197,8 +197,8 @@ class SqliteMetadata extends AbstractSource
         $p = $this->adapter->getPlatform();
 
         $sql = 'SELECT "name", "tbl_name", "sql" FROM '
-             . $p->quoteIdentifierChain(array($schema, 'sqlite_master'))
-             . ' WHERE "type" = \'trigger\'';
+             .$p->quoteIdentifierChain(array($schema, 'sqlite_master'))
+             .' WHERE "type" = \'trigger\'';
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $triggers = array();
@@ -238,18 +238,19 @@ class SqliteMetadata extends AbstractSource
         $sql = 'PRAGMA ';
 
         if (null !== $schema) {
-            $sql .= $p->quoteIdentifier($schema) . '.';
+            $sql .= $p->quoteIdentifier($schema).'.';
         }
         $sql .= $name;
 
         if (null !== $value) {
-            $sql .= '(' . $p->quoteTrustedValue($value) . ')';
+            $sql .= '('.$p->quoteTrustedValue($value).')';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         if ($results instanceof ResultSetInterface) {
             return $results->toArray();
         }
+
         return array();
     }
 
@@ -273,6 +274,7 @@ class SqliteMetadata extends AbstractSource
         if (!preg_match($re, $sql, $matches)) {
             return;
         }
+
         return array(
             'view_definition' => $matches['view_definition'],
         );
@@ -291,11 +293,11 @@ class SqliteMetadata extends AbstractSource
                 'TRIGGER',
                 array('IF', 'NOT', 'EXISTS'),
                 $identifierChain,
-                array('(?<action_timing>BEFORE|AFTER|INSTEAD\\s+OF)', ),
+                array('(?<action_timing>BEFORE|AFTER|INSTEAD\\s+OF)'),
                 '(?<event_manipulation>DELETE|INSERT|UPDATE)',
-                array('OF', '(?<column_usage>' . $identifierList . ')'),
+                array('OF', '(?<column_usage>'.$identifierList.')'),
                 'ON',
-                '(?<event_object_table>' . $identifier . ')',
+                '(?<event_object_table>'.$identifier.')',
                 array('FOR', 'EACH', 'ROW'),
                 array('WHEN', '(?<action_condition>.+)'),
                 '(?<action_statement>BEGIN',
@@ -340,13 +342,14 @@ class SqliteMetadata extends AbstractSource
     {
         foreach ($re as &$value) {
             if (is_array($value)) {
-                $value = '(?:' . implode('\\s*+', $value) . '\\s*+)?';
+                $value = '(?:'.implode('\\s*+', $value).'\\s*+)?';
             } else {
                 $value .= '\\s*+';
             }
         }
         unset($value);
-        $re = '/^' . implode('\\s*+', $re) . '$/';
+        $re = '/^'.implode('\\s*+', $re).'$/';
+
         return $re;
     }
 
@@ -354,12 +357,12 @@ class SqliteMetadata extends AbstractSource
     {
         static $re = null;
         if (null === $re) {
-            $re = '(?:' . implode('|', array(
+            $re = '(?:'.implode('|', array(
                 '"(?:[^"\\\\]++|\\\\.)*+"',
                 '`(?:[^`]++|``)*+`',
                 '\\[[^\\]]+\\]',
                 '[^\\s\\.]+',
-            )) . ')';
+            )).')';
         }
 
         return $re;
@@ -370,8 +373,9 @@ class SqliteMetadata extends AbstractSource
         static $re = null;
         if (null === $re) {
             $identifier = $this->getIdentifierRegularExpression();
-            $re = $identifier . '(?:\\s*\\.\\s*' . $identifier . ')*+';
+            $re = $identifier.'(?:\\s*\\.\\s*'.$identifier.')*+';
         }
+
         return $re;
     }
 
@@ -380,8 +384,9 @@ class SqliteMetadata extends AbstractSource
         static $re = null;
         if (null === $re) {
             $identifier = $this->getIdentifierRegularExpression();
-            $re = $identifier . '(?:\\s*,\\s*' . $identifier . ')*+';
+            $re = $identifier.'(?:\\s*,\\s*'.$identifier.')*+';
         }
+
         return $re;
     }
 }

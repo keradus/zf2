@@ -69,6 +69,7 @@ abstract class AbstractAddressList implements HeaderInterface
         foreach ($values as $address) {
             $addressList->addFromString($address);
         }
+
         return $header;
     }
 
@@ -100,12 +101,13 @@ abstract class AbstractAddressList implements HeaderInterface
             }
         }
 
-        return implode(',' . Headers::FOLDING, $emails);
+        return implode(','.Headers::FOLDING, $emails);
     }
 
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -117,7 +119,7 @@ abstract class AbstractAddressList implements HeaderInterface
     /**
      * Set address list for this header
      *
-     * @param  AddressList $addressList
+     * @param AddressList $addressList
      */
     public function setAddressList(AddressList $addressList)
     {
@@ -134,6 +136,7 @@ abstract class AbstractAddressList implements HeaderInterface
         if (null === $this->addressList) {
             $this->setAddressList(new AddressList());
         }
+
         return $this->addressList;
     }
 
@@ -141,6 +144,7 @@ abstract class AbstractAddressList implements HeaderInterface
     {
         $name  = $this->getFieldName();
         $value = $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
+
         return (empty($value)) ? '' : sprintf('%s: %s', $name, $value);
     }
 }

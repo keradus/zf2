@@ -24,11 +24,12 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_originalDir = __DIR__ . '/../_files/test.maildir/';
+        $this->_originalDir = __DIR__.'/../_files/test.maildir/';
 
         if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 . 'directory before enabling the maildir tests');
+                                 .'directory before enabling the maildir tests');
+
             return;
         }
 
@@ -36,7 +37,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/../_files/test.tmp/';
+                $this->_tmpdir = __DIR__.'/../_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);
@@ -49,6 +50,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
             closedir($dh);
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
@@ -58,20 +60,20 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
         foreach ($this->_subdirs as $dir) {
             if ($dir != '.') {
-                mkdir($this->_tmpdir . $dir);
+                mkdir($this->_tmpdir.$dir);
             }
             foreach (array('cur', 'new') as $subdir) {
-                if (!file_exists($this->_originalDir . $dir . '/' . $subdir)) {
+                if (!file_exists($this->_originalDir.$dir.'/'.$subdir)) {
                     continue;
                 }
-                mkdir($this->_tmpdir . $dir . '/' . $subdir);
-                $dh = opendir($this->_originalDir . $dir . '/' . $subdir);
+                mkdir($this->_tmpdir.$dir.'/'.$subdir);
+                $dh = opendir($this->_originalDir.$dir.'/'.$subdir);
                 while (($entry = readdir($dh)) !== false) {
-                    $entry = $dir . '/' . $subdir . '/' . $entry;
-                    if (!is_file($this->_originalDir . $entry)) {
+                    $entry = $dir.'/'.$subdir.'/'.$entry;
+                    if (!is_file($this->_originalDir.$entry)) {
                         continue;
                     }
-                    copy($this->_originalDir . $entry, $this->_tmpdir . $entry);
+                    copy($this->_originalDir.$entry, $this->_tmpdir.$entry);
                 }
                 closedir($dh);
             }
@@ -82,25 +84,25 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
             foreach (array('cur', 'new') as $subdir) {
-                if (!file_exists($this->_tmpdir . $dir . '/' . $subdir)) {
+                if (!file_exists($this->_tmpdir.$dir.'/'.$subdir)) {
                     continue;
                 }
-                if (!is_dir($this->_tmpdir . $dir . '/' . $subdir)) {
+                if (!is_dir($this->_tmpdir.$dir.'/'.$subdir)) {
                     continue;
                 }
-                $dh = opendir($this->_tmpdir . $dir . '/' . $subdir);
+                $dh = opendir($this->_tmpdir.$dir.'/'.$subdir);
                 while (($entry = readdir($dh)) !== false) {
-                    $entry = $this->_tmpdir . $dir . '/' . $subdir . '/' . $entry;
+                    $entry = $this->_tmpdir.$dir.'/'.$subdir.'/'.$entry;
                     if (!is_file($entry)) {
                         continue;
                     }
                     unlink($entry);
                 }
                 closedir($dh);
-                rmdir($this->_tmpdir . $dir . '/' . $subdir);
+                rmdir($this->_tmpdir.$dir.'/'.$subdir);
             }
-            if ($dir != '.' && is_dir($this->_tmpdir . $dir)) {
-                rmdir($this->_tmpdir . $dir);
+            if ($dir != '.' && is_dir($this->_tmpdir.$dir)) {
+                rmdir($this->_tmpdir.$dir);
             }
         }
     }
@@ -176,7 +178,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         // we search for this folder because we can't assume an order while iterating
         $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder.test' => 'test',
-                                'INBOX'          => 'INBOX');
+                                'INBOX'          => 'INBOX', );
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -199,7 +201,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         // we search for this folder because we can't assume an order while iterating
         $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder.test' => 'test',
-                                'INBOX'          => 'INBOX');
+                                'INBOX'          => 'INBOX', );
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -245,7 +247,6 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
     public function testCount()
     {
         $this->markTestIncomplete("Fail");
@@ -289,13 +290,14 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     public function testNotReadableFolder()
     {
         $this->markTestIncomplete("Fail");
-        $stat = stat($this->_params['dirname'] . '.subfolder');
-        chmod($this->_params['dirname'] . '.subfolder', 0);
+        $stat = stat($this->_params['dirname'].'.subfolder');
+        chmod($this->_params['dirname'].'.subfolder', 0);
         clearstatcache();
-        $statcheck = stat($this->_params['dirname'] . '.subfolder');
+        $statcheck = stat($this->_params['dirname'].'.subfolder');
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
-            chmod($this->_params['dirname'] . '.subfolder', $stat['mode']);
+            chmod($this->_params['dirname'].'.subfolder', $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
+
             return;
         }
 
@@ -307,7 +309,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
             // test ok
         }
 
-        chmod($this->_params['dirname'] . '.subfolder', $stat['mode']);
+        chmod($this->_params['dirname'].'.subfolder', $stat['mode']);
 
         if (!$check) {
             $this->fail('no exception while loading invalid dir with subfolder not readable');
@@ -323,6 +325,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
             chmod($this->_params['dirname'], $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
+
             return;
         }
 
@@ -345,7 +348,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Maildir($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
+        $root->foobar = new Folder('foobar', DIRECTORY_SEPARATOR.'foobar');
 
         $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
         $mail->selectFolder('foobar');
@@ -373,14 +376,14 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function testWithAdditionalFolder()
     {
-        mkdir($this->_params['dirname'] . '.xyyx');
-        mkdir($this->_params['dirname'] . '.xyyx/cur');
+        mkdir($this->_params['dirname'].'.xyyx');
+        mkdir($this->_params['dirname'].'.xyyx/cur');
 
         $mail = new Folder\Maildir($this->_params);
         $mail->selectFolder('xyyx');
         $this->assertEquals($mail->countMessages(), 0);
 
-        rmdir($this->_params['dirname'] . '.xyyx/cur');
-        rmdir($this->_params['dirname'] . '.xyyx');
+        rmdir($this->_params['dirname'].'.xyyx/cur');
+        rmdir($this->_params['dirname'].'.xyyx');
     }
 }

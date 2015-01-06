@@ -27,7 +27,7 @@ class DomDocument extends AbstractGenerator
     /**
      * Start XML element
      *
-     * @param string $name
+     * @param  string $name
      * @return void
      */
     protected function _openElement($name)
@@ -52,7 +52,7 @@ class DomDocument extends AbstractGenerator
      *
      * Resets $currentElement to the next parent node in the hierarchy
      *
-     * @param string $name
+     * @param  string $name
      * @return void
      */
     protected function _closeElement($name)

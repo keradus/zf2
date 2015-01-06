@@ -47,6 +47,7 @@ class FactoryTest extends TestCase
         if (null === $this->tmpDir) {
             $this->tmpDir = sys_get_temp_dir();
         }
+
         return $this->tmpDir;
     }
 
@@ -54,6 +55,7 @@ class FactoryTest extends TestCase
     {
         if (!extension_loaded('gd')) {
             $this->markTestSkipped('The GD extension is not available.');
+
             return;
         }
         if (!function_exists("imagepng")) {
@@ -63,7 +65,7 @@ class FactoryTest extends TestCase
             $this->markTestSkipped("Image CAPTCHA requires FT fonts support");
         }
 
-        $this->testDir = $this->getTmpDir() . '/ZF_test_images';
+        $this->testDir = $this->getTmpDir().'/ZF_test_images';
         if (!is_dir($this->testDir)) {
             @mkdir($this->testDir);
         }
@@ -121,7 +123,7 @@ class FactoryTest extends TestCase
             'options' => array(
                 'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
                 'imgDir'       => $this->testDir,
-                'font'         => __DIR__. '/../Pdf/_fonts/Vera.ttf',
+                'font'         => __DIR__.'/../Pdf/_fonts/Vera.ttf',
             ),
         ));
         $this->assertInstanceOf('Zend\Captcha\Image', $captcha);
@@ -135,7 +137,7 @@ class FactoryTest extends TestCase
             'options' => array(
                 'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
                 'imgDir'       => $this->testDir,
-                'font'         => __DIR__. '/../Pdf/_fonts/Vera.ttf',
+                'font'         => __DIR__.'/../Pdf/_fonts/Vera.ttf',
             ),
         ));
         $this->assertInstanceOf('Zend\Captcha\Image', $captcha);

@@ -58,9 +58,9 @@ class Factory
     /**
      * Read a config from a file.
      *
-     * @param  string  $filename
-     * @param  bool $returnConfigObject
-     * @param  bool $useIncludePath
+     * @param  string                             $filename
+     * @param  bool                               $returnConfigObject
+     * @param  bool                               $useIncludePath
      * @return array|Config
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -129,9 +129,9 @@ class Factory
     /**
      * Read configuration from multiple files and merge them.
      *
-     * @param  array   $files
-     * @param  bool $returnConfigObject
-     * @param  bool $useIncludePath
+     * @param  array        $files
+     * @param  bool         $returnConfigObject
+     * @param  bool         $useIncludePath
      * @return array|Config
      */
     public static function fromFiles(array $files, $returnConfigObject = false, $useIncludePath = false)
@@ -148,9 +148,9 @@ class Factory
     /**
      * Writes a config to a file
      *
-     * @param string $filename
-     * @param array|Config $config
-     * @return bool TRUE on success | FALSE on failure
+     * @param  string                             $filename
+     * @param  array|Config                       $config
+     * @return bool                               TRUE on success | FALSE on failure
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
@@ -204,7 +204,7 @@ class Factory
     /**
      * Set reader plugin manager
      *
-     * @param ReaderPluginManager $readers
+     * @param  ReaderPluginManager $readers
      * @return void
      */
     public static function setReaderPluginManager(ReaderPluginManager $readers)
@@ -222,13 +222,14 @@ class Factory
         if (static::$readers === null) {
             static::$readers = new ReaderPluginManager();
         }
+
         return static::$readers;
     }
 
     /**
      * Set writer plugin manager
      *
-     * @param WriterPluginManager $writers
+     * @param  WriterPluginManager $writers
      * @return void
      */
     public static function setWriterPluginManager(WriterPluginManager $writers)
@@ -253,8 +254,8 @@ class Factory
     /**
      * Set config reader for file extension
      *
-     * @param  string $extension
-     * @param  string|Reader\ReaderInterface $reader
+     * @param  string                             $extension
+     * @param  string|Reader\ReaderInterface      $reader
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -264,7 +265,7 @@ class Factory
 
         if (!is_string($reader) && !$reader instanceof Reader\ReaderInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Reader should be plugin name, class name or ' .
+                'Reader should be plugin name, class name or '.
                 'instance of %s\Reader\ReaderInterface; received "%s"',
                 __NAMESPACE__,
                 (is_object($reader) ? get_class($reader) : gettype($reader))
@@ -277,8 +278,8 @@ class Factory
     /**
      * Set config writer for file extension
      *
-     * @param string $extension
-     * @param string|Writer\AbstractWriter $writer
+     * @param  string                             $extension
+     * @param  string|Writer\AbstractWriter       $writer
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -288,7 +289,7 @@ class Factory
 
         if (!is_string($writer) && !$writer instanceof Writer\AbstractWriter) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Writer should be plugin name, class name or ' .
+                'Writer should be plugin name, class name or '.
                 'instance of %s\Writer\AbstractWriter; received "%s"',
                 __NAMESPACE__,
                 (is_object($writer) ? get_class($writer) : gettype($writer))

@@ -61,7 +61,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Initialize
-     * @param resource $resource
+     * @param  resource $resource
      * @return Result
      */
     public function initialize($resource /*, $generatedValue, $isBuffered = null*/)
@@ -70,6 +70,7 @@ class Result implements Iterator, ResultInterface
             throw new Exception\InvalidArgumentException('Invalid resource provided.');
         }
         $this->resource = $resource;
+
         return $this;
     }
 
@@ -150,8 +151,10 @@ class Result implements Iterator, ResultInterface
 
         if ($this->currentData !== false) {
             $this->position++;
+
             return true;
         }
+
         return false;
     }
 

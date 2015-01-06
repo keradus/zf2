@@ -34,9 +34,9 @@ class FormLabel extends AbstractHelper
      * Always generates a "for" statement, as we cannot assume the form input
      * will be provided in the $labelContent.
      *
-     * @param  ElementInterface $element
-     * @param  null|string      $labelContent
-     * @param  string           $position
+     * @param  ElementInterface          $element
+     * @param  null|string               $labelContent
+     * @param  string                    $position
      * @throws Exception\DomainException
      * @return string|FormLabel
      */
@@ -53,7 +53,7 @@ class FormLabel extends AbstractHelper
             if (empty($label)) {
                 throw new Exception\DomainException(
                     sprintf(
-                        '%s expects either label content as the second argument, ' .
+                        '%s expects either label content as the second argument, '.
                         'or that the element provided has a label attribute; neither found',
                         __METHOD__
                     )
@@ -77,7 +77,7 @@ class FormLabel extends AbstractHelper
                     break;
                 case self::PREPEND:
                 default:
-                    $labelContent = $label . $labelContent;
+                    $labelContent = $label.$labelContent;
                     break;
             }
         }
@@ -86,13 +86,13 @@ class FormLabel extends AbstractHelper
             $labelContent = $label;
         }
 
-        return $openTag . $labelContent . $this->closeTag();
+        return $openTag.$labelContent.$this->closeTag();
     }
 
     /**
      * Generate an opening label tag
      *
-     * @param  null|array|ElementInterface $attributesOrElement
+     * @param  null|array|ElementInterface        $attributesOrElement
      * @throws Exception\InvalidArgumentException
      * @throws Exception\DomainException
      * @return string
@@ -105,6 +105,7 @@ class FormLabel extends AbstractHelper
 
         if (is_array($attributesOrElement)) {
             $attributes = $this->createAttributesString($attributesOrElement);
+
             return sprintf('<label %s>', $attributes);
         }
 
@@ -136,6 +137,7 @@ class FormLabel extends AbstractHelper
         }
 
         $attributes = $this->createAttributesString($attributes);
+
         return sprintf('<label %s>', $attributes);
     }
 

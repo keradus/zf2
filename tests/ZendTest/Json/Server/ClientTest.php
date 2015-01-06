@@ -242,22 +242,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $json = $response->toJson();
 
         $response = $this->makeHttpResponseFrom($json);
+
         return $response;
     }
 
-    public function makeHttpResponseFrom($data, $status=200, $message='OK')
+    public function makeHttpResponseFrom($data, $status = 200, $message = 'OK')
     {
         $headers = array("HTTP/1.1 $status $message",
                          "Status: $status",
                          'Content-Type: application/json',
-                         'Content-Length: ' . strlen($data)
+                         'Content-Length: '.strlen($data),
                          );
-        return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
+
+        return implode("\r\n", $headers)."\r\n\r\n$data\r\n\r\n";
     }
 
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
+
         return HttpResponse::fromString($response);
     }
 

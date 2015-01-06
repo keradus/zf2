@@ -48,9 +48,9 @@ class ListenerOptionsTest extends TestCase
            'config_static_paths'     => array('static', 'custom_paths'),
        ));
 
-        $this->assertEquals(__DIR__ . '/module-config-cache.php', $options->getConfigCacheFile());
+        $this->assertEquals(__DIR__.'/module-config-cache.php', $options->getConfigCacheFile());
         $options->setConfigCacheKey('foo');
-        $this->assertEquals(__DIR__ . '/module-config-cache.foo.php', $options->getConfigCacheFile());
+        $this->assertEquals(__DIR__.'/module-config-cache.foo.php', $options->getConfigCacheFile());
     }
 
     /**
@@ -66,9 +66,9 @@ class ListenerOptionsTest extends TestCase
            'config_static_paths'      => array('static', 'custom_paths'),
        ));
 
-        $this->assertEquals(__DIR__ . '/module-classmap-cache.php', $options->getModuleMapCacheFile());
+        $this->assertEquals(__DIR__.'/module-classmap-cache.php', $options->getModuleMapCacheFile());
         $options->setModuleMapCacheKey('foo');
-        $this->assertEquals(__DIR__ . '/module-classmap-cache.foo.php', $options->getModuleMapCacheFile());
+        $this->assertEquals(__DIR__.'/module-classmap-cache.foo.php', $options->getModuleMapCacheFile());
     }
 
     public function testCanAccessKeysAsProperties()
@@ -100,7 +100,7 @@ class ListenerOptionsTest extends TestCase
     public function testSetModulePathsAcceptsConfigOrTraverable()
     {
         $config = new Config(array(__DIR__));
-        $options = new ListenerOptions;
+        $options = new ListenerOptions();
         $options->setModulePaths($config);
         $this->assertSame($config, $options->getModulePaths());
     }
@@ -108,14 +108,14 @@ class ListenerOptionsTest extends TestCase
     public function testSetModulePathsThrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $options = new ListenerOptions;
+        $options = new ListenerOptions();
         $options->setModulePaths('asd');
     }
 
     public function testSetConfigGlobPathsAcceptsConfigOrTraverable()
     {
         $config = new Config(array(__DIR__));
-        $options = new ListenerOptions;
+        $options = new ListenerOptions();
         $options->setConfigGlobPaths($config);
         $this->assertSame($config, $options->getConfigGlobPaths());
     }
@@ -123,14 +123,14 @@ class ListenerOptionsTest extends TestCase
     public function testSetConfigGlobPathsThrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $options = new ListenerOptions;
+        $options = new ListenerOptions();
         $options->setConfigGlobPaths('asd');
     }
 
     public function testSetConfigStaticPathsThrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $options = new ListenerOptions;
+        $options = new ListenerOptions();
         $options->setConfigStaticPaths('asd');
     }
 
@@ -138,7 +138,7 @@ class ListenerOptionsTest extends TestCase
     {
         $array = array(__DIR__);
         $traversable = new Config($array);
-        $options = new ListenerOptions;
+        $options = new ListenerOptions();
 
         $this->assertSame($options, $options->setExtraConfig($array));
         $this->assertSame($array, $options->getExtraConfig());
@@ -150,7 +150,7 @@ class ListenerOptionsTest extends TestCase
     public function testSetExtraConfigThrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $options = new ListenerOptions;
+        $options = new ListenerOptions();
         $options->setExtraConfig('asd');
     }
 }

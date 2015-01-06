@@ -97,7 +97,7 @@ class NumberFormat extends AbstractHelper
             $decimals = $this->getDecimals();
         }
 
-        $formatterId = md5($formatStyle . "\0" . $locale . "\0" . $decimals);
+        $formatterId = md5($formatStyle."\0".$locale."\0".$decimals);
 
         if (!isset($this->formatters[$formatterId])) {
             $this->formatters[$formatterId] = new NumberFormatter(
@@ -117,12 +117,13 @@ class NumberFormat extends AbstractHelper
     /**
      * Set format style to use instead of the default
      *
-     * @param  int $formatStyle
+     * @param  int          $formatStyle
      * @return NumberFormat
      */
     public function setFormatStyle($formatStyle)
     {
         $this->formatStyle = (int) $formatStyle;
+
         return $this;
     }
 
@@ -143,12 +144,13 @@ class NumberFormat extends AbstractHelper
     /**
      * Set format type to use instead of the default
      *
-     * @param  int $formatType
+     * @param  int          $formatType
      * @return NumberFormat
      */
     public function setFormatType($formatType)
     {
         $this->formatType = (int) $formatType;
+
         return $this;
     }
 
@@ -162,18 +164,20 @@ class NumberFormat extends AbstractHelper
         if (null === $this->formatType) {
             $this->formatType = NumberFormatter::TYPE_DEFAULT;
         }
+
         return $this->formatType;
     }
 
     /**
      * Set number of decimals to use instead of the default.
      *
-     * @param  int $decimals
+     * @param  int          $decimals
      * @return NumberFormat
      */
     public function setDecimals($decimals)
     {
         $this->decimals = $decimals;
+
         return $this;
     }
 
@@ -190,12 +194,13 @@ class NumberFormat extends AbstractHelper
     /**
      * Set locale to use instead of the default.
      *
-     * @param  string $locale
+     * @param  string       $locale
      * @return NumberFormat
      */
     public function setLocale($locale)
     {
         $this->locale = (string) $locale;
+
         return $this;
     }
 

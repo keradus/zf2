@@ -12,9 +12,9 @@ namespace ZendTest\Feed\Reader\Integration;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class PodcastRss2Test extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -22,13 +22,12 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/podcast.xml';
     }
 
     /**
      * Feed level testing
      */
-
     public function testGetsNewFeedUrl()
     {
         $feed = Reader\Reader::importString(
@@ -52,9 +51,9 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(array(
             'Technology' => array(
-                'Gadgets' => null
+                'Gadgets' => null,
             ),
-            'TV & Film' => null
+            'TV & Film' => null,
         ), $feed->getItunesCategories());
     }
 
@@ -154,7 +153,6 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
     /**
      * Entry level testing
      */
-
     public function testGetsEntryBlock()
     {
         $feed = Reader\Reader::importString(

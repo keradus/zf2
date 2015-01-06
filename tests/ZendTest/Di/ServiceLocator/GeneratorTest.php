@@ -28,7 +28,7 @@ class GeneratorTest extends TestCase
     public function setUp()
     {
         $this->tmpFile = false;
-        $this->di = new Di;
+        $this->di = new Di();
     }
 
     public function tearDown()
@@ -42,6 +42,7 @@ class GeneratorTest extends TestCase
     public function getTmpFile()
     {
         $this->tmpFile = tempnam(sys_get_temp_dir(), 'zdi');
+
         return $this->tmpFile;
     }
 

@@ -34,14 +34,14 @@ class SeparatorToSeparatorTest extends \PHPUnit_Framework_TestCase
 
         $input = array(
             'dash separated words',
-            '=test something'
+            '=test something',
         );
         $filtered = $filter($input);
 
         $this->assertNotEquals($input, $filtered);
         $this->assertEquals(array(
             'dash-separated-words',
-            '=test-something'
+            '=test-something',
         ), $filtered);
     }
 
@@ -69,7 +69,7 @@ class SeparatorToSeparatorTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
-            array(new \stdClass())
+            array(new \stdClass()),
         );
     }
 

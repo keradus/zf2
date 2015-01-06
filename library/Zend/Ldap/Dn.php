@@ -44,8 +44,8 @@ class Dn implements ArrayAccess
     /**
      * Creates a DN from an array or a string
      *
-     * @param  string|array $dn
-     * @param  string|null  $caseFold
+     * @param  string|array            $dn
+     * @param  string|null             $caseFold
      * @return Dn
      * @throws Exception\LdapException
      */
@@ -62,8 +62,8 @@ class Dn implements ArrayAccess
     /**
      * Creates a DN from a string
      *
-     * @param  string      $dn
-     * @param  string|null $caseFold
+     * @param  string                  $dn
+     * @param  string|null             $caseFold
      * @return Dn
      * @throws Exception\LdapException
      */
@@ -75,14 +75,15 @@ class Dn implements ArrayAccess
         } else {
             $dnArray = static::explodeDn((string) $dn);
         }
+
         return new static($dnArray, $caseFold);
     }
 
     /**
      * Creates a DN from an array
      *
-     * @param  array       $dn
-     * @param  string|null $caseFold
+     * @param  array                   $dn
+     * @param  string|null             $caseFold
      * @return Dn
      * @throws Exception\LdapException
      */
@@ -106,33 +107,35 @@ class Dn implements ArrayAccess
     /**
      * Gets the RDN of the current DN
      *
-     * @param  string $caseFold
+     * @param  string                  $caseFold
      * @return array
      * @throws Exception\LdapException if DN has no RDN (empty array)
      */
     public function getRdn($caseFold = null)
     {
         $caseFold = static::sanitizeCaseFold($caseFold, $this->caseFold);
+
         return static::caseFoldRdn($this->get(0, 1, $caseFold), null);
     }
 
     /**
      * Gets the RDN of the current DN as a string
      *
-     * @param  string $caseFold
+     * @param  string                  $caseFold
      * @return string
      * @throws Exception\LdapException if DN has no RDN (empty array)
      */
     public function getRdnString($caseFold = null)
     {
         $caseFold = static::sanitizeCaseFold($caseFold, $this->caseFold);
+
         return static::implodeRdn($this->getRdn(), $caseFold);
     }
 
     /**
      * Get the parent DN $levelUp levels up the tree
      *
-     * @param  int $levelUp
+     * @param  int                     $levelUp
      * @throws Exception\LdapException
      * @return Dn
      */
@@ -143,15 +146,16 @@ class Dn implements ArrayAccess
             throw new Exception\LdapException(null, 'Cannot retrieve parent DN with given $levelUp');
         }
         $newDn = array_slice($this->dn, $levelUp);
+
         return new static($newDn, $this->caseFold);
     }
 
     /**
      * Get a DN part
      *
-     * @param  int    $index
-     * @param  int    $length
-     * @param  string $caseFold
+     * @param  int                     $index
+     * @param  int                     $length
+     * @param  string                  $caseFold
      * @return array
      * @throws Exception\LdapException if index is illegal
      */
@@ -166,15 +170,16 @@ class Dn implements ArrayAccess
         if ($length === 1) {
             return static::caseFoldRdn($this->dn[$index], $caseFold);
         }
+
         return static::caseFoldDn(array_slice($this->dn, $index, $length, false), $caseFold);
     }
 
     /**
      * Set a DN part
      *
-     * @param  int   $index
-     * @param  array $value
-     * @return Dn Provides a fluent interface
+     * @param  int                     $index
+     * @param  array                   $value
+     * @return Dn                      Provides a fluent interface
      * @throws Exception\LdapException if index is illegal
      */
     public function set($index, array $value)
@@ -182,15 +187,16 @@ class Dn implements ArrayAccess
         $this->assertIndex($index);
         static::assertRdn($value);
         $this->dn[$index] = $value;
+
         return $this;
     }
 
     /**
      * Remove a DN part
      *
-     * @param  int $index
-     * @param  int $length
-     * @return Dn Provides a fluent interface
+     * @param  int                     $index
+     * @param  int                     $length
+     * @return Dn                      Provides a fluent interface
      * @throws Exception\LdapException if index is illegal
      */
     public function remove($index, $length = 1)
@@ -201,6 +207,7 @@ class Dn implements ArrayAccess
             $length = 1;
         }
         array_splice($this->dn, $index, $length, null);
+
         return $this;
     }
 
@@ -208,12 +215,13 @@ class Dn implements ArrayAccess
      * Append a DN part
      *
      * @param  array $value
-     * @return Dn Provides a fluent interface
+     * @return Dn    Provides a fluent interface
      */
     public function append(array $value)
     {
         static::assertRdn($value);
         $this->dn[] = $value;
+
         return $this;
     }
 
@@ -221,21 +229,22 @@ class Dn implements ArrayAccess
      * Prepend a DN part
      *
      * @param  array $value
-     * @return Dn Provides a fluent interface
+     * @return Dn    Provides a fluent interface
      */
     public function prepend(array $value)
     {
         static::assertRdn($value);
         array_unshift($this->dn, $value);
+
         return $this;
     }
 
     /**
      * Insert a DN part
      *
-     * @param  int   $index
-     * @param  array $value
-     * @return Dn Provides a fluent interface
+     * @param  int                     $index
+     * @param  array                   $value
+     * @return Dn                      Provides a fluent interface
      * @throws Exception\LdapException if index is illegal
      */
     public function insert($index, array $value)
@@ -245,13 +254,14 @@ class Dn implements ArrayAccess
         $first    = array_slice($this->dn, 0, $index + 1);
         $second   = array_slice($this->dn, $index + 1);
         $this->dn = array_merge($first, array($value), $second);
+
         return $this;
     }
 
     /**
      * Assert index is correct and usable
      *
-     * @param  mixed $index
+     * @param  mixed                   $index
      * @return bool
      * @throws Exception\LdapException
      */
@@ -263,13 +273,14 @@ class Dn implements ArrayAccess
         if ($index < 0 || $index >= count($this->dn)) {
             throw new Exception\LdapException(null, 'Parameter $index out of bounds');
         }
+
         return true;
     }
 
     /**
      * Assert if value is in a correct RDN format
      *
-     * @param  array $value
+     * @param  array                   $value
      * @return bool
      * @throws Exception\LdapException
      */
@@ -299,13 +310,14 @@ class Dn implements ArrayAccess
     /**
      * Return DN as a string
      *
-     * @param  string $caseFold
+     * @param  string                  $caseFold
      * @return string
      * @throws Exception\LdapException
      */
     public function toString($caseFold = null)
     {
         $caseFold = static::sanitizeCaseFold($caseFold, $this->caseFold);
+
         return static::implodeDn($this->dn, $caseFold);
     }
 
@@ -322,6 +334,7 @@ class Dn implements ArrayAccess
         if ($caseFold === self::ATTR_CASEFOLD_NONE) {
             return $this->dn;
         }
+
         return static::caseFoldDn($this->dn, $caseFold);
     }
 
@@ -358,6 +371,7 @@ class Dn implements ArrayAccess
         foreach ($dn as $part) {
             $return[] = static::caseFoldRdn($part, $caseFold);
         }
+
         return $return;
     }
 
@@ -374,7 +388,7 @@ class Dn implements ArrayAccess
     /**
      * Required by the ArrayAccess implementation
      *
-     * @param  int $offset
+     * @param  int  $offset
      * @return bool
      */
     public function offsetExists($offset)
@@ -383,6 +397,7 @@ class Dn implements ArrayAccess
         if ($offset < 0 || $offset >= count($this->dn)) {
             return false;
         }
+
         return true;
     }
 
@@ -390,7 +405,7 @@ class Dn implements ArrayAccess
      * Proxy to {@see get()}
      * Required by the ArrayAccess implementation
      *
-     * @param  int $offset
+     * @param  int   $offset
      * @return array
      */
     public function offsetGet($offset)
@@ -462,7 +477,7 @@ class Dn implements ArrayAccess
      * @author Benedikt Hallinger <beni@php.net>
      *
      * @param  string|array $values An array containing the DN values that should be escaped
-     * @return array The array $values, but escaped
+     * @return array        The array $values, but escaped
      */
     public static function escapeValue($values = array())
     {
@@ -481,10 +496,10 @@ class Dn implements ArrayAccess
             if (preg_match('/^(\s*)(.+?)(\s*)$/', $val, $matches)) {
                 $val = $matches[2];
                 for ($i = 0, $len = strlen($matches[1]); $i < $len; $i++) {
-                    $val = '\20' . $val;
+                    $val = '\20'.$val;
                 }
                 for ($i = 0, $len = strlen($matches[3]); $i < $len; $i++) {
-                    $val = $val . '\20';
+                    $val = $val.'\20';
                 }
             }
             if (null === $val) {
@@ -492,6 +507,7 @@ class Dn implements ArrayAccess
             } // apply escaped "null" if string is empty
             $values[$key] = $val;
         }
+
         return (count($values) == 1) ? $values[0] : $values;
     }
 
@@ -505,7 +521,7 @@ class Dn implements ArrayAccess
      * @author Benedikt Hallinger <beni@php.net>
      *
      * @param  string|array $values Array of DN Values
-     * @return array Same as $values, but unescaped
+     * @return array        Same as $values, but unescaped
      */
     public static function unescapeValue($values = array())
     {
@@ -516,10 +532,11 @@ class Dn implements ArrayAccess
             // strip slashes from special chars
             $val          = str_replace(
                 array('\\\\', '\,', '\+', '\"', '\<', '\>', '\;', '\#', '\='),
-                array('\\', ',', '+', '"', '<', '>', ';', '#', '=', ), $val
+                array('\\', ',', '+', '"', '<', '>', ';', '#', '='), $val
             );
             $values[$key] = Converter\Converter::hex32ToAsc($val);
         }
+
         return (count($values) == 1) ? $values[0] : $values;
     }
 
@@ -535,10 +552,10 @@ class Dn implements ArrayAccess
      * )
      * for a DN of cn=name1+uid=user,cn=name2,dc=example,dc=org.
      *
-     * @param  string $dn
-     * @param  array  $keys     An optional array to receive DN keys (e.g. CN, OU, DC, ...)
-     * @param  array  $vals     An optional array to receive DN values
-     * @param  string $caseFold
+     * @param  string                  $dn
+     * @param  array                   $keys     An optional array to receive DN keys (e.g. CN, OU, DC, ...)
+     * @param  array                   $vals     An optional array to receive DN values
+     * @param  string                  $caseFold
      * @return array
      * @throws Exception\LdapException
      */
@@ -571,6 +588,7 @@ class Dn implements ArrayAccess
         if ($vals !== null) {
             $vals = $v;
         }
+
         return $ret;
     }
 
@@ -579,7 +597,7 @@ class Dn implements ArrayAccess
      * @param  array  $keys     An optional array to receive DN keys (e.g. CN, OU, DC, ...)
      * @param  array  $vals     An optional array to receive DN values
      * @param  string $caseFold
-     * @return bool True if the DN was successfully parsed or false if the string is not a valid DN.
+     * @return bool   True if the DN was successfully parsed or false if the string is not a valid DN.
      */
     public static function checkDn(
         $dn, array &$keys = null, array &$vals = null,
@@ -672,8 +690,8 @@ class Dn implements ArrayAccess
      * This method supports the creation of multi-valued RDNs
      * $part must contain an even number of elements.
      *
-     * @param  array  $part
-     * @param  string $caseFold
+     * @param  array                   $part
+     * @param  string                  $caseFold
      * @return string
      * @throws Exception\LdapException
      */
@@ -704,9 +722,9 @@ class Dn implements ArrayAccess
      *      array("dc" => "org")
      * )
      *
-     * @param  array  $dnArray
-     * @param  string $caseFold
-     * @param  string $separator
+     * @param  array                   $dnArray
+     * @param  string                  $caseFold
+     * @param  string                  $separator
      * @return string
      * @throws Exception\LdapException
      */
@@ -755,6 +773,7 @@ class Dn implements ArrayAccess
                 return false;
             }
         }
+
         return true;
     }
 }

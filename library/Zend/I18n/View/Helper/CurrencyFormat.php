@@ -142,12 +142,13 @@ class CurrencyFormat extends AbstractHelper
     /**
      * The 3-letter ISO 4217 currency code indicating the currency to use
      *
-     * @param  string $currencyCode
+     * @param  string         $currencyCode
      * @return CurrencyFormat
      */
     public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
+
         return $this;
     }
 
@@ -164,12 +165,13 @@ class CurrencyFormat extends AbstractHelper
     /**
      * Set the currency pattern
      *
-     * @param  string $currencyPattern
+     * @param  string         $currencyPattern
      * @return CurrencyFormat
      */
     public function setCurrencyPattern($currencyPattern)
     {
         $this->currencyPattern = $currencyPattern;
+
         return $this;
     }
 
@@ -186,12 +188,13 @@ class CurrencyFormat extends AbstractHelper
     /**
      * Set locale to use instead of the default
      *
-     * @param  string $locale
+     * @param  string         $locale
      * @return CurrencyFormat
      */
     public function setLocale($locale)
     {
         $this->locale = (string) $locale;
+
         return $this;
     }
 
@@ -212,12 +215,13 @@ class CurrencyFormat extends AbstractHelper
     /**
      * Set if the view helper should show two decimals
      *
-     * @param  bool $showDecimals
+     * @param  bool           $showDecimals
      * @return CurrencyFormat
      */
     public function setShouldShowDecimals($showDecimals)
     {
         $this->showDecimals = (bool) $showDecimals;
+
         return $this;
     }
 

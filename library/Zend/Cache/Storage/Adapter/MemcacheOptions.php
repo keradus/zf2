@@ -68,7 +68,7 @@ class MemcacheOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $namespaceSeparator
+     * @param  string          $namespaceSeparator
      * @return MemcacheOptions
      */
     public function setNamespaceSeparator($namespaceSeparator)
@@ -78,6 +78,7 @@ class MemcacheOptions extends AdapterOptions
             $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
             $this->namespaceSeparator = $namespaceSeparator;
         }
+
         return $this;
     }
 
@@ -94,7 +95,7 @@ class MemcacheOptions extends AdapterOptions
     /**
      * Set the memcache resource manager to use
      *
-     * @param null|MemcacheResourceManager $resourceManager
+     * @param  null|MemcacheResourceManager $resourceManager
      * @return MemcacheOptions
      */
     public function setResourceManager(MemcacheResourceManager $resourceManager = null)
@@ -103,6 +104,7 @@ class MemcacheOptions extends AdapterOptions
             $this->triggerOptionEvent('resource_manager', $resourceManager);
             $this->resourceManager = $resourceManager;
         }
+
         return $this;
     }
 
@@ -116,6 +118,7 @@ class MemcacheOptions extends AdapterOptions
         if (!$this->resourceManager) {
             $this->resourceManager = new MemcacheResourceManager();
         }
+
         return $this->resourceManager;
     }
 
@@ -132,7 +135,7 @@ class MemcacheOptions extends AdapterOptions
     /**
      * Set the memcache resource id
      *
-     * @param string $resourceId
+     * @param  string          $resourceId
      * @return MemcacheOptions
      */
     public function setResourceId($resourceId)
@@ -142,6 +145,7 @@ class MemcacheOptions extends AdapterOptions
             $this->triggerOptionEvent('resource_id', $resourceId);
             $this->resourceId = $resourceId;
         }
+
         return $this;
     }
 
@@ -158,7 +162,7 @@ class MemcacheOptions extends AdapterOptions
     /**
      * Set whether compressed writes are turned on or not
      *
-     * @param boolean $compression
+     * @param  boolean $compression
      * @return $this
      */
     public function setCompression($compression)
@@ -168,19 +172,21 @@ class MemcacheOptions extends AdapterOptions
             $this->triggerOptionEvent('compression', $compression);
             $this->compression = $compression;
         }
+
         return $this;
     }
 
     /**
      * Sets a list of memcache servers to add on initialize
      *
-     * @param string|array $servers list of servers
+     * @param  string|array                       $servers list of servers
      * @return MemcacheOptions
      * @throws Exception\InvalidArgumentException
      */
     public function setServers($servers)
     {
         $this->getResourceManager()->addServers($this->getResourceId(), $servers);
+
         return $this;
     }
 
@@ -203,6 +209,7 @@ class MemcacheOptions extends AdapterOptions
     public function setAutoCompressThreshold($threshold)
     {
         $this->getResourceManager()->setAutoCompressThreshold($this->getResourceId(), $threshold);
+
         return $this;
     }
 
@@ -225,6 +232,7 @@ class MemcacheOptions extends AdapterOptions
     public function setAutoCompressMinSavings($minSavings)
     {
         $this->getResourceManager()->setAutoCompressMinSavings($this->getResourceId(), $minSavings);
+
         return $this;
     }
 
@@ -241,12 +249,13 @@ class MemcacheOptions extends AdapterOptions
     /**
      * Set default server values
      *
-     * @param array $serverDefaults
+     * @param  array           $serverDefaults
      * @return MemcacheOptions
      */
     public function setServerDefaults(array $serverDefaults)
     {
         $this->getResourceManager()->setServerDefaults($this->getResourceId(), $serverDefaults);
+
         return $this;
     }
 
@@ -263,12 +272,13 @@ class MemcacheOptions extends AdapterOptions
     /**
      * Set callback for server connection failures
      *
-     * @param callable $callback
+     * @param  callable $callback
      * @return $this
      */
     public function setFailureCallback($callback)
     {
         $this->getResourceManager()->setFailureCallback($this->getResourceId(), $callback);
+
         return $this;
     }
 

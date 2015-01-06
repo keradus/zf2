@@ -26,8 +26,9 @@ class TestClassCache
         ++static::$fooCounter;
         $args = func_get_args();
 
-        echo 'foobar_output('.implode(', ', $args) . ') : ' . static::$fooCounter;
-        return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
+        echo 'foobar_output('.implode(', ', $args).') : '.static::$fooCounter;
+
+        return 'foobar_return('.implode(', ', $args).') : '.static::$fooCounter;
     }
 
     public static function emptyMethod()
@@ -48,10 +49,10 @@ class ClassCacheTest extends CommonPatternTest
     public function setUp()
     {
         $this->_storage = new Cache\Storage\Adapter\Memory(array(
-            'memory_limit' => 0
+            'memory_limit' => 0,
         ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
-            'class'   => __NAMESPACE__ . '\TestClassCache',
+            'class'   => __NAMESPACE__.'\TestClassCache',
             'storage' => $this->_storage,
         ));
         $this->_pattern = new Cache\Pattern\ClassCache();
@@ -99,8 +100,8 @@ class ClassCacheTest extends CommonPatternTest
 
     protected function _testCall($method, array $args)
     {
-        $returnSpec = 'foobar_return(' . implode(', ', $args) . ') : ';
-        $outputSpec = 'foobar_output(' . implode(', ', $args) . ') : ';
+        $returnSpec = 'foobar_return('.implode(', ', $args).') : ';
+        $outputSpec = 'foobar_output('.implode(', ', $args).') : ';
 
         // first call - not cached
         $firstCounter = TestClassCache::$fooCounter + 1;
@@ -110,8 +111,8 @@ class ClassCacheTest extends CommonPatternTest
         $return = call_user_func_array(array($this->_pattern, $method), $args);
         $data = ob_get_clean();
 
-        $this->assertEquals($returnSpec . $firstCounter, $return);
-        $this->assertEquals($outputSpec . $firstCounter, $data);
+        $this->assertEquals($returnSpec.$firstCounter, $return);
+        $this->assertEquals($outputSpec.$firstCounter, $data);
 
         // second call - cached
         ob_start();
@@ -119,9 +120,9 @@ class ClassCacheTest extends CommonPatternTest
         $return = call_user_func_array(array($this->_pattern, $method), $args);
         $data = ob_get_clean();
 
-        $this->assertEquals($returnSpec . $firstCounter, $return);
+        $this->assertEquals($returnSpec.$firstCounter, $return);
         if ($this->_options->getCacheOutput()) {
-            $this->assertEquals($outputSpec . $firstCounter, $data);
+            $this->assertEquals($outputSpec.$firstCounter, $data);
         } else {
             $this->assertEquals('', $data);
         }

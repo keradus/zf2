@@ -24,7 +24,7 @@ class ContentDisposition implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-disposition') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Disposition string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Disposition string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class ContentDisposition implements HeaderInterface
 
     public function toString()
     {
-        return 'Content-Disposition: ' . $this->getFieldValue();
+        return 'Content-Disposition: '.$this->getFieldValue();
     }
 }

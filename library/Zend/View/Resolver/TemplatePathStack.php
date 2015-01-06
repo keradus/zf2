@@ -61,7 +61,7 @@ class TemplatePathStack implements ResolverInterface
     /**
      * Constructor
      *
-     * @param  null|array|Traversable $options
+     * @param null|array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -72,7 +72,7 @@ class TemplatePathStack implements ResolverInterface
             }
         }
 
-        $this->paths = new SplStack;
+        $this->paths = new SplStack();
         if (null !== $options) {
             $this->setOptions($options);
         }
@@ -81,7 +81,7 @@ class TemplatePathStack implements ResolverInterface
     /**
      * Configure object
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return void
      * @throws Exception\InvalidArgumentException
      */
@@ -117,13 +117,14 @@ class TemplatePathStack implements ResolverInterface
     /**
      * Set default file suffix
      *
-     * @param  string $defaultSuffix
+     * @param  string            $defaultSuffix
      * @return TemplatePathStack
      */
     public function setDefaultSuffix($defaultSuffix)
     {
         $this->defaultSuffix = (string) $defaultSuffix;
         $this->defaultSuffix = ltrim($this->defaultSuffix, '.');
+
         return $this;
     }
 
@@ -140,7 +141,7 @@ class TemplatePathStack implements ResolverInterface
     /**
      * Add many paths to the stack at once
      *
-     * @param  array $paths
+     * @param  array             $paths
      * @return TemplatePathStack
      */
     public function addPaths(array $paths)
@@ -148,13 +149,14 @@ class TemplatePathStack implements ResolverInterface
         foreach ($paths as $path) {
             $this->addPath($path);
         }
+
         return $this;
     }
 
     /**
      * Rest the path stack to the paths provided
      *
-     * @param  SplStack|array $paths
+     * @param  SplStack|array                     $paths
      * @return TemplatePathStack
      * @throws Exception\InvalidArgumentException
      */
@@ -185,13 +187,14 @@ class TemplatePathStack implements ResolverInterface
         $path = rtrim($path, '/');
         $path = rtrim($path, '\\');
         $path .= DIRECTORY_SEPARATOR;
+
         return $path;
     }
 
     /**
      * Add a single path to the stack
      *
-     * @param  string $path
+     * @param  string                             $path
      * @return TemplatePathStack
      * @throws Exception\InvalidArgumentException
      */
@@ -204,6 +207,7 @@ class TemplatePathStack implements ResolverInterface
             ));
         }
         $this->paths[] = static::normalizePath($path);
+
         return $this;
     }
 
@@ -214,7 +218,7 @@ class TemplatePathStack implements ResolverInterface
      */
     public function clearPaths()
     {
-        $this->paths = new SplStack;
+        $this->paths = new SplStack();
     }
 
     /**
@@ -230,12 +234,13 @@ class TemplatePathStack implements ResolverInterface
     /**
      * Set LFI protection flag
      *
-     * @param  bool $flag
+     * @param  bool              $flag
      * @return TemplatePathStack
      */
     public function setLfiProtection($flag)
     {
         $this->lfiProtectionOn = (bool) $flag;
+
         return $this;
     }
 
@@ -252,12 +257,13 @@ class TemplatePathStack implements ResolverInterface
     /**
      * Set flag indicating if stream wrapper should be used if short_open_tag is off
      *
-     * @param  bool $flag
+     * @param  bool              $flag
      * @return TemplatePathStack
      */
     public function setUseStreamWrapper($flag)
     {
         $this->useStreamWrapper = (bool) $flag;
+
         return $this;
     }
 
@@ -277,8 +283,8 @@ class TemplatePathStack implements ResolverInterface
     /**
      * Retrieve the filesystem path to a view script
      *
-     * @param  string $name
-     * @param  null|Renderer $renderer
+     * @param  string                    $name
+     * @param  null|Renderer             $renderer
      * @return string
      * @throws Exception\DomainException
      */
@@ -294,35 +300,38 @@ class TemplatePathStack implements ResolverInterface
 
         if (!count($this->paths)) {
             $this->lastLookupFailure = static::FAILURE_NO_PATHS;
+
             return false;
         }
 
         // Ensure we have the expected file extension
         $defaultSuffix = $this->getDefaultSuffix();
         if (pathinfo($name, PATHINFO_EXTENSION) == '') {
-            $name .= '.' . $defaultSuffix;
+            $name .= '.'.$defaultSuffix;
         }
 
         foreach ($this->paths as $path) {
-            $file = new SplFileInfo($path . $name);
+            $file = new SplFileInfo($path.$name);
             if ($file->isReadable()) {
                 // Found! Return it.
                 if (($filePath = $file->getRealPath()) === false && substr($path, 0, 7) === 'phar://') {
                     // Do not try to expand phar paths (realpath + phars == fail)
-                    $filePath = $path . $name;
+                    $filePath = $path.$name;
                     if (!file_exists($filePath)) {
                         break;
                     }
                 }
                 if ($this->useStreamWrapper()) {
                     // If using a stream wrapper, prepend the spec to the path
-                    $filePath = 'zend.view://' . $filePath;
+                    $filePath = 'zend.view://'.$filePath;
                 }
+
                 return $filePath;
             }
         }
 
         $this->lastLookupFailure = static::FAILURE_NOT_FOUND;
+
         return false;
     }
 

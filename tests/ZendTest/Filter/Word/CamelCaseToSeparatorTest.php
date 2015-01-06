@@ -57,7 +57,7 @@ class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
 
         $input = array(
             'CamelCasedWords',
-            'somethingDifferent'
+            'somethingDifferent',
         );
 
         $filtered = $filter($input);
@@ -70,7 +70,7 @@ class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
-            array(new \stdClass())
+            array(new \stdClass()),
         );
     }
 

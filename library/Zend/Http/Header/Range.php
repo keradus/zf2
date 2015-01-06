@@ -24,7 +24,7 @@ class Range implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'range') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Range string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Range string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Range implements HeaderInterface
 
     public function toString()
     {
-        return 'Range: ' . $this->getFieldValue();
+        return 'Range: '.$this->getFieldValue();
     }
 }

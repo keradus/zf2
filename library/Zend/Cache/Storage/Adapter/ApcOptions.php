@@ -24,7 +24,7 @@ class ApcOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $namespaceSeparator
+     * @param  string     $namespaceSeparator
      * @return ApcOptions
      */
     public function setNamespaceSeparator($namespaceSeparator)
@@ -32,6 +32,7 @@ class ApcOptions extends AdapterOptions
         $namespaceSeparator = (string) $namespaceSeparator;
         $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
         $this->namespaceSeparator = $namespaceSeparator;
+
         return $this;
     }
 

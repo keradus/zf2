@@ -7,7 +7,6 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 use Zend\Console;
 use Zend\File\ClassFileLocator;
 use Zend\Loader\StandardAutoloader;
@@ -27,18 +26,17 @@ use Zend\Loader\StandardAutoloader;
  * --ignore|-i [ <string> ]     Comma-separated namespaces to ignore
  * --sort|-s                    Alphabetically sort classes
  */
-
-$zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
+$zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__.'/../library';
 if (is_dir($zfLibraryPath)) {
     // Try to load StandardAutoloader from library
-    if (false === include($zfLibraryPath . '/Zend/Loader/StandardAutoloader.php')) {
-        echo 'Unable to locate autoloader via library; aborting' . PHP_EOL;
+    if (false === include ($zfLibraryPath.'/Zend/Loader/StandardAutoloader.php')) {
+        echo 'Unable to locate autoloader via library; aborting'.PHP_EOL;
         exit(2);
     }
 } else {
     // Try to load StandardAutoloader from include_path
-    if (false === include('Zend/Loader/StandardAutoloader.php')) {
-        echo 'Unable to locate autoloader via include_path; aborting' . PHP_EOL;
+    if (false === include ('Zend/Loader/StandardAutoloader.php')) {
+        echo 'Unable to locate autoloader via include_path; aborting'.PHP_EOL;
         exit(2);
     }
 }
@@ -80,8 +78,8 @@ if (isset($opts->i)) {
 $relativePathForClassmap = '';
 if (isset($opts->l)) {
     if (!is_dir($opts->l)) {
-        echo 'Invalid library directory provided' . PHP_EOL
-            . PHP_EOL;
+        echo 'Invalid library directory provided'.PHP_EOL
+            .PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);
     }
@@ -91,27 +89,27 @@ $libraryPath = str_replace(DIRECTORY_SEPARATOR, '/', realpath($libraryPath));
 
 $usingStdout = false;
 $appending = $opts->getOption('a');
-$output = $libraryPath . '/autoload_classmap.php';
+$output = $libraryPath.'/autoload_classmap.php';
 if (isset($opts->o)) {
     $output = $opts->o;
     if ('-' == $output) {
         $output = STDOUT;
         $usingStdout = true;
     } elseif (is_dir($output)) {
-        echo 'Invalid output file provided' . PHP_EOL
-            . PHP_EOL;
+        echo 'Invalid output file provided'.PHP_EOL
+            .PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);
     } elseif (!is_writeable(dirname($output))) {
-        echo "Cannot write to '$output'; aborting." . PHP_EOL
-            . PHP_EOL
-            . $opts->getUsageMessage();
+        echo "Cannot write to '$output'; aborting.".PHP_EOL
+            .PHP_EOL
+            .$opts->getUsageMessage();
         exit(2);
     } elseif (file_exists($output) && !$opts->getOption('w') && !$appending) {
-        echo "Autoload file already exists at '$output'," . PHP_EOL
-            . "but 'overwrite' or 'appending' flag was not specified; aborting." . PHP_EOL
-            . PHP_EOL
-            . $opts->getUsageMessage();
+        echo "Autoload file already exists at '$output',".PHP_EOL
+            ."but 'overwrite' or 'appending' flag was not specified; aborting.".PHP_EOL
+            .PHP_EOL
+            .$opts->getUsageMessage();
         exit(2);
     } else {
         // We need to add the $libraryPath into the relative path that is created in the classmap file.
@@ -119,7 +117,7 @@ if (isset($opts->o)) {
 
         // Simple case: $libraryPathCompare is in $classmapPathCompare
         if (strpos($libraryPath, $classmapPath) === 0) {
-            $relativePathForClassmap = substr($libraryPath, strlen($classmapPath) + 1) . '/';
+            $relativePathForClassmap = substr($libraryPath, strlen($classmapPath) + 1).'/';
         } else {
             $libraryPathParts  = explode('/', $libraryPath);
             $classmapPathParts = explode('/', $classmapPath);
@@ -139,7 +137,7 @@ if (isset($opts->o)) {
             // Add library subdirs
             $count = count($libraryPathParts);
             for (; $i < $count; $i++) {
-                $relativePathForClassmap .= $libraryPathParts[$i] . '/';
+                $relativePathForClassmap .= $libraryPathParts[$i].'/';
             }
         }
     }
@@ -147,9 +145,9 @@ if (isset($opts->o)) {
 
 if (!$usingStdout) {
     if ($appending) {
-        echo "Appending to class file map '$output' for library in '$libraryPath'..." . PHP_EOL;
+        echo "Appending to class file map '$output' for library in '$libraryPath'...".PHP_EOL;
     } else {
-        echo "Creating class file map for library in '$libraryPath'..." . PHP_EOL;
+        echo "Creating class file map for library in '$libraryPath'...".PHP_EOL;
     }
 }
 
@@ -158,12 +156,12 @@ $l = new ClassFileLocator($libraryPath);
 
 // Iterate over each element in the path, and create a map of
 // classname => filename, where the filename is relative to the library path
-$map = new stdClass;
+$map = new stdClass();
 foreach ($l as $file) {
-    $filename  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $file->getFilename());
+    $filename  = str_replace($libraryPath.'/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()).'/'.$file->getFilename());
 
     // Add in relative path to library
-    $filename  = $relativePathForClassmap . $filename;
+    $filename  = $relativePathForClassmap.$filename;
 
     foreach ($file->getClasses() as $class) {
         foreach ($ignoreNamespaces as $ignoreNs) {
@@ -182,7 +180,7 @@ if ($opts->getOption('s')) {
 }
 
 if ($appending) {
-    $content = var_export($map, true) . ';';
+    $content = var_export($map, true).';';
 
     // Prefix with __DIR__; modify the generated content
     $content = preg_replace("#(=> ')#", "=> __DIR__ . '/", $content);
@@ -203,9 +201,9 @@ if ($appending) {
 } else {
     // Create a file with the class/file map.
     // Stupid syntax highlighters make separating < from PHP declaration necessary
-    $content = '<' . "?php\n"
-             . "// Generated by ZF2's ./bin/classmap_generator.php\n"
-             . 'return ' . var_export($map, true) . ';';
+    $content = '<'."?php\n"
+             ."// Generated by ZF2's ./bin/classmap_generator.php\n"
+             .'return '.var_export($map, true).';';
 
     // Prefix with __DIR__; modify the generated content
     $content = preg_replace("#(=> ')#", "=> __DIR__ . '/", $content);
@@ -228,14 +226,14 @@ foreach ($matches as $match) {
     $maxWidth = max($maxWidth, strlen($match[1]));
 }
 
-$content = preg_replace('(\n\s+([^=]+)=>)e', "'\n    \\1' . str_repeat(' ', " . $maxWidth . " - strlen('\\1')) . '=>'", $content);
+$content = preg_replace('(\n\s+([^=]+)=>)e', "'\n    \\1' . str_repeat(' ', ".$maxWidth." - strlen('\\1')) . '=>'", $content);
 
 // Make the file end by EOL
-$content = rtrim($content, "\n") . "\n";
+$content = rtrim($content, "\n")."\n";
 
 // Write the contents to disk
 file_put_contents($output, $content);
 
 if (!$usingStdout) {
-    echo "Wrote classmap file to '" . realpath($output) . "'" . PHP_EOL;
+    echo "Wrote classmap file to '".realpath($output)."'".PHP_EOL;
 }

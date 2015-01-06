@@ -45,7 +45,7 @@ class StripTags extends AbstractFilter
      *     'allowAttribs'  => Attributes which are allowed
      *     'allowComments' => Are comments allowed ?
      *
-     * @param  string|array|Traversable $options
+     * @param string|array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -90,7 +90,7 @@ class StripTags extends AbstractFilter
      * Sets the tagsAllowed option
      *
      * @param  array|string $tagsAllowed
-     * @return self Provides a fluent interface
+     * @return self         Provides a fluent interface
      */
     public function setTagsAllowed($tagsAllowed)
     {
@@ -142,7 +142,7 @@ class StripTags extends AbstractFilter
      * Sets the attributesAllowed option
      *
      * @param  array|string $attributesAllowed
-     * @return self Provides a fluent interface
+     * @return self         Provides a fluent interface
      */
     public function setAttributesAllowed($attributesAllowed)
     {
@@ -168,7 +168,7 @@ class StripTags extends AbstractFilter
      * If the value provided is non-scalar, the value will remain unfiltered
      *
      * @todo   improve docblock descriptions
-     * @param  string $value
+     * @param  string       $value
      * @return string|mixed
      */
     public function filter($value)
@@ -191,7 +191,7 @@ class StripTags extends AbstractFilter
                 $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '', $value);
             }
 
-            $value = $start . $value;
+            $value = $start.$value;
         }
 
         // Initialize accumulator for filtered data
@@ -214,7 +214,7 @@ class StripTags extends AbstractFilter
                 $tagFiltered = '';
             }
             // Add the filtered pre-tag text and filtered tag to the data buffer
-            $dataFiltered .= $preTag . $tagFiltered;
+            $dataFiltered .= $preTag.$tagFiltered;
         }
 
         // Return the filtered data
@@ -275,8 +275,8 @@ class StripTags extends AbstractFilter
                     continue;
                 }
                 // Add the attribute to the accumulator
-                $tagAttributes .= " $attributeName=" . $attributeDelimiter
-                                . $attributeValue . $attributeDelimiter;
+                $tagAttributes .= " $attributeName=".$attributeDelimiter
+                                .$attributeValue.$attributeDelimiter;
             }
         }
 
@@ -286,6 +286,6 @@ class StripTags extends AbstractFilter
         }
 
         // Return the filtered tag
-        return $tagStart . $tagName . $tagAttributes . $tagEnd;
+        return $tagStart.$tagName.$tagAttributes.$tagEnd;
     }
 }

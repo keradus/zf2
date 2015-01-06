@@ -154,12 +154,12 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
             array('defaultZero', '$number = 0'),
             array('defaultNumber', '$number = 1234'),
             array('defaultFloat', '$float = 1.34'),
-            array('defaultConstant', '$con = \'foo\'')
+            array('defaultConstant', '$con = \'foo\''),
         );
     }
 
     /**
-     * @param  string                               $method
+     * @param  string                                    $method
      * @return \Zend\Code\Reflection\ParameterReflection
      */
     protected function getFirstReflectionParameter($method)
@@ -202,7 +202,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testParameterGeneratorReturnsCorrectTypeForNonNamespaceClasses()
     {
-        require_once __DIR__ . '/../TestAsset/NonNamespaceClass.php';
+        require_once __DIR__.'/../TestAsset/NonNamespaceClass.php';
 
         $reflClass = new \Zend\Code\Reflection\ClassReflection('ZendTest_Code_NsTest_BarClass');
         $params = $reflClass->getMethod('fooMethod')->getParameters();
@@ -217,7 +217,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testTypehintsWithNamespaceInNamepsacedClassReturnTypewithBackslash()
     {
-        require_once __DIR__ . '/TestAsset/NamespaceTypeHintClass.php';
+        require_once __DIR__.'/TestAsset/NamespaceTypeHintClass.php';
 
         $reflClass = new \Zend\Code\Reflection\ClassReflection('Namespaced\TypeHint\Bar');
         $params = $reflClass->getMethod('method')->getParameters();

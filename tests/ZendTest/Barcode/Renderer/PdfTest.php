@@ -44,7 +44,7 @@ class PdfTest extends TestCommon
 
     public function testDrawReturnResource()
     {
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $resource = $this->renderer->draw();
@@ -54,7 +54,7 @@ class PdfTest extends TestCommon
 
     public function testDrawWithExistantResourceReturnResource()
     {
-        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        Barcode\Barcode::setBarcodeFont(__DIR__.'/../Object/_fonts/Vera.ttf');
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $pdfResource = new Pdf\PdfDocument();
@@ -69,6 +69,7 @@ class PdfTest extends TestCommon
     {
         $pdf = new Pdf\PdfDocument();
         $pdf->pages[] = new Pdf\Page('500:300:');
+
         return $this->renderer->setResource($pdf);
     }
 

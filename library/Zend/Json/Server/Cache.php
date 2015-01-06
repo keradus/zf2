@@ -22,7 +22,7 @@ class Cache extends ServerCache
      *
      * Returns true on success, false on failure
      *
-     * @param  string $filename
+     * @param  string                   $filename
      * @param  \Zend\Json\Server\Server $server
      * @return bool
      */
@@ -49,7 +49,7 @@ class Cache extends ServerCache
      * On success, returns the cached SMD (a JSON string); a failure, returns
      * boolean false.
      *
-     * @param  string $filename
+     * @param  string       $filename
      * @return string|false
      */
     public static function getSmd($filename)
@@ -79,6 +79,7 @@ class Cache extends ServerCache
     {
         if (is_string($filename) && file_exists($filename)) {
             unlink($filename);
+
             return true;
         }
 

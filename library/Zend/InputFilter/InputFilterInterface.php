@@ -20,7 +20,7 @@ interface InputFilterInterface extends Countable
      * Add an input to the input filter
      *
      * @param  InputInterface|InputFilterInterface|array $input
-     * @param  null|string $name Name used to retrieve this input
+     * @param  null|string                               $name  Name used to retrieve this input
      * @return InputFilterInterface
      */
     public function add($input, $name = null);
@@ -28,7 +28,7 @@ interface InputFilterInterface extends Countable
     /**
      * Retrieve a named input
      *
-     * @param  string $name
+     * @param  string                              $name
      * @return InputInterface|InputFilterInterface
      */
     public function get($name);
@@ -44,7 +44,7 @@ interface InputFilterInterface extends Countable
     /**
      * Remove a named input
      *
-     * @param  string $name
+     * @param  string               $name
      * @return InputFilterInterface
      */
     public function remove($name);
@@ -52,7 +52,7 @@ interface InputFilterInterface extends Countable
     /**
      * Set data to use when validating and filtering
      *
-     * @param  array|Traversable $data
+     * @param  array|Traversable    $data
      * @return InputFilterInterface
      */
     public function setData($data);
@@ -75,7 +75,7 @@ interface InputFilterInterface extends Countable
      * Implementations should allow passing a single array value, or multiple arguments,
      * each specifying a single input.
      *
-     * @param  mixed $name
+     * @param  mixed                $name
      * @return InputFilterInterface
      */
     public function setValidationGroup($name);

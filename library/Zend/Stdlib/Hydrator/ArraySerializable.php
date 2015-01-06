@@ -18,7 +18,7 @@ class ArraySerializable extends AbstractHydrator
      *
      * Extracts values via the object's getArrayCopy() method.
      *
-     * @param  object $object
+     * @param  object                           $object
      * @return array
      * @throws Exception\BadMethodCallException for an $object not implementing getArrayCopy()
      */
@@ -56,8 +56,8 @@ class ArraySerializable extends AbstractHydrator
      * Hydrates an object by passing $data to either its exchangeArray() or
      * populate() method.
      *
-     * @param  array $data
-     * @param  object $object
+     * @param  array                            $data
+     * @param  object                           $object
      * @return object
      * @throws Exception\BadMethodCallException for an $object not implementing exchangeArray() or populate()
      */
@@ -78,6 +78,7 @@ class ArraySerializable extends AbstractHydrator
                 sprintf('%s expects the provided object to implement exchangeArray() or populate()', __METHOD__)
             );
         }
+
         return $object;
     }
 }

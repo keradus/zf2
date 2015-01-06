@@ -24,7 +24,7 @@ abstract class ArrayUtils
      * Test whether an array contains one or more string keys
      *
      * @param  mixed $value
-     * @param  bool  $allowEmpty    Should an empty array() return true
+     * @param  bool  $allowEmpty Should an empty array() return true
      * @return bool
      */
     public static function hasStringKeys($value, $allowEmpty = false)
@@ -44,7 +44,7 @@ abstract class ArrayUtils
      * Test whether an array contains one or more integer keys
      *
      * @param  mixed $value
-     * @param  bool  $allowEmpty    Should an empty array() return true
+     * @param  bool  $allowEmpty Should an empty array() return true
      * @return bool
      */
     public static function hasIntegerKeys($value, $allowEmpty = false)
@@ -71,7 +71,7 @@ abstract class ArrayUtils
      * - a string with float:  '4000.99999', '-10.10'
      *
      * @param  mixed $value
-     * @param  bool  $allowEmpty    Should an empty array() return true
+     * @param  bool  $allowEmpty Should an empty array() return true
      * @return bool
      */
     public static function hasNumericKeys($value, $allowEmpty = false)
@@ -104,7 +104,7 @@ abstract class ArrayUtils
      * </code>
      *
      * @param  mixed $value
-     * @param  bool  $allowEmpty    Is an empty list a valid list?
+     * @param  bool  $allowEmpty Is an empty list a valid list?
      * @return bool
      */
     public static function isList($value, $allowEmpty = false)
@@ -146,7 +146,7 @@ abstract class ArrayUtils
      * </code>
      *
      * @param  mixed $value
-     * @param  bool  $allowEmpty    Is an empty array() a valid hash table?
+     * @param  bool  $allowEmpty Is an empty array() a valid hash table?
      * @return bool
      */
     public static function isHashTable($value, $allowEmpty = false)
@@ -170,9 +170,9 @@ abstract class ArrayUtils
      * non-strict check is implemented. if $strict = -1, the default in_array
      * non-strict behaviour is used.
      *
-     * @param mixed $needle
-     * @param array $haystack
-     * @param int|bool $strict
+     * @param  mixed    $needle
+     * @param  array    $haystack
+     * @param  int|bool $strict
      * @return bool
      */
     public static function inArray($needle, array $haystack, $strict = false)
@@ -189,6 +189,7 @@ abstract class ArrayUtils
                 }
             }
         }
+
         return in_array($needle, $haystack, $strict);
     }
 
@@ -198,15 +199,15 @@ abstract class ArrayUtils
      * Converts an iterator to an array. The $recursive flag, on by default,
      * hints whether or not you want to do so recursively.
      *
-     * @param  array|Traversable  $iterator     The array or Traversable object to convert
-     * @param  bool               $recursive    Recursively check all nested structures
+     * @param  array|Traversable                  $iterator  The array or Traversable object to convert
+     * @param  bool                               $recursive Recursively check all nested structures
      * @throws Exception\InvalidArgumentException if $iterator is not an array or a Traversable object
      * @return array
      */
     public static function iteratorToArray($iterator, $recursive = true)
     {
         if (!is_array($iterator) && !$iterator instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable object');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable object');
         }
 
         if (!$recursive) {

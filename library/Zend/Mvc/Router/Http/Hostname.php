@@ -57,9 +57,9 @@ class Hostname implements RouteInterface
     /**
      * Create a new hostname route.
      *
-     * @param  string $route
-     * @param  array  $constraints
-     * @param  array  $defaults
+     * @param string $route
+     * @param array  $constraints
+     * @param array  $defaults
      */
     public function __construct($route, array $constraints = array(), array $defaults = array())
     {
@@ -72,7 +72,7 @@ class Hostname implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return Hostname
      * @throws Exception\InvalidArgumentException
      */
@@ -81,7 +81,7 @@ class Hostname implements RouteInterface
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable set of options');
         }
 
         if (!isset($options['route'])) {
@@ -102,7 +102,7 @@ class Hostname implements RouteInterface
     /**
      * Parse a route definition.
      *
-     * @param  string $def
+     * @param  string                     $def
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -160,9 +160,9 @@ class Hostname implements RouteInterface
     /**
      * Build the matching regex from parsed parts.
      *
-     * @param  array   $parts
-     * @param  array   $constraints
-     * @param  int $groupIndex
+     * @param  array                      $parts
+     * @param  array                      $constraints
+     * @param  int                        $groupIndex
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -177,21 +177,21 @@ class Hostname implements RouteInterface
                     break;
 
                 case 'parameter':
-                    $groupName = '?P<param' . $groupIndex . '>';
+                    $groupName = '?P<param'.$groupIndex.'>';
 
                     if (isset($constraints[$part[1]])) {
-                        $regex .= '(' . $groupName . $constraints[$part[1]] . ')';
+                        $regex .= '('.$groupName.$constraints[$part[1]].')';
                     } elseif ($part[2] === null) {
-                        $regex .= '(' . $groupName . '[^.]+)';
+                        $regex .= '('.$groupName.'[^.]+)';
                     } else {
-                        $regex .= '(' . $groupName . '[^' . $part[2] . ']+)';
+                        $regex .= '('.$groupName.'[^'.$part[2].']+)';
                     }
 
-                    $this->paramMap['param' . $groupIndex++] = $part[1];
+                    $this->paramMap['param'.$groupIndex++] = $part[1];
                     break;
 
                 case 'optional':
-                    $regex .= '(?:' . $this->buildRegex($part[1], $constraints, $groupIndex) . ')?';
+                    $regex .= '(?:'.$this->buildRegex($part[1], $constraints, $groupIndex).')?';
                     break;
             }
         }
@@ -202,9 +202,9 @@ class Hostname implements RouteInterface
     /**
      * Build host.
      *
-     * @param  array   $parts
-     * @param  array   $mergedParams
-     * @param  bool    $isOptional
+     * @param  array                              $parts
+     * @param  array                              $mergedParams
+     * @param  bool                               $isOptional
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
@@ -262,7 +262,7 @@ class Hostname implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request $request
+     * @param  Request         $request
      * @return RouteMatch|null
      */
     public function match(Request $request)
@@ -274,7 +274,7 @@ class Hostname implements RouteInterface
         $uri  = $request->getUri();
         $host = $uri->getHost();
 
-        $result = preg_match('(^' . $this->regex . '$)', $host, $matches);
+        $result = preg_match('(^'.$this->regex.'$)', $host, $matches);
 
         if (!$result) {
             return;

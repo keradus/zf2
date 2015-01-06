@@ -69,16 +69,16 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function objectCallback($value)
     {
-        return 'objectCallback-' . $value;
+        return 'objectCallback-'.$value;
     }
 
     public static function staticCallback($value)
     {
-        return 'staticCallback-' . $value;
+        return 'staticCallback-'.$value;
     }
 
     public function objectCallbackWithParams($value, $param = null)
     {
-        return 'objectCallbackWithParams-' . $value . '-' . $param;
+        return 'objectCallbackWithParams-'.$value.'-'.$param;
     }
 }

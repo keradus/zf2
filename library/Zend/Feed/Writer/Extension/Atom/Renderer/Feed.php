@@ -14,7 +14,7 @@ use DOMElement;
 use Zend\Feed\Writer\Extension;
 
 /**
-*/
+ */
 class Feed extends Extension\AbstractRenderer
 {
     /**
@@ -62,7 +62,7 @@ class Feed extends Extension\AbstractRenderer
      * Set feed link elements
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
@@ -73,7 +73,7 @@ class Feed extends Extension\AbstractRenderer
         }
         foreach ($flinks as $type => $href) {
             if (strtolower($type) == $this->getType()) { // issue 2605
-                $mime  = 'application/' . strtolower($type) . '+xml';
+                $mime  = 'application/'.strtolower($type).'+xml';
                 $flink = $dom->createElement('atom:link');
                 $root->appendChild($flink);
                 $flink->setAttribute('rel', 'self');
@@ -88,7 +88,7 @@ class Feed extends Extension\AbstractRenderer
      * Set PuSH hubs
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setHubs(DOMDocument $dom, DOMElement $root)

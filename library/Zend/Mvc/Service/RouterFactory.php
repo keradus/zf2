@@ -22,9 +22,9 @@ class RouterFactory implements FactoryInterface
      * to instantiate the router. Uses the TreeRouteStack implementation by
      * default.
      *
-     * @param  ServiceLocatorInterface        $serviceLocator
-     * @param  string|null                     $cName
-     * @param  string|null                     $rName
+     * @param  ServiceLocatorInterface              $serviceLocator
+     * @param  string|null                          $cName
+     * @param  string|null                          $rName
      * @return \Zend\Mvc\Router\RouteStackInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator, $cName = null, $rName = null)
@@ -57,6 +57,7 @@ class RouterFactory implements FactoryInterface
 
         // Obtain an instance
         $factory = sprintf('%s::factory', $routerClass);
+
         return call_user_func($factory, $routerConfig);
     }
 }

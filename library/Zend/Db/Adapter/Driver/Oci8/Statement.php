@@ -63,22 +63,24 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set driver
      *
-     * @param  Oci8 $driver
+     * @param  Oci8      $driver
      * @return Statement
      */
     public function setDriver($driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Statement
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -93,36 +95,39 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Initialize
      *
-     * @param  resource $oci8
+     * @param  resource  $oci8
      * @return Statement
      */
     public function initialize($oci8)
     {
         $this->oci8 = $oci8;
+
         return $this;
     }
 
     /**
      * Set sql
      *
-     * @param  string $sql
+     * @param  string    $sql
      * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
     /**
      * Set Parameter container
      *
-     * @param ParameterContainer $parameterContainer
+     * @param  ParameterContainer $parameterContainer
      * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -139,7 +144,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set resource
      *
-     * @param  resource $oci8Statement
+     * @param  resource  $oci8Statement
      * @return Statement
      */
     public function setResource($oci8Statement)
@@ -153,6 +158,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
         $this->resource = $oci8Statement;
         $this->isPrepared = true;
+
         return $this;
     }
 
@@ -183,7 +189,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string $sql
+     * @param  string    $sql
      * @return Statement
      */
     public function prepare($sql = null)
@@ -200,20 +206,21 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         if (!$this->resource) {
             $e = oci_error($this->oci8);
             throw new Exception\InvalidQueryException(
-                'Statement couldn\'t be produced with sql: ' . $sql,
+                'Statement couldn\'t be produced with sql: '.$sql,
                 null,
                 new Exception\ErrorException($e['message'], $e['code'])
             );
         }
 
         $this->isPrepared = true;
+
         return $this;
     }
 
     /**
      * Execute
      *
-     * @param null|array|ParameterContainer $parameters
+     * @param  null|array|ParameterContainer $parameters
      * @return mixed
      */
     public function execute($parameters = null)
@@ -240,7 +247,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->bindParametersFromContainer();
         }
         /** END Standard ParameterContainer Merging Block */
-
         if ($this->profiler) {
             $this->profiler->profilerStart($this);
         }
@@ -261,6 +267,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource);
+
         return $result;
     }
 

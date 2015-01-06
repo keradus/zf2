@@ -27,7 +27,7 @@ class DiInstanceManagerProxy extends DiInstanceManager
     /**
      * Constructor
      *
-     * @param DiInstanceManager $diInstanceManager
+     * @param DiInstanceManager       $diInstanceManager
      * @param ServiceLocatorInterface $serviceLocator
      */
     public function __construct(DiInstanceManager $diInstanceManager, ServiceLocatorInterface $serviceLocator)

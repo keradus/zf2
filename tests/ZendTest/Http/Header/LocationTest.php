@@ -14,12 +14,12 @@ use Zend\Http\Header\Location;
 class LocationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @param  string $uri The URL to redirect to
+     * @param string $uri The URL to redirect to
      * @dataProvider locationFromStringCreatesValidLocationHeaderProvider
      */
     public function testLocationFromStringCreatesValidLocationHeader($uri)
     {
-        $locationHeader = Location::fromString('Location: ' . $uri);
+        $locationHeader = Location::fromString('Location: '.$uri);
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $locationHeader);
         $this->assertInstanceOf('Zend\Http\Header\Location', $locationHeader);
     }
@@ -44,7 +44,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
      */
     public function testLocationCanSetDifferentSchemeUris($uri, $expectedClass)
     {
-        $locationHeader = new Location;
+        $locationHeader = new Location();
         $locationHeader->setUri($uri);
         $this->assertAttributeInstanceof($expectedClass, 'uri', $locationHeader);
     }
@@ -60,7 +60,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     public function testLocationCanSetDifferentSchemeUriObjects($uri, $expectedClass)
     {
         $uri = \Zend\Uri\UriFactory::factory($uri);
-        $locationHeader = new Location;
+        $locationHeader = new Location();
         $locationHeader->setUri($uri);
         $this->assertAttributeInstanceof($expectedClass, 'uri', $locationHeader);
     }
@@ -99,7 +99,6 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implementation specific tests  */
-
     public function testLocationCanSetAndAccessAbsoluteUri()
     {
         $locationHeader = Location::fromString('Location: http://www.example.com/path');

@@ -202,7 +202,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
                 'four',
                 true,
             ),
-            'id'  => 'foobar'
+            'id'  => 'foobar',
         );
     }
 }

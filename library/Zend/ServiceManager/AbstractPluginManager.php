@@ -89,9 +89,9 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      * createFromInvokable() will use these and pass them to the instance
      * constructor if not null and a non-empty array.
      *
-     * @param  string $name
-     * @param  array  $options
-     * @param  bool   $usePeeringServiceManagers
+     * @param string $name
+     * @param array  $options
+     * @param bool   $usePeeringServiceManagers
      *
      * @return object
      *
@@ -194,9 +194,9 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         if (!class_exists($invokable)) {
             throw new Exception\ServiceNotFoundException(sprintf(
                 '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
-                get_class($this) . '::' . __FUNCTION__,
+                get_class($this).'::'.__FUNCTION__,
                 $canonicalName,
-                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
+                ($requestedName ? '(alias: '.$requestedName.')' : ''),
                 $invokable
             ));
         }
@@ -246,7 +246,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
             throw new Exception\ServiceNotCreatedException(sprintf(
                 'While attempting to create %s%s an invalid factory was registered for this instance type.',
                 $canonicalName,
-                ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+                ($requestedName ? '(alias: '.$requestedName.')' : '')
             ));
         }
 

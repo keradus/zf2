@@ -24,7 +24,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * Constructor
      *
-     * @param  array|Traversable|null $options
+     * @param array|Traversable|null $options
      */
     public function __construct($options = null)
     {
@@ -36,9 +36,9 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * Set one or more configuration properties
      *
-     * @param  array|Traversable|AbstractOptions $options
+     * @param  array|Traversable|AbstractOptions  $options
      * @throws Exception\InvalidArgumentException
-     * @return AbstractOptions Provides fluent interface
+     * @return AbstractOptions                    Provides fluent interface
      */
     public function setFromArray($options)
     {
@@ -75,7 +75,8 @@ abstract class AbstractOptions implements ParameterObjectInterface
         $array = array();
         $transform = function ($letters) {
             $letter = array_shift($letters);
-            return '_' . strtolower($letter);
+
+            return '_'.strtolower($letter);
         };
         foreach ($this as $key => $value) {
             if ($key === '__strictMode__') {
@@ -84,6 +85,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
             $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
             $array[$normalizedKey] = $value;
         }
+
         return $array;
     }
 
@@ -91,14 +93,14 @@ abstract class AbstractOptions implements ParameterObjectInterface
      * Set a configuration property
      *
      * @see ParameterObject::__set()
-     * @param string $key
-     * @param mixed $value
+     * @param  string                           $key
+     * @param  mixed                            $value
      * @throws Exception\BadMethodCallException
      * @return void
      */
     public function __set($key, $value)
     {
-        $setter = 'set' . str_replace('_', '', $key);
+        $setter = 'set'.str_replace('_', '', $key);
 
         if (is_callable(array($this, $setter))) {
             $this->{$setter}($value);
@@ -110,7 +112,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
             throw new Exception\BadMethodCallException(sprintf(
                 'The option "%s" does not have a callable "%s" setter method which must be defined',
                 $key,
-                'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
+                'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
             ));
         }
     }
@@ -119,13 +121,13 @@ abstract class AbstractOptions implements ParameterObjectInterface
      * Get a configuration property
      *
      * @see ParameterObject::__get()
-     * @param string $key
+     * @param  string                           $key
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
     public function __get($key)
     {
-        $getter = 'get' . str_replace('_', '', $key);
+        $getter = 'get'.str_replace('_', '', $key);
 
         if (is_callable(array($this, $getter))) {
             return $this->{$getter}();
@@ -134,14 +136,14 @@ abstract class AbstractOptions implements ParameterObjectInterface
         throw new Exception\BadMethodCallException(sprintf(
             'The option "%s" does not have a callable "%s" getter method which must be defined',
             $key,
-            'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
+            'get'.str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
         ));
     }
 
     /**
      * Test if a configuration property is null
      * @see ParameterObject::__isset()
-     * @param string $key
+     * @param  string $key
      * @return bool
      */
     public function __isset($key)
@@ -153,7 +155,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
      * Set a configuration property to NULL
      *
      * @see ParameterObject::__unset()
-     * @param string $key
+     * @param  string                             $key
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -163,8 +165,8 @@ abstract class AbstractOptions implements ParameterObjectInterface
             $this->__set($key, null);
         } catch (Exception\BadMethodCallException $e) {
             throw new Exception\InvalidArgumentException(
-                'The class property $' . $key . ' cannot be unset as'
-                . ' NULL is an invalid value for it',
+                'The class property $'.$key.' cannot be unset as'
+                .' NULL is an invalid value for it',
                 0,
                 $e
             );

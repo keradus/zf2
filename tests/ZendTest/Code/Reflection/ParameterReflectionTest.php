@@ -62,7 +62,7 @@ class ParameterReflectionTest extends \PHPUnit_Framework_TestCase
             array('two','int'),
             array('three','string'),
             array('array','array'),
-            array('class','ZendTest\Code\Reflection\TestAsset\TestSampleClass')
+            array('class','ZendTest\Code\Reflection\TestAsset\TestSampleClass'),
         );
     }
 }

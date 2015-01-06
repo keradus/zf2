@@ -29,7 +29,7 @@ abstract class AbstractPluginManagerFactory implements FactoryInterface
     {
         $pluginManagerClass = static::PLUGIN_MANAGER_CLASS;
         /* @var $plugins AbstractPluginManager */
-        $plugins = new $pluginManagerClass;
+        $plugins = new $pluginManagerClass();
         $plugins->setServiceLocator($serviceLocator);
         $configuration = $serviceLocator->get('Config');
 

@@ -33,7 +33,7 @@ class DispatchListenerTest extends TestCase
     public function setUp()
     {
         $serviceConfig = ArrayUtils::merge(
-            $this->readAttribute(new ServiceListenerFactory, 'defaultServiceConfig'),
+            $this->readAttribute(new ServiceListenerFactory(), 'defaultServiceConfig'),
             array(
                 'allow_override' => true,
                 'invokables' => array(

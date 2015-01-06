@@ -46,7 +46,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         'sizes',
         'type',
         'title',
-        'extras'
+        'extras',
     );
 
     /**
@@ -74,8 +74,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * Allows calling $helper->headLink(), but, more importantly, chaining calls
      * like ->appendStylesheet()->headLink().
      *
-     * @param  array  $attributes
-     * @param  string $placement
+     * @param  array    $attributes
+     * @param  string   $placement
      * @return HeadLink
      */
     public function headLink(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
@@ -89,8 +89,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * Returns current object instance. Optionally, allows passing array of
      * values to build link.
      *
-     * @param  array  $attributes
-     * @param  string $placement
+     * @param  array    $attributes
+     * @param  string   $placement
      * @return HeadLink
      */
     public function __invoke(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
@@ -135,8 +135,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      *   - public function appendSection()
      *   - public function appendSubsection()
      *
-     * @param  mixed $method
-     * @param  mixed $args
+     * @param  mixed                            $method
+     * @param  mixed                            $args
      * @throws Exception\BadMethodCallException
      * @return void
      */
@@ -164,7 +164,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             if (is_array($args[0])) {
                 $item = $this->createData($args[0]);
             } else {
-                $dataMethod = 'createData' . $type;
+                $dataMethod = 'createData'.$type;
                 $item       = $this->$dataMethod($args);
             }
 
@@ -207,7 +207,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * append()
      *
-     * @param  array $value
+     * @param  array                              $value
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -225,8 +225,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * offsetSet()
      *
-     * @param  string|int $index
-     * @param  array      $value
+     * @param  string|int                         $index
+     * @param  array                              $value
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -244,7 +244,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * prepend()
      *
-     * @param  array $value
+     * @param  array                              $value
      * @throws Exception\InvalidArgumentException
      * @return HeadLink
      */
@@ -262,7 +262,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * set()
      *
-     * @param  array $value
+     * @param  array                              $value
      * @throws Exception\InvalidArgumentException
      * @return HeadLink
      */
@@ -320,9 +320,9 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $attributes['conditionalStylesheet']) === '!IE') {
-                $link = '<!-->' . $link . '<!--';
+                $link = '<!-->'.$link.'<!--';
             }
-            $link = '<!--[if ' . $attributes['conditionalStylesheet'] . ']>' . $link . '<![endif]-->';
+            $link = '<!--[if '.$attributes['conditionalStylesheet'].']>'.$link.'<![endif]-->';
         }
 
         return $link;
@@ -346,13 +346,13 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             $items[] = $this->itemToString($item);
         }
 
-        return $indent . implode($this->escape($this->getSeparator()) . $indent, $items);
+        return $indent.implode($this->escape($this->getSeparator()).$indent, $items);
     }
 
     /**
      * Create data item for stack
      *
-     * @param  array $attributes
+     * @param  array    $attributes
      * @return stdClass
      */
     public function createData(array $attributes)
@@ -363,7 +363,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * Create item for stylesheet link item
      *
-     * @param  array $args
+     * @param  array          $args
      * @return stdClass|false Returns false if stylesheet is a duplicate
      */
     public function createDataStylesheet(array $args)
@@ -425,7 +425,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * Create item for alternate link item
      *
-     * @param  array $args
+     * @param  array                              $args
      * @throws Exception\InvalidArgumentException
      * @return stdClass
      */
@@ -464,7 +464,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * Create item for a prev relationship (mainly used for pagination)
      *
-     * @param  array $args
+     * @param  array    $args
      * @return stdClass
      */
     public function createDataPrev(array $args)
@@ -480,7 +480,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * Create item for a prev relationship (mainly used for pagination)
      *
-     * @param  array $args
+     * @param  array    $args
      * @return stdClass
      */
     public function createDataNext(array $args)

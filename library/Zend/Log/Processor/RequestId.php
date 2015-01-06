@@ -1,11 +1,11 @@
 <?php
 /**
  * Zend Framework (http://framework.zend.com/)
-*
-* @link      http://github.com/zendframework/zf2 for the canonical source repository
-* @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
-* @license   http://framework.zend.com/license/new-bsd New BSD License
-*/
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
 
 namespace Zend\Log\Processor;
 
@@ -25,7 +25,7 @@ class RequestId implements ProcessorInterface
      *
      * This enables to filter the log for messages belonging to a specific request
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return array event data
      */
     public function process(array $event)
@@ -39,6 +39,7 @@ class RequestId implements ProcessorInterface
         }
 
         $event['extra']['requestId'] = $this->getIdentifier();
+
         return $event;
     }
 
@@ -59,15 +60,18 @@ class RequestId implements ProcessorInterface
 
         if (Console::isConsole()) {
             $this->identifier = md5($requestTime);
+
             return $this->identifier;
         }
 
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $this->identifier = md5($requestTime . $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $this->identifier = md5($requestTime.$_SERVER['HTTP_X_FORWARDED_FOR']);
+
             return $this->identifier;
         }
 
-        $this->identifier = md5($requestTime . $_SERVER['REMOTE_ADDR']);
+        $this->identifier = md5($requestTime.$_SERVER['REMOTE_ADDR']);
+
         return $this->identifier;
     }
 }

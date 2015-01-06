@@ -63,6 +63,7 @@ class NotExists extends Exists
             $check = true;
             if (file_exists($file)) {
                 $this->error(self::DOES_EXIST);
+
                 return false;
             }
         } else {
@@ -72,8 +73,9 @@ class NotExists extends Exists
                 }
 
                 $check = true;
-                if (file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
+                if (file_exists($directory.DIRECTORY_SEPARATOR.$filename)) {
                     $this->error(self::DOES_EXIST);
+
                     return false;
                 }
             }
@@ -81,6 +83,7 @@ class NotExists extends Exists
 
         if (!$check) {
             $this->error(self::DOES_EXIST);
+
             return false;
         }
 

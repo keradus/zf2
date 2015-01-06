@@ -35,7 +35,7 @@ interface DiscoveryStrategyInterface
      * Default implementation assumes the value of the return doc-block tag.
      *
      * @param  AbstractFunction $function
-     * @param  Prototype $prototype
+     * @param  Prototype        $prototype
      * @return string
      */
     public function getFunctionReturnType(AbstractFunction $function, Prototype $prototype);
@@ -46,7 +46,7 @@ interface DiscoveryStrategyInterface
      * Default implementation assumes one-way, when return value is "void".
      *
      * @param  AbstractFunction $function
-     * @param  Prototype $prototype
+     * @param  Prototype        $prototype
      * @return bool
      */
     public function isFunctionOneWay(AbstractFunction $function, Prototype $prototype);

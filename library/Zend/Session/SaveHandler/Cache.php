@@ -40,7 +40,7 @@ class Cache implements SaveHandlerInterface
     /**
      * Constructor
      *
-     * @param  CacheStorage $cacheStorage
+     * @param CacheStorage $cacheStorage
      */
     public function __construct(CacheStorage $cacheStorage)
     {
@@ -50,8 +50,8 @@ class Cache implements SaveHandlerInterface
     /**
      * Open Session
      *
-     * @param string $savePath
-     * @param string $name
+     * @param  string $savePath
+     * @param  string $name
      * @return bool
      */
     public function open($savePath, $name)
@@ -76,7 +76,7 @@ class Cache implements SaveHandlerInterface
     /**
      * Read session data
      *
-     * @param string $id
+     * @param  string $id
      * @return string
      */
     public function read($id)
@@ -87,8 +87,8 @@ class Cache implements SaveHandlerInterface
     /**
      * Write session data
      *
-     * @param string $id
-     * @param string $data
+     * @param  string $id
+     * @param  string $data
      * @return bool
      */
     public function write($id, $data)
@@ -99,7 +99,7 @@ class Cache implements SaveHandlerInterface
     /**
      * Destroy session
      *
-     * @param string $id
+     * @param  string $id
      * @return bool
      */
     public function destroy($id)
@@ -110,7 +110,7 @@ class Cache implements SaveHandlerInterface
     /**
      * Garbage Collection
      *
-     * @param int $maxlifetime
+     * @param  int  $maxlifetime
      * @return bool
      */
     public function gc($maxlifetime)
@@ -119,6 +119,7 @@ class Cache implements SaveHandlerInterface
         if ($cache instanceof ClearExpiredCacheStorage) {
             return $cache->clearExpired();
         }
+
         return true;
     }
 
@@ -131,6 +132,7 @@ class Cache implements SaveHandlerInterface
     public function setCacheStorage(CacheStorage $cacheStorage)
     {
         $this->cacheStorage = $cacheStorage;
+
         return $this;
     }
 

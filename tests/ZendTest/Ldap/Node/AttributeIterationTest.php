@@ -36,7 +36,7 @@ class AttributeIterationTest extends TestLdap\AbstractTestCase
                                  'cn'          => array('name'),
                                  'empty'       => array(),
                                  'host'        => array('a', 'b', 'c'),
-                                 'objectclass' => array('account', 'top')), $data
+                                 'objectclass' => array('account', 'top'), ), $data
         );
     }
 }

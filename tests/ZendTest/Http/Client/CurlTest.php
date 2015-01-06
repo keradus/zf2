@@ -62,7 +62,7 @@ class CurlTest extends CommonHttpTests
     {
         $config = array(
             'timeout'    => 500,
-            'someoption' => 'hasvalue'
+            'someoption' => 'hasvalue',
         );
 
         $this->_adapter->setOptions($config);
@@ -84,7 +84,7 @@ class CurlTest extends CommonHttpTests
             'timeout'  => 400,
             'nested'   => array(
                 'item' => 'value',
-            )
+            ),
         ));
 
         $this->_adapter->setOptions($config);
@@ -131,7 +131,7 @@ class CurlTest extends CommonHttpTests
 
     public function testRedirectWithGetOnly()
     {
-        $this->client->setUri($this->baseuri . 'testRedirections.php');
+        $this->client->setUri($this->baseuri.'testRedirections.php');
 
         // Set some parameters
         $this->client->setParameterGet(array('swallow', 'african'));
@@ -163,10 +163,10 @@ class CurlTest extends CommonHttpTests
             'curloptions' => array(
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_TIMEOUT => 1,
-            ))
+            ), )
         );
 
-        $this->client->setUri($this->baseuri . 'testRedirections.php');
+        $this->client->setUri($this->baseuri.'testRedirections.php');
 
         //  Set some parameters
         $this->client->setParameterGet(array('swallow' => 'african'));
@@ -185,9 +185,9 @@ class CurlTest extends CommonHttpTests
     public function testPutFileContentWithHttpClient()
     {
         // Method 1: Using the binary string of a file to PUT
-        $this->client->setUri($this->baseuri . 'testRawPostData.php');
-        $putFileContents = file_get_contents(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
-            '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg');
+        $this->client->setUri($this->baseuri.'testRawPostData.php');
+        $putFileContents = file_get_contents(dirname(realpath(__FILE__)).DIRECTORY_SEPARATOR.
+            '_files'.DIRECTORY_SEPARATOR.'staticFile.jpg');
 
         $this->client->setRawBody($putFileContents);
         $this->client->setMethod('PUT');
@@ -201,20 +201,20 @@ class CurlTest extends CommonHttpTests
      */
     public function testPutFileHandleWithHttpClient()
     {
-        $this->client->setUri($this->baseuri . 'testRawPostData.php');
-        $putFileContents = file_get_contents(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
-            '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg');
+        $this->client->setUri($this->baseuri.'testRawPostData.php');
+        $putFileContents = file_get_contents(dirname(realpath(__FILE__)).DIRECTORY_SEPARATOR.
+            '_files'.DIRECTORY_SEPARATOR.'staticFile.jpg');
 
         // Method 2: Using a File-Handle to the file to PUT the data
-        $putFilePath = dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
-            '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg';
+        $putFilePath = dirname(realpath(__FILE__)).DIRECTORY_SEPARATOR.
+            '_files'.DIRECTORY_SEPARATOR.'staticFile.jpg';
         $putFileHandle = fopen($putFilePath, "r");
         $putFileSize = filesize($putFilePath);
 
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
         $adapter->setOptions(array(
-            'curloptions' => array(CURLOPT_INFILE => $putFileHandle, CURLOPT_INFILESIZE => $putFileSize)
+            'curloptions' => array(CURLOPT_INFILE => $putFileHandle, CURLOPT_INFILESIZE => $putFileSize),
         ));
         $this->client->setMethod('PUT');
         $this->client->send();
@@ -313,7 +313,7 @@ class CurlTest extends CommonHttpTests
      */
     public function testHeadRequest()
     {
-        $this->client->setUri($this->baseuri . 'testRawPostData.php');
+        $this->client->setUri($this->baseuri.'testRawPostData.php');
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
         $this->client->setMethod('HEAD');
@@ -324,15 +324,15 @@ class CurlTest extends CommonHttpTests
     public function testAuthorizeHeader()
     {
         // We just need someone to talk to
-        $this->client->setUri($this->baseuri. 'testHttpAuth.php');
+        $this->client->setUri($this->baseuri.'testHttpAuth.php');
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
 
         $uid = 'alice';
         $pwd = 'secret';
 
-        $hash   = base64_encode($uid . ':' . $pwd);
-        $header = 'Authorization: Basic ' . $hash;
+        $hash   = base64_encode($uid.':'.$pwd);
+        $header = 'Authorization: Basic '.$hash;
 
         $this->client->setAuth($uid, $pwd);
         $res = $this->client->send();
@@ -348,7 +348,7 @@ class CurlTest extends CommonHttpTests
      */
     public function testResponseDoesNotDoubleDecodeGzippedBody()
     {
-        $this->client->setUri($this->baseuri . 'testCurlGzipData.php');
+        $this->client->setUri($this->baseuri.'testCurlGzipData.php');
         $adapter = new Adapter\Curl();
         $adapter->setOptions(array(
             'curloptions' => array(

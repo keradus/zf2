@@ -30,7 +30,6 @@ class SequenceFeature extends AbstractFeature
      */
     protected $sequenceValue;
 
-
     /**
      * @param string $primaryKeyField
      * @param string $sequenceName
@@ -42,7 +41,7 @@ class SequenceFeature extends AbstractFeature
     }
 
     /**
-     * @param Insert $insert
+     * @param  Insert $insert
      * @return Insert
      */
     public function preInsert(Insert $insert)
@@ -52,6 +51,7 @@ class SequenceFeature extends AbstractFeature
         $key = array_search($this->primaryKeyField, $columns);
         if ($key !== false) {
             $this->sequenceValue = $values[$key];
+
             return $insert;
         }
 
@@ -61,12 +61,13 @@ class SequenceFeature extends AbstractFeature
         }
 
         $insert->values(array($this->primaryKeyField => $this->sequenceValue),  Insert::VALUES_MERGE);
+
         return $insert;
     }
 
     /**
      * @param StatementInterface $statement
-     * @param ResultInterface $result
+     * @param ResultInterface    $result
      */
     public function postInsert(StatementInterface $statement, ResultInterface $result)
     {
@@ -86,10 +87,10 @@ class SequenceFeature extends AbstractFeature
 
         switch ($platformName) {
             case 'Oracle':
-                $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.NEXTVAL as "nextval" FROM dual';
+                $sql = 'SELECT '.$platform->quoteIdentifier($this->sequenceName).'.NEXTVAL as "nextval" FROM dual';
                 break;
             case 'PostgreSQL':
-                $sql = 'SELECT NEXTVAL(\'"' . $this->sequenceName . '"\')';
+                $sql = 'SELECT NEXTVAL(\'"'.$this->sequenceName.'"\')';
                 break;
             default :
                 return;
@@ -100,6 +101,7 @@ class SequenceFeature extends AbstractFeature
         $result = $statement->execute();
         $sequence = $result->current();
         unset($statement, $result);
+
         return $sequence['nextval'];
     }
 
@@ -114,10 +116,10 @@ class SequenceFeature extends AbstractFeature
 
         switch ($platformName) {
             case 'Oracle':
-                $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.CURRVAL as "currval" FROM dual';
+                $sql = 'SELECT '.$platform->quoteIdentifier($this->sequenceName).'.CURRVAL as "currval" FROM dual';
                 break;
             case 'PostgreSQL':
-                $sql = 'SELECT CURRVAL(\'' . $this->sequenceName . '\')';
+                $sql = 'SELECT CURRVAL(\''.$this->sequenceName.'\')';
                 break;
             default :
                 return;
@@ -128,6 +130,7 @@ class SequenceFeature extends AbstractFeature
         $result = $statement->execute();
         $sequence = $result->current();
         unset($statement, $result);
+
         return $sequence['currval'];
     }
 }

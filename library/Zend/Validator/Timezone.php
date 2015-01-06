@@ -79,7 +79,7 @@ class Timezone extends AbstractValidator
     /**
      * Set the types
      *
-     * @param  int|array $type
+     * @param int|array $type
      *
      * @throws Exception\InvalidArgumentException
      */
@@ -102,13 +102,14 @@ class Timezone extends AbstractValidator
     /**
      * Returns true if timezone location or timezone abbreviations is correct.
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return bool
      */
     public function isValid($value)
     {
         if ($value !== null && !is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -123,6 +124,7 @@ class Timezone extends AbstractValidator
 
                 if (!array_key_exists($value, $abbrs) && !in_array($value, $locations)) {
                     $this->error(self::INVALID);
+
                     return false;
                 }
                 break;
@@ -133,6 +135,7 @@ class Timezone extends AbstractValidator
 
                 if (!in_array($value, $locations)) {
                     $this->error(self::INVALID_TIMEZONE_LOCATION);
+
                     return false;
                 }
                 break;
@@ -143,6 +146,7 @@ class Timezone extends AbstractValidator
 
                 if (!array_key_exists($value, $abbrs)) {
                     $this->error(self::INVALID_TIMEZONE_ABBREVIATION);
+
                     return false;
                 }
                 break;

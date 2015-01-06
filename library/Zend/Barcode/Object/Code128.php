@@ -63,12 +63,12 @@ class Code128 extends AbstractObject
                 99 => "10111011110", 100 => "10111101110", 101 => "11101011110",
                102 => "11110101110",
                103 => "11010000100", 104 => "11010010000", 105 => "11010011100",
-               106 => "1100011101011");
+               106 => "1100011101011", );
 
     /**
-    * Character sets ABC
-    * @var array
-    */
+     * Character sets ABC
+     * @var array
+     */
     protected $charSets = array(
         'A' => array(
             ' ', '!', '"', '#', '$', '%', '&', "'",
@@ -84,7 +84,7 @@ class Code128 extends AbstractObject
             0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
             0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
             'FNC3', 'FNC2', 'SHIFT', 'Code C', 'Code B', 'FNC4', 'FNC1',
-            'START A', 'START B', 'START C', 'STOP'),
+            'START A', 'START B', 'START C', 'STOP', ),
         'B' => array(
             ' ', '!', '"', '#', '$', '%', '&', "'",
             '(', ')', '*', '+', ',', '-', '.', '/',
@@ -111,7 +111,7 @@ class Code128 extends AbstractObject
             '70', '71', '72', '73', '74', '75', '76', '77', '78', '79',
             '80', '81', '82', '83', '84', '85', '86', '87', '88', '89',
             '90', '91', '92', '93', '94', '95', '96', '97', '98', '99',
-            'Code B', 'Code A', 'FNC1', 'START A', 'START B', 'START C', 'STOP'));
+            'Code B', 'Code A', 'FNC1', 'START A', 'START B', 'START C', 'STOP', ), );
 
     /**
      * Width of the barcode (in pixels)
@@ -130,6 +130,7 @@ class Code128 extends AbstractObject
         // ...except the STOP character (13)
         $encodedData += $characterLength + 2 * $this->barThinWidth * $this->factor;
         $width = $quietZone + $encodedData + $quietZone;
+
         return $width;
     }
 
@@ -164,15 +165,16 @@ class Code128 extends AbstractObject
                 $barcodeTable[] = array($c, $this->barThinWidth, 0, 1);
             }
         }
+
         return $barcodeTable;
     }
 
     /**
      * Checks if the next $length chars of $string starting at $pos are numeric.
      * Returns false if the end of the string is reached.
-     * @param string $string String to search
-     * @param int    $pos Starting position
-     * @param int    $length Length to search
+     * @param  string $string String to search
+     * @param  int    $pos    Starting position
+     * @param  int    $length Length to search
      * @return bool
      */
     protected static function _isDigit($string, $pos, $length = 2)
@@ -186,12 +188,13 @@ class Code128 extends AbstractObject
                 return false;
             }
         }
+
         return true;
     }
 
     /**
      * Convert string to barcode string
-     * @param string $string
+     * @param  string $string
      * @return array
      */
     protected function convertToBarcodeChars($string)
@@ -263,17 +266,19 @@ class Code128 extends AbstractObject
         }
 
         $this->convertedText[md5($string)] = $result;
+
         return $result;
     }
 
     /**
      * Set text to encode
-     * @param string $value
+     * @param  string  $value
      * @return Code128
      */
     public function setText($value)
     {
         $this->text = $value;
+
         return $this;
     }
 

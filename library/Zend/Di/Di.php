@@ -110,7 +110,7 @@ class Di implements DependencyInjectionInterface
      *
      * @param null|DefinitionList  $definitions
      * @param null|InstanceManager $instanceManager
-     * @param null|Config   $config
+     * @param null|Config          $config
      */
     public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Config $config = null)
     {
@@ -191,8 +191,8 @@ class Di implements DependencyInjectionInterface
 
     /**
      * @param $name
-     * @param array $params
-     * @param string $method
+     * @param  array  $params
+     * @param  string $method
      * @return array
      */
     protected function getCallParameters($name, array $params, $method = "__construct")
@@ -208,8 +208,10 @@ class Di implements DependencyInjectionInterface
                     }
                 }
             }
+
             return $callParameters;
         }
+
         return $params;
     }
 
@@ -235,12 +237,14 @@ class Di implements DependencyInjectionInterface
             $fastHash = $im->hasSharedInstanceWithParameters($name, $callParameters, true);
             if ($fastHash) {
                 array_pop($this->instanceContext);
+
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
         }
 
         if ($im->hasSharedInstance($name, $callParameters)) {
             array_pop($this->instanceContext);
+
             return $im->getSharedInstance($name, $callParameters);
         }
 
@@ -281,9 +285,9 @@ class Di implements DependencyInjectionInterface
         array_push($this->instanceContext, array('NEW', $class, $alias));
 
         if (!$definitions->hasClass($class)) {
-            $aliasMsg = ($alias) ? '(specified by alias ' . $alias . ') ' : '';
+            $aliasMsg = ($alias) ? '(specified by alias '.$alias.') ' : '';
             throw new Exception\ClassNotFoundException(
-                'Class ' . $aliasMsg . $class . ' could not be located in provided definitions.'
+                'Class '.$aliasMsg.$class.' could not be located in provided definitions.'
             );
         }
 
@@ -346,7 +350,7 @@ class Di implements DependencyInjectionInterface
         $definitions = $this->definitions();
         $class = $this->getClass($instance);
         $injectionMethods = array(
-            $class => ($definitions->hasClass($class)) ? $definitions->getMethods($class) : array()
+            $class => ($definitions->hasClass($class)) ? $definitions->getMethods($class) : array(),
         );
         $parent = $class;
         while ($parent = get_parent_class($parent)) {
@@ -363,10 +367,10 @@ class Di implements DependencyInjectionInterface
     }
 
     /**
-     * @param object      $instance
-     * @param array       $injectionMethods
-     * @param array       $params
-     * @param string|null $instanceClass
+     * @param  object                     $instance
+     * @param  array                      $injectionMethods
+     * @param  array                      $params
+     * @param  string|null                $instanceClass
      * @param string|null$instanceAlias
      * @param  string                     $requestedName
      * @throws Exception\RuntimeException
@@ -411,7 +415,7 @@ class Di implements DependencyInjectionInterface
                         } elseif (is_int($injectName) && is_array($injectValue)) {
                             throw new Exception\RuntimeException(
                                 'An injection was provided with a keyed index and an array of data, try using'
-                                . ' the name of a particular method as a key for your injection data.'
+                                .' the name of a particular method as a key for your injection data.'
                             );
                         }
                     }
@@ -519,7 +523,7 @@ class Di implements DependencyInjectionInterface
         } elseif (is_string($callback) && strpos($callback, '::') !== false) {
             list($class, $method) = explode('::', $callback, 2);
         } else {
-            throw new Exception\RuntimeException('Invalid callback type provided to ' . __METHOD__);
+            throw new Exception\RuntimeException('Invalid callback type provided to '.__METHOD__);
         }
 
         $callParameters = array();
@@ -593,7 +597,7 @@ class Di implements DependencyInjectionInterface
         $computedParams = array(
             'value'     => array(),
             'retrieval' => array(),
-            'optional'  => array()
+            'optional'  => array(),
         );
 
         // retrieve instance configurations for all contexts
@@ -644,16 +648,16 @@ class Di implements DependencyInjectionInterface
         foreach ($injectionMethodParameters as $fqParamPos => $info) {
             list($name, $type, $isRequired) = $info;
 
-            $fqParamName = substr_replace($fqParamPos, ':' . $info[0], strrpos($fqParamPos, ':'));
+            $fqParamName = substr_replace($fqParamPos, ':'.$info[0], strrpos($fqParamPos, ':'));
 
             // PRIORITY 1 - consult user provided parameters
             if (isset($callTimeUserParams[$fqParamPos]) || isset($callTimeUserParams[$name])) {
                 if (isset($callTimeUserParams[$fqParamPos])) {
-                    $callTimeCurValue =& $callTimeUserParams[$fqParamPos];
+                    $callTimeCurValue = & $callTimeUserParams[$fqParamPos];
                 } elseif (isset($callTimeUserParams[$fqParamName])) {
-                    $callTimeCurValue =& $callTimeUserParams[$fqParamName];
+                    $callTimeCurValue = & $callTimeUserParams[$fqParamName];
                 } else {
-                    $callTimeCurValue =& $callTimeUserParams[$name];
+                    $callTimeCurValue = & $callTimeUserParams[$name];
                 }
 
                 if ($type !== false && is_string($callTimeCurValue)) {
@@ -661,13 +665,13 @@ class Di implements DependencyInjectionInterface
                         // was an alias provided?
                         $computedParams['retrieval'][$fqParamPos] = array(
                             $callTimeUserParams[$name],
-                            $this->instanceManager->getClassFromAlias($callTimeCurValue)
+                            $this->instanceManager->getClassFromAlias($callTimeCurValue),
                         );
                     } elseif ($this->definitions->hasClass($callTimeUserParams[$name])) {
                         // was a known class provided?
                         $computedParams['retrieval'][$fqParamPos] = array(
                             $callTimeCurValue,
-                            $callTimeCurValue
+                            $callTimeCurValue,
                         );
                     } else {
                         // must be a value
@@ -692,11 +696,11 @@ class Di implements DependencyInjectionInterface
                     || isset($iConfig[$thisIndex]['parameters'][$fqParamName])
                     || isset($iConfig[$thisIndex]['parameters'][$name])) {
                     if (isset($iConfig[$thisIndex]['parameters'][$fqParamPos])) {
-                        $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$fqParamPos];
+                        $iConfigCurValue = & $iConfig[$thisIndex]['parameters'][$fqParamPos];
                     } elseif (isset($iConfig[$thisIndex]['parameters'][$fqParamName])) {
-                        $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$fqParamName];
+                        $iConfigCurValue = & $iConfig[$thisIndex]['parameters'][$fqParamName];
                     } else {
-                        $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$name];
+                        $iConfigCurValue = & $iConfig[$thisIndex]['parameters'][$name];
                     }
 
                     if ($type === false && is_string($iConfigCurValue)) {
@@ -705,13 +709,13 @@ class Di implements DependencyInjectionInterface
                         && isset($aliases[$iConfigCurValue])) {
                         $computedParams['retrieval'][$fqParamPos] = array(
                             $iConfig[$thisIndex]['parameters'][$name],
-                            $this->instanceManager->getClassFromAlias($iConfigCurValue)
+                            $this->instanceManager->getClassFromAlias($iConfigCurValue),
                         );
                     } elseif (is_string($iConfigCurValue)
                         && $this->definitions->hasClass($iConfigCurValue)) {
                         $computedParams['retrieval'][$fqParamPos] = array(
                             $iConfigCurValue,
-                            $iConfigCurValue
+                            $iConfigCurValue,
                         );
                     } elseif (is_object($iConfigCurValue)
                         && $iConfigCurValue instanceof Closure
@@ -818,7 +822,7 @@ class Di implements DependencyInjectionInterface
                         // plus it cannot be resolve, and no value exist, bail out
                         throw new Exception\MissingPropertyException(
                             sprintf(
-                                'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
+                                'Missing %s for parameter '.$name.' for '.$class.'::'.$method,
                                 (($value[0] === null) ? 'value' : 'instance/object')
                             ),
                             $e->getCode(),
@@ -830,6 +834,7 @@ class Di implements DependencyInjectionInterface
                         if (isset($alias)) {
                             array_pop($this->currentAliasDependenencies);
                         }
+
                         return false;
                     }
                 } catch (ServiceManagerException $e) {
@@ -844,7 +849,7 @@ class Di implements DependencyInjectionInterface
                         // plus it cannot be resolve, and no value exist, bail out
                         throw new Exception\MissingPropertyException(
                             sprintf(
-                                'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
+                                'Missing %s for parameter '.$name.' for '.$class.'::'.$method,
                                 (($value[0] === null) ? 'value' : 'instance/object')
                             ),
                             $e->getCode(),
@@ -856,6 +861,7 @@ class Di implements DependencyInjectionInterface
                         if (isset($alias)) {
                             array_pop($this->currentAliasDependenencies);
                         }
+
                         return false;
                     }
                 }
@@ -868,7 +874,7 @@ class Di implements DependencyInjectionInterface
                     // if this item was not marked as optional,
                     // plus it cannot be resolve, and no value exist, bail out
                     throw new Exception\MissingPropertyException(sprintf(
-                        'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
+                        'Missing %s for parameter '.$name.' for '.$class.'::'.$method,
                         (($value[0] === null) ? 'value' : 'instance/object')
                     ));
                 } else {
@@ -892,7 +898,7 @@ class Di implements DependencyInjectionInterface
      *
      * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *
-     * @param string $className
+     * @param  string $className
      * @param $type
      * @return bool
      */

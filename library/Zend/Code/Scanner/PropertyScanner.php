@@ -94,7 +94,7 @@ class PropertyScanner implements ScannerInterface
     /**
      * Constructor
      *
-     * @param array $propertyTokens
+     * @param array           $propertyTokens
      * @param NameInformation $nameInformation
      */
     public function __construct(array $propertyTokens, NameInformation $nameInformation = null)
@@ -133,6 +133,7 @@ class PropertyScanner implements ScannerInterface
     public function getName()
     {
         $this->scan();
+
         return $this->name;
     }
 
@@ -150,6 +151,7 @@ class PropertyScanner implements ScannerInterface
     public function isPublic()
     {
         $this->scan();
+
         return $this->isPublic;
     }
 
@@ -159,6 +161,7 @@ class PropertyScanner implements ScannerInterface
     public function isPrivate()
     {
         $this->scan();
+
         return $this->isPrivate;
     }
 
@@ -168,6 +171,7 @@ class PropertyScanner implements ScannerInterface
     public function isProtected()
     {
         $this->scan();
+
         return $this->isProtected;
     }
 
@@ -177,6 +181,7 @@ class PropertyScanner implements ScannerInterface
     public function isStatic()
     {
         $this->scan();
+
         return $this->isStatic;
     }
 
@@ -186,6 +191,7 @@ class PropertyScanner implements ScannerInterface
     public function getValue()
     {
         $this->scan();
+
         return $this->value;
     }
 
@@ -195,11 +201,12 @@ class PropertyScanner implements ScannerInterface
     public function getDocComment()
     {
         $this->scan();
+
         return $this->docComment;
     }
 
     /**
-     * @param Annotation\AnnotationManager $annotationManager
+     * @param  Annotation\AnnotationManager $annotationManager
      * @return AnnotationScanner
      */
     public function getAnnotations(Annotation\AnnotationManager $annotationManager)
@@ -217,6 +224,7 @@ class PropertyScanner implements ScannerInterface
     public function __toString()
     {
         $this->scan();
+
         return var_export($this, true);
     }
 

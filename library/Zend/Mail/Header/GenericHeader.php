@@ -36,14 +36,15 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         if ($decodedLine != $headerLine) {
             $header->setEncoding('UTF-8');
         }
+
         return $header;
     }
 
     /**
      * Splits the header line in `name` and `value` parts.
      *
-     * @param string $headerLine
-     * @return string[] `name` in the first index and `value` in the second.
+     * @param  string                             $headerLine
+     * @return string[]                           `name` in the first index and `value` in the second.
      * @throws Exception\InvalidArgumentException If header does not match with the format ``name:value``
      */
     public static function splitHeaderLine($headerLine)
@@ -78,7 +79,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     /**
      * Set header name
      *
-     * @param  string $fieldName
+     * @param  string                             $fieldName
      * @throws Exception\InvalidArgumentException
      * @return GenericHeader
      */
@@ -99,6 +100,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         }
 
         $this->fieldName = $fieldName;
+
         return $this;
     }
 
@@ -110,7 +112,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     /**
      * Set header value
      *
-     * @param  string $fieldValue
+     * @param  string        $fieldValue
      * @return GenericHeader
      */
     public function setFieldValue($fieldValue)
@@ -122,6 +124,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         }
 
         $this->fieldValue = $fieldValue;
+
         return $this;
     }
 
@@ -137,6 +140,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -150,6 +154,6 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         $name  = $this->getFieldName();
         $value = $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
 
-        return $name . ': ' . $value;
+        return $name.': '.$value;
     }
 }

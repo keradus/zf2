@@ -22,9 +22,9 @@ class Index extends AbstractIndex
     protected $lengths;
 
     /**
-     * @param  string $column
-     * @param  null|string $name
-     * @param array $lengths
+     * @param string      $column
+     * @param null|string $name
+     * @param array       $lengths
      */
     public function __construct($column, $name = null, array $lengths = array())
     {

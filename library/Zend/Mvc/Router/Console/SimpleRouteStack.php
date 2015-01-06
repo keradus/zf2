@@ -28,8 +28,8 @@ class SimpleRouteStack extends BaseSimpleRouteStack
     {
         $routes = $this->routePluginManager;
         foreach (array(
-                'catchall' => __NAMESPACE__ . '\Catchall',
-                'simple'   => __NAMESPACE__ . '\Simple',
+                'catchall' => __NAMESPACE__.'\Catchall',
+                'simple'   => __NAMESPACE__.'\Simple',
             ) as $name => $class
         ) {
             $routes->setInvokableClass($name, $class);
@@ -40,9 +40,9 @@ class SimpleRouteStack extends BaseSimpleRouteStack
      * addRoute(): defined by RouteStackInterface interface.
      *
      * @see    RouteStackInterface::addRoute()
-     * @param  string  $name
-     * @param  mixed   $route
-     * @param  int $priority
+     * @param  string           $name
+     * @param  mixed            $route
+     * @param  int              $priority
      * @return SimpleRouteStack
      */
     public function addRoute($name, $route, $priority = null)
@@ -58,7 +58,7 @@ class SimpleRouteStack extends BaseSimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    BaseSimpleRouteStack::routeFromArray()
-     * @param  array|Traversable $specs
+     * @param  array|Traversable                  $specs
      * @return RouteInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException

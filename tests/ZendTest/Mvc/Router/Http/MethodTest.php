@@ -22,27 +22,27 @@ class MethodTest extends TestCase
         return array(
             'simple-match' => array(
                 new HttpMethod('get'),
-                'get'
+                'get',
             ),
             'match-comma-separated-verbs' => array(
                 new HttpMethod('get,post'),
-                'get'
+                'get',
             ),
             'match-comma-separated-verbs-ws' => array(
                 new HttpMethod('get ,   post , put'),
-                'post'
+                'post',
             ),
             'match-ignores-case' => array(
                 new HttpMethod('Get'),
-                'get'
-            )
+                'get',
+            ),
         );
     }
 
     /**
      * @dataProvider routeProvider
-     * @param    HttpMethod $route
-     * @param    $verb
+     * @param HttpMethod $route
+     * @param            $verb
      * @internal param string $path
      * @internal param int $offset
      * @internal param bool $shouldMatch
@@ -71,10 +71,10 @@ class MethodTest extends TestCase
         $tester->testFactory(
             'Zend\Mvc\Router\Http\Method',
             array(
-                'verb' => 'Missing "verb" in options array'
+                'verb' => 'Missing "verb" in options array',
             ),
             array(
-                'verb' => 'get'
+                'verb' => 'get',
             )
         );
     }

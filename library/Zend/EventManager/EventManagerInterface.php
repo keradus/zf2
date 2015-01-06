@@ -28,9 +28,9 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * - Passing event name, target, array|ArrayAccess of arguments, and callback
      *
      * @param  string|EventInterface $event
-     * @param  object|string $target
-     * @param  array|object $argv
-     * @param  null|callable $callback
+     * @param  object|string         $target
+     * @param  array|object          $argv
+     * @param  null|callable         $callback
      * @return ResponseCollection
      */
     public function trigger($event, $target = null, $argv = array(), $callback = null);
@@ -45,9 +45,9 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * - Passing event name, target, array|ArrayAccess of arguments, and callback
      *
      * @param  string|EventInterface $event
-     * @param  object|string $target
-     * @param  array|object $argv
-     * @param  callable $callback
+     * @param  object|string         $target
+     * @param  array|object          $argv
+     * @param  callable              $callback
      * @return ResponseCollection
      * @deprecated Please use trigger()
      */
@@ -56,9 +56,9 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
     /**
      * Attach a listener to an event
      *
-     * @param  string $event
-     * @param  callable $callback
-     * @param  int $priority Priority at which to register listener
+     * @param  string          $event
+     * @param  callable        $callback
+     * @param  int             $priority Priority at which to register listener
      * @return CallbackHandler
      */
     public function attach($event, $callback = null, $priority = 1);
@@ -81,7 +81,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
     /**
      * Retrieve a list of listeners registered to a given event
      *
-     * @param  string $event
+     * @param  string       $event
      * @return array|object
      */
     public function getListeners($event);
@@ -97,7 +97,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
     /**
      * Set the event class to utilize
      *
-     * @param  string $class
+     * @param  string                $class
      * @return EventManagerInterface
      */
     public function setEventClass($class);
@@ -112,7 +112,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
     /**
      * Set the identifiers (overrides any currently set identifiers)
      *
-     * @param string|int|array|Traversable $identifiers
+     * @param  string|int|array|Traversable $identifiers
      * @return EventManagerInterface
      */
     public function setIdentifiers($identifiers);
@@ -120,7 +120,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
     /**
      * Add some identifier(s) (appends to any currently set identifiers)
      *
-     * @param string|int|array|Traversable $identifiers
+     * @param  string|int|array|Traversable $identifiers
      * @return EventManagerInterface
      */
     public function addIdentifiers($identifiers);
@@ -129,8 +129,8 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * Attach a listener aggregate
      *
      * @param  ListenerAggregateInterface $aggregate
-     * @param  int $priority If provided, a suggested priority for the aggregate to use
-     * @return mixed return value of {@link ListenerAggregateInterface::attach()}
+     * @param  int                        $priority  If provided, a suggested priority for the aggregate to use
+     * @return mixed                      return value of {@link ListenerAggregateInterface::attach()}
      */
     public function attachAggregate(ListenerAggregateInterface $aggregate, $priority = 1);
 
@@ -138,7 +138,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * Detach a listener aggregate
      *
      * @param  ListenerAggregateInterface $aggregate
-     * @return mixed return value of {@link ListenerAggregateInterface::detach()}
+     * @return mixed                      return value of {@link ListenerAggregateInterface::detach()}
      */
     public function detachAggregate(ListenerAggregateInterface $aggregate);
 }

@@ -37,13 +37,13 @@ class AcceptLanguage extends AbstractAccept
      */
     public function toString()
     {
-        return 'Accept-Language: ' . $this->getFieldValue();
+        return 'Accept-Language: '.$this->getFieldValue();
     }
 
     /**
      * Add a language, with the given priority
      *
-     * @param  string $type
+     * @param  string    $type
      * @param  int|float $priority
      * @return Accept
      */
@@ -66,7 +66,7 @@ class AcceptLanguage extends AbstractAccept
     /**
      * Parse the keys contained in the header line
      *
-     * @param string $fieldValuePart
+     * @param  string                                                         $fieldValuePart
      * @return \Zend\Http\Header\Accept\FieldValuePart\LanguageFieldValuePart
      * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
      */
@@ -101,7 +101,7 @@ class AcceptLanguage extends AbstractAccept
                 'format'     => $format,
                 'priority'   => isset($params['q']) ? $params['q'] : 1,
                 'params'     => $params,
-                'raw'        => trim($raw)
+                'raw'        => trim($raw),
         );
 
         return new FieldValuePart\LanguageFieldValuePart((object) $aggregated);

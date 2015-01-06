@@ -23,7 +23,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     protected function loadInstructionsFile($fileName)
     {
-        return include_once(__DIR__ . "/TestAsset/$fileName.php");
+        return include_once __DIR__."/TestAsset/$fileName.php";
     }
 
     public function setUp()
@@ -60,7 +60,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         $object = $this->getBarcodeObject(
                 array('barHeight' => 150,
-                        'unkownProperty' => 'aValue'));
+                        'unkownProperty' => 'aValue', ));
         $this->assertEquals(150, $object->getBarHeight());
     }
 
@@ -68,7 +68,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         $config = new Config\Config(
                 array('barHeight' => 150,
-                        'unkownProperty' => 'aValue'));
+                        'unkownProperty' => 'aValue', ));
         $object = $this->getBarcodeObject($config);
         $this->assertEquals(150, $object->getBarHeight());
     }
@@ -77,7 +77,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         $this->object->setOptions(
                 array('barHeight' => 150,
-                        'unkownProperty' => 'aValue'));
+                        'unkownProperty' => 'aValue', ));
         $this->assertEquals(150, $this->object->getBarHeight());
     }
 
@@ -351,7 +351,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'font' => 'my_font.ttf' ,
                 'color' => '#123456' ,
                 'alignment' => 'center' ,
-                'orientation' => 45);
+                'orientation' => 45, );
         $object->addTestInstruction($instructions);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
@@ -363,7 +363,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $color = '#123456';
         $filled = false;
         $instructions = array('type' => 'polygon' , 'points' => $points ,
-                'color' => $color , 'filled' => $filled);
+                'color' => $color , 'filled' => $filled, );
         $object->addTestPolygon($points, $color, $filled);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
@@ -376,7 +376,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $object->setForeColor($color);
         $filled = false;
         $instructions = array('type' => 'polygon' , 'points' => $points ,
-                'color' => $color , 'filled' => $filled);
+                'color' => $color , 'filled' => $filled, );
         $object->addTestPolygon($points, null, $filled);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
@@ -395,7 +395,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'position' => $position ,
                 'font' => $font , 'color' => $color ,
                 'alignment' => $alignment ,
-                'orientation' => $orientation);
+                'orientation' => $orientation, );
         $object->addTestText($text, $size, $position, $font, $color, $alignment,
                 $orientation);
         $this->assertSame(array($instructions), $object->getInstructions());
@@ -416,7 +416,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'position' => $position ,
                 'font' => $font , 'color' => $color ,
                 'alignment' => $alignment ,
-                'orientation' => $orientation);
+                'orientation' => $orientation, );
         $object->addTestText($text, $size, $position, $font, null, $alignment, $orientation);
         $this->assertSame(array($instructions), $object->getInstructions());
     }

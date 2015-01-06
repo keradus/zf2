@@ -44,7 +44,7 @@ class MemcacheResourceManager
     /**
      * Check if a resource exists
      *
-     * @param string $id
+     * @param  string $id
      * @return bool
      */
     public function hasResource($id)
@@ -55,7 +55,7 @@ class MemcacheResourceManager
     /**
      * Gets a memcache resource
      *
-     * @param string $id
+     * @param  string                     $id
      * @return MemcacheResource
      * @throws Exception\RuntimeException
      */
@@ -87,14 +87,15 @@ class MemcacheResourceManager
 
         // buffer and return
         $this->resources[$id] = $memc;
+
         return $memc;
     }
 
     /**
      * Set a resource
      *
-     * @param string $id
-     * @param array|Traversable|MemcacheResource $resource
+     * @param  string                             $id
+     * @param  array|Traversable|MemcacheResource $resource
      * @return MemcacheResourceManager
      */
     public function setResource($id, $resource, $failureCallback = null, $serverDefaults = array())
@@ -150,12 +151,13 @@ class MemcacheResourceManager
     /**
      * Remove a resource
      *
-     * @param string $id
+     * @param  string                  $id
      * @return MemcacheResourceManager
      */
     public function removeResource($id)
     {
         unset($this->resources[$id]);
+
         return $this;
     }
 
@@ -184,7 +186,7 @@ class MemcacheResourceManager
      * Set compress threshold on a Memcache resource
      *
      * @param MemcacheResource $resource
-     * @param array $libOptions
+     * @param array            $libOptions
      */
     protected function setResourceAutoCompressThreshold(MemcacheResource $resource, $threshold, $minSavings)
     {
@@ -201,7 +203,7 @@ class MemcacheResourceManager
     /**
      * Get compress threshold
      *
-     * @param  string $id
+     * @param  string                                 $id
      * @return int|null
      * @throws \Zend\Cache\Exception\RuntimeException
      */
@@ -216,15 +218,16 @@ class MemcacheResourceManager
             // Cannot get options from Memcache resource once created
             throw new Exception\RuntimeException("Cannot get compress threshold once resource is created");
         }
+
         return $resource['auto_compress_threshold'];
     }
 
     /**
      * Set compress threshold
      *
-     * @param string                            $id
-     * @param int|string|array|ArrayAccess|null $threshold
-     * @param float|string|bool                 $minSavings
+     * @param  string                            $id
+     * @param  int|string|array|ArrayAccess|null $threshold
+     * @param  float|string|bool                 $minSavings
      * @return MemcacheResourceManager
      */
     public function setAutoCompressThreshold($id, $threshold, $minSavings = false)
@@ -246,13 +249,14 @@ class MemcacheResourceManager
                 $resource['auto_compress_min_savings'] = $minSavings;
             }
         }
+
         return $this;
     }
 
     /**
      * Get compress min savings
      *
-     * @param  string $id
+     * @param  string                     $id
      * @return float|null
      * @throws Exception\RuntimeException
      */
@@ -267,14 +271,15 @@ class MemcacheResourceManager
             // Cannot get options from Memcache resource once created
             throw new Exception\RuntimeException("Cannot get compress min savings once resource is created");
         }
+
         return $resource['auto_compress_min_savings'];
     }
 
     /**
      * Set compress min savings
      *
-     * @param  string            $id
-     * @param  float|string|null $minSavings
+     * @param  string                                 $id
+     * @param  float|string|null                      $minSavings
      * @return MemcacheResourceManager
      * @throws \Zend\Cache\Exception\RuntimeException
      */
@@ -296,6 +301,7 @@ class MemcacheResourceManager
         } else {
             $resource['auto_compress_min_savings'] = $minSavings;
         }
+
         return $this;
     }
 
@@ -305,15 +311,15 @@ class MemcacheResourceManager
      *   'persistent' => <persistent>, 'weight' => <weight>,
      *   'timeout' => <timeout>, 'retry_interval' => <retryInterval>,
      * )
-     * @param string $id
-     * @param array  $serverDefaults
+     * @param  string                  $id
+     * @param  array                   $serverDefaults
      * @return MemcacheResourceManager
      */
     public function setServerDefaults($id, array $serverDefaults)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'server_defaults' => $serverDefaults
+                'server_defaults' => $serverDefaults,
             ));
         }
 
@@ -326,7 +332,7 @@ class MemcacheResourceManager
     /**
      * Get default server values
      *
-     * @param string $id
+     * @param  string                     $id
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -335,11 +341,12 @@ class MemcacheResourceManager
         if (!isset($this->serverDefaults[$id])) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
         }
+
         return $this->serverDefaults[$id];
     }
 
     /**
-     * @param array $serverDefaults
+     * @param  array                              $serverDefaults
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeServerDefaults(& $serverDefaults)
@@ -378,8 +385,8 @@ class MemcacheResourceManager
     /**
      * Set callback for server connection failures
      *
-     * @param string $id
-     * @param callable|null $failureCallback
+     * @param  string                  $id
+     * @param  callable|null           $failureCallback
      * @return MemcacheResourceManager
      */
     public function setFailureCallback($id, $failureCallback)
@@ -389,13 +396,14 @@ class MemcacheResourceManager
         }
 
         $this->failureCallbacks[$id] = $failureCallback;
+
         return $this;
     }
 
     /**
      * Get callback for server connection failures
      *
-     * @param string $id
+     * @param  string                     $id
      * @return callable|null
      * @throws Exception\RuntimeException
      */
@@ -404,15 +412,16 @@ class MemcacheResourceManager
         if (!isset($this->failureCallbacks[$id])) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
         }
+
         return $this->failureCallbacks[$id];
     }
 
     /**
      * Get servers
      *
-     * @param string $id
+     * @param  string                     $id
      * @throws Exception\RuntimeException
-     * @return array array('host' => <host>, 'port' => <port>, 'weight' => <weight>)
+     * @return array                      array('host' => <host>, 'port' => <port>, 'weight' => <weight>)
      */
     public function getServers($id)
     {
@@ -424,21 +433,22 @@ class MemcacheResourceManager
         if ($resource instanceof MemcacheResource) {
             throw new Exception\RuntimeException("Cannot get server list once resource is created");
         }
+
         return $resource['servers'];
     }
 
     /**
      * Add servers
      *
-     * @param string       $id
-     * @param string|array $servers
+     * @param  string                  $id
+     * @param  string|array            $servers
      * @return MemcacheResourceManager
      */
     public function addServers($id, $servers)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'servers' => $servers
+                'servers' => $servers,
             ));
         }
 
@@ -468,8 +478,8 @@ class MemcacheResourceManager
     /**
      * Add one server
      *
-     * @param string       $id
-     * @param string|array $server
+     * @param  string                  $id
+     * @param  string|array            $server
      * @return MemcacheResourceManager
      */
     public function addServer($id, $server)
@@ -479,9 +489,9 @@ class MemcacheResourceManager
 
     /**
      * @param MemcacheResource $resource
-     * @param array $server
-     * @param array $serverDefaults
-     * @param callable|null $failureCallback
+     * @param array            $server
+     * @param array            $serverDefaults
+     * @param callable|null    $failureCallback
      */
     protected function addServerToResource(
         MemcacheResource $resource,
@@ -524,7 +534,7 @@ class MemcacheResourceManager
         $result = array();
         foreach ($servers as $server) {
             $this->normalizeServer($server);
-            $result[$server['host'] . ':' . $server['port']] = $server;
+            $result[$server['host'].':'.$server['port']] = $server;
         }
 
         $servers = array_values($result);
@@ -538,7 +548,7 @@ class MemcacheResourceManager
      *   'timeout' => <timeout>, 'retry_interval' => <retryInterval>,
      * )
      *
-     * @param string|array $server
+     * @param  string|array                       $server
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeServer(& $server)
@@ -575,7 +585,7 @@ class MemcacheResourceManager
             // parse server from URI host{:?port}{?weight}
             $server = trim($server);
             if (strpos($server, '://') === false) {
-                $server = 'tcp://' . $server;
+                $server = 'tcp://'.$server;
             }
 
             $urlParts = parse_url($server);
@@ -630,17 +640,18 @@ class MemcacheResourceManager
      * Compare 2 normalized server arrays
      * (Compares only the host and the port)
      *
-     * @param array $serverA
-     * @param array $serverB
+     * @param  array $serverA
+     * @param  array $serverB
      * @return int
      */
     protected function compareServers(array $serverA, array $serverB)
     {
-        $keyA = $serverA['host'] . ':' . $serverA['port'];
-        $keyB = $serverB['host'] . ':' . $serverB['port'];
+        $keyA = $serverA['host'].':'.$serverA['port'];
+        $keyB = $serverB['host'].':'.$serverB['port'];
         if ($keyA === $keyB) {
             return 0;
         }
+
         return $keyA > $keyB ? 1 : -1;
     }
 }

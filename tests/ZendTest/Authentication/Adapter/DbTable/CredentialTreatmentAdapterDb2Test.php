@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Authentication\Adapter\DbTable;
 
 use Zend\Authentication;
@@ -181,7 +182,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         // Since we did not set db2_attr_case, column names will be upper case, as expected
         $resultRow = $this->authAdapter->getResultRowObject(array(
             'USERNAME',
-            'REAL_NAME'
+            'REAL_NAME',
         ));
         $this->assertEquals(
             'O:8:"stdClass":2:{s:8:"USERNAME";s:11:"my_username";s:9:"REAL_NAME";s:12:"My Real Name";}', serialize($resultRow)
@@ -331,7 +332,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldNotAuthenticateWhenFlagIsNotSet()
     {
         $sqlInsert = "INSERT INTO $this->tableName (id, username, password, real_name) "
-                   . "VALUES (2, 'my_username', 'my_otherpass', 'Test user 2')";
+                   ."VALUES (2, 'my_username', 'my_otherpass', 'Test user 2')";
         $this->db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
@@ -350,7 +351,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldAuthenticateWhenFlagIsSet()
     {
         $sqlInsert = "INSERT INTO $this->tableName (id, username, password, real_name) "
-                   . "VALUES (2, 'my_username', 'my_otherpass', 'Test user 2')";
+                   ."VALUES (2, 'my_username', 'my_otherpass', 'Test user 2')";
         $this->db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
@@ -380,7 +381,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         $this->createDbAdapter($optionalParams);
 
         $sqlInsert = "INSERT INTO $this->tableName (id, username, password, real_name) "
-                   . "VALUES (1, 'my_username', 'my_password', 'My Real Name')";
+                   ."VALUES (1, 'my_username', 'my_password', 'My Real Name')";
 
         $this->db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
     }
@@ -394,11 +395,11 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         $this->db = new DbAdapter($this->dbAdapterParams);
 
         $sqlCreate = "CREATE TABLE {$this->tableName} ( "
-                   . 'id INTEGER NOT NULL, '
-                   . 'username VARCHAR(50) NOT NULL, '
-                   . 'password VARCHAR(32), '
-                   . 'real_name VARCHAR(150), '
-                   . 'PRIMARY KEY(id))';
+                   .'id INTEGER NOT NULL, '
+                   .'username VARCHAR(50) NOT NULL, '
+                   .'password VARCHAR(32), '
+                   .'real_name VARCHAR(150), '
+                   .'PRIMARY KEY(id))';
 
         $this->db->query($sqlCreate, DbAdapter::QUERY_MODE_EXECUTE);
     }

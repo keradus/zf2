@@ -44,5 +44,5 @@ class PragmaTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Pragma: xxx', $pragmaHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

@@ -72,7 +72,7 @@ class Doctype extends AbstractHelper
     /**
      * Set or retrieve doctype
      *
-     * @param  string $doctype
+     * @param  string                    $doctype
      * @throws Exception\DomainException
      * @return Doctype
      */
@@ -165,12 +165,13 @@ class Doctype extends AbstractHelper
     /**
      * Set doctype
      *
-     * @param  string $doctype
+     * @param  string  $doctype
      * @return Doctype
      */
     public function setDoctype($doctype)
     {
         $this->registry['doctype'] = $doctype;
+
         return $this;
     }
 

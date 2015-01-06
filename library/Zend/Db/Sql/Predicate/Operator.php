@@ -69,10 +69,10 @@ class Operator extends AbstractExpression implements PredicateInterface
      * Constructor
      *
      * @param int|float|bool|string $left
-     * @param string $operator
+     * @param string                $operator
      * @param int|float|bool|string $right
-     * @param string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
-     * @param string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
+     * @param string                $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param string                $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      */
     public function __construct(
         $left = null,
@@ -105,7 +105,7 @@ class Operator extends AbstractExpression implements PredicateInterface
     /**
      * Set left side of operator
      *
-     * @param  int|float|bool|string $left
+     * @param int|float|bool|string $left
      *
      * @return Operator
      */
@@ -134,7 +134,7 @@ class Operator extends AbstractExpression implements PredicateInterface
     /**
      * Set parameter type for left side of operator
      *
-     * @param  string $type TYPE_IDENTIFIER or TYPE_VALUE {@see allowedTypes}
+     * @param string $type TYPE_IDENTIFIER or TYPE_VALUE {@see allowedTypes}
      *
      * @return Operator
      *
@@ -146,8 +146,8 @@ class Operator extends AbstractExpression implements PredicateInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid type "%s" provided; must be of type "%s" or "%s"',
                 $type,
-                __CLASS__ . '::TYPE_IDENTIFIER',
-                __CLASS__ . '::TYPE_VALUE'
+                __CLASS__.'::TYPE_IDENTIFIER',
+                __CLASS__.'::TYPE_VALUE'
             ));
         }
 
@@ -169,7 +169,7 @@ class Operator extends AbstractExpression implements PredicateInterface
     /**
      * Set operator string
      *
-     * @param  string $operator
+     * @param  string   $operator
      * @return Operator
      */
     public function setOperator($operator)
@@ -192,7 +192,7 @@ class Operator extends AbstractExpression implements PredicateInterface
     /**
      * Set right side of operator
      *
-     * @param  int|float|bool|string $right
+     * @param int|float|bool|string $right
      *
      * @return Operator
      */
@@ -221,7 +221,7 @@ class Operator extends AbstractExpression implements PredicateInterface
     /**
      * Set parameter type for right side of operator
      *
-     * @param  string $type TYPE_IDENTIFIER or TYPE_VALUE {@see allowedTypes}
+     * @param  string                             $type TYPE_IDENTIFIER or TYPE_VALUE {@see allowedTypes}
      * @throws Exception\InvalidArgumentException
      * @return Operator
      */
@@ -231,8 +231,8 @@ class Operator extends AbstractExpression implements PredicateInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid type "%s" provided; must be of type "%s" or "%s"',
                 $type,
-                __CLASS__ . '::TYPE_IDENTIFIER',
-                __CLASS__ . '::TYPE_VALUE'
+                __CLASS__.'::TYPE_IDENTIFIER',
+                __CLASS__.'::TYPE_VALUE'
             ));
         }
 
@@ -262,9 +262,9 @@ class Operator extends AbstractExpression implements PredicateInterface
         list($values[], $types[]) = $this->normalizeArgument($this->right, $this->rightType);
 
         return array(array(
-            '%s ' . $this->operator . ' %s',
+            '%s '.$this->operator.' %s',
             $values,
-            $types
+            $types,
         ));
     }
 }

@@ -30,36 +30,36 @@ class NotInTest extends TestCase
 
     public function testGetExpressionDataWithSubselect()
     {
-        $select = new Select;
+        $select = new Select();
         $in = new NotIn('foo', $select);
         $expected = array(array(
             '%s NOT IN %s',
             array('foo', $select),
-            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE),
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }
 
     public function testGetExpressionDataWithSubselectAndIdentifier()
     {
-        $select = new Select;
+        $select = new Select();
         $in = new NotIn('foo', $select);
         $expected = array(array(
             '%s NOT IN %s',
             array('foo', $select),
-            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE),
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }
 
     public function testGetExpressionDataWithSubselectAndArrayIdentifier()
     {
-        $select = new Select;
+        $select = new Select();
         $in = new NotIn(array('foo', 'bar'), $select);
         $expected = array(array(
             '(%s, %s) NOT IN %s',
             array('foo', 'bar', $select),
-            array($in::TYPE_IDENTIFIER, $in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+            array($in::TYPE_IDENTIFIER, $in::TYPE_IDENTIFIER, $in::TYPE_VALUE),
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }

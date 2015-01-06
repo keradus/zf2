@@ -30,6 +30,7 @@ class HtmlFlash extends AbstractHtmlElement
         $params = array_merge(array('movie' => $data, 'quality' => 'high'), $params);
 
         $htmlObject = $this->getView()->plugin('htmlObject');
+
         return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

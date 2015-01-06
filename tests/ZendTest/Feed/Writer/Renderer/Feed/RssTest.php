@@ -25,7 +25,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->validWriter = new Writer\Feed;
+        $this->validWriter = new Writer\Feed();
         $this->validWriter->setTitle('This is a test feed.');
         $this->validWriter->setDescription('This is a test description.');
         $this->validWriter->setLink('http://www.example.com');
@@ -40,7 +40,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsWriterInConstructor()
     {
-        $writer = new Writer\Feed;
+        $writer = new Writer\Feed();
         $feed   = new Renderer\Feed\Rss($writer);
         $this->assertTrue($feed->getDataContainer() instanceof Writer\Feed);
     }
@@ -175,7 +175,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed->render();
         $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals(
-            'Zend_Feed_Writer ' . Version::VERSION . ' (http://framework.zend.com)', $feed->getGenerator());
+            'Zend_Feed_Writer '.Version::VERSION.' (http://framework.zend.com)', $feed->getGenerator());
     }
 
     public function testFeedLanguageHasBeenSet()
@@ -266,13 +266,13 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testFeedHoldsAnyAuthorAdded()
     {
         $this->validWriter->addAuthor(array('name' => 'Joe',
-                                             'email'=> 'joe@example.com',
-                                             'uri'  => 'http://www.example.com/joe'));
+                                             'email' => 'joe@example.com',
+                                             'uri'  => 'http://www.example.com/joe', ));
         $atomFeed = new Renderer\Feed\Rss($this->validWriter);
         $atomFeed->render();
         $feed   = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
-        $this->assertEquals(array('name'=> 'Joe'), $feed->getAuthor());
+        $this->assertEquals(array('name' => 'Joe'), $feed->getAuthor());
     }
 
     /**
@@ -281,13 +281,13 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testFeedAuthorCharDataEncoding()
     {
         $this->validWriter->addAuthor(array('name' => '<>&\'"áéíóú',
-                                            'email'=> 'joe@example.com',
-                                            'uri'  => 'http://www.example.com/joe'));
+                                            'email' => 'joe@example.com',
+                                            'uri'  => 'http://www.example.com/joe', ));
         $atomFeed = new Renderer\Feed\Rss($this->validWriter);
         $atomFeed->render();
         $feed   = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
-        $this->assertEquals(array('name'=> '<>&\'"áéíóú'), $feed->getAuthor());
+        $this->assertEquals(array('name' => '<>&\'"áéíóú'), $feed->getAuthor());
     }
 
     public function testCopyrightCanBeSet()
@@ -316,8 +316,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->addCategories(array(
                                                 array('term'   => 'cat_dog',
                                                       'label'  => 'Cats & Dogs',
-                                                      'scheme' => 'http://example.com/schema1'),
-                                                array('term'=> 'cat_dog2')
+                                                      'scheme' => 'http://example.com/schema1', ),
+                                                array('term' => 'cat_dog2'),
                                            ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -325,10 +325,10 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             array('term'   => 'cat_dog',
                   'label'  => 'cat_dog',
-                  'scheme' => 'http://example.com/schema1'),
+                  'scheme' => 'http://example.com/schema1', ),
             array('term'   => 'cat_dog2',
                   'label'  => 'cat_dog2',
-                  'scheme' => null)
+                  'scheme' => null, ),
         );
         $this->assertEquals($expected, (array) $feed->getCategories());
     }
@@ -341,8 +341,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->addCategories(array(
                                                 array('term'   => '<>&\'"áéíóú',
                                                       'label'  => 'Cats & Dogs',
-                                                      'scheme' => 'http://example.com/schema1'),
-                                                array('term'=> 'cat_dog2')
+                                                      'scheme' => 'http://example.com/schema1', ),
+                                                array('term' => 'cat_dog2'),
                                            ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -350,10 +350,10 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             array('term'   => '<>&\'"áéíóú',
                   'label'  => '<>&\'"áéíóú',
-                  'scheme' => 'http://example.com/schema1'),
+                  'scheme' => 'http://example.com/schema1', ),
             array('term'   => 'cat_dog2',
                   'label'  => 'cat_dog2',
-                  'scheme' => null)
+                  'scheme' => null, ),
         );
         $this->assertEquals($expected, (array) $feed->getCategories());
     }
@@ -367,7 +367,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed->render();
         $feed     = Reader\Reader::importString($rssFeed->saveXml());
         $expected = array(
-            'http://www.example.com/hub', 'http://www.example.com/hub2'
+            'http://www.example.com/hub', 'http://www.example.com/hub2',
         );
         $this->assertEquals($expected, (array) $feed->getHubs());
     }
@@ -380,7 +380,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'title'       => 'Image ALT',
                                            'height'      => '400',
                                            'width'       => '144',
-                                           'description' => 'Image TITLE'
+                                           'description' => 'Image TITLE',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -391,7 +391,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
             'title'       => 'Image ALT',
             'height'      => '400',
             'width'       => '144',
-            'description' => 'Image TITLE'
+            'description' => 'Image TITLE',
         );
         $this->assertEquals($expected, $feed->getImage());
     }
@@ -401,7 +401,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setImage(array(
                                            'uri'   => 'http://www.example.com/logo.gif',
                                            'link'  => 'http://www.example.com',
-                                           'title' => 'Image ALT'
+                                           'title' => 'Image ALT',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -409,7 +409,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'uri'   => 'http://www.example.com/logo.gif',
             'link'  => 'http://www.example.com',
-            'title' => 'Image ALT'
+            'title' => 'Image ALT',
         );
         $this->assertEquals($expected, $feed->getImage());
     }
@@ -421,7 +421,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $this->validWriter->setImage(array(
                                            'uri'   => 'http://www.example.com/logo.gif',
-                                           'title' => 'Image ALT'
+                                           'title' => 'Image ALT',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -434,7 +434,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $this->validWriter->setImage(array(
                                            'uri'  => 'http://www.example.com/logo.gif',
-                                           'link' => 'http://www.example.com'
+                                           'link' => 'http://www.example.com',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -447,7 +447,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $this->validWriter->setImage(array(
                                            'link'  => 'http://www.example.com',
-                                           'title' => 'Image ALT'
+                                           'title' => 'Image ALT',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -462,7 +462,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'uri'         => 'http://www.example.com/logo.gif',
                                            'link'        => 'http://www.example.com',
                                            'title'       => 'Image ALT',
-                                           'description' => 2
+                                           'description' => 2,
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -477,7 +477,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'uri'         => 'http://www.example.com/logo.gif',
                                            'link'        => 'http://www.example.com',
                                            'title'       => 'Image ALT',
-                                           'description' => ''
+                                           'description' => '',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -493,7 +493,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'link'   => 'http://www.example.com',
                                            'title'  => 'Image ALT',
                                            'height' => 'a',
-                                           'width'  => 144
+                                           'width'  => 144,
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -509,7 +509,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'link'   => 'http://www.example.com',
                                            'title'  => 'Image ALT',
                                            'height' => '',
-                                           'width'  => 144
+                                           'width'  => 144,
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -525,7 +525,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'link'   => 'http://www.example.com',
                                            'title'  => 'Image ALT',
                                            'height' => '401',
-                                           'width'  => 144
+                                           'width'  => 144,
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -541,7 +541,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'link'   => 'http://www.example.com',
                                            'title'  => 'Image ALT',
                                            'height' => '400',
-                                           'width'  => 'a'
+                                           'width'  => 'a',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -557,7 +557,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'link'   => 'http://www.example.com',
                                            'title'  => 'Image ALT',
                                            'height' => '400',
-                                           'width'  => ''
+                                           'width'  => '',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -573,7 +573,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            'link'   => 'http://www.example.com',
                                            'title'  => 'Image ALT',
                                            'height' => '400',
-                                           'width'  => '145'
+                                           'width'  => '145',
                                       ));
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -585,7 +585,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
         $feed = Reader\Reader::importString($rssFeed->saveXml());
-        $myDate = new DateTime('@' . 1234567890);
+        $myDate = new DateTime('@'. 1234567890);
         $this->assertEquals($myDate, $feed->getDateCreated());
     }
 }

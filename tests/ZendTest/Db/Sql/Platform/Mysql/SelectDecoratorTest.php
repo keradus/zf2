@@ -34,17 +34,17 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
             null,
             array(
                 $driver,
-                new MysqlPlatform()
+                new MysqlPlatform(),
             )
         );
 
-        $parameterContainer = new ParameterContainer;
+        $parameterContainer = new ParameterContainer();
         $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $statement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
 
         $statement->expects($this->once())->method('setSql')->with($expectedSql);
 
-        $selectDecorator = new SelectDecorator;
+        $selectDecorator = new SelectDecorator();
         $selectDecorator->setSubject($select);
         $selectDecorator->prepareStatement($adapter, $statement);
 
@@ -60,32 +60,32 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlString(Select $select, $notUsed, $notUsed, $expectedSql)
     {
-        $parameterContainer = new ParameterContainer;
+        $parameterContainer = new ParameterContainer();
         $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $statement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
 
-        $selectDecorator = new SelectDecorator;
+        $selectDecorator = new SelectDecorator();
         $selectDecorator->setSubject($select);
-        $this->assertEquals($expectedSql, $selectDecorator->getSqlString(new MysqlPlatform));
+        $this->assertEquals($expectedSql, $selectDecorator->getSqlString(new MysqlPlatform()));
     }
 
     public function dataProvider()
     {
-        $select0 = new Select;
+        $select0 = new Select();
         $select0->from('foo')->limit(5)->offset(10);
         $expectedPrepareSql0 = 'SELECT `foo`.* FROM `foo` LIMIT ? OFFSET ?';
         $expectedParams0 = array('offset' => 10, 'limit' => 5);
         $expectedSql0 = 'SELECT `foo`.* FROM `foo` LIMIT 5 OFFSET 10';
 
         // offset without limit
-        $select1 = new Select;
+        $select1 = new Select();
         $select1->from('foo')->offset(10);
         $expectedPrepareSql1 = 'SELECT `foo`.* FROM `foo` LIMIT 18446744073709551615 OFFSET ?';
         $expectedParams1 = array('offset' => 10);
         $expectedSql1 = 'SELECT `foo`.* FROM `foo` LIMIT 18446744073709551615 OFFSET 10';
 
         // offset and limit are not type casted when injected into parameter container
-        $select2 = new Select;
+        $select2 = new Select();
         $select2->from('foo')->limit('5')->offset('10000000000000000000');
         $expectedPrepareSql2 = 'SELECT `foo`.* FROM `foo` LIMIT ? OFFSET ?';
         $expectedParams2 = array('offset' => '10000000000000000000', 'limit' => '5');

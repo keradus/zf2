@@ -37,8 +37,8 @@ class Gettext extends AbstractFileLoader
      * load(): defined by FileLoaderInterface.
      *
      * @see    FileLoaderInterface::load()
-     * @param  string $locale
-     * @param  string $filename
+     * @param  string                             $locale
+     * @param  string                             $filename
      * @return TextDomain
      * @throws Exception\InvalidArgumentException
      */
@@ -183,9 +183,9 @@ class Gettext extends AbstractFileLoader
     protected function readIntegerList($num)
     {
         if ($this->littleEndian) {
-            return unpack('V' . $num, fread($this->file, 4 * $num));
+            return unpack('V'.$num, fread($this->file, 4 * $num));
         }
 
-        return unpack('N' . $num, fread($this->file, 4 * $num));
+        return unpack('N'.$num, fread($this->file, 4 * $num));
     }
 }

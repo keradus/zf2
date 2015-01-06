@@ -47,6 +47,7 @@ class Http extends JsonResponse
 
         if (!$this->isError() && (null === $this->getId())) {
             header('HTTP/1.1 204 No Content');
+
             return;
         }
 
@@ -56,7 +57,7 @@ class Http extends JsonResponse
 
         $contentType = $smd->getContentType();
         if (!empty($contentType)) {
-            header('Content-Type: ' . $contentType);
+            header('Content-Type: '.$contentType);
         }
     }
 }

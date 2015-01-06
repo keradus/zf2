@@ -44,5 +44,5 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Server: xxx', $serverHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

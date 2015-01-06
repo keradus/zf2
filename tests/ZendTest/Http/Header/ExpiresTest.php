@@ -40,8 +40,8 @@ class ExpiresTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Expires: Sun, 06 Nov 1994 08:49:37 GMT', $expiresHeader->toString());
     }
 
-    /**
-     * Implementation specific tests are covered by DateTest
-     * @see ZendTest\Http\Header\DateTest
-     */
+/**
+ * Implementation specific tests are covered by DateTest
+ * @see ZendTest\Http\Header\DateTest
+ */
 }

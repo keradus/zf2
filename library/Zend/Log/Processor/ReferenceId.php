@@ -16,7 +16,7 @@ class ReferenceId extends RequestId implements ProcessorInterface
      *
      * This enables to filter the log for messages belonging to a specific request
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return array event data
      */
     public function process(array $event)
@@ -37,7 +37,7 @@ class ReferenceId extends RequestId implements ProcessorInterface
     /**
      * Sets identifier.
      *
-     * @param string $identifier
+     * @param  string $identifier
      * @return self
      */
     public function setReferenceId($identifier)

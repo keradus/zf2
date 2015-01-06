@@ -25,7 +25,7 @@ class PythonPickleOptions extends AdapterOptions
      *
      * Supported versions are 0, 1, 2 and 3
      *
-     * @param  int $protocol
+     * @param  int                                $protocol
      * @return PythonPickleOptions
      * @throws Exception\InvalidArgumentException
      */

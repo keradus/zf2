@@ -272,7 +272,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $test, $message);
     }
 
-    public function getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern=null)
+    public function getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern = null)
     {
         return new IntlDateFormatter($locale, $dateType, $timeType, $timezone, null, $pattern);
     }

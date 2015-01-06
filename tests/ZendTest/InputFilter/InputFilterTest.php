@@ -65,8 +65,8 @@ class InputFilterTest extends TestCase
 
         $data = array(
             'people' => array(
-                 'name' => 'Wanderson'
-            )
+                 'name' => 'Wanderson',
+            ),
         );
 
         $this->filter->setData($data);

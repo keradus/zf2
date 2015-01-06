@@ -19,7 +19,7 @@ trait InputFilterAwareTrait
     /**
      * Set input filter
      *
-     * @param InputFilterInterface $inputFilter
+     * @param  InputFilterInterface $inputFilter
      * @return mixed
      */
     public function setInputFilter(InputFilterInterface $inputFilter)

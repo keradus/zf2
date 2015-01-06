@@ -13,9 +13,9 @@ use DateTime;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -29,36 +29,36 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/Atom';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/Atom';
 
         $this->expectedCats = array(
             array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema1',
-                'label' => 'topic1'
+                'label' => 'topic1',
             ),
             array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema2',
-                'label' => 'topic1'
+                'label' => 'topic1',
             ),
             array(
                 'term' => 'cat_dog',
                 'scheme' => 'http://example.com/schema1',
-                'label' => 'Cat & Dog'
-            )
+                'label' => 'Cat & Dog',
+            ),
         );
         $this->expectedCatsDc = array(
             array(
                 'term' => 'topic1',
                 'scheme' => null,
-                'label' => 'topic1'
+                'label' => 'topic1',
             ),
             array(
                 'term' => 'topic2',
                 'scheme' => null,
-                'label' => 'topic2'
-            )
+                'label' => 'topic2',
+            ),
         );
     }
 
@@ -91,12 +91,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
 
         $authors = array(
-            array('email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
-            array('name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
-            array('name'=>'Joe Bloggs'),
-            array('email'=>'joe@example.com','uri'=>'http://www.example.com'),
-            array('uri'=>'http://www.example.com'),
-            array('email'=>'joe@example.com')
+            array('email' => 'joe@example.com','name' => 'Joe Bloggs','uri' => 'http://www.example.com'),
+            array('name' => 'Joe Bloggs','uri' => 'http://www.example.com'),
+            array('name' => 'Joe Bloggs'),
+            array('email' => 'joe@example.com','uri' => 'http://www.example.com'),
+            array('uri' => 'http://www.example.com'),
+            array('email' => 'joe@example.com'),
         );
 
         $this->assertEquals($authors, (array) $feed->getAuthors());
@@ -109,12 +109,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
 
         $authors = array(
-            array('email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
-            array('name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
-            array('name'=>'Joe Bloggs'),
-            array('email'=>'joe@example.com','uri'=>'http://www.example.com'),
-            array('uri'=>'http://www.example.com'),
-            array('email'=>'joe@example.com')
+            array('email' => 'joe@example.com','name' => 'Joe Bloggs','uri' => 'http://www.example.com'),
+            array('name' => 'Joe Bloggs','uri' => 'http://www.example.com'),
+            array('name' => 'Joe Bloggs'),
+            array('email' => 'joe@example.com','uri' => 'http://www.example.com'),
+            array('uri' => 'http://www.example.com'),
+            array('email' => 'joe@example.com'),
         );
 
         $this->assertEquals($authors, (array) $feed->getAuthors());
@@ -129,7 +129,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/atom03.xml')
         );
 
-        $this->assertEquals(array('name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'), $feed->getAuthor());
+        $this->assertEquals(array('name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'), $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromAtom10()
@@ -138,7 +138,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/atom10.xml')
         );
 
-        $this->assertEquals(array('name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'), $feed->getAuthor());
+        $this->assertEquals(array('name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'), $feed->getAuthor());
     }
 
     /**
@@ -147,7 +147,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsDateCreatedFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath . '/datecreated/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath.'/datecreated/plain/atom03.xml')
         );
         $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateCreated());
@@ -156,7 +156,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsDateCreatedFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath . '/datecreated/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath.'/datecreated/plain/atom10.xml')
         );
         $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateCreated());
@@ -168,7 +168,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsDateModifiedFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath . '/datemodified/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath.'/datemodified/plain/atom03.xml')
         );
         $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateModified());
@@ -177,7 +177,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsDateModifiedFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath . '/datemodified/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath.'/datemodified/plain/atom10.xml')
         );
         $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateModified());
@@ -381,7 +381,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2'
+            'http://www.example.com/hub2',
         ), $feed->getHubs());
     }
 
@@ -392,15 +392,13 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2'
+            'http://www.example.com/hub2',
         ), $feed->getHubs());
     }
-
 
     /**
      * Implements Countable
      */
-
     public function testCountableInterface()
     {
         $feed = Reader\Reader::importString(
@@ -481,7 +479,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/atom03.xml')
         );
-        $this->assertEquals(array('uri'=>'http://www.example.com/logo.gif'), $feed->getImage());
+        $this->assertEquals(array('uri' => 'http://www.example.com/logo.gif'), $feed->getImage());
     }
 
     public function testGetsImageFromAtom10()
@@ -489,7 +487,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/atom10.xml')
         );
-        $this->assertEquals(array('uri'=>'http://www.example.com/logo.gif'), $feed->getImage());
+        $this->assertEquals(array('uri' => 'http://www.example.com/logo.gif'), $feed->getImage());
     }
 
     /**

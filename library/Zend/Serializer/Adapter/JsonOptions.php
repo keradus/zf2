@@ -24,12 +24,13 @@ class JsonOptions extends AdapterOptions
     protected $objectDecodeType = ZendJson::TYPE_ARRAY;
 
     /**
-     * @param  bool $flag
+     * @param  bool        $flag
      * @return JsonOptions
      */
     public function setCycleCheck($flag)
     {
         $this->cycleCheck = (bool) $flag;
+
         return $this;
     }
 
@@ -42,12 +43,13 @@ class JsonOptions extends AdapterOptions
     }
 
     /**
-     * @param  bool $flag
+     * @param  bool        $flag
      * @return JsonOptions
      */
     public function setEnableJsonExprFinder($flag)
     {
         $this->enableJsonExprFinder = (bool) $flag;
+
         return $this;
     }
 
@@ -60,7 +62,7 @@ class JsonOptions extends AdapterOptions
     }
 
     /**
-     * @param  int $type
+     * @param  int                                $type
      * @return JsonOptions
      * @throws Exception\InvalidArgumentException
      */
@@ -68,7 +70,7 @@ class JsonOptions extends AdapterOptions
     {
         if ($type != ZendJson::TYPE_ARRAY && $type != ZendJson::TYPE_OBJECT) {
             throw new Exception\InvalidArgumentException(
-                'Unknown decode type: ' . $type
+                'Unknown decode type: '.$type
             );
         }
 

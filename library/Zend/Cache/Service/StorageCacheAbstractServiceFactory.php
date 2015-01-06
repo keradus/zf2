@@ -56,6 +56,7 @@ class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
     {
         $config = $this->getConfig($services);
         $config = $config[$requestedName];
+
         return StorageFactory::factory($config);
     }
 
@@ -73,16 +74,19 @@ class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
 
         if (!$services->has('Config')) {
             $this->config = array();
+
             return $this->config;
         }
 
         $config = $services->get('Config');
         if (!isset($config[$this->configKey])) {
             $this->config = array();
+
             return $this->config;
         }
 
         $this->config = $config[$this->configKey];
+
         return $this->config;
     }
 }

@@ -30,7 +30,7 @@ abstract class AbstractPrecisionColumn extends AbstractLengthColumn
     }
 
     /**
-     * @param  int $digits
+     * @param int $digits
      *
      * @return self
      */
@@ -48,7 +48,7 @@ abstract class AbstractPrecisionColumn extends AbstractLengthColumn
     }
 
     /**
-     * @param int|null $decimal
+     * @param  int|null $decimal
      * @return self
      */
     public function setDecimal($decimal)
@@ -72,7 +72,7 @@ abstract class AbstractPrecisionColumn extends AbstractLengthColumn
     protected function getLengthExpression()
     {
         if ($this->decimal !== null) {
-            return $this->length . ',' . $this->decimal;
+            return $this->length.','.$this->decimal;
         }
 
         return $this->length;

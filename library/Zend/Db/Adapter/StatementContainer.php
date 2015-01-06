@@ -22,7 +22,7 @@ class StatementContainer implements StatementContainerInterface
     protected $parameterContainer = null;
 
     /**
-     * @param string|null $sql
+     * @param string|null             $sql
      * @param ParameterContainer|null $parameterContainer
      */
     public function __construct($sql = null, ParameterContainer $parameterContainer = null)
@@ -30,7 +30,7 @@ class StatementContainer implements StatementContainerInterface
         if ($sql) {
             $this->setSql($sql);
         }
-        $this->parameterContainer = ($parameterContainer) ?: new ParameterContainer;
+        $this->parameterContainer = ($parameterContainer) ?: new ParameterContainer();
     }
 
     /**
@@ -40,6 +40,7 @@ class StatementContainer implements StatementContainerInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
@@ -52,12 +53,13 @@ class StatementContainer implements StatementContainerInterface
     }
 
     /**
-     * @param ParameterContainer $parameterContainer
+     * @param  ParameterContainer $parameterContainer
      * @return StatementContainer
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 

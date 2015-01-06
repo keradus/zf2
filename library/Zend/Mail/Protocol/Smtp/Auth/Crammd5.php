@@ -33,9 +33,9 @@ class Crammd5 extends Smtp
      * All parameters may be passed as an array to the first argument of the
      * constructor. If so,
      *
-     * @param  string|array $host   (Default: 127.0.0.1)
-     * @param  null|int     $port   (Default: null)
-     * @param  null|array   $config Auth-specific parameters
+     * @param string|array $host   (Default: 127.0.0.1)
+     * @param null|int     $port   (Default: null)
+     * @param null|array   $config Auth-specific parameters
      */
     public function __construct($host = '127.0.0.1', $port = null, $config = null)
     {
@@ -75,7 +75,7 @@ class Crammd5 extends Smtp
         $challenge = $this->_expect(334);
         $challenge = base64_decode($challenge);
         $digest = $this->_hmacMd5($this->getPassword(), $challenge);
-        $this->_send(base64_encode($this->getUsername() . ' ' . $digest));
+        $this->_send(base64_encode($this->getUsername().' '.$digest));
         $this->_expect(235);
         $this->auth = true;
     }
@@ -83,12 +83,13 @@ class Crammd5 extends Smtp
     /**
      * Set value for username
      *
-     * @param  string $username
+     * @param  string  $username
      * @return Crammd5
      */
     public function setUsername($username)
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -105,12 +106,13 @@ class Crammd5 extends Smtp
     /**
      * Set value for password
      *
-     * @param  string $password
+     * @param  string  $password
      * @return Crammd5
      */
     public function setPassword($password)
     {
         $this->password = $password;
+
         return $this;
     }
 

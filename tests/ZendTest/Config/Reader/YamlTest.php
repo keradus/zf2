@@ -42,7 +42,7 @@ class YamlTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/Yaml/' . $name . '.yaml';
+        return __DIR__.'/TestAssets/Yaml/'.$name.'.yaml';
     }
 
     public function testInvalidIniFile()

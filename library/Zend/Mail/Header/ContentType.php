@@ -73,7 +73,7 @@ class ContentType implements HeaderInterface
             $values[] = sprintf('%s="%s"', $attribute, $value);
         }
 
-        return implode(';' . Headers::FOLDING, $values);
+        return implode(';'.Headers::FOLDING, $values);
     }
 
     public function setEncoding($encoding)
@@ -89,13 +89,13 @@ class ContentType implements HeaderInterface
 
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue();
+        return 'Content-Type: '.$this->getFieldValue();
     }
 
     /**
      * Set the content type
      *
-     * @param  string $type
+     * @param  string                             $type
      * @throws Exception\InvalidArgumentException
      * @return ContentType
      */
@@ -109,6 +109,7 @@ class ContentType implements HeaderInterface
             ));
         }
         $this->type = $type;
+
         return $this;
     }
 
@@ -125,14 +126,15 @@ class ContentType implements HeaderInterface
     /**
      * Add a parameter pair
      *
-     * @param  string $name
-     * @param  string $value
+     * @param  string      $name
+     * @param  string      $value
      * @return ContentType
      */
     public function addParameter($name, $value)
     {
         $name = strtolower($name);
         $this->parameters[$name] = (string) $value;
+
         return $this;
     }
 
@@ -149,7 +151,7 @@ class ContentType implements HeaderInterface
     /**
      * Get a parameter by name
      *
-     * @param  string $name
+     * @param  string      $name
      * @return null|string
      */
     public function getParameter($name)
@@ -158,6 +160,7 @@ class ContentType implements HeaderInterface
         if (isset($this->parameters[$name])) {
             return $this->parameters[$name];
         }
+
         return;
     }
 
@@ -172,8 +175,10 @@ class ContentType implements HeaderInterface
         $name = strtolower($name);
         if (isset($this->parameters[$name])) {
             unset($this->parameters[$name]);
+
             return true;
         }
+
         return false;
     }
 }

@@ -19,9 +19,9 @@ trait ArrayOrTraversableGuardTrait
     /**
      * Verifies that the data is an array or Traversable
      *
-     * @param  mixed  $data           the data to verify
-     * @param  string $dataName       the data name
-     * @param  string $exceptionClass FQCN for the exception
+     * @param  mixed      $data           the data to verify
+     * @param  string     $dataName       the data name
+     * @param  string     $exceptionClass FQCN for the exception
      * @throws \Exception
      */
     protected function guardForArrayOrTraversable(

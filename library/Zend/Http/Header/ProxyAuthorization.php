@@ -24,7 +24,7 @@ class ProxyAuthorization implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'proxy-authorization') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Proxy-Authorization string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Proxy-Authorization string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class ProxyAuthorization implements HeaderInterface
 
     public function toString()
     {
-        return 'Proxy-Authorization: ' . $this->getFieldValue();
+        return 'Proxy-Authorization: '.$this->getFieldValue();
     }
 }

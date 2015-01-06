@@ -162,7 +162,6 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         unset($adapter, $driver);
     }
 
-
     /**
      * @testdox unit test: Test getDriver() will return driver object
      * @covers Zend\Db\Adapter\Adapter::getDriver
@@ -216,7 +215,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueryWhenPreparedWithParameterArrayProducesResult()
     {
-        $parray = array('bar'=>'foo');
+        $parray = array('bar' => 'foo');
         $sql = 'SELECT foo, :bar';
         $statement = $this->getMock('\Zend\Db\Adapter\Driver\StatementInterface');
         $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');

@@ -126,7 +126,7 @@ class ModuleManagerFactory implements FactoryInterface
         $events->attach($defaultListeners);
         $events->attach($serviceListener);
 
-        $moduleEvent = new ModuleEvent;
+        $moduleEvent = new ModuleEvent();
         $moduleEvent->setParam('ServiceManager', $serviceLocator);
 
         $moduleManager = new ModuleManager($configuration['modules'], $events);

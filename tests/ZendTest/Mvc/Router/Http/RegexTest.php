@@ -24,58 +24,58 @@ class RegexTest extends TestCase
                 new Regex('/(?<foo>[^/]+)', '/%foo%'),
                 '/bar',
                 null,
-                array('foo' => 'bar')
+                array('foo' => 'bar'),
             ),
             'no-match-without-leading-slash' => array(
                 new Regex('(?<foo>[^/]+)', '%foo%'),
                 '/bar',
                 null,
-                null
+                null,
             ),
             'no-match-with-trailing-slash' => array(
                 new Regex('/(?<foo>[^/]+)', '/%foo%'),
                 '/bar/',
                 null,
-                null
+                null,
             ),
             'offset-skips-beginning' => array(
                 new Regex('(?<foo>[^/]+)', '%foo%'),
                 '/bar',
                 1,
-                array('foo' => 'bar')
+                array('foo' => 'bar'),
             ),
             'offset-enables-partial-matching' => array(
                 new Regex('/(?<foo>[^/]+)', '/%foo%'),
                 '/bar/baz',
                 0,
-                array('foo' => 'bar')
+                array('foo' => 'bar'),
             ),
             'url-encoded-parameters-are-decoded' => array(
                 new Regex('/(?<foo>[^/]+)', '/%foo%'),
                 '/foo%20bar',
                 null,
-                array('foo' => 'foo bar')
+                array('foo' => 'foo bar'),
             ),
             'empty-matches-are-replaced-with-defaults' => array(
                 new Regex('/foo(?:/(?<bar>[^/]+))?/baz-(?<baz>[^/]+)', '/foo/baz-%baz%', array('bar' => 'bar')),
                 '/foo/baz-baz',
                 null,
-                array('bar' => 'bar', 'baz' => 'baz')
+                array('bar' => 'bar', 'baz' => 'baz'),
             ),
         );
     }
 
     /**
      * @dataProvider routeProvider
-     * @param        Regex   $route
-     * @param        string  $path
-     * @param        integer $offset
-     * @param        array   $params
+     * @param Regex   $route
+     * @param string  $path
+     * @param integer $offset
+     * @param array   $params
      */
     public function testMatching(Regex $route, $path, $offset, array $params = null)
     {
         $request = new Request();
-        $request->setUri('http://example.com' . $path);
+        $request->setUri('http://example.com'.$path);
         $match = $route->match($request, $offset);
 
         if ($params === null) {
@@ -95,10 +95,10 @@ class RegexTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Regex   $route
-     * @param        string  $path
-     * @param        integer $offset
-     * @param        array   $params
+     * @param Regex   $route
+     * @param string  $path
+     * @param integer $offset
+     * @param array   $params
      */
     public function testAssembling(Regex $route, $path, $offset, array $params = null)
     {
@@ -139,11 +139,11 @@ class RegexTest extends TestCase
             'Zend\Mvc\Router\Http\Regex',
             array(
                 'regex' => 'Missing "regex" in options array',
-                'spec'  => 'Missing "spec" in options array'
+                'spec'  => 'Missing "spec" in options array',
             ),
             array(
                 'regex' => '/foo',
-                'spec'  => '/foo'
+                'spec'  => '/foo',
             )
         );
     }
@@ -154,7 +154,7 @@ class RegexTest extends TestCase
         // this includes every character other than #, %, / and ?
         $raw = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\\;\',.~!@$^&*()_+{}|:"<>';
         $request = new Request();
-        $request->setUri('http://example.com/' . $raw);
+        $request->setUri('http://example.com/'.$raw);
         $route   = new Regex('/(?<foo>[^/]+)', '/%foo%');
         $match   = $route->match($request);
 
@@ -167,7 +167,7 @@ class RegexTest extends TestCase
         $in  = '%61%62%63%64%65%66%67%68%69%6a%6b%6c%6d%6e%6f%70%71%72%73%74%75%76%77%78%79%7a%41%42%43%44%45%46%47%48%49%4a%4b%4c%4d%4e%4f%50%51%52%53%54%55%56%57%58%59%5a%30%31%32%33%34%35%36%37%38%39%60%2d%3d%5b%5d%5c%3b%27%2c%2e%2f%7e%21%40%23%24%25%5e%26%2a%28%29%5f%2b%7b%7d%7c%3a%22%3c%3e%3f';
         $out = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\\;\',./~!@#$%^&*()_+{}|:"<>?';
         $request = new Request();
-        $request->setUri('http://example.com/' . $in);
+        $request->setUri('http://example.com/'.$in);
         $route   = new Regex('/(?<foo>[^/]+)', '/%foo%');
         $match   = $route->match($request);
 

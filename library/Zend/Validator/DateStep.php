@@ -98,6 +98,7 @@ class DateStep extends Date
     public function setBaseValue($baseValue)
     {
         $this->baseValue = $baseValue;
+
         return $this;
     }
 
@@ -120,6 +121,7 @@ class DateStep extends Date
     public function setStep(DateInterval $step)
     {
         $this->step = $step;
+
         return $this;
     }
 
@@ -152,6 +154,7 @@ class DateStep extends Date
     public function setTimezone(DateTimeZone $timezone)
     {
         $this->timezone = $timezone;
+
         return $this;
     }
 
@@ -166,7 +169,7 @@ class DateStep extends Date
         if (strpos($this->format, 'Y-\WW') === 0
             && preg_match('/^([0-9]{4})\-W([0-9]{2})/', $value, $matches)
         ) {
-            $date = new DateTime;
+            $date = new DateTime();
             $date->setISODate($matches[1], $matches[2]);
         } else {
             $date = DateTime::createFromFormat($this->format, $value, $this->timezone);
@@ -179,6 +182,7 @@ class DateStep extends Date
             if ($addErrors) {
                 $this->error(self::FALSEFORMAT);
             }
+
             return false;
         }
 
@@ -188,7 +192,7 @@ class DateStep extends Date
     /**
      * Returns true if a date is within a valid step
      *
-     * @param  string|int|\DateTime $value
+     * @param  string|int|\DateTime               $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */
@@ -266,6 +270,7 @@ class DateStep extends Date
                         break;
                 }
                 $this->error(self::NOT_STEP);
+
                 return false;
             }
 
@@ -314,6 +319,7 @@ class DateStep extends Date
                             break;
                     }
                     $this->error(self::NOT_STEP);
+
                     return false;
                 }
             }
@@ -339,6 +345,7 @@ class DateStep extends Date
         }
 
         $this->error(self::NOT_STEP);
+
         return false;
     }
 }

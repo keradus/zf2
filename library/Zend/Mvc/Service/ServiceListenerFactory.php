@@ -89,7 +89,7 @@ class ServiceListenerFactory implements FactoryInterface
             'Zend\View\Resolver\TemplatePathStack'   => 'ViewTemplatePathStack',
             'Zend\View\Resolver\AggregateResolver'   => 'ViewResolver',
             'Zend\View\Resolver\ResolverInterface'   => 'ViewResolver',
-            'ControllerManager'                      => 'ControllerLoader'
+            'ControllerManager'                      => 'ControllerLoader',
         ),
         'abstract_factories' => array(
             'Zend\Form\FormAbstractServiceFactory',
@@ -127,7 +127,7 @@ class ServiceListenerFactory implements FactoryInterface
 
             if (!$serviceListener instanceof ServiceListenerInterface) {
                 throw new RuntimeException(
-                    'The service named ServiceListenerInterface must implement ' .
+                    'The service named ServiceListenerInterface must implement '.
                     'Zend\ModuleManager\Listener\ServiceListenerInterface'
                 );
             }

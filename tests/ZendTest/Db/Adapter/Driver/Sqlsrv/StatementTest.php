@@ -26,7 +26,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->statement = new Statement;
+        $this->statement = new Statement();
     }
 
     /**
@@ -50,7 +50,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetParameterContainer()
     {
-        $this->assertSame($this->statement, $this->statement->setParameterContainer(new ParameterContainer));
+        $this->assertSame($this->statement, $this->statement->setParameterContainer(new ParameterContainer()));
     }
 
     /**
@@ -58,7 +58,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParameterContainer()
     {
-        $container = new ParameterContainer;
+        $container = new ParameterContainer();
         $this->statement->setParameterContainer($container);
         $this->assertSame($container, $this->statement->getParameterContainer());
     }

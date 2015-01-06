@@ -30,9 +30,9 @@ abstract class Glob
      * Find pathnames matching a pattern.
      *
      * @see    http://docs.php.net/glob
-     * @param  string  $pattern
-     * @param  int $flags
-     * @param  bool $forceFallback
+     * @param  string                     $pattern
+     * @param  int                        $flags
+     * @param  bool                       $forceFallback
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -48,8 +48,8 @@ abstract class Glob
     /**
      * Use the glob function provided by the system.
      *
-     * @param  string  $pattern
-     * @param  int     $flags
+     * @param  string                     $pattern
+     * @param  int                        $flags
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -83,14 +83,15 @@ abstract class Glob
         if ($res === false) {
             throw new Exception\RuntimeException("glob('{$pattern}', {$globFlags}) failed", 0, $err);
         }
+
         return $res;
     }
 
     /**
      * Expand braces manually, then use the system glob.
      *
-     * @param  string  $pattern
-     * @param  int     $flags
+     * @param  string                     $pattern
+     * @param  int                        $flags
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -147,8 +148,8 @@ abstract class Glob
 
         while (true) {
             $subPattern = substr($pattern, 0, $begin)
-                        . substr($pattern, $p, $next - $p)
-                        . substr($pattern, $rest + 1);
+                        .substr($pattern, $p, $next - $p)
+                        .substr($pattern, $rest + 1);
 
             $result = static::fallbackGlob($subPattern, $flags | self::GLOB_BRACE);
 
@@ -170,9 +171,9 @@ abstract class Glob
     /**
      * Find the end of the sub-pattern in a brace expression.
      *
-     * @param  string  $pattern
-     * @param  int $begin
-     * @param  int $flags
+     * @param  string   $pattern
+     * @param  int      $begin
+     * @param  int      $flags
      * @return int|null
      */
     protected static function nextBraceSub($pattern, $begin, $flags)

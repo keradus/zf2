@@ -54,7 +54,7 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'label'      => 'foo',
             'action'     => 'index',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
         Page\Mvc::setDefaultRoute('default');
         $page->setRouter($this->router);
@@ -69,7 +69,7 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'label'      => 'foo',
             'action'     => 'index',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
         $page->setRouteMatch($this->routeMatch);
         $page->setRouter($this->router);
@@ -84,7 +84,7 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'label'      => 'foo',
             'route' => 'test/route',
-            'use_route_match' => true
+            'use_route_match' => true,
         ));
         $router = $this->getMock('\Zend\Mvc\Router\Http\TreeRouteStack');
         $router->expects($this->once())->method('assemble')->will($this->returnValue('/test/route'));
@@ -100,8 +100,8 @@ class MvcTest extends TestCase
             'controller' => 'mycontroller',
             'route' => 'myroute',
             'params' => array(
-                'page' => 1337
-            )
+                'page' => 1337,
+            ),
         ));
 
         $route  = new RegexRoute(
@@ -110,7 +110,7 @@ class MvcTest extends TestCase
             array(
                 'controller' => 'foobar',
                 'action'     => 'bazbat',
-                'page'       => 1
+                'page'       => 1,
             )
         );
         $router = new TreeRouteStack();
@@ -132,12 +132,12 @@ class MvcTest extends TestCase
     {
         $page = new Page\Mvc(array(
             'label' => 'spiffyjrwashere',
-            'route' => 'lolfish'
+            'route' => 'lolfish',
         ));
 
         $route = new LiteralRoute('/lolfish');
 
-        $router = new TreeRouteStack;
+        $router = new TreeRouteStack();
         $router->addRoute('lolfish', $route);
 
         $routeMatch = new RouteMatch(array());
@@ -154,17 +154,17 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'label' => 'mpinkstonwashere',
             'route' => 'roflcopter',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
 
         $route = new LiteralRoute('/roflcopter');
 
-        $router = new TreeRouteStack;
+        $router = new TreeRouteStack();
         $router->addRoute('roflcopter', $route);
 
         $routeMatch = new RouteMatch(array(
             ModuleRouteListener::MODULE_NAMESPACE => 'Application\Controller',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
         $routeMatch->setMatchedRouteName('roflcopter');
 
@@ -218,8 +218,8 @@ class MvcTest extends TestCase
             'action'             => 'myaction',
             'route'              => 'myroute',
             'params'             => array(
-                'page' => 1337
-            )
+                'page' => 1337,
+            ),
         ));
 
         $route = new RegexRoute(
@@ -249,8 +249,8 @@ class MvcTest extends TestCase
             'action'             => 'myaction',
             'route'              => 'myroute',
             'params'             => array(
-                'page' => 1337
-            )
+                'page' => 1337,
+            ),
         ));
 
         $route = new RegexRoute(
@@ -282,7 +282,7 @@ class MvcTest extends TestCase
     {
         $page = new Page\Mvc(array(
             'action'     => 'index',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
 
         $routeMatch = new RouteMatch(array(
@@ -299,7 +299,7 @@ class MvcTest extends TestCase
     {
         $page = new Page\Mvc(array(
             'action'     => 'bar',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
 
         $routeMatch = new RouteMatch(array(
@@ -319,14 +319,14 @@ class MvcTest extends TestCase
             'action'     => 'view',
             'controller' => 'post',
             'params'     => array(
-                'id'     => '1337'
-            )
+                'id'     => '1337',
+            ),
         ));
 
         $routeMatch = new RouteMatch(array(
             'controller' => 'post',
             'action'     => 'view',
-            'id'         => '1337'
+            'id'         => '1337',
         ));
 
         $page->setRouteMatch($routeMatch);
@@ -360,14 +360,14 @@ class MvcTest extends TestCase
             'action'     => 'view',
             'controller' => 'post',
             'params'     => array(
-                'id'     => '1337'
-            )
+                'id'     => '1337',
+            ),
         ));
 
         $routeMatch = new RouteMatch(array(
             'controller' => 'post',
             'action'     => 'view',
-            'id'         => null
+            'id'         => null,
         ));
 
         $page->setRouteMatch($routeMatch);
@@ -380,7 +380,7 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'index',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
 
         $props = array('Action', 'Controller');
@@ -413,7 +413,7 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'label'      => 'foo',
             'action'     => 'index',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
 
         $props    = array('Route');
@@ -446,7 +446,7 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'label' => 'foo',
             'action' => 'index',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
 
         $params = array('foo' => 'bar', 'baz' => 'bat');
@@ -509,7 +509,7 @@ class MvcTest extends TestCase
         $newRouter = new TestAsset\Router();
 
         $page = new Page\Mvc(array(
-            'route' => 'default'
+            'route' => 'default',
         ));
         $page->setRouter($newRouter);
 
@@ -525,7 +525,7 @@ class MvcTest extends TestCase
             'label'         => 'foo',
             'action'        => 'index',
             'controller'    => 'index',
-            'defaultRouter' => $this->router
+            'defaultRouter' => $this->router,
         ));
 
         $this->assertEquals($this->router, $page->getDefaultRouter());
@@ -552,7 +552,7 @@ class MvcTest extends TestCase
             'action'           => 'index',
             'controller'       => 'index',
             'route'            => 'default',
-            'defaultRouter'    => $this->router
+            'defaultRouter'    => $this->router,
         ));
 
         // If the default router is not used an exception will be thrown.
@@ -590,7 +590,7 @@ class MvcTest extends TestCase
 
         $route = new SegmentRoute('/lollerblades/view[/:serialNumber]');
 
-        $router = new TreeRouteStack;
+        $router = new TreeRouteStack();
         $router->addRoute('lollerblades', $route);
 
         $routeMatch = new RouteMatch(array(
@@ -616,12 +616,12 @@ class MvcTest extends TestCase
 
         $route = new SegmentRoute('/lmaoplane[/:controller]');
 
-        $router = new TreeRouteStack;
+        $router = new TreeRouteStack();
         $router->addRoute('lmaoplane', $route);
 
         $routeMatch = new RouteMatch(array(
             ModuleRouteListener::MODULE_NAMESPACE => 'Application\Controller',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
         $routeMatch->setMatchedRouteName('lmaoplane');
 
@@ -652,14 +652,14 @@ class MvcTest extends TestCase
 
         $route = new LiteralRoute('/foo');
 
-        $router = new TreeRouteStack;
+        $router = new TreeRouteStack();
         $router->addRoute('myRoute', $route);
 
         $routeMatch = new RouteMatch(
             array(
                 ModuleRouteListener::MODULE_NAMESPACE => 'Application\Controller',
                 'controller' => 'index',
-                'action' => 'index'
+                'action' => 'index',
             )
         );
         $routeMatch->setMatchedRouteName('index');
@@ -693,7 +693,7 @@ class MvcTest extends TestCase
         );
         $parentPage->addPage($childPage);
 
-        $router = new TreeRouteStack;
+        $router = new TreeRouteStack();
         $router->addRoutes(
             array(
                 'parentPageRoute' => array(
@@ -702,9 +702,9 @@ class MvcTest extends TestCase
                         'route' => '/foo',
                         'defaults' => array(
                             'controller' => 'fooController',
-                            'action' => 'fooAction'
-                        )
-                    )
+                            'action' => 'fooAction',
+                        ),
+                    ),
                 ),
                 'childPageRoute' => array(
                     'type' => 'literal',
@@ -712,10 +712,10 @@ class MvcTest extends TestCase
                         'route' => '/bar',
                         'defaults' => array(
                             'controller' => 'barController',
-                            'action' => 'barAction'
-                        )
-                    )
-                )
+                            'action' => 'barAction',
+                        ),
+                    ),
+                ),
             )
         );
 
@@ -723,7 +723,7 @@ class MvcTest extends TestCase
             array(
                 ModuleRouteListener::MODULE_NAMESPACE => 'Application\Controller',
                 'controller' => 'barController',
-                'action' => 'barAction'
+                'action' => 'barAction',
             )
         );
         $routeMatch->setMatchedRouteName('childPageRoute');

@@ -24,7 +24,7 @@ class ContentLanguage implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-language') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Language string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Language string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class ContentLanguage implements HeaderInterface
 
     public function toString()
     {
-        return 'Content-Language: ' . $this->getFieldValue();
+        return 'Content-Language: '.$this->getFieldValue();
     }
 }

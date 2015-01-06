@@ -34,11 +34,11 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
 
     public function setUp()
     {
-        $this->testFilesDir = __DIR__ . '/_files';
+        $this->testFilesDir = __DIR__.'/_files';
 
         $this->translator = new Translator();
-        $this->translator->addTranslationFile('phpArray', $this->testFilesDir . '/tokens.en.php', 'route', 'en');
-        $this->translator->addTranslationFile('phpArray', $this->testFilesDir . '/tokens.de.php', 'route', 'de');
+        $this->translator->addTranslationFile('phpArray', $this->testFilesDir.'/tokens.en.php', 'route', 'en');
+        $this->translator->addTranslationFile('phpArray', $this->testFilesDir.'/tokens.de.php', 'route', 'de');
 
         $this->fooRoute = array(
             'type' => 'Segment',

@@ -24,8 +24,8 @@ class AddressList implements Countable, Iterator
     /**
      * Add an address to the list
      *
-     * @param  string|Address\AddressInterface $emailOrAddress
-     * @param  null|string $name
+     * @param  string|Address\AddressInterface    $emailOrAddress
+     * @param  null|string                        $name
      * @throws Exception\InvalidArgumentException
      * @return AddressList
      */
@@ -48,6 +48,7 @@ class AddressList implements Countable, Iterator
         }
 
         $this->addresses[$email] = $emailOrAddress;
+
         return $this;
     }
 
@@ -58,7 +59,7 @@ class AddressList implements Countable, Iterator
      * as the name. Otherwise, the value is passed as the sole argument to add(),
      * and, as such, can be either email strings or Address\AddressInterface objects.
      *
-     * @param  array $addresses
+     * @param  array                      $addresses
      * @throws Exception\RuntimeException
      * @return AddressList
      */
@@ -76,6 +77,7 @@ class AddressList implements Countable, Iterator
                 ));
             }
         }
+
         return $this;
     }
 
@@ -84,7 +86,7 @@ class AddressList implements Countable, Iterator
      *  - "ZF Dev" <dev@zf.com>
      *  - dev@zf.com
      *
-     * @param string $address
+     * @param  string                             $address
      * @throws Exception\InvalidArgumentException
      * @return AddressList
      */
@@ -124,6 +126,7 @@ class AddressList implements Countable, Iterator
         foreach ($addressList as $address) {
             $this->add($address);
         }
+
         return $this;
     }
 
@@ -136,13 +139,14 @@ class AddressList implements Countable, Iterator
     public function has($email)
     {
         $email = strtolower($email);
+
         return isset($this->addresses[$email]);
     }
 
     /**
      * Get an address by email
      *
-     * @param  string $email
+     * @param  string                        $email
      * @return bool|Address\AddressInterface
      */
     public function get($email)
@@ -169,6 +173,7 @@ class AddressList implements Countable, Iterator
         }
 
         unset($this->addresses[$email]);
+
         return true;
     }
 
@@ -186,7 +191,7 @@ class AddressList implements Countable, Iterator
      * Rewind iterator
      *
      * @return mixed the value of the first addresses element, or false if the addresses is
-     * empty.
+     *               empty.
      * @see addresses
      */
     public function rewind()
@@ -218,7 +223,7 @@ class AddressList implements Countable, Iterator
      * Move to next item
      *
      * @return mixed the addresses value in the next place that's pointed to by the
-     * internal array pointer, or false if there are no more elements.
+     *               internal array pointer, or false if there are no more elements.
      * @see addresses
      */
     public function next()
@@ -234,13 +239,14 @@ class AddressList implements Countable, Iterator
     public function valid()
     {
         $key = key($this->addresses);
+
         return ($key !== null && $key !== false);
     }
 
     /**
      * Create an address object
      *
-     * @param  string $email
+     * @param  string      $email
      * @param  string|null $name
      * @return Address
      */

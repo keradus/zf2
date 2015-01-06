@@ -54,13 +54,13 @@ class MessageId implements HeaderInterface
 
     public function toString()
     {
-        return 'Message-ID: ' . $this->getFieldValue();
+        return 'Message-ID: '.$this->getFieldValue();
     }
 
     /**
      * Set the message id
      *
-     * @param string|null $id
+     * @param  string|null $id
      * @return MessageId
      */
     public function setId($id = null)
@@ -71,6 +71,7 @@ class MessageId implements HeaderInterface
 
         $id = sprintf('<%s>', $id);
         $this->messageId = $id;
+
         return $this;
     }
 
@@ -107,6 +108,6 @@ class MessageId implements HeaderInterface
             $hostName = php_uname('n');
         }
 
-        return sha1($time . $user . $rand) . '@' . $hostName;
+        return sha1($time.$user.$rand).'@'.$hostName;
     }
 }

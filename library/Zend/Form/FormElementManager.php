@@ -117,7 +117,7 @@ class FormElementManager extends AbstractPluginManager
      *
      * Checks that the element is an instance of ElementInterface
      *
-     * @param  mixed $plugin
+     * @param  mixed                             $plugin
      * @throws Exception\InvalidElementException
      * @return void
      */
@@ -140,9 +140,9 @@ class FormElementManager extends AbstractPluginManager
      * createFromInvokable() will use these and pass them to the instance
      * constructor if not null and a non-empty array.
      *
-     * @param  string $name
+     * @param  string       $name
      * @param  string|array $options
-     * @param  bool $usePeeringServiceManagers
+     * @param  bool         $usePeeringServiceManagers
      * @return object
      */
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
@@ -150,6 +150,7 @@ class FormElementManager extends AbstractPluginManager
         if (is_string($options)) {
             $options = array('name' => $options);
         }
+
         return parent::get($name, $options, $usePeeringServiceManagers);
     }
 
@@ -159,8 +160,8 @@ class FormElementManager extends AbstractPluginManager
      * Overrides parent implementation by passing $creationOptions to the
      * constructor, if non-null.
      *
-     * @param  string $canonicalName
-     * @param  string $requestedName
+     * @param  string                     $canonicalName
+     * @param  string                     $requestedName
      * @return null|\stdClass
      * @throws ServiceNotCreatedException If resolved class does not exist
      */

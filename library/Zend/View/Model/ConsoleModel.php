@@ -50,12 +50,13 @@ class ConsoleModel extends ViewModel
     /**
      * Set result text.
      *
-     * @param string  $text
+     * @param  string                        $text
      * @return \Zend\View\Model\ConsoleModel
      */
     public function setResult($text)
     {
         $this->setVariable(self::RESULT, $text);
+
         return $this;
     }
 

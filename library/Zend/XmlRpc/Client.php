@@ -63,9 +63,9 @@ class Client implements ServerClient
     /**
      * Create a new XML-RPC client to a remote server
      *
-     * @param  string $server      Full address of the XML-RPC service
-     *                             (e.g. http://time.xmlrpc.com/RPC2)
-     * @param  \Zend\Http\Client $httpClient HTTP Client to use for requests
+     * @param string            $server     Full address of the XML-RPC service
+     *                                      (e.g. http://time.xmlrpc.com/RPC2)
+     * @param \Zend\Http\Client $httpClient HTTP Client to use for requests
      */
     public function __construct($server, Http\Client $httpClient = null)
     {
@@ -144,7 +144,7 @@ class Client implements ServerClient
     /**
      * Returns a proxy object for more convenient method calls
      *
-     * @param string $namespace  Namespace to proxy or empty string for none
+     * @param  string                          $namespace Namespace to proxy or empty string for none
      * @return \Zend\XmlRpc\Client\ServerProxy
      */
     public function getProxy($namespace = '')
@@ -153,18 +153,20 @@ class Client implements ServerClient
             $proxy = new Client\ServerProxy($this, $namespace);
             $this->proxyCache[$namespace] = $proxy;
         }
+
         return $this->proxyCache[$namespace];
     }
 
     /**
      * Set skip system lookup flag
      *
-     * @param  bool $flag
+     * @param  bool                $flag
      * @return \Zend\XmlRpc\Client
      */
     public function setSkipSystemLookup($flag = true)
     {
         $this->skipSystemLookup = (bool) $flag;
+
         return $this;
     }
 
@@ -181,8 +183,8 @@ class Client implements ServerClient
     /**
      * Perform an XML-RPC request and return a response.
      *
-     * @param \Zend\XmlRpc\Request $request
-     * @param null|\Zend\XmlRpc\Response $response
+     * @param  \Zend\XmlRpc\Request                        $request
+     * @param  null|\Zend\XmlRpc\Response                  $response
      * @return void
      * @throws \Zend\XmlRpc\Client\Exception\HttpException
      */
@@ -239,8 +241,8 @@ class Client implements ServerClient
     /**
      * Send an XML-RPC request to the service (for a specific method)
      *
-     * @param  string $method Name of the method we want to call
-     * @param  array $params Array of parameters for the method
+     * @param  string                                       $method Name of the method we want to call
+     * @param  array                                        $params Array of parameters for the method
      * @return mixed
      * @throws \Zend\XmlRpc\Client\Exception\FaultException
      */
@@ -325,8 +327,8 @@ class Client implements ServerClient
     /**
      * Create request object
      *
-     * @param string $method
-     * @param array $params
+     * @param  string               $method
+     * @param  array                $params
      * @return \Zend\XmlRpc\Request
      */
     protected function _createRequest($method, $params)

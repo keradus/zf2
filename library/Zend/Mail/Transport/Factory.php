@@ -25,7 +25,7 @@ abstract class Factory
     );
 
     /**
-     * @param array $spec
+     * @param  array                              $spec
      * @return TransportInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\DomainException
@@ -60,7 +60,7 @@ abstract class Factory
             ));
         }
 
-        $transport = new $type;
+        $transport = new $type();
 
         if (! $transport instanceof TransportInterface) {
             throw new Exception\DomainException(sprintf(

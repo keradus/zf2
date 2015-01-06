@@ -32,6 +32,7 @@ abstract class HeaderWrap
         } elseif ($header instanceof StructuredInterface) {
             return static::wrapStructuredHeader($value, $header);
         }
+
         return $value;
     }
 
@@ -40,8 +41,8 @@ abstract class HeaderWrap
      *
      * Wrap at 78 characters or before, based on whitespace.
      *
-     * @param string          $value
-     * @param HeaderInterface $header
+     * @param  string          $value
+     * @param  HeaderInterface $header
      * @return string
      */
     protected static function wrapUnstructuredHeader($value, HeaderInterface $header)
@@ -50,6 +51,7 @@ abstract class HeaderWrap
         if ($encoding == 'ASCII') {
             return wordwrap($value, 78, Headers::FOLDING);
         }
+
         return static::mimeEncodeValue($value, $encoding, 78);
     }
 
@@ -74,6 +76,7 @@ abstract class HeaderWrap
                 $temp    = '';
             }
         }
+
         return implode(Headers::FOLDING, $lines);
     }
 

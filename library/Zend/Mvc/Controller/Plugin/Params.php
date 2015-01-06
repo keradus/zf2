@@ -17,8 +17,8 @@ class Params extends AbstractPlugin
     /**
      * Grabs a param from route match by default.
      *
-     * @param string $param
-     * @param mixed $default
+     * @param  string $param
+     * @param  mixed  $default
      * @return mixed
      */
     public function __invoke($param = null, $default = null)
@@ -26,14 +26,15 @@ class Params extends AbstractPlugin
         if ($param === null) {
             return $this;
         }
+
         return $this->fromRoute($param, $default);
     }
 
     /**
      * Return all files or a single file.
      *
-     * @param  string $name File name to retrieve, or null to get all.
-     * @param  mixed $default Default value to use when the file is missing.
+     * @param  string                  $name    File name to retrieve, or null to get all.
+     * @param  mixed                   $default Default value to use when the file is missing.
      * @return array|\ArrayAccess|null
      */
     public function fromFiles($name = null, $default = null)
@@ -48,8 +49,8 @@ class Params extends AbstractPlugin
     /**
      * Return all header parameters or a single header parameter.
      *
-     * @param  string $header Header name to retrieve, or null to get all.
-     * @param  mixed $default Default value to use when the requested header is missing.
+     * @param  string                                 $header  Header name to retrieve, or null to get all.
+     * @param  mixed                                  $default Default value to use when the requested header is missing.
      * @return null|\Zend\Http\Header\HeaderInterface
      */
     public function fromHeader($header = null, $default = null)
@@ -64,8 +65,8 @@ class Params extends AbstractPlugin
     /**
      * Return all post parameters or a single post parameter.
      *
-     * @param string $param Parameter name to retrieve, or null to get all.
-     * @param mixed $default Default value to use when the parameter is missing.
+     * @param  string $param   Parameter name to retrieve, or null to get all.
+     * @param  mixed  $default Default value to use when the parameter is missing.
      * @return mixed
      */
     public function fromPost($param = null, $default = null)
@@ -80,8 +81,8 @@ class Params extends AbstractPlugin
     /**
      * Return all query parameters or a single query parameter.
      *
-     * @param string $param Parameter name to retrieve, or null to get all.
-     * @param mixed $default Default value to use when the parameter is missing.
+     * @param  string $param   Parameter name to retrieve, or null to get all.
+     * @param  mixed  $default Default value to use when the parameter is missing.
      * @return mixed
      */
     public function fromQuery($param = null, $default = null)
@@ -96,8 +97,8 @@ class Params extends AbstractPlugin
     /**
      * Return all route parameters or a single route parameter.
      *
-     * @param string $param Parameter name to retrieve, or null to get all.
-     * @param mixed $default Default value to use when the parameter is missing.
+     * @param  string           $param   Parameter name to retrieve, or null to get all.
+     * @param  mixed            $default Default value to use when the parameter is missing.
      * @return mixed
      * @throws RuntimeException
      */

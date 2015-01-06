@@ -46,8 +46,8 @@ class NotLikeTest extends \PHPUnit_Framework_TestCase
                 array(
                     '%1$s NOT LIKE %2$s',
                     array('bar', 'Foo%'),
-                    array($notLike::TYPE_IDENTIFIER, $notLike::TYPE_VALUE)
-                )
+                    array($notLike::TYPE_IDENTIFIER, $notLike::TYPE_VALUE),
+                ),
             ),
             $notLike->getExpressionData()
         );

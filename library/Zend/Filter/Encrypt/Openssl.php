@@ -65,7 +65,7 @@ class Openssl implements EncryptionAlgorithmInterface
      *   'compression' => compress value with this compression adapter
      *   'package'     => pack envelope keys into encrypted string, simplifies decryption
      *
-     * @param string|array|Traversable $options Options for this adapter
+     * @param  string|array|Traversable              $options Options for this adapter
      * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($options = array())
@@ -103,7 +103,7 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Sets the encryption keys
      *
-     * @param  string|array $keys Key with type association
+     * @param  string|array                       $keys Key with type association
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -161,6 +161,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function getPublicKey()
     {
         $key = $this->keys['public'];
+
         return $key;
     }
 
@@ -194,13 +195,14 @@ class Openssl implements EncryptionAlgorithmInterface
     public function getPrivateKey()
     {
         $key = $this->keys['private'];
+
         return $key;
     }
 
     /**
      * Sets private keys
      *
-     * @param  string $key Private key
+     * @param  string $key        Private key
      * @param  string $passphrase
      * @return self
      */
@@ -232,6 +234,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function getEnvelopeKey()
     {
         $key = $this->keys['envelope'];
+
         return $key;
     }
 
@@ -270,12 +273,13 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Sets a new passphrase
      *
-     * @param string $passphrase
+     * @param  string $passphrase
      * @return self
      */
     public function setPassphrase($passphrase)
     {
         $this->passphrase = $passphrase;
+
         return $this;
     }
 
@@ -292,7 +296,7 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Sets an internal compression for values to encrypt
      *
-     * @param string|array $compression
+     * @param  string|array $compression
      * @return self
      */
     public function setCompression($compression)
@@ -302,6 +306,7 @@ class Openssl implements EncryptionAlgorithmInterface
         }
 
         $this->compression = $compression;
+
         return $this;
     }
 
@@ -324,6 +329,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function setPackage($package)
     {
         $this->package = (bool) $package;
+
         return $this;
     }
 
@@ -331,8 +337,8 @@ class Openssl implements EncryptionAlgorithmInterface
      * Encrypts $value with the defined settings
      * Note that you also need the "encrypted" keys to be able to decrypt
      *
-     * @param  string $value Content to encrypt
-     * @return string The encrypted content
+     * @param  string                     $value Content to encrypt
+     * @return string                     The encrypted content
      * @throws Exception\RuntimeException
      */
     public function encrypt($value)
@@ -381,10 +387,10 @@ class Openssl implements EncryptionAlgorithmInterface
         if ($this->package) {
             $header = pack('n', count($this->keys['envelope']));
             foreach ($this->keys['envelope'] as $key => $envKey) {
-                $header .= pack('H32n', $fingerprints[$key], strlen($envKey)) . $envKey;
+                $header .= pack('H32n', $fingerprints[$key], strlen($envKey)).$envKey;
             }
 
-            $encrypted = $header . $encrypted;
+            $encrypted = $header.$encrypted;
         }
 
         return $encrypted;
@@ -395,8 +401,8 @@ class Openssl implements EncryptionAlgorithmInterface
      *
      * Decrypts $value with the defined settings
      *
-     * @param  string $value Content to decrypt
-     * @return string The decrypted content
+     * @param  string                     $value Content to decrypt
+     * @return string                     The decrypted content
      * @throws Exception\RuntimeException
      */
     public function decrypt($value)

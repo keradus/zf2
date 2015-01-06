@@ -25,7 +25,7 @@ interface PartInterface extends RecursiveIterator
      *
      * If part is multipart the raw content of this part with all sub parts is returned
      *
-     * @return string body
+     * @return string                       body
      * @throws Exception\ExceptionInterface
      */
     public function getContent();
@@ -40,8 +40,8 @@ interface PartInterface extends RecursiveIterator
     /**
      * Get part of multipart message
      *
-     * @param  int $num number of part starting with 1 for first part
-     * @return PartInterface wanted part
+     * @param  int                          $num number of part starting with 1 for first part
+     * @return PartInterface                wanted part
      * @throws Exception\ExceptionInterface
      */
     public function getPart($num);
@@ -69,8 +69,8 @@ interface PartInterface extends RecursiveIterator
      * Internally headers that occur more than once are saved as array, all other as string. If $format
      * is set to string implode is used to concat the values (with Zend\Mime\Mime::LINEEND as delim).
      *
-     * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
-     * @param  string $format change type of return value to 'string' or 'array'
+     * @param  string                                                        $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
+     * @param  string                                                        $format change type of return value to 'string' or 'array'
      * @return string|array|\Zend\Mail\Header\HeaderInterface|\ArrayIterator value of header in wanted or internal format
      * @throws Exception\ExceptionInterface
      */
@@ -85,10 +85,10 @@ interface PartInterface extends RecursiveIterator
      * Throws an exception if the requested header does not exist. If
      * the specific header field does not exist, returns null.
      *
-     * @param  string $name       name of header, like in getHeader()
-     * @param  string $wantedPart the wanted part, default is first, if null an array with all parts is returned
-     * @param  string $firstName  key name for the first part
-     * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
+     * @param  string                       $name       name of header, like in getHeader()
+     * @param  string                       $wantedPart the wanted part, default is first, if null an array with all parts is returned
+     * @param  string                       $firstName  key name for the first part
+     * @return string|array                 wanted part or all parts as array($firstName => firstPart, partname => value)
      * @throws Exception\ExceptionInterface
      */
     public function getHeaderField($name, $wantedPart = '0', $firstName = '0');
@@ -100,8 +100,8 @@ interface PartInterface extends RecursiveIterator
      *
      * @see PartInterface::getHeader()
      *
-     * @param  string $name header name
-     * @return string value of header
+     * @param  string                       $name header name
+     * @return string                       value of header
      * @throws Exception\ExceptionInterface
      */
     public function __get($name);

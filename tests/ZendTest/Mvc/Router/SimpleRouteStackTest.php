@@ -37,7 +37,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $stack = new SimpleRouteStack();
         $stack->addRoutes(array(
-            'foo' => new TestAsset\DummyRoute()
+            'foo' => new TestAsset\DummyRoute(),
         ));
 
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
@@ -47,7 +47,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $stack = new SimpleRouteStack();
         $stack->addRoutes(new ArrayIterator(array(
-            'foo' => new TestAsset\DummyRoute()
+            'foo' => new TestAsset\DummyRoute(),
         )));
 
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
@@ -64,7 +64,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $stack = new SimpleRouteStack();
         $stack->setRoutes(array(
-            'foo' => new TestAsset\DummyRoute()
+            'foo' => new TestAsset\DummyRoute(),
         ));
 
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
@@ -78,7 +78,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $stack = new SimpleRouteStack();
         $stack->setRoutes(new ArrayIterator(array(
-            'foo' => new TestAsset\DummyRoute()
+            'foo' => new TestAsset\DummyRoute(),
         )));
 
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
@@ -92,7 +92,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $stack = new SimpleRouteStack();
         $stack->addRoutes(array(
-            'foo' => new TestAsset\DummyRoute()
+            'foo' => new TestAsset\DummyRoute(),
         ));
 
         $this->assertEquals($stack, $stack->removeRoute('foo'));
@@ -110,7 +110,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $stack = new SimpleRouteStack();
         $stack->addRoute('foo', array(
-            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute'
+            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
         ));
 
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
@@ -121,7 +121,7 @@ class SimpleRouteStackTest extends TestCase
         $stack = new SimpleRouteStack();
         $stack->addRoute('foo', array(
             'type'    => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
-            'options' => array()
+            'options' => array(),
         ));
 
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
@@ -140,10 +140,10 @@ class SimpleRouteStackTest extends TestCase
 
         $stack->addRoute('foo', array(
             'type'     => '\ZendTest\Mvc\Router\TestAsset\DummyRouteWithParam',
-            'priority' => 2
+            'priority' => 2,
         ))->addRoute('bar', array(
             'type'     => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
-            'priority' => 1
+            'priority' => 1,
         ));
 
         $this->assertEquals('bar', $stack->match(new Request())->getParam('foo'));
@@ -159,7 +159,7 @@ class SimpleRouteStackTest extends TestCase
 
         $stack->addRoute('foo', array(
             'type'     => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
-            'priority' => 1
+            'priority' => 1,
         ));
 
         $this->assertEquals('bar', $stack->match(new Request())->getParam('foo'));
@@ -169,7 +169,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $stack = new SimpleRouteStack();
         $stack->addRoute('foo', new ArrayIterator(array(
-            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute'
+            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
         )));
 
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
@@ -241,7 +241,7 @@ class SimpleRouteStackTest extends TestCase
             array(
                 'route_plugins'  => new RoutePluginManager(),
                 'routes'         => array(),
-                'default_params' => array()
+                'default_params' => array(),
             )
         );
     }

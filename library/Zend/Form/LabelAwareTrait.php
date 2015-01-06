@@ -30,12 +30,13 @@ trait LabelAwareTrait
     /**
      * Set the attributes to use with the label
      *
-     * @param array $labelAttributes
+     * @param  array               $labelAttributes
      * @return LabelAwareInterface
      */
     public function setLabelAttributes(array $labelAttributes)
     {
         $this->labelAttributes = $labelAttributes;
+
         return $this;
     }
 
@@ -54,7 +55,7 @@ trait LabelAwareTrait
      *
      * Implementation will decide if this will overwrite or merge.
      *
-     * @param  array|Traversable $arrayOrTraversable
+     * @param  array|Traversable                  $arrayOrTraversable
      * @return Element|ElementInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -70,6 +71,7 @@ trait LabelAwareTrait
         foreach ($arrayOrTraversable as $key => $value) {
             $this->setLabelOption($key, $value);
         }
+
         return $this;
     }
 
@@ -91,13 +93,14 @@ trait LabelAwareTrait
     public function clearLabelOptions()
     {
         $this->labelOptions = array();
+
         return $this;
     }
 
     /**
      * Remove many attributes at once
      *
-     * @param array $keys
+     * @param  array            $keys
      * @return ElementInterface
      */
     public function removeLabelOptions(array $keys)
@@ -112,13 +115,14 @@ trait LabelAwareTrait
     /**
      * Set a single label optionn
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  string                   $key
+     * @param  mixed                    $value
      * @return Element|ElementInterface
      */
     public function setLabelOption($key, $value)
     {
         $this->labelOptions[$key] = $value;
+
         return $this;
     }
 
@@ -133,18 +137,20 @@ trait LabelAwareTrait
         if (!array_key_exists($key, $this->labelOptions)) {
             return;
         }
+
         return $this->labelOptions[$key];
     }
 
     /**
      * Remove a single label option
      *
-     * @param string $key
+     * @param  string           $key
      * @return ElementInterface
      */
     public function removeLabelOption($key)
     {
         unset($this->labelOptions[$key]);
+
         return $this;
     }
 

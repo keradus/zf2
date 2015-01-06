@@ -23,7 +23,7 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
     {
         $fields = array(
             'message' => 'foo',
-            'priority' => LOG_NOTICE
+            'priority' => LOG_NOTICE,
         );
         $writer = new SyslogWriter();
         $writer->write($fields);
@@ -80,7 +80,7 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
     {
         $event = array(
             'message' => 'tottakai',
-            'priority' => Logger::ERR
+            'priority' => Logger::ERR,
         );
 
         $writer = new SyslogWriter();

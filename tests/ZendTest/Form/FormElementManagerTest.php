@@ -43,6 +43,7 @@ class FormElementManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->setFactory('my-form', function ($elements) use ($factory) {
             $form = new Form();
             $form->setFormFactory($factory);
+
             return $form;
         });
         $form = $this->manager->get('my-Form');
@@ -75,7 +76,7 @@ class FormElementManagerTest extends \PHPUnit_Framework_TestCase
         $args = array(
             'name' => 'foo',
             'options' => array(
-                'label' => 'bar'
+                'label' => 'bar',
             ),
         );
         $element = $this->manager->get('element', $args);
@@ -86,7 +87,7 @@ class FormElementManagerTest extends \PHPUnit_Framework_TestCase
     public function testOptionsCreationOptions()
     {
         $args = array(
-            'label' => 'bar'
+            'label' => 'bar',
         );
         $element = $this->manager->get('element', $args);
         $this->assertEquals('element', $element->getName(), 'Invokable CNAME');
@@ -97,7 +98,7 @@ class FormElementManagerTest extends \PHPUnit_Framework_TestCase
     {
         $args = array(
             'options' => array(
-                'label' => 'bar'
+                'label' => 'bar',
             ),
         );
         $element = $this->manager->get('element', $args);

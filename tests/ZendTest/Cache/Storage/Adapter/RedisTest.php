@@ -42,11 +42,11 @@ class RedisTest extends CommonAdapterTest
 
         if (defined('TESTS_ZEND_CACHE_REDIS_HOST') && defined('TESTS_ZEND_CACHE_REDIS_PORT')) {
             $this->_options->getResourceManager()->setServer(__CLASS__, array(
-                TESTS_ZEND_CACHE_REDIS_HOST, TESTS_ZEND_CACHE_REDIS_PORT, 1
+                TESTS_ZEND_CACHE_REDIS_HOST, TESTS_ZEND_CACHE_REDIS_PORT, 1,
             ));
         } elseif (defined('TESTS_ZEND_CACHE_REDIS_HOST')) {
             $this->_options->getResourceManager()->setServer(__CLASS__, array(
-                TESTS_ZEND_CACHE_REDIS_HOST
+                TESTS_ZEND_CACHE_REDIS_HOST,
             ));
         }
 
@@ -208,7 +208,6 @@ class RedisTest extends CommonAdapterTest
         $this->_storage->setItem($key, $value);
         $this->assertEquals($value, $this->_storage->getItem($key), 'Redis should return an array, lib options were not set correctly');
 
-
         $options = array('serializer', RedisResource::SERIALIZER_NONE);
         $this->_options->setLibOptions($options);
         $this->_storage->setItem($key, $value);
@@ -227,7 +226,6 @@ class RedisTest extends CommonAdapterTest
         //test if it's still possible to set/get item and if lib serializer works
         $redis->setItem($key, $value);
         $this->assertEquals($value, $redis->getItem($key), 'Redis should return an array, lib options were not set correctly');
-
 
         $options = array('serializer', RedisResource::SERIALIZER_NONE);
         $this->_options->setLibOptions($options);

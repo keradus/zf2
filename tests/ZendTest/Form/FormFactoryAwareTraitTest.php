@@ -23,7 +23,7 @@ class FormFactoryAwareTraitTest extends TestCase
 
         $this->assertAttributeEquals(null, 'factory', $object);
 
-        $factory = new Factory;
+        $factory = new Factory();
 
         $object->setFormFactory($factory);
 

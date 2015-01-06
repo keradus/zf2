@@ -45,6 +45,7 @@ class Code25 extends AbstractObject
                          * $this->factor;
         $encodedData     = strlen($this->getText()) * $characterLength;
         $stopCharacter   = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
+
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -90,6 +91,7 @@ class Code25 extends AbstractObject
         $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
         $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
         $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+
         return $barcodeTable;
     }
 

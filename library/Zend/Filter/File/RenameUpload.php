@@ -61,6 +61,7 @@ class RenameUpload extends AbstractFilter
             );
         }
         $this->options['target'] = $target;
+
         return $this;
     }
 
@@ -74,13 +75,14 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  bool $flag When true, this filter will use the $_FILES['name']
-     *                       as the target filename.
-     *                       Otherwise, it uses the default 'target' rules.
+     *                    as the target filename.
+     *                    Otherwise, it uses the default 'target' rules.
      * @return self
      */
     public function setUseUploadName($flag = true)
     {
         $this->options['use_upload_name'] = (bool) $flag;
+
         return $this;
     }
 
@@ -100,6 +102,7 @@ class RenameUpload extends AbstractFilter
     public function setUseUploadExtension($flag = true)
     {
         $this->options['use_upload_extension'] = (bool) $flag;
+
         return $this;
     }
 
@@ -118,6 +121,7 @@ class RenameUpload extends AbstractFilter
     public function setOverwrite($flag = true)
     {
         $this->options['overwrite'] = (bool) $flag;
+
         return $this;
     }
 
@@ -136,6 +140,7 @@ class RenameUpload extends AbstractFilter
     public function setRandomize($flag = true)
     {
         $this->options['randomize'] = (bool) $flag;
+
         return $this;
     }
 
@@ -153,9 +158,9 @@ class RenameUpload extends AbstractFilter
      * Renames the file $value to the new name set before
      * Returns the file $value, removing all but digit characters
      *
-     * @param  string|array $value Full path of file to change or $_FILES data array
+     * @param  string|array               $value Full path of file to change or $_FILES data array
      * @throws Exception\RuntimeException
-     * @return string|array The new filename which has been set, or false when there were errors
+     * @return string|array               The new filename which has been set, or false when there were errors
      */
     public function filter($value)
     {
@@ -205,8 +210,8 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @param  string $sourceFile Source file path
-     * @param  string $targetFile Target file path
+     * @param  string                     $sourceFile Source file path
+     * @param  string                     $targetFile Target file path
      * @throws Exception\RuntimeException
      * @return bool
      */
@@ -227,7 +232,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @param  string $targetFile Target file path
+     * @param  string                             $targetFile Target file path
      * @throws Exception\InvalidArgumentException
      */
     protected function checkFileExists($targetFile)
@@ -244,7 +249,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @param  array $uploadData $_FILES array
+     * @param  array  $uploadData $_FILES array
      * @return string
      */
     protected function getFinalTarget($uploadData)
@@ -264,7 +269,7 @@ class RenameUpload extends AbstractFilter
             }
         } else {
             $info      = pathinfo($target);
-            $targetDir = $info['dirname'] . DIRECTORY_SEPARATOR;
+            $targetDir = $info['dirname'].DIRECTORY_SEPARATOR;
         }
 
         // Get the target filename
@@ -276,7 +281,7 @@ class RenameUpload extends AbstractFilter
                 $targetInfo = pathinfo($targetFile);
                 $sourceinfo = pathinfo($uploadData['name']);
                 if (isset($sourceinfo['extension'])) {
-                    $targetFile = $targetInfo['filename'] . '.' . $sourceinfo['extension'];
+                    $targetFile = $targetInfo['filename'].'.'.$sourceinfo['extension'];
                 }
             }
         } else {
@@ -287,7 +292,7 @@ class RenameUpload extends AbstractFilter
             $targetFile = $this->applyRandomToFilename($uploadData['name'], $targetFile);
         }
 
-        return $targetDir . $targetFile;
+        return $targetDir.$targetFile;
     }
 
     /**
@@ -298,17 +303,17 @@ class RenameUpload extends AbstractFilter
     protected function applyRandomToFilename($source, $filename)
     {
         $info = pathinfo($filename);
-        $filename = $info['filename'] . uniqid('_');
+        $filename = $info['filename'].uniqid('_');
 
         $sourceinfo = pathinfo($source);
 
         $extension = '';
         if ($this->getUseUploadExtension() === true && isset($sourceinfo['extension'])) {
-            $extension .= '.' . $sourceinfo['extension'];
+            $extension .= '.'.$sourceinfo['extension'];
         } elseif (isset($info['extension'])) {
-            $extension .= '.' . $info['extension'];
+            $extension .= '.'.$info['extension'];
         }
 
-        return $filename . $extension;
+        return $filename.$extension;
     }
 }

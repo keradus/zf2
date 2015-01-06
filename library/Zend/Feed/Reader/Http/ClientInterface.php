@@ -14,7 +14,7 @@ interface ClientInterface
     /**
      * Make a GET request to a given URI
      *
-     * @param  string $uri
+     * @param  string            $uri
      * @return ResponseInterface
      */
     public function get($uri);

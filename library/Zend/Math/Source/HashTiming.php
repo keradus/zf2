@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Math\Source;
 
 use RandomLib;
@@ -78,16 +79,16 @@ class HashTiming implements RandomLib\Source
         $hash_length    = 20;
 
         while (strlen($result) < $size) {
-            $bytes  = ($total > $hash_length)? $hash_length : $total;
+            $bytes  = ($total > $hash_length) ? $hash_length : $total;
             $total -= $bytes;
-            for ($i=1; $i < 3; $i++) {
+            for ($i = 1; $i < 3; $i++) {
                 $t1   = microtime(true);
                 $seed = mt_rand();
-                for ($j=1; $j < 50; $j++) {
+                for ($j = 1; $j < 50; $j++) {
                     $seed = sha1($seed);
                 }
                 $t2 = microtime(true);
-                $entropy .= $t1 . $t2;
+                $entropy .= $t1.$t2;
             }
             $div = (int) (($t2 - $t1) * 1000000);
             if ($div <= 0) {
@@ -102,10 +103,11 @@ class HashTiming implements RandomLib\Source
                     $seed = sha1($seed);
                 }
                 $t2 = microtime();
-                $entropy .= $t1 . $t2;
+                $entropy .= $t1.$t2;
             }
             $result .= sha1($entropy, true);
         }
+
         return substr($result, 0, $size);
     }
 }

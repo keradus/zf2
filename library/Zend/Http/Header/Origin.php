@@ -28,12 +28,12 @@ class Origin implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'origin') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Origin string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Origin string: "'.$name.'"');
         }
 
         $uri = UriFactory::factory($value);
         if (!$uri->isValid()) {
-            throw new Exception\InvalidArgumentException('Invalid header value for Origin key: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header value for Origin key: "'.$name.'"');
         }
 
         return new static($value);
@@ -59,6 +59,6 @@ class Origin implements HeaderInterface
 
     public function toString()
     {
-        return 'Origin: ' . $this->getFieldValue();
+        return 'Origin: '.$this->getFieldValue();
     }
 }

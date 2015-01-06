@@ -58,9 +58,10 @@ class PubSubHubbub
             $feed = $source;
         } else {
             throw new Exception\InvalidArgumentException('The source parameter was'
-            . ' invalid, i.e. not a URL string or an instance of type'
-            . ' Zend\Feed\Reader\Feed\AbstractFeed');
+            .' invalid, i.e. not a URL string or an instance of type'
+            .' Zend\Feed\Reader\Feed\AbstractFeed');
         }
+
         return $feed->getHubs();
     }
 
@@ -86,10 +87,11 @@ class PubSubHubbub
     public static function getHttpClient()
     {
         if (!isset(static::$httpClient)) {
-            static::$httpClient = new Http\Client;
+            static::$httpClient = new Http\Client();
         } else {
             static::$httpClient->resetParameters();
         }
+
         return static::$httpClient;
     }
 
@@ -109,7 +111,7 @@ class PubSubHubbub
      *
      * If null, resets the instance
      *
-     * @param  null|Escaper $escaper
+     * @param null|Escaper $escaper
      */
     public static function setEscaper(Escaper $escaper = null)
     {
@@ -128,6 +130,7 @@ class PubSubHubbub
         if (null === static::$escaper) {
             static::setEscaper(new Escaper());
         }
+
         return static::$escaper;
     }
 
@@ -142,6 +145,7 @@ class PubSubHubbub
         $escaper    = static::getEscaper();
         $rawencoded = $escaper->escapeUrl($string);
         $rfcencoded = str_replace('%7E', '~', $rawencoded);
+
         return $rfcencoded;
     }
 }

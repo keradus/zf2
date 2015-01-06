@@ -28,7 +28,7 @@ abstract class AbstractIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         foreach ($this->variables as $name => $value) {
             if (!isset($GLOBALS[$value])) {
-                $this->fail('Missing required variable ' . $value . ' from phpunit.xml for this integration test');
+                $this->fail('Missing required variable '.$value.' from phpunit.xml for this integration test');
             }
             $this->variables[$name] = $GLOBALS[$value];
         }

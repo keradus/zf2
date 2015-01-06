@@ -44,6 +44,7 @@ class View implements EventManagerAwareInterface
     public function setRequest(Request $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -56,6 +57,7 @@ class View implements EventManagerAwareInterface
     public function setResponse(Response $response)
     {
         $this->response = $response;
+
         return $this;
     }
 
@@ -92,6 +94,7 @@ class View implements EventManagerAwareInterface
             get_class($this),
         ));
         $this->events = $events;
+
         return $this;
     }
 
@@ -107,6 +110,7 @@ class View implements EventManagerAwareInterface
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->events;
     }
 
@@ -120,12 +124,13 @@ class View implements EventManagerAwareInterface
      * event, at the priority specified.
      *
      * @param  callable $callable
-     * @param  int $priority
+     * @param  int      $priority
      * @return View
      */
     public function addRenderingStrategy($callable, $priority = 1)
     {
         $this->getEventManager()->attach(ViewEvent::EVENT_RENDERER, $callable, $priority);
+
         return $this;
     }
 
@@ -141,12 +146,13 @@ class View implements EventManagerAwareInterface
      * event, at the priority specified.
      *
      * @param  callable $callable
-     * @param  int $priority
+     * @param  int      $priority
      * @return View
      */
     public function addResponseStrategy($callable, $priority = 1)
     {
         $this->getEventManager()->attach(ViewEvent::EVENT_RESPONSE, $callable, $priority);
+
         return $this;
     }
 
@@ -161,7 +167,7 @@ class View implements EventManagerAwareInterface
      *
      * @triggers renderer(ViewEvent)
      * @triggers response(ViewEvent)
-     * @param  Model $model
+     * @param  Model                      $model
      * @throws Exception\RuntimeException
      * @return void
      */
@@ -219,7 +225,7 @@ class View implements EventManagerAwareInterface
     /**
      * Loop through children, rendering each
      *
-     * @param  Model $model
+     * @param  Model                     $model
      * @throws Exception\DomainException
      * @return void
      */
@@ -235,8 +241,8 @@ class View implements EventManagerAwareInterface
             $capture = $child->captureTo();
             if (!empty($capture)) {
                 if ($child->isAppend()) {
-                    $oldResult=$model->{$capture};
-                    $model->setVariable($capture, $oldResult . $result);
+                    $oldResult = $model->{$capture};
+                    $model->setVariable($capture, $oldResult.$result);
                 } else {
                     $model->setVariable($capture, $result);
                 }
@@ -259,6 +265,7 @@ class View implements EventManagerAwareInterface
         if (null !== ($response = $this->getResponse())) {
             $event->setResponse($response);
         }
+
         return $event;
     }
 }

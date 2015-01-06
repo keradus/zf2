@@ -23,7 +23,7 @@ class TranslatorAwareTraitTest extends TestCase
 
         $this->assertAttributeEquals(null, 'translator', $object);
 
-        $translator = new Translator;
+        $translator = new Translator();
 
         $object->setTranslator($translator);
 
@@ -37,7 +37,7 @@ class TranslatorAwareTraitTest extends TestCase
         $this->assertAttributeEquals(null, 'translator', $object);
         $this->assertAttributeEquals('default', 'translatorTextDomain', $object);
 
-        $translator = new Translator;
+        $translator = new Translator();
         $textDomain = 'domain';
 
         $object->setTranslator($translator, $textDomain);
@@ -52,7 +52,7 @@ class TranslatorAwareTraitTest extends TestCase
 
         $this->assertNull($object->getTranslator());
 
-        $translator = new Translator;
+        $translator = new Translator();
 
         $object->setTranslator($translator);
 
@@ -65,7 +65,7 @@ class TranslatorAwareTraitTest extends TestCase
 
         $this->assertFalse($object->hasTranslator());
 
-        $translator = new Translator;
+        $translator = new Translator();
 
         $object->setTranslator($translator);
 

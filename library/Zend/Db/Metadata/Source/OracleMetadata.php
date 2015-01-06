@@ -22,7 +22,7 @@ class OracleMetadata extends AbstractSource
     protected $constraintTypeMap = array(
         'C' => 'CHECK',
         'P' => 'PRIMARY KEY',
-        'R' => 'FOREIGN_KEY'
+        'R' => 'FOREIGN_KEY',
     );
 
     /**
@@ -43,18 +43,18 @@ class OracleMetadata extends AbstractSource
             'DATA_TYPE',
             'DATA_LENGTH',
             'DATA_PRECISION',
-            'DATA_SCALE'
+            'DATA_SCALE',
         );
 
         $this->prepareDataHierarchy('columns', $schema, $table);
         $parameters = array(
             ':ownername' => $schema,
-            ':tablename' => $table
+            ':tablename' => $table,
         );
 
-        $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM all_tab_columns'
-             . ' WHERE owner = :ownername AND table_name = :tablename';
+        $sql = 'SELECT '.implode(', ', $isColumns)
+             .' FROM all_tab_columns'
+             .' WHERE owner = :ownername AND table_name = :tablename';
 
         $result = $this->adapter->query($sql)->execute($parameters);
         $columns = array();
@@ -75,13 +75,14 @@ class OracleMetadata extends AbstractSource
         }
 
         $this->data['columns'][$schema][$table] = $columns;
+
         return $this;
     }
 
     /**
      * Constraint type
      *
-     * @param string $type
+     * @param  string $type
      * @return string
      */
     protected function getConstraintType($type)
@@ -131,7 +132,7 @@ class OracleMetadata extends AbstractSource
 
         $parameters = array(
             ':schema' => $schema,
-            ':table' => $table
+            ':table' => $table,
         );
 
         $results = $this->adapter->query($sql)->execute($parameters);
@@ -235,6 +236,7 @@ class OracleMetadata extends AbstractSource
         }
 
         $this->data['table_names'][$schema] = $tables;
+
         return $this;
     }
 

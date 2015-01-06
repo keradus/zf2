@@ -44,7 +44,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'STRING' => 'STRING',
             'ABC1@3' => 'ABC1@3',
-            'A b C'  => 'A B C'
+            'A b C'  => 'A B C',
         );
 
         foreach ($valuesExpected as $input => $output) {
@@ -64,7 +64,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'ü'     => 'Ü',
             'ñ'     => 'Ñ',
-            'üñ123' => 'ÜÑ123'
+            'üñ123' => 'ÜÑ123',
         );
 
         try {
@@ -98,7 +98,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'ü'     => 'Ü',
             'ñ'     => 'Ñ',
-            'üñ123' => 'ÜÑ123'
+            'üñ123' => 'ÜÑ123',
         );
 
         try {
@@ -120,7 +120,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'ü'     => 'Ü',
             'ñ'     => 'Ñ',
-            'üñ123' => 'ÜÑ123'
+            'üñ123' => 'ÜÑ123',
         );
 
         try {
@@ -162,8 +162,8 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 'lower case written',
-                'This should stay the same'
-            ))
+                'This should stay the same',
+            )),
         );
     }
 

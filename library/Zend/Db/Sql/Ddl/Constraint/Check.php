@@ -22,8 +22,8 @@ class Check extends AbstractConstraint
     protected $specification = 'CHECK (%s)';
 
     /**
-     * @param  string|\Zend\Db\Sql\ExpressionInterface $expression
-     * @param  null|string $name
+     * @param string|\Zend\Db\Sql\ExpressionInterface $expression
+     * @param null|string                             $name
      */
     public function __construct($expression, $name)
     {
@@ -48,7 +48,7 @@ class Check extends AbstractConstraint
         }
 
         return array(array(
-            $newSpec . $this->specification,
+            $newSpec.$this->specification,
             $values,
             $newSpecTypes,
         ));

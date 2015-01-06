@@ -50,7 +50,7 @@ class Float extends AbstractValidator
     /**
      * Constructor for the integer validator
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable                     $options
      * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = array())
@@ -84,18 +84,20 @@ class Float extends AbstractValidator
         if (null === $this->locale) {
             $this->locale = Locale::getDefault();
         }
+
         return $this->locale;
     }
 
     /**
      * Sets the locale to use
      *
-     * @param string|null $locale
+     * @param  string|null $locale
      * @return Float
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
         return $this;
     }
 
@@ -103,7 +105,7 @@ class Float extends AbstractValidator
      * Returns true if and only if $value is a floating-point value. Uses the formal definition of a float as described
      * in the PHP manual: {@link http://www.php.net/float}
      *
-     * @param  string $value
+     * @param  string                             $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */
@@ -111,6 +113,7 @@ class Float extends AbstractValidator
     {
         if (!is_scalar($value) || is_bool($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -132,11 +135,11 @@ class Float extends AbstractValidator
         }
 
         if (StringUtils::hasPcreUnicodeSupport()) {
-            $exponentialSymbols = '[Ee' . $formatter->getSymbol(NumberFormatter::EXPONENTIAL_SYMBOL) . ']+';
-            $search = '/' . $exponentialSymbols . '/u';
+            $exponentialSymbols = '[Ee'.$formatter->getSymbol(NumberFormatter::EXPONENTIAL_SYMBOL).']+';
+            $search = '/'.$exponentialSymbols.'/u';
         } else {
             $exponentialSymbols = '[Ee]';
-            $search = '/' . $exponentialSymbols . '/';
+            $search = '/'.$exponentialSymbols.'/';
         }
 
         if (!preg_match($search, $value)) {
@@ -173,7 +176,7 @@ class Float extends AbstractValidator
         }
 
         //If we have Unicode support, we can use the real graphemes, otherwise, just the ASCII characters
-        $decimal     = '['. preg_quote($decSeparator, '/') . ']';
+        $decimal     = '['.preg_quote($decSeparator, '/').']';
         $prefix      = '[+-]';
         $exp         = $exponentialSymbols;
         $numberRange = '0-9';
@@ -182,24 +185,24 @@ class Float extends AbstractValidator
 
         if (StringUtils::hasPcreUnicodeSupport()) {
             $prefix = '['
-                .  preg_quote(
+                .preg_quote(
                     $formatter->getTextAttribute(NumberFormatter::POSITIVE_PREFIX)
-                    .  $formatter->getTextAttribute(NumberFormatter::NEGATIVE_PREFIX)
-                    .  $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
-                    .  $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
+                    .$formatter->getTextAttribute(NumberFormatter::NEGATIVE_PREFIX)
+                    .$formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
+                    .$formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
                     '/'
                 )
-                . ']{0,3}';
+                .']{0,3}';
             $suffix = ($formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX))
                 ? '['
-                    .  preg_quote(
+                    .preg_quote(
                         $formatter->getTextAttribute(NumberFormatter::POSITIVE_SUFFIX)
-                        .  $formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX)
-                        .  $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
-                        .  $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
+                        .$formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX)
+                        .$formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
+                        .$formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
                         '/'
                     )
-                    . ']{0,3}'
+                    .']{0,3}'
                 : '';
             $numberRange = '\p{N}';
             $useUnicode = 'u';
@@ -215,17 +218,16 @@ class Float extends AbstractValidator
          *       of the string - i.e. 10,6 is not valid for en-US.
          * @see http://www.php.net/float
          */
-
-        $lnum    = '[' . $numberRange . ']+';
-        $dnum    = '(([' . $numberRange . ']*' . $decimal . $lnum . ')|(' . $lnum . $decimal . '[' . $numberRange . ']*))';
-        $expDnum = '((' . $prefix . '((' . $lnum . '|' . $dnum . ')' . $exp . $prefix . $lnum . ')' . $suffix . ')|'
-            . '(' . $suffix . '(' . $lnum . $prefix . $exp . '(' . $dnum . '|' . $lnum . '))' . $prefix . '))';
+        $lnum    = '['.$numberRange.']+';
+        $dnum    = '((['.$numberRange.']*'.$decimal.$lnum.')|('.$lnum.$decimal.'['.$numberRange.']*))';
+        $expDnum = '(('.$prefix.'(('.$lnum.'|'.$dnum.')'.$exp.$prefix.$lnum.')'.$suffix.')|'
+            .'('.$suffix.'('.$lnum.$prefix.$exp.'('.$dnum.'|'.$lnum.'))'.$prefix.'))';
 
         // LEFT-TO-RIGHT MARK (U+200E) is messing up everything for the handful
         // of locales that have it
-        $lnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $lnum . $suffix . '$/' . $useUnicode);
-        $dnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $dnum . $suffix . '$/' . $useUnicode);
-        $expDnumSearch  = str_replace("\xE2\x80\x8E", '', '/^' . $expDnum . '$/' . $useUnicode);
+        $lnumSearch     = str_replace("\xE2\x80\x8E", '', '/^'.$prefix.$lnum.$suffix.'$/'.$useUnicode);
+        $dnumSearch     = str_replace("\xE2\x80\x8E", '', '/^'.$prefix.$dnum.$suffix.'$/'.$useUnicode);
+        $expDnumSearch  = str_replace("\xE2\x80\x8E", '', '/^'.$expDnum.'$/'.$useUnicode);
         $value          = str_replace("\xE2\x80\x8E", '', $value);
         $unGroupedValue = str_replace($groupSeparator, '', $value);
 

@@ -20,10 +20,10 @@ class IniTest extends TestCase
 
     public function setUp()
     {
-        $this->testFilesDir = realpath(__DIR__ . '/../_files');
+        $this->testFilesDir = realpath(__DIR__.'/../_files');
 
         $this->originalIncludePath = get_include_path();
-        set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
+        set_include_path($this->testFilesDir.PATH_SEPARATOR.$this->testFilesDir.'/translations.phar');
     }
 
     public function tearDown()
@@ -41,7 +41,7 @@ class IniTest extends TestCase
     public function testLoaderLoadsEmptyFile()
     {
         $loader = new IniLoader();
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_empty.ini');
+        $textDomain = $loader->load('en_EN', $this->testFilesDir.'/translation_empty.ini');
         $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $textDomain);
     }
 
@@ -50,7 +50,7 @@ class IniTest extends TestCase
         $loader = new IniLoader();
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
                                     'Each INI row must be an array with message and translation');
-        $loader->load('en_EN', $this->testFilesDir . '/failed.ini');
+        $loader->load('en_EN', $this->testFilesDir.'/failed.ini');
     }
 
     public function testLoaderFailsToLoadBadSyntax()
@@ -58,13 +58,13 @@ class IniTest extends TestCase
         $loader = new IniLoader();
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
                                     'Each INI row must be an array with message and translation');
-        $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
+        $loader->load('en_EN', $this->testFilesDir.'/failed_syntax.ini');
     }
 
     public function testLoaderReturnsValidTextDomain()
     {
         $loader = new IniLoader();
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
+        $textDomain = $loader->load('en_EN', $this->testFilesDir.'/translation_en.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -73,7 +73,7 @@ class IniTest extends TestCase
     public function testLoaderReturnsValidTextDomainWithFileWithoutPlural()
     {
         $loader = new IniLoader();
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_without_plural.ini');
+        $textDomain = $loader->load('en_EN', $this->testFilesDir.'/translation_en_without_plural.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -82,7 +82,7 @@ class IniTest extends TestCase
     public function testLoaderReturnsValidTextDomainWithSimpleSyntax()
     {
         $loader = new IniLoader();
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en_simple_syntax.ini');
+        $textDomain = $loader->load('en_EN', $this->testFilesDir.'/translation_en_simple_syntax.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
@@ -91,7 +91,7 @@ class IniTest extends TestCase
     public function testLoaderLoadsPluralRules()
     {
         $loader     = new IniLoader();
-        $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
+        $textDomain = $loader->load('en_EN', $this->testFilesDir.'/translation_en.ini');
 
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));
         $this->assertEquals(0, $textDomain->getPluralRule()->evaluate(1));
@@ -113,7 +113,7 @@ class IniTest extends TestCase
     {
         $loader = new IniLoader();
         $loader->setUseIncludePath(true);
-        $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.ini');
+        $textDomain = $loader->load('en_EN', 'phar://'.$this->testFilesDir.'/translations.phar/translation_en.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);

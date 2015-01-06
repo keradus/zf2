@@ -19,9 +19,9 @@ class Decode
      *
      * Parts consist of the header and the body of each MIME part.
      *
-     * @param  string $body     raw body of message
-     * @param  string $boundary boundary as found in content-type
-     * @return array parts with content of each part, empty if no parts found
+     * @param  string                     $body     raw body of message
+     * @param  string                     $boundary boundary as found in content-type
+     * @return array                      parts with content of each part, empty if no parts found
      * @throws Exception\RuntimeException
      */
     public static function splitMime($body, $boundary)
@@ -34,7 +34,7 @@ class Decode
         // find every mime part limiter and cut out the
         // string before it.
         // the part before the first boundary string is discarded:
-        $p = strpos($body, '--' . $boundary . "\n", $start);
+        $p = strpos($body, '--'.$boundary."\n", $start);
         if ($p === false) {
             // no parts found!
             return array();
@@ -43,19 +43,20 @@ class Decode
         // position after first boundary line
         $start = $p + 3 + strlen($boundary);
 
-        while (($p = strpos($body, '--' . $boundary . "\n", $start)) !== false) {
+        while (($p = strpos($body, '--'.$boundary."\n", $start)) !== false) {
             $res[] = substr($body, $start, $p-$start);
             $start = $p + 3 + strlen($boundary);
         }
 
         // no more parts, find end boundary
-        $p = strpos($body, '--' . $boundary . '--', $start);
-        if ($p===false) {
+        $p = strpos($body, '--'.$boundary.'--', $start);
+        if ($p === false) {
             throw new Exception\RuntimeException('Not a valid Mime Message: End Missing');
         }
 
         // the remaining part also needs to be parsed:
         $res[] = substr($body, $start, $p-$start);
+
         return $res;
     }
 
@@ -63,10 +64,10 @@ class Decode
      * decodes a mime encoded String and returns a
      * struct of parts with header and body
      *
-     * @param  string $message  raw message content
-     * @param  string $boundary boundary as found in content-type
-     * @param  string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
-     * @return array|null parts as array('header' => array(name => value), 'body' => content), null if no parts found
+     * @param  string                     $message  raw message content
+     * @param  string                     $boundary boundary as found in content-type
+     * @param  string                     $EOL      EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
+     * @return array|null                 parts as array('header' => array(name => value), 'body' => content), null if no parts found
      * @throws Exception\RuntimeException
      */
     public static function splitMessageStruct($message, $boundary, $EOL = Mime::LINEEND)
@@ -81,8 +82,9 @@ class Decode
         foreach ($parts as $part) {
             static::splitMessage($part, $headers, $body, $EOL);
             $result[] = array('header' => $headers,
-                              'body'   => $body    );
+                              'body'   => $body,    );
         }
+
         return $result;
     }
 
@@ -92,11 +94,11 @@ class Decode
      *
      * The charset of the returned headers depend on your iconv settings.
      *
-     * @param  string|Headers  $message raw message with header and optional content
-     * @param  Headers         $headers output param, headers container
-     * @param  string          $body    output param, content of message
-     * @param  string          $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
-     * @param  bool         $strict  enable strict mode for parsing message
+     * @param  string|Headers $message raw message with header and optional content
+     * @param  Headers        $headers output param, headers container
+     * @param  string         $body    output param, content of message
+     * @param  string         $EOL     EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
+     * @param  bool           $strict  enable strict mode for parsing message
      * @return null
      */
     public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND, $strict = false)
@@ -110,6 +112,7 @@ class Decode
             $headers = array();
             // TODO: we're ignoring \r for now - is this function fast enough and is it safe to assume noone needs \r?
             $body = str_replace(array("\r", "\n"), array('', $EOL), $message);
+
             return;
         }
 
@@ -123,8 +126,8 @@ class Decode
 
         // find an empty line between headers and body
         // default is set new line
-        if (strpos($message, $EOL . $EOL)) {
-            list($headers, $body) = explode($EOL . $EOL, $message, 2);
+        if (strpos($message, $EOL.$EOL)) {
+            list($headers, $body) = explode($EOL.$EOL, $message, 2);
         // next is the standard new line
         } elseif ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
             list($headers, $body) = explode("\r\n\r\n", $message, 2);
@@ -144,8 +147,8 @@ class Decode
     /**
      * split a content type in its different parts
      *
-     * @param  string $type       content-type
-     * @param  string $wantedPart the wanted part, else an array with all parts is returned
+     * @param  string       $type       content-type
+     * @param  string       $wantedPart the wanted part, else an array with all parts is returned
      * @return string|array wanted part or all parts as array('type' => content-type, partname => value)
      */
     public static function splitContentType($type, $wantedPart = null)
@@ -156,10 +159,10 @@ class Decode
     /**
      * split a header field like content type in its different parts
      *
-     * @param  string $field      header field
-     * @param  string $wantedPart the wanted part, else an array with all parts is returned
-     * @param  string $firstName  key name for the first part
-     * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
+     * @param  string                     $field      header field
+     * @param  string                     $wantedPart the wanted part, else an array with all parts is returned
+     * @param  string                     $firstName  key name for the first part
+     * @return string|array               wanted part or all parts as array($firstName => firstPart, partname => value)
      * @throws Exception\RuntimeException
      */
     public static function splitHeaderField($field, $wantedPart = null, $firstName = '0')
@@ -170,10 +173,11 @@ class Decode
         // special case - a bit optimized
         if ($firstName === $wantedPart) {
             $field = strtok($field, ';');
+
             return $field[0] == '"' ? substr($field, 1, -1) : $field;
         }
 
-        $field = $firstName . '=' . $field;
+        $field = $firstName.'='.$field;
         if (!preg_match_all('%([^=\s]+)\s*=\s*("[^"]+"|[^;]+)(;\s*|$)%', $field, $matches)) {
             throw new Exception\RuntimeException('not a valid header field');
         }
@@ -186,8 +190,10 @@ class Decode
                 if ($matches[2][$key][0] != '"') {
                     return $matches[2][$key];
                 }
+
                 return substr($matches[2][$key], 1, -1);
             }
+
             return;
         }
 

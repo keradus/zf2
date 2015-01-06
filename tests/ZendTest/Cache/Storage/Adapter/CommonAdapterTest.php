@@ -50,7 +50,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected $_phpDatatypes = array(
         'NULL', 'boolean', 'integer', 'double',
-        'string', 'array', 'object', 'resource'
+        'string', 'array', 'object', 'resource',
     );
 
     public function setUp()
@@ -100,12 +100,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             $method = str_replace(' ', '', $method);
 
             $this->assertTrue(
-                method_exists($options, 'set' . $method),
+                method_exists($options, 'set'.$method),
                 "Missing method 'set'{$method}"
             );
 
             $this->assertTrue(
-                method_exists($options, 'get' . $method),
+                method_exists($options, 'get'.$method),
                 "Missing method 'get'{$method}"
             );
         }
@@ -123,7 +123,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $options = $this->_storage->getOptions();
         foreach ($options->toArray() as $option => $value) {
             $method = ucwords(str_replace('_', ' ', $option));
-            $method = 'set' . str_replace(' ', '', $method);
+            $method = 'set'.str_replace(' ', '', $method);
             $this->assertSame(
                 $options,
                 $options->{$method}($value),
@@ -382,7 +382,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $items = array(
             'key1' => 'value1',
-            'key2' => 'value2'
+            'key2' => 'value2',
         );
         $this->assertSame(array(), $this->_storage->setItems($items));
 
@@ -572,6 +572,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         if ($capabilities->getUseRequestTime()) {
             // Can't test much more if the request time will be used
             $this->assertEquals('value', $this->_storage->getItem('key'));
+
             return;
         }
 
@@ -597,12 +598,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $itemsHigh = array(
             'keyHigh1' => 'valueHigh1',
             'keyHigh2' => 'valueHigh2',
-            'keyHigh3' => 'valueHigh3'
+            'keyHigh3' => 'valueHigh3',
         );
         $itemsLow = array(
             'keyLow1' => 'valueLow1',
             'keyLow2' => 'valueLow2',
-            'keyLow3' => 'valueLow3'
+            'keyLow3' => 'valueLow3',
         );
         $items = $itemsHigh + $itemsLow;
 

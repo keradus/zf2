@@ -83,9 +83,9 @@ EOS;
                     'baz1',
                     'baz2',
                     'constant2' => 'ArrayObject::STD_PROP_LIST',
-                )
+                ),
             ),
-            new ValueGenerator('PHP_EOL', 'constant')
+            new ValueGenerator('PHP_EOL', 'constant'),
         );
 
         $expectedSource = <<<EOS
@@ -122,7 +122,7 @@ EOS;
             0 => 'b',
             'c',
             7 => 'd',
-            3 => 'e'
+            3 => 'e',
         );
 
         $valueGenerator = new ValueGenerator();

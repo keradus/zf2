@@ -98,7 +98,7 @@ class DebugTest extends \PHPUnit_Framework_TestCase
     {
         Debug::setSapi('apache');
 
-        $escaper = new Escaper;
+        $escaper = new Escaper();
         Debug::setEscaper($escaper);
 
         $a = array("a" => "<script type=\"text/javascript\"");

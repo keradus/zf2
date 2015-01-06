@@ -57,18 +57,19 @@ class MimeVersion implements HeaderInterface
 
     public function toString()
     {
-        return 'MIME-Version: ' . $this->getFieldValue();
+        return 'MIME-Version: '.$this->getFieldValue();
     }
 
     /**
      * Set the version string used in this header
      *
-     * @param  string $version
+     * @param  string      $version
      * @return MimeVersion
      */
     public function setVersion($version)
     {
         $this->version = $version;
+
         return $this;
     }
 

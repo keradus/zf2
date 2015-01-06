@@ -100,7 +100,7 @@ class Message
      * object set by this call will be used. Otherwise, a new Zend\Mime\Mime object
      * is generated and used.
      *
-     * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
+     * @param  string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
      * @return string
      */
     public function generateMessage($EOL = Mime::LINEEND)
@@ -116,13 +116,13 @@ class Message
 
             $boundaryLine = $mime->boundaryLine($EOL);
             $body = 'This is a message in Mime Format.  If you see this, '
-                  . "your mail reader does not support this format." . $EOL;
+                  ."your mail reader does not support this format.".$EOL;
 
             foreach (array_keys($this->parts) as $p) {
                 $body .= $boundaryLine
-                       . $this->getPartHeaders($p, $EOL)
-                       . $EOL
-                       . $this->getPartContent($p, $EOL);
+                       .$this->getPartHeaders($p, $EOL)
+                       .$EOL
+                       .$this->getPartContent($p, $EOL);
             }
 
             $body .= $mime->mimeEnd($EOL);
@@ -134,7 +134,7 @@ class Message
     /**
      * Get the headers of a given part as an array
      *
-     * @param int $partnum
+     * @param  int   $partnum
      * @return array
      */
     public function getPartHeadersArray($partnum)
@@ -145,8 +145,8 @@ class Message
     /**
      * Get the headers of a given part as a string
      *
-     * @param int $partnum
-     * @param string $EOL
+     * @param  int    $partnum
+     * @param  string $EOL
      * @return string
      */
     public function getPartHeaders($partnum, $EOL = Mime::LINEEND)
@@ -157,8 +157,8 @@ class Message
     /**
      * Get the (encoded) content of a given part as a string
      *
-     * @param int $partnum
-     * @param string $EOL
+     * @param  int    $partnum
+     * @param  string $EOL
      * @return string
      */
     public function getPartContent($partnum, $EOL = Mime::LINEEND)
@@ -171,8 +171,8 @@ class Message
      *
      * Parts consist of the header and the body of each MIME part.
      *
-     * @param string $body
-     * @param string $boundary
+     * @param  string                     $body
+     * @param  string                     $boundary
      * @throws Exception\RuntimeException
      * @return array
      */
@@ -183,7 +183,7 @@ class Message
         // find every mime part limiter and cut out the
         // string before it.
         // the part before the first boundary string is discarded:
-        $p = strpos($body, '--' . $boundary."\n", $start);
+        $p = strpos($body, '--'.$boundary."\n", $start);
         if ($p === false) {
             // no parts found!
             return array();
@@ -192,19 +192,20 @@ class Message
         // position after first boundary line
         $start = $p + 3 + strlen($boundary);
 
-        while (($p = strpos($body, '--' . $boundary . "\n", $start)) !== false) {
+        while (($p = strpos($body, '--'.$boundary."\n", $start)) !== false) {
             $res[] = substr($body, $start, $p-$start);
             $start = $p + 3 + strlen($boundary);
         }
 
         // no more parts, find end boundary
-        $p = strpos($body, '--' . $boundary . '--', $start);
-        if ($p===false) {
+        $p = strpos($body, '--'.$boundary.'--', $start);
+        if ($p === false) {
             throw new Exception\RuntimeException('Not a valid Mime Message: End Missing');
         }
 
         // the remaining part also needs to be parsed:
         $res[] = substr($body, $start, $p-$start);
+
         return $res;
     }
 
@@ -212,9 +213,9 @@ class Message
      * Decodes a MIME encoded string and returns a Zend\Mime\Message object with
      * all the MIME parts set according to the given string
      *
-     * @param string $message
-     * @param string $boundary
-     * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
+     * @param  string                     $message
+     * @param  string                     $boundary
+     * @param  string                     $EOL      EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
      * @throws Exception\RuntimeException
      * @return \Zend\Mime\Message
      */
@@ -231,7 +232,6 @@ class Message
                 /**
                  * @todo check for characterset and filename
                  */
-
                 $fieldName  = $header->getFieldName();
                 $fieldValue = $header->getFieldValue();
                 switch (strtolower($fieldName)) {

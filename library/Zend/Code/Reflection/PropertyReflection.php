@@ -100,7 +100,7 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
      * By having this as a seperate method it allows the method to be overridden
      * if a different FileScanner is needed.
      *
-     * @param  string $filename
+     * @param string $filename
      *
      * @return CachingFileScanner
      */

@@ -57,20 +57,21 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string          $name
      * @return AbstractAdapter
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
     /**
      * Set single option for the object
      *
-     * @param  string $key
-     * @param  string $value
+     * @param  string          $key
+     * @param  string          $value
      * @return AbstractAdapter
      */
     public function setOption($key, $value)
@@ -79,7 +80,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
             return $this;
         }
 
-        $method = 'set' . ucfirst($key);
+        $method = 'set'.ucfirst($key);
         if (method_exists($this, $method)) {
             // Setter exists; use it
             $this->$method($value);
@@ -89,25 +90,27 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
             $this->$key = $value;
             $this->options[$key] = $value;
         }
+
         return $this;
     }
 
     /**
      * Set object state from options array
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      * @return AbstractAdapter
      */
     public function setOptions($options = array())
     {
         if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable');
         }
 
         foreach ($options as $key => $value) {
             $this->setOption($key, $value);
         }
+
         return $this;
     }
 

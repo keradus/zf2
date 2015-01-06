@@ -70,7 +70,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  array|Traversable                 $options
+     * @param  array|Traversable                  $options
      * @return ClassMethods
      * @throws Exception\InvalidArgumentException
      */
@@ -91,7 +91,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  bool      $underscoreSeparatedKeys
+     * @param  bool         $underscoreSeparatedKeys
      * @return ClassMethods
      */
     public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
@@ -99,7 +99,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
         $this->underscoreSeparatedKeys = (bool) $underscoreSeparatedKeys;
 
         if ($this->underscoreSeparatedKeys) {
-            $this->setNamingStrategy(new UnderscoreNamingStrategy);
+            $this->setNamingStrategy(new UnderscoreNamingStrategy());
         } elseif ($this->getNamingStrategy() instanceof UnderscoreNamingStrategy) {
             $this->removeNamingStrategy();
         }
@@ -154,7 +154,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             }
 
             foreach ($methods as $method) {
-                $methodFqn = $objectClass . '::' . $method;
+                $methodFqn = $objectClass.'::'.$method;
 
                 if (! ($filter->filter($methodFqn) && $this->callableMethodFilter->filter($methodFqn))) {
                     continue;
@@ -206,10 +206,10 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
         $objectClass = get_class($object);
 
         foreach ($data as $property => $value) {
-            $propertyFqn = $objectClass . '::$' . $property;
+            $propertyFqn = $objectClass.'::$'.$property;
 
             if (! isset($this->hydrationMethodsCache[$propertyFqn])) {
-                $setterName = 'set' . ucfirst($this->hydrateName($property, $data));
+                $setterName = 'set'.ucfirst($this->hydrateName($property, $data));
 
                 $this->hydrationMethodsCache[$propertyFqn] = is_callable(array($object, $setterName))
                     ? $setterName

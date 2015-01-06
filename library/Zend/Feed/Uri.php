@@ -66,13 +66,14 @@ class Uri
     );
 
     /**
-     * @param  string $uri
+     * @param string $uri
      */
     public function __construct($uri)
     {
         $parsed = parse_url($uri);
         if (false === $parsed) {
             $this->valid = false;
+
             return;
         }
 
@@ -148,6 +149,7 @@ class Uri
             if ($this->path && substr($this->path, 0, 1) != '/') {
                 return false;
             }
+
             return true;
         }
 
@@ -161,6 +163,7 @@ class Uri
             if (substr($this->path, 0, 2) == '//') {
                 return false;
             }
+
             return true;
         }
 

@@ -19,8 +19,8 @@ class Gmp implements AdapterInterface
     /**
      * Create string representing big integer in decimal form from arbitrary integer format
      *
-     * @param  string $operand
-     * @param  int|null $base
+     * @param  string      $operand
+     * @param  int|null    $base
      * @return bool|string
      */
     public function init($operand, $base = null)
@@ -38,7 +38,7 @@ class Gmp implements AdapterInterface
                 } else {
                     $m[1] = '';
                 }
-                $operand = str_pad(($m[1] . $m[2]), ($m[3] + 1), '0', STR_PAD_RIGHT);
+                $operand = str_pad(($m[1].$m[2]), ($m[3] + 1), '0', STR_PAD_RIGHT);
             } else {
                 // let GMP guess base
                 $base = 0;
@@ -46,7 +46,7 @@ class Gmp implements AdapterInterface
         }
 
         set_error_handler(function () { /* Do nothing */}, \E_WARNING);
-        $res = gmp_init($sign . $operand, $base);
+        $res = gmp_init($sign.$operand, $base);
         restore_error_handler();
         if ($res === false) {
             return false;
@@ -65,6 +65,7 @@ class Gmp implements AdapterInterface
     public function add($leftOperand, $rightOperand)
     {
         $result = gmp_add($leftOperand, $rightOperand);
+
         return gmp_strval($result);
     }
 
@@ -78,6 +79,7 @@ class Gmp implements AdapterInterface
     public function sub($leftOperand, $rightOperand)
     {
         $result = gmp_sub($leftOperand, $rightOperand);
+
         return gmp_strval($result);
     }
 
@@ -91,6 +93,7 @@ class Gmp implements AdapterInterface
     public function mul($leftOperand, $rightOperand)
     {
         $result = gmp_mul($leftOperand, $rightOperand);
+
         return gmp_strval($result);
     }
 
@@ -98,8 +101,8 @@ class Gmp implements AdapterInterface
      * Divide two big integers and return integer part result.
      * Raises exception if the divisor is zero.
      *
-     * @param  string $leftOperand
-     * @param  string $rightOperand
+     * @param  string                            $leftOperand
+     * @param  string                            $rightOperand
      * @return string|null
      * @throws Exception\DivisionByZeroException
      */
@@ -112,6 +115,7 @@ class Gmp implements AdapterInterface
         }
 
         $result = gmp_div_q($leftOperand, $rightOperand);
+
         return gmp_strval($result);
     }
 
@@ -125,6 +129,7 @@ class Gmp implements AdapterInterface
     public function pow($operand, $exp)
     {
         $result = gmp_pow($operand, $exp);
+
         return gmp_strval($result);
     }
 
@@ -137,6 +142,7 @@ class Gmp implements AdapterInterface
     public function sqrt($operand)
     {
         $result = gmp_sqrt($operand);
+
         return gmp_strval($result);
     }
 
@@ -149,6 +155,7 @@ class Gmp implements AdapterInterface
     public function abs($operand)
     {
         $result = gmp_abs($operand);
+
         return gmp_strval($result);
     }
 
@@ -162,6 +169,7 @@ class Gmp implements AdapterInterface
     public function mod($leftOperand, $modulus)
     {
         $result = gmp_mod($leftOperand, $modulus);
+
         return gmp_strval($result);
     }
 
@@ -176,6 +184,7 @@ class Gmp implements AdapterInterface
     public function powmod($leftOperand, $rightOperand, $modulus)
     {
         $result = gmp_powm($leftOperand, $rightOperand, $modulus);
+
         return gmp_strval($result);
     }
 
@@ -197,7 +206,7 @@ class Gmp implements AdapterInterface
      * Convert big integer into it's binary number representation
      *
      * @param  string $int
-     * @param  bool $twoc  return in twos' complement form
+     * @param  bool   $twoc return in twos' complement form
      * @return string
      */
     public function intToBin($int, $twoc = false)
@@ -216,7 +225,7 @@ class Gmp implements AdapterInterface
 
         $hex  = gmp_strval($int, 16);
         if (strlen($hex) & 1) {
-            $hex = '0' . $hex;
+            $hex = '0'.$hex;
         }
 
         $bytes = pack('H*', $hex);
@@ -224,8 +233,9 @@ class Gmp implements AdapterInterface
 
         if ($twoc) {
             if (ord($bytes[0]) & 0x80) {
-                $bytes = $nb . $bytes;
+                $bytes = $nb.$bytes;
             }
+
             return $isNegative ? ~$bytes : $bytes;
         }
 
@@ -236,7 +246,7 @@ class Gmp implements AdapterInterface
      * Convert binary number into big integer
      *
      * @param  string $bytes
-     * @param  bool $twoc  whether binary number is in twos' complement form
+     * @param  bool   $twoc  whether binary number is in twos' complement form
      * @return string
      */
     public function binToInt($bytes, $twoc = false)
@@ -249,7 +259,7 @@ class Gmp implements AdapterInterface
             $sign  = '-';
         }
 
-        $result = gmp_init($sign . bin2hex($bytes), 16);
+        $result = gmp_init($sign.bin2hex($bytes), 16);
 
         if ($isNegative) {
             $result = gmp_sub($result, '1');
@@ -261,9 +271,9 @@ class Gmp implements AdapterInterface
     /**
      * Base conversion. Bases 2..62 are supported
      *
-     * @param  string $operand
-     * @param  int    $fromBase
-     * @param  int    $toBase
+     * @param  string                             $operand
+     * @param  int                                $fromBase
+     * @param  int                                $toBase
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -313,9 +323,9 @@ class Gmp implements AdapterInterface
         do {
             list($decimal, $remainder) = gmp_div_qr($decimal, $toBase);
             $pos    = gmp_strval($remainder);
-            $result = $chars[$pos] . $result;
+            $result = $chars[$pos].$result;
         } while (gmp_cmp($decimal, '0'));
 
-        return $sign . $result;
+        return $sign.$result;
     }
 }

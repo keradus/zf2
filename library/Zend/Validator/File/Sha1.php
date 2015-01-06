@@ -56,11 +56,12 @@ class Sha1 extends Hash
      * Sets the sha1 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return Hash Provides a fluent interface
+     * @return Hash         Provides a fluent interface
      */
     public function setSha1($options)
     {
         $this->setHash($options);
+
         return $this;
     }
 
@@ -68,11 +69,12 @@ class Sha1 extends Hash
      * Adds the sha1 hash for one or multiple files
      *
      * @param  string|array $options
-     * @return Hash Provides a fluent interface
+     * @return Hash         Provides a fluent interface
      */
     public function addSha1($options)
     {
         $this->addHash($options);
+
         return $this;
     }
 
@@ -80,7 +82,7 @@ class Sha1 extends Hash
      * Returns true if and only if the given file confirms the set hash
      *
      * @param  string $value|array Filename to check for hash
-     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
+     * @param  array  $file        File data from \Zend\File\Transfer\Transfer (optional)
      * @return bool
      */
     public function isValid($value, $file = null)
@@ -106,6 +108,7 @@ class Sha1 extends Hash
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+
             return false;
         }
 
@@ -113,6 +116,7 @@ class Sha1 extends Hash
         $filehash = hash_file('sha1', $file);
         if ($filehash === false) {
             $this->error(self::NOT_DETECTED);
+
             return false;
         }
 
@@ -123,6 +127,7 @@ class Sha1 extends Hash
         }
 
         $this->error(self::DOES_NOT_MATCH);
+
         return false;
     }
 }

@@ -119,10 +119,10 @@ abstract class AbstractContainer extends ArrayObject
 
         $items  = $this->getArrayCopy();
         $return = $indent
-            . $this->getPrefix()
-            . implode($this->getSeparator(), $items)
-            . $this->getPostfix();
-        $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
+            .$this->getPrefix()
+            .implode($this->getSeparator(), $items)
+            .$this->getPostfix();
+        $return = preg_replace("/(\r\n?|\n)/", '$1'.$indent, $return);
 
         return $return;
     }
@@ -130,8 +130,8 @@ abstract class AbstractContainer extends ArrayObject
     /**
      * Start capturing content to push into placeholder
      *
-     * @param  string $type How to capture content into placeholder; append, prepend, or set
-     * @param  mixed  $key  Key to which to capture content
+     * @param  string                     $type How to capture content into placeholder; append, prepend, or set
+     * @param  mixed                      $key  Key to which to capture content
      * @throws Exception\RuntimeException if nested captures detected
      * @return void
      */
@@ -222,6 +222,7 @@ abstract class AbstractContainer extends ArrayObject
         if (1 == count($this)) {
             $keys = $this->getKeys();
             $key  = array_shift($keys);
+
             return $this[$key];
         }
 
@@ -280,6 +281,7 @@ abstract class AbstractContainer extends ArrayObject
     public function append($value)
     {
         parent::append($value);
+
         return $this;
     }
 
@@ -308,6 +310,7 @@ abstract class AbstractContainer extends ArrayObject
     public function setIndent($indent)
     {
         $this->indent = $this->getWhitespace($indent);
+
         return $this;
     }
 
@@ -330,6 +333,7 @@ abstract class AbstractContainer extends ArrayObject
     public function setPostfix($postfix)
     {
         $this->postfix = (string) $postfix;
+
         return $this;
     }
 
@@ -352,6 +356,7 @@ abstract class AbstractContainer extends ArrayObject
     public function setPrefix($prefix)
     {
         $this->prefix = (string) $prefix;
+
         return $this;
     }
 
@@ -376,6 +381,7 @@ abstract class AbstractContainer extends ArrayObject
     public function setSeparator($separator)
     {
         $this->separator = (string) $separator;
+
         return $this;
     }
 

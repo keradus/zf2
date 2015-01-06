@@ -69,7 +69,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '1.234.567,891'
+                '1.234.567,891',
             ),
             array(
                 'de_DE',
@@ -85,7 +85,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '123.456.789 %'
+                '123.456.789 %',
             ),
             array(
                 'de_DE',
@@ -93,7 +93,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 1,
                 1234567.891234567890000,
-                '123.456.789,1 %'
+                '123.456.789,1 %',
             ),
             array(
                 'de_DE',
@@ -101,7 +101,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '1,23456789123457E6'
+                '1,23456789123457E6',
             ),
             array(
                 'ru_RU',
@@ -109,7 +109,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '1 234 567,891'
+                '1 234 567,891',
             ),
             array(
                 'ru_RU',
@@ -117,7 +117,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '123 456 789 %'
+                '123 456 789 %',
             ),
             array(
                 'ru_RU',
@@ -125,7 +125,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '1,23456789123457E6'
+                '1,23456789123457E6',
             ),
             array(
                 'en_US',
@@ -133,7 +133,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '1,234,567.891'
+                '1,234,567.891',
             ),
             array(
                 'en_US',
@@ -141,7 +141,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '123,456,789%'
+                '123,456,789%',
             ),
             array(
                 'en_US',
@@ -149,7 +149,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 NumberFormatter::TYPE_DOUBLE,
                 null,
                 1234567.891234567890000,
-                '1.23456789123457E6'
+                '1.23456789123457E6',
             ),
         );
     }

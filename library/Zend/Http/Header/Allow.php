@@ -40,7 +40,7 @@ class Allow implements HeaderInterface
     /**
      * Create Allow header from header line
      *
-     * @param string $headerLine
+     * @param  string                             $headerLine
      * @return Allow
      * @throws Exception\InvalidArgumentException
      */
@@ -50,7 +50,7 @@ class Allow implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'allow') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Allow string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Allow string: "'.$name.'"');
         }
 
         $header = new static();
@@ -103,7 +103,7 @@ class Allow implements HeaderInterface
     /**
      * Allow methods or list of methods
      *
-     * @param array|string $allowedMethods
+     * @param  array|string $allowedMethods
      * @return Allow
      */
     public function allowMethods($allowedMethods)
@@ -119,7 +119,7 @@ class Allow implements HeaderInterface
     /**
      * Disallow methods or list of methods
      *
-     * @param array|string $disallowedMethods
+     * @param  array|string $disallowedMethods
      * @return Allow
      */
     public function disallowMethods($disallowedMethods)
@@ -135,7 +135,7 @@ class Allow implements HeaderInterface
     /**
      * Convenience alias for @see disallowMethods()
      *
-     * @param array|string $disallowedMethods
+     * @param  array|string $disallowedMethods
      * @return Allow
      */
     public function denyMethods($disallowedMethods)
@@ -146,7 +146,7 @@ class Allow implements HeaderInterface
     /**
      * Check whether method is allowed
      *
-     * @param string $method
+     * @param  string $method
      * @return bool
      */
     public function isAllowedMethod($method)
@@ -168,6 +168,6 @@ class Allow implements HeaderInterface
      */
     public function toString()
     {
-        return 'Allow: ' . $this->getFieldValue();
+        return 'Allow: '.$this->getFieldValue();
     }
 }

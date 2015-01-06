@@ -45,6 +45,7 @@ class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
             $test->event  = $e->getName();
             $test->target = $e->getTarget();
             $test->params = $e->getParams();
+
             return $test->params;
         });
         $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $listener);

@@ -28,7 +28,7 @@ class Royalmail extends AbstractObject
         'C' => '3102', 'D' => '3012', 'E' => '3003', 'F' => '2112', 'G' => '2103', 'H' => '2013',
         'I' => '1320', 'J' => '1230', 'K' => '1221', 'L' => '0330', 'M' => '0321', 'N' => '0231',
         'O' => '1302', 'P' => '1212', 'Q' => '1203', 'R' => '0312', 'S' => '0303', 'T' => '0213',
-        'U' => '1122', 'V' => '1032', 'W' => '1023', 'X' => '0132', 'Y' => '0123', 'Z' => '0033'
+        'U' => '1122', 'V' => '1032', 'W' => '1023', 'X' => '0132', 'Y' => '0123', 'Z' => '0033',
     );
 
     protected $rows = array(
@@ -72,6 +72,7 @@ class Royalmail extends AbstractObject
         $startCharacter  = (2 * $this->barThinWidth) * $this->factor;
         $stopCharacter   = (1 * $this->barThinWidth) * $this->factor;
         $encodedData     = (8 * $this->barThinWidth) * $this->factor * strlen($this->getText());
+
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -107,6 +108,7 @@ class Royalmail extends AbstractObject
 
         // Stop character (1)
         $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+
         return $barcodeTable;
     }
 
@@ -132,6 +134,7 @@ class Royalmail extends AbstractObject
 
         $rowchkvalue = array_keys($this->rows, $rowvalue);
         $colchkvalue = array_keys($this->columns, $colvalue);
+
         return current(array_intersect($rowchkvalue, $colchkvalue));
     }
 }

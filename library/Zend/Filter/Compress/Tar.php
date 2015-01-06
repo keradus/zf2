@@ -37,7 +37,7 @@ class Tar extends AbstractCompressionAlgorithm
     /**
      * Class constructor
      *
-     * @param array $options (Optional) Options to set
+     * @param  array                                 $options (Optional) Options to set
      * @throws Exception\ExtensionNotLoadedException if Archive_Tar component not available
      */
     public function __construct($options = null)
@@ -45,7 +45,7 @@ class Tar extends AbstractCompressionAlgorithm
         if (!class_exists('Archive_Tar')) {
             throw new Exception\ExtensionNotLoadedException(
                 'This filter needs PEAR\'s Archive_Tar component. '
-                . 'Ensure loading Archive_Tar (registering autoload or require_once)'
+                .'Ensure loading Archive_Tar (registering autoload or require_once)'
             );
         }
 
@@ -89,7 +89,7 @@ class Tar extends AbstractCompressionAlgorithm
     /**
      * Sets the target path to use
      *
-     * @param  string $target
+     * @param  string                             $target
      * @return self
      * @throws Exception\InvalidArgumentException if target path does not exist
      */
@@ -101,6 +101,7 @@ class Tar extends AbstractCompressionAlgorithm
 
         $target = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, (string) $target);
         $this->options['target'] = $target;
+
         return $this;
     }
 
@@ -119,9 +120,9 @@ class Tar extends AbstractCompressionAlgorithm
      *
      * Either Gz or Bz2.
      *
-     * @param string $mode
+     * @param  string                                $mode
      * @return self
-     * @throws Exception\InvalidArgumentException for invalid $mode values
+     * @throws Exception\InvalidArgumentException    for invalid $mode values
      * @throws Exception\ExtensionNotLoadedException if bz2 mode selected but extension not loaded
      * @throws Exception\ExtensionNotLoadedException if gz mode selected but extension not loaded
      */
@@ -141,13 +142,14 @@ class Tar extends AbstractCompressionAlgorithm
         }
 
         $this->options['mode'] = $mode;
+
         return $this;
     }
 
     /**
      * Compresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException if unable to create temporary file
      * @throws Exception\RuntimeException if unable to create archive
@@ -158,7 +160,7 @@ class Tar extends AbstractCompressionAlgorithm
         if (!file_exists($content)) {
             $file = $this->getTarget();
             if (is_dir($file)) {
-                $file .= DIRECTORY_SEPARATOR . "tar.tmp";
+                $file .= DIRECTORY_SEPARATOR."tar.tmp";
             }
 
             $result = file_put_contents($file, $content);
@@ -194,7 +196,7 @@ class Tar extends AbstractCompressionAlgorithm
     /**
      * Decompresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException if unable to find archive
      * @throws Exception\RuntimeException if error occurs decompressing archive
@@ -210,7 +212,7 @@ class Tar extends AbstractCompressionAlgorithm
         $archive = new Archive_Tar($archive, $this->getMode());
         $target  = $this->getTarget();
         if (!is_dir($target)) {
-            $target = dirname($target) . DIRECTORY_SEPARATOR;
+            $target = dirname($target).DIRECTORY_SEPARATOR;
         }
 
         $result = $archive->extract($target);

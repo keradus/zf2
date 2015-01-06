@@ -41,7 +41,7 @@ class EmailAddress extends AbstractValidator
      */
     protected $messageVariables = array(
         'hostname'  => 'hostname',
-        'localPart' => 'localPart'
+        'localPart' => 'localPart',
     );
 
     /**
@@ -106,8 +106,8 @@ class EmailAddress extends AbstractValidator
      * Sets the validation failure message template for a particular key
      * Adds the ability to set messages to the attached hostname validator
      *
-     * @param  string $messageString
-     * @param  string $messageKey     OPTIONAL
+     * @param  string            $messageString
+     * @param  string            $messageKey    OPTIONAL
      * @return AbstractValidator Provides a fluent interface
      */
     public function setMessage($messageString, $messageKey = null)
@@ -115,6 +115,7 @@ class EmailAddress extends AbstractValidator
         if ($messageKey === null) {
             $this->getHostnameValidator()->setMessage($messageString);
             parent::setMessage($messageString);
+
             return $this;
         }
 
@@ -144,7 +145,7 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
-     * @param Hostname $hostnameValidator OPTIONAL
+     * @param  Hostname     $hostnameValidator OPTIONAL
      * @return EmailAddress Provides a fluent interface
      */
     public function setHostnameValidator(Hostname $hostnameValidator = null)
@@ -167,7 +168,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Sets the allow option of the hostname validator to use
      *
-     * @param int $allow
+     * @param  int          $allow
      * @return EmailAddress Provides a fluent interface
      */
     public function setAllow($allow)
@@ -205,12 +206,13 @@ class EmailAddress extends AbstractValidator
      *
      * This only applies when DNS hostnames are validated
      *
-     * @param  bool $mx Set allowed to true to validate for MX records, and false to not validate them
+     * @param  bool         $mx Set allowed to true to validate for MX records, and false to not validate them
      * @return EmailAddress Fluid Interface
      */
     public function useMxCheck($mx)
     {
         $this->options['useMxCheck'] = (bool) $mx;
+
         return $this;
     }
 
@@ -227,12 +229,13 @@ class EmailAddress extends AbstractValidator
     /**
      * Use deep validation for MX records
      *
-     * @param  bool $deep Set deep to true to perform a deep validation process for MX records
+     * @param  bool         $deep Set deep to true to perform a deep validation process for MX records
      * @return EmailAddress Fluid Interface
      */
     public function useDeepMxCheck($deep)
     {
         $this->options['useDeepMxCheck'] = (bool) $deep;
+
         return $this;
     }
 
@@ -250,12 +253,13 @@ class EmailAddress extends AbstractValidator
      * Sets if the domain should also be checked
      * or only the local part of the email address
      *
-     * @param  bool $domain
+     * @param  bool         $domain
      * @return EmailAddress Fluid Interface
      */
     public function useDomainCheck($domain = true)
     {
         $this->options['useDomainCheck'] = (bool) $domain;
+
         return $this;
     }
 
@@ -282,8 +286,8 @@ class EmailAddress extends AbstractValidator
      *   - 100.64.0.0/10
      * @see http://tools.ietf.org/html/rfc6598#section-7
      *
-     * @param string $host
-     * @return bool Returns false when minimal one of the given addresses is not reserved
+     * @param  string $host
+     * @return bool   Returns false when minimal one of the given addresses is not reserved
      */
     protected function isReserved($host)
     {
@@ -334,7 +338,7 @@ class EmailAddress extends AbstractValidator
         // atext: ALPHA / DIGIT / and "!", "#", "$", "%", "&", "'", "*",
         //        "+", "-", "/", "=", "?", "^", "_", "`", "{", "|", "}", "~"
         $atext = 'a-zA-Z0-9\x21\x23\x24\x25\x26\x27\x2a\x2b\x2d\x2f\x3d\x3f\x5e\x5f\x60\x7b\x7c\x7d\x7e';
-        if (preg_match('/^[' . $atext . ']+(\x2e+[' . $atext . ']+)*$/', $this->localPart)) {
+        if (preg_match('/^['.$atext.']+(\x2e+['.$atext.']+)*$/', $this->localPart)) {
             $result = true;
         } else {
             // Try quoted string format (RFC 5321 Chapter 4.1.2)
@@ -342,7 +346,7 @@ class EmailAddress extends AbstractValidator
             // Quoted-string characters are: DQUOTE *(qtext/quoted-pair) DQUOTE
             $qtext      = '\x20-\x21\x23-\x5b\x5d-\x7e'; // %d32-33 / %d35-91 / %d93-126
             $quotedPair = '\x20-\x7e'; // %d92 %d32-126
-            if (preg_match('/^"(['. $qtext .']|\x5c[' . $quotedPair . '])*"$/', $this->localPart)) {
+            if (preg_match('/^"(['.$qtext.']|\x5c['.$quotedPair.'])*"$/', $this->localPart)) {
                 $result = true;
             } else {
                 $this->error(self::DOT_ATOM);
@@ -392,6 +396,7 @@ class EmailAddress extends AbstractValidator
 
         if (!$result) {
             $this->error(self::INVALID_MX_RECORD);
+
             return $result;
         }
 
@@ -452,8 +457,8 @@ class EmailAddress extends AbstractValidator
     /**
      * Splits the given value in hostname and local part of the email address
      *
-     * @param string $value Email address to be split
-     * @return bool Returns false when the email can not be split
+     * @param  string $value Email address to be split
+     * @return bool   Returns false when the email can not be split
      */
     protected function splitEmailParts($value)
     {
@@ -484,6 +489,7 @@ class EmailAddress extends AbstractValidator
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -493,6 +499,7 @@ class EmailAddress extends AbstractValidator
         // Split email address up and disallow '..'
         if (!$this->splitEmailParts($value)) {
             $this->error(self::INVALID_FORMAT);
+
             return false;
         }
 

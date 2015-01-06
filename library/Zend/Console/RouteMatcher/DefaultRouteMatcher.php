@@ -49,12 +49,12 @@ class DefaultRouteMatcher implements RouteMatcherInterface
     /**
      * Class constructor
      *
-     * @param string $route
-     * @param array $constraints
-     * @param array $defaults
-     * @param array $aliases
-     * @param array $filters
-     * @param ValidatorInterface[] $validators
+     * @param  string                             $route
+     * @param  array                              $constraints
+     * @param  array                              $defaults
+     * @param  array                              $aliases
+     * @param  array                              $filters
+     * @param  ValidatorInterface[]               $validators
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(
@@ -72,7 +72,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
         if ($filters !== null) {
             foreach ($filters as $name => $filter) {
                 if (!$filter instanceof FilterInterface) {
-                    throw new Exception\InvalidArgumentException('Cannot use ' . gettype($filters) . ' as filter for ' . __CLASS__);
+                    throw new Exception\InvalidArgumentException('Cannot use '.gettype($filters).' as filter for '.__CLASS__);
                 }
                 $this->filters[$name] = $filter;
             }
@@ -81,7 +81,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
         if ($validators !== null) {
             foreach ($validators as $name => $validator) {
                 if (!$validator instanceof ValidatorInterface) {
-                    throw new Exception\InvalidArgumentException('Cannot use ' . gettype($validator) . ' as validator for ' . __CLASS__);
+                    throw new Exception\InvalidArgumentException('Cannot use '.gettype($validator).' as validator for '.__CLASS__);
                 }
                 $this->validators[$name] = $validator;
             }
@@ -93,7 +93,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
     /**
      * Parse a route definition.
      *
-     * @param  string $def
+     * @param  string                             $def
      * @return array
      * @throws Exception\InvalidArgumentException
      */
@@ -296,7 +296,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroup' . $unnamedGroupCounter++,
+                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroup'.$unnamedGroupCounter++,
                     'literal'       => true,
                     'required'      => false,
                     'positional'    => true,
@@ -335,7 +335,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt' . $unnamedGroupCounter++,
+                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroupAt'.$unnamedGroupCounter++,
                     'literal'       => true,
                     'required'      => true,
                     'positional'    => true,
@@ -378,7 +378,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt' . $unnamedGroupCounter++,
+                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroupAt'.$unnamedGroupCounter++,
                     'literal'       => false,
                     'required'      => true,
                     'positional'    => false,
@@ -421,7 +421,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt' . $unnamedGroupCounter++,
+                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroupAt'.$unnamedGroupCounter++,
                     'literal'       => false,
                     'required'      => false,
                     'positional'    => false,
@@ -430,7 +430,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 );
             } else {
                 throw new Exception\InvalidArgumentException(
-                    'Cannot understand Console route at "' . substr($def, $pos) . '"'
+                    'Cannot understand Console route at "'.substr($def, $pos).'"'
                 );
             }
 
@@ -444,7 +444,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
     /**
      * Returns list of names representing single parameter
      *
-     * @param string $name
+     * @param  string $name
      * @return string
      */
     private function getAliases($name)
@@ -455,13 +455,14 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 $namesToMatch[] = $alias;
             }
         }
+
         return $namesToMatch;
     }
 
     /**
      * Returns canonical name of a parameter
      *
-     * @param string $name
+     * @param  string $name
      * @return string
      */
     private function getCanonicalName($name)
@@ -469,13 +470,14 @@ class DefaultRouteMatcher implements RouteMatcherInterface
         if (isset($this->aliases[$name])) {
             return $this->aliases[$name];
         }
+
         return $name;
     }
 
     /**
      * Match parameters against route passed to constructor
      *
-     * @param array $params
+     * @param  array      $params
      * @return array|null
      */
     public function match($params)
@@ -507,7 +509,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
 
                 $alternativeAliases = array();
                 foreach ($part['alternatives'] as $alternative) {
-                    $alternativeAliases[] = '(?:' . implode('|', $this->getAliases($alternative)) . ')';
+                    $alternativeAliases[] = '(?:'.implode('|', $this->getAliases($alternative)).')';
                 }
 
                 $regex .= implode('|', $alternativeAliases);
@@ -519,21 +521,21 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 }
             } else {
                 // a single named flag
-                $name = '(?:' . implode('|', $this->getAliases($part['name'])) . ')';
+                $name = '(?:'.implode('|', $this->getAliases($part['name'])).')';
 
                 if ($part['short'] === true) {
                     // short variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-' . $name . '(?:\=(?P<value>.*?)$)?$/i';
+                        $regex = '/^\-'.$name.'(?:\=(?P<value>.*?)$)?$/i';
                     } else {
-                        $regex = '/^\-' . $name . '$/i';
+                        $regex = '/^\-'.$name.'$/i';
                     }
                 } elseif ($part['short'] === false) {
                     // long variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-{2,}' . $name . '(?:\=(?P<value>.*?)$)?$/i';
+                        $regex = '/^\-{2,}'.$name.'(?:\=(?P<value>.*?)$)?$/i';
                     } else {
-                        $regex = '/^\-{2,}' . $name . '$/i';
+                        $regex = '/^\-{2,}'.$name.'$/i';
                     }
                 }
             }
@@ -562,7 +564,6 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 }
             }
 
-
             if (!$param) {
                 /*
                  * Drop out if that was a mandatory param
@@ -578,7 +579,6 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     continue;
                 }
             }
-
 
             /*
              * Value for flags is always boolean
@@ -639,7 +639,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 } else {
                     foreach ($part['alternatives'] as $alt) {
                         if ($alt === $matchedName && !isset($matches[$alt])) {
-                            $matches[$alt] = isset($this->defaults[$alt])? $this->defaults[$alt] : true;
+                            $matches[$alt] = isset($this->defaults[$alt]) ? $this->defaults[$alt] : true;
                         } elseif (!isset($matches[$alt])) {
                             $matches[$alt] = false;
                         }
@@ -710,7 +710,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 // from all alternatives set matching parameter to TRUE and the rest to FALSE
                 foreach ($part['alternatives'] as $alt) {
                     if ($alt == $value) {
-                        $matches[$alt] = isset($this->defaults[$alt])? $this->defaults[$alt] : true;
+                        $matches[$alt] = isset($this->defaults[$alt]) ? $this->defaults[$alt] : true;
                     } else {
                         $matches[$alt] = false;
                     }
@@ -721,7 +721,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
             } elseif (!$part['required']) {
                 // set optional parameter flag
                 $name = $part['name'];
-                $matches[$name] = isset($this->defaults[$name])? $this->defaults[$name] : true;
+                $matches[$name] = isset($this->defaults[$name]) ? $this->defaults[$name] : true;
             }
 
             /*

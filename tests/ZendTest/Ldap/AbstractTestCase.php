@@ -29,6 +29,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
             'boolean'     => array('TRUE', 'FALSE'),
             'objectclass' => array('account', 'top'),
         );
+
         return $data;
     }
 

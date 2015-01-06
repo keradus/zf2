@@ -58,7 +58,7 @@ abstract class AbstractKey
      * Encrypt using this key
      *
      * @abstract
-     * @param string $data
+     * @param  string $data
      * @return string
      */
     abstract public function encrypt($data);
@@ -67,7 +67,7 @@ abstract class AbstractKey
      * Decrypt using this key
      *
      * @abstract
-     * @param string $data
+     * @param  string $data
      * @return string
      */
     abstract public function decrypt($data);

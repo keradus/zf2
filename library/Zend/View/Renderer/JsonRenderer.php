@@ -71,19 +71,20 @@ class JsonRenderer implements Renderer, TreeRendererInterface
     /**
      * Set flag indicating whether or not to merge unnamed children
      *
-     * @param  bool $mergeUnnamedChildren
+     * @param  bool         $mergeUnnamedChildren
      * @return JsonRenderer
      */
     public function setMergeUnnamedChildren($mergeUnnamedChildren)
     {
         $this->mergeUnnamedChildren = (bool) $mergeUnnamedChildren;
+
         return $this;
     }
 
     /**
      * Set the JSONP callback function name
      *
-     * @param  string $callback
+     * @param  string       $callback
      * @return JsonRenderer
      */
     public function setJsonpCallback($callback)
@@ -92,6 +93,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
         if (!empty($callback)) {
             $this->jsonpCallback = $callback;
         }
+
         return $this;
     }
 
@@ -119,10 +121,10 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      * Renders values as JSON
      *
      * @todo   Determine what use case exists for accepting both $nameOrModel and $values
-     * @param  string|Model $nameOrModel The script/resource process, or a view model
-     * @param  null|array|\ArrayAccess $values Values to use during rendering
+     * @param  string|Model              $nameOrModel The script/resource process, or a view model
+     * @param  null|array|\ArrayAccess   $values      Values to use during rendering
      * @throws Exception\DomainException
-     * @return string The script output.
+     * @return string                    The script output.
      */
     public function render($nameOrModel, $values = null)
     {
@@ -139,8 +141,9 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
 
             if ($this->hasJsonpCallback()) {
-                $values = $this->jsonpCallback . '(' . $values . ');';
+                $values = $this->jsonpCallback.'('.$values.');';
             }
+
             return $values;
         }
 
@@ -157,8 +160,9 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
 
             if ($this->hasJsonpCallback()) {
-                $return = $this->jsonpCallback . '(' . $return . ');';
+                $return = $this->jsonpCallback.'('.$return.');';
             }
+
             return $return;
         }
 
@@ -185,8 +189,8 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      * Retrieve values from a model and recurse its children to build a data structure
      *
      * @param  Model $model
-     * @param  bool $mergeWithVariables Whether or not to merge children with
-     *         the variables of the $model
+     * @param  bool  $mergeWithVariables Whether or not to merge children with
+     *                                   the variables of the $model
      * @return array
      */
     protected function recurseModel(Model $model, $mergeWithVariables = true)
@@ -223,6 +227,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
                 $values = array_replace_recursive($values, $childValues);
             }
         }
+
         return $values;
     }
 
@@ -230,8 +235,8 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      * Inject discovered child model values into parent model
      *
      * @todo   detect collisions and decide whether to append and/or aggregate?
-     * @param  Model $model
-     * @param  array $children
+     * @param Model $model
+     * @param array $children
      */
     protected function injectChildren(Model $model, array $children)
     {

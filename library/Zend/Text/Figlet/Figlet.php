@@ -274,14 +274,14 @@ class Figlet
 
         // If no font was defined, load default font
         if (!$this->fontLoaded) {
-            $this->_loadFont(__DIR__ . '/zend-framework.flf');
+            $this->_loadFont(__DIR__.'/zend-framework.flf');
         }
     }
 
     /**
      * Set options from array
      *
-     * @param  array $options Configuration for Figlet
+     * @param  array  $options Configuration for Figlet
      * @return Figlet
      */
     public function setOptions(array $options)
@@ -291,11 +291,12 @@ class Figlet
                 continue;
             }
 
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
@@ -308,18 +309,20 @@ class Figlet
     public function setFont($font)
     {
         $this->_loadFont($font);
+
         return $this;
     }
 
     /**
      * Set handling of paragraphs
      *
-     * @param  bool $handleParagraphs Whether to handle paragraphs or not
+     * @param  bool   $handleParagraphs Whether to handle paragraphs or not
      * @return Figlet
      */
     public function setHandleParagraphs($handleParagraphs)
     {
         $this->handleParagraphs = (bool) $handleParagraphs;
+
         return $this;
     }
 
@@ -327,25 +330,27 @@ class Figlet
      * Set the justification. 0 stands for left aligned, 1 for centered and 2
      * for right aligned.
      *
-     * @param  int $justification Justification of the output text
+     * @param  int    $justification Justification of the output text
      * @return Figlet
      */
     public function setJustification($justification)
     {
         $this->justification = min(3, max(0, (int) $justification));
+
         return $this;
     }
 
     /**
      * Set the output width
      *
-     * @param  int $outputWidth Output with which should be used for word
-     *                              wrapping and justification
+     * @param  int    $outputWidth Output with which should be used for word
+     *                             wrapping and justification
      * @return Figlet
      */
     public function setOutputWidth($outputWidth)
     {
         $this->outputWidth = max(1, (int) $outputWidth);
+
         return $this;
     }
 
@@ -354,12 +359,13 @@ class Figlet
      * Zend\Text\Figlet::DIRECTION_LEFT_TO_RIGHT. For writing from right to left,
      * use Zend\Text\Figlet::DIRECTION_RIGHT_TO_LEFT.
      *
-     * @param  int $rightToLeft Right-to-left mode
+     * @param  int    $rightToLeft Right-to-left mode
      * @return Figlet
      */
     public function setRightToLeft($rightToLeft)
     {
         $this->rightToLeft = min(1, max(0, (int) $rightToLeft));
+
         return $this;
     }
 
@@ -368,7 +374,7 @@ class Figlet
      *
      * Use one of the constants of Zend\Text\Figlet::SM_*, you may combine them.
      *
-     * @param  int $smushMode Smush mode to use for generating text
+     * @param  int    $smushMode Smush mode to use for generating text
      * @return Figlet
      */
     public function setSmushMode($smushMode)
@@ -397,8 +403,8 @@ class Figlet
     /**
      * Render a FIGlet text
      *
-     * @param  string $text     Text to convert to a figlet text
-     * @param  string $encoding Encoding of the input string
+     * @param  string                             $text     Text to convert to a figlet text
+     * @param  string                             $encoding Encoding of the input string
      * @throws Exception\InvalidArgumentException When $text is not a string
      * @throws Exception\UnexpectedValueException When $text it not properly encoded
      * @return string
@@ -415,7 +421,7 @@ class Figlet
         // Convert $text to UTF-8 and check encoding
         $text = $strWrapper->convert($text);
         if (!StringUtils::isValidUtf8($text)) {
-            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding);
+            throw new Exception\UnexpectedValueException('$text is not encoded with '.$encoding);
         }
 
         $strWrapper = StringUtils::getWrapper('UTF-8');
@@ -448,7 +454,7 @@ class Figlet
             $lastCharWasEol = (ctype_space($char) && $char !== "\t" && $char !== ' ');
 
             if (ctype_space($char)) {
-                $char = ($char === "\t" || $char === ' ') ? ' ': "\n";
+                $char = ($char === "\t" || $char === ' ') ? ' ' : "\n";
             }
 
             // Skip unprintable characters
@@ -479,9 +485,9 @@ class Figlet
                     $wordBreakMode = false;
                 } elseif ($this->_addChar($char)) {
                     if ($char !== ' ') {
-                        $wordBreakMode = ($wordBreakMode >= 2) ? 3: 1;
+                        $wordBreakMode = ($wordBreakMode >= 2) ? 3 : 1;
                     } else {
-                        $wordBreakMode = ($wordBreakMode > 0) ? 2: 0;
+                        $wordBreakMode = ($wordBreakMode > 0) ? 2 : 0;
                     }
                 } elseif ($this->outlineLength === 0) {
                     for ($i = 0; $i < $this->charHeight; $i++) {
@@ -550,7 +556,7 @@ class Figlet
             }
         }
 
-        $this->output .= str_replace($this->hardBlank, ' ', $string) . "\n";
+        $this->output .= str_replace($this->hardBlank, ' ', $string)."\n";
     }
 
     /**
@@ -660,7 +666,7 @@ class Figlet
                     $tempLine[$position] = $this->_smushem($tempLine[$position], $this->outputLine[$row][$k]);
                 }
 
-                $this->outputLine[$row] = $tempLine . substr($this->outputLine[$row], $smushAmount);
+                $this->outputLine[$row] = $tempLine.substr($this->outputLine[$row], $smushAmount);
             } else {
                 for ($k = 0; $k < $smushAmount; $k++) {
                     if (($this->outlineLength - $smushAmount + $k) < 0) {
@@ -937,10 +943,10 @@ class Figlet
     /**
      * Load the specified font
      *
-     * @param  string $fontFile Font file to load
-     * @throws Exception\RuntimeException When font file was not found
-     * @throws Exception\RuntimeException When GZIP library is required but not found
-     * @throws Exception\RuntimeException When font file is not readable
+     * @param  string                             $fontFile Font file to load
+     * @throws Exception\RuntimeException         When font file was not found
+     * @throws Exception\RuntimeException         When GZIP library is required but not found
+     * @throws Exception\RuntimeException         When font file is not readable
      * @throws Exception\UnexpectedValueException When font file is not a FIGlet 2 font file
      * @return void
      */
@@ -948,7 +954,7 @@ class Figlet
     {
         // Check if the font file exists
         if (!file_exists($fontFile)) {
-            throw new Exception\RuntimeException($fontFile . ': Font file not found');
+            throw new Exception\RuntimeException($fontFile.': Font file not found');
         }
 
         // Check if gzip support is required
@@ -957,7 +963,7 @@ class Figlet
                 throw new Exception\RuntimeException('GZIP library is required for gzip compressed font files');
             }
 
-            $fontFile   = 'compress.zlib://' . $fontFile;
+            $fontFile   = 'compress.zlib://'.$fontFile;
             $compressed = true;
         } else {
             $compressed = false;
@@ -966,7 +972,7 @@ class Figlet
         // Try to open the file
         $fp = fopen($fontFile, 'rb');
         if ($fp === false) {
-            throw new Exception\RuntimeException($fontFile . ': Could not open file');
+            throw new Exception\RuntimeException($fontFile.': Could not open file');
         }
 
         // If the file is not compressed, lock the stream
@@ -991,7 +997,7 @@ class Figlet
         );
 
         if ($magic !== self::FONTFILE_MAGIC_NUMBER || $numsRead < 5) {
-            throw new Exception\UnexpectedValueException($fontFile . ': Not a FIGlet 2 font file');
+            throw new Exception\UnexpectedValueException($fontFile.': Not a FIGlet 2 font file');
         }
 
         // Set default right to left
@@ -1046,6 +1052,7 @@ class Figlet
 
             if ($char === false) {
                 fclose($fp);
+
                 return;
             }
 
@@ -1079,6 +1086,7 @@ class Figlet
 
             if ($char === false) {
                 fclose($fp);
+
                 return;
             }
 

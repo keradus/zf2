@@ -15,7 +15,7 @@ interface InitializerInterface
      * Initialize
      *
      * @param $instance
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return mixed
      */
     public function initialize($instance, ServiceLocatorInterface $serviceLocator);

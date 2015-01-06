@@ -20,14 +20,15 @@ class GmpTest extends AbstractTestCase
     {
         if (!extension_loaded('gmp')) {
             $this->markTestSkipped('Missing ext/gmp');
+
             return;
         }
 
         $this->adapter = new Gmp();
     }
 
-    /**
-     * Gmp adapter test uses common test methods and data providers
-     * inherited from abstract @see AbstractTestCase
-     */
+/**
+ * Gmp adapter test uses common test methods and data providers
+ * inherited from abstract @see AbstractTestCase
+ */
 }

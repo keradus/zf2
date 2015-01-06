@@ -21,7 +21,7 @@ class Step extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID => "Invalid value given. Scalar expected",
-        self::NOT_STEP => "The input is not a valid step"
+        self::NOT_STEP => "The input is not a valid step",
     );
 
     /**
@@ -66,12 +66,13 @@ class Step extends AbstractValidator
     /**
      * Sets the base value from which the step should be computed
      *
-     * @param mixed $baseValue
+     * @param  mixed $baseValue
      * @return Step
      */
     public function setBaseValue($baseValue)
     {
         $this->baseValue = $baseValue;
+
         return $this;
     }
 
@@ -88,12 +89,13 @@ class Step extends AbstractValidator
     /**
      * Sets the step value
      *
-     * @param mixed $step
+     * @param  mixed $step
      * @return Step
      */
     public function setStep($step)
     {
         $this->step = (float) $step;
+
         return $this;
     }
 
@@ -110,13 +112,14 @@ class Step extends AbstractValidator
     /**
      * Returns true if $value is a scalar and a valid step value
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return bool
      */
     public function isValid($value)
     {
         if (!is_numeric($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -126,6 +129,7 @@ class Step extends AbstractValidator
 
         if ($fmod !== 0.0 && $fmod !== $this->step) {
             $this->error(self::NOT_STEP);
+
             return false;
         }
 
@@ -135,8 +139,8 @@ class Step extends AbstractValidator
     /**
      * replaces the internal fmod function which give wrong results on many cases
      *
-     * @param float $x
-     * @param float $y
+     * @param  float $x
+     * @param  float $y
      * @return float
      */
     protected function fmod($x, $y)

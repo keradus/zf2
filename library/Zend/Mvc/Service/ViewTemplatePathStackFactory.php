@@ -22,7 +22,7 @@ class ViewTemplatePathStackFactory implements FactoryInterface
      * ['view_manager']['template_path_stack'] and sets the default suffix with the
      * ['view_manager']['default_template_suffix']
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface        $serviceLocator
      * @return ViewResolver\TemplatePathStack
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

@@ -23,12 +23,13 @@ abstract class AbstractHelper implements HelperInterface
     /**
      * Set the View object
      *
-     * @param  Renderer $view
+     * @param  Renderer       $view
      * @return AbstractHelper
      */
     public function setView(Renderer $view)
     {
         $this->view = $view;
+
         return $this;
     }
 

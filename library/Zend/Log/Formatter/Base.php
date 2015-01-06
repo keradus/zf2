@@ -35,7 +35,7 @@ class Base implements FormatterInterface
         }
 
         if (is_array($dateTimeFormat)) {
-            $dateTimeFormat = isset($dateTimeFormat['dateTimeFormat'])? $dateTimeFormat['dateTimeFormat'] : null;
+            $dateTimeFormat = isset($dateTimeFormat['dateTimeFormat']) ? $dateTimeFormat['dateTimeFormat'] : null;
         }
 
         if (null !== $dateTimeFormat) {
@@ -46,7 +46,7 @@ class Base implements FormatterInterface
     /**
      * Formats data to be written by the writer.
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return array
      */
     public function format($event)
@@ -66,7 +66,7 @@ class Base implements FormatterInterface
     /**
      * Normalize all non-scalar data types (except null) in a string value
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return mixed
      */
     protected function normalize($value)
@@ -119,6 +119,7 @@ class Base implements FormatterInterface
     public function setDateTimeFormat($dateTimeFormat)
     {
         $this->dateTimeFormat = (string) $dateTimeFormat;
+
         return $this;
     }
 }

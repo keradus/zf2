@@ -31,7 +31,7 @@ class Delete extends AbstractPreparableSql
      */
     protected $specifications = array(
         self::SPECIFICATION_DELETE => 'DELETE FROM %1$s',
-        self::SPECIFICATION_WHERE => 'WHERE %1$s'
+        self::SPECIFICATION_WHERE => 'WHERE %1$s',
     );
 
     /**
@@ -57,7 +57,7 @@ class Delete extends AbstractPreparableSql
     /**
      * Constructor
      *
-     * @param  null|string|TableIdentifier $table
+     * @param null|string|TableIdentifier $table
      */
     public function __construct($table = null)
     {
@@ -76,6 +76,7 @@ class Delete extends AbstractPreparableSql
     public function from($table)
     {
         $this->table = $table;
+
         return $this;
     }
 
@@ -90,16 +91,17 @@ class Delete extends AbstractPreparableSql
             'emptyWhereProtection' => $this->emptyWhereProtection,
             'table' => $this->table,
             'set' => $this->set,
-            'where' => $this->where
+            'where' => $this->where,
         );
+
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
     /**
      * Create where clause
      *
-     * @param  Where|\Closure|string|array $predicate
-     * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     * @param Where|\Closure|string|array $predicate
+     * @param string                      $combination One of the OP_* constants from Predicate\PredicateSet
      *
      * @return Delete
      */
@@ -110,6 +112,7 @@ class Delete extends AbstractPreparableSql
         } else {
             $this->where->addPredicates($predicate, $combination);
         }
+
         return $this;
     }
 
@@ -152,7 +155,7 @@ class Delete extends AbstractPreparableSql
      *
      * Overloads "where" only.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return Where|null
      */

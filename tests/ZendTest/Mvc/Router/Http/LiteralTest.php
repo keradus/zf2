@@ -24,46 +24,46 @@ class LiteralTest extends TestCase
                 new Literal('/foo'),
                 '/foo',
                 null,
-                true
+                true,
             ),
             'no-match-without-leading-slash' => array(
                 new Literal('foo'),
                 '/foo',
                 null,
-                false
+                false,
             ),
             'no-match-with-trailing-slash' => array(
                 new Literal('/foo'),
                 '/foo/',
                 null,
-                false
+                false,
             ),
             'offset-skips-beginning' => array(
                 new Literal('foo'),
                 '/foo',
                 1,
-                true
+                true,
             ),
             'offset-enables-partial-matching' => array(
                 new Literal('/foo'),
                 '/foo/bar',
                 0,
-                true
+                true,
             ),
         );
     }
 
     /**
      * @dataProvider routeProvider
-     * @param        Literal $route
-     * @param        string  $path
-     * @param        integer $offset
-     * @param        bool $shouldMatch
+     * @param Literal $route
+     * @param string  $path
+     * @param integer $offset
+     * @param bool    $shouldMatch
      */
     public function testMatching(Literal $route, $path, $offset, $shouldMatch)
     {
         $request = new Request();
-        $request->setUri('http://example.com' . $path);
+        $request->setUri('http://example.com'.$path);
         $match = $route->match($request, $offset);
 
         if (!$shouldMatch) {
@@ -79,10 +79,10 @@ class LiteralTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Literal $route
-     * @param        string  $path
-     * @param        integer $offset
-     * @param        bool $shouldMatch
+     * @param Literal $route
+     * @param string  $path
+     * @param integer $offset
+     * @param bool    $shouldMatch
      */
     public function testAssembling(Literal $route, $path, $offset, $shouldMatch)
     {
@@ -122,10 +122,10 @@ class LiteralTest extends TestCase
         $tester->testFactory(
             'Zend\Mvc\Router\Http\Literal',
             array(
-                'route' => 'Missing "route" in options array'
+                'route' => 'Missing "route" in options array',
             ),
             array(
-                'route' => '/foo'
+                'route' => '/foo',
             )
         );
     }

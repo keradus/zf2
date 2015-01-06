@@ -24,7 +24,7 @@ class PostgresqlTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->platform = new Postgresql;
+        $this->platform = new Postgresql();
     }
 
     /**

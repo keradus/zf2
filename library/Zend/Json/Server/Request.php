@@ -61,28 +61,29 @@ class Request
     /**
      * Set request state
      *
-     * @param  array $options
+     * @param  array                     $options
      * @return \Zend\Json\Server\Request
      */
     public function setOptions(array $options)
     {
         $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (in_array($method, $methods)) {
                 $this->$method($value);
             } elseif ($key == 'jsonrpc') {
                 $this->setVersion($value);
             }
         }
+
         return $this;
     }
 
     /**
      * Add a parameter to the request
      *
-     * @param  mixed $value
-     * @param  string $key
+     * @param  mixed                     $value
+     * @param  string                    $key
      * @return \Zend\Json\Server\Request
      */
     public function addParam($value, $key = null)
@@ -100,7 +101,7 @@ class Request
     /**
      * Add many params
      *
-     * @param  array $params
+     * @param  array                     $params
      * @return \Zend\Json\Server\Request
      */
     public function addParams(array $params)
@@ -108,18 +109,20 @@ class Request
         foreach ($params as $key => $value) {
             $this->addParam($value, $key);
         }
+
         return $this;
     }
 
     /**
      * Overwrite params
      *
-     * @param  array $params
+     * @param  array                     $params
      * @return \Zend\Json\Server\Request
      */
     public function setParams(array $params)
     {
         $this->params = array();
+
         return $this->addParams($params);
     }
 
@@ -151,7 +154,7 @@ class Request
     /**
      * Set request method
      *
-     * @param  string $name
+     * @param  string                    $name
      * @return \Zend\Json\Server\Request
      */
     public function setMethod($name)
@@ -161,6 +164,7 @@ class Request
         } else {
             $this->method = $name;
         }
+
         return $this;
     }
 
@@ -197,12 +201,13 @@ class Request
     /**
      * Set request identifier
      *
-     * @param  mixed $name
+     * @param  mixed                     $name
      * @return \Zend\Json\Server\Request
      */
     public function setId($name)
     {
         $this->id = (string) $name;
+
         return $this;
     }
 
@@ -219,7 +224,7 @@ class Request
     /**
      * Set JSON-RPC version
      *
-     * @param  string $version
+     * @param  string                    $version
      * @return \Zend\Json\Server\Request
      */
     public function setVersion($version)
@@ -229,6 +234,7 @@ class Request
         } else {
             $this->version = '1.0';
         }
+
         return $this;
     }
 
@@ -266,7 +272,7 @@ class Request
     public function toJson()
     {
         $jsonArray = array(
-            'method' => $this->getMethod()
+            'method' => $this->getMethod(),
         );
         if (null !== ($id = $this->getId())) {
             $jsonArray['id'] = $id;

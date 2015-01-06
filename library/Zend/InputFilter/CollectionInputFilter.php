@@ -46,7 +46,7 @@ class CollectionInputFilter extends InputFilter
     /**
      * Set the input filter to use when looping the data
      *
-     * @param BaseInputFilter|array|Traversable $inputFilter
+     * @param  BaseInputFilter|array|Traversable $inputFilter
      * @throws Exception\RuntimeException
      * @return CollectionInputFilter
      */
@@ -87,7 +87,7 @@ class CollectionInputFilter extends InputFilter
     /**
      * Set if the collection can be empty
      *
-     * @param bool $isRequired
+     * @param  bool                  $isRequired
      * @return CollectionInputFilter
      */
     public function setIsRequired($isRequired)
@@ -110,7 +110,7 @@ class CollectionInputFilter extends InputFilter
     /**
      * Set the count of data to validate
      *
-     * @param int $count
+     * @param  int                   $count
      * @return CollectionInputFilter
      */
     public function setCount($count)

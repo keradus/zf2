@@ -40,9 +40,9 @@ class Ldap extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array  $options    An array of arrays of Zend\Ldap\Ldap options
-     * @param  string $identity   The username of the account being authenticated
-     * @param  string $credential The password of the account being authenticated
+     * @param array  $options    An array of arrays of Zend\Ldap\Ldap options
+     * @param string $identity   The username of the account being authenticated
+     * @param string $credential The password of the account being authenticated
      */
     public function __construct(array $options = array(), $identity = null, $credential = null)
     {
@@ -70,7 +70,7 @@ class Ldap extends AbstractAdapter
      * this adapter.
      *
      * @param  array $options The array of arrays of Zend\Ldap\Ldap options
-     * @return Ldap Provides a fluent interface
+     * @return Ldap  Provides a fluent interface
      */
     public function setOptions($options)
     {
@@ -81,6 +81,7 @@ class Ldap extends AbstractAdapter
         if (array_key_exists('credential', $this->options)) {
             $this->options['password'] = $this->options['credential'];
         }
+
         return $this;
     }
 
@@ -99,7 +100,7 @@ class Ldap extends AbstractAdapter
      * Sets the username for binding
      *
      * @param  string $username The username for binding
-     * @return Ldap Provides a fluent interface
+     * @return Ldap   Provides a fluent interface
      */
     public function setUsername($username)
     {
@@ -121,7 +122,7 @@ class Ldap extends AbstractAdapter
      * Sets the password for the account
      *
      * @param  string $password The password of the account being authenticated
-     * @return Ldap Provides a fluent interface
+     * @return Ldap   Provides a fluent interface
      */
     public function setPassword($password)
     {
@@ -146,7 +147,7 @@ class Ldap extends AbstractAdapter
      * Set an Ldap connection
      *
      * @param  ZendLdap\Ldap $ldap An existing Ldap object
-     * @return Ldap Provides a fluent interface
+     * @return Ldap          Provides a fluent interface
      */
     public function setLdap(ZendLdap\Ldap $ldap)
     {
@@ -192,6 +193,7 @@ class Ldap extends AbstractAdapter
         if (!$username) {
             $code = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
             $messages[0] = 'A username is required';
+
             return new AuthenticationResult($code, '', $messages);
         }
         if (!$password) {
@@ -200,6 +202,7 @@ class Ldap extends AbstractAdapter
              */
             $code = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
             $messages[0] = 'A password is required';
+
             return new AuthenticationResult($code, '', $messages);
         }
 
@@ -268,6 +271,7 @@ class Ldap extends AbstractAdapter
                         // rebinding with authenticated user
                         $ldap->bind($dn, $password);
                     }
+
                     return new AuthenticationResult(AuthenticationResult::SUCCESS, $canonicalName, $messages);
                 } else {
                     $messages[0] = 'Account is not a member of the specified group';
@@ -299,7 +303,7 @@ class Ldap extends AbstractAdapter
                     $failedAuthorities[$dname] = $zle->getMessage();
                 } else {
                     $line = $zle->getLine();
-                    $messages[] = $zle->getFile() . "($line): " . $zle->getMessage();
+                    $messages[] = $zle->getFile()."($line): ".$zle->getMessage();
                     $messages[] = preg_replace(
                         '/\b'.preg_quote(substr($password, 0, 15), '/').'\b/',
                         '*****',
@@ -322,7 +326,7 @@ class Ldap extends AbstractAdapter
      *
      * @param  ZendLdap\Ldap $ldap
      * @param  array         $options
-     * @return array of auth-adapter specific options
+     * @return array         of auth-adapter specific options
      */
     protected function prepareOptions(ZendLdap\Ldap $ldap, array $options)
     {
@@ -333,7 +337,7 @@ class Ldap extends AbstractAdapter
             'groupAttr'   => 'cn',
             'groupFilter' => 'objectClass=groupOfUniqueNames',
             'memberAttr'  => 'uniqueMember',
-            'memberIsDn'  => true
+            'memberIsDn'  => true,
         );
         foreach ($adapterOptions as $key => $value) {
             if (array_key_exists($key, $options)) {
@@ -365,6 +369,7 @@ class Ldap extends AbstractAdapter
             }
         }
         $ldap->setOptions($options);
+
         return $adapterOptions;
     }
 
@@ -403,7 +408,7 @@ class Ldap extends AbstractAdapter
             return true;
         }
 
-        return 'Failed to verify group membership with ' . $group->toString();
+        return 'Failed to verify group membership with '.$group->toString();
     }
 
     /**
@@ -412,8 +417,8 @@ class Ldap extends AbstractAdapter
      * This resembles the feature {@see Zend\Authentication\Adapter\DbTable::getResultRowObject()}.
      * Closes ZF-6813
      *
-     * @param  array $returnAttribs
-     * @param  array $omitAttribs
+     * @param  array         $returnAttribs
+     * @param  array         $omitAttribs
      * @return stdClass|bool
      */
     public function getAccountObject(array $returnAttribs = array(), array $omitAttribs = array())
@@ -440,13 +445,14 @@ class Ldap extends AbstractAdapter
                 $returnObject->$attr = $value;
             }
         }
+
         return $returnObject;
     }
 
     /**
      * Converts options to string
      *
-     * @param  array $options
+     * @param  array  $options
      * @return string
      */
     private function optionsToString(array $options)
@@ -459,8 +465,9 @@ class Ldap extends AbstractAdapter
             if ($str) {
                 $str .= ',';
             }
-            $str .= $key . '=' . $val;
+            $str .= $key.'='.$val;
         }
+
         return $str;
     }
 }

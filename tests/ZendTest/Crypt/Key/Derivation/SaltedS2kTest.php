@@ -28,6 +28,7 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('mhash')) {
             $this->markTestSkipped('The mhash extension is not available');
+
             return;
         }
         $password = SaltedS2k::calc('sha256', 'test', $this->salt, 32);
@@ -39,6 +40,7 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('mhash')) {
             $this->markTestSkipped('The mhash extension is not available');
+
             return;
         }
         $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException',
@@ -50,6 +52,7 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('mhash')) {
             $this->markTestSkipped('The mhash extension is not available');
+
             return;
         }
         $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException',

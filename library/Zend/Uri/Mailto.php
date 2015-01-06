@@ -51,6 +51,7 @@ class Mailto extends Uri
         }
 
         $validator = $this->getValidator();
+
         return $validator->isValid($this->path);
     }
 
@@ -88,6 +89,7 @@ class Mailto extends Uri
     public function setValidator(ValidatorInterface $validator)
     {
         $this->emailValidator = $validator;
+
         return $this;
     }
 
@@ -104,6 +106,7 @@ class Mailto extends Uri
         if (null === $this->emailValidator) {
             $this->setValidator(new EmailValidator());
         }
+
         return $this->emailValidator;
     }
 }

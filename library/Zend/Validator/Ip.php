@@ -39,7 +39,7 @@ class Ip extends AbstractValidator
     /**
      * Sets the options for this validator
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException If there is any kind of IP allowed or $options is not an array or Traversable.
      * @return AbstractValidator
      */
@@ -64,6 +64,7 @@ class Ip extends AbstractValidator
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -86,29 +87,30 @@ class Ip extends AbstractValidator
             }
         }
         $this->error(self::NOT_IP_ADDRESS);
+
         return false;
     }
 
     /**
      * Validates an IPv4 address
      *
-     * @param string $value
+     * @param  string $value
      * @return bool
      */
     protected function validateIPv4($value)
     {
         if (preg_match('/^([01]{8}.){3}[01]{8}\z/i', $value)) {
             // binary format  00000000.00000000.00000000.00000000
-            $value = bindec(substr($value, 0, 8)) . '.' . bindec(substr($value, 9, 8)) . '.'
-                   . bindec(substr($value, 18, 8)) . '.' . bindec(substr($value, 27, 8));
+            $value = bindec(substr($value, 0, 8)).'.'.bindec(substr($value, 9, 8)).'.'
+                   .bindec(substr($value, 18, 8)).'.'.bindec(substr($value, 27, 8));
         } elseif (preg_match('/^([0-9]{3}.){3}[0-9]{3}\z/i', $value)) {
             // octet format 777.777.777.777
-            $value = (int) substr($value, 0, 3) . '.' . (int) substr($value, 4, 3) . '.'
-                   . (int) substr($value, 8, 3) . '.' . (int) substr($value, 12, 3);
+            $value = (int) substr($value, 0, 3).'.'.(int) substr($value, 4, 3).'.'
+                   .(int) substr($value, 8, 3).'.'.(int) substr($value, 12, 3);
         } elseif (preg_match('/^([0-9a-f]{2}.){3}[0-9a-f]{2}\z/i', $value)) {
             // hex format ff.ff.ff.ff
-            $value = hexdec(substr($value, 0, 2)) . '.' . hexdec(substr($value, 3, 2)) . '.'
-                   . hexdec(substr($value, 6, 2)) . '.' . hexdec(substr($value, 9, 2));
+            $value = hexdec(substr($value, 0, 2)).'.'.hexdec(substr($value, 3, 2)).'.'
+                   .hexdec(substr($value, 6, 2)).'.'.hexdec(substr($value, 9, 2));
         }
 
         $ip2long = ip2long($value);
@@ -123,8 +125,8 @@ class Ip extends AbstractValidator
      * Validates an IPv6 address
      *
      * @param  string $value Value to check against
-     * @return bool True when $value is a valid ipv6 address
-     *                 False otherwise
+     * @return bool   True when $value is a valid ipv6 address
+     *                      False otherwise
      */
     protected function validateIPv6($value)
     {
@@ -138,7 +140,7 @@ class Ip extends AbstractValidator
                 return false;
             }
 
-            $value = substr($value, 0, $lastcolon) . ':0:0';
+            $value = substr($value, 0, $lastcolon).':0:0';
         }
 
         if (strpos($value, '::') === false) {
@@ -164,8 +166,8 @@ class Ip extends AbstractValidator
      * IPvFuture is loosely defined in the Section 3.2.2 of RFC 3986
      *
      * @param  string $value Value to check against
-     * @return bool True when $value is a valid IPvFuture address
-     *                 False otherwise
+     * @return bool   True when $value is a valid IPvFuture address
+     *                      False otherwise
      */
     protected function validateIPvFuture($value)
     {

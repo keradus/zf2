@@ -58,7 +58,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
             array(
                 'testServersGivenAsString',
                 array(
-                    'servers' => '127.0.0.1:1234,127.0.0.1,192.1.0.1?weight=3,localhost,127.0.0.1:11211?weight=1' .
+                    'servers' => '127.0.0.1:1234,127.0.0.1,192.1.0.1?weight=3,localhost,127.0.0.1:11211?weight=1'.
                                  ',10.0.0.1:11211?weight=1&status=0&persistent=0&timeout=5&retry_interval=10',
                 ),
                 array(
@@ -67,7 +67,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3, 'status' => true),
                     array('host' => 'localhost', 'port' => 11211, 'status' => true),
                     array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
-                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
+                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10, ),
                 ),
             ),
 
@@ -90,7 +90,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3, 'status' => true),
                     array('host' => 'localhost', 'port' => 11211, 'status' => true),
                     array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
-                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
+                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10, ),
                 ),
             ),
 
@@ -113,7 +113,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3, 'status' => true),
                     array('host' => 'localhost', 'port' => 11211, 'status' => true),
                     array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
-                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
+                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10, ),
                 ),
             ),
 
@@ -148,8 +148,8 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                             'status' => false,
                             'persistent' => false,
                             'timeout' => 5,
-                            'retry_interval' => 10
-                        )
+                            'retry_interval' => 10,
+                        ),
                     ),
                 ),
                 array(
@@ -158,7 +158,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3, 'status' => true),
                     array('host' => 'localhost', 'port' => 11211, 'status' => true),
                     array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
-                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
+                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10, ),
                 ),
             ),
         );
@@ -245,14 +245,15 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
         );
+
         return $data;
     }
 
     /**
      * @dataProvider validCompressThresholdOptionsProvider
      * @param string $resourceId
-     * @param array $thresholdOptions
-     * @param array $expectedOptions
+     * @param array  $thresholdOptions
+     * @param array  $expectedOptions
      */
     public function testSetCompressThreshold($resourceId, $thresholdOptions, $expectedOptions)
     {
@@ -365,6 +366,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
         );
+
         return $data;
     }
 

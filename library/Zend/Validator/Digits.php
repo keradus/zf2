@@ -45,6 +45,7 @@ class Digits extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -52,6 +53,7 @@ class Digits extends AbstractValidator
 
         if ('' === $this->getValue()) {
             $this->error(self::STRING_EMPTY);
+
             return false;
         }
 
@@ -61,6 +63,7 @@ class Digits extends AbstractValidator
 
         if ($this->getValue() !== static::$filter->filter($this->getValue())) {
             $this->error(self::NOT_DIGITS);
+
             return false;
         }
 

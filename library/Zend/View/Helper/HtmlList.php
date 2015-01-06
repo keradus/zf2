@@ -19,12 +19,12 @@ class HtmlList extends AbstractHtmlElement
     /**
      * Generates a 'List' element.
      *
-     * @param  array $items   Array with the elements of the list
-     * @param  bool  $ordered Specifies ordered/unordered list; default unordered
-     * @param  array $attribs Attributes for the ol/ul tag.
-     * @param  bool  $escape  Escape the items.
+     * @param  array                              $items   Array with the elements of the list
+     * @param  bool                               $ordered Specifies ordered/unordered list; default unordered
+     * @param  array                              $attribs Attributes for the ol/ul tag.
+     * @param  bool                               $escape  Escape the items.
      * @throws Exception\InvalidArgumentException
-     * @return string The list XHTML.
+     * @return string                             The list XHTML.
      */
     public function __invoke(array $items, $ordered = false, $attribs = false, $escape = true)
     {
@@ -43,14 +43,14 @@ class HtmlList extends AbstractHtmlElement
                     $escaper = $this->getView()->plugin('escapeHtml');
                     $item    = $escaper($item);
                 }
-                $list .= '<li>' . $item . '</li>' . self::EOL;
+                $list .= '<li>'.$item.'</li>'.self::EOL;
             } else {
                 $itemLength = 5 + strlen(self::EOL);
                 if ($itemLength < strlen($list)) {
                     $list = substr($list, 0, strlen($list) - $itemLength)
-                     . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                     .$this($item, $ordered, $attribs, $escape).'</li>'.self::EOL;
                 } else {
-                    $list .= '<li>' . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                    $list .= '<li>'.$this($item, $ordered, $attribs, $escape).'</li>'.self::EOL;
                 }
             }
         }
@@ -63,6 +63,6 @@ class HtmlList extends AbstractHtmlElement
 
         $tag = ($ordered) ? 'ol' : 'ul';
 
-        return '<' . $tag . $attribs . '>' . self::EOL . $list . '</' . $tag . '>' . self::EOL;
+        return '<'.$tag.$attribs.'>'.self::EOL.$list.'</'.$tag.'>'.self::EOL;
     }
 }

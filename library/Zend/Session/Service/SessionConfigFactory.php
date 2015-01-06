@@ -27,7 +27,7 @@ class SessionConfigFactory implements FactoryInterface
      * @param  ServiceLocatorInterface    $services
      * @return ConfigInterface
      * @throws ServiceNotCreatedException if session_config is missing, or an
-     *         invalid config_class is used
+     *                                             invalid config_class is used
      */
     public function createService(ServiceLocatorInterface $services)
     {

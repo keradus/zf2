@@ -354,7 +354,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
                     ),
                     'return' => 'string',
                 ),
-            )
+            ),
         );
     }
 
@@ -395,7 +395,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $smdSource->setTarget('http://foo');
         $smdSource->setTransport('POST');
         $smdSource->setServices(array(
-            array('name' => 'foo')
+            array('name' => 'foo'),
         ));
 
         $smdDestination = new Smd();

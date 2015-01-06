@@ -45,7 +45,7 @@ abstract class AbstractCallback implements CallbackInterface
      * options for the Subscriber without calling all supported setter
      * methods in turn.
      *
-     * @param  array|Traversable $options Options array or Traversable object
+     * @param array|Traversable $options Options array or Traversable object
      */
     public function __construct($options = null)
     {
@@ -57,7 +57,7 @@ abstract class AbstractCallback implements CallbackInterface
     /**
      * Process any injected configuration options
      *
-     * @param  array|Traversable $options Options array or Traversable object
+     * @param  array|Traversable                  $options Options array or Traversable object
      * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
@@ -69,7 +69,7 @@ abstract class AbstractCallback implements CallbackInterface
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Array or Traversable object'
-            . 'expected, got ' . gettype($options));
+            .'expected, got '.gettype($options));
         }
 
         if (is_array($options)) {
@@ -79,6 +79,7 @@ abstract class AbstractCallback implements CallbackInterface
         if (array_key_exists('storage', $options)) {
             $this->setStorage($options['storage']);
         }
+
         return $this;
     }
 
@@ -106,6 +107,7 @@ abstract class AbstractCallback implements CallbackInterface
     public function setStorage(Model\SubscriptionPersistenceInterface $storage)
     {
         $this->storage = $storage;
+
         return $this;
     }
 
@@ -121,8 +123,9 @@ abstract class AbstractCallback implements CallbackInterface
     {
         if ($this->storage === null) {
             throw new Exception\RuntimeException('No storage object has been'
-                . ' set that subclasses Zend\Feed\Pubsubhubbub\Model\SubscriptionPersistence');
+                .' set that subclasses Zend\Feed\Pubsubhubbub\Model\SubscriptionPersistence');
         }
+
         return $this->storage;
     }
 
@@ -131,7 +134,7 @@ abstract class AbstractCallback implements CallbackInterface
      * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend\Controller\Response\Http.
      *
-     * @param  HttpResponse|PhpResponse $httpResponse
+     * @param  HttpResponse|PhpResponse           $httpResponse
      * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
@@ -139,10 +142,11 @@ abstract class AbstractCallback implements CallbackInterface
     {
         if (!$httpResponse instanceof HttpResponse && !$httpResponse instanceof PhpResponse) {
             throw new Exception\InvalidArgumentException('HTTP Response object must'
-                . ' implement one of Zend\Feed\Pubsubhubbub\HttpResponse or'
-                . ' Zend\Http\PhpEnvironment\Response');
+                .' implement one of Zend\Feed\Pubsubhubbub\HttpResponse or'
+                .' Zend\Http\PhpEnvironment\Response');
         }
         $this->httpResponse = $httpResponse;
+
         return $this;
     }
 
@@ -156,8 +160,9 @@ abstract class AbstractCallback implements CallbackInterface
     public function getHttpResponse()
     {
         if ($this->httpResponse === null) {
-            $this->httpResponse = new HttpResponse;
+            $this->httpResponse = new HttpResponse();
         }
+
         return $this->httpResponse;
     }
 
@@ -166,7 +171,7 @@ abstract class AbstractCallback implements CallbackInterface
      * In other words, is this class serving one or more subscribers? How many?
      * Defaults to 1 if left unchanged.
      *
-     * @param  string|int $count
+     * @param  string|int                         $count
      * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
@@ -175,9 +180,10 @@ abstract class AbstractCallback implements CallbackInterface
         $count = intval($count);
         if ($count <= 0) {
             throw new Exception\InvalidArgumentException('Subscriber count must be'
-                . ' greater than zero');
+                .' greater than zero');
         }
         $this->subscriberCount = $count;
+
         return $this;
     }
 
@@ -209,16 +215,17 @@ abstract class AbstractCallback implements CallbackInterface
             if ($_SERVER['HTTPS'] == 'on') {
                 $scheme = 'https';
             }
-            $schemeAndHttpHost = $scheme . '://' . $this->_getHttpHost();
+            $schemeAndHttpHost = $scheme.'://'.$this->_getHttpHost();
             if (strpos($callbackUrl, $schemeAndHttpHost) === 0) {
                 $callbackUrl = substr($callbackUrl, strlen($schemeAndHttpHost));
             }
         } elseif (isset($_SERVER['ORIG_PATH_INFO'])) {
-            $callbackUrl= $_SERVER['ORIG_PATH_INFO'];
+            $callbackUrl = $_SERVER['ORIG_PATH_INFO'];
             if (!empty($_SERVER['QUERY_STRING'])) {
-                $callbackUrl .= '?' . $_SERVER['QUERY_STRING'];
+                $callbackUrl .= '?'.$_SERVER['QUERY_STRING'];
             }
         }
+
         return $callbackUrl;
     }
 
@@ -244,13 +251,13 @@ abstract class AbstractCallback implements CallbackInterface
             return $name;
         }
 
-        return $name . ':' . $port;
+        return $name.':'.$port;
     }
 
     /**
      * Retrieve a Header value from either $_SERVER or Apache
      *
-     * @param string $header
+     * @param  string      $header
      * @return bool|string
      */
     protected function _getHeader($header)
@@ -259,7 +266,7 @@ abstract class AbstractCallback implements CallbackInterface
         if (!empty($_SERVER[$temp])) {
             return $_SERVER[$temp];
         }
-        $temp = 'HTTP_' . strtoupper(str_replace('-', '_', $header));
+        $temp = 'HTTP_'.strtoupper(str_replace('-', '_', $header));
         if (!empty($_SERVER[$temp])) {
             return $_SERVER[$temp];
         }
@@ -269,6 +276,7 @@ abstract class AbstractCallback implements CallbackInterface
                 return $headers[$header];
             }
         }
+
         return false;
     }
 
@@ -286,6 +294,7 @@ abstract class AbstractCallback implements CallbackInterface
         if (strlen(trim($body)) > 0) {
             return $body;
         }
+
         return false;
     }
 }

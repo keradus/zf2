@@ -42,7 +42,7 @@ class JsonStrategy extends AbstractListenerAggregate
     /**
      * Constructor
      *
-     * @param  JsonRenderer $renderer
+     * @param JsonRenderer $renderer
      */
     public function __construct(JsonRenderer $renderer)
     {
@@ -61,12 +61,13 @@ class JsonStrategy extends AbstractListenerAggregate
     /**
      * Set the content-type character set
      *
-     * @param  string $charset
+     * @param  string       $charset
      * @return JsonStrategy
      */
     public function setCharset($charset)
     {
         $this->charset = (string) $charset;
+
         return $this;
     }
 
@@ -84,7 +85,7 @@ class JsonStrategy extends AbstractListenerAggregate
      * Detect if we should use the JsonRenderer based on model type and/or
      * Accept header
      *
-     * @param  ViewEvent $e
+     * @param  ViewEvent         $e
      * @return null|JsonRenderer
      */
     public function selectRenderer(ViewEvent $e)
@@ -131,7 +132,7 @@ class JsonStrategy extends AbstractListenerAggregate
             $contentType = 'application/json';
         }
 
-        $contentType .= '; charset=' . $this->charset;
+        $contentType .= '; charset='.$this->charset;
         $headers->addHeaderLine('content-type', $contentType);
 
         if (in_array(strtoupper($this->charset), $this->multibyteCharsets)) {

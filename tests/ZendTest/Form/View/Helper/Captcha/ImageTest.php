@@ -24,6 +24,7 @@ class ImageTest extends CommonTestCase
     {
         if (!extension_loaded('gd')) {
             $this->markTestSkipped('The GD extension is not available.');
+
             return;
         }
         if (!function_exists("imagepng")) {
@@ -33,17 +34,16 @@ class ImageTest extends CommonTestCase
             $this->markTestSkipped("Image CAPTCHA requires FT fonts support");
         }
 
-        $this->testDir = $this->getTmpDir() . '/ZF_test_images';
+        $this->testDir = $this->getTmpDir().'/ZF_test_images';
         if (!is_dir($this->testDir)) {
             @mkdir($this->testDir);
         }
-
 
         $this->helper  = new ImageCaptchaHelper();
         $this->captcha = new ImageCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
             'imgDir'       => $this->testDir,
-            'font'         => __DIR__. '/_files/Vera.ttf',
+            'font'         => __DIR__.'/_files/Vera.ttf',
         ));
         parent::setUp();
     }
@@ -59,6 +59,7 @@ class ImageTest extends CommonTestCase
         // remove captcha images
         if (!isset($this->testDir)) {
             parent::tearDown();
+
             return;
         }
 
@@ -81,6 +82,7 @@ class ImageTest extends CommonTestCase
         if (null === $this->tmpDir) {
             $this->tmpDir = sys_get_temp_dir();
         }
+
         return $this->tmpDir;
     }
 
@@ -88,6 +90,7 @@ class ImageTest extends CommonTestCase
     {
         $element = new CaptchaElement('foo');
         $element->setCaptcha($this->captcha);
+
         return $element;
     }
 
@@ -103,15 +106,15 @@ class ImageTest extends CommonTestCase
     {
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
-        $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;id\&\#x5D\;").*?(type="hidden")#', $markup);
-        $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;id\&\#x5D\;").*?(value="' . $this->captcha->getId() . '")#', $markup);
+        $this->assertRegExp('#(name="'.$element->getName().'\&\#x5B\;id\&\#x5D\;").*?(type="hidden")#', $markup);
+        $this->assertRegExp('#(name="'.$element->getName().'\&\#x5B\;id\&\#x5D\;").*?(value="'.$this->captcha->getId().'")#', $markup);
     }
 
     public function testRendersTextInputForInput()
     {
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
-        $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;input\&\#x5D\;").*?(type="text")#', $markup);
+        $this->assertRegExp('#(name="'.$element->getName().'\&\#x5B\;input\&\#x5D\;").*?(type="text")#', $markup);
     }
 
     public function testRendersImageTagPriorToInputByDefault()

@@ -24,7 +24,7 @@ class UserAgent implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (str_replace(array('_', ' ', '.'), '-', strtolower($name)) !== 'user-agent') {
-            throw new Exception\InvalidArgumentException('Invalid header line for User-Agent string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for User-Agent string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class UserAgent implements HeaderInterface
 
     public function toString()
     {
-        return 'User-Agent: ' . $this->getFieldValue();
+        return 'User-Agent: '.$this->getFieldValue();
     }
 }

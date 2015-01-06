@@ -33,7 +33,7 @@ class TreeRouteStackTest extends TestCase
         $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Given route does not implement HTTP route interface');
         $stack = new TreeRouteStack();
         $stack->addRoute('foo', array(
-            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute'
+            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
         ));
     }
 
@@ -41,7 +41,7 @@ class TreeRouteStackTest extends TestCase
     {
         $stack = new TreeRouteStack();
         $stack->addRoute('foo', new ArrayIterator(array(
-            'type' => '\ZendTest\Mvc\Router\Http\TestAsset\DummyRoute'
+            'type' => '\ZendTest\Mvc\Router\Http\TestAsset\DummyRoute',
         )));
     }
 
@@ -73,7 +73,7 @@ class TreeRouteStackTest extends TestCase
         $stack = new TreeRouteStack();
         $stack->setBaseUrl('/foo');
         $stack->addRoute('foo', array(
-            'type' => '\ZendTest\Mvc\Router\Http\TestAsset\DummyRoute'
+            'type' => '\ZendTest\Mvc\Router\Http\TestAsset\DummyRoute',
         ));
 
         $this->assertEquals(4, $stack->match(new Request())->getParam('offset'));
@@ -83,7 +83,7 @@ class TreeRouteStackTest extends TestCase
     {
         $stack = new TreeRouteStack();
         $stack->addRoute('foo', array(
-            'type' => '\ZendTest\Mvc\Router\Http\TestAsset\DummyRoute'
+            'type' => '\ZendTest\Mvc\Router\Http\TestAsset\DummyRoute',
         ));
 
         $this->assertEquals(null, $stack->match(new Request())->getParam('offset'));
@@ -241,7 +241,7 @@ class TreeRouteStackTest extends TestCase
             array(
                 'type' => 'Scheme',
                 'options' => array(
-                    'scheme' => 'https'
+                    'scheme' => 'https',
                 ),
                 'child_routes' => array(
                     'index' => array(
@@ -417,10 +417,10 @@ class TreeRouteStackTest extends TestCase
             array(
                 'type' => 'literal',
                 'options' => array(
-                    'route' => '/foo'
+                    'route' => '/foo',
                 ),
                 'chain_routes' => array(
-                    'bar'
+                    'bar',
                 ),
             )
         );
@@ -440,19 +440,19 @@ class TreeRouteStackTest extends TestCase
             array(
                 'type' => 'literal',
                 'options' => array(
-                    'route' => '/foo'
+                    'route' => '/foo',
                 ),
                 'chain_routes' => array(
-                    array('type' => 'scheme', 'options' => array('scheme' => 'https'))
+                    array('type' => 'scheme', 'options' => array('scheme' => 'https')),
                 ),
                 'child_routes' => array(
                     'baz' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => '/baz'
+                            'route' => '/baz',
                         ),
-                    )
-                )
+                    ),
+                ),
             )
         );
         $this->assertEquals('https://localhost/foo/baz', $stack->assemble(array(), array('name' => 'foo/baz')));

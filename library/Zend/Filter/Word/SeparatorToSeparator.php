@@ -20,8 +20,8 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Constructor
      *
-     * @param  string $searchSeparator      Separator to search for
-     * @param  string $replacementSeparator Separator to replace with
+     * @param string $searchSeparator      Separator to search for
+     * @param string $replacementSeparator Separator to replace with
      */
     public function __construct($searchSeparator = ' ', $replacementSeparator = '-')
     {
@@ -38,6 +38,7 @@ class SeparatorToSeparator extends AbstractFilter
     public function setSearchSeparator($separator)
     {
         $this->searchSeparator = $separator;
+
         return $this;
     }
 
@@ -60,6 +61,7 @@ class SeparatorToSeparator extends AbstractFilter
     public function setReplacementSeparator($separator)
     {
         $this->replacementSeparator = $separator;
+
         return $this;
     }
 
@@ -91,7 +93,8 @@ class SeparatorToSeparator extends AbstractFilter
             throw new Exception\RuntimeException('You must provide a search separator for this filter to work.');
         }
 
-        $pattern = '#' . preg_quote($this->searchSeparator, '#') . '#';
+        $pattern = '#'.preg_quote($this->searchSeparator, '#').'#';
+
         return preg_replace($pattern, $this->replacementSeparator, $value);
     }
 }

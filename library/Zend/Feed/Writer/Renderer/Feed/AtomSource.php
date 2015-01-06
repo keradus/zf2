@@ -15,13 +15,13 @@ use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 
 /**
-*/
+ */
 class AtomSource extends AbstractAtom implements Renderer\RendererInterface
 {
     /**
      * Constructor
      *
-     * @param  Writer\Source $container
+     * @param Writer\Source $container
      */
     public function __construct(Writer\Source $container)
     {
@@ -63,6 +63,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
             $ext->setDOMDocument($this->getDOMDocument(), $root);
             $ext->render();
         }
+
         return $this;
     }
 
@@ -70,7 +71,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
      * Set feed generator string
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)

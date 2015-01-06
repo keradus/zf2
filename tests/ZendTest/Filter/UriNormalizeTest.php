@@ -60,7 +60,7 @@ class UriNormalizeTest extends \PHPUnit_Framework_TestCase
             array('mailto', 'mailto:shahar@example.com', 'mailto:shahar@example.com'),
             array('http', 'www.example.com/foo/bar?q=q', 'http://www.example.com/foo/bar?q=q'),
             array('ftp', 'www.example.com/path/to/file.ext', 'ftp://www.example.com/path/to/file.ext'),
-            array('http', '/just/a/path', '/just/a/path') // cannot be enforced, no host
+            array('http', '/just/a/path', '/just/a/path'), // cannot be enforced, no host
         );
     }
 
@@ -71,8 +71,8 @@ class UriNormalizeTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 'http://www.example.com',
-                'file:///home/shahar/secret/../../otherguy/secret'
-            ))
+                'file:///home/shahar/secret/../../otherguy/secret',
+            )),
         );
     }
 

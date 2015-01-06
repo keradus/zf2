@@ -68,10 +68,10 @@ class ProgressBar
     /**
      * Create a new progressbar backend.
      *
-     * @param  Adapter\AbstractAdapter $adapter
-     * @param  float|int               $min
-     * @param  float|int               $max
-     * @param  string|null             $persistenceNamespace
+     * @param  Adapter\AbstractAdapter       $adapter
+     * @param  float|int                     $min
+     * @param  float|int                     $max
+     * @param  string|null                   $persistenceNamespace
      * @throws Exception\OutOfRangeException When $min is greater than $max
      */
     public function __construct(Adapter\AbstractAdapter $adapter, $min = 0, $max = 100, $persistenceNamespace = null)
@@ -171,7 +171,7 @@ class ProgressBar
     /**
      * Update the progressbar to the next value
      *
-     * @param  int $diff
+     * @param  int    $diff
      * @param  string $text
      * @return void
      */

@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Filter;
 
 use Zend\Filter\PregReplace as PregReplaceFilter;
@@ -91,14 +92,14 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
 
         $input = array(
             'controller/action',
-            'This should stay the same'
+            'This should stay the same',
         );
 
         $filtered = $filter($input);
         $this->assertNotEquals($input, $filtered);
         $this->assertEquals(array(
             'foo/bar',
-            'This should stay the same'
+            'This should stay the same',
         ), $filtered);
     }
 
@@ -122,7 +123,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
-            array(new \stdClass())
+            array(new \stdClass()),
         );
     }
 

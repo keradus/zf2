@@ -61,6 +61,7 @@ class Codabar extends AbstractAdapter
         $this->setCharacters('0123456789-$:/.+');
         $result = parent::hasValidCharacters($value);
         $this->setCharacters($chars);
+
         return $result;
     }
 }

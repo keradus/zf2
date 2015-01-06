@@ -12,9 +12,9 @@ namespace ZendTest\Feed\Reader\Feed;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Reader\Reader
-*/
+ * @group Zend_Feed
+ * @group Reader\Reader
+ */
 class CommonTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -22,7 +22,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/Common';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/Common';
     }
 
     /**

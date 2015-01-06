@@ -41,13 +41,14 @@ class Result implements ResultInterface
 
     /**
      * @param  resource $resource
-     * @param  mixed $generatedValue
+     * @param  mixed    $generatedValue
      * @return Result
      */
     public function initialize($resource, $generatedValue = null)
     {
         $this->resource = $resource;
         $this->generatedValue = $generatedValue;
+
         return $this;
     }
 
@@ -64,6 +65,7 @@ class Result implements ResultInterface
         }
 
         $this->currentData = db2_fetch_assoc($this->resource);
+
         return $this->currentData;
     }
 
@@ -75,6 +77,7 @@ class Result implements ResultInterface
         $this->currentData = db2_fetch_assoc($this->resource);
         $this->currentComplete = true;
         $this->position++;
+
         return $this->currentData;
     }
 

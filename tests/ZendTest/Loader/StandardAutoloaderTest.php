@@ -84,10 +84,10 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         $options = array(
             'namespaces' => array(
-                'Zend\\'   => dirname(__DIR__) . DIRECTORY_SEPARATOR,
+                'Zend\\'   => dirname(__DIR__).DIRECTORY_SEPARATOR,
             ),
             'prefixes'   => array(
-                'Zend_'  => dirname(__DIR__) . DIRECTORY_SEPARATOR,
+                'Zend_'  => dirname(__DIR__).DIRECTORY_SEPARATOR,
             ),
             'fallback_autoloader' => true,
         );
@@ -101,10 +101,10 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testPassingTraversableOptionsPopulatesProperties()
     {
         $namespaces = new \ArrayObject(array(
-            'Zend\\' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
+            'Zend\\' => dirname(__DIR__).DIRECTORY_SEPARATOR,
         ));
         $prefixes = new \ArrayObject(array(
-            'Zend_' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
+            'Zend_' => dirname(__DIR__).DIRECTORY_SEPARATOR,
         ));
         $options = new \ArrayObject(array(
             'namespaces' => $namespaces,
@@ -121,7 +121,7 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testAutoloadsNamespacedClasses()
     {
         $loader = new StandardAutoloader();
-        $loader->registerNamespace('ZendTest\UnusualNamespace', __DIR__ . '/TestAsset');
+        $loader->registerNamespace('ZendTest\UnusualNamespace', __DIR__.'/TestAsset');
         $loader->autoload('ZendTest\UnusualNamespace\NamespacedClass');
         $this->assertTrue(class_exists('ZendTest\UnusualNamespace\NamespacedClass', false));
     }
@@ -129,7 +129,7 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testAutoloadsVendorPrefixedClasses()
     {
         $loader = new StandardAutoloader();
-        $loader->registerPrefix('ZendTest_UnusualPrefix', __DIR__ . '/TestAsset');
+        $loader->registerPrefix('ZendTest_UnusualPrefix', __DIR__.'/TestAsset');
         $loader->autoload('ZendTest_UnusualPrefix_PrefixedClass');
         $this->assertTrue(class_exists('ZendTest_UnusualPrefix_PrefixedClass', false));
     }
@@ -138,7 +138,7 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         $loader = new StandardAutoloader();
         $loader->setFallbackAutoloader(true);
-        set_include_path(__DIR__ . '/TestAsset/' . PATH_SEPARATOR . $this->includePath);
+        set_include_path(__DIR__.'/TestAsset/'.PATH_SEPARATOR.$this->includePath);
         $loader->autoload('TestNamespace\FallbackCase');
         $this->assertTrue(class_exists('TestNamespace\FallbackCase', false));
     }
@@ -169,7 +169,7 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testAutoloadsNamespacedClassesWithUnderscores()
     {
         $loader = new StandardAutoloader();
-        $loader->registerNamespace('ZendTest\UnusualNamespace', __DIR__ . '/TestAsset');
+        $loader->registerNamespace('ZendTest\UnusualNamespace', __DIR__.'/TestAsset');
         $loader->autoload('ZendTest\UnusualNamespace\Name_Space\Namespaced_Class');
         $this->assertTrue(class_exists('ZendTest\UnusualNamespace\Name_Space\Namespaced_Class', false));
     }
@@ -187,8 +187,8 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $r      = new ReflectionClass($loader);
         $file   = $r->getFileName();
         $expected = array(
-            'Zend\\'    => dirname(dirname($file)) . DIRECTORY_SEPARATOR,
-            'ZendXml\\' => dirname(dirname(dirname($file))) . DIRECTORY_SEPARATOR . 'ZendXml' . DIRECTORY_SEPARATOR,
+            'Zend\\'    => dirname(dirname($file)).DIRECTORY_SEPARATOR,
+            'ZendXml\\' => dirname(dirname(dirname($file))).DIRECTORY_SEPARATOR.'ZendXml'.DIRECTORY_SEPARATOR,
         );
         $this->assertAttributeEquals($expected, 'namespaces', $loader);
     }
@@ -196,8 +196,8 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testWillLoopThroughAllNamespacesUntilMatchIsFoundWhenAutoloading()
     {
         $loader = new StandardAutoloader();
-        $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent', __DIR__ . '/TestAsset/Parent');
-        $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent\Child', __DIR__ . '/TestAsset/Child');
+        $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent', __DIR__.'/TestAsset/Parent');
+        $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent\Child', __DIR__.'/TestAsset/Child');
         $result = $loader->autoload('ZendTest\Loader\TestAsset\Parent\Child\Subclass');
         $this->assertTrue($result !== false);
         $this->assertTrue(class_exists('ZendTest\Loader\TestAsset\Parent\Child\Subclass', false));

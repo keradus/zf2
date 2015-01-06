@@ -13,21 +13,21 @@ use DateTime;
 use Zend\Feed\Writer;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Writer
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Writer
+ */
 class DeletedTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetsReference()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         $entry->setReference('http://www.example.com/id');
         $this->assertEquals('http://www.example.com/id', $entry->getReference());
     }
 
     public function testSetReferenceThrowsExceptionOnInvalidParameter()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         try {
             $entry->setReference('');
             $this->fail();
@@ -37,13 +37,13 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
 
     public function testGetReferenceReturnsNullIfNotSet()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         $this->assertTrue(null === $entry->getReference());
     }
 
     public function testSetWhenDefaultsToCurrentTime()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         $entry->setWhen();
         $dateNow = new DateTime();
         $this->assertTrue($dateNow >= $entry->getWhen());
@@ -51,9 +51,9 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
 
     public function testSetWhenUsesGivenUnixTimestamp()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         $entry->setWhen(1234567890);
-        $myDate = new DateTime('@' . 1234567890);
+        $myDate = new DateTime('@'. 1234567890);
         $this->assertEquals($myDate, $entry->getWhen());
     }
 
@@ -62,9 +62,9 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetWhenUsesGivenUnixTimestampWhenItIsLessThanTenDigits()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         $entry->setWhen(123456789);
-        $myDate = new DateTime('@' . 123456789);
+        $myDate = new DateTime('@'. 123456789);
         $this->assertEquals($myDate, $entry->getWhen());
     }
 
@@ -73,23 +73,23 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetWhenUsesGivenUnixTimestampWhenItIsAVerySmallInteger()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         $entry->setWhen(123);
-        $myDate = new DateTime('@' . 123);
+        $myDate = new DateTime('@'. 123);
         $this->assertEquals($myDate, $entry->getWhen());
     }
 
     public function testSetWhenUsesDateTimeObject()
     {
-        $myDate = new DateTime('@' . 1234567890);
-        $entry = new Writer\Deleted;
+        $myDate = new DateTime('@'. 1234567890);
+        $entry = new Writer\Deleted();
         $entry->setWhen($myDate);
         $this->assertEquals($myDate, $entry->getWhen());
     }
 
     public function testSetWhenThrowsExceptionOnInvalidParameter()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         try {
             $entry->setWhen('abc');
             $this->fail();
@@ -99,36 +99,36 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
 
     public function testGetWhenReturnsNullIfDateNotSet()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         $this->assertTrue(null === $entry->getWhen());
     }
 
     public function testAddsByNameFromArray()
     {
-        $entry = new Writer\Deleted;
-        $entry->setBy(array('name'=>'Joe'));
-        $this->assertEquals(array('name'=>'Joe'), $entry->getBy());
+        $entry = new Writer\Deleted();
+        $entry->setBy(array('name' => 'Joe'));
+        $this->assertEquals(array('name' => 'Joe'), $entry->getBy());
     }
 
     public function testAddsByEmailFromArray()
     {
-        $entry = new Writer\Deleted;
-        $entry->setBy(array('name'=>'Joe', 'email'=>'joe@example.com'));
-        $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $entry->getBy());
+        $entry = new Writer\Deleted();
+        $entry->setBy(array('name' => 'Joe', 'email' => 'joe@example.com'));
+        $this->assertEquals(array('name' => 'Joe', 'email' => 'joe@example.com'), $entry->getBy());
     }
 
     public function testAddsByUriFromArray()
     {
-        $entry = new Writer\Deleted;
-        $entry->setBy(array('name'=>'Joe', 'uri'=>'http://www.example.com'));
-        $this->assertEquals(array('name'=>'Joe', 'uri' => 'http://www.example.com'), $entry->getBy());
+        $entry = new Writer\Deleted();
+        $entry->setBy(array('name' => 'Joe', 'uri' => 'http://www.example.com'));
+        $this->assertEquals(array('name' => 'Joe', 'uri' => 'http://www.example.com'), $entry->getBy());
     }
 
     public function testAddByThrowsExceptionOnInvalidNameFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         try {
-            $entry->setBy(array('name'=>''));
+            $entry->setBy(array('name' => ''));
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
@@ -136,9 +136,9 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
 
     public function testAddByThrowsExceptionOnInvalidEmailFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         try {
-            $entry->setBy(array('name'=>'Joe', 'email'=>''));
+            $entry->setBy(array('name' => 'Joe', 'email' => ''));
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
@@ -147,9 +147,9 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
     public function testAddByThrowsExceptionOnInvalidUriFromArray()
     {
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         try {
-            $entry->setBy(array('name'=>'Joe', 'uri'=>'notauri'));
+            $entry->setBy(array('name' => 'Joe', 'uri' => 'notauri'));
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
@@ -157,9 +157,9 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
 
     public function testAddByThrowsExceptionIfNameOmittedFromArray()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
         try {
-            $entry->setBy(array('uri'=>'notauri'));
+            $entry->setBy(array('uri' => 'notauri'));
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
@@ -170,23 +170,22 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBy()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
 
         $by = $entry->getBy();
         $this->assertNull($by);
 
-        $entry->setBy(array('name'=>'Joe', 'email'=>'joe@example.com'));
-        $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $entry->getBy());
+        $entry->setBy(array('name' => 'Joe', 'email' => 'joe@example.com'));
+        $this->assertEquals(array('name' => 'Joe', 'email' => 'joe@example.com'), $entry->getBy());
     }
-
 
     public function testSetByException()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
 
         $this->setExpectedException('Zend\Feed\Writer\Exception\InvalidArgumentException',
             'Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
-        $entry->setBy(array('name' => 'joe', 'email'=>'joe@example.com', 'uri'=> ''));
+        $entry->setBy(array('name' => 'joe', 'email' => 'joe@example.com', 'uri' => ''));
     }
 
     /**
@@ -196,7 +195,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
      */
     public function testCommentAndRemove()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
 
         $comment = $entry->getComment();
         $this->assertNull($comment);
@@ -214,7 +213,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncoding()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
 
         $encoding = $entry->getEncoding();
         $this->assertEquals('UTF-8', $encoding);
@@ -233,7 +232,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
      */
     public function testType()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
 
         $type = $entry->getType();
         $this->assertNull($type);
@@ -244,7 +243,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
 
     public function testFluentInterface()
     {
-        $entry = new Writer\Deleted;
+        $entry = new Writer\Deleted();
 
         $result = $entry->setType('type')
                         ->setBy(array('name' => 'foo'))

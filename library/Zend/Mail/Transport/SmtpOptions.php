@@ -55,7 +55,7 @@ class SmtpOptions extends AbstractOptions
      * Set the local client hostname or IP
      *
      * @todo   hostname/IP validation
-     * @param  string $name
+     * @param  string                                        $name
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return SmtpOptions
      */
@@ -68,6 +68,7 @@ class SmtpOptions extends AbstractOptions
             ));
         }
         $this->name = $name;
+
         return $this;
     }
 
@@ -88,7 +89,7 @@ class SmtpOptions extends AbstractOptions
     /**
      * Set connection class
      *
-     * @param  string $connectionClass the value to be set
+     * @param  string                                        $connectionClass the value to be set
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return SmtpOptions
      */
@@ -101,6 +102,7 @@ class SmtpOptions extends AbstractOptions
             ));
         }
         $this->connectionClass = $connectionClass;
+
         return $this;
     }
 
@@ -117,12 +119,13 @@ class SmtpOptions extends AbstractOptions
     /**
      * Set connection configuration array
      *
-     * @param  array $connectionConfig
+     * @param  array       $connectionConfig
      * @return SmtpOptions
      */
     public function setConnectionConfig(array $connectionConfig)
     {
         $this->connectionConfig = $connectionConfig;
+
         return $this;
     }
 
@@ -140,12 +143,13 @@ class SmtpOptions extends AbstractOptions
      * Set the SMTP host
      *
      * @todo   hostname/IP validation
-     * @param  string $host
+     * @param  string      $host
      * @return SmtpOptions
      */
     public function setHost($host)
     {
         $this->host = (string) $host;
+
         return $this;
     }
 
@@ -162,7 +166,7 @@ class SmtpOptions extends AbstractOptions
     /**
      * Set the port the SMTP server runs on
      *
-     * @param  int $port
+     * @param  int                                           $port
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return SmtpOptions
      */
@@ -176,6 +180,7 @@ class SmtpOptions extends AbstractOptions
             ));
         }
         $this->port = $port;
+
         return $this;
     }
 }

@@ -33,8 +33,8 @@ class FormElementErrors extends AbstractHelper
      *
      * Proxies to {@link render()} if an element is passed.
      *
-     * @param  ElementInterface $element
-     * @param  array            $attributes
+     * @param  ElementInterface         $element
+     * @param  array                    $attributes
      * @return string|FormElementErrors
      */
     public function __invoke(ElementInterface $element = null, array $attributes = array())
@@ -49,8 +49,8 @@ class FormElementErrors extends AbstractHelper
     /**
      * Render validation errors for the provided $element
      *
-     * @param  ElementInterface $element
-     * @param  array $attributes
+     * @param  ElementInterface          $element
+     * @param  array                     $attributes
      * @throws Exception\DomainException
      * @return string
      */
@@ -72,7 +72,7 @@ class FormElementErrors extends AbstractHelper
         $attributes = array_merge($this->attributes, $attributes);
         $attributes = $this->createAttributesString($attributes);
         if (!empty($attributes)) {
-            $attributes = ' ' . $attributes;
+            $attributes = ' '.$attributes;
         }
 
         // Flatten message array
@@ -97,12 +97,13 @@ class FormElementErrors extends AbstractHelper
     /**
      * Set the attributes that will go on the message open format
      *
-     * @param  array $attributes key value pairs of attributes
+     * @param  array             $attributes key value pairs of attributes
      * @return FormElementErrors
      */
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
+
         return $this;
     }
 
@@ -119,12 +120,13 @@ class FormElementErrors extends AbstractHelper
     /**
      * Set the string used to close message representation
      *
-     * @param  string $messageCloseString
+     * @param  string            $messageCloseString
      * @return FormElementErrors
      */
     public function setMessageCloseString($messageCloseString)
     {
         $this->messageCloseString = (string) $messageCloseString;
+
         return $this;
     }
 
@@ -141,12 +143,13 @@ class FormElementErrors extends AbstractHelper
     /**
      * Set the formatted string used to open message representation
      *
-     * @param  string $messageOpenFormat
+     * @param  string            $messageOpenFormat
      * @return FormElementErrors
      */
     public function setMessageOpenFormat($messageOpenFormat)
     {
         $this->messageOpenFormat = (string) $messageOpenFormat;
+
         return $this;
     }
 
@@ -163,12 +166,13 @@ class FormElementErrors extends AbstractHelper
     /**
      * Set the string used to separate messages
      *
-     * @param  string $messageSeparatorString
+     * @param  string            $messageSeparatorString
      * @return FormElementErrors
      */
     public function setMessageSeparatorString($messageSeparatorString)
     {
         $this->messageSeparatorString = (string) $messageSeparatorString;
+
         return $this;
     }
 

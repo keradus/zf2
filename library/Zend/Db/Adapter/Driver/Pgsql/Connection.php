@@ -79,7 +79,7 @@ class Connection extends AbstractConnection
         $connection = $this->getConnectionString();
         set_error_handler(function ($number, $string) {
             throw new Exception\RuntimeException(
-                __METHOD__ . ': Unable to connect to database', null, new Exception\ErrorException($string, $number)
+                __METHOD__.': Unable to connect to database', null, new Exception\ErrorException($string, $number)
             );
         });
         $this->resource = pg_connect($connection);
@@ -210,7 +210,7 @@ class Connection extends AbstractConnection
         if ($name == null) {
             return;
         }
-        $result = pg_query($this->resource, 'SELECT CURRVAL(\'' . str_replace('\'', '\\\'', $name) . '\') as "currval"');
+        $result = pg_query($this->resource, 'SELECT CURRVAL(\''.str_replace('\'', '\\\'', $name).'\') as "currval"');
 
         return pg_fetch_result($result, 0, 'currval');
     }
@@ -232,6 +232,7 @@ class Connection extends AbstractConnection
                     return $p[$name];
                 }
             }
+
             return;
         };
 

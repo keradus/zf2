@@ -41,11 +41,11 @@ abstract class AbstractPlatform implements PlatformInterface
         foreach ($safeWords as $sWord) {
             $safeWordsInt[strtolower($sWord)] = true;
 
-            $safeRegex .= '|' . preg_quote($sWord);
+            $safeRegex .= '|'.preg_quote($sWord);
         }
 
         $parts = preg_split(
-            '/([\.\s]' . $safeRegex . ')/i',
+            '/([\.\s]'.$safeRegex.')/i',
             $identifier,
             -1,
             PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
@@ -57,8 +57,8 @@ abstract class AbstractPlatform implements PlatformInterface
             $identifier .= isset($safeWordsInt[strtolower($part)])
                 ? $part
                 : $this->quoteIdentifier[0]
-                . str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $part)
-                . $this->quoteIdentifier[1];
+                .str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $part)
+                .$this->quoteIdentifier[1];
         }
 
         return $identifier;
@@ -74,8 +74,8 @@ abstract class AbstractPlatform implements PlatformInterface
         }
 
         return $this->quoteIdentifier[0]
-            . str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $identifier)
-            . $this->quoteIdentifier[1];
+            .str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $identifier)
+            .$this->quoteIdentifier[1];
     }
 
     /**

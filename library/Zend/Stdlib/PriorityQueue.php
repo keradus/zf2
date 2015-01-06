@@ -55,8 +55,8 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * Priority defaults to 1 (low priority) if none provided.
      *
-     * @param  mixed $data
-     * @param  int $priority
+     * @param  mixed         $data
+     * @param  int           $priority
      * @return PriorityQueue
      */
     public function insert($data, $priority = 1)
@@ -67,6 +67,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
             'priority' => $priority,
         );
         $this->getQueue()->insert($data, $priority);
+
         return $this;
     }
 
@@ -84,7 +85,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * instances.
      *
      * @param  mixed $datum
-     * @return bool False if the item was not found, true otherwise.
+     * @return bool  False if the item was not found, true otherwise.
      */
     public function remove($datum)
     {
@@ -105,8 +106,10 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
                     $queue->insert($item['data'], $item['priority']);
                 }
             }
+
             return true;
         }
+
         return false;
     }
 
@@ -165,6 +168,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
     public function getIterator()
     {
         $queue = $this->getQueue();
+
         return clone $queue;
     }
 
@@ -200,7 +204,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * sorted). You may provide one of the EXTR_* flags as an argument, allowing
      * the ability to return priorities or both data and priority.
      *
-     * @param  int $flag
+     * @param  int   $flag
      * @return array
      */
     public function toArray($flag = self::EXTR_DATA)
@@ -226,12 +230,13 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * Please see {@link getIterator()} for details on the necessity of an
      * internal queue class. The class provided should extend SplPriorityQueue.
      *
-     * @param  string $class
+     * @param  string        $class
      * @return PriorityQueue
      */
     public function setInternalQueueClass($class)
     {
         $this->queueClass = (string) $class;
+
         return $this;
     }
 
@@ -248,13 +253,14 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
                 return true;
             }
         }
+
         return false;
     }
 
     /**
      * Does the queue have an item with the given priority?
      *
-     * @param  int $priority
+     * @param  int  $priority
      * @return bool
      */
     public function hasPriority($priority)
@@ -264,6 +270,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
                 return true;
             }
         }
+
         return false;
     }
 
@@ -284,6 +291,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
                 ));
             }
         }
+
         return $this->queue;
     }
 

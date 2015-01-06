@@ -138,7 +138,7 @@ class StaticEventManagerTest extends TestCase
 
     public function testListenersAttachedUsingWildcardEventWillBeTriggeredByResource()
     {
-        $test     = new stdClass;
+        $test     = new stdClass();
         $test->events = array();
         $callback = function ($e) use ($test) {
             $test->events[] = $e->getName();
@@ -246,7 +246,7 @@ class StaticEventManagerTest extends TestCase
         $manager = new EventManager($identifiers);
         $manager->setSharedManager($events);
 
-        $test = new \stdClass;
+        $test = new \stdClass();
         $test->triggered = 0;
         $events->attach('foo', 'bar', function ($e) use ($test) {
             $test->triggered++;
@@ -265,7 +265,7 @@ class StaticEventManagerTest extends TestCase
         $manager = new EventManager($identifiers);
         $manager->setSharedManager($events);
 
-        $test = new \stdClass;
+        $test = new \stdClass();
         $test->triggered = 0;
         $events->attach('*', 'bar', function ($e) use ($test) {
             $test->triggered++;
@@ -285,7 +285,7 @@ class StaticEventManagerTest extends TestCase
         $manager = new EventManager($identifiers);
         $manager->setSharedManager($events);
 
-        $test = new \stdClass;
+        $test = new \stdClass();
         $test->triggered = 0;
         $events->attach('foo', 'bar', function ($e) use ($test) {
             $test->triggered++;

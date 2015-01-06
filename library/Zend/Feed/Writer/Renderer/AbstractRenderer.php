@@ -14,7 +14,7 @@ use DOMElement;
 use Zend\Feed\Writer;
 
 /**
-*/
+ */
 class AbstractRenderer
 {
     /**
@@ -118,12 +118,13 @@ class AbstractRenderer
     /**
      * Set feed encoding
      *
-     * @param  string $enc
+     * @param  string           $enc
      * @return AbstractRenderer
      */
     public function setEncoding($enc)
     {
         $this->encoding = $enc;
+
         return $this;
     }
 
@@ -140,7 +141,7 @@ class AbstractRenderer
     /**
      * Indicate whether or not to ignore exceptions
      *
-     * @param  bool $bool
+     * @param  bool                                      $bool
      * @return AbstractRenderer
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -150,6 +151,7 @@ class AbstractRenderer
             throw new Writer\Exception\InvalidArgumentException('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->ignoreExceptions = $bool;
+
         return $this;
     }
 

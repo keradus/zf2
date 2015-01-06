@@ -80,7 +80,7 @@ class Syslog extends AbstractWriter
     /**
      * Constructor
      *
-     * @param  array $params Array of options; may include "application" and "facility" keys
+     * @param  array  $params Array of options; may include "application" and "facility" keys
      * @return Syslog
      */
     public function __construct($params = null)
@@ -139,7 +139,7 @@ class Syslog extends AbstractWriter
             'LOG_NEWS',
             'LOG_SYSLOG',
             'LOG_USER',
-            'LOG_UUCP'
+            'LOG_UUCP',
         );
 
         foreach ($constants as $constant) {
@@ -164,7 +164,7 @@ class Syslog extends AbstractWriter
     /**
      * Set syslog facility
      *
-     * @param int $facility Syslog facility
+     * @param  int                                $facility Syslog facility
      * @return Syslog
      * @throws Exception\InvalidArgumentException for invalid log facility
      */
@@ -194,13 +194,14 @@ class Syslog extends AbstractWriter
 
         $this->facility = $facility;
         $this->initializeSyslog();
+
         return $this;
     }
 
     /**
      * Set application name
      *
-     * @param string $appName Application name
+     * @param  string $appName Application name
      * @return Syslog
      */
     public function setApplicationName($appName)
@@ -211,6 +212,7 @@ class Syslog extends AbstractWriter
 
         $this->appName = $appName;
         $this->initializeSyslog();
+
         return $this;
     }
 
@@ -227,7 +229,7 @@ class Syslog extends AbstractWriter
     /**
      * Write a message to syslog.
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return void
      */
     protected function doWrite(array $event)

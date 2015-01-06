@@ -26,12 +26,14 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
                 $header = new static($fieldName, $multiValue);
                 $headers[] = $header->setEncoding($encoding);
             }
+
             return $headers;
         } else {
             $header = new static($fieldName, $fieldValue);
             if ($decodedLine != $headerLine) {
                 $header->setEncoding('UTF-8');
             }
+
             return $header;
         }
     }
@@ -39,7 +41,7 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
     /**
      * Cast multiple header objects to a single string header
      *
-     * @param  array $headers
+     * @param  array                              $headers
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -55,6 +57,7 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
             }
             $values[] = $header->getFieldValue(HeaderInterface::FORMAT_ENCODED);
         }
-        return $name . ': ' . implode(',', $values);
+
+        return $name.': '.implode(',', $values);
     }
 }

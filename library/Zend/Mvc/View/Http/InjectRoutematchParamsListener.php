@@ -69,7 +69,7 @@ class InjectRoutematchParamsListener extends AbstractListenerAggregate
     /**
      * Should RouteMatch parameters replace existing Request params?
      *
-     * @param  bool $overwrite
+     * @param bool $overwrite
      */
     public function setOverwrite($overwrite)
     {

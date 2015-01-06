@@ -29,8 +29,8 @@ class Message implements MessageInterface
      * Non-destructive setting of message metadata; always adds to the metadata, never overwrites
      * the entire metadata container.
      *
-     * @param  string|int|array|Traversable $spec
-     * @param  mixed $value
+     * @param  string|int|array|Traversable       $spec
+     * @param  mixed                              $value
      * @throws Exception\InvalidArgumentException
      * @return Message
      */
@@ -38,6 +38,7 @@ class Message implements MessageInterface
     {
         if (is_scalar($spec)) {
             $this->metadata[$spec] = $value;
+
             return $this;
         }
         if (!is_array($spec) && !$spec instanceof Traversable) {
@@ -49,14 +50,15 @@ class Message implements MessageInterface
         foreach ($spec as $key => $value) {
             $this->metadata[$key] = $value;
         }
+
         return $this;
     }
 
     /**
      * Retrieve all metadata or a single metadatum as specified by key
      *
-     * @param  null|string|int $key
-     * @param  null|mixed $default
+     * @param  null|string|int                    $key
+     * @param  null|mixed                         $default
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
@@ -80,12 +82,13 @@ class Message implements MessageInterface
     /**
      * Set message content
      *
-     * @param  mixed $value
+     * @param  mixed   $value
      * @return Message
      */
     public function setContent($value)
     {
         $this->content = $value;
+
         return $this;
     }
 
@@ -112,7 +115,8 @@ class Message implements MessageInterface
                 (string) $value
             );
         }
-        $request .= "\r\n" . $this->getContent();
+        $request .= "\r\n".$this->getContent();
+
         return $request;
     }
 }

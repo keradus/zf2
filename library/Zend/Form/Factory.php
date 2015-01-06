@@ -47,6 +47,7 @@ class Factory
     public function setInputFilterFactory(InputFilterFactory $inputFilterFactory)
     {
         $this->inputFilterFactory = $inputFilterFactory;
+
         return $this;
     }
 
@@ -62,6 +63,7 @@ class Factory
         if (null === $this->inputFilterFactory) {
             $this->setInputFilterFactory(new InputFilterFactory());
         }
+
         return $this->inputFilterFactory;
     }
 
@@ -74,6 +76,7 @@ class Factory
     public function setFormElementManager(FormElementManager $formElementManager)
     {
         $this->formElementManager = $formElementManager;
+
         return $this;
     }
 
@@ -98,7 +101,7 @@ class Factory
      * type is being requested; if none is provided, assumes the spec
      * represents simply an element.
      *
-     * @param  array|Traversable $spec
+     * @param  array|Traversable         $spec
      * @return ElementInterface
      * @throws Exception\DomainException
      */
@@ -134,7 +137,7 @@ class Factory
     /**
      * Create an element
      *
-     * @param  array $spec
+     * @param  array            $spec
      * @return ElementInterface
      */
     public function createElement($spec)
@@ -149,7 +152,7 @@ class Factory
     /**
      * Create a fieldset
      *
-     * @param  array $spec
+     * @param  array            $spec
      * @return ElementInterface
      */
     public function createFieldset($spec)
@@ -164,7 +167,7 @@ class Factory
     /**
      * Create a form
      *
-     * @param  array $spec
+     * @param  array            $spec
      * @return ElementInterface
      */
     public function createForm($spec)
@@ -270,8 +273,8 @@ class Factory
      *   array specification for the input filter factory
      * - hydrator: hydrator instance or named hydrator class
      *
-     * @param  FormInterface                  $form
-     * @param  array|Traversable|ArrayAccess  $spec
+     * @param  FormInterface                 $form
+     * @param  array|Traversable|ArrayAccess $spec
      * @return FormInterface
      */
     public function configureForm(FormInterface $form, $spec)
@@ -295,8 +298,8 @@ class Factory
      *
      * Ensures we have an array, Traversable, or ArrayAccess object, and returns it.
      *
-     * @param  array|Traversable|ArrayAccess $spec
-     * @param  string $method Method invoking the validator
+     * @param  array|Traversable|ArrayAccess      $spec
+     * @param  string                             $method Method invoking the validator
      * @return array|ArrayAccess
      * @throws Exception\InvalidArgumentException for invalid $spec
      */
@@ -308,6 +311,7 @@ class Factory
 
         if ($spec instanceof Traversable) {
             $spec = ArrayUtils::iteratorToArray($spec);
+
             return $spec;
         }
 
@@ -326,8 +330,8 @@ class Factory
      * Takes a list of element specifications, creates the elements, and injects them into the provided fieldset
      *
      * @param  array|Traversable|ArrayAccess $elements
-     * @param  FieldsetInterface $fieldset
-     * @param  string $method Method invoking this one (for exception messages)
+     * @param  FieldsetInterface             $fieldset
+     * @param  string                        $method   Method invoking this one (for exception messages)
      * @return void
      */
     protected function prepareAndInjectElements($elements, FieldsetInterface $fieldset, $method)
@@ -355,8 +359,8 @@ class Factory
      * Takes a list of fieldset specifications, creates the fieldsets, and injects them into the master fieldset
      *
      * @param  array|Traversable|ArrayAccess $fieldsets
-     * @param  FieldsetInterface $masterFieldset
-     * @param  string $method Method invoking this one (for exception messages)
+     * @param  FieldsetInterface             $masterFieldset
+     * @param  string                        $method         Method invoking this one (for exception messages)
      * @return void
      */
     public function prepareAndInjectFieldsets($fieldsets, FieldsetInterface $masterFieldset, $method)
@@ -378,9 +382,9 @@ class Factory
      * Takes a string indicating a class name, instantiates the class
      * by that name, and injects the class instance as the bound object.
      *
-     * @param  string           $objectName
-     * @param  FieldsetInterface $fieldset
-     * @param  string           $method
+     * @param  string                    $objectName
+     * @param  FieldsetInterface         $fieldset
+     * @param  string                    $method
      * @throws Exception\DomainException
      * @return void
      */
@@ -402,7 +406,7 @@ class Factory
             ));
         }
 
-        $fieldset->setObject(new $objectName);
+        $fieldset->setObject(new $objectName());
     }
 
     /**
@@ -415,13 +419,14 @@ class Factory
      * @param  FieldsetInterface                       $fieldset
      * @param  string                                  $method
      * @return void
-     * @throws Exception\DomainException If $hydratorOrName is not a string, does not resolve to a known class, or
-     *                                   the class does not implement Hydrator\HydratorInterface
+     * @throws Exception\DomainException               If $hydratorOrName is not a string, does not resolve to a known class, or
+     *                                                                the class does not implement Hydrator\HydratorInterface
      */
     protected function prepareAndInjectHydrator($hydratorOrName, FieldsetInterface $fieldset, $method)
     {
         if ($hydratorOrName instanceof Hydrator\HydratorInterface) {
             $fieldset->setHydrator($hydratorOrName);
+
             return;
         }
 
@@ -468,7 +473,7 @@ class Factory
      * @param  string                    $method
      * @return void
      * @throws Exception\DomainException If $factoryOrName is not a string, does not resolve to a known class, or
-     *                                   the class does not extend Form\Factory
+     *                                                 the class does not extend Form\Factory
      */
     protected function prepareAndInjectFactory($factoryOrName, FieldsetInterface $fieldset, $method)
     {
@@ -507,9 +512,9 @@ class Factory
      * Otherwise, $spec is passed on to the attached InputFilter Factory
      * instance in order to create the input filter.
      *
-     * @param  string|array|Traversable $spec
-     * @param  FormInterface $form
-     * @param  string $method
+     * @param  string|array|Traversable  $spec
+     * @param  FormInterface             $form
+     * @param  string                    $method
      * @return void
      * @throws Exception\DomainException for unknown InputFilter class or invalid InputFilter instance
      */
@@ -517,6 +522,7 @@ class Factory
     {
         if ($spec instanceof InputFilterInterface) {
             $form->setInputFilter($spec);
+
             return;
         }
 
@@ -528,7 +534,7 @@ class Factory
                     $spec
                 ));
             }
-            $filter = new $spec;
+            $filter = new $spec();
             if (!$filter instanceof InputFilterInterface) {
                 throw new Exception\DomainException(sprintf(
                     '%s expects a valid implementation of Zend\InputFilter\InputFilterInterface; received "%s"',
@@ -537,6 +543,7 @@ class Factory
                 ));
             }
             $form->setInputFilter($filter);
+
             return;
         }
 
@@ -553,9 +560,9 @@ class Factory
      *
      * Takes an array of elements names
      *
-     * @param  string|array|Traversable $spec
-     * @param  FormInterface $form
-     * @param  string $method
+     * @param  string|array|Traversable  $spec
+     * @param  FormInterface             $form
+     * @param  string                    $method
      * @return void
      * @throws Exception\DomainException if validation group given is not an array
      */
@@ -577,7 +584,7 @@ class Factory
     /**
      * Try to pull hydrator from service manager, or instantiates it from its name
      *
-     * @param  string $hydratorName
+     * @param  string                    $hydratorName
      * @return mixed
      * @throws Exception\DomainException
      */
@@ -603,14 +610,15 @@ class Factory
             ));
         }
 
-        $hydrator = new $hydratorName;
+        $hydrator = new $hydratorName();
+
         return $hydrator;
     }
 
     /**
      * Try to pull factory from service manager, or instantiates it from its name
      *
-     * @param  string $factoryName
+     * @param  string                    $factoryName
      * @return mixed
      * @throws Exception\DomainException
      */
@@ -629,7 +637,8 @@ class Factory
             ));
         }
 
-        $factory = new $factoryName;
+        $factory = new $factoryName();
+
         return $factory;
     }
 }

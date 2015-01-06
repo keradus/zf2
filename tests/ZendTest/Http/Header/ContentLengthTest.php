@@ -44,5 +44,5 @@ class ContentLengthTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Content-Length: xxx', $contentLengthHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

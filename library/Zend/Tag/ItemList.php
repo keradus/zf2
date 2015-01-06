@@ -37,7 +37,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     /**
      * Spread values in the items relative to their weight
      *
-     * @param  array $values
+     * @param  array                    $values
      * @throws InvalidArgumentException When value list is empty
      * @return void
      */
@@ -97,7 +97,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     /**
      * Seek to an absolute position
      *
-     * @param  int $index
+     * @param  int                  $index
      * @throws OutOfBoundsException When the seek position is invalid
      * @return void
      */
@@ -180,7 +180,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     /**
      * Get the value of an offset
      *
-     * @param  mixed $offset
+     * @param  mixed             $offset
      * @return TaggableInterface
      */
     public function offsetGet($offset)
@@ -191,8 +191,8 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     /**
      * Append a new item
      *
-     * @param  mixed          $offset
-     * @param  TaggableInterface $item
+     * @param  mixed                $offset
+     * @param  TaggableInterface    $item
      * @throws OutOfBoundsException When item does not implement Zend\Tag\TaggableInterface
      * @return void
      */

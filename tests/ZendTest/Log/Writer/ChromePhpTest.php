@@ -49,7 +49,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
         $writer = new ChromePhp($this->chromephp);
         $writer->write(array(
             'message' => 'my msg',
-            'priority' => Logger::DEBUG
+            'priority' => Logger::DEBUG,
         ));
         $this->assertEquals('my msg', $this->chromephp->calls['trace'][0]);
     }
@@ -60,7 +60,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
         $writer = new ChromePhp($chromephp);
         $writer->write(array(
             'message' => 'my msg',
-            'priority' => Logger::DEBUG
+            'priority' => Logger::DEBUG,
         ));
         $this->assertTrue(empty($this->chromephp->calls));
     }

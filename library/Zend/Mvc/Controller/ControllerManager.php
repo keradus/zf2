@@ -38,7 +38,7 @@ class ControllerManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * service manager, event manager, and plugin manager
      *
-     * @param  null|ConfigInterface $configuration
+     * @param null|ConfigInterface $configuration
      */
     public function __construct(ConfigInterface $configuration = null)
     {
@@ -50,7 +50,7 @@ class ControllerManager extends AbstractPluginManager
     /**
      * Inject required dependencies into the controller.
      *
-     * @param  DispatchableInterface $controller
+     * @param  DispatchableInterface   $controller
      * @param  ServiceLocatorInterface $serviceLocator
      * @return void
      */
@@ -94,7 +94,7 @@ class ControllerManager extends AbstractPluginManager
      *
      * Ensure we have a dispatchable.
      *
-     * @param  mixed $plugin
+     * @param  mixed                                $plugin
      * @return true
      * @throws Exception\InvalidControllerException
      */
@@ -128,8 +128,8 @@ class ControllerManager extends AbstractPluginManager
      * Override: do not use peering service managers
      *
      * @param  string $name
-     * @param  array $options
-     * @param  bool $usePeeringServiceManagers
+     * @param  array  $options
+     * @param  bool   $usePeeringServiceManagers
      * @return mixed
      */
     public function get($name, $options = array(), $usePeeringServiceManagers = false)

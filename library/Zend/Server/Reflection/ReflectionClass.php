@@ -51,8 +51,8 @@ class ReflectionClass
      * {@link Zend\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      *
      * @param PhpReflectionClass $reflection
-     * @param string $namespace
-     * @param mixed $argv
+     * @param string             $namespace
+     * @param mixed              $argv
      */
     public function __construct(PhpReflectionClass $reflection, $namespace = null, $argv = false)
     {
@@ -75,8 +75,8 @@ class ReflectionClass
     /**
      * Proxy reflection calls
      *
-     * @param string $method
-     * @param array $args
+     * @param  string                           $method
+     * @param  array                            $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
@@ -95,7 +95,7 @@ class ReflectionClass
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function __get($key)
@@ -112,8 +112,8 @@ class ReflectionClass
      *
      * Values are stored by $key in {@link $config}.
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  string $key
+     * @param  mixed  $value
      * @return void
      */
     public function __set($key, $value)
@@ -145,7 +145,7 @@ class ReflectionClass
     /**
      * Set namespace for this class
      *
-     * @param string $namespace
+     * @param  string                             $namespace
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -153,6 +153,7 @@ class ReflectionClass
     {
         if (empty($namespace)) {
             $this->namespace = '';
+
             return;
         }
 

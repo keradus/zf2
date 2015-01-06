@@ -18,7 +18,7 @@ class ErrorHandler extends Simple
     /**
      * This method formats the event for the PHP Error Handler.
      *
-     * @param  array $event
+     * @param  array  $event
      * @return string
      */
     public function format($event)
@@ -40,15 +40,15 @@ class ErrorHandler extends Simple
      * Flatten the multi-dimensional $event array into a single dimensional
      * array
      *
-     * @param array $event
-     * @param string $key
+     * @param  array  $event
+     * @param  string $key
      * @return array
      */
     protected function buildReplacementsFromArray($event, $key = null)
     {
         $result = array();
         foreach ($event as $index => $value) {
-            $nextIndex = $key === null ? $index : $key . '[' . $index . ']';
+            $nextIndex = $key === null ? $index : $key.'['.$index.']';
             if ($value === null) {
                 continue;
             }
@@ -64,6 +64,7 @@ class ErrorHandler extends Simple
                 $result = array_merge($result, $this->buildReplacementsFromArray($value, $nextIndex));
             }
         }
+
         return $result;
     }
 }

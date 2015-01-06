@@ -75,7 +75,7 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
                     $tgPropReflection->setValue($this->table, $this->mockAdapter);
                     break;
                 case 'resultSetPrototype':
-                    $tgPropReflection->setValue($this->table, new ResultSet);
+                    $tgPropReflection->setValue($this->table, new ResultSet());
                     break;
                 case 'sql':
                     $tgPropReflection->setValue($this->table, $this->mockSql);
@@ -218,7 +218,6 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
         $mockInsert->expects($this->once())
             ->method('prepareStatement')
             ->with($this->mockAdapter);
-
 
         $mockInsert->expects($this->once())
             ->method('values')

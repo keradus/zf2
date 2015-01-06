@@ -24,7 +24,7 @@ class IfNoneMatch implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-none-match') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-None-Match string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-None-Match string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class IfNoneMatch implements HeaderInterface
 
     public function toString()
     {
-        return 'If-None-Match: ' . $this->getFieldValue();
+        return 'If-None-Match: '.$this->getFieldValue();
     }
 }

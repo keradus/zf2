@@ -51,9 +51,9 @@ abstract class AbstractManager implements Manager
     /**
      * Constructor
      *
-     * @param  Config|null $config
-     * @param  Storage|null $storage
-     * @param  SaveHandler|null $saveHandler
+     * @param  Config|null                $config
+     * @param  Storage|null               $storage
+     * @param  SaveHandler|null           $saveHandler
      * @throws Exception\RuntimeException
      */
     public function __construct(Config $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
@@ -111,12 +111,13 @@ abstract class AbstractManager implements Manager
     /**
      * Set configuration object
      *
-     * @param  Config $config
+     * @param  Config          $config
      * @return AbstractManager
      */
     public function setConfig(Config $config)
     {
         $this->config = $config;
+
         return $this;
     }
 
@@ -133,12 +134,13 @@ abstract class AbstractManager implements Manager
     /**
      * Set session storage object
      *
-     * @param  Storage $storage
+     * @param  Storage         $storage
      * @return AbstractManager
      */
     public function setStorage(Storage $storage)
     {
         $this->storage = $storage;
+
         return $this;
     }
 
@@ -155,12 +157,13 @@ abstract class AbstractManager implements Manager
     /**
      * Set session save handler object
      *
-     * @param  SaveHandler $saveHandler
+     * @param  SaveHandler     $saveHandler
      * @return AbstractManager
      */
     public function setSaveHandler(SaveHandler $saveHandler)
     {
         $this->saveHandler = $saveHandler;
+
         return $this;
     }
 

@@ -55,9 +55,9 @@ class Boolean extends AbstractFilter
     /**
      * Constructor
      *
-     * @param array|Traversable|int|null  $typeOrOptions
-     * @param bool  $casting
-     * @param array $translations
+     * @param array|Traversable|int|null $typeOrOptions
+     * @param bool                       $casting
+     * @param array                      $translations
      */
     public function __construct($typeOrOptions = null, $casting = true, $translations = array())
     {
@@ -85,7 +85,7 @@ class Boolean extends AbstractFilter
     /**
      * Set boolean types
      *
-     * @param  int|array $type
+     * @param  int|array                          $type
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -115,6 +115,7 @@ class Boolean extends AbstractFilter
         }
 
         $this->options['type'] = $type;
+
         return $this;
     }
 
@@ -132,13 +133,14 @@ class Boolean extends AbstractFilter
      * Set the working mode
      *
      * @param  bool $flag When true this filter works like cast
-     *                       When false it recognises only true and false
-     *                       and all other values are returned as is
+     *                    When false it recognises only true and false
+     *                    and all other values are returned as is
      * @return self
      */
     public function setCasting($flag = true)
     {
         $this->options['casting'] = (bool) $flag;
+
         return $this;
     }
 
@@ -153,7 +155,7 @@ class Boolean extends AbstractFilter
     }
 
     /**
-     * @param  array|Traversable $translations
+     * @param  array|Traversable                  $translations
      * @throws Exception\InvalidArgumentException
      * @return self
      */

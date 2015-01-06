@@ -24,7 +24,7 @@ class ProxyAuthenticate implements MultipleHeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'proxy-authenticate') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Proxy-Authenticate string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Proxy-Authenticate string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,7 +50,7 @@ class ProxyAuthenticate implements MultipleHeaderInterface
 
     public function toString()
     {
-        return 'Proxy-Authenticate: ' . $this->getFieldValue();
+        return 'Proxy-Authenticate: '.$this->getFieldValue();
     }
 
     public function toStringMultipleHeaders(array $headers)
@@ -64,6 +64,7 @@ class ProxyAuthenticate implements MultipleHeaderInterface
             }
             $strings[] = $header->toString();
         }
+
         return implode("\r\n", $strings);
     }
 }

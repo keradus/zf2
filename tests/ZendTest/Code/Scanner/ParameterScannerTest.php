@@ -16,7 +16,7 @@ class ParameterScannerTest extends TestCase
 {
     public function testParameterScannerHasParameterInformation()
     {
-        $file      = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $file      = new FileScanner(__DIR__.'/../TestAsset/BarClass.php');
         $class     = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $method    = $class->getMethod('three');
         $parameter = $method->getParameter('t');

@@ -25,10 +25,11 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_originalDir = __DIR__ . '/../_files/test.maildir/';
+        $this->_originalDir = __DIR__.'/../_files/test.maildir/';
         if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 . 'directory before enabling the maildir tests');
+                                 .'directory before enabling the maildir tests');
+
             return;
         }
 
@@ -36,7 +37,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/../_files/test.tmp/';
+                $this->_tmpdir = __DIR__.'/../_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);
@@ -50,6 +51,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
@@ -59,53 +61,53 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
         foreach ($this->_subdirs as $dir) {
             if ($dir != '.') {
-                mkdir($this->_tmpdir . $dir);
+                mkdir($this->_tmpdir.$dir);
             }
             foreach (array('cur', 'new') as $subdir) {
-                if (!file_exists($this->_originalDir . $dir . '/' . $subdir)) {
+                if (!file_exists($this->_originalDir.$dir.'/'.$subdir)) {
                     continue;
                 }
-                mkdir($this->_tmpdir . $dir . '/' . $subdir);
-                $dh = opendir($this->_originalDir . $dir . '/' . $subdir);
+                mkdir($this->_tmpdir.$dir.'/'.$subdir);
+                $dh = opendir($this->_originalDir.$dir.'/'.$subdir);
                 while (($entry = readdir($dh)) !== false) {
-                    $entry = $dir . '/' . $subdir . '/' . $entry;
-                    if (!is_file($this->_originalDir . $entry)) {
+                    $entry = $dir.'/'.$subdir.'/'.$entry;
+                    if (!is_file($this->_originalDir.$entry)) {
                         continue;
                     }
-                    copy($this->_originalDir . $entry, $this->_tmpdir . $entry);
+                    copy($this->_originalDir.$entry, $this->_tmpdir.$entry);
                 }
                 closedir($dh);
             }
-            copy($this->_originalDir . 'maildirsize', $this->_tmpdir . 'maildirsize');
+            copy($this->_originalDir.'maildirsize', $this->_tmpdir.'maildirsize');
         }
     }
 
     public function tearDown()
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
-            if (!file_exists($this->_tmpdir . $dir)) {
+            if (!file_exists($this->_tmpdir.$dir)) {
                 continue;
             }
             foreach (array('cur', 'new', 'tmp') as $subdir) {
-                if (!file_exists($this->_tmpdir . $dir . '/' . $subdir)) {
+                if (!file_exists($this->_tmpdir.$dir.'/'.$subdir)) {
                     continue;
                 }
-                $dh = opendir($this->_tmpdir . $dir . '/' . $subdir);
+                $dh = opendir($this->_tmpdir.$dir.'/'.$subdir);
                 while (($entry = readdir($dh)) !== false) {
-                    $entry = $this->_tmpdir . $dir . '/' . $subdir . '/' . $entry;
+                    $entry = $this->_tmpdir.$dir.'/'.$subdir.'/'.$entry;
                     if (!is_file($entry)) {
                         continue;
                     }
                     unlink($entry);
                 }
                 closedir($dh);
-                rmdir($this->_tmpdir . $dir . '/' . $subdir);
+                rmdir($this->_tmpdir.$dir.'/'.$subdir);
             }
             if ($dir != '.') {
-                rmdir($this->_tmpdir . $dir);
+                rmdir($this->_tmpdir.$dir);
             }
         }
-        @unlink($this->_tmpdir . 'maildirsize');
+        @unlink($this->_tmpdir.'maildirsize');
     }
 
     public function testCreateFolder()
@@ -148,7 +150,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Writable\Maildir($this->_params);
         $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
-        $mail->createFolder('foo' . DIRECTORY_SEPARATOR . 'bar');
+        $mail->createFolder('foo'.DIRECTORY_SEPARATOR.'bar');
     }
 
     public function testCreateFolderExistingDir()
@@ -309,7 +311,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
     public function testSetFlagsRemovedFile()
     {
         $mail = new Writable\Maildir($this->_params);
-        unlink($this->_params['dirname'] . 'cur/1000000000.P1.example.org:2,S');
+        unlink($this->_params['dirname'].'cur/1000000000.P1.example.org:2,S');
 
         $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
     }
@@ -329,7 +331,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
     public function testRemoveRemovedFile()
     {
         $mail = new Writable\Maildir($this->_params);
-        unlink($this->_params['dirname'] . 'cur/1000000000.P1.example.org:2,S');
+        unlink($this->_params['dirname'].'cur/1000000000.P1.example.org:2,S');
 
         $this->setExpectedException('Zend\Mail\Storage\Exception\InvalidArgumentException');
         $mail->removeMessage(1);
@@ -350,9 +352,9 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
             'quota' => array(
                     'count' => 10,
                     'L'     => 1,
-                    'size'  => 3000
+                    'size'  => 3000,
                 ),
-            'over_quota' => false
+            'over_quota' => false,
         );
         $this->assertEquals($quotaResult, $mail->checkQuota(true));
     }
@@ -378,9 +380,9 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
             'quota' => array(
                     'size'  => 100,
                     'count' => 2,
-                    'X'     => 0
+                    'X'     => 0,
                 ),
-            'over_quota' => true
+            'over_quota' => true,
         );
         $this->assertEquals($quotaResult, $mail->checkQuota(true, true));
         $this->assertEquals(array('size' => 100, 'count' => 2, 'X' => 0), $mail->getQuota(true));
@@ -391,7 +393,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail = new Writable\Maildir($this->_params);
         $this->assertEquals($mail->getQuota(true), array('size' => 3000, 'L' => 1, 'count' => 10));
 
-        unlink($this->_tmpdir . 'maildirsize');
+        unlink($this->_tmpdir.'maildirsize');
 
         $this->assertNull($mail->getQuota());
 
@@ -402,7 +404,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
     public function testMissingMaildirsizeWithFixedQuota()
     {
         $mail = new Writable\Maildir($this->_params);
-        unlink($this->_tmpdir . 'maildirsize');
+        unlink($this->_tmpdir.'maildirsize');
         $mail->setQuota(array('size' => 100, 'count' => 2, 'X' => 0));
 
         $quotaResult = array(
@@ -411,9 +413,9 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
             'quota' => array(
                     'size'  => 100,
                     'count' => 2,
-                    'X'     => 0
+                    'X'     => 0,
                 ),
-            'over_quota' => true
+            'over_quota' => true,
         );
         $this->assertEquals($mail->checkQuota(true), $quotaResult);
 
@@ -433,9 +435,9 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
             'quota' => array(
                     'size'  => 3000,
                     'count' => 6,
-                    'X'     => 0
+                    'X'     => 0,
                 ),
-            'over_quota' => true
+            'over_quota' => true,
         );
         $this->assertEquals($mail->checkQuota(true), $quotaResult);
 
@@ -475,9 +477,9 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
             'quota' => array(
                     'size'  => 3000,
                     'count' => 6,
-                    'X'     => 0
+                    'X'     => 0,
                 ),
-            'over_quota' => true
+            'over_quota' => true,
         );
         $this->assertEquals($mail->checkQuota(true), $quotaResult);
     }
@@ -504,7 +506,6 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail->selectFolder('INBOX');
         $fromCount = $mail->countMessages();
         $mail->moveMessage(1, $target);
-
 
         $this->assertEquals($fromCount - 1, $mail->countMessages());
         $mail->selectFolder($target);

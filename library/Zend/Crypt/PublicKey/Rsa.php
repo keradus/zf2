@@ -30,7 +30,7 @@ class Rsa
     /**
      * RSA instance factory
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                      $options
      * @return Rsa
      * @throws Rsa\Exception\RuntimeException
      * @throws Rsa\Exception\InvalidArgumentException
@@ -94,7 +94,7 @@ class Rsa
     /**
      * Class constructor
      *
-     * @param  RsaOptions $options
+     * @param  RsaOptions                     $options
      * @throws Rsa\Exception\RuntimeException
      */
     public function __construct(RsaOptions $options = null)
@@ -115,12 +115,13 @@ class Rsa
     /**
      * Set options
      *
-     * @param RsaOptions $options
+     * @param  RsaOptions $options
      * @return Rsa
      */
     public function setOptions(RsaOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -143,16 +144,17 @@ class Rsa
     {
         $message = '';
         while (false !== ($error = openssl_error_string())) {
-            $message .= $error . "\n";
+            $message .= $error."\n";
         }
+
         return trim($message);
     }
 
     /**
      * Sign with private key
      *
-     * @param  string     $data
-     * @param  Rsa\PrivateKey $privateKey
+     * @param  string                         $data
+     * @param  Rsa\PrivateKey                 $privateKey
      * @return string
      * @throws Rsa\Exception\RuntimeException
      */
@@ -171,7 +173,7 @@ class Rsa
         );
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Can not generate signature; openssl ' . $this->getOpensslErrorString()
+                'Can not generate signature; openssl '.$this->getOpensslErrorString()
             );
         }
 
@@ -190,10 +192,10 @@ class Rsa
      *  - MODE_BASE64: Decode $signature using base64 algorithm.
      *  - MODE_RAW: $signature is not encoded.
      *
-     * @param  string $data
-     * @param  string $signature
-     * @param  null|Rsa\PublicKey $publicKey
-     * @param  int                $mode Input encoding
+     * @param  string                         $data
+     * @param  string                         $signature
+     * @param  null|Rsa\PublicKey             $publicKey
+     * @param  int                            $mode      Input encoding
      * @return bool
      * @throws Rsa\Exception\RuntimeException
      * @see Rsa::MODE_AUTO
@@ -234,7 +236,7 @@ class Rsa
         );
         if (-1 === $result) {
             throw new Exception\RuntimeException(
-                'Can not verify signature; openssl ' . $this->getOpensslErrorString()
+                'Can not verify signature; openssl '.$this->getOpensslErrorString()
             );
         }
 
@@ -244,8 +246,8 @@ class Rsa
     /**
      * Encrypt with private/public key
      *
-     * @param  string          $data
-     * @param  Rsa\AbstractKey $key
+     * @param  string                                 $data
+     * @param  Rsa\AbstractKey                        $key
      * @return string
      * @throws Rsa\Exception\InvalidArgumentException
      */
@@ -276,9 +278,9 @@ class Rsa
      *  - MODE_BASE64: Decode $data using base64 algorithm.
      *  - MODE_RAW: $data is not encoded.
      *
-     * @param  string          $data
-     * @param  Rsa\AbstractKey $key
-     * @param  int             $mode Input encoding
+     * @param  string                                 $data
+     * @param  Rsa\AbstractKey                        $key
+     * @param  int                                    $mode Input encoding
      * @return string
      * @throws Rsa\Exception\InvalidArgumentException
      * @see Rsa::MODE_AUTO
@@ -321,13 +323,14 @@ class Rsa
      * Generate new private/public key pair
      * @see RsaOptions::generateKeys()
      *
-     * @param  array $opensslConfig
+     * @param  array                          $opensslConfig
      * @return Rsa
      * @throws Rsa\Exception\RuntimeException
      */
     public function generateKeys(array $opensslConfig = array())
     {
         $this->options->generateKeys($opensslConfig);
+
         return $this;
     }
 }

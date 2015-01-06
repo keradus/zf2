@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Log\Writer;
 
 use Traversable;
@@ -63,9 +64,9 @@ class FingersCrossed extends AbstractWriter
     /**
      * Constructor
      *
-     * @param WriterInterface|string|array|Traversable $writer Wrapped writer or array of configuration options
-     * @param FilterInterface|int $filterOrPriority Filter or log priority which determines buffering of events
-     * @param int $bufferSize Maximum buffer size
+     * @param WriterInterface|string|array|Traversable $writer           Wrapped writer or array of configuration options
+     * @param FilterInterface|int                      $filterOrPriority Filter or log priority which determines buffering of events
+     * @param int                                      $bufferSize       Maximum buffer size
      */
     public function __construct($writer, $filterOrPriority = null, $bufferSize = 0)
     {
@@ -99,8 +100,8 @@ class FingersCrossed extends AbstractWriter
     /**
      * Set a new writer
      *
-     * @param  string|WriterInterface $writer
-     * @param  array|null $options
+     * @param  string|WriterInterface             $writer
+     * @param  array|null                         $options
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -119,6 +120,7 @@ class FingersCrossed extends AbstractWriter
         }
 
         $this->writer = $writer;
+
         return $this;
     }
 
@@ -132,20 +134,21 @@ class FingersCrossed extends AbstractWriter
         if (null === $this->writerPlugins) {
             $this->setWriterPluginManager(new WriterPluginManager());
         }
+
         return $this->writerPlugins;
     }
 
     /**
      * Set writer plugin manager
      *
-     * @param  string|WriterPluginManager $plugins
+     * @param  string|WriterPluginManager         $plugins
      * @return FingersCrossed
      * @throws Exception\InvalidArgumentException
      */
     public function setWriterPluginManager($plugins)
     {
         if (is_string($plugins)) {
-            $plugins = new $plugins;
+            $plugins = new $plugins();
         }
         if (!$plugins instanceof WriterPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -156,14 +159,15 @@ class FingersCrossed extends AbstractWriter
         }
 
         $this->writerPlugins = $plugins;
+
         return $this;
     }
 
     /**
      * Get writer instance
      *
-     * @param string $name
-     * @param array|null $options
+     * @param  string          $name
+     * @param  array|null      $options
      * @return WriterInterface
      */
     public function writerPlugin($name, array $options = null)
@@ -174,7 +178,7 @@ class FingersCrossed extends AbstractWriter
     /**
      * Log a message to this writer.
      *
-     * @param array $event log data event
+     * @param  array $event log data event
      * @return void
      */
     public function write(array $event)
@@ -185,8 +189,8 @@ class FingersCrossed extends AbstractWriter
     /**
      * Check if buffered data should be flushed
      *
-     * @param array $event event data
-     * @return bool true if buffered data should be flushed
+     * @param  array $event event data
+     * @return bool  true if buffered data should be flushed
      */
     protected function isActivated(array $event)
     {
@@ -195,19 +199,21 @@ class FingersCrossed extends AbstractWriter
                 return false;
             }
         }
+
         return true;
     }
 
     /**
      * Write message to buffer or delegate event data to the wrapped writer
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return void
      */
     protected function doWrite(array $event)
     {
         if (!$this->buffering) {
             $this->writer->write($event);
+
             return;
         }
 
@@ -241,7 +247,7 @@ class FingersCrossed extends AbstractWriter
      * Stub in accordance to parent method signature.
      * Fomatters must be set on the wrapped writer.
      *
-     * @param string|FormatterInterface $formatter
+     * @param  string|FormatterInterface $formatter
      * @return WriterInterface
      */
     public function setFormatter($formatter)

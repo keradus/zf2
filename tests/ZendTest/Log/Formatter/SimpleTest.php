@@ -44,7 +44,7 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
             'message'      => 'foo',
             'priority'     => 42,
             'priorityName' => 'bar',
-            'extra'        => array()
+            'extra'        => array(),
         );
 
         $outputExpected = '2012-08-28T18:15:00+00:00 bar (42): foo';

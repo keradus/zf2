@@ -59,6 +59,7 @@ class Subject implements UnstructuredInterface
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -70,11 +71,12 @@ class Subject implements UnstructuredInterface
     public function setSubject($subject)
     {
         $this->subject = (string) $subject;
+
         return $this;
     }
 
     public function toString()
     {
-        return 'Subject: ' . $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
+        return 'Subject: '.$this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
     }
 }

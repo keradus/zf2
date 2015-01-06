@@ -87,7 +87,6 @@ class UpcaTest extends TestCommon
         $this->assertTrue($this->object->checkParams());
     }
 
-
     public function testGetKnownWidthWithoutOrientation()
     {
         $this->object->setText('00123456789');

@@ -46,12 +46,13 @@ abstract class AbstractFeed
     /**
      * Set the DOM document
      *
-     * @param  DOMDocument $dom
+     * @param  DOMDocument  $dom
      * @return AbstractFeed
      */
     public function setDomDocument(DOMDocument $dom)
     {
         $this->domDocument = $dom;
+
         return $this;
     }
 
@@ -73,18 +74,20 @@ abstract class AbstractFeed
     public function getEncoding()
     {
         $assumed = $this->getDomDocument()->encoding;
+
         return $assumed;
     }
 
     /**
      * Set the feed type
      *
-     * @param  string $type
+     * @param  string       $type
      * @return AbstractFeed
      */
     public function setType($type)
     {
         $this->data['type'] = $type;
+
         return $this;
     }
 
@@ -102,6 +105,7 @@ abstract class AbstractFeed
             $type = Reader\Reader::detectType($this->getDomDocument());
             $this->setType($type);
         }
+
         return $type;
     }
 
@@ -118,18 +122,20 @@ abstract class AbstractFeed
     /**
      * Set the XPath query
      *
-     * @param  DOMXPath $xpath
+     * @param  DOMXPath      $xpath
      * @return AbstractEntry
      */
     public function setXpath(DOMXPath $xpath = null)
     {
         if (null === $xpath) {
             $this->xpath = null;
+
             return $this;
         }
 
         $this->xpath = $xpath;
         $this->registerNamespaces();
+
         return $this;
     }
 
@@ -160,7 +166,7 @@ abstract class AbstractFeed
     /**
      * Set the XPath prefix
      *
-     * @param string $prefix
+     * @param  string $prefix
      * @return void
      */
     public function setXpathPrefix($prefix)

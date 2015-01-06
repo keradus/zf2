@@ -27,7 +27,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
      */
     protected $defaultPatterns = array(
         '#config[\._-](.*)$#i',
-        '#^(.*)[\\\\\._-]config$#i'
+        '#^(.*)[\\\\\._-]config$#i',
     );
 
     /**
@@ -38,9 +38,9 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
     /**
      * Determine if we can create a service with name
      *
-     * @param ServiceManager\ServiceLocatorInterface $serviceLocator
-     * @param string $name
-     * @param string $requestedName
+     * @param  ServiceManager\ServiceLocatorInterface $serviceLocator
+     * @param  string                                 $name
+     * @param  string                                 $requestedName
      * @return bool
      */
     public function canCreateServiceWithName(ServiceManager\ServiceLocatorInterface $serviceLocator, $name, $requestedName)
@@ -59,15 +59,16 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         }
 
         $config = $serviceLocator->get('Config');
+
         return isset($config[$key]);
     }
 
     /**
      * Create service with name
      *
-     * @param ServiceManager\ServiceLocatorInterface $serviceLocator
-     * @param string $name
-     * @param string $requestedName
+     * @param  ServiceManager\ServiceLocatorInterface $serviceLocator
+     * @param  string                                 $name
+     * @param  string                                 $requestedName
      * @return string|mixed|array
      */
     public function createServiceWithName(ServiceManager\ServiceLocatorInterface $serviceLocator, $name, $requestedName)
@@ -79,16 +80,18 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         $key = $this->match($requestedName);
         if (isset($this->configs[$key])) {
             $this->configs[$requestedName] = $this->configs[$key];
+
             return $this->configs[$key];
         }
 
         $config = $serviceLocator->get('Config');
         $this->configs[$requestedName] = $this->configs[$key] = $config[$key];
+
         return $config;
     }
 
     /**
-     * @param string $pattern
+     * @param  string                             $pattern
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -101,11 +104,12 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         $patterns = $this->getPatterns();
         array_unshift($patterns, $pattern);
         $this->setPatterns($patterns);
+
         return $this;
     }
 
     /**
-     * @param array|Traversable $patterns
+     * @param  array|Traversable                  $patterns
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -127,7 +131,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
     }
 
     /**
-     * @param array|Traversable $patterns
+     * @param  array|Traversable         $patterns
      * @return self
      * @throws \InvalidArgumentException
      */
@@ -142,6 +146,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         }
 
         $this->patterns = $patterns;
+
         return $this;
     }
 
@@ -153,11 +158,12 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         if (null === $this->patterns) {
             $this->setPatterns($this->defaultPatterns);
         }
+
         return $this->patterns;
     }
 
     /**
-     * @param string $requestedName
+     * @param  string      $requestedName
      * @return null|string
      */
     protected function match($requestedName)
@@ -167,6 +173,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
                 return $matches[1];
             }
         }
+
         return;
     }
 }

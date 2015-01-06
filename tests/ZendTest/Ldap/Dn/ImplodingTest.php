@@ -32,7 +32,7 @@ class ImplodingTest extends \PHPUnit_Framework_TestCase
             array("cn" => "name1"),
             array("cn" => "name2"),
             array("dc" => "example"),
-            array("dc" => "org")
+            array("dc" => "org"),
         );
         $dn       = Ldap\Dn::implodeDn($dnArray);
         $this->assertEquals($expected, $dn);
@@ -63,7 +63,7 @@ class ImplodingTest extends \PHPUnit_Framework_TestCase
     public function testImplodeRdnMultiValuedRdn()
     {
         $a        = array('cn'  => 'value',
-                          'uid' => 'testUser');
+                          'uid' => 'testUser', );
         $expected = 'cn=value+uid=testUser';
         $this->assertEquals($expected, Ldap\Dn::implodeRdn($a));
     }
@@ -72,7 +72,7 @@ class ImplodingTest extends \PHPUnit_Framework_TestCase
     {
         $a        = array('cn'  => 'value',
                           'uid' => 'testUser',
-                          'ou'  => 'myDep');
+                          'ou'  => 'myDep', );
         $expected = 'cn=value+ou=myDep+uid=testUser';
         $this->assertEquals($expected, Ldap\Dn::implodeRdn($a));
     }
@@ -95,14 +95,14 @@ class ImplodingTest extends \PHPUnit_Framework_TestCase
     {
         $a        = array('cn'  => 'value',
                           'uid' => 'testUser',
-                          'ou'  => 'myDep');
+                          'ou'  => 'myDep', );
         $expected = 'CN=value+OU=myDep+UID=testUser';
         $this->assertEquals($expected,
             Ldap\Dn::implodeRdn($a, Ldap\Dn::ATTR_CASEFOLD_UPPER)
         );
         $a        = array('CN'  => 'value',
                           'uID' => 'testUser',
-                          'ou'  => 'myDep');
+                          'ou'  => 'myDep', );
         $expected = 'cn=value+ou=myDep+uid=testUser';
         $this->assertEquals($expected,
             Ldap\Dn::implodeRdn($a, Ldap\Dn::ATTR_CASEFOLD_LOWER)

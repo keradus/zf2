@@ -45,8 +45,8 @@ class AdapterPluginManager extends AbstractPluginManager
     /**
      * Attempt to create an instance via a factory
      *
-     * @param  string $canonicalName
-     * @param  string $requestedName
+     * @param  string                                                    $canonicalName
+     * @param  string                                                    $requestedName
      * @return mixed
      * @throws \Zend\ServiceManager\Exception\ServiceNotCreatedException If factory is not callable
      */
@@ -57,6 +57,7 @@ class AdapterPluginManager extends AbstractPluginManager
             $factory = new $factory($this->creationOptions);
             $this->factories[$canonicalName] = $factory;
         }
+
         return parent::createFromFactory($canonicalName, $requestedName);
     }
 
@@ -66,7 +67,7 @@ class AdapterPluginManager extends AbstractPluginManager
      * Checks that the adapter loaded is an instance
      * of Adapter\AdapterInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                      $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

@@ -95,7 +95,7 @@ class Connection extends AbstractConnection
 
         $serverName = '.';
         $params = array(
-            'ReturnDatesAsStrings' => true
+            'ReturnDatesAsStrings' => true,
         );
         foreach ($this->connectionParameters as $key => $value) {
             switch (strtolower($key)) {

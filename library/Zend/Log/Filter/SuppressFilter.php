@@ -22,7 +22,7 @@ class SuppressFilter implements FilterInterface
     /**
      * This is a simple boolean filter.
      *
-     * @param int|array|Traversable $suppress
+     * @param  int|array|Traversable              $suppress
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($suppress = false)
@@ -59,8 +59,8 @@ class SuppressFilter implements FilterInterface
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param array $event event data
-     * @return bool accepted?
+     * @param  array $event event data
+     * @return bool  accepted?
      */
     public function filter(array $event)
     {

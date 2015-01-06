@@ -58,26 +58,29 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function initialize($resource)
     {
         $this->db2 = $resource;
+
         return $this;
     }
 
     /**
-     * @param IbmDb2 $driver
+     * @param  IbmDb2    $driver
      * @return Statement
      */
     public function setDriver(IbmDb2 $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Statement
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -98,6 +101,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
@@ -114,12 +118,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set parameter container
      *
-     * @param ParameterContainer $parameterContainer
+     * @param  ParameterContainer $parameterContainer
      * @return mixed
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -158,7 +163,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Prepare sql
      *
-     * @param string|null $sql
+     * @param  string|null $sql
      * @return Statement
      */
     public function prepare($sql = null)
@@ -178,6 +183,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->isPrepared = true;
+
         return $this;
     }
 
@@ -194,7 +200,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Execute
      *
-     * @param null|array|ParameterContainer $parameters
+     * @param  null|array|ParameterContainer $parameters
      * @return Result
      */
     public function execute($parameters = null)
@@ -217,7 +223,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->parameterContainer->setFromArray($parameters);
         }
         /** END Standard ParameterContainer Merging Block */
-
         if ($this->profiler) {
             $this->profiler->profilerStart($this);
         }
@@ -235,6 +240,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource);
+
         return $result;
     }
 }

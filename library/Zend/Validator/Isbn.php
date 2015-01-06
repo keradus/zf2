@@ -93,6 +93,7 @@ class Isbn extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -137,14 +138,17 @@ class Isbn extends AbstractValidator
 
             default:
                 $this->error(self::NO_ISBN);
+
                 return false;
         }
 
         // validate
         if (substr($this->getValue(), -1) != $checksum) {
             $this->error(self::NO_ISBN);
+
             return false;
         }
+
         return true;
     }
 
@@ -153,9 +157,9 @@ class Isbn extends AbstractValidator
      *
      * It is allowed only empty string, hyphen and space.
      *
-     * @param  string $separator
+     * @param  string                             $separator
      * @throws Exception\InvalidArgumentException When $separator is not valid
-     * @return Isbn Provides a fluent interface
+     * @return Isbn                               Provides a fluent interface
      */
     public function setSeparator($separator)
     {
@@ -165,6 +169,7 @@ class Isbn extends AbstractValidator
         }
 
         $this->options['separator'] = $separator;
+
         return $this;
     }
 
@@ -181,9 +186,9 @@ class Isbn extends AbstractValidator
     /**
      * Set allowed ISBN type.
      *
-     * @param  string $type
+     * @param  string                             $type
      * @throws Exception\InvalidArgumentException When $type is not valid
-     * @return Isbn Provides a fluent interface
+     * @return Isbn                               Provides a fluent interface
      */
     public function setType($type)
     {
@@ -193,6 +198,7 @@ class Isbn extends AbstractValidator
         }
 
         $this->options['type'] = $type;
+
         return $this;
     }
 

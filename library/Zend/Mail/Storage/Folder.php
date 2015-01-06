@@ -61,6 +61,7 @@ class Folder implements RecursiveIterator
     public function hasChildren()
     {
         $current = $this->current();
+
         return $current && $current instanceof Folder && !$current->isLeaf();
     }
 
@@ -123,9 +124,9 @@ class Folder implements RecursiveIterator
     /**
      * get subfolder named $name
      *
-     * @param  string $name wanted subfolder
+     * @param  string                             $name wanted subfolder
      * @throws Exception\InvalidArgumentException
-     * @return \Zend\Mail\Storage\Folder folder named $folder
+     * @return \Zend\Mail\Storage\Folder          folder named $folder
      */
     public function __get($name)
     {
@@ -139,7 +140,7 @@ class Folder implements RecursiveIterator
     /**
      * add or replace subfolder named $name
      *
-     * @param string $name local name of subfolder
+     * @param string                    $name   local name of subfolder
      * @param \Zend\Mail\Storage\Folder $folder instance for new subfolder
      */
     public function __set($name, Folder $folder)

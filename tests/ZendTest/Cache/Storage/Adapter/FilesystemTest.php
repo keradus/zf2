@@ -89,9 +89,9 @@ class FilesystemTest extends CommonAdapterTest
 
         $firstSlash = strpos($cacheDir, '/');
         $cacheDir = substr($cacheDir, 0, $firstSlash + 1)
-                  . '..//../'
-                  . substr($cacheDir, $firstSlash)
-                  . '///';
+                  .'..//../'
+                  .substr($cacheDir, $firstSlash)
+                  .'///';
 
         $this->_options->setCacheDir($cacheDir);
         $cacheDir = $this->_options->getCacheDir();
@@ -148,7 +148,7 @@ class FilesystemTest extends CommonAdapterTest
         } else {
             @exec('whoami 2>&1', $out, $ret);
             if ($ret) {
-                $this->markTestSkipped("Not testable: " . implode("\n", $out));
+                $this->markTestSkipped("Not testable: ".implode("\n", $out));
             } elseif (isset($out[0]) && $out[0] == 'root') {
                 $this->markTestSkipped("Not testable as root");
             }
@@ -270,7 +270,7 @@ class FilesystemTest extends CommonAdapterTest
         $meta = $this->_storage->getMetadata('test');
         $this->assertInternalType('array', $meta);
 
-        $expectedCtime = filectime($meta['filespec'] . '.dat');
+        $expectedCtime = filectime($meta['filespec'].'.dat');
         $this->assertEquals($expectedCtime, $meta['ctime']);
     }
 
@@ -283,7 +283,7 @@ class FilesystemTest extends CommonAdapterTest
         $meta = $this->_storage->getMetadata('test');
         $this->assertInternalType('array', $meta);
 
-        $expectedAtime = fileatime($meta['filespec'] . '.dat');
+        $expectedAtime = fileatime($meta['filespec'].'.dat');
         $this->assertEquals($expectedAtime, $meta['atime']);
     }
 
@@ -291,7 +291,7 @@ class FilesystemTest extends CommonAdapterTest
     {
         $this->_options->setTtl(0.1);
         $this->_storage->setItem('k', 'v');
-        $dirs = glob($this->_tmpCacheDir . '/*');
+        $dirs = glob($this->_tmpCacheDir.'/*');
         if (count($dirs) === 0) {
             $this->fail('Could not find cache dir');
         }

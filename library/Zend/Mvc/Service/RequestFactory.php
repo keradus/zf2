@@ -20,7 +20,7 @@ class RequestFactory implements FactoryInterface
     /**
      * Create and return a request instance, according to current environment.
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface    $serviceLocator
      * @return ConsoleRequest|HttpRequest
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

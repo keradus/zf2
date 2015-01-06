@@ -44,5 +44,5 @@ class ContentEncodingTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Content-Encoding: xxx', $contentEncodingHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

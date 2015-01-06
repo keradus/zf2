@@ -28,8 +28,8 @@ class DateSelect extends MonthSelect
     /**
      * Constructor. Add the day select element
      *
-     * @param  null|int|string  $name    Optional name for the element
-     * @param  array            $options Optional options for the element
+     * @param null|int|string $name    Optional name for the element
+     * @param array           $options Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -42,7 +42,7 @@ class DateSelect extends MonthSelect
      * Accepted options for DateSelect (plus the ones from MonthSelect) :
      * - day_attributes: HTML attributes to be rendered with the day element
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable $options
      * @return DateSelect
      */
     public function setOptions($options)
@@ -77,12 +77,13 @@ class DateSelect extends MonthSelect
     /**
      * Set the day attributes
      *
-     * @param  array $dayAttributes
+     * @param  array      $dayAttributes
      * @return DateSelect
      */
     public function setDayAttributes(array $dayAttributes)
     {
         $this->dayElement->setAttributes($dayAttributes);
+
         return $this;
     }
 
@@ -97,7 +98,7 @@ class DateSelect extends MonthSelect
     }
 
     /**
-     * @param  string|array|\ArrayAccess|PhpDateTime $value
+     * @param  string|array|\ArrayAccess|PhpDateTime         $value
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @return void|\Zend\Form\Element
      */
@@ -115,7 +116,7 @@ class DateSelect extends MonthSelect
             $value = array(
                 'year'  => $value->format('Y'),
                 'month' => $value->format('m'),
-                'day'   => $value->format('d')
+                'day'   => $value->format('d'),
             );
         }
 
@@ -148,7 +149,7 @@ class DateSelect extends MonthSelect
         parent::prepareElement($form);
 
         $name = $this->getName();
-        $this->dayElement->setName($name . '[day]');
+        $this->dayElement->setName($name.'[day]');
     }
 
     /**
@@ -183,17 +184,17 @@ class DateSelect extends MonthSelect
                         'callback' => function ($date) {
                             // Convert the date to a specific format
                             if (is_array($date)) {
-                                $date = $date['year'] . '-' . $date['month'] . '-' . $date['day'];
+                                $date = $date['year'].'-'.$date['month'].'-'.$date['day'];
                             }
 
                             return $date;
-                        }
-                    )
-                )
+                        },
+                    ),
+                ),
             ),
             'validators' => array(
                 $this->getValidator(),
-            )
+            ),
         );
     }
 

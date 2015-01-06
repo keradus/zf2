@@ -29,7 +29,7 @@ interface FieldsetInterface extends
      * @param  array|\Traversable|ElementInterface $elementOrFieldset Typically, only allow objects implementing ElementInterface;
      *                                                                however, keeping it flexible to allow a factory-based form
      *                                                                implementation as well
-     * @param  array $flags
+     * @param  array                               $flags
      * @return FieldsetInterface
      */
     public function add($elementOrFieldset, array $flags = array());
@@ -45,7 +45,7 @@ interface FieldsetInterface extends
     /**
      * Retrieve a named element or fieldset
      *
-     * @param  string $elementOrFieldset
+     * @param  string           $elementOrFieldset
      * @return ElementInterface
      */
     public function get($elementOrFieldset);
@@ -53,7 +53,7 @@ interface FieldsetInterface extends
     /**
      * Remove a named element or fieldset
      *
-     * @param  string $elementOrFieldset
+     * @param  string            $elementOrFieldset
      * @return FieldsetInterface
      */
     public function remove($elementOrFieldset);
@@ -61,8 +61,8 @@ interface FieldsetInterface extends
     /**
      * Set/change the priority of an element or fieldset
      *
-     * @param string $elementOrFieldset
-     * @param int $priority
+     * @param  string            $elementOrFieldset
+     * @param  int               $priority
      * @return FieldsetInterface
      */
     public function setPriority($elementOrFieldset, $priority);

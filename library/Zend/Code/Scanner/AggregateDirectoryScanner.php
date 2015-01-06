@@ -19,7 +19,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
     protected $isScanned = false;
 
     /**
-     * @param  bool $returnScannerClass
+     * @param bool $returnScannerClass
      * @todo not implemented
      */
     public function getNamespaces($returnScannerClass = false)
@@ -69,9 +69,9 @@ class AggregateDirectoryScanner extends DirectoryScanner
     }
 
     /**
-     * @param  string $class
-     * @param  bool $returnScannerClass
-     * @param  bool $returnDerivedScannerClass
+     * @param  string                           $class
+     * @param  bool                             $returnScannerClass
+     * @param  bool                             $returnDerivedScannerClass
      * @return ClassScanner|DerivedClassScanner
      * @throws Exception\RuntimeException
      */

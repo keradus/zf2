@@ -14,8 +14,8 @@ interface MessageInterface
     /**
      * Set metadata
      *
-     * @param  string|int|array|\Traversable $spec
-     * @param  mixed $value
+     * @param string|int|array|\Traversable $spec
+     * @param mixed                         $value
      */
     public function setMetadata($spec, $value = null);
 

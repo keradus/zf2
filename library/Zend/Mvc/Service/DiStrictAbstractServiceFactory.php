@@ -48,7 +48,7 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
     protected $allowedServiceNames = array();
 
     /**
-     * @param Di $di
+     * @param Di     $di
      * @param string $useServiceLocator
      */
     public function __construct(Di $di, $useServiceLocator = self::USE_SL_NONE)
@@ -84,7 +84,7 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $serviceName, $requestedName)
     {
         if (!isset($this->allowedServiceNames[$requestedName])) {
-            throw new Exception\InvalidServiceNameException('Service "' . $requestedName . '" is not whitelisted');
+            throw new Exception\InvalidServiceNameException('Service "'.$requestedName.'" is not whitelisted');
         }
 
         if ($serviceLocator instanceof AbstractPluginManager) {

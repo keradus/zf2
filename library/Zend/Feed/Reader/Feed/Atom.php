@@ -13,14 +13,14 @@ use DOMDocument;
 use Zend\Feed\Reader;
 
 /**
-*/
+ */
 class Atom extends AbstractFeed
 {
     /**
      * Constructor
      *
-     * @param  DOMDocument $dom
-     * @param  string $type
+     * @param DOMDocument $dom
+     * @param string      $type
      */
     public function __construct(DOMDocument $dom, $type = null)
     {
@@ -47,7 +47,7 @@ class Atom extends AbstractFeed
     /**
      * Get a single author
      *
-     * @param  int $index
+     * @param  int         $index
      * @return string|null
      */
     public function getAuthor($index = 0)

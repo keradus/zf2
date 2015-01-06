@@ -159,12 +159,13 @@ class ConstraintObject
     /**
      * Set table name
      *
-     * @param  string $tableName
+     * @param  string           $tableName
      * @return ConstraintObject
      */
     public function setTableName($tableName)
     {
         $this->tableName = $tableName;
+
         return $this;
     }
 
@@ -206,12 +207,13 @@ class ConstraintObject
     /**
      * Set Columns.
      *
-     * @param string[] $columns
+     * @param  string[]         $columns
      * @return ConstraintObject
      */
     public function setColumns(array $columns)
     {
         $this->columns = $columns;
+
         return $this;
     }
 
@@ -228,12 +230,13 @@ class ConstraintObject
     /**
      * Set Referenced Table Schema.
      *
-     * @param string $referencedTableSchema
+     * @param  string           $referencedTableSchema
      * @return ConstraintObject
      */
     public function setReferencedTableSchema($referencedTableSchema)
     {
         $this->referencedTableSchema = $referencedTableSchema;
+
         return $this;
     }
 
@@ -250,12 +253,13 @@ class ConstraintObject
     /**
      * Set Referenced Table Name.
      *
-     * @param string $referencedTableName
+     * @param  string           $referencedTableName
      * @return ConstraintObject
      */
     public function setReferencedTableName($referencedTableName)
     {
         $this->referencedTableName = $referencedTableName;
+
         return $this;
     }
 
@@ -272,12 +276,13 @@ class ConstraintObject
     /**
      * Set Referenced Columns.
      *
-     * @param string[] $referencedColumns
+     * @param  string[]         $referencedColumns
      * @return ConstraintObject
      */
     public function setReferencedColumns(array $referencedColumns)
     {
         $this->referencedColumns = $referencedColumns;
+
         return $this;
     }
 
@@ -294,12 +299,13 @@ class ConstraintObject
     /**
      * Set Match Option.
      *
-     * @param string $matchOption
+     * @param  string           $matchOption
      * @return ConstraintObject
      */
     public function setMatchOption($matchOption)
     {
         $this->matchOption = $matchOption;
+
         return $this;
     }
 
@@ -316,12 +322,13 @@ class ConstraintObject
     /**
      * Set Update Rule.
      *
-     * @param string $updateRule
+     * @param  string           $updateRule
      * @return ConstraintObject
      */
     public function setUpdateRule($updateRule)
     {
         $this->updateRule = $updateRule;
+
         return $this;
     }
 
@@ -338,12 +345,13 @@ class ConstraintObject
     /**
      * Set Delete Rule.
      *
-     * @param string $deleteRule
+     * @param  string           $deleteRule
      * @return ConstraintObject
      */
     public function setDeleteRule($deleteRule)
     {
         $this->deleteRule = $deleteRule;
+
         return $this;
     }
 
@@ -360,12 +368,13 @@ class ConstraintObject
     /**
      * Set Check Clause.
      *
-     * @param string $checkClause
+     * @param  string           $checkClause
      * @return ConstraintObject
      */
     public function setCheckClause($checkClause)
     {
         $this->checkClause = $checkClause;
+
         return $this;
     }
 

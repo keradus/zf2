@@ -77,7 +77,7 @@ class BlockCipher
     /**
      * Constructor
      *
-     * @param  SymmetricInterface $cipher
+     * @param SymmetricInterface $cipher
      */
     public function __construct(SymmetricInterface $cipher)
     {
@@ -149,6 +149,7 @@ class BlockCipher
     public function setCipher(SymmetricInterface $cipher)
     {
         $this->cipher = $cipher;
+
         return $this;
     }
 
@@ -165,7 +166,7 @@ class BlockCipher
     /**
      * Set the number of iterations for Pbkdf2
      *
-     * @param  int $num
+     * @param  int         $num
      * @return BlockCipher
      */
     public function setKeyIteration($num)
@@ -188,7 +189,7 @@ class BlockCipher
     /**
      * Set the salt (IV)
      *
-     * @param  string $salt
+     * @param  string                             $salt
      * @return BlockCipher
      * @throws Exception\InvalidArgumentException
      */
@@ -197,7 +198,7 @@ class BlockCipher
         try {
             $this->cipher->setSalt($salt);
         } catch (Symmetric\Exception\InvalidArgumentException $e) {
-            throw new Exception\InvalidArgumentException("The salt is not valid: " . $e->getMessage());
+            throw new Exception\InvalidArgumentException("The salt is not valid: ".$e->getMessage());
         }
         $this->saltSetted = true;
 
@@ -227,7 +228,7 @@ class BlockCipher
     /**
      * Enable/disable the binary output
      *
-     * @param  bool $value
+     * @param  bool        $value
      * @return BlockCipher
      */
     public function setBinaryOutput($value)
@@ -277,7 +278,7 @@ class BlockCipher
     /**
      * Set algorithm of the symmetric cipher
      *
-     * @param  string $algo
+     * @param  string                             $algo
      * @return BlockCipher
      * @throws Exception\InvalidArgumentException
      */
@@ -326,7 +327,7 @@ class BlockCipher
     /**
      * Set the hash algorithm for HMAC authentication
      *
-     * @param  string $hash
+     * @param  string                             $hash
      * @return BlockCipher
      * @throws Exception\InvalidArgumentException
      */
@@ -355,7 +356,7 @@ class BlockCipher
     /**
      * Set the hash algorithm for the Pbkdf2
      *
-     * @param  string $hash
+     * @param  string                             $hash
      * @return BlockCipher
      * @throws Exception\InvalidArgumentException
      */
@@ -384,7 +385,7 @@ class BlockCipher
     /**
      * Encrypt then authenticate using HMAC
      *
-     * @param  string $data
+     * @param  string                             $data
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -430,18 +431,18 @@ class BlockCipher
         // encryption
         $ciphertext = $this->cipher->encrypt($data);
         // HMAC
-        $hmac = Hmac::compute($keyHmac, $this->hash, $this->cipher->getAlgorithm() . $ciphertext);
+        $hmac = Hmac::compute($keyHmac, $this->hash, $this->cipher->getAlgorithm().$ciphertext);
         if (!$this->binaryOutput) {
             $ciphertext = base64_encode($ciphertext);
         }
 
-        return $hmac . $ciphertext;
+        return $hmac.$ciphertext;
     }
 
     /**
      * Decrypt
      *
-     * @param  string $data
+     * @param  string                             $data
      * @return string|bool
      * @throws Exception\InvalidArgumentException
      */
@@ -479,7 +480,7 @@ class BlockCipher
         $this->cipher->setKey(substr($hash, 0, $keySize));
         // set the key for HMAC
         $keyHmac = substr($hash, $keySize);
-        $hmacNew = Hmac::compute($keyHmac, $this->hash, $this->cipher->getAlgorithm() . $ciphertext);
+        $hmacNew = Hmac::compute($keyHmac, $this->hash, $this->cipher->getAlgorithm().$ciphertext);
         if (!Utils::compareStrings($hmacNew, $hmac)) {
             return false;
         }

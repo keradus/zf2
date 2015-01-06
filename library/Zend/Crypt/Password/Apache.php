@@ -50,7 +50,7 @@ class Apache implements PasswordInterface
     /**
      * Constructor
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
@@ -81,7 +81,7 @@ class Apache implements PasswordInterface
     /**
      * Generate the hash of a password
      *
-     * @param  string $password
+     * @param  string                     $password
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -97,7 +97,7 @@ class Apache implements PasswordInterface
                 $hash = crypt($password, Rand::getString(2, self::ALPHA64));
                 break;
             case 'sha1':
-                $hash = '{SHA}' . base64_encode(sha1($password, true));
+                $hash = '{SHA}'.base64_encode(sha1($password, true));
                 break;
             case 'md5':
                 $hash = $this->apr1Md5($password);
@@ -108,7 +108,7 @@ class Apache implements PasswordInterface
                         'You must specify UserName and AuthName (realm) to generate the digest'
                     );
                 }
-                $hash = md5($this->userName . ':' . $this->authName . ':' .$password);
+                $hash = md5($this->userName.':'.$this->authName.':'.$password);
                 break;
         }
 
@@ -118,14 +118,15 @@ class Apache implements PasswordInterface
     /**
      * Verify if a password is correct against a hash value
      *
-     * @param  string  $password
-     * @param  string  $hash
+     * @param  string $password
+     * @param  string $hash
      * @return bool
      */
     public function verify($password, $hash)
     {
         if (substr($hash, 0, 5) === '{SHA}') {
-            $hash2 = '{SHA}' . base64_encode(sha1($password, true));
+            $hash2 = '{SHA}'.base64_encode(sha1($password, true));
+
             return ($hash === $hash2);
         }
         if (substr($hash, 0, 6) === '$apr1$') {
@@ -136,6 +137,7 @@ class Apache implements PasswordInterface
                 );
             }
             $hash2 = $this->apr1Md5($password, $token[2]);
+
             return ($hash === $hash2);
         }
         if (strlen($hash) > 13) { // digest
@@ -144,16 +146,18 @@ class Apache implements PasswordInterface
                     'You must specify UserName and AuthName (realm) to verify the digest'
                 );
             }
-            $hash2 = md5($this->userName . ':' . $this->authName . ':' .$password);
+            $hash2 = md5($this->userName.':'.$this->authName.':'.$password);
+
             return ($hash === $hash2);
         }
+
         return (crypt($password, $hash) === $hash);
     }
 
     /**
      * Set the format of the password
      *
-     * @param  string $format
+     * @param  string                             $format
      * @throws Exception\InvalidArgumentException
      * @return Apache
      */
@@ -265,8 +269,8 @@ class Apache implements PasswordInterface
             }
         }
         $len  = strlen($password);
-        $text = $password . '$apr1$' . $salt;
-        $bin  = pack("H32", md5($password . $salt . $password));
+        $text = $password.'$apr1$'.$salt;
+        $bin  = pack("H32", md5($password.$salt.$password));
         for ($i = $len; $i > 0; $i -= 16) {
             $text .= substr($bin, 0, min(16, $i));
         }
@@ -292,10 +296,10 @@ class Apache implements PasswordInterface
             if ($j == 16) {
                 $j = 5;
             }
-            $tmp = $bin[$i] . $bin[$k] . $bin[$j] . $tmp;
+            $tmp = $bin[$i].$bin[$k].$bin[$j].$tmp;
         }
-        $tmp = chr(0) . chr(0) . $bin[11] . $tmp;
+        $tmp = chr(0).chr(0).$bin[11].$tmp;
 
-        return '$apr1$' . $salt . '$' . $this->toAlphabet64($tmp);
+        return '$apr1$'.$salt.'$'.$this->toAlphabet64($tmp);
     }
 }

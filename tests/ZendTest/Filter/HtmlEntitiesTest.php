@@ -48,7 +48,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
             '>'      => '&gt;',
             '\''     => '&#039;',
             '"'      => '&quot;',
-            '&'      => '&amp;'
+            '&'      => '&amp;',
             );
         $filter = $this->_filter;
         foreach ($valuesExpected as $input => $output) {
@@ -155,7 +155,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteStyleQuotesEncodeBoth()
     {
-        $input  = "A 'single' and " . '"double"';
+        $input  = "A 'single' and ".'"double"';
         $result = 'A &#039;single&#039; and &quot;double&quot;';
 
         $this->_filter->setQuoteStyle(ENT_QUOTES);
@@ -170,7 +170,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteStyleQuotesEncodeDouble()
     {
-        $input  = "A 'single' and " . '"double"';
+        $input  = "A 'single' and ".'"double"';
         $result = "A 'single' and &quot;double&quot;";
 
         $this->_filter->setQuoteStyle(ENT_COMPAT);
@@ -185,8 +185,8 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteStyleQuotesEncodeNone()
     {
-        $input  = "A 'single' and " . '"double"';
-        $result = "A 'single' and " . '"double"';
+        $input  = "A 'single' and ".'"double"';
+        $result = "A 'single' and ".'"double"';
 
         $this->_filter->setQuoteStyle(ENT_NOQUOTES);
         $this->assertEquals($result, $this->_filter->filter($input));
@@ -201,7 +201,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
             $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
         }
 
-        $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
+        $string = file_get_contents(dirname(__FILE__).'/_files/latin-1-text.txt');
 
         // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
@@ -221,7 +221,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
             $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
         }
 
-        $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
+        $string = file_get_contents(dirname(__FILE__).'/_files/latin-1-text.txt');
 
         // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
@@ -241,7 +241,7 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
             $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
         }
 
-        $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-dash-only.txt');
+        $string = file_get_contents(dirname(__FILE__).'/_files/latin-1-dash-only.txt');
 
         // restore_error_handler can emit an E_WARNING; let's ignore that, as
         // we want to test the returned value
@@ -262,8 +262,8 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 '<',
-                '>'
-            ))
+                '>',
+            )),
         );
     }
 

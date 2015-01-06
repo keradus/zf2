@@ -44,5 +44,5 @@ class MaxForwardsTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Max-Forwards: xxx', $maxForwardsHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

@@ -49,7 +49,7 @@ class Compress extends AbstractFilter
     /**
      * Set filter setate
      *
-     * @param  array $options
+     * @param  array                              $options
      * @throws Exception\InvalidArgumentException if options is not an array or Traversable
      * @return self
      */
@@ -67,11 +67,12 @@ class Compress extends AbstractFilter
             if ($key == 'options') {
                 $key = 'adapterOptions';
             }
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
@@ -91,7 +92,7 @@ class Compress extends AbstractFilter
         $adapter = $this->adapter;
         $options = $this->getAdapterOptions();
         if (!class_exists($adapter)) {
-            $adapter = 'Zend\\Filter\\Compress\\' . ucfirst($adapter);
+            $adapter = 'Zend\\Filter\\Compress\\'.ucfirst($adapter);
             if (!class_exists($adapter)) {
                 throw new Exception\RuntimeException(sprintf(
                     '%s unable to load adapter; class "%s" not found',
@@ -103,8 +104,9 @@ class Compress extends AbstractFilter
 
         $this->adapter = new $adapter($options);
         if (!$this->adapter instanceof Compress\CompressionAlgorithmInterface) {
-            throw new Exception\InvalidArgumentException("Compression adapter '" . $adapter . "' does not implement Zend\\Filter\\Compress\\CompressionAlgorithmInterface");
+            throw new Exception\InvalidArgumentException("Compression adapter '".$adapter."' does not implement Zend\\Filter\\Compress\\CompressionAlgorithmInterface");
         }
+
         return $this->adapter;
     }
 
@@ -129,6 +131,7 @@ class Compress extends AbstractFilter
     {
         if ($adapter instanceof Compress\CompressionAlgorithmInterface) {
             $this->adapter = $adapter;
+
             return $this;
         }
         if (!is_string($adapter)) {
@@ -158,6 +161,7 @@ class Compress extends AbstractFilter
     public function setAdapterOptions(array $options)
     {
         $this->adapterOptions = $options;
+
         return $this;
     }
 
@@ -170,14 +174,15 @@ class Compress extends AbstractFilter
     public function getOptions($option = null)
     {
         $adapter = $this->getAdapter();
+
         return $adapter->getOptions($option);
     }
 
     /**
      * Calls adapter methods
      *
-     * @param string       $method  Method to call
-     * @param string|array $options Options for this method
+     * @param  string                           $method  Method to call
+     * @param  string|array                     $options Options for this method
      * @return mixed
      * @throws Exception\BadMethodCallException
      */

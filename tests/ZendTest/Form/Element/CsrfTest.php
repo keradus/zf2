@@ -23,7 +23,7 @@ class CsrfTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\Csrf'
+            'Zend\Validator\Csrf',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
@@ -62,7 +62,7 @@ class CsrfTest extends TestCase
         $element->setOptions(array(
             'csrf_options' => array(
                 'timeout' => 777,
-                'salt' => 'MySalt')
+                'salt' => 'MySalt', ),
             ));
         $validator = $element->getCsrfValidator();
         $this->assertEquals('foo', $validator->getName());

@@ -50,7 +50,7 @@ class UploadFile extends AbstractValidator
     /**
      * Returns true if and only if the file was uploaded without errors
      *
-     * @param  string $value File to check for upload errors
+     * @param  string                             $value File to check for upload errors
      * @return bool
      * @throws Exception\InvalidArgumentException
      */

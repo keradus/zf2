@@ -23,9 +23,9 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
 
     /**
      * @param string $methodName
-     * @param array $types
+     * @param array  $types
      * @param string $description
-     * @param bool $isStatic
+     * @param bool   $isStatic
      */
     public function __construct($methodName = null, $types = array(), $description = null, $isStatic = false)
     {
@@ -47,12 +47,13 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
     }
 
     /**
-     * @param boolean $isStatic
+     * @param  boolean   $isStatic
      * @return MethodTag
      */
     public function setIsStatic($isStatic)
     {
         $this->isStatic = $isStatic;
+
         return $this;
     }
 
@@ -65,12 +66,13 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
     }
 
     /**
-     * @param string $methodName
+     * @param  string    $methodName
      * @return MethodTag
      */
     public function setMethodName($methodName)
     {
         $this->methodName = rtrim($methodName, ')(');
+
         return $this;
     }
 
@@ -88,10 +90,10 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@method'
-            . (($this->isStatic) ? ' static' : '')
-            . ((!empty($this->types)) ? ' ' . $this->getTypesAsString() : '')
-            . ((!empty($this->methodName)) ? ' ' . $this->methodName . '()' : '')
-            . ((!empty($this->description)) ? ' ' . $this->description : '');
+            .(($this->isStatic) ? ' static' : '')
+            .((!empty($this->types)) ? ' '.$this->getTypesAsString() : '')
+            .((!empty($this->methodName)) ? ' '.$this->methodName.'()' : '')
+            .((!empty($this->description)) ? ' '.$this->description : '');
 
         return $output;
     }

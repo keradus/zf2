@@ -24,7 +24,7 @@ class AbstractAdapterTestMockAdapter extends Adapter\AbstractAdapter
 
     public function __construct()
     {
-        $testfile = __DIR__ . '/_files/test.txt';
+        $testfile = __DIR__.'/_files/test.txt';
         $this->files = array(
             'foo' => array(
                 'name'      => 'foo.jpg',
@@ -78,7 +78,7 @@ class AbstractAdapterTestMockAdapter extends Adapter\AbstractAdapter
             ),
             'file' => array(
                 'name'      => 'foo.jpg',
-                'multifiles' => array(0 => 'file_0_', 1 => 'file_1_')
+                'multifiles' => array(0 => 'file_0_', 1 => 'file_1_'),
             ),
         );
     }
@@ -91,6 +91,7 @@ class AbstractAdapterTestMockAdapter extends Adapter\AbstractAdapter
     public function receive($options = null)
     {
         $this->received = true;
+
         return;
     }
 
@@ -141,7 +142,7 @@ class AbstractAdapterTestMockAdapter extends Adapter\AbstractAdapter
                 'validated' => false,
                 'received'  => false,
                 'filtered'  => false,
-            )
+            ),
         );
     }
 }

@@ -24,7 +24,7 @@ class MaxForwards implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'max-forwards') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Max-Forwards string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Max-Forwards string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class MaxForwards implements HeaderInterface
 
     public function toString()
     {
-        return 'Max-Forwards: ' . $this->getFieldValue();
+        return 'Max-Forwards: '.$this->getFieldValue();
     }
 }

@@ -41,7 +41,6 @@ abstract class AbstractFeature extends AbstractTableGateway
         return array();
     }
 
-
     /*
     public function preInitialize();
     public function postInitialize();

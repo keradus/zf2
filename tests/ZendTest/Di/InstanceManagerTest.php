@@ -44,7 +44,7 @@ class InstanceManagerTest extends TestCase
      */
     public function testInstanceManagerCanResolveRecursiveAliases()
     {
-        $im = new InstanceManager;
+        $im = new InstanceManager();
         $im->addAlias('bar-alias', 'Some\Class');
         $im->addAlias('foo-alias', 'bar-alias');
         $class = $im->getClassFromAlias('foo-alias');
@@ -56,7 +56,7 @@ class InstanceManagerTest extends TestCase
      */
     public function testInstanceManagerThrowsExceptionForRecursiveAliases()
     {
-        $im = new InstanceManager;
+        $im = new InstanceManager();
         $im->addAlias('bar-alias', 'foo-alias');
         $im->addAlias('foo-alias', 'bar-alias');
 
@@ -71,7 +71,7 @@ class InstanceManagerTest extends TestCase
     {
         $config = array('parameters' => array('username' => 'my-username'));
 
-        $im = new InstanceManager;
+        $im = new InstanceManager();
         $im->addAlias('bar-alias', 'Some\Class');
         $im->addAlias('foo-alias', 'bar-alias');
         $im->setConfig('bar-alias', $config);

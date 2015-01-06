@@ -72,7 +72,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Returns the flash messenger plugin controller
      *
-     * @param  string|null $namespace
+     * @param  string|null                         $namespace
      * @return FlashMessenger|PluginFlashMessenger
      */
     public function __invoke($namespace = null)
@@ -95,6 +95,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     public function __call($method, $argv)
     {
         $flashMessenger = $this->getPluginFlashMessenger();
+
         return call_user_func_array(array($flashMessenger, $method), $argv);
     }
 
@@ -110,6 +111,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     {
         $flashMessenger = $this->getPluginFlashMessenger();
         $messages = $flashMessenger->getMessagesFromNamespace($namespace);
+
         return $this->renderMessages($namespace, $messages, $classes, $autoEscape);
     }
 
@@ -124,16 +126,17 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     {
         $flashMessenger = $this->getPluginFlashMessenger();
         $messages = $flashMessenger->getCurrentMessagesFromNamespace($namespace);
+
         return $this->renderMessages($namespace, $messages, $classes, $autoEscape);
     }
 
     /**
      * Render Messages
      *
-     * @param string    $namespace
-     * @param array     $messages
-     * @param array     $classes
-     * @param bool|null $autoEscape
+     * @param  string    $namespace
+     * @param  array     $messages
+     * @param  array     $classes
+     * @param  bool|null $autoEscape
      * @return string
      */
     protected function renderMessages(
@@ -173,6 +176,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
 
                 if ($autoEscape) {
                     $messagesToPrint[] = $escapeHtml($item);
+
                     return;
                 }
 
@@ -185,12 +189,13 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
         }
 
         // Generate markup
-        $markup  = sprintf($this->getMessageOpenFormat(), ' class="' . implode(' ', $classes) . '"');
+        $markup  = sprintf($this->getMessageOpenFormat(), ' class="'.implode(' ', $classes).'"');
         $markup .= implode(
-            sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'),
+            sprintf($this->getMessageSeparatorString(), ' class="'.implode(' ', $classes).'"'),
             $messagesToPrint
         );
         $markup .= $this->getMessageCloseString();
+
         return $markup;
     }
 
@@ -203,6 +208,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     public function setAutoEscape($autoEscape = true)
     {
         $this->autoEscape = (bool) $autoEscape;
+
         return $this;
     }
 
@@ -219,12 +225,13 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Set the string used to close message representation
      *
-     * @param  string $messageCloseString
+     * @param  string         $messageCloseString
      * @return FlashMessenger
      */
     public function setMessageCloseString($messageCloseString)
     {
         $this->messageCloseString = (string) $messageCloseString;
+
         return $this;
     }
 
@@ -241,12 +248,13 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Set the formatted string used to open message representation
      *
-     * @param  string $messageOpenFormat
+     * @param  string         $messageOpenFormat
      * @return FlashMessenger
      */
     public function setMessageOpenFormat($messageOpenFormat)
     {
         $this->messageOpenFormat = (string) $messageOpenFormat;
+
         return $this;
     }
 
@@ -263,12 +271,13 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Set the string used to separate messages
      *
-     * @param  string $messageSeparatorString
+     * @param  string         $messageSeparatorString
      * @return FlashMessenger
      */
     public function setMessageSeparatorString($messageSeparatorString)
     {
         $this->messageSeparatorString = (string) $messageSeparatorString;
+
         return $this;
     }
 
@@ -291,6 +300,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     public function setPluginFlashMessenger(PluginFlashMessenger $pluginFlashMessenger)
     {
         $this->pluginFlashMessenger = $pluginFlashMessenger;
+
         return $this;
     }
 
@@ -317,6 +327,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
+
         return $this;
     }
 

@@ -69,12 +69,13 @@ EOT;
     /**
      * Flag: display exceptions in error pages?
      *
-     * @param  bool $displayExceptions
+     * @param  bool              $displayExceptions
      * @return ExceptionStrategy
      */
     public function setDisplayExceptions($displayExceptions)
     {
         $this->displayExceptions = (bool) $displayExceptions;
+
         return $this;
     }
 
@@ -115,24 +116,26 @@ EOT;
      *   :line        - the line where the exception has been thrown
      *   :stack       - full exception stack
      *
-     * @param string|callable  $message
+     * @param  string|callable   $message
      * @return ExceptionStrategy
      */
     public function setMessage($message)
     {
         $this->message = $message;
+
         return $this;
     }
 
     /**
      * Sets template for previous message that will be shown in Console.
      *
-     * @param string $previousMessage
+     * @param  string            $previousMessage
      * @return ExceptionStrategy
      */
     public function setPreviousMessage($previousMessage)
     {
         $this->previousMessage = $previousMessage;
+
         return $this;
     }
 
@@ -227,7 +230,7 @@ EOT;
                             $exception->getFile(),
                             $exception->getLine(),
                             $exception->getTraceAsString(),
-                            $previous
+                            $previous,
                         ),
                         $this->message
                     );

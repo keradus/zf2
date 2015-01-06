@@ -16,7 +16,7 @@ interface ResolverInterface
     /**
      * Resolve a template/pattern name to a resource the renderer can consume
      *
-     * @param  string $name
+     * @param  string        $name
      * @param  null|Renderer $renderer
      * @return mixed
      */

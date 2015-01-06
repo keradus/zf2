@@ -30,7 +30,7 @@ abstract class Serializer
     /**
      * Create a serializer adapter instance.
      *
-     * @param  string|Adapter $adapterName Name of the adapter class
+     * @param  string|Adapter           $adapterName    Name of the adapter class
      * @param  array |\Traversable|null $adapterOptions Serializer options
      * @return Adapter
      */
@@ -64,6 +64,7 @@ abstract class Serializer
         if (static::$adapters === null) {
             static::$adapters = new AdapterPluginManager();
         }
+
         return static::$adapters;
     }
 
@@ -75,13 +76,14 @@ abstract class Serializer
     public static function resetAdapterPluginManager()
     {
         static::$adapters = new AdapterPluginManager();
+
         return static::$adapters;
     }
 
     /**
      * Change the default adapter.
      *
-     * @param string|Adapter $adapter
+     * @param string|Adapter          $adapter
      * @param array|\Traversable|null $adapterOptions
      */
     public static function setDefaultAdapter($adapter, $adapterOptions = null)
@@ -99,6 +101,7 @@ abstract class Serializer
         if (!static::$defaultAdapter instanceof Adapter) {
             static::setDefaultAdapter(static::$defaultAdapter);
         }
+
         return static::$defaultAdapter;
     }
 
@@ -106,8 +109,8 @@ abstract class Serializer
      * Generates a storable representation of a value using the default adapter.
      * Optionally different adapter could be provided as second argument
      *
-     * @param  mixed $value
-     * @param  string|Adapter $adapter
+     * @param  mixed                   $value
+     * @param  string|Adapter          $adapter
      * @param  array|\Traversable|null $adapterOptions Adapter constructor options
      *                                                 only used to create adapter instance
      * @return string
@@ -127,8 +130,8 @@ abstract class Serializer
      * Creates a PHP value from a stored representation using the default adapter.
      * Optionally different adapter could be provided as second argument
      *
-     * @param  string $serialized
-     * @param  string|Adapter $adapter
+     * @param  string                  $serialized
+     * @param  string|Adapter          $adapter
      * @param  array|\Traversable|null $adapterOptions Adapter constructor options
      *                                                 only used to create adapter instance
      * @return mixed

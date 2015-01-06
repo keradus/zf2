@@ -16,7 +16,7 @@ class ConstantScannerTest extends TestCase
 {
     public function testConstantScannerHasConstantInformation()
     {
-        $file = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $file = new FileScanner(__DIR__.'/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
 
         $constant = $class->getConstant('BAR');

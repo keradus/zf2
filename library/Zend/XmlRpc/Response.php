@@ -48,7 +48,7 @@ class Response
      * Can optionally pass in the return value and type hinting; otherwise, the
      * return value can be set via {@link setReturnValue()}.
      *
-     * @param mixed $return
+     * @param mixed  $return
      * @param string $type
      */
     public function __construct($return = null, $type = null)
@@ -59,13 +59,14 @@ class Response
     /**
      * Set encoding to use in response
      *
-     * @param string $encoding
+     * @param  string                $encoding
      * @return \Zend\XmlRpc\Response
      */
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         AbstractValue::setEncoding($encoding);
+
         return $this;
     }
 
@@ -84,8 +85,8 @@ class Response
      *
      * Sets the return value, with optional type hinting if provided.
      *
-     * @param mixed $value
-     * @param string $type
+     * @param  mixed  $value
+     * @param  string $type
      * @return void
      */
     public function setReturnValue($value, $type = null)
@@ -140,16 +141,17 @@ class Response
      * Attempts to load a response from an XMLRPC response, autodetecting if it
      * is a fault response.
      *
-     * @param string $response
+     * @param  string                   $response
      * @throws Exception\ValueException if invalid XML
-     * @return bool True if a valid XMLRPC response, false if a fault
-     * response or invalid input
+     * @return bool                     True if a valid XMLRPC response, false if a fault
+     *                                           response or invalid input
      */
     public function loadXml($response)
     {
         if (!is_string($response)) {
             $this->fault = new Fault(650);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
@@ -158,6 +160,7 @@ class Response
         } catch (\ZendXml\Exception\RuntimeException $e) {
             $this->fault = new Fault(651);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
@@ -166,6 +169,7 @@ class Response
             $this->fault = new Fault();
             $this->fault->setEncoding($this->getEncoding());
             $this->fault->loadXml($response);
+
             return false;
         }
 
@@ -173,6 +177,7 @@ class Response
             // Invalid response
             $this->fault = new Fault(652);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
@@ -185,10 +190,12 @@ class Response
         } catch (Exception\ValueException $e) {
             $this->fault = new Fault(653);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
         $this->setReturnValue($value->getValue());
+
         return true;
     }
 

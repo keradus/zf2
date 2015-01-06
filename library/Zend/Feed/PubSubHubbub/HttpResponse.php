@@ -61,14 +61,14 @@ class HttpResponse
         $httpCodeSent = false;
         foreach ($this->headers as $header) {
             if (!$httpCodeSent && $this->statusCode) {
-                header($header['name'] . ': ' . $header['value'], $header['replace'], $this->statusCode);
+                header($header['name'].': '.$header['value'], $header['replace'], $this->statusCode);
                 $httpCodeSent = true;
             } else {
-                header($header['name'] . ': ' . $header['value'], $header['replace']);
+                header($header['name'].': '.$header['value'], $header['replace']);
             }
         }
         if (!$httpCodeSent) {
-            header('HTTP/1.1 ' . $this->statusCode);
+            header('HTTP/1.1 '.$this->statusCode);
         }
     }
 
@@ -78,9 +78,9 @@ class HttpResponse
      * If $replace is true, replaces any headers already defined with that
      * $name.
      *
-     * @param  string $name
-     * @param  string $value
-     * @param  bool $replace
+     * @param  string                               $name
+     * @param  string                               $value
+     * @param  bool                                 $replace
      * @return \Zend\Feed\PubSubHubbub\HttpResponse
      */
     public function setHeader($name, $value, $replace = false)
@@ -106,7 +106,7 @@ class HttpResponse
     /**
      * Check if a specific Header is set and return its value
      *
-     * @param  string $name
+     * @param  string      $name
      * @return string|null
      */
     public function getHeader($name)
@@ -132,7 +132,7 @@ class HttpResponse
     /**
      * Can we send headers?
      *
-     * @param  bool $throw Whether or not to throw an exception if headers have been sent; defaults to false
+     * @param  bool                       $throw Whether or not to throw an exception if headers have been sent; defaults to false
      * @return HttpResponse
      * @throws Exception\RuntimeException
      */
@@ -140,15 +140,16 @@ class HttpResponse
     {
         $ok = headers_sent($file, $line);
         if ($ok && $throw) {
-            throw new Exception\RuntimeException('Cannot send headers; headers already sent in ' . $file . ', line ' . $line);
+            throw new Exception\RuntimeException('Cannot send headers; headers already sent in '.$file.', line '.$line);
         }
+
         return !$ok;
     }
 
     /**
      * Set HTTP response code to use with headers
      *
-     * @param  int $code
+     * @param  int                                $code
      * @return HttpResponse
      * @throws Exception\InvalidArgumentException
      */
@@ -156,9 +157,10 @@ class HttpResponse
     {
         if (!is_int($code) || (100 > $code) || (599 < $code)) {
             throw new Exception\InvalidArgumentException('Invalid HTTP response'
-            . ' code:' . $code);
+            .' code:'.$code);
         }
         $this->statusCode = $code;
+
         return $this;
     }
 
@@ -175,13 +177,14 @@ class HttpResponse
     /**
      * Set body content
      *
-     * @param  string $content
+     * @param  string                               $content
      * @return \Zend\Feed\PubSubHubbub\HttpResponse
      */
     public function setContent($content)
     {
         $this->content = (string) $content;
         $this->setHeader('content-length', strlen($content));
+
         return $this;
     }
 
@@ -206,6 +209,7 @@ class HttpResponse
         $filtered = str_replace(array('-', '_'), ' ', (string) $name);
         $filtered = ucwords(strtolower($filtered));
         $filtered = str_replace(' ', '-', $filtered);
+
         return $filtered;
     }
 }

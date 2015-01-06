@@ -231,7 +231,7 @@ class Connection extends AbstractConnection
                     }
                     break;
             }
-            $dsn = $pdoDriver . ':' . implode(';', $dsn);
+            $dsn = $pdoDriver.':'.implode(';', $dsn);
         } elseif (!isset($dsn)) {
             throw new Exception\InvalidConnectionParametersException(
                 'A dsn was not provided or could not be constructed from your parameters',
@@ -245,7 +245,7 @@ class Connection extends AbstractConnection
             $this->resource = new \PDO($dsn, $username, $password, $options);
             $this->resource->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             if (isset($charset) && $pdoDriver == 'pgsql') {
-                $this->resource->exec('SET NAMES ' . $this->resource->quote($charset));
+                $this->resource->exec('SET NAMES '.$this->resource->quote($charset));
             }
             $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         } catch (\PDOException $e) {
@@ -253,7 +253,7 @@ class Connection extends AbstractConnection
             if (!is_long($code)) {
                 $code = null;
             }
-            throw new Exception\RuntimeException('Connect Error: ' . $e->getMessage(), $code, $e);
+            throw new Exception\RuntimeException('Connect Error: '.$e->getMessage(), $code, $e);
         }
 
         return $this;

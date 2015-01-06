@@ -23,7 +23,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get the specified author
      *
-     * @param  int $index
+     * @param  int         $index
      * @return string|null
      */
     public function getAuthor($index = 0)
@@ -49,7 +49,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         $authors = array();
-        $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom:author');
+        $list = $this->getXpath()->query($this->getXpathPrefix().'//atom:author');
 
         if (!$list->length) {
             /**
@@ -76,6 +76,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         $this->data['authors'] = $authors;
+
         return $this->data['authors'];
     }
 
@@ -92,7 +93,7 @@ class Entry extends Extension\AbstractEntry
 
         $content = null;
 
-        $el = $this->getXpath()->query($this->getXpathPrefix() . '/atom:content');
+        $el = $this->getXpath()->query($this->getXpathPrefix().'/atom:content');
         if ($el->length > 0) {
             $el = $el->item(0);
             $type = $el->getAttribute('type');
@@ -107,7 +108,7 @@ class Entry extends Extension\AbstractEntry
                 case 'xhtml':
                     $this->getXpath()->registerNamespace('xhtml', 'http://www.w3.org/1999/xhtml');
                     $xhtml = $this->getXpath()->query(
-                        $this->getXpathPrefix() . '/atom:content/xhtml:div'
+                        $this->getXpathPrefix().'/atom:content/xhtml:div'
                     )->item(0);
                     $d = new DOMDocument('1.0', $this->getEncoding());
                     $xhtmls = $d->importNode($xhtml, true);
@@ -139,16 +140,17 @@ class Entry extends Extension\AbstractEntry
     protected function collectXhtml($xhtml, $prefix)
     {
         if (!empty($prefix)) {
-            $prefix = $prefix . ':';
+            $prefix = $prefix.':';
         }
         $matches = array(
-            "/<\?xml[^<]*>[^<]*<" . $prefix . "div[^<]*/",
-            "/<\/" . $prefix . "div>\s*$/"
+            "/<\?xml[^<]*>[^<]*<".$prefix."div[^<]*/",
+            "/<\/".$prefix."div>\s*$/",
         );
         $xhtml = preg_replace($matches, '', $xhtml);
         if (!empty($prefix)) {
-            $xhtml = preg_replace("/(<[\/]?)" . $prefix . "([a-zA-Z]+)/", '$1$2', $xhtml);
+            $xhtml = preg_replace("/(<[\/]?)".$prefix."([a-zA-Z]+)/", '$1$2', $xhtml);
         }
+
         return $xhtml;
     }
 
@@ -166,9 +168,9 @@ class Entry extends Extension\AbstractEntry
         $date = null;
 
         if ($this->getAtomType() === Reader\Reader::TYPE_ATOM_03) {
-            $dateCreated = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:created)');
+            $dateCreated = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/atom:created)');
         } else {
-            $dateCreated = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:published)');
+            $dateCreated = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/atom:published)');
         }
 
         if ($dateCreated) {
@@ -194,9 +196,9 @@ class Entry extends Extension\AbstractEntry
         $date = null;
 
         if ($this->getAtomType() === Reader\Reader::TYPE_ATOM_03) {
-            $dateModified = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:modified)');
+            $dateModified = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/atom:modified)');
         } else {
-            $dateModified = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:updated)');
+            $dateModified = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/atom:updated)');
         }
 
         if ($dateModified) {
@@ -219,7 +221,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data['description'];
         }
 
-        $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:summary)');
+        $description = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/atom:summary)');
 
         if (!$description) {
             $description = null;
@@ -243,7 +245,7 @@ class Entry extends Extension\AbstractEntry
 
         $enclosure = null;
 
-        $nodeList = $this->getXpath()->query($this->getXpathPrefix() . '/atom:link[@rel="enclosure"]');
+        $nodeList = $this->getXpath()->query($this->getXpathPrefix().'/atom:link[@rel="enclosure"]');
 
         if ($nodeList->length > 0) {
             $enclosure         = new stdClass();
@@ -268,7 +270,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data['id'];
         }
 
-        $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
+        $id = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/atom:id)');
 
         if (!$id) {
             if ($this->getPermalink()) {
@@ -297,8 +299,8 @@ class Entry extends Extension\AbstractEntry
         }
 
         $baseUrl = $this->getXpath()->evaluate('string('
-            . $this->getXpathPrefix() . '/@xml:base[1]'
-        . ')');
+            .$this->getXpathPrefix().'/@xml:base[1]'
+        .')');
 
         if (!$baseUrl) {
             $baseUrl = $this->getXpath()->evaluate('string(//@xml:base[1])');
@@ -316,7 +318,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get a specific link
      *
-     * @param  int $index
+     * @param  int    $index
      * @return string
      */
     public function getLink($index = 0)
@@ -346,8 +348,8 @@ class Entry extends Extension\AbstractEntry
         $links = array();
 
         $list = $this->getXpath()->query(
-            $this->getXpathPrefix() . '//atom:link[@rel="alternate"]/@href' . '|' .
-            $this->getXpathPrefix() . '//atom:link[not(@rel)]/@href'
+            $this->getXpathPrefix().'//atom:link[@rel="alternate"]/@href'.'|'.
+            $this->getXpathPrefix().'//atom:link[not(@rel)]/@href'
         );
 
         if ($list->length) {
@@ -382,7 +384,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data['title'];
         }
 
-        $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
+        $title = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/atom:title)');
 
         if (!$title) {
             $title = null;
@@ -408,7 +410,7 @@ class Entry extends Extension\AbstractEntry
 
         $this->getXpath()->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
         $list = $this->getXpath()->query(
-            $this->getXpathPrefix() . '//atom:link[@rel="replies"]/@thread10:count'
+            $this->getXpathPrefix().'//atom:link[@rel="replies"]/@thread10:count'
         );
 
         if ($list->length) {
@@ -434,7 +436,7 @@ class Entry extends Extension\AbstractEntry
         $link = null;
 
         $list = $this->getXpath()->query(
-            $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="text/html"]/@href'
+            $this->getXpathPrefix().'//atom:link[@rel="replies" and @type="text/html"]/@href'
         );
 
         if ($list->length) {
@@ -450,7 +452,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Returns a URI pointing to a feed of all comments for this entry
      *
-     * @param string $type
+     * @param  string $type
      * @return string
      */
     public function getCommentFeedLink($type = 'atom')
@@ -462,7 +464,7 @@ class Entry extends Extension\AbstractEntry
         $link = null;
 
         $list = $this->getXpath()->query(
-            $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="application/' . $type.'+xml"]/@href'
+            $this->getXpathPrefix().'//atom:link[@rel="replies" and @type="application/'.$type.'+xml"]/@href'
         );
 
         if ($list->length) {
@@ -487,7 +489,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($this->getAtomType() == Reader\Reader::TYPE_ATOM_10) {
-            $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom:category');
+            $list = $this->getXpath()->query($this->getXpathPrefix().'//atom:category');
         } else {
             /**
              * Since Atom 0.3 did not support categories, it would have used the
@@ -495,20 +497,20 @@ class Entry extends Extension\AbstractEntry
              * may have been retrofitted to use Atom 1.0 instead.
              */
             $this->getXpath()->registerNamespace('atom10', Reader\Reader::NAMESPACE_ATOM_10);
-            $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom10:category');
+            $list = $this->getXpath()->query($this->getXpathPrefix().'//atom10:category');
         }
 
         if ($list->length) {
-            $categoryCollection = new Collection\Category;
+            $categoryCollection = new Collection\Category();
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->getAttribute('term'),
                     'scheme' => $category->getAttribute('scheme'),
-                    'label' => $category->getAttribute('label')
+                    'label' => $category->getAttribute('label'),
                 );
             }
         } else {
-            return new Collection\Category;
+            return new Collection\Category();
         }
 
         $this->data['categories'] = $categoryCollection;
@@ -530,7 +532,7 @@ class Entry extends Extension\AbstractEntry
         $source = null;
         // TODO: Investigate why _getAtomType() fails here. Is it even needed?
         if ($this->getType() == Reader\Reader::TYPE_ATOM_10) {
-            $list = $this->getXpath()->query($this->getXpathPrefix() . '/atom:source[1]');
+            $list = $this->getXpath()->query($this->getXpathPrefix().'/atom:source[1]');
             if ($list->length) {
                 $element = $list->item(0);
                 $source = new Reader\Feed\Atom\Source($element, $this->getXpathPrefix());
@@ -538,6 +540,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         $this->data['source'] = $source;
+
         return $this->data['source'];
     }
 
@@ -552,19 +555,20 @@ class Entry extends Extension\AbstractEntry
     {
         if (!Uri::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
-                $link = $this->getBaseUrl() . $link;
+                $link = $this->getBaseUrl().$link;
                 if (!Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }
         }
+
         return $link;
     }
 
     /**
      * Get an author entry
      *
-     * @param DOMElement $element
+     * @param  DOMElement $element
      * @return string
      */
     protected function getAuthorFromElement(DOMElement $element)
@@ -590,6 +594,7 @@ class Entry extends Extension\AbstractEntry
         if (empty($author)) {
             return;
         }
+
         return $author;
     }
 

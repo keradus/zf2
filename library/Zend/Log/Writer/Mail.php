@@ -69,8 +69,8 @@ class Mail extends AbstractWriter
     /**
      * Constructor
      *
-     * @param  MailMessage|array|Traversable $mail
-     * @param  Transport\TransportInterface $transport Optional
+     * @param  MailMessage|array|Traversable      $mail
+     * @param  Transport\TransportInterface       $transport Optional
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($mail, Transport\TransportInterface $transport = null)
@@ -123,6 +123,7 @@ class Mail extends AbstractWriter
     public function setTransport(Transport\TransportInterface $transport)
     {
         $this->transport = $transport;
+
         return $this;
     }
 
@@ -159,6 +160,7 @@ class Mail extends AbstractWriter
     public function setSubjectPrependText($subject)
     {
         $this->subjectPrependText = (string) $subject;
+
         return $this;
     }
 
@@ -191,10 +193,10 @@ class Mail extends AbstractWriter
             $this->transport->send($this->mail);
         } catch (TransportException\ExceptionInterface $e) {
             trigger_error(
-                "unable to send log entries via email; " .
-                "message = {$e->getMessage()}; " .
-                "code = {$e->getCode()}; " .
-                "exception class = " . get_class($e),
+                "unable to send log entries via email; ".
+                "message = {$e->getMessage()}; ".
+                "code = {$e->getCode()}; ".
+                "exception class = ".get_class($e),
                 E_USER_WARNING
             );
         }

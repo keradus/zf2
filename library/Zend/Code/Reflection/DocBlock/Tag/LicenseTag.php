@@ -32,7 +32,7 @@ class LicenseTag implements TagInterface
     /**
      * Initializer
      *
-     * @param  string $tagDocblockLine
+     * @param string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
@@ -69,6 +69,6 @@ class LicenseTag implements TagInterface
 
     public function __toString()
     {
-        return 'DocBlock Tag [ * @' . $this->getName() . ' ]' . PHP_EOL;
+        return 'DocBlock Tag [ * @'.$this->getName().' ]'.PHP_EOL;
     }
 }

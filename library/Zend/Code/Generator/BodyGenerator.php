@@ -17,12 +17,13 @@ class BodyGenerator extends AbstractGenerator
     protected $content = null;
 
     /**
-     * @param  string $content
+     * @param  string        $content
      * @return BodyGenerator
      */
     public function setContent($content)
     {
         $this->content = (string) $content;
+
         return $this;
     }
 

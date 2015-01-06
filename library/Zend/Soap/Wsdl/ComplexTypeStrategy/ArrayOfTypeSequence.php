@@ -30,7 +30,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
 
             for ($i = 1; $i <= $nestedCounter; $i++) {
                 $complexType    = $this->_getTypeBasedOnNestingLevel($singularType, $i);
-                $complexTypePhp = $singularType . str_repeat('[]', $i);
+                $complexTypePhp = $singularType.str_repeat('[]', $i);
                 $childType      = $this->_getTypeBasedOnNestingLevel($singularType, $i-1);
 
                 $this->_addSequenceType($complexType, $childType, $complexTypePhp);
@@ -63,7 +63,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
             return $this->getContext()->getType($singularType);
         }
 
-        return Wsdl::TYPES_NS . ':' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
+        return Wsdl::TYPES_NS.':'.str_repeat('ArrayOf', $level).ucfirst($this->getContext()->translateType($singularType));
     }
 
     /**
@@ -91,9 +91,9 @@ class ArrayOfTypeSequence extends DefaultComplexType
     /**
      * Append the complex type definition to the WSDL via the context access
      *
-     * @param  string $arrayType      Array type name (e.g. 'tns:ArrayOfArrayOfInt')
-     * @param  string $childType      Qualified array items type (e.g. 'xsd:int', 'tns:ArrayOfInt')
-     * @param  string $phpArrayType   PHP type (e.g. 'int[][]', '\MyNamespace\MyClassName[][][]')
+     * @param string $arrayType    Array type name (e.g. 'tns:ArrayOfArrayOfInt')
+     * @param string $childType    Qualified array items type (e.g. 'xsd:int', 'tns:ArrayOfInt')
+     * @param string $phpArrayType PHP type (e.g. 'int[][]', '\MyNamespace\MyClassName[][][]')
      */
     protected function _addSequenceType($arrayType, $childType, $phpArrayType)
     {

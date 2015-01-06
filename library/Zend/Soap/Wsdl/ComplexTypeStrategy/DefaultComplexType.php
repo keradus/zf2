@@ -18,8 +18,8 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
     /**
      * Add a complex type by recursively using all the class properties fetched via Reflection.
      *
-     * @param  string $type Name of the class to be specified
-     * @return string XSD Type for the given PHP type
+     * @param  string                             $type Name of the class to be specified
+     * @return string                             XSD Type for the given PHP type
      * @throws Exception\InvalidArgumentException if class does not exist
      */
     public function addComplexType($type)
@@ -27,7 +27,7 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         if (!class_exists($type)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Cannot add a complex type %s that is not an object or where '
-                . 'class could not be found in "DefaultComplexType" strategy.',
+                .'class could not be found in "DefaultComplexType" strategy.',
                 $type
             ));
         }
@@ -41,7 +41,7 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
 
         $dom = $this->getContext()->toDomDocument();
         $soapTypeName = $this->getContext()->translateType($phpType);
-        $soapType     = Wsdl::TYPES_NS . ':' . $soapTypeName;
+        $soapType     = Wsdl::TYPES_NS.':'.$soapTypeName;
 
         // Register type here to avoid recursion
         $this->getContext()->addType($phpType, $soapType);

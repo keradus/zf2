@@ -41,7 +41,7 @@ interface RendererInterface
      *
      * @param  string|ModelInterface   $nameOrModel The script/resource process, or a view model
      * @param  null|array|\ArrayAccess $values      Values to use during rendering
-     * @return string The script output.
+     * @return string                  The script output.
      */
     public function render($nameOrModel, $values = null);
 }

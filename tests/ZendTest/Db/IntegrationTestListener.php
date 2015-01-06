@@ -40,7 +40,7 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
             }
             if (extension_loaded('pdo')) {
                 $this->adapters['pdo_mysql'] = new \Pdo(
-                    'mysql:host=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_MYSQL_HOSTNAME'] . ';dbname=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_MYSQL_DATABASE'],
+                    'mysql:host='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_MYSQL_HOSTNAME'].';dbname='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_MYSQL_DATABASE'],
                     $GLOBALS['ZEND_DB_ADAPTER_DRIVER_MYSQL_USERNAME'],
                     $GLOBALS['ZEND_DB_ADAPTER_DRIVER_MYSQL_PASSWORD']
                 );
@@ -49,15 +49,15 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
         if (isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_HOSTNAME'])) {
             if (extension_loaded('pgsql')) {
                 $this->adapters['pgsql'] = pg_connect(
-                    'host=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_HOSTNAME']
-                        . ' dbname=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_DATABASE']
-                        . ' user=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_USERNAME']
-                        . ' password=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_PASSWORD']
+                    'host='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_HOSTNAME']
+                        .' dbname='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_DATABASE']
+                        .' user='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_USERNAME']
+                        .' password='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_PASSWORD']
                 );
             }
             if (extension_loaded('pdo')) {
                 $this->adapters['pdo_pgsql'] = new \Pdo(
-                    'pgsql:host=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_HOSTNAME'] . ';dbname=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_DATABASE'],
+                    'pgsql:host='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_HOSTNAME'].';dbname='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_DATABASE'],
                     $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_USERNAME'],
                     $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_PASSWORD']
                 );
@@ -78,7 +78,7 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
                         'UID' => $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME'],
                         'PWD' => $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD'],
                         'Database' => (isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'])
-                            ? $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'] : null)
+                            ? $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'] : null),
                     )
                 );
                 if (!$this->adapters['sqlsrv']) {
@@ -88,8 +88,8 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
             }
             if (extension_loaded('pdo')) {
                 $this->adapters['pdo_sqlsrv'] = new \Pdo(
-                    'sqlsrv:Server=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME']
-                        . ';Database=' . (isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'])
+                    'sqlsrv:Server='.$GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME']
+                        .';Database='.(isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'])
                             ? $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'] : null),
                     $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME'],
                     $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD']
@@ -124,7 +124,7 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
     /**
      * A test started.
      *
-     * @param  PHPUnit_Framework_Test $test
+     * @param PHPUnit_Framework_Test $test
      */
     public function startTest(PHPUnit_Framework_Test $test)
     {
@@ -143,8 +143,8 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
     /**
      * A test ended.
      *
-     * @param  PHPUnit_Framework_Test $test
-     * @param  float                  $time
+     * @param PHPUnit_Framework_Test $test
+     * @param float                  $time
      */
     public function endTest(PHPUnit_Framework_Test $test, $time)
     {

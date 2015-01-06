@@ -30,8 +30,8 @@ interface StringWrapperInterface
     /**
      * Set character encoding working with and convert to
      *
-     * @param string      $encoding         The character encoding to work with
-     * @param string|null $convertEncoding  The character encoding to convert to
+     * @param  string                 $encoding        The character encoding to work with
+     * @param  string|null            $convertEncoding The character encoding to convert to
      * @return StringWrapperInterface
      */
     public function setEncoding($encoding, $convertEncoding = null);
@@ -53,7 +53,7 @@ interface StringWrapperInterface
     /**
      * Returns the length of the given string
      *
-     * @param string $str
+     * @param  string    $str
      * @return int|false
      */
     public function strlen($str);
@@ -61,9 +61,9 @@ interface StringWrapperInterface
     /**
      * Returns the portion of string specified by the start and length parameters
      *
-     * @param string   $str
-     * @param int      $offset
-     * @param int|null $length
+     * @param  string       $str
+     * @param  int          $offset
+     * @param  int|null     $length
      * @return string|false
      */
     public function substr($str, $offset = 0, $length = null);
@@ -71,9 +71,9 @@ interface StringWrapperInterface
     /**
      * Find the position of the first occurrence of a substring in a string
      *
-     * @param string $haystack
-     * @param string $needle
-     * @param int    $offset
+     * @param  string    $haystack
+     * @param  string    $needle
+     * @param  int       $offset
      * @return int|false
      */
     public function strpos($haystack, $needle, $offset = 0);
@@ -81,8 +81,8 @@ interface StringWrapperInterface
     /**
      * Convert a string from defined encoding to the defined convert encoding
      *
-     * @param string  $str
-     * @param bool $reverse
+     * @param  string       $str
+     * @param  bool         $reverse
      * @return string|false
      */
     public function convert($str, $reverse = false);
@@ -90,10 +90,10 @@ interface StringWrapperInterface
     /**
      * Wraps a string to a given number of characters
      *
-     * @param  string  $str
-     * @param  int $width
-     * @param  string  $break
-     * @param  bool $cut
+     * @param  string $str
+     * @param  int    $width
+     * @param  string $break
+     * @param  bool   $cut
      * @return string
      */
     public function wordWrap($str, $width = 75, $break = "\n", $cut = false);
@@ -101,10 +101,10 @@ interface StringWrapperInterface
     /**
      * Pad a string to a certain length with another string
      *
-     * @param  string  $input
-     * @param  int $padLength
-     * @param  string  $padString
-     * @param  int $padType
+     * @param  string $input
+     * @param  int    $padLength
+     * @param  string $padString
+     * @param  int    $padType
      * @return string
      */
     public function strPad($input, $padLength, $padString = ' ', $padType = STR_PAD_RIGHT);

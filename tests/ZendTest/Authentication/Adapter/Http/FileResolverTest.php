@@ -52,7 +52,7 @@ class FileResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filesPath = __DIR__ . '/TestAsset';
+        $this->_filesPath = __DIR__.'/TestAsset';
         $this->_validPath = "$this->_filesPath/htdigest.3";
         $this->_badPath   = 'doesnotexist';
         $this->_resolver  = new Http\FileResolver($this->_validPath);

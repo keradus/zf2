@@ -10,6 +10,7 @@
 /**
  * @namespace
  */
+
 namespace Zend\Mvc\Router\Console;
 
 use Traversable;
@@ -46,12 +47,12 @@ class Simple implements RouteInterface
     /**
      * Create a new simple console route.
      *
-     * @param  string|RouteMatcherInterface             $routeOrRouteMatcher
-     * @param  array                                    $constraints
-     * @param  array                                    $defaults
-     * @param  array                                    $aliases
-     * @param  null|array|Traversable|FilterChain       $filters
-     * @param  null|array|Traversable|ValidatorChain    $validators
+     * @param  string|RouteMatcherInterface          $routeOrRouteMatcher
+     * @param  array                                 $constraints
+     * @param  array                                 $defaults
+     * @param  array                                 $aliases
+     * @param  null|array|Traversable|FilterChain    $filters
+     * @param  null|array|Traversable|ValidatorChain $validators
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(
@@ -69,7 +70,7 @@ class Simple implements RouteInterface
         } else {
             throw new Exception\InvalidArgumentException(
                 "routeOrRouteMatcher should either be string, or class implementing RouteMatcherInterface. "
-                . gettype($routeOrRouteMatcher) . " was given."
+                .gettype($routeOrRouteMatcher)." was given."
             );
         }
     }
@@ -78,7 +79,7 @@ class Simple implements RouteInterface
      * factory(): defined by Route interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -87,7 +88,7 @@ class Simple implements RouteInterface
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable set of options');
         }
 
         if (!isset($options['route'])) {
@@ -126,9 +127,9 @@ class Simple implements RouteInterface
      * match(): defined by Route interface.
      *
      * @see     Route::match()
-     * @param   Request             $request
-     * @param   null|int            $pathOffset
-     * @return  RouteMatch
+     * @param  Request    $request
+     * @param  null|int   $pathOffset
+     * @return RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
     {
@@ -142,6 +143,7 @@ class Simple implements RouteInterface
         if (null !== $matches) {
             return new RouteMatch($matches);
         }
+
         return;
     }
 

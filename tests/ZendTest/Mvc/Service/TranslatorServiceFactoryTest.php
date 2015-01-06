@@ -105,7 +105,7 @@ class TranslatorServiceFactoryTest extends TestCase
 
         //#5959
         //get any plugins with AbstractPluginManagerFactory
-        $routePluginManagerFactory = new RoutePluginManagerFactory;
+        $routePluginManagerFactory = new RoutePluginManagerFactory();
         $routePluginManager = $routePluginManagerFactory->createService($serviceLocator);
 
         $translator = $this->factory->createService($serviceLocator);

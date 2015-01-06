@@ -53,7 +53,7 @@ class ZendServerShm extends AbstractZendServer implements
     /**
      * Remove items of given namespace
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return bool
      */
     public function clearByNamespace($namespace)
@@ -83,9 +83,9 @@ class ZendServerShm extends AbstractZendServer implements
     /**
      * Store data into Zend Data SHM Cache
      *
-     * @param  string $internalKey
-     * @param  mixed  $value
-     * @param  int    $ttl
+     * @param  string                     $internalKey
+     * @param  mixed                      $value
+     * @param  int                        $ttl
      * @return void
      * @throws Exception\RuntimeException
      */
@@ -102,8 +102,8 @@ class ZendServerShm extends AbstractZendServer implements
     /**
      * Fetch a single item from Zend Data SHM Cache
      *
-     * @param  string $internalKey
-     * @return mixed The stored value or NULL if item wasn't found
+     * @param  string                     $internalKey
+     * @return mixed                      The stored value or NULL if item wasn't found
      * @throws Exception\RuntimeException
      */
     protected function zdcFetch($internalKey)
@@ -114,8 +114,8 @@ class ZendServerShm extends AbstractZendServer implements
     /**
      * Fetch multiple items from Zend Data SHM Cache
      *
-     * @param  array $internalKeys
-     * @return array All found items
+     * @param  array                      $internalKeys
+     * @return array                      All found items
      * @throws Exception\RuntimeException
      */
     protected function zdcFetchMulti(array $internalKeys)
@@ -124,13 +124,14 @@ class ZendServerShm extends AbstractZendServer implements
         if ($items === false) {
             throw new Exception\RuntimeException("zend_shm_cache_fetch(<array>) failed");
         }
+
         return $items;
     }
 
     /**
      * Delete data from Zend Data SHM Cache
      *
-     * @param  string $internalKey
+     * @param  string                     $internalKey
      * @return bool
      * @throws Exception\RuntimeException
      */

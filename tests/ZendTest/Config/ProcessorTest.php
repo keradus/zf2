@@ -44,14 +44,14 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
                 'cc' => 5,
                 'cd' => array(
                     'cda' => 6,
-                    'cdb' => 7
+                    'cdb' => 7,
                 ),
             ),
             'd' => array(
                 'da' => 8,
-                'db' => 9
+                'db' => 9,
             ),
-            'e' => 10
+            'e' => 10,
         );
 
         $this->tokenBare = array(
@@ -104,17 +104,17 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
                 array(
                     'id' => 'oneDog',
                     'label' => 'one dog',
-                    'route' => 'app-one-dog'
+                    'route' => 'app-one-dog',
                 ),
                 array(
                     'id' => 'twoDogs',
                     'label' => 'two dogs',
-                    'route' => 'app-two-dogs'
+                    'route' => 'app-two-dogs',
                 ),
-            )
+            ),
         );
 
-        $this->translatorFile = realpath(__DIR__ . '/_files/translations-de_DE.php');
+        $this->translatorFile = realpath(__DIR__.'/_files/translations-de_DE.php');
 
         $this->filter = array(
             'simple' => 'some MixedCase VALue',
@@ -174,7 +174,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     {
         $processor = new TokenProcessor();
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot use ' . gettype(array()) . ' as token name.');
+                                    'Cannot use '.gettype(array()).' as token name.');
         $processor->addToken(array(), 'bar');
     }
 
@@ -390,9 +390,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor->process($config);
 
         $this->assertEquals(PHP_VERSION, $config->phpVersion);
-        $this->assertEquals('Current PHP version is: ' . PHP_VERSION, $config->phpVersionInside);
+        $this->assertEquals('Current PHP version is: '.PHP_VERSION, $config->phpVersionInside);
         $this->assertEquals(PHP_VERSION, $config->nested->phpVersion);
-        $this->assertEquals('Current PHP version is: ' . PHP_VERSION, $config->nested->phpVersionInside);
+        $this->assertEquals('Current PHP version is: '.PHP_VERSION, $config->nested->phpVersionInside);
     }
 
     public function testTranslator()
@@ -558,7 +558,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $queue->insert($upperProcessor);
         $queue->insert($lowerProcessor);
 
-        $data ='TeSt';
+        $data = 'TeSt';
         $this->assertEquals('test', $queue->processValue($data));
     }
 

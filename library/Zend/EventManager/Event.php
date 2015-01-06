@@ -44,9 +44,9 @@ class Event implements EventInterface
      *
      * Accept a target and its parameters.
      *
-     * @param  string $name Event name
-     * @param  string|object $target
-     * @param  array|ArrayAccess $params
+     * @param string            $name   Event name
+     * @param string|object     $target
+     * @param array|ArrayAccess $params
      */
     public function __construct($name = null, $target = null, $params = null)
     {
@@ -90,7 +90,7 @@ class Event implements EventInterface
      *
      * Overwrites parameters
      *
-     * @param  array|ArrayAccess|object $params
+     * @param  array|ArrayAccess|object           $params
      * @return Event
      * @throws Exception\InvalidArgumentException
      */
@@ -103,6 +103,7 @@ class Event implements EventInterface
         }
 
         $this->params = $params;
+
         return $this;
     }
 
@@ -122,7 +123,7 @@ class Event implements EventInterface
      * If the parameter does not exist, the $default value will be returned.
      *
      * @param  string|int $name
-     * @param  mixed $default
+     * @param  mixed      $default
      * @return mixed
      */
     public function getParam($name, $default = null)
@@ -140,6 +141,7 @@ class Event implements EventInterface
         if (!isset($this->params->{$name})) {
             return $default;
         }
+
         return $this->params->{$name};
     }
 
@@ -152,6 +154,7 @@ class Event implements EventInterface
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
@@ -164,6 +167,7 @@ class Event implements EventInterface
     public function setTarget($target)
     {
         $this->target = $target;
+
         return $this;
     }
 
@@ -171,7 +175,7 @@ class Event implements EventInterface
      * Set an individual parameter to a value
      *
      * @param  string|int $name
-     * @param  mixed $value
+     * @param  mixed      $value
      * @return Event
      */
     public function setParam($name, $value)
@@ -183,6 +187,7 @@ class Event implements EventInterface
             // Objects
             $this->params->{$name} = $value;
         }
+
         return $this;
     }
 

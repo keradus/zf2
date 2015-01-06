@@ -28,7 +28,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->update = new Update;
+        $this->update = new Update();
     }
 
     /**
@@ -127,7 +127,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('AND', $predicates[6][0]);
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\IsNotNull', $predicates[6][1]);
 
-        $where = new Where;
+        $where = new Where();
         $this->update->where($where);
         $this->assertSame($where, $this->update->where);
 
@@ -193,7 +193,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $this->update->prepareStatement($mockAdapter, $mockStatement);
 
         // with TableIdentifier
-        $this->update = new Update;
+        $this->update = new Update();
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
@@ -226,7 +226,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString(new TrustingSql92Platform()));
 
         // with TableIdentifier
-        $this->update = new Update;
+        $this->update = new Update();
         $this->update->table(new TableIdentifier('foo', 'sch'))
             ->set(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null))
             ->where('x = y');
@@ -240,7 +240,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlStringForFalseUpdateValueParameter()
     {
-        $this->update = new Update;
+        $this->update = new Update();
         $this->update->table(new TableIdentifier('foo', 'sch'))
             ->set(array('bar' => false, 'boo' => 'test', 'bam' => true))
             ->where('x = y');
@@ -279,9 +279,9 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $update2->table('foo')
             ->set(array('bar' => 'baz'))
             ->where(array(
-                'id = ?'=>1
+                'id = ?' => 1,
             ));
-        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString(new TrustingSql92Platform));
+        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString(new TrustingSql92Platform()));
     }
 
     /**
@@ -340,7 +340,7 @@ class UpdateIgnore extends Update
 
     protected $specifications = array(
         self::SPECIFICATION_UPDATE => 'UPDATE IGNORE %1$s SET %2$s',
-        self::SPECIFICATION_WHERE  => 'WHERE %1$s'
+        self::SPECIFICATION_WHERE  => 'WHERE %1$s',
     );
 
     protected function processupdateIgnore(\Zend\Db\Adapter\Platform\PlatformInterface $platform, \Zend\Db\Adapter\Driver\DriverInterface $driver = null, \Zend\Db\Adapter\ParameterContainer $parameterContainer = null)

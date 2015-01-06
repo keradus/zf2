@@ -39,7 +39,7 @@ class WordCount extends AbstractValidator
     protected $messageVariables = array(
         'min'   => array('options' => 'min'),
         'max'   => array('options' => 'max'),
-        'count' => 'count'
+        'count' => 'count',
     );
 
     /**
@@ -70,7 +70,7 @@ class WordCount extends AbstractValidator
      * 'min': Minimum word count
      * 'max': Maximum word count
      *
-     * @param  int|array|\Traversable $options Options for the adapter
+     * @param int|array|\Traversable $options Options for the adapter
      */
     public function __construct($options = null)
     {
@@ -99,8 +99,8 @@ class WordCount extends AbstractValidator
     /**
      * Sets the minimum word count
      *
-     * @param  int|array $min The minimum word count
-     * @return WordCount Provides a fluent interface
+     * @param  int|array                          $min The minimum word count
+     * @return WordCount                          Provides a fluent interface
      * @throws Exception\InvalidArgumentException When min is greater than max
      */
     public function setMin($min)
@@ -121,6 +121,7 @@ class WordCount extends AbstractValidator
         }
 
         $this->options['min'] = $min;
+
         return $this;
     }
 
@@ -137,8 +138,8 @@ class WordCount extends AbstractValidator
     /**
      * Sets the maximum file count
      *
-     * @param  int|array $max The maximum word count
-     * @return WordCount Provides a fluent interface
+     * @param  int|array                          $max The maximum word count
+     * @return WordCount                          Provides a fluent interface
      * @throws Exception\InvalidArgumentException When max is smaller than min
      */
     public function setMax($max)
@@ -159,6 +160,7 @@ class WordCount extends AbstractValidator
         }
 
         $this->options['max'] = $max;
+
         return $this;
     }
 
@@ -193,6 +195,7 @@ class WordCount extends AbstractValidator
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+
             return false;
         }
 
@@ -200,11 +203,13 @@ class WordCount extends AbstractValidator
         $this->count = str_word_count($content);
         if (($this->getMax() !== null) && ($this->count > $this->getMax())) {
             $this->error(self::TOO_MUCH);
+
             return false;
         }
 
         if (($this->getMin() !== null) && ($this->count < $this->getMin())) {
             $this->error(self::TOO_LESS);
+
             return false;
         }
 

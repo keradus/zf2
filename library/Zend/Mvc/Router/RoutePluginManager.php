@@ -35,9 +35,9 @@ class RoutePluginManager extends AbstractPluginManager
      * service name. This ensures that providing the FQCN does not trigger an
      * abstract factory later.
      *
-     * @param  string       $name
-     * @param  string       $invokableClass
-     * @param  null|bool    $shared
+     * @param  string             $name
+     * @param  string             $invokableClass
+     * @param  null|bool          $shared
      * @return RoutePluginManager
      */
     public function setInvokableClass($name, $invokableClass, $shared = null)
@@ -46,6 +46,7 @@ class RoutePluginManager extends AbstractPluginManager
         if ($name != $invokableClass) {
             $this->setAlias($invokableClass, $name);
         }
+
         return $this;
     }
 
@@ -55,7 +56,7 @@ class RoutePluginManager extends AbstractPluginManager
      * Checks that the filter loaded is either a valid callback or an instance
      * of FilterInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                      $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */
@@ -79,8 +80,8 @@ class RoutePluginManager extends AbstractPluginManager
      * Overrides parent implementation by invoking the route factory,
      * passing $creationOptions as the argument.
      *
-     * @param  string $canonicalName
-     * @param  string $requestedName
+     * @param  string                     $canonicalName
+     * @param  string                     $requestedName
      * @return null|\stdClass
      * @throws Exception\RuntimeException If resolved class does not exist, or does not implement RouteInterface
      */
@@ -92,17 +93,17 @@ class RoutePluginManager extends AbstractPluginManager
                 '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
                 __METHOD__,
                 $canonicalName,
-                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
+                ($requestedName ? '(alias: '.$requestedName.')' : ''),
                 $invokable
             ));
         }
 
-        if (!static::isSubclassOf($invokable, __NAMESPACE__ . '\RouteInterface')) {
+        if (!static::isSubclassOf($invokable, __NAMESPACE__.'\RouteInterface')) {
             throw new Exception\RuntimeException(sprintf(
                 '%s: failed retrieving "%s%s" via invokable class "%s"; class does not implement %s\RouteInterface',
                 __METHOD__,
                 $canonicalName,
-                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
+                ($requestedName ? '(alias: '.$requestedName.')' : ''),
                 $invokable,
                 __NAMESPACE__
             ));

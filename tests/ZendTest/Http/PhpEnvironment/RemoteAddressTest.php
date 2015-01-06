@@ -73,7 +73,7 @@ class RemoteAddressTest extends TestCase
     public function testSetTrustedProxies()
     {
         $result = $this->remoteAddress->setTrustedProxies(array(
-            '192.168.0.10', '192.168.0.1'
+            '192.168.0.10', '192.168.0.1',
         ));
         $this->assertTrue($result instanceof RemoteAddr);
     }
@@ -88,7 +88,7 @@ class RemoteAddressTest extends TestCase
     {
         $this->remoteAddress->setUseProxy(true);
         $this->remoteAddress->setTrustedProxies(array(
-            '192.168.0.10', '10.0.0.1'
+            '192.168.0.10', '10.0.0.1',
         ));
         $_SERVER['REMOTE_ADDR'] = '192.168.0.10';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '8.8.8.8, 10.0.0.1';
@@ -99,7 +99,7 @@ class RemoteAddressTest extends TestCase
     {
         $this->remoteAddress->setUseProxy(true);
         $this->remoteAddress->setTrustedProxies(array(
-            '10.0.0.1'
+            '10.0.0.1',
         ));
         // the REMOTE_ADDR is not in the trusted IPs, possible attack here
         $_SERVER['REMOTE_ADDR'] = '1.1.1.1';
@@ -117,7 +117,7 @@ class RemoteAddressTest extends TestCase
     {
         $this->remoteAddress->setUseProxy(true);
         $this->remoteAddress->setTrustedProxies(array(
-            '192.168.0.10', '10.0.0.1', '10.0.0.2'
+            '192.168.0.10', '10.0.0.1', '10.0.0.2',
         ));
         $_SERVER['REMOTE_ADDR'] = '192.168.0.10';
         // 1.1.1.1 is the first IP address from the right not representing a known proxy server; as such, we

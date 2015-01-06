@@ -25,7 +25,7 @@ class BacktraceTest extends \PHPUnit_Framework_TestCase
                 'priority'     => 1,
                 'priorityName' => 'ALERT',
                 'message'      => 'foo',
-                'extra'        => array()
+                'extra'        => array(),
         );
 
         $event = $processor->process($event);

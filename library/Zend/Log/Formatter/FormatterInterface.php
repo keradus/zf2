@@ -21,7 +21,7 @@ interface FormatterInterface
     /**
      * Formats data into a single line to be written by the writer.
      *
-     * @param array $event event data
+     * @param  array  $event event data
      * @return string formatted line to write to the log
      */
     public function format($event);
@@ -37,7 +37,7 @@ interface FormatterInterface
      * Set the format specifier for DateTime objects
      *
      * @see http://php.net/manual/en/function.date.php
-     * @param string $dateTimeFormat DateTime format
+     * @param  string             $dateTimeFormat DateTime format
      * @return FormatterInterface
      */
     public function setDateTimeFormat($dateTimeFormat);

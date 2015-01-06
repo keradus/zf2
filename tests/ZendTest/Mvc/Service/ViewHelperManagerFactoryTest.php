@@ -70,8 +70,8 @@ class ViewHelperManagerFactoryTest extends TestCase
         $this->services->setService('Config',
             array(
                 'view_manager' => array(
-                    'base_path_console' => 'http://test.com'
-                )
+                    'base_path_console' => 'http://test.com',
+                ),
             )
         );
         $this->services->setService('Request', new ConsoleRequest());

@@ -126,7 +126,7 @@ class Getopt
         self::CONFIG_CUMULATIVE_FLAGS        => false,
         self::CONFIG_PARAMETER_SEPARATOR     => null,
         self::CONFIG_FREEFORM_FLAGS          => false,
-        self::CONFIG_NUMERIC_FLAGS           => false
+        self::CONFIG_NUMERIC_FLAGS           => false,
     );
 
     /**
@@ -198,9 +198,9 @@ class Getopt
      * The third parameter is an array of configuration parameters
      * to control the behavior of this instance of Getopt; it is optional.
      *
-     * @param  array $rules
-     * @param  array $argv
-     * @param  array $getoptConfig
+     * @param  array                              $rules
+     * @param  array                              $argv
+     * @param  array                              $getoptConfig
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($rules, $argv = null, $getoptConfig = array())
@@ -251,16 +251,18 @@ class Getopt
         $this->parse();
         if (isset($this->ruleMap[$key])) {
             $key = $this->ruleMap[$key];
+
             return isset($this->options[$key]);
         }
+
         return false;
     }
 
     /**
      * Set the value for a given option.
      *
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
      */
     public function __set($key, $value)
     {
@@ -284,7 +286,7 @@ class Getopt
     /**
      * Unset an option.
      *
-     * @param  string $key
+     * @param string $key
      */
     public function __unset($key)
     {
@@ -299,7 +301,7 @@ class Getopt
      * Define additional command-line arguments.
      * These are appended to those defined when the constructor was called.
      *
-     * @param  array $argv
+     * @param  array                              $argv
      * @throws Exception\InvalidArgumentException When not given an array as parameter
      * @return self
      */
@@ -310,6 +312,7 @@ class Getopt
         }
         $this->argv = array_merge($this->argv, $argv);
         $this->parsed = false;
+
         return $this;
     }
 
@@ -317,7 +320,7 @@ class Getopt
      * Define full set of command-line arguments.
      * These replace any currently defined.
      *
-     * @param  array $argv
+     * @param  array                              $argv
      * @throws Exception\InvalidArgumentException When not given an array as parameter
      * @return self
      */
@@ -328,6 +331,7 @@ class Getopt
         }
         $this->argv = $argv;
         $this->parsed = false;
+
         return $this;
     }
 
@@ -346,6 +350,7 @@ class Getopt
                 $this->setOption($key, $value);
             }
         }
+
         return $this;
     }
 
@@ -363,6 +368,7 @@ class Getopt
         if ($configKey !== null) {
             $this->getoptConfig[$configKey] = $configValue;
         }
+
         return $this;
     }
 
@@ -392,10 +398,11 @@ class Getopt
                  * The developer should subclass Getopt and
                  * provide this method.
                  */
-                $method = '_addRulesMode' . ucfirst($ruleMode);
+                $method = '_addRulesMode'.ucfirst($ruleMode);
                 $this->$method($rules);
         }
         $this->parsed = false;
+
         return $this;
     }
 
@@ -409,8 +416,9 @@ class Getopt
         $this->parse();
         $s = array();
         foreach ($this->options as $flag => $value) {
-            $s[] = $flag . '=' . ($value === true ? 'true' : $value);
+            $s[] = $flag.'='.($value === true ? 'true' : $value);
         }
+
         return implode(' ', $s);
     }
 
@@ -433,6 +441,7 @@ class Getopt
                 $s[] = $value;
             }
         }
+
         return $s;
     }
 
@@ -449,12 +458,13 @@ class Getopt
             $j['options'][] = array(
                 'option' => array(
                     'flag' => $flag,
-                    'parameter' => $value
-                )
+                    'parameter' => $value,
+                ),
             );
         }
 
         $json = \Zend\Json\Json::encode($j);
+
         return $json;
     }
 
@@ -478,6 +488,7 @@ class Getopt
             $optionsNode->appendChild($optionNode);
         }
         $xml = $doc->saveXML();
+
         return $xml;
     }
 
@@ -489,6 +500,7 @@ class Getopt
     public function getOptions()
     {
         $this->parse();
+
         return array_keys($this->options);
     }
 
@@ -514,6 +526,7 @@ class Getopt
                 return $this->options[$flag];
             }
         }
+
         return;
     }
 
@@ -525,6 +538,7 @@ class Getopt
     public function getRemainingArgs()
     {
         $this->parse();
+
         return $this->remainingArgs;
     }
 
@@ -534,6 +548,7 @@ class Getopt
         foreach ($this->getOptions() as $option) {
             $result[$option] = $this->getOption($option);
         }
+
         return $result;
     }
 
@@ -558,7 +573,7 @@ class Getopt
             $flags = array();
             if (is_array($rule['alias'])) {
                 foreach ($rule['alias'] as $flag) {
-                    $flags[] = (strlen($flag) == 1 ? '-' : '--') . $flag;
+                    $flags[] = (strlen($flag) == 1 ? '-' : '--').$flag;
                 }
             }
             $linepart['name'] = implode('|', $flags);
@@ -589,6 +604,7 @@ class Getopt
                 $linepart['help']
             );
         }
+
         return $usage;
     }
 
@@ -598,7 +614,7 @@ class Getopt
      * The parameter $aliasMap is an associative array
      * mapping option name (short or long) to an alias.
      *
-     * @param  array $aliasMap
+     * @param  array                        $aliasMap
      * @throws Exception\ExceptionInterface
      * @return self
      */
@@ -614,12 +630,13 @@ class Getopt
             }
             $flag = $this->ruleMap[$flag];
             if (isset($this->rules[$alias]) || isset($this->ruleMap[$alias])) {
-                $o = (strlen($alias) == 1 ? '-' : '--') . $alias;
+                $o = (strlen($alias) == 1 ? '-' : '--').$alias;
                 throw new Exception\InvalidArgumentException("Option \"$o\" is being defined more than once.");
             }
             $this->rules[$flag]['alias'][] = $alias;
             $this->ruleMap[$alias] = $flag;
         }
+
         return $this;
     }
 
@@ -641,6 +658,7 @@ class Getopt
             $flag = $this->ruleMap[$flag];
             $this->rules[$flag]['help'] = $help;
         }
+
         return $this;
     }
 
@@ -737,7 +755,7 @@ class Getopt
      * A long option is preceded by a double '--' character.
      * Long options may not be clustered.
      *
-     * @param  mixed &$argv
+     * @param mixed &$argv
      */
     protected function _parseLongOption(&$argv)
     {
@@ -756,7 +774,7 @@ class Getopt
      * Short options are those preceded by a single '-' character.
      * Short options may be clustered.
      *
-     * @param  mixed &$argv
+     * @param mixed &$argv
      */
     protected function _parseShortOptionCluster(&$argv)
     {
@@ -769,8 +787,8 @@ class Getopt
     /**
      * Parse command-line arguments for a single option.
      *
-     * @param  string $flag
-     * @param  mixed  $argv
+     * @param  string                       $flag
+     * @param  mixed                        $argv
      * @throws Exception\ExceptionInterface
      */
     protected function _parseSingleOption($flag, &$argv)
@@ -798,7 +816,7 @@ class Getopt
             $realFlag = $flag;
             $this->rules[$realFlag] = array(
                 'param'          => 'optional',
-                'isFreeformFlag' => true
+                'isFreeformFlag' => true,
             );
         } else {
             $realFlag = $this->ruleMap[$flag];
@@ -837,7 +855,7 @@ class Getopt
      * Throw runtime exception if this action is deny by configuration
      * or no one numeric option handlers is defined
      *
-     * @param  int $value
+     * @param  int                        $value
      * @throws Exception\RuntimeException
      * @return void
      */
@@ -861,8 +879,8 @@ class Getopt
      * and parser should follow cumulative params by configuration,
      * we should to add new param to array, not to overwrite
      *
-     * @param  string $flag
-     * @param  string $value
+     * @param string $flag
+     * @param string $value
      */
     protected function _setSingleOptionValue($flag, $value)
     {
@@ -892,7 +910,7 @@ class Getopt
      * Set TRUE value to given flag, if this option does not exist yet
      * In other case increase value to show count of flags' usage
      *
-     * @param  string $flag
+     * @param string $flag
      */
     protected function _setBooleanFlagValue($flag)
     {
@@ -906,8 +924,8 @@ class Getopt
      * the option $flag.
      * Throw an exception in most other cases.
      *
-     * @param  string $flag
-     * @param  string $param
+     * @param  string                       $flag
+     * @param  string                       $param
      * @throws Exception\ExceptionInterface
      * @return bool
      */
@@ -938,13 +956,14 @@ class Getopt
             default:
                 break;
         }
+
         return true;
     }
 
     /**
      * Define legal options using the gnu-style format.
      *
-     * @param  string $rules
+     * @param string $rules
      */
     protected function _addRulesModeGnu($rules)
     {
@@ -977,7 +996,7 @@ class Getopt
     /**
      * Define legal options using the Zend-style format.
      *
-     * @param  array $rules
+     * @param  array                        $rules
      * @throws Exception\ExceptionInterface
      */
     protected function _addRulesModeZend($rules)

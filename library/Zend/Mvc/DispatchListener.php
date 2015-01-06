@@ -69,6 +69,7 @@ class DispatchListener extends AbstractListenerAggregate
 
         if (!$controllerLoader->has($controllerName)) {
             $return = $this->marshalControllerNotFoundEvent($application::ERROR_CONTROLLER_NOT_FOUND, $controllerName, $e, $application);
+
             return $this->complete($return, $e);
         }
 
@@ -76,9 +77,11 @@ class DispatchListener extends AbstractListenerAggregate
             $controller = $controllerLoader->get($controllerName);
         } catch (InvalidControllerException $exception) {
             $return = $this->marshalControllerNotFoundEvent($application::ERROR_CONTROLLER_INVALID, $controllerName, $e, $application, $exception);
+
             return $this->complete($return, $e);
         } catch (\Exception $exception) {
             $return = $this->marshalBadControllerEvent($controllerName, $e, $application, $exception);
+
             return $this->complete($return, $e);
         }
 
@@ -121,7 +124,7 @@ class DispatchListener extends AbstractListenerAggregate
     /**
      * Complete the dispatch
      *
-     * @param  mixed $return
+     * @param  mixed    $return
      * @param  MvcEvent $event
      * @return mixed
      */
@@ -133,17 +136,18 @@ class DispatchListener extends AbstractListenerAggregate
             }
         }
         $event->setResult($return);
+
         return $return;
     }
 
     /**
      * Marshal a controller not found exception event
      *
-     * @param  string $type
-     * @param  string $controllerName
-     * @param  MvcEvent $event
+     * @param  string      $type
+     * @param  string      $controllerName
+     * @param  MvcEvent    $event
      * @param  Application $application
-     * @param  \Exception $exception
+     * @param  \Exception  $exception
      * @return mixed
      */
     protected function marshalControllerNotFoundEvent(
@@ -155,7 +159,7 @@ class DispatchListener extends AbstractListenerAggregate
     ) {
         $event->setError($type)
               ->setController($controllerName)
-              ->setControllerClass('invalid controller class or alias: ' . $controllerName);
+              ->setControllerClass('invalid controller class or alias: '.$controllerName);
         if ($exception !== null) {
             $event->setParam('exception', $exception);
         }
@@ -166,6 +170,7 @@ class DispatchListener extends AbstractListenerAggregate
         if (! $return) {
             $return = $event->getResult();
         }
+
         return $return;
     }
 
@@ -173,11 +178,11 @@ class DispatchListener extends AbstractListenerAggregate
      * Marshal a controller not found exception event
      *
      * @deprecated Use marshalControllerNotFoundEvent() instead
-     * @param  string $type
-     * @param  string $controllerName
-     * @param  MvcEvent $event
+     * @param  string      $type
+     * @param  string      $controllerName
+     * @param  MvcEvent    $event
      * @param  Application $application
-     * @param  \Exception $exception
+     * @param  \Exception  $exception
      * @return mixed
      */
     protected function marshallControllerNotFoundEvent(
@@ -199,10 +204,10 @@ class DispatchListener extends AbstractListenerAggregate
     /**
      * Marshal a bad controller exception event
      *
-     * @param  string $controllerName
-     * @param  MvcEvent $event
+     * @param  string      $controllerName
+     * @param  MvcEvent    $event
      * @param  Application $application
-     * @param  \Exception $exception
+     * @param  \Exception  $exception
      * @return mixed
      */
     protected function marshalBadControllerEvent(

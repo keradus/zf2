@@ -29,7 +29,7 @@ class ResultSetIntegrationTest extends TestCase
      */
     protected function setUp()
     {
-        $this->resultSet = new ResultSet;
+        $this->resultSet = new ResultSet();
     }
 
     public function testRowObjectPrototypeIsPopulatedByRowObjectByDefault()
@@ -65,7 +65,7 @@ class ResultSetIntegrationTest extends TestCase
             array(true),
             array('string'),
             array(array('foo')),
-            array(new stdClass),
+            array(new stdClass()),
         );
     }
 
@@ -85,14 +85,14 @@ class ResultSetIntegrationTest extends TestCase
 
     public function testCanProvideIteratorAsDataSource()
     {
-        $it = new SplStack;
+        $it = new SplStack();
         $this->resultSet->initialize($it);
         $this->assertSame($it, $this->resultSet->getDataSource());
     }
 
     public function testCanProvideIteratorAggregateAsDataSource()
     {
-        $iteratorAggregate = $this->getMock('IteratorAggregate', array('getIterator'), array(new SplStack));
+        $iteratorAggregate = $this->getMock('IteratorAggregate', array('getIterator'), array(new SplStack()));
         $iteratorAggregate->expects($this->any())->method('getIterator')->will($this->returnValue($iteratorAggregate));
         $this->resultSet->initialize($iteratorAggregate);
         $this->assertSame($iteratorAggregate->getIterator(), $this->resultSet->getDataSource());
@@ -122,9 +122,10 @@ class ResultSetIntegrationTest extends TestCase
         for ($i = 0; $i < $count; $i++) {
             $array[] = array(
                 'id'    => $i,
-                'title' => 'title ' . $i,
+                'title' => 'title '.$i,
             );
         }
+
         return new ArrayIterator($array);
     }
 

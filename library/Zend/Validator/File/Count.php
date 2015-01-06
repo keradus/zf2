@@ -39,7 +39,7 @@ class Count extends AbstractValidator
     protected $messageVariables = array(
         'min'   => array('options' => 'min'),
         'max'   => array('options' => 'max'),
-        'count' => 'count'
+        'count' => 'count',
     );
 
     /**
@@ -76,7 +76,7 @@ class Count extends AbstractValidator
      * 'min': Minimum filecount
      * 'max': Maximum filecount
      *
-     * @param  int|array|\Traversable $options Options for the adapter
+     * @param int|array|\Traversable $options Options for the adapter
      */
     public function __construct($options = null)
     {
@@ -105,8 +105,8 @@ class Count extends AbstractValidator
     /**
      * Sets the minimum file count
      *
-     * @param  int|array $min The minimum file count
-     * @return Count Provides a fluent interface
+     * @param  int|array                          $min The minimum file count
+     * @return Count                              Provides a fluent interface
      * @throws Exception\InvalidArgumentException When min is greater than max
      */
     public function setMin($min)
@@ -127,6 +127,7 @@ class Count extends AbstractValidator
         }
 
         $this->options['min'] = $min;
+
         return $this;
     }
 
@@ -143,8 +144,8 @@ class Count extends AbstractValidator
     /**
      * Sets the maximum file count
      *
-     * @param  int|array $max The maximum file count
-     * @return Count Provides a fluent interface
+     * @param  int|array                          $max The maximum file count
+     * @return Count                              Provides a fluent interface
      * @throws Exception\InvalidArgumentException When max is smaller than min
      */
     public function setMax($max)
@@ -165,13 +166,14 @@ class Count extends AbstractValidator
         }
 
         $this->options['max'] = $max;
+
         return $this;
     }
 
     /**
      * Adds a file for validation
      *
-     * @param string|array $file
+     * @param  string|array $file
      * @return Count
      */
     public function addFile($file)
@@ -207,7 +209,7 @@ class Count extends AbstractValidator
         }
 
         if (($file !== null) && array_key_exists('tmp_name', $file)) {
-            $value = $file['destination'] . DIRECTORY_SEPARATOR . $file['name'];
+            $value = $file['destination'].DIRECTORY_SEPARATOR.$file['name'];
         }
 
         if (($file === null) || !empty($file['tmp_name'])) {
@@ -246,6 +248,7 @@ class Count extends AbstractValidator
         }
 
         $this->error($errorType);
+
         return false;
     }
 }

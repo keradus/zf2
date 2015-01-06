@@ -19,7 +19,7 @@ class Source extends AbstractAtom implements Renderer\RendererInterface
     /**
      * Constructor
      *
-     * @param  Writer\Source $container
+     * @param Writer\Source $container
      */
     public function __construct(Writer\Source $container)
     {
@@ -61,6 +61,7 @@ class Source extends AbstractAtom implements Renderer\RendererInterface
             $ext->setDomDocument($this->getDomDocument(), $root);
             $ext->render();
         }
+
         return $this;
     }
 
@@ -68,7 +69,7 @@ class Source extends AbstractAtom implements Renderer\RendererInterface
      * Set feed generator string
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)

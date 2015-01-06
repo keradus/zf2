@@ -46,7 +46,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'string' => 'String',
             'aBc1@3' => 'Abc1@3',
-            'A b C'  => 'A B C'
+            'A b C'  => 'A B C',
         );
 
         foreach ($valuesExpected as $input => $output) {
@@ -66,7 +66,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             '√º'      => '√º',
             '√±'      => '√±',
-            '√º√±123' => '√º√±123'
+            '√º√±123' => '√º√±123',
         );
 
         try {
@@ -101,12 +101,12 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             '√º'      => '√º',
             '√±'      => '√±',
-            '√º√±123' => '√º√±123'
+            '√º√±123' => '√º√±123',
         );
 
         try {
             $filter = new UpperCaseWordsFilter(array(
-                'encoding' => 'UTF-8'
+                'encoding' => 'UTF-8',
             ));
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
@@ -125,7 +125,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             '√º'      => '√º',
             '√±'      => '√±',
-            '√º√±123' => '√º√±123'
+            '√º√±123' => '√º√±123',
         );
 
         try {
@@ -170,9 +170,9 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     'Upper CASE and lowerCase Words WRITTEN',
-                    'This Should Stay The Same'
-                )
-            )
+                    'This Should Stay The Same',
+                ),
+            ),
         );
     }
 

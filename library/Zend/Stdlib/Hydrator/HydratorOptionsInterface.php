@@ -12,7 +12,7 @@ namespace Zend\Stdlib\Hydrator;
 interface HydratorOptionsInterface
 {
     /**
-     * @param  array|\Traversable $options
+     * @param  array|\Traversable       $options
      * @return HydratorOptionsInterface
      */
     public function setOptions($options);

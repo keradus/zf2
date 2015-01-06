@@ -55,7 +55,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         $writer = new FirePhp($this->firephp);
         $writer->write(array(
             'message' => 'my msg',
-            'priority' => Logger::DEBUG
+            'priority' => Logger::DEBUG,
         ));
         $this->assertEquals('my msg', $this->firephp->calls['trace'][0]);
     }
@@ -68,7 +68,7 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
         $writer = new FirePhp($firephp);
         $writer->write(array(
             'message' => 'my msg',
-            'priority' => Logger::DEBUG
+            'priority' => Logger::DEBUG,
         ));
         $this->assertTrue(empty($this->firephp->calls));
     }

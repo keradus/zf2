@@ -47,7 +47,7 @@ class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataSetTypeSetValueGenerate
      * @param string $type
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $code
      */
     public function testSetTypeSetValueGenerate($type, $value, $code)
@@ -63,7 +63,7 @@ class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataSetTypeSetValueGenerate
      * @param string $type
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $code
      */
     public function testSetBogusTypeSetValueGenerateUseAutoDetection($type, $value, $code)
@@ -260,11 +260,10 @@ EOS;
         $this->assertEquals('var', $tag->getName());
     }
 
-
     /**
      * @dataProvider dataSetTypeSetValueGenerate
      * @param string $type
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $code
      */
     public function testSetDefaultValue($type, $value, $code)

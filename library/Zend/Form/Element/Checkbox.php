@@ -22,7 +22,7 @@ class Checkbox extends Element implements InputProviderInterface
      * @var array
      */
     protected $attributes = array(
-        'type' => 'checkbox'
+        'type' => 'checkbox',
     );
 
     /**
@@ -76,12 +76,13 @@ class Checkbox extends Element implements InputProviderInterface
     /**
      * Do we render hidden element?
      *
-     * @param  bool $useHiddenElement
+     * @param  bool     $useHiddenElement
      * @return Checkbox
      */
     public function setUseHiddenElement($useHiddenElement)
     {
         $this->useHiddenElement = (bool) $useHiddenElement;
+
         return $this;
     }
 
@@ -104,6 +105,7 @@ class Checkbox extends Element implements InputProviderInterface
     public function setUncheckedValue($uncheckedValue)
     {
         $this->uncheckedValue = $uncheckedValue;
+
         return $this;
     }
 
@@ -126,6 +128,7 @@ class Checkbox extends Element implements InputProviderInterface
     public function setCheckedValue($checkedValue)
     {
         $this->checkedValue = $checkedValue;
+
         return $this;
     }
 
@@ -149,9 +152,10 @@ class Checkbox extends Element implements InputProviderInterface
         if (null === $this->validator) {
             $this->validator = new InArrayValidator(array(
                 'haystack' => array($this->checkedValue, $this->uncheckedValue),
-                'strict'   => false
+                'strict'   => false,
             ));
         }
+
         return $this->validator;
     }
 
@@ -191,19 +195,20 @@ class Checkbox extends Element implements InputProviderInterface
     /**
      * Checks or unchecks the checkbox.
      *
-     * @param bool $value The flag to set.
+     * @param  bool     $value The flag to set.
      * @return Checkbox
      */
     public function setChecked($value)
     {
         $this->value = $value ? $this->getCheckedValue() : $this->getUncheckedValue();
+
         return $this;
     }
 
     /**
      * Checks or unchecks the checkbox.
      *
-     * @param mixed $value A boolean flag or string that is checked against the "checked value".
+     * @param  mixed   $value A boolean flag or string that is checked against the "checked value".
      * @return Element
      */
     public function setValue($value)
@@ -211,6 +216,7 @@ class Checkbox extends Element implements InputProviderInterface
         // Cast to strings because POST data comes in string form
         $checked = (string) $value === (string) $this->getCheckedValue();
         $this->value = $checked ? $this->getCheckedValue() : $this->getUncheckedValue();
+
         return $this;
     }
 }

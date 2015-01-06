@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Filter;
 
 use Zend\Filter\StripNewlines as StripNewlinesFilter;
@@ -31,7 +32,7 @@ class StripNewlinesTest extends \PHPUnit_Framework_TestCase
             '\n' => '\n',
             '\r' => '\r',
             '\r\n' => '\r\n',
-            "Some text\nthat we have\r\nstuff in" => 'Some textthat we havestuff in'
+            "Some text\nthat we have\r\nstuff in" => 'Some textthat we havestuff in',
         );
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
@@ -47,7 +48,7 @@ class StripNewlinesTest extends \PHPUnit_Framework_TestCase
         $filter = new StripNewLinesFilter();
         $expected = array(
             "Some text\nthat we have\r\nstuff in" => 'Some textthat we havestuff in',
-            "Some text\n" => 'Some text'
+            "Some text\n" => 'Some text',
         );
         $this->assertEquals(array_values($expected), $filter(array_keys($expected)));
     }
@@ -56,7 +57,7 @@ class StripNewlinesTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
-            array(new \stdClass())
+            array(new \stdClass()),
         );
     }
 

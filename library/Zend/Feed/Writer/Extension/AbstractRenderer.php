@@ -13,7 +13,7 @@ use DOMDocument;
 use DOMElement;
 
 /**
-*/
+ */
 abstract class AbstractRenderer implements RendererInterface
 {
     /**
@@ -56,24 +56,26 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Set the data container
      *
-     * @param  mixed $container
+     * @param  mixed            $container
      * @return AbstractRenderer
      */
     public function setDataContainer($container)
     {
         $this->container = $container;
+
         return $this;
     }
 
     /**
      * Set feed encoding
      *
-     * @param  string $enc
+     * @param  string           $enc
      * @return AbstractRenderer
      */
     public function setEncoding($enc)
     {
         $this->encoding = $enc;
+
         return $this;
     }
 
@@ -90,14 +92,15 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Set DOMDocument and DOMElement on which to operate
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $base
+     * @param  DOMDocument      $dom
+     * @param  DOMElement       $base
      * @return AbstractRenderer
      */
     public function setDomDocument(DOMDocument $dom, DOMElement $base)
     {
         $this->dom  = $dom;
         $this->base = $base;
+
         return $this;
     }
 
@@ -114,12 +117,13 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Set feed type
      *
-     * @param  string $type
+     * @param  string           $type
      * @return AbstractRenderer
      */
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -136,12 +140,13 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Set root element of document
      *
-     * @param  DOMElement $root
+     * @param  DOMElement       $root
      * @return AbstractRenderer
      */
     public function setRootElement(DOMElement $root)
     {
         $this->rootElement = $root;
+
         return $this;
     }
 

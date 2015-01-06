@@ -23,7 +23,7 @@ class PrimaryKeyTest extends \PHPUnit_Framework_TestCase
             array(array(
                 'PRIMARY KEY (%s)',
                 array('foo'),
-                array($pk::TYPE_IDENTIFIER)
+                array($pk::TYPE_IDENTIFIER),
             )),
             $pk->getExpressionData()
         );

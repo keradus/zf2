@@ -53,7 +53,7 @@ class Extension extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array|Traversable $options
+     * @param string|array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -99,12 +99,13 @@ class Extension extends AbstractValidator
     /**
      * Sets the case to use
      *
-     * @param  bool $case
+     * @param  bool      $case
      * @return Extension Provides a fluent interface
      */
     public function setCase($case)
     {
         $this->options['case'] = (bool) $case;
+
         return $this;
     }
 
@@ -124,12 +125,13 @@ class Extension extends AbstractValidator
      * Sets the file extensions
      *
      * @param  string|array $extension The extensions to validate
-     * @return Extension Provides a fluent interface
+     * @return Extension    Provides a fluent interface
      */
     public function setExtension($extension)
     {
         $this->options['extension'] = null;
         $this->addExtension($extension);
+
         return $this;
     }
 
@@ -137,7 +139,7 @@ class Extension extends AbstractValidator
      * Adds the file extensions
      *
      * @param  string|array $extension The extensions to add for validation
-     * @return Extension Provides a fluent interface
+     * @return Extension    Provides a fluent interface
      */
     public function addExtension($extension)
     {
@@ -164,6 +166,7 @@ class Extension extends AbstractValidator
         }
 
         $this->options['extension'] = implode(',', $extensions);
+
         return $this;
     }
 
@@ -198,6 +201,7 @@ class Extension extends AbstractValidator
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+
             return false;
         }
 
@@ -215,6 +219,7 @@ class Extension extends AbstractValidator
         }
 
         $this->error(self::FALSE_EXTENSION);
+
         return false;
     }
 }

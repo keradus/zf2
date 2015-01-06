@@ -24,7 +24,7 @@ class IfRange implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-range') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-Range string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-Range string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class IfRange implements HeaderInterface
 
     public function toString()
     {
-        return 'If-Range: ' . $this->getFieldValue();
+        return 'If-Range: '.$this->getFieldValue();
     }
 }

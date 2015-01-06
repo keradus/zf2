@@ -77,6 +77,7 @@ class WinCache extends AbstractAdapter implements
         if (!$this->options) {
             $this->setOptions(new WinCacheOptions());
         }
+
         return $this->options;
     }
 
@@ -90,6 +91,7 @@ class WinCache extends AbstractAdapter implements
     public function getTotalSpace()
     {
         $mem = wincache_ucache_meminfo();
+
         return $mem['memory_total'];
     }
 
@@ -103,6 +105,7 @@ class WinCache extends AbstractAdapter implements
     public function getAvailableSpace()
     {
         $mem = wincache_ucache_meminfo();
+
         return $mem['memory_free'];
     }
 
@@ -123,18 +126,18 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to get an item.
      *
-     * @param  string  $normalizedKey
-     * @param  bool $success
-     * @param  mixed   $casToken
-     * @return mixed Data on success, null on failure
+     * @param  string                       $normalizedKey
+     * @param  bool                         $success
+     * @param  mixed                        $casToken
+     * @return mixed                        Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
         $result      = wincache_ucache_get($internalKey, $success);
 
         if ($success) {
@@ -149,8 +152,8 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to get multiple items.
      *
-     * @param  array $normalizedKeys
-     * @return array Associative array of keys and values
+     * @param  array                        $normalizedKeys
+     * @return array                        Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys)
@@ -161,10 +164,10 @@ class WinCache extends AbstractAdapter implements
             return wincache_ucache_get($normalizedKeys);
         }
 
-        $prefix       = $namespace . $options->getNamespaceSeparator();
+        $prefix       = $namespace.$options->getNamespaceSeparator();
         $internalKeys = array();
         foreach ($normalizedKeys as $normalizedKey) {
-            $internalKeys[] = $prefix . $normalizedKey;
+            $internalKeys[] = $prefix.$normalizedKey;
         }
 
         $fetch = wincache_ucache_get($internalKeys);
@@ -182,7 +185,7 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to test if an item exists.
      *
-     * @param  string $normalizedKey
+     * @param  string                       $normalizedKey
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -190,28 +193,30 @@ class WinCache extends AbstractAdapter implements
     {
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        return wincache_ucache_exists($prefix . $normalizedKey);
+        $prefix    = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+
+        return wincache_ucache_exists($prefix.$normalizedKey);
     }
 
     /**
      * Get metadata of an item.
      *
-     * @param  string $normalizedKey
-     * @return array|bool Metadata on success, false on failure
+     * @param  string                       $normalizedKey
+     * @return array|bool                   Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadata(& $normalizedKey)
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
 
         $info = wincache_ucache_info(true, $internalKey);
         if (isset($info['ucache_entries'][1])) {
             $metadata = $info['ucache_entries'][1];
             $this->normalizeMetadata($metadata);
+
             return $metadata;
         }
 
@@ -223,8 +228,8 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to store an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -232,8 +237,8 @@ class WinCache extends AbstractAdapter implements
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
         $ttl         = $options->getTtl();
 
         if (!wincache_ucache_set($internalKey, $value, $ttl)) {
@@ -249,8 +254,8 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to store multiple items.
      *
-     * @param  array $normalizedKeyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                        $normalizedKeyValuePairs
+     * @return array                        Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
@@ -261,10 +266,10 @@ class WinCache extends AbstractAdapter implements
             return wincache_ucache_set($normalizedKeyValuePairs, null, $options->getTtl());
         }
 
-        $prefix                = $namespace . $options->getNamespaceSeparator();
+        $prefix                = $namespace.$options->getNamespaceSeparator();
         $internalKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => & $value) {
-            $internalKey = $prefix . $normalizedKey;
+            $internalKey = $prefix.$normalizedKey;
             $internalKeyValuePairs[$internalKey] = & $value;
         }
 
@@ -282,8 +287,8 @@ class WinCache extends AbstractAdapter implements
     /**
      * Add an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -291,8 +296,8 @@ class WinCache extends AbstractAdapter implements
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
         $ttl         = $options->getTtl();
 
         if (!wincache_ucache_add($internalKey, $value, $ttl)) {
@@ -308,8 +313,8 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to add multiple items.
      *
-     * @param  array $normalizedKeyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                        $normalizedKeyValuePairs
+     * @return array                        Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs)
@@ -320,10 +325,10 @@ class WinCache extends AbstractAdapter implements
             return wincache_ucache_add($normalizedKeyValuePairs, null, $options->getTtl());
         }
 
-        $prefix                = $namespace . $options->getNamespaceSeparator();
+        $prefix                = $namespace.$options->getNamespaceSeparator();
         $internalKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
-            $internalKey = $prefix . $normalizedKey;
+            $internalKey = $prefix.$normalizedKey;
             $internalKeyValuePairs[$internalKey] = $value;
         }
 
@@ -341,8 +346,8 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to replace an existing item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -350,8 +355,8 @@ class WinCache extends AbstractAdapter implements
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
         if (!wincache_ucache_exists($internalKey)) {
             return false;
         }
@@ -370,7 +375,7 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to remove an item.
      *
-     * @param  string $normalizedKey
+     * @param  string                       $normalizedKey
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -378,16 +383,17 @@ class WinCache extends AbstractAdapter implements
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
+
         return wincache_ucache_delete($internalKey);
     }
 
     /**
      * Internal method to remove multiple items.
      *
-     * @param  array $normalizedKeys
-     * @return array Array of not removed keys
+     * @param  array                        $normalizedKeys
+     * @return array                        Array of not removed keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItems(array & $normalizedKeys)
@@ -396,13 +402,14 @@ class WinCache extends AbstractAdapter implements
         $namespace = $options->getNamespace();
         if ($namespace === '') {
             $result = wincache_ucache_delete($normalizedKeys);
+
             return ($result === false) ? $normalizedKeys : $result;
         }
 
-        $prefix       = $namespace . $options->getNamespaceSeparator();
+        $prefix       = $namespace.$options->getNamespaceSeparator();
         $internalKeys = array();
         foreach ($normalizedKeys as $normalizedKey) {
-            $internalKeys[] = $prefix . $normalizedKey;
+            $internalKeys[] = $prefix.$normalizedKey;
         }
 
         $result = wincache_ucache_delete($internalKeys);
@@ -422,34 +429,36 @@ class WinCache extends AbstractAdapter implements
     /**
      * Internal method to increment an item.
      *
-     * @param  string $normalizedKey
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                       $normalizedKey
+     * @param  int                          $value
+     * @return int|bool                     The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
+
         return wincache_ucache_inc($internalKey, (int) $value);
     }
 
     /**
      * Internal method to decrement an item.
      *
-     * @param  string $normalizedKey
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                       $normalizedKey
+     * @param  int                          $value
+     * @return int|bool                     The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
+
         return wincache_ucache_dec($internalKey, (int) $value);
     }
 
@@ -479,7 +488,7 @@ class WinCache extends AbstractAdapter implements
                         'resource' => false,
                     ),
                     'supportedMetadata' => array(
-                        'internal_key', 'ttl', 'hits', 'size'
+                        'internal_key', 'ttl', 'hits', 'size',
                     ),
                     'minTtl'             => 1,
                     'maxTtl'             => 0,

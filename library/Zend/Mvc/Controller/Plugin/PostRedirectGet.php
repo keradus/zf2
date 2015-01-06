@@ -37,8 +37,8 @@ class PostRedirectGet extends AbstractPlugin
      * session container, and, if so, returns them; otherwise, it returns a
      * boolean false.
      *
-     * @param  null|string $redirect
-     * @param  bool        $redirectToUrl
+     * @param  null|string                                  $redirect
+     * @param  bool                                         $redirectToUrl
      * @return \Zend\Http\Response|array|\Traversable|false
      */
     public function __invoke($redirect = null, $redirectToUrl = false)
@@ -50,11 +50,13 @@ class PostRedirectGet extends AbstractPlugin
         if ($request->isPost()) {
             $container->setExpirationHops(1, 'post');
             $container->post = $request->getPost()->toArray();
+
             return $this->redirect($redirect, $redirectToUrl);
         } else {
             if (null !== $container->post) {
                 $post = $container->post;
                 unset($container->post);
+
                 return $post;
             }
 
@@ -70,24 +72,26 @@ class PostRedirectGet extends AbstractPlugin
         if (!isset($this->sessionContainer)) {
             $this->sessionContainer = new Container('prg_post1');
         }
+
         return $this->sessionContainer;
     }
 
     /**
-     * @param  Container $container
+     * @param  Container       $container
      * @return PostRedirectGet
      */
     public function setSessionContainer(Container $container)
     {
         $this->sessionContainer = $container;
+
         return $this;
     }
 
     /**
      * TODO: Good candidate for traits method in PHP 5.4 with FilePostRedirectGet plugin
      *
-     * @param  string  $redirect
-     * @param  bool    $redirectToUrl
+     * @param  string                               $redirect
+     * @param  bool                                 $redirectToUrl
      * @return \Zend\Http\Response
      * @throws \Zend\Mvc\Exception\RuntimeException
      */
@@ -124,6 +128,7 @@ class PostRedirectGet extends AbstractPlugin
         if (false === $redirectToUrl) {
             $response = $redirector->toRoute($redirect, $params, $options, $reuseMatchedParams);
             $response->setStatusCode(303);
+
             return $response;
         }
 

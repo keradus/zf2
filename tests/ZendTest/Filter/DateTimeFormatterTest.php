@@ -37,9 +37,9 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 '1',
-                -1
+                -1,
             )),
-            array(0.53)
+            array(0.53),
         );
     }
 

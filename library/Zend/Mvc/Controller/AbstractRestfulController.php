@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Mvc\Controller;
 
 use Zend\Http\Request as HttpRequest;
@@ -33,8 +34,8 @@ abstract class AbstractRestfulController extends AbstractController
     protected $contentTypes = array(
         self::CONTENT_TYPE_JSON => array(
             'application/hal+json',
-            'application/json'
-        )
+            'application/json',
+        ),
     );
 
     /**
@@ -65,6 +66,7 @@ abstract class AbstractRestfulController extends AbstractController
     public function setIdentifierName($name)
     {
         $this->identifierName = (string) $name;
+
         return $this;
     }
 
@@ -89,7 +91,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -104,7 +106,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -121,7 +123,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -136,7 +138,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -150,7 +152,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -168,7 +170,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -188,7 +190,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -207,7 +209,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -225,7 +227,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -243,7 +245,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -259,7 +261,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(405);
 
         return array(
-            'content' => 'Method Not Allowed'
+            'content' => 'Method Not Allowed',
         );
     }
 
@@ -273,7 +275,7 @@ abstract class AbstractRestfulController extends AbstractController
         $this->response->setStatusCode(404);
 
         return array(
-            'content' => 'Page not found'
+            'content' => 'Page not found',
         );
     }
 
@@ -285,8 +287,8 @@ abstract class AbstractRestfulController extends AbstractController
      * to determine how to handle the request, and which method to delegate to.
      *
      * @events dispatch.pre, dispatch.post
-     * @param  Request $request
-     * @param  null|Response $response
+     * @param  Request                            $request
+     * @param  null|Response                      $response
      * @return mixed|Response
      * @throws Exception\InvalidArgumentException
      */
@@ -304,7 +306,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Handle the request
      *
      * @todo   try-catch in "patch" for patchList should be removed in the future
-     * @param  MvcEvent $e
+     * @param  MvcEvent                  $e
      * @return mixed
      * @throws Exception\DomainException if no route matches in event or invalid HTTP method
      */
@@ -332,6 +334,7 @@ abstract class AbstractRestfulController extends AbstractController
             }
             $return = $this->$method();
             $e->setResult($return);
+
             return $return;
         }
 
@@ -405,6 +408,7 @@ abstract class AbstractRestfulController extends AbstractController
                 } catch (Exception\RuntimeException $ex) {
                     $response = $e->getResponse();
                     $response->setStatusCode(405);
+
                     return $response;
                 }
                 break;
@@ -431,18 +435,20 @@ abstract class AbstractRestfulController extends AbstractController
             default:
                 $response = $e->getResponse();
                 $response->setStatusCode(405);
+
                 return $response;
         }
 
         $routeMatch->setParam('action', $action);
         $e->setResult($return);
+
         return $return;
     }
 
     /**
      * Process post data and call create
      *
-     * @param Request $request
+     * @param  Request $request
      * @return mixed
      */
     public function processPostData(Request $request)
@@ -459,7 +465,7 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Check if request has certain content type
      *
-     * @param  Request $request
+     * @param  Request     $request
      * @param  string|null $contentType
      * @return bool
      */
@@ -510,8 +516,8 @@ abstract class AbstractRestfulController extends AbstractController
      * To retrieve the body content data, use "$data = $this->processBodyContent($request)";
      * that method will return a string, array, or, in the case of JSON, an object.
      *
-     * @param  string $method
-     * @param  Callable $handler
+     * @param  string                    $method
+     * @param  Callable                  $handler
      * @return AbstractRestfulController
      */
     public function addHttpMethodHandler($method, /* Callable */ $handler)
@@ -524,6 +530,7 @@ abstract class AbstractRestfulController extends AbstractController
         }
         $method = strtolower($method);
         $this->customHttpMethodsMap[$method] = $handler;
+
         return $this;
     }
 
@@ -534,7 +541,7 @@ abstract class AbstractRestfulController extends AbstractController
      * query string, returning it if found. Otherwise, returns a boolean false.
      *
      * @param  \Zend\Mvc\Router\RouteMatch $routeMatch
-     * @param  Request $request
+     * @param  Request                     $request
      * @return false|mixed
      */
     protected function getIdentifier($routeMatch, $request)
@@ -562,7 +569,7 @@ abstract class AbstractRestfulController extends AbstractController
      * of "0", the method assumes that we have non-urlencoded content and
      * returns the raw content; otherwise, the array created is returned.
      *
-     * @param  mixed $request
+     * @param  mixed               $request
      * @return object|string|array
      */
     protected function processBodyContent($request)

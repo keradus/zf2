@@ -14,7 +14,7 @@ interface AdapterInterface
     /**
      * Checks the length of a barcode
      *
-     * @param  string $value  The barcode to check for proper length
+     * @param  string $value The barcode to check for proper length
      * @return bool
      */
     public function hasValidLength($value);
@@ -30,7 +30,7 @@ interface AdapterInterface
     /**
      * Validates the checksum
      *
-     * @param string $value The barcode to check the checksum for
+     * @param  string $value The barcode to check the checksum for
      * @return bool
      */
     public function hasValidChecksum($value);
@@ -59,7 +59,7 @@ interface AdapterInterface
     /**
      * Sets the checksum validation, if no value is given, the actual setting is returned
      *
-     * @param  bool $check
+     * @param  bool                 $check
      * @return AbstractAdapter|bool
      */
     public function useChecksum($check = null);

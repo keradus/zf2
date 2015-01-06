@@ -63,8 +63,8 @@ abstract class AbstractStandalone extends AbstractHelper implements
      *
      * Proxy to container methods
      *
-     * @param  string $method
-     * @param  array $args
+     * @param  string                           $method
+     * @param  array                            $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
@@ -77,17 +77,18 @@ abstract class AbstractStandalone extends AbstractHelper implements
                 // If the container is returned, we really want the current object
                 return $this;
             }
+
             return $return;
         }
 
-        throw new Exception\BadMethodCallException('Method "' . $method . '" does not exist');
+        throw new Exception\BadMethodCallException('Method "'.$method.'" does not exist');
     }
 
     /**
      * Overloading: set property value
      *
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function __set($key, $value)
@@ -121,6 +122,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     public function __isset($key)
     {
         $container = $this->getContainer();
+
         return isset($container[$key]);
     }
 
@@ -170,6 +172,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
             && method_exists($this->getView(), 'getEncoding')
         ) {
             $escaper = $this->getView()->plugin('escapeHtml');
+
             return $escaper((string) $string);
         }
 
@@ -179,12 +182,13 @@ abstract class AbstractStandalone extends AbstractHelper implements
     /**
      * Set whether or not auto escaping should be used
      *
-     * @param  bool $autoEscape whether or not to auto escape output
+     * @param  bool               $autoEscape whether or not to auto escape output
      * @return AbstractStandalone
      */
     public function setAutoEscape($autoEscape = true)
     {
         $this->autoEscape = ($autoEscape) ? true : false;
+
         return $this;
     }
 
@@ -201,12 +205,13 @@ abstract class AbstractStandalone extends AbstractHelper implements
     /**
      * Set container on which to operate
      *
-     * @param  AbstractContainer $container
+     * @param  AbstractContainer  $container
      * @return AbstractStandalone
      */
     public function setContainer(AbstractContainer $container)
     {
         $this->container = $container;
+
         return $this;
     }
 
@@ -220,6 +225,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
         if (!$this->container instanceof AbstractContainer) {
             $this->container = new $this->containerClass();
         }
+
         return $this->container;
     }
 
@@ -232,6 +238,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     {
         if (null != $this->container) {
             $this->container = null;
+
             return true;
         }
 
@@ -241,7 +248,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     /**
      * Set the container class to use
      *
-     * @param  string $name
+     * @param  string                                                     $name
      * @throws Exception\InvalidArgumentException
      * @throws Exception\DomainException
      * @return \Zend\View\Helper\Placeholder\Container\AbstractStandalone
@@ -263,6 +270,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
         }
 
         $this->containerClass = $name;
+
         return $this;
     }
 
@@ -279,7 +287,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     /**
      * Set Escaper instance
      *
-     * @param  Escaper $escaper
+     * @param  Escaper            $escaper
      * @return AbstractStandalone
      */
     public function setEscaper(Escaper $escaper)
@@ -316,6 +324,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     public function count()
     {
         $container = $this->getContainer();
+
         return count($container);
     }
 
@@ -345,7 +354,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
      * ArrayAccess: offsetSet
      *
      * @param  string|int $offset
-     * @param  mixed $value
+     * @param  mixed      $value
      * @return void
      */
     public function offsetSet($offset, $value)

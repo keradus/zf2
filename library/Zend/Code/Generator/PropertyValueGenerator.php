@@ -18,6 +18,6 @@ class PropertyValueGenerator extends ValueGenerator
      */
     public function generate()
     {
-        return parent::generate() . ';';
+        return parent::generate().';';
     }
 }

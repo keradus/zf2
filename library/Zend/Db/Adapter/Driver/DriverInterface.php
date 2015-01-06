@@ -19,7 +19,7 @@ interface DriverInterface
     /**
      * Get database platform name
      *
-     * @param string $nameFormat
+     * @param  string $nameFormat
      * @return string
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE);
@@ -41,7 +41,7 @@ interface DriverInterface
     /**
      * Create statement
      *
-     * @param string|resource $sqlOrResource
+     * @param  string|resource    $sqlOrResource
      * @return StatementInterface
      */
     public function createStatement($sqlOrResource = null);
@@ -49,7 +49,7 @@ interface DriverInterface
     /**
      * Create result
      *
-     * @param resource $resource
+     * @param  resource        $resource
      * @return ResultInterface
      */
     public function createResult($resource);
@@ -64,8 +64,8 @@ interface DriverInterface
     /**
      * Format parameter name
      *
-     * @param string $name
-     * @param mixed  $type
+     * @param  string $name
+     * @param  mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null);

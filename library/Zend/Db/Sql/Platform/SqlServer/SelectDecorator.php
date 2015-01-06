@@ -41,9 +41,9 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     }
 
     /**
-     * @param PlatformInterface $platform
-     * @param DriverInterface $driver
-     * @param ParameterContainer $parameterContainer
+     * @param  PlatformInterface  $platform
+     * @param  DriverInterface    $driver
+     * @param  ParameterContainer $parameterContainer
      * @param $sqls
      * @param $parameters
      * @return null
@@ -56,7 +56,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
         $selectParameters = $parameters[self::SELECT];
 
-        $starSuffix = $platform->getIdentifierSeparator() . self::SQL_STAR;
+        $starSuffix = $platform->getIdentifierSeparator().self::SQL_STAR;
         foreach ($selectParameters[0] as $i => $columnParameters) {
             if ($columnParameters[0] == self::SQL_STAR || (isset($columnParameters[1]) && $columnParameters[1] == self::SQL_STAR) || strpos($columnParameters[0], $starSuffix)) {
                 $selectParameters[0] = array(array(self::SQL_STAR));
@@ -80,14 +80,14 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $offsetParamName = $driver->formatParameterName('offset');
             $offsetForSumParamName = $driver->formatParameterName('offsetForSum');
             array_push($sqls, ') AS [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION] WHERE [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION].[__ZEND_ROW_NUMBER] BETWEEN '
-                . $offsetParamName . '+1 AND ' . $limitParamName . '+' . $offsetForSumParamName);
+                .$offsetParamName.'+1 AND '.$limitParamName.'+'.$offsetForSumParamName);
             $parameterContainer->offsetSet('offset', $this->offset);
             $parameterContainer->offsetSet('limit', $this->limit);
             $parameterContainer->offsetSetReference('offsetForSum', 'offset');
         } else {
             array_push($sqls, ') AS [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION] WHERE [ZEND_SQL_SERVER_LIMIT_OFFSET_EMULATION].[__ZEND_ROW_NUMBER] BETWEEN '
-                . (int) $this->offset . '+1 AND '
-                . (int) $this->limit . '+' . (int) $this->offset
+                .(int) $this->offset.'+1 AND '
+                .(int) $this->limit.'+'.(int) $this->offset
             );
         }
 
@@ -99,7 +99,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         }
 
         // add a column for row_number() using the order specification
-        $parameters[self::SELECT][0][] = array('ROW_NUMBER() OVER (' . $orderBy . ')', '[__ZEND_ROW_NUMBER]');
+        $parameters[self::SELECT][0][] = array('ROW_NUMBER() OVER ('.$orderBy.')', '[__ZEND_ROW_NUMBER]');
 
         $sqls[self::SELECT] = $this->createSqlFromSpecificationAndParameters(
             $this->specifications[self::SELECT],

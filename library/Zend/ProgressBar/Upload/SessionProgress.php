@@ -17,7 +17,7 @@ use Zend\ProgressBar\Exception;
 class SessionProgress extends AbstractUploadHandler
 {
     /**
-     * @param  string $id
+     * @param  string                            $id
      * @return array|bool
      * @throws Exception\PhpEnvironmentException
      */
@@ -29,7 +29,7 @@ class SessionProgress extends AbstractUploadHandler
             );
         }
 
-        $sessionKey = ini_get('session.upload_progress.prefix') . $id;
+        $sessionKey = ini_get('session.upload_progress.prefix').$id;
         $uploadInfo = (isset($_SESSION[$sessionKey])) ? $_SESSION[$sessionKey] : null;
         if (!is_array($uploadInfo)) {
             return false;

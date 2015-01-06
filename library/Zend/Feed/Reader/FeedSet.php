@@ -14,7 +14,7 @@ use DOMNodeList;
 use Zend\Feed\Uri;
 
 /**
-*/
+ */
 class FeedSet extends ArrayObject
 {
     public $rss = null;
@@ -35,8 +35,8 @@ class FeedSet extends ArrayObject
      * Note that feeds are not loaded at this point, but will be lazy
      * loaded automatically when each links 'feed' array key is accessed.
      *
-     * @param DOMNodeList $links
-     * @param string $uri
+     * @param  DOMNodeList $links
+     * @param  string      $uri
      * @return void
      */
     public function addLinks(DOMNodeList $links, $uri)
@@ -72,15 +72,16 @@ class FeedSet extends ArrayObject
                 $uri = Uri::factory($uri);
 
                 if ($link[0] !== '/') {
-                    $link = $uri->getPath() . '/' . $link;
+                    $link = $uri->getPath().'/'.$link;
                 }
 
-                $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->canonicalizePath($link);
+                $link = $uri->getScheme().'://'.$uri->getHost().'/'.$this->canonicalizePath($link);
                 if (!Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }
         }
+
         return $link;
     }
 
@@ -101,6 +102,7 @@ class FeedSet extends ArrayObject
                 $absolutes[] = $part;
             }
         }
+
         return implode('/', $absolutes);
     }
 
@@ -108,7 +110,7 @@ class FeedSet extends ArrayObject
      * Supports lazy loading of feeds using Reader::import() but
      * delegates any other operations to the parent class.
      *
-     * @param string $offset
+     * @param  string $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -119,8 +121,10 @@ class FeedSet extends ArrayObject
             }
             $feed = Reader::import($this->offsetGet('href'));
             $this->offsetSet('feed', $feed);
+
             return $feed;
         }
+
         return parent::offsetGet($offset);
     }
 }

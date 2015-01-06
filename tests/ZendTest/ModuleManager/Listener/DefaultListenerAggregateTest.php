@@ -34,7 +34,7 @@ class DefaultListenerAggregateTest extends TestCase
         $this->defaultListeners = new DefaultListenerAggregate(
             new ListenerOptions(array(
                 'module_paths'         => array(
-                    realpath(__DIR__ . '/TestAsset'),
+                    realpath(__DIR__.'/TestAsset'),
                 ),
             ))
         );
@@ -62,7 +62,7 @@ class DefaultListenerAggregateTest extends TestCase
     public function testDefaultListenerAggregateCanAttachItself()
     {
         $moduleManager = new ModuleManager(array('ListenerTestModule'));
-        $moduleManager->getEventManager()->attachAggregate(new DefaultListenerAggregate);
+        $moduleManager->getEventManager()->attachAggregate(new DefaultListenerAggregate());
 
         $events = $moduleManager->getEventManager()->getEvents();
         $expectedEvents = array(
@@ -102,7 +102,7 @@ class DefaultListenerAggregateTest extends TestCase
 
     public function testDefaultListenerAggregateCanDetachItself()
     {
-        $listenerAggregate = new DefaultListenerAggregate;
+        $listenerAggregate = new DefaultListenerAggregate();
         $moduleManager     = new ModuleManager(array('ListenerTestModule'));
 
         $this->assertEquals(1, count($moduleManager->getEventManager()->getEvents()));

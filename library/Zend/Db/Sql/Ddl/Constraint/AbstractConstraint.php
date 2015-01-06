@@ -38,7 +38,7 @@ abstract class AbstractConstraint implements ConstraintInterface
 
     /**
      * @param null|string|array $columns
-     * @param null|string $name
+     * @param null|string       $name
      */
     public function __construct($columns = null, $name = null)
     {
@@ -56,6 +56,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
@@ -85,6 +86,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     public function addColumn($column)
     {
         $this->columns[] = $column;
+
         return $this;
     }
 

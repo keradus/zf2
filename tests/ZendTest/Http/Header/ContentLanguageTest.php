@@ -44,5 +44,5 @@ class ContentLanguageTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Content-Language: xxx', $contentLanguageHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

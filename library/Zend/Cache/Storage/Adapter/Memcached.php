@@ -101,7 +101,7 @@ class Memcached extends AbstractAdapter implements
             // init namespace prefix
             $namespace = $options->getNamespace();
             if ($namespace !== '') {
-                $this->namespacePrefix = $namespace . $options->getNamespaceSeparator();
+                $this->namespacePrefix = $namespace.$options->getNamespaceSeparator();
             } else {
                 $this->namespacePrefix = '';
             }
@@ -142,6 +142,7 @@ class Memcached extends AbstractAdapter implements
         if (!$this->options) {
             $this->setOptions(new MemcachedOptions());
         }
+
         return $this->options;
     }
 
@@ -158,6 +159,7 @@ class Memcached extends AbstractAdapter implements
         if (!$memc->flush()) {
             throw $this->getExceptionByResultCode($memc->getResultCode());
         }
+
         return true;
     }
 
@@ -177,6 +179,7 @@ class Memcached extends AbstractAdapter implements
         }
 
         $mem = array_pop($stats);
+
         return $mem['limit_maxbytes'];
     }
 
@@ -196,6 +199,7 @@ class Memcached extends AbstractAdapter implements
         }
 
         $mem = array_pop($stats);
+
         return $mem['limit_maxbytes'] - $mem['bytes'];
     }
 
@@ -204,16 +208,16 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to get an item.
      *
-     * @param  string  $normalizedKey
-     * @param  bool $success
-     * @param  mixed   $casToken
-     * @return mixed Data on success, null on failure
+     * @param  string                       $normalizedKey
+     * @param  bool                         $success
+     * @param  mixed                        $casToken
+     * @return mixed                        Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
         $memc        = $this->getMemcachedResource();
-        $internalKey = $this->namespacePrefix . $normalizedKey;
+        $internalKey = $this->namespacePrefix.$normalizedKey;
 
         if (func_num_args() > 2) {
             $result = $memc->get($internalKey, null, $casToken);
@@ -239,8 +243,8 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to get multiple items.
      *
-     * @param  array $normalizedKeys
-     * @return array Associative array of keys and values
+     * @param  array                        $normalizedKeys
+     * @return array                        Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys)
@@ -248,7 +252,7 @@ class Memcached extends AbstractAdapter implements
         $memc = $this->getMemcachedResource();
 
         foreach ($normalizedKeys as & $normalizedKey) {
-            $normalizedKey = $this->namespacePrefix . $normalizedKey;
+            $normalizedKey = $this->namespacePrefix.$normalizedKey;
         }
 
         $result = $memc->getMulti($normalizedKeys);
@@ -272,14 +276,14 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to test if an item exists.
      *
-     * @param  string $normalizedKey
+     * @param  string                       $normalizedKey
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey)
     {
         $memc  = $this->getMemcachedResource();
-        $value = $memc->get($this->namespacePrefix . $normalizedKey);
+        $value = $memc->get($this->namespacePrefix.$normalizedKey);
         if ($value === false) {
             $rsCode = $memc->getResultCode();
             if ($rsCode == MemcachedResource::RES_SUCCESS) {
@@ -297,8 +301,8 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to test multiple items.
      *
-     * @param  array $normalizedKeys
-     * @return array Array of found keys
+     * @param  array                        $normalizedKeys
+     * @return array                        Array of found keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys)
@@ -306,7 +310,7 @@ class Memcached extends AbstractAdapter implements
         $memc = $this->getMemcachedResource();
 
         foreach ($normalizedKeys as & $normalizedKey) {
-            $normalizedKey = $this->namespacePrefix . $normalizedKey;
+            $normalizedKey = $this->namespacePrefix.$normalizedKey;
         }
 
         $result = $memc->getMulti($normalizedKeys);
@@ -331,8 +335,8 @@ class Memcached extends AbstractAdapter implements
     /**
      * Get metadata of multiple items
      *
-     * @param  array $normalizedKeys
-     * @return array Associative array of keys and metadata
+     * @param  array                        $normalizedKeys
+     * @return array                        Associative array of keys and metadata
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadatas(array & $normalizedKeys)
@@ -340,7 +344,7 @@ class Memcached extends AbstractAdapter implements
         $memc = $this->getMemcachedResource();
 
         foreach ($normalizedKeys as & $normalizedKey) {
-            $normalizedKey = $this->namespacePrefix . $normalizedKey;
+            $normalizedKey = $this->namespacePrefix.$normalizedKey;
         }
 
         $result = $memc->getMulti($normalizedKeys);
@@ -370,8 +374,8 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to store an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -379,7 +383,7 @@ class Memcached extends AbstractAdapter implements
     {
         $memc       = $this->getMemcachedResource();
         $expiration = $this->expirationTime();
-        if (!$memc->set($this->namespacePrefix . $normalizedKey, $value, $expiration)) {
+        if (!$memc->set($this->namespacePrefix.$normalizedKey, $value, $expiration)) {
             throw $this->getExceptionByResultCode($memc->getResultCode());
         }
 
@@ -389,8 +393,8 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to store multiple items.
      *
-     * @param  array $normalizedKeyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                        $normalizedKeyValuePairs
+     * @return array                        Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
@@ -400,7 +404,7 @@ class Memcached extends AbstractAdapter implements
 
         $namespacedKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => & $value) {
-            $namespacedKeyValuePairs[$this->namespacePrefix . $normalizedKey] = & $value;
+            $namespacedKeyValuePairs[$this->namespacePrefix.$normalizedKey] = & $value;
         }
 
         if (!$memc->setMulti($namespacedKeyValuePairs, $expiration)) {
@@ -413,8 +417,8 @@ class Memcached extends AbstractAdapter implements
     /**
      * Add an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -422,7 +426,7 @@ class Memcached extends AbstractAdapter implements
     {
         $memc       = $this->getMemcachedResource();
         $expiration = $this->expirationTime();
-        if (!$memc->add($this->namespacePrefix . $normalizedKey, $value, $expiration)) {
+        if (!$memc->add($this->namespacePrefix.$normalizedKey, $value, $expiration)) {
             if ($memc->getResultCode() == MemcachedResource::RES_NOTSTORED) {
                 return false;
             }
@@ -435,8 +439,8 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to replace an existing item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -444,7 +448,7 @@ class Memcached extends AbstractAdapter implements
     {
         $memc       = $this->getMemcachedResource();
         $expiration = $this->expirationTime();
-        if (!$memc->replace($this->namespacePrefix . $normalizedKey, $value, $expiration)) {
+        if (!$memc->replace($this->namespacePrefix.$normalizedKey, $value, $expiration)) {
             $rsCode = $memc->getResultCode();
             if ($rsCode == MemcachedResource::RES_NOTSTORED) {
                 return false;
@@ -458,9 +462,9 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to set an item only if token matches
      *
-     * @param  mixed  $token
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  mixed                        $token
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      * @see    getItem()
@@ -470,7 +474,7 @@ class Memcached extends AbstractAdapter implements
     {
         $memc       = $this->getMemcachedResource();
         $expiration = $this->expirationTime();
-        $result     = $memc->cas($token, $this->namespacePrefix . $normalizedKey, $value, $expiration);
+        $result     = $memc->cas($token, $this->namespacePrefix.$normalizedKey, $value, $expiration);
 
         if ($result === false) {
             $rsCode = $memc->getResultCode();
@@ -485,14 +489,14 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to remove an item.
      *
-     * @param  string $normalizedKey
+     * @param  string                       $normalizedKey
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey)
     {
         $memc   = $this->getMemcachedResource();
-        $result = $memc->delete($this->namespacePrefix . $normalizedKey);
+        $result = $memc->delete($this->namespacePrefix.$normalizedKey);
 
         if ($result === false) {
             $rsCode = $memc->getResultCode();
@@ -509,8 +513,8 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to remove multiple items.
      *
-     * @param  array $normalizedKeys
-     * @return array Array of not removed keys
+     * @param  array                        $normalizedKeys
+     * @return array                        Array of not removed keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItems(array & $normalizedKeys)
@@ -523,7 +527,7 @@ class Memcached extends AbstractAdapter implements
         $memc = $this->getMemcachedResource();
 
         foreach ($normalizedKeys as & $normalizedKey) {
-            $normalizedKey = $this->namespacePrefix . $normalizedKey;
+            $normalizedKey = $this->namespacePrefix.$normalizedKey;
         }
 
         $rsCodes = $memc->deleteMulti($normalizedKeys);
@@ -552,15 +556,15 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to increment an item.
      *
-     * @param  string $normalizedKey
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                       $normalizedKey
+     * @param  int                          $value
+     * @return int|bool                     The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
     {
         $memc        = $this->getMemcachedResource();
-        $internalKey = $this->namespacePrefix . $normalizedKey;
+        $internalKey = $this->namespacePrefix.$normalizedKey;
         $value       = (int) $value;
         $newValue    = $memc->increment($internalKey, $value);
 
@@ -585,15 +589,15 @@ class Memcached extends AbstractAdapter implements
     /**
      * Internal method to decrement an item.
      *
-     * @param  string $normalizedKey
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                       $normalizedKey
+     * @param  int                          $value
+     * @return int|bool                     The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
     {
         $memc        = $this->getMemcachedResource();
-        $internalKey = $this->namespacePrefix . $normalizedKey;
+        $internalKey = $this->namespacePrefix.$normalizedKey;
         $value       = (int) $value;
         $newValue    = $memc->decrement($internalKey, $value);
 
@@ -678,13 +682,14 @@ class Memcached extends AbstractAdapter implements
         if ($ttl > 2592000) {
             return time() + $ttl;
         }
+
         return $ttl;
     }
 
     /**
      * Generate exception based of memcached result code
      *
-     * @param int $code
+     * @param  int                                $code
      * @return Exception\RuntimeException
      * @throws Exception\InvalidArgumentException On success code
      */

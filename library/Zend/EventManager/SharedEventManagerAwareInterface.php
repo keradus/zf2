@@ -17,7 +17,7 @@ interface SharedEventManagerAwareInterface
     /**
      * Inject a SharedEventManager instance
      *
-     * @param  SharedEventManagerInterface $sharedEventManager
+     * @param  SharedEventManagerInterface      $sharedEventManager
      * @return SharedEventManagerAwareInterface
      */
     public function setSharedManager(SharedEventManagerInterface $sharedEventManager);

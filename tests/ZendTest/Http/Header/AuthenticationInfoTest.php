@@ -44,5 +44,5 @@ class AuthenticationInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Authentication-Info: xxx', $authenticationInfoHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

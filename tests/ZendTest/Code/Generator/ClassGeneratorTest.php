@@ -66,7 +66,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $classGenerator = new ClassGenerator();
         $classGenerator->addProperties(array(
             'propOne',
-            new PropertyGenerator('propTwo')
+            new PropertyGenerator('propTwo'),
         ));
 
         $properties = $classGenerator->getProperties();
@@ -110,7 +110,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $classGenerator = new ClassGenerator();
         $classGenerator->addMethods(array(
             'methodOne',
-            new MethodGenerator('methodTwo')
+            new MethodGenerator('methodTwo'),
         ));
 
         $methods = $classGenerator->getMethods();
@@ -196,10 +196,10 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
             'extendedClass' => 'ExtendedClassName',
             'implementedInterfaces' => array('Iterator', 'Traversable'),
             'properties' => array('foo',
-                array('name' => 'bar')
+                array('name' => 'bar'),
             ),
             'methods' => array(
-                array('name' => 'baz')
+                array('name' => 'baz'),
             ),
         ));
 
@@ -237,8 +237,8 @@ EOS;
         $code = $classGenerator->generate();
 
         $expectedClassDef = 'class ClassWithInterface'
-            . ' implements ZendTest\Code\Generator\TestAsset\OneInterface'
-            . ', ZendTest\Code\Generator\TestAsset\TwoInterface';
+            .' implements ZendTest\Code\Generator\TestAsset\OneInterface'
+            .', ZendTest\Code\Generator\TestAsset\TwoInterface';
         $this->assertContains($expectedClassDef, $code);
     }
 
@@ -255,8 +255,8 @@ EOS;
         $code = $classGenerator->generate();
 
         $expectedClassDef = 'class NewClassWithInterface'
-            . ' extends ZendTest\Code\Generator\TestAsset\ClassWithInterface'
-            . ' implements ZendTest\Code\Generator\TestAsset\ThreeInterface';
+            .' extends ZendTest\Code\Generator\TestAsset\ClassWithInterface'
+            .' implements ZendTest\Code\Generator\TestAsset\ThreeInterface';
         $this->assertContains($expectedClassDef, $code);
     }
 
@@ -265,7 +265,7 @@ EOS;
      */
     public function testNonNamespaceClassReturnsAllMethods()
     {
-        require_once __DIR__ . '/../TestAsset/NonNamespaceClass.php';
+        require_once __DIR__.'/../TestAsset/NonNamespaceClass.php';
 
         $reflClass = new ClassReflection('ZendTest_Code_NsTest_BarClass');
         $classGenerator = ClassGenerator::fromReflection($reflClass);
@@ -522,7 +522,7 @@ CODE;
 
         $classGenerator->addConstants(array(
             new PropertyGenerator('x', 'value1', PropertyGenerator::FLAG_CONSTANT),
-            new PropertyGenerator('y', 'value2', PropertyGenerator::FLAG_CONSTANT)
+            new PropertyGenerator('y', 'value2', PropertyGenerator::FLAG_CONSTANT),
         ));
 
         $this->assertCount(2, $classGenerator->getConstants());
@@ -538,8 +538,8 @@ CODE;
         $classGenerator = new ClassGenerator();
 
         $classGenerator->addConstants(array(
-            array( 'name'=> 'x', 'value' => 'value1'),
-            array('name' => 'y', 'value' => 'value2')
+            array( 'name' => 'x', 'value' => 'value1'),
+            array('name' => 'y', 'value' => 'value2'),
         ));
 
         $this->assertCount(2, $classGenerator->getConstants());
@@ -603,7 +603,7 @@ CODE;
     {
         $constants = array(
             new PropertyGenerator('x', 'value1', PropertyGenerator::FLAG_CONSTANT),
-            new PropertyGenerator('y', 'value2', PropertyGenerator::FLAG_CONSTANT)
+            new PropertyGenerator('y', 'value2', PropertyGenerator::FLAG_CONSTANT),
         );
         $classGenerator = new ClassGenerator();
 

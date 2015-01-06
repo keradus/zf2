@@ -18,7 +18,6 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
-
 class Int extends AbstractValidator
 {
     const INVALID = 'intInvalid';
@@ -42,7 +41,7 @@ class Int extends AbstractValidator
     /**
      * Constructor for the integer validator
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                     $options
      * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = array())
@@ -73,6 +72,7 @@ class Int extends AbstractValidator
         if (null === $this->locale) {
             $this->locale = Locale::getDefault();
         }
+
         return $this->locale;
     }
 
@@ -85,13 +85,14 @@ class Int extends AbstractValidator
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
         return $this;
     }
 
     /**
      * Returns true if and only if $value is a valid integer
      *
-     * @param  string|int $value
+     * @param  string|int                         $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */
@@ -99,6 +100,7 @@ class Int extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -122,10 +124,12 @@ class Int extends AbstractValidator
             $parsedInt = $format->parse($value, NumberFormatter::TYPE_INT64);
             if (intl_is_failure($format->getErrorCode())) {
                 $this->error(self::NOT_INT);
+
                 return false;
             }
         } catch (IntlException $intlException) {
             $this->error(self::NOT_INT);
+
             return false;
         }
 
@@ -137,6 +141,7 @@ class Int extends AbstractValidator
 
         if (strval($parsedInt) !== $valueFiltered) {
             $this->error(self::NOT_INT);
+
             return false;
         }
 

@@ -23,7 +23,7 @@ class ControllerManagerTest extends TestCase
     {
         $this->events       = new EventManager();
         $this->consoleAdapter = new ConsoleAdapter();
-        $this->sharedEvents = new SharedEventManager;
+        $this->sharedEvents = new SharedEventManager();
         $this->events->setSharedManager($this->sharedEvents);
 
         $this->plugins  = new ControllerPluginManager();

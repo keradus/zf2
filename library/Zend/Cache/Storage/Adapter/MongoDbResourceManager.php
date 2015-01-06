@@ -39,7 +39,7 @@ class MongoDbResourceManager
     /**
      * Set a resource
      *
-     * @param string $id
+     * @param string                            $id
      * @param array|Traversable|MongoCollection $resource
      *
      * @return self

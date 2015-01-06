@@ -49,8 +49,8 @@ class MongoDB implements SaveHandlerInterface
     /**
      * Constructor
      *
-     * @param Mongo|MongoClient $mongo
-     * @param MongoDBOptions $options
+     * @param  Mongo|MongoClient        $mongo
+     * @param  MongoDBOptions           $options
      * @throws InvalidArgumentException
      */
     public function __construct($mongo, MongoDBOptions $options)
@@ -77,8 +77,8 @@ class MongoDB implements SaveHandlerInterface
     /**
      * Open session
      *
-     * @param string $savePath
-     * @param string $name
+     * @param  string $savePath
+     * @param  string $name
      * @return bool
      */
     public function open($savePath, $name)
@@ -103,7 +103,7 @@ class MongoDB implements SaveHandlerInterface
     /**
      * Read session data
      *
-     * @param string $id
+     * @param  string $id
      * @return string
      */
     public function read($id)
@@ -128,8 +128,8 @@ class MongoDB implements SaveHandlerInterface
     /**
      * Write session data
      *
-     * @param string $id
-     * @param string $data
+     * @param  string $id
+     * @param  string $data
      * @return bool
      */
     public function write($id, $data)
@@ -164,7 +164,7 @@ class MongoDB implements SaveHandlerInterface
     /**
      * Destroy session
      *
-     * @param string $id
+     * @param  string $id
      * @return bool
      */
     public function destroy($id)
@@ -187,7 +187,7 @@ class MongoDB implements SaveHandlerInterface
      * efficient.
      *
      * @see http://docs.mongodb.org/manual/tutorial/expire-data/
-     * @param int $maxlifetime
+     * @param  int  $maxlifetime
      * @return bool
      */
     public function gc($maxlifetime)

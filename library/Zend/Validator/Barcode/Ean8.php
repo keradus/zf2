@@ -24,7 +24,7 @@ class Ean8 extends AbstractAdapter
     /**
      * Overrides parent checkLength
      *
-     * @param string $value Value
+     * @param  string $value Value
      * @return bool
      */
     public function hasValidLength($value)

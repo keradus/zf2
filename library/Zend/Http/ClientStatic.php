@@ -22,7 +22,7 @@ class ClientStatic
     /**
      * Get the static HTTP client
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable $options
      * @return Client
      */
     protected static function getStaticClient($options = null)
@@ -30,16 +30,17 @@ class ClientStatic
         if (!isset(static::$client) || $options !== null) {
             static::$client = new Client(null, $options);
         }
+
         return static::$client;
     }
 
     /**
      * HTTP GET METHOD (static)
      *
-     * @param  string $url
-     * @param  array $query
-     * @param  array $headers
-     * @param  mixed $body
+     * @param  string            $url
+     * @param  array             $query
+     * @param  array             $headers
+     * @param  mixed             $body
      * @param  array|Traversable $clientOptions
      * @return Response|bool
      */
@@ -49,7 +50,7 @@ class ClientStatic
             return false;
         }
 
-        $request= new Request();
+        $request = new Request();
         $request->setUri($url);
         $request->setMethod(Request::METHOD_GET);
 
@@ -71,11 +72,11 @@ class ClientStatic
     /**
      * HTTP POST METHOD (static)
      *
-     * @param  string $url
-     * @param  array $params
-     * @param  array $headers
-     * @param  mixed $body
-     * @param  array|Traversable $clientOptions
+     * @param  string                             $url
+     * @param  array                              $params
+     * @param  array                              $headers
+     * @param  mixed                              $body
+     * @param  array|Traversable                  $clientOptions
      * @throws Exception\InvalidArgumentException
      * @return Response|bool
      */
@@ -85,7 +86,7 @@ class ClientStatic
             return false;
         }
 
-        $request= new Request();
+        $request = new Request();
         $request->setUri($url);
         $request->setMethod(Request::METHOD_POST);
 

@@ -31,12 +31,12 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Zend\\Navigation\\Page\\Uri', AbstractPage::factory(array(
             'label' => 'URI Page',
-            'factory_uri' => '#'
+            'factory_uri' => '#',
         )));
 
         $this->assertInstanceOf('Zend\\Navigation\\Page\\Mvc', AbstractPage::factory(array(
             'label' => 'URI Page',
-            'factory_mvc' => '#'
+            'factory_mvc' => '#',
         )));
     }
 
@@ -45,16 +45,16 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
         $pages = array(
             AbstractPage::factory(array(
                 'label' => 'MVC Page',
-                'action' => 'index'
+                'action' => 'index',
             )),
             AbstractPage::factory(array(
                 'label' => 'MVC Page',
-                'controller' => 'index'
+                'controller' => 'index',
             )),
             AbstractPage::factory(array(
                 'label' => 'MVC Page',
-                'route' => 'home'
-            ))
+                'route' => 'home',
+            )),
         );
 
         $this->assertContainsOnly('Zend\Navigation\Page\Mvc', $pages);
@@ -64,7 +64,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'URI Page',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertInstanceOf('Zend\\Navigation\\Page\\Uri', $page);
@@ -76,7 +76,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
             'label' => 'MVC Page',
             'action' => 'index',
             'controller' => 'index',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertInstanceOf('Zend\\Navigation\\Page\\Mvc', $page);
@@ -88,7 +88,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
             'type' => 'mvc',
             'label' => 'MVC Page',
             'action' => 'index',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
 
         $this->assertInstanceOf('Zend\\Navigation\\Page\\Mvc', $mvcPage);
@@ -99,7 +99,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
         $uriPage = AbstractPage::factory(array(
             'type' => 'uri',
             'label' => 'URI Page',
-            'uri' => 'http://www.example.com/'
+            'uri' => 'http://www.example.com/',
         ));
 
         $this->assertInstanceOf('Zend\\Navigation\\Page\\Uri', $uriPage);
@@ -109,7 +109,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'type' => 'ZendTest\Navigation\TestAsset\Page',
-            'label' => 'My Custom Page'
+            'label' => 'My Custom Page',
         ));
 
         return $this->assertInstanceOf('ZendTest\\Navigation\\TestAsset\\Page', $page);
@@ -120,7 +120,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
         try {
             $page = AbstractPage::factory(array(
                 'type' => 'ZendTest\Navigation\TestAsset\InvalidPage',
-                'label' => 'My Invalid Page'
+                'label' => 'My Invalid Page',
             ));
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             return;
@@ -133,7 +133,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $pageConfig = array(
             'type' => 'My_NonExistent_Page',
-            'label' => 'My non-existent Page'
+            'label' => 'My non-existent Page',
         );
 
         try {
@@ -150,7 +150,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $page = AbstractPage::factory(array(
-                'label' => 'My Invalid Page'
+                'label' => 'My Invalid Page',
             ));
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             return;

@@ -39,7 +39,6 @@ class RsaTest extends \PHPUnit_Framework_TestCase
     /** @var string */
     protected $userOpenSslConf;
 
-
     /** @var Rsa */
     protected $rsa;
 
@@ -110,11 +109,11 @@ l9Nwj3KnPKFdqzJchujP2TLNwSYoQnxgyoMxdho=
 
 CERT;
 
-        $this->testPemFile = realpath(__DIR__ . '/../_files/test.pem');
+        $this->testPemFile = realpath(__DIR__.'/../_files/test.pem');
 
-        $this->testCertificateFile = realpath(__DIR__ . '/../_files/test.cert');
+        $this->testCertificateFile = realpath(__DIR__.'/../_files/test.cert');
 
-        $this->userOpenSslConf = realpath(__DIR__ . '/../_files/openssl.cnf');
+        $this->userOpenSslConf = realpath(__DIR__.'/../_files/openssl.cnf');
 
         $rsaOptions = new RsaOptions(array(
             'private_key'   => new Rsa\PrivateKey($this->testPemString),
@@ -123,7 +122,7 @@ CERT;
 
         $rsaOptions = new RsaOptions(array(
             'private_key'   => new Rsa\PrivateKey($this->testPemString),
-            'binary_output' => false
+            'binary_output' => false,
         ));
         $this->rsaBase64Out = new Rsa($rsaOptions);
     }
@@ -133,7 +132,7 @@ CERT;
         $rsa = Rsa::factory(array(
             'hash_algorithm' => 'sha1',
             'binary_output'  => false,
-            'private_key'    => $this->testPemString
+            'private_key'    => $this->testPemString,
         ));
         $this->assertInstanceOf('Zend\Crypt\PublicKey\Rsa', $rsa);
         $this->assertInstanceOf('Zend\Crypt\PublicKey\RsaOptions', $rsa->getOptions());
@@ -377,7 +376,7 @@ CERT;
     public function testKeyGenerationCreatesPassphrasedPrivateKey()
     {
         $rsaOptions  = new RsaOptions(array(
-            'pass_phrase' => '0987654321'
+            'pass_phrase' => '0987654321',
         ));
         $rsaOptions->generateKeys(array(
             'config'           => $this->userOpenSslConf,
@@ -387,7 +386,7 @@ CERT;
         try {
             $rsa = Rsa::factory(array(
                 'pass_phrase' => '1234567890',
-                'private_key' => $rsaOptions->getPrivateKey()->toString()
+                'private_key' => $rsaOptions->getPrivateKey()->toString(),
             ));
             $this->fail('Expected passphrase mismatch exception not thrown');
         } catch (Exception\RuntimeException $e) {
@@ -397,7 +396,7 @@ CERT;
     public function testRsaLoadsPassphrasedKeys()
     {
         $rsaOptions  = new RsaOptions(array(
-            'pass_phrase' => '0987654321'
+            'pass_phrase' => '0987654321',
         ));
         $rsaOptions->generateKeys(array(
             'config'           => $this->userOpenSslConf,

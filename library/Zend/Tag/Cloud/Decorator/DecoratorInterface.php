@@ -19,14 +19,14 @@ interface DecoratorInterface
      *
      * Allow passing options to the constructor.
      *
-     * @param  mixed $options
+     * @param mixed $options
      */
     public function __construct($options = null);
 
     /**
      * Render a list of tags
      *
-     * @param  mixed $tags
+     * @param  mixed  $tags
      * @return string
      */
     public function render($tags);

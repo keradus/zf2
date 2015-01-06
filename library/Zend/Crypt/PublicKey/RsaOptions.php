@@ -61,6 +61,7 @@ class RsaOptions extends AbstractOptions
     {
         $this->privateKey = $key;
         $this->publicKey  = $this->privateKey->getPublicKey();
+
         return $this;
     }
 
@@ -83,6 +84,7 @@ class RsaOptions extends AbstractOptions
     public function setPublicKey(Rsa\PublicKey $key)
     {
         $this->publicKey = $key;
+
         return $this;
     }
 
@@ -99,12 +101,13 @@ class RsaOptions extends AbstractOptions
     /**
      * Set pass phrase
      *
-     * @param string $phrase
+     * @param  string     $phrase
      * @return RsaOptions
      */
     public function setPassPhrase($phrase)
     {
         $this->passPhrase = (string) $phrase;
+
         return $this;
     }
 
@@ -121,7 +124,7 @@ class RsaOptions extends AbstractOptions
     /**
      * Set hash algorithm
      *
-     * @param  string $hash
+     * @param  string                                 $hash
      * @return RsaOptions
      * @throws Rsa\Exception\RuntimeException
      * @throws Rsa\Exception\InvalidArgumentException
@@ -129,14 +132,15 @@ class RsaOptions extends AbstractOptions
     public function setHashAlgorithm($hash)
     {
         $hashUpper = strtoupper($hash);
-        if (!defined('OPENSSL_ALGO_' . $hashUpper)) {
+        if (!defined('OPENSSL_ALGO_'.$hashUpper)) {
             throw new Exception\InvalidArgumentException(
                 "Hash algorithm '{$hash}' is not supported"
             );
         }
 
         $this->hashAlgorithm = strtolower($hash);
-        $this->opensslSignatureAlgorithm = constant('OPENSSL_ALGO_' . $hashUpper);
+        $this->opensslSignatureAlgorithm = constant('OPENSSL_ALGO_'.$hashUpper);
+
         return $this;
     }
 
@@ -153,20 +157,22 @@ class RsaOptions extends AbstractOptions
     public function getOpensslSignatureAlgorithm()
     {
         if (!isset($this->opensslSignatureAlgorithm)) {
-            $this->opensslSignatureAlgorithm = constant('OPENSSL_ALGO_' . strtoupper($this->hashAlgorithm));
+            $this->opensslSignatureAlgorithm = constant('OPENSSL_ALGO_'.strtoupper($this->hashAlgorithm));
         }
+
         return $this->opensslSignatureAlgorithm;
     }
 
     /**
      * Enable/disable the binary output
      *
-     * @param  bool $value
+     * @param  bool       $value
      * @return RsaOptions
      */
     public function setBinaryOutput($value)
     {
         $this->binaryOutput = (bool) $value;
+
         return $this;
     }
 
@@ -183,7 +189,7 @@ class RsaOptions extends AbstractOptions
     /**
      * Generate new private/public key pair
      *
-     * @param  array $opensslConfig
+     * @param  array                          $opensslConfig
      * @return RsaOptions
      * @throws Rsa\Exception\RuntimeException
      */
@@ -193,7 +199,7 @@ class RsaOptions extends AbstractOptions
             array(
                 'private_key_type' => OPENSSL_KEYTYPE_RSA,
                 'private_key_bits' => Rsa\PrivateKey::DEFAULT_KEY_SIZE,
-                'digest_alg'       => $this->getHashAlgorithm()
+                'digest_alg'       => $this->getHashAlgorithm(),
             ),
             $opensslConfig
         );
@@ -202,7 +208,7 @@ class RsaOptions extends AbstractOptions
         $resource = openssl_pkey_new($opensslConfig);
         if (false === $resource) {
             throw new Exception\RuntimeException(
-                'Can not generate keys; openssl ' . openssl_error_string()
+                'Can not generate keys; openssl '.openssl_error_string()
             );
         }
 
@@ -211,7 +217,7 @@ class RsaOptions extends AbstractOptions
         $result     = openssl_pkey_export($resource, $private, $passPhrase, $opensslConfig);
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Can not export key; openssl ' . openssl_error_string()
+                'Can not export key; openssl '.openssl_error_string()
             );
         }
 

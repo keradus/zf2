@@ -67,11 +67,11 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
             $this->names[Ldap\Ldap::ACCTNAME_FORM_USERNAME] = TESTS_ZEND_LDAP_ALT_USERNAME;
             if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
                 $this->names[Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL] =
-                    TESTS_ZEND_LDAP_ALT_USERNAME . '@' . TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
+                    TESTS_ZEND_LDAP_ALT_USERNAME.'@'.TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
             }
             if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
                 $this->names[Ldap\Ldap::ACCTNAME_FORM_BACKSLASH] =
-                    TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT . '\\' . TESTS_ZEND_LDAP_ALT_USERNAME;
+                    TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT.'\\'.TESTS_ZEND_LDAP_ALT_USERNAME;
             }
         }
     }

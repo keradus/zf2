@@ -25,7 +25,8 @@ class Pkcs7 implements PaddingInterface
     public function pad($string, $blockSize = 32)
     {
         $pad = $blockSize - (strlen($string) % $blockSize);
-        return $string . str_repeat(chr($pad), $pad);
+
+        return $string.str_repeat(chr($pad), $pad);
     }
 
     /**
@@ -43,6 +44,7 @@ class Pkcs7 implements PaddingInterface
         if (substr($string, $len) == str_repeat($end, $last)) {
             return substr($string, 0, $len);
         }
+
         return false;
     }
 }

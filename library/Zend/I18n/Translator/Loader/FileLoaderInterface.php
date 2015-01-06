@@ -17,8 +17,8 @@ interface FileLoaderInterface
     /**
      * Load translations from a file.
      *
-     * @param  string $locale
-     * @param  string $filename
+     * @param  string                                $locale
+     * @param  string                                $filename
      * @return \Zend\I18n\Translator\TextDomain|null
      */
     public function load($locale, $filename);

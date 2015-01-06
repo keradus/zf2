@@ -24,7 +24,7 @@ class ExceptionHandler implements FormatterInterface
     /**
      * This method formats the event for the PHP Exception
      *
-     * @param array $event
+     * @param  array  $event
      * @return string
      */
     public function format($event)
@@ -33,21 +33,21 @@ class ExceptionHandler implements FormatterInterface
             $event['timestamp'] = $event['timestamp']->format($this->getDateTimeFormat());
         }
 
-        $output = $event['timestamp'] . ' ' . $event['priorityName'] . ' ('
-                . $event['priority'] . ') ' . $event['message'] .' in '
-                . $event['extra']['file'] . ' on line ' . $event['extra']['line'];
+        $output = $event['timestamp'].' '.$event['priorityName'].' ('
+                .$event['priority'].') '.$event['message'].' in '
+                .$event['extra']['file'].' on line '.$event['extra']['line'];
 
         if (!empty($event['extra']['trace'])) {
             $outputTrace = '';
             foreach ($event['extra']['trace'] as $trace) {
                 $outputTrace .= "File  : {$trace['file']}\n"
-                              . "Line  : {$trace['line']}\n"
-                              . "Func  : {$trace['function']}\n"
-                              . "Class : {$trace['class']}\n"
-                              . "Type  : " . $this->getType($trace['type']) . "\n"
-                              . "Args  : " . print_r($trace['args'], true) . "\n";
+                              ."Line  : {$trace['line']}\n"
+                              ."Func  : {$trace['function']}\n"
+                              ."Class : {$trace['class']}\n"
+                              ."Type  : ".$this->getType($trace['type'])."\n"
+                              ."Args  : ".print_r($trace['args'], true)."\n";
             }
-            $output .= "\n[Trace]\n" . $outputTrace;
+            $output .= "\n[Trace]\n".$outputTrace;
         }
 
         return $output;
@@ -67,13 +67,14 @@ class ExceptionHandler implements FormatterInterface
     public function setDateTimeFormat($dateTimeFormat)
     {
         $this->dateTimeFormat = (string) $dateTimeFormat;
+
         return $this;
     }
 
     /**
      * Get the type of a function
      *
-     * @param string $type
+     * @param  string $type
      * @return string
      */
     protected function getType($type)

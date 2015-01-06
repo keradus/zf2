@@ -107,17 +107,17 @@ class CreditCard extends AbstractValidator
                                         '6222', '6223', '6224', '6225', '6226', '6227', '6228',
                                         '62290', '62291', '622920', '622921', '622922', '622923',
                                         '622924', '622925', '644', '645', '646', '647', '648',
-                                        '649', '65'),
+                                        '649', '65', ),
         self::JCB              => array('1800', '2131', '3528', '3529', '353', '354', '355', '356', '357', '358'),
         self::LASER            => array('6304', '6706', '6771', '6709'),
         self::MAESTRO          => array('5018', '5020', '5038', '6304', '6759', '6761', '6762', '6763',
-                                        '6764', '6765', '6766'),
+                                        '6764', '6765', '6766', ),
         self::MASTERCARD       => array('51', '52', '53', '54', '55'),
         self::SOLO             => array('6334', '6767'),
         self::UNIONPAY         => array('622126', '622127', '622128', '622129', '62213', '62214',
                                         '62215', '62216', '62217', '62218', '62219', '6222', '6223',
                                         '6224', '6225', '6226', '6227', '6228', '62290', '62291',
-                                        '622920', '622921', '622922', '622923', '622924', '622925'),
+                                        '622920', '622921', '622922', '622923', '622924', '622925', ),
         self::VISA             => array('4'),
     );
 
@@ -179,11 +179,12 @@ class CreditCard extends AbstractValidator
      * Sets CCIs which are accepted by validation
      *
      * @param  string|array $type Type to allow for validation
-     * @return CreditCard Provides a fluid interface
+     * @return CreditCard   Provides a fluid interface
      */
     public function setType($type)
     {
         $this->options['type'] = array();
+
         return $this->addType($type);
     }
 
@@ -191,7 +192,7 @@ class CreditCard extends AbstractValidator
      * Adds a CCI to be accepted by validation
      *
      * @param  string|array $type Type to allow for validation
-     * @return CreditCard Provides a fluid interface
+     * @return CreditCard   Provides a fluid interface
      */
     public function addType($type)
     {
@@ -200,7 +201,7 @@ class CreditCard extends AbstractValidator
         }
 
         foreach ($type as $typ) {
-            if (defined('self::' . strtoupper($typ)) && !in_array($typ, $this->options['type'])) {
+            if (defined('self::'.strtoupper($typ)) && !in_array($typ, $this->options['type'])) {
                 $this->options['type'][] = $typ;
             }
 
@@ -225,7 +226,7 @@ class CreditCard extends AbstractValidator
     /**
      * Sets a new callback for service validation
      *
-     * @param  callable $service
+     * @param  callable                           $service
      * @return CreditCard
      * @throws Exception\InvalidArgumentException on invalid service callback
      */
@@ -236,6 +237,7 @@ class CreditCard extends AbstractValidator
         }
 
         $this->options['service'] = $service;
+
         return $this;
     }
 
@@ -251,11 +253,13 @@ class CreditCard extends AbstractValidator
 
         if (!is_string($value)) {
             $this->error(self::INVALID, $value);
+
             return false;
         }
 
         if (!ctype_digit($value)) {
             $this->error(self::CONTENT, $value);
+
             return false;
         }
 
@@ -277,11 +281,13 @@ class CreditCard extends AbstractValidator
 
         if ($foundp == false) {
             $this->error(self::PREFIX, $value);
+
             return false;
         }
 
         if ($foundl == false) {
             $this->error(self::LENGTH, $value);
+
             return false;
         }
 
@@ -296,6 +302,7 @@ class CreditCard extends AbstractValidator
 
         if ((10 - $sum % 10) % 10 != $value[$length - 1]) {
             $this->error(self::CHECKSUM, $value);
+
             return false;
         }
 
@@ -306,10 +313,12 @@ class CreditCard extends AbstractValidator
                 $callback->setOptions($this->getType());
                 if (!$callback->isValid($value)) {
                     $this->error(self::SERVICE, $value);
+
                     return false;
                 }
             } catch (\Exception $e) {
                 $this->error(self::SERVICEFAILURE, $value);
+
                 return false;
             }
         }

@@ -7,7 +7,6 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 use Zend\Console;
 use Zend\Loader\StandardAutoloader;
 
@@ -27,24 +26,23 @@ use Zend\Loader\StandardAutoloader;
  * --append|-a                  Append to map file if it exists
  * --overwrite|-w               Whether or not to overwrite existing map file
  */
-
-$zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
+$zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__.'/../library';
 if (is_dir($zfLibraryPath)) {
     // Try to load StandardAutoloader from library
-    if (false === include($zfLibraryPath . '/Zend/Loader/StandardAutoloader.php')) {
-        echo 'Unable to locate autoloader via library; aborting' . PHP_EOL;
+    if (false === include ($zfLibraryPath.'/Zend/Loader/StandardAutoloader.php')) {
+        echo 'Unable to locate autoloader via library; aborting'.PHP_EOL;
         exit(2);
     }
 } else {
     // Try to load StandardAutoloader from include_path
-    if (false === include('Zend/Loader/StandardAutoloader.php')) {
-        echo 'Unable to locate autoloader via include_path; aborting' . PHP_EOL;
+    if (false === include ('Zend/Loader/StandardAutoloader.php')) {
+        echo 'Unable to locate autoloader via include_path; aborting'.PHP_EOL;
         exit(2);
     }
 }
 
 $libraryPath = getcwd();
-$viewPath    = getcwd() . '/view';
+$viewPath    = getcwd().'/view';
 
 // Setup autoloading
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
@@ -76,20 +74,20 @@ if ($opts->getOption('h')) {
 $fileExtensions = '*';
 if (isset($opts->e) && $opts->e != '*') {
     if (!preg_match('/^(\*?[[:alnum:]]\*?+\|?)+$/', $opts->e)) {
-        echo 'Invalid extensions list specified. Expecting wildcard or alternation: *, *html, phtml|tpl' . PHP_EOL
-            . PHP_EOL;
+        echo 'Invalid extensions list specified. Expecting wildcard or alternation: *, *html, phtml|tpl'.PHP_EOL
+            .PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);
     }
-    $fileExtensions = '(' . $opts->e . ')';
+    $fileExtensions = '('.$opts->e.')';
 }
 $fileExtensions = str_replace('*', '.*', $fileExtensions);
 
 $relativePathForMap = '';
 if (isset($opts->l)) {
     if (!is_dir($opts->l)) {
-        echo 'Invalid library directory provided' . PHP_EOL
-            . PHP_EOL;
+        echo 'Invalid library directory provided'.PHP_EOL
+            .PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);
     }
@@ -99,8 +97,8 @@ $libraryPath = str_replace(DIRECTORY_SEPARATOR, '/', realpath($libraryPath));
 
 if (isset($opts->v)) {
     if (!is_dir($opts->v)) {
-        echo 'Invalid view template directory provided' . PHP_EOL
-            . PHP_EOL;
+        echo 'Invalid view template directory provided'.PHP_EOL
+            .PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);
     }
@@ -109,7 +107,7 @@ if (isset($opts->v)) {
 
 if (!is_dir($viewPath)) {
     printf('Invalid view path provided (%s)', $viewPath);
-    echo PHP_EOL . PHP_EOL;
+    echo PHP_EOL.PHP_EOL;
     echo $opts->getUsageMessage();
     exit(2);
 }
@@ -118,27 +116,27 @@ $viewPath = str_replace(DIRECTORY_SEPARATOR, '/', realpath($viewPath));
 
 $usingStdout = false;
 $appending   = $opts->getOption('a');
-$output      = $libraryPath . '/template_map.php';
+$output      = $libraryPath.'/template_map.php';
 if (isset($opts->o)) {
     $output = $opts->o;
     if ('-' == $output) {
         $output = STDOUT;
         $usingStdout = true;
     } elseif (is_dir($output)) {
-        echo 'Invalid output file provided' . PHP_EOL
-            . PHP_EOL;
+        echo 'Invalid output file provided'.PHP_EOL
+            .PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);
     } elseif (!is_writeable(dirname($output))) {
-        echo "Cannot write to '$output'; aborting." . PHP_EOL
-            . PHP_EOL
-            . $opts->getUsageMessage();
+        echo "Cannot write to '$output'; aborting.".PHP_EOL
+            .PHP_EOL
+            .$opts->getUsageMessage();
         exit(2);
     } elseif (file_exists($output) && !$opts->getOption('w') && !$appending) {
-        echo "Template map file already exists at '$output'," . PHP_EOL
-            . "but 'overwrite' or 'appending' flag was not specified; aborting." . PHP_EOL
-            . PHP_EOL
-            . $opts->getUsageMessage();
+        echo "Template map file already exists at '$output',".PHP_EOL
+            ."but 'overwrite' or 'appending' flag was not specified; aborting.".PHP_EOL
+            .PHP_EOL
+            .$opts->getUsageMessage();
         exit(2);
     } else {
         // We need to add the $libraryPath into the relative path that is created in the template map file.
@@ -146,7 +144,7 @@ if (isset($opts->o)) {
 
         // Simple case: $libraryPathCompare is in $mapPathCompare
         if (strpos($libraryPath, $mapPath) === 0) {
-            $relativePathForMap = substr($libraryPath, strlen($mapPath) + 1) . '/';
+            $relativePathForMap = substr($libraryPath, strlen($mapPath) + 1).'/';
         } else {
             $libraryPathParts  = explode('/', $libraryPath);
             $mapPathParts = explode('/', $mapPath);
@@ -166,7 +164,7 @@ if (isset($opts->o)) {
             // Add library subdirs
             $count = count($libraryPathParts);
             for (; $i < $count; $i++) {
-                $relativePathForMap .= $libraryPathParts[$i] . '/';
+                $relativePathForMap .= $libraryPathParts[$i].'/';
             }
         }
     }
@@ -174,9 +172,9 @@ if (isset($opts->o)) {
 
 if (!$usingStdout) {
     if ($appending) {
-        echo "Appending to template file map '$output' for library in '$libraryPath'..." . PHP_EOL;
+        echo "Appending to template file map '$output' for library in '$libraryPath'...".PHP_EOL;
     } else {
-        echo "Creating template file map for library in '$libraryPath'..." . PHP_EOL;
+        echo "Creating template file map for library in '$libraryPath'...".PHP_EOL;
     }
 }
 
@@ -185,18 +183,18 @@ $l = new RecursiveIteratorIterator($dirOrIterator);
 
 // Iterate over each element in the path, and create a map of
 // template name => filename, where the filename is relative to the view path
-$map = new stdClass;
+$map = new stdClass();
 foreach ($l as $file) {
     /* @var $file SplFileInfo */
-    if (!$file->isFile() || !preg_match('/^' . $fileExtensions . '$/', $file->getExtension())) {
+    if (!$file->isFile() || !preg_match('/^'.$fileExtensions.'$/', $file->getExtension())) {
         continue;
     }
-    $filename  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $file->getFilename());
+    $filename  = str_replace($libraryPath.'/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()).'/'.$file->getFilename());
 
     // Add in relative path to library
-    $filename = $relativePathForMap . $filename;
-    $baseName = $file->getBasename('.' . pathinfo($file->getFilename(), PATHINFO_EXTENSION));
-    $mapName  = str_replace(str_replace(DIRECTORY_SEPARATOR, '/', realpath($viewPath)) . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $baseName);
+    $filename = $relativePathForMap.$filename;
+    $baseName = $file->getBasename('.'.pathinfo($file->getFilename(), PATHINFO_EXTENSION));
+    $mapName  = str_replace(str_replace(DIRECTORY_SEPARATOR, '/', realpath($viewPath)).'/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()).'/'.$baseName);
     $map->{$mapName} = $filename;
 }
 
@@ -209,13 +207,13 @@ if ($appending && file_exists($output) && is_array(include $output)) {
     // append our new templates
     $content = file($output, FILE_IGNORE_NEW_LINES);
     array_pop($content);
-    $content = implode(PHP_EOL, $content) . PHP_EOL;
+    $content = implode(PHP_EOL, $content).PHP_EOL;
 } else {
     // Write mode or the file does not exists: create a new file
     // Stupid syntax highlighters make separating < from PHP declaration necessary
-    $content = '<' . "?php" . PHP_EOL
-             . '// Generated by ZF2\'s ./bin/templatemap_generator.php'  . PHP_EOL
-             . 'return array(' . PHP_EOL;
+    $content = '<'."?php".PHP_EOL
+             .'// Generated by ZF2\'s ./bin/templatemap_generator.php'.PHP_EOL
+             .'return array('.PHP_EOL;
 }
 
 // Process the template map as a string before inserting it to the output file
@@ -243,18 +241,18 @@ foreach ($matches as $match) {
 }
 
 $mapExport = preg_replace_callback('(\n\s+([^=]+)=>)', function ($matches) use ($maxWidth) {
-    return PHP_EOL . '    ' . $matches[1] . str_repeat(' ', $maxWidth - strlen($matches[1])) . '=>';
+    return PHP_EOL.'    '.$matches[1].str_repeat(' ', $maxWidth - strlen($matches[1])).'=>';
 }, $mapExport);
 
 // Trim the content
 $mapExport = trim($mapExport, "\n");
 
 // Append the map to the file, close the array and write a new line
-$content .= $mapExport . ';' . PHP_EOL;
+$content .= $mapExport.';'.PHP_EOL;
 
 // Write the contents to disk
 file_put_contents($output, $content);
 
 if (!$usingStdout) {
-    echo "Wrote templatemap file to '" . realpath($output) . "'" . PHP_EOL;
+    echo "Wrote templatemap file to '".realpath($output)."'".PHP_EOL;
 }

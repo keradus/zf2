@@ -35,10 +35,10 @@ class Registry
      * will have the least priority, and the last parent added will have the
      * highest priority.
      *
-     * @param  RoleInterface                           $role
+     * @param  RoleInterface                          $role
      * @param  RoleInterface|string|array|Traversable $parents
      * @throws Exception\InvalidArgumentException
-     * @return Registry Provides a fluent interface
+     * @return Registry                               Provides a fluent interface
      */
     public function add(RoleInterface $role, $parents = null)
     {
@@ -90,7 +90,7 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  RoleInterface|string $role
+     * @param  RoleInterface|string               $role
      * @throws Exception\InvalidArgumentException
      * @return RoleInterface
      */
@@ -157,9 +157,9 @@ class Registry
      * through the entire inheritance DAG to determine whether $role
      * inherits from $inherit through its ancestor Roles.
      *
-     * @param  RoleInterface|string  $role
-     * @param  RoleInterface|string  $inherit
-     * @param  bool                    $onlyParents
+     * @param  RoleInterface|string               $role
+     * @param  RoleInterface|string               $inherit
+     * @param  bool                               $onlyParents
      * @throws Exception\InvalidArgumentException
      * @return bool
      */
@@ -192,9 +192,9 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  RoleInterface|string $role
+     * @param  RoleInterface|string               $role
      * @throws Exception\InvalidArgumentException
-     * @return Registry Provides a fluent interface
+     * @return Registry                           Provides a fluent interface
      */
     public function remove($role)
     {

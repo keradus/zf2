@@ -35,12 +35,12 @@ class PrototypeClassFactory
     protected $genericPrototype = null;
 
     /**
-     * @param PrototypeInterface[] $prototypes
+     * @param PrototypeInterface[]      $prototypes
      * @param PrototypeGenericInterface $genericPrototype
      */
     public function __construct($prototypes = array(), PrototypeGenericInterface $genericPrototype = null)
     {
-        foreach ((array)$prototypes as $prototype) {
+        foreach ((array) $prototypes as $prototype) {
             $this->addPrototype($prototype);
         }
 
@@ -50,7 +50,7 @@ class PrototypeClassFactory
     }
 
     /**
-     * @param PrototypeInterface $prototype
+     * @param  PrototypeInterface                 $prototype
      * @throws Exception\InvalidArgumentException
      */
     public function addPrototype(PrototypeInterface $prototype)
@@ -65,7 +65,7 @@ class PrototypeClassFactory
     }
 
     /**
-     * @param PrototypeGenericInterface $prototype
+     * @param  PrototypeGenericInterface          $prototype
      * @throws Exception\InvalidArgumentException
      */
     public function setGenericPrototype(PrototypeGenericInterface $prototype)
@@ -78,7 +78,7 @@ class PrototypeClassFactory
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return string
      */
     protected function normalizeName($name)
@@ -87,17 +87,18 @@ class PrototypeClassFactory
     }
 
     /**
-     * @param string $name
+     * @param  string $name
      * @return bool
      */
     public function hasPrototype($name)
     {
         $name = $this->normalizeName($name);
+
         return isset($this->prototypes[$name]);
     }
 
     /**
-     * @param  string $prototypeName
+     * @param  string                     $prototypeName
      * @return PrototypeInterface
      * @throws Exception\RuntimeException
      */

@@ -16,9 +16,9 @@ error_reporting(E_ALL | E_STRICT);
 if (class_exists('PHPUnit_Runner_Version', true)) {
     $phpUnitVersion = PHPUnit_Runner_Version::id();
     if ('@package_version@' !== $phpUnitVersion && version_compare($phpUnitVersion, '4.0.0', '<')) {
-        echo 'This version of PHPUnit (' . PHPUnit_Runner_Version::id() . ') is not supported'
-           . ' in Zend Framework 2.x unit tests. Supported is version 4.0.0 or higher.'
-           . ' See also: https://github.com/zendframework/zf2/blob/master/CONTRIBUTING.md#running-tests' . PHP_EOL;
+        echo 'This version of PHPUnit ('.PHPUnit_Runner_Version::id().') is not supported'
+           .' in Zend Framework 2.x unit tests. Supported is version 4.0.0 or higher.'
+           .' See also: https://github.com/zendframework/zf2/blob/master/CONTRIBUTING.md#running-tests'.PHP_EOL;
         exit(1);
     }
     unset($phpUnitVersion);
@@ -48,26 +48,26 @@ set_include_path(implode(PATH_SEPARATOR, $path));
 /**
  * Setup autoloading
  */
-include __DIR__ . '/_autoload.php';
+include __DIR__.'/_autoload.php';
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
  */
-if (is_readable($zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
-    require_once $zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php';
+if (is_readable($zfCoreTests.DIRECTORY_SEPARATOR.'TestConfiguration.php')) {
+    require_once $zfCoreTests.DIRECTORY_SEPARATOR.'TestConfiguration.php';
 } else {
-    require_once $zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
+    require_once $zfCoreTests.DIRECTORY_SEPARATOR.'TestConfiguration.php.dist';
 }
 
 if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true) {
     $codeCoverageFilter = new PHP_CodeCoverage_Filter();
 
     $lastArg = end($_SERVER['argv']);
-    if (is_dir($zfCoreTests . '/' . $lastArg)) {
-        $codeCoverageFilter->addDirectoryToWhitelist($zfCoreLibrary . '/' . $lastArg);
-    } elseif (is_file($zfCoreTests . '/' . $lastArg)) {
-        $codeCoverageFilter->addDirectoryToWhitelist(dirname($zfCoreLibrary . '/' . $lastArg));
+    if (is_dir($zfCoreTests.'/'.$lastArg)) {
+        $codeCoverageFilter->addDirectoryToWhitelist($zfCoreLibrary.'/'.$lastArg);
+    } elseif (is_file($zfCoreTests.'/'.$lastArg)) {
+        $codeCoverageFilter->addDirectoryToWhitelist(dirname($zfCoreLibrary.'/'.$lastArg));
     } else {
         $codeCoverageFilter->addDirectoryToWhitelist($zfCoreLibrary);
     }
@@ -81,7 +81,6 @@ if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true) {
 
     unset($codeCoverageFilter);
 }
-
 
 /**
  * Start output buffering, if enabled

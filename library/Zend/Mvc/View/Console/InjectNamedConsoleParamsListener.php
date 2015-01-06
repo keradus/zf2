@@ -27,9 +27,9 @@ class InjectNamedConsoleParamsListener extends AbstractListenerAggregate
     /**
      * Inspect the result, and cast it to a ViewModel if a string is detected
      *
-     * @param MvcEvent $e
+     * @param  MvcEvent $e
      * @return void
-    */
+     */
     public function injectNamedParams(MvcEvent $e)
     {
         if (!$routeMatch = $e->getRouteMatch()) {

@@ -37,7 +37,7 @@ class PropertyTag implements TagInterface, PhpDocTypedTagInterface
     /**
      * Initializer
      *
-     * @param  string $tagDocblockLine
+     * @param string $tagDocblockLine
      */
     public function initialize($tagDocblockLine)
     {
@@ -95,6 +95,6 @@ class PropertyTag implements TagInterface, PhpDocTypedTagInterface
 
     public function __toString()
     {
-        return 'DocBlock Tag [ * @' . $this->getName() . ' ]' . PHP_EOL;
+        return 'DocBlock Tag [ * @'.$this->getName().' ]'.PHP_EOL;
     }
 }

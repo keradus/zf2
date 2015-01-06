@@ -104,6 +104,7 @@ class Dba extends AbstractAdapter implements
         if (!$this->options) {
             $this->setOptions(new DbaOptions());
         }
+
         return $this->options;
     }
 
@@ -209,7 +210,7 @@ class Dba extends AbstractAdapter implements
     /**
      * Remove items by given namespace
      *
-     * @param string $namespace
+     * @param  string $namespace
      * @return bool
      */
     public function clearByNamespace($namespace)
@@ -219,7 +220,7 @@ class Dba extends AbstractAdapter implements
             throw new Exception\InvalidArgumentException('No namespace given');
         }
 
-        $prefix  = $namespace . $this->getOptions()->getNamespaceSeparator();
+        $prefix  = $namespace.$this->getOptions()->getNamespaceSeparator();
         $prefixl = strlen($prefix);
         $result  = true;
 
@@ -246,7 +247,7 @@ class Dba extends AbstractAdapter implements
     /**
      * Remove items matching given prefix
      *
-     * @param string $prefix
+     * @param  string $prefix
      * @return bool
      */
     public function clearByPrefix($prefix)
@@ -258,7 +259,7 @@ class Dba extends AbstractAdapter implements
 
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator() . $prefix;
+        $prefix    = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator().$prefix;
         $prefixL   = strlen($prefix);
         $result    = true;
 
@@ -291,7 +292,7 @@ class Dba extends AbstractAdapter implements
     {
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $prefix    = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
 
         return new DbaIterator($this, $this->handle, $prefix);
     }
@@ -310,6 +311,7 @@ class Dba extends AbstractAdapter implements
         if (!dba_optimize($this->handle)) {
             throw new Exception\RuntimeException('dba_optimize failed');
         }
+
         return true;
     }
 
@@ -318,35 +320,37 @@ class Dba extends AbstractAdapter implements
     /**
      * Internal method to get an item.
      *
-     * @param  string  $normalizedKey
-     * @param  bool $success
-     * @param  mixed   $casToken
-     * @return mixed Data on success, null on failure
+     * @param  string                       $normalizedKey
+     * @param  bool                         $success
+     * @param  mixed                        $casToken
+     * @return mixed                        Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $prefix    = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
 
         $this->_open();
-        $value = dba_fetch($prefix . $normalizedKey, $this->handle);
+        $value = dba_fetch($prefix.$normalizedKey, $this->handle);
 
         if ($value === false) {
             $success = false;
+
             return;
         }
 
         $success = true;
         $casToken = $value;
+
         return $value;
     }
 
     /**
      * Internal method to test if an item exists.
      *
-     * @param  string $normalizedKey
+     * @param  string                       $normalizedKey
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -354,10 +358,11 @@ class Dba extends AbstractAdapter implements
     {
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $prefix    = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
 
         $this->_open();
-        return dba_exists($prefix . $normalizedKey, $this->handle);
+
+        return dba_exists($prefix.$normalizedKey, $this->handle);
     }
 
     /* writing */
@@ -365,8 +370,8 @@ class Dba extends AbstractAdapter implements
     /**
      * Internal method to store an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -374,8 +379,8 @@ class Dba extends AbstractAdapter implements
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
 
         $this->_open();
         if (!dba_replace($internalKey, $value, $this->handle)) {
@@ -388,8 +393,8 @@ class Dba extends AbstractAdapter implements
     /**
      * Add an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -397,8 +402,8 @@ class Dba extends AbstractAdapter implements
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
 
         $this->_open();
 
@@ -422,7 +427,7 @@ class Dba extends AbstractAdapter implements
     /**
      * Internal method to remove an item.
      *
-     * @param  string $normalizedKey
+     * @param  string                       $normalizedKey
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -430,8 +435,8 @@ class Dba extends AbstractAdapter implements
     {
         $options     = $this->getOptions();
         $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
-        $internalKey = $prefix . $normalizedKey;
+        $prefix      = ($namespace === '') ? '' : $namespace.$options->getNamespaceSeparator();
+        $internalKey = $prefix.$normalizedKey;
 
         $this->_open();
 

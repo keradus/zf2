@@ -39,6 +39,7 @@ class Ini implements ReaderInterface
     public function setNestSeparator($separator)
     {
         $this->nestSeparator = $separator;
+
         return $this;
     }
 
@@ -56,7 +57,7 @@ class Ini implements ReaderInterface
      * fromFile(): defined by Reader interface.
      *
      * @see    ReaderInterface::fromFile()
-     * @param  string $filename
+     * @param  string                     $filename
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -89,7 +90,7 @@ class Ini implements ReaderInterface
     /**
      * fromString(): defined by Reader interface.
      *
-     * @param  string $string
+     * @param  string                     $string
      * @return array|bool
      * @throws Exception\RuntimeException
      */
@@ -144,8 +145,8 @@ class Ini implements ReaderInterface
     /**
      * Process a nested section
      *
-     * @param array $sections
-     * @param mixed $value
+     * @param  array $sections
+     * @param  mixed $value
      * @return array
      */
     private function buildNestedSection($sections, $value)
@@ -182,9 +183,9 @@ class Ini implements ReaderInterface
     /**
      * Process a key.
      *
-     * @param  string $key
-     * @param  string $value
-     * @param  array  $config
+     * @param  string                     $key
+     * @param  string                     $value
+     * @param  array                      $config
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -215,7 +216,7 @@ class Ini implements ReaderInterface
                 }
 
                 $reader  = clone $this;
-                $include = $reader->fromFile($this->directory . '/' . $value);
+                $include = $reader->fromFile($this->directory.'/'.$value);
                 $config  = array_replace_recursive($config, $include);
             } else {
                 $config[$key] = $value;

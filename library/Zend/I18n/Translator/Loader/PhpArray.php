@@ -22,8 +22,8 @@ class PhpArray extends AbstractFileLoader
      * load(): defined by FileLoaderInterface.
      *
      * @see    FileLoaderInterface::load()
-     * @param  string $locale
-     * @param  string $filename
+     * @param  string                             $locale
+     * @param  string                             $filename
      * @return TextDomain|null
      * @throws Exception\InvalidArgumentException
      */

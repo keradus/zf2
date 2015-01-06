@@ -32,9 +32,9 @@ class Expression extends AbstractExpression
     protected $types = array();
 
     /**
-     * @param string $expression
+     * @param string       $expression
      * @param string|array $parameters
-     * @param array $types @deprecated will be dropped in version 3.0.0
+     * @param array        $types      @deprecated will be dropped in version 3.0.0
      */
     public function __construct($expression = '', $parameters = null, array $types = array())
     {
@@ -44,7 +44,7 @@ class Expression extends AbstractExpression
 
         if ($types) { // should be deprecated and removed version 3.0.0
             if (is_array($parameters)) {
-                foreach ($parameters as $i=>$parameter) {
+                foreach ($parameters as $i => $parameter) {
                     $parameters[$i] = array(
                         $parameter => isset($types[$i]) ? $types[$i] : self::TYPE_VALUE,
                     );
@@ -72,6 +72,7 @@ class Expression extends AbstractExpression
             throw new Exception\InvalidArgumentException('Supplied expression must be a string.');
         }
         $this->expression = $expression;
+
         return $this;
     }
 
@@ -94,6 +95,7 @@ class Expression extends AbstractExpression
             throw new Exception\InvalidArgumentException('Expression parameters must be a scalar or array.');
         }
         $this->parameters = $parameters;
+
         return $this;
     }
 
@@ -107,12 +109,13 @@ class Expression extends AbstractExpression
 
     /**
      * @deprecated
-     * @param array $types
+     * @param  array      $types
      * @return Expression
      */
     public function setTypes(array $types)
     {
         $this->types = $types;
+
         return $this;
     }
 
@@ -137,7 +140,7 @@ class Expression extends AbstractExpression
 
         if ($parametersCount == 0) {
             return array(
-                str_ireplace(self::PLACEHOLDER, '', $expression)
+                str_ireplace(self::PLACEHOLDER, '', $expression),
             );
         }
 
@@ -149,10 +152,11 @@ class Expression extends AbstractExpression
         foreach ($parameters as $parameter) {
             list($values[], $types[]) = $this->normalizeArgument($parameter, self::TYPE_VALUE);
         }
+
         return array(array(
             $expression,
             $values,
-            $types
+            $types,
         ));
     }
 }

@@ -16,13 +16,13 @@ use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 
 /**
-*/
+ */
 class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
      *
-     * @param  Writer\Deleted $container
+     * @param Writer\Deleted $container
      */
     public function __construct(Writer\Deleted $container)
     {
@@ -54,7 +54,7 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
      * Set tombstone comment
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setComment(DOMDocument $dom, DOMElement $root)
@@ -73,7 +73,7 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
      * Set entry authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setBy(DOMDocument $dom, DOMElement $root)

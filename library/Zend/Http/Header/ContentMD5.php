@@ -24,7 +24,7 @@ class ContentMD5 implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-md5') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-MD5 string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-MD5 string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class ContentMD5 implements HeaderInterface
 
     public function toString()
     {
-        return 'Content-MD5: ' . $this->getFieldValue();
+        return 'Content-MD5: '.$this->getFieldValue();
     }
 }

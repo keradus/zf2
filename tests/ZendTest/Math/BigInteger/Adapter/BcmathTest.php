@@ -20,14 +20,15 @@ class BcmathTest extends AbstractTestCase
     {
         if (!extension_loaded('bcmath')) {
             $this->markTestSkipped('Missing ext/bcmath');
+
             return;
         }
 
         $this->adapter = new Bcmath();
     }
 
-    /**
-     * Bcmath adapter test uses common test methods and data providers
-     * inherited from abstract @see AbstractTestCase
-     */
+/**
+ * Bcmath adapter test uses common test methods and data providers
+ * inherited from abstract @see AbstractTestCase
+ */
 }

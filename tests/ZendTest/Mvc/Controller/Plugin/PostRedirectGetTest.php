@@ -33,27 +33,27 @@ class PostRedirectGetTest extends TestCase
 
     public function setUp()
     {
-        $router = new TreeRouteStack;
+        $router = new TreeRouteStack();
         $router->addRoute('home', LiteralRoute::factory(array(
             'route'    => '/',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
-            )
+            ),
         )));
 
         $router->addRoute('sub', SegmentRoute::factory(array(
             'route' => '/foo/:param',
             'defaults' => array(
-                'param' => 1
-            )
+                'param' => 1,
+            ),
         )));
 
         $router->addRoute('ctl', SegmentRoute::factory(array(
             'route' => '/ctl/:controller',
             'defaults' => array(
                 '__NAMESPACE__' => 'ZendTest\Mvc\Controller\TestAsset',
-                'controller' => 'sample'
-            )
+                'controller' => 'sample',
+            ),
         )));
 
         $this->controller = new SampleController();
@@ -85,7 +85,7 @@ class PostRedirectGetTest extends TestCase
     {
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value'
+            'postval1' => 'value',
         )));
 
         $result         = $this->controller->dispatch($this->request, $this->response);
@@ -101,7 +101,7 @@ class PostRedirectGetTest extends TestCase
     {
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         )));
 
         $result         = $this->controller->dispatch($this->request, $this->response);
@@ -116,7 +116,7 @@ class PostRedirectGetTest extends TestCase
     public function testReturnsPostOnRedirectGet()
     {
         $params = array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         );
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters($params));
@@ -150,11 +150,11 @@ class PostRedirectGetTest extends TestCase
     public function testThrowsExceptionOnRouteWithoutRouter()
     {
         $controller = $this->controller;
-        $controller = $controller->getEvent()->setRouter(new SimpleRouteStack);
+        $controller = $controller->getEvent()->setRouter(new SimpleRouteStack());
 
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value'
+            'postval1' => 'value',
         )));
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -167,7 +167,7 @@ class PostRedirectGetTest extends TestCase
 
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         )));
 
         $result         = $this->controller->dispatch($this->request, $this->response);
@@ -185,7 +185,7 @@ class PostRedirectGetTest extends TestCase
 
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         )));
 
         $this->controller->dispatch($this->request, $this->response);
@@ -203,13 +203,13 @@ class PostRedirectGetTest extends TestCase
         $this->request->setMethod('POST');
         $this->request->setUri($expects);
         $this->request->setPost(new Parameters(array(
-            'postval1' => 'value1'
+            'postval1' => 'value1',
         )));
 
         $routeMatch = $this->event->getRouter()->match($this->request);
         $this->event->setRouteMatch($routeMatch);
 
-        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($this->event);
 
         $this->controller->dispatch($this->request, $this->response);
@@ -233,7 +233,7 @@ class PostRedirectGetTest extends TestCase
         $routeMatch = $this->event->getRouter()->match($this->request);
         $this->event->setRouteMatch($routeMatch);
 
-        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($this->event);
 
         $this->controller->dispatch($this->request, $this->response);
@@ -241,7 +241,7 @@ class PostRedirectGetTest extends TestCase
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
-        $this->assertEquals($expects . '?id=123', $prgResultRoute->getHeaders()->get('Location')->getUri(), 'expects to redirect for the same url');
+        $this->assertEquals($expects.'?id=123', $prgResultRoute->getHeaders()->get('Location')->getUri(), 'expects to redirect for the same url');
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
 }

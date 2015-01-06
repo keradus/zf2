@@ -30,6 +30,6 @@ class AnyType implements ComplexTypeStrategyInterface
      */
     public function addComplexType($type)
     {
-        return Wsdl::XSD_NS . ':anyType';
+        return Wsdl::XSD_NS.':anyType';
     }
 }

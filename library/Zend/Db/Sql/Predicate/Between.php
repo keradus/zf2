@@ -21,9 +21,9 @@ class Between extends AbstractExpression implements PredicateInterface
     /**
      * Constructor
      *
-     * @param  string $identifier
-     * @param  int|float|string $minValue
-     * @param  int|float|string $maxValue
+     * @param string           $identifier
+     * @param int|float|string $minValue
+     * @param int|float|string $maxValue
      */
     public function __construct($identifier = null, $minValue = null, $maxValue = null)
     {
@@ -41,12 +41,13 @@ class Between extends AbstractExpression implements PredicateInterface
     /**
      * Set identifier for comparison
      *
-     * @param  string $identifier
+     * @param  string  $identifier
      * @return Between
      */
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
@@ -69,6 +70,7 @@ class Between extends AbstractExpression implements PredicateInterface
     public function setMinValue($minValue)
     {
         $this->minValue = $minValue;
+
         return $this;
     }
 
@@ -91,6 +93,7 @@ class Between extends AbstractExpression implements PredicateInterface
     public function setMaxValue($maxValue)
     {
         $this->maxValue = $maxValue;
+
         return $this;
     }
 
@@ -107,12 +110,13 @@ class Between extends AbstractExpression implements PredicateInterface
     /**
      * Set specification string to use in forming SQL predicate
      *
-     * @param  string $specification
+     * @param  string  $specification
      * @return Between
      */
     public function setSpecification($specification)
     {
         $this->specification = $specification;
+
         return $this;
     }
 
@@ -136,6 +140,7 @@ class Between extends AbstractExpression implements PredicateInterface
         list($values[], $types[]) = $this->normalizeArgument($this->identifier, self::TYPE_IDENTIFIER);
         list($values[], $types[]) = $this->normalizeArgument($this->minValue,   self::TYPE_VALUE);
         list($values[], $types[]) = $this->normalizeArgument($this->maxValue,   self::TYPE_VALUE);
+
         return array(
             array(
                 $this->getSpecification(),

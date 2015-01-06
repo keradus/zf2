@@ -28,7 +28,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      *
      * Instantiate and optionally populate template map.
      *
-     * @param  array|Traversable $map
+     * @param array|Traversable $map
      */
     public function __construct($map = array())
     {
@@ -50,7 +50,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
      *
      * Maps should be arrays or Traversable objects with name => path pairs
      *
-     * @param  array|Traversable $map
+     * @param  array|Traversable                  $map
      * @throws Exception\InvalidArgumentException
      * @return TemplateMapResolver
      */
@@ -69,14 +69,15 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
         }
 
         $this->map = $map;
+
         return $this;
     }
 
     /**
      * Add an entry to the map
      *
-     * @param  string|array|Traversable $nameOrMap
-     * @param  null|string $path
+     * @param  string|array|Traversable           $nameOrMap
+     * @param  null|string                        $path
      * @throws Exception\InvalidArgumentException
      * @return TemplateMapResolver
      */
@@ -84,6 +85,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
     {
         if (is_array($nameOrMap) || $nameOrMap instanceof Traversable) {
             $this->merge($nameOrMap);
+
             return $this;
         }
 
@@ -99,17 +101,19 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
             if (isset($this->map[$nameOrMap])) {
                 unset($this->map[$nameOrMap]);
             }
+
             return $this;
         }
 
         $this->map[$nameOrMap] = $path;
+
         return $this;
     }
 
     /**
      * Merge internal map with provided map
      *
-     * @param  array|Traversable $map
+     * @param  array|Traversable                  $map
      * @throws Exception\InvalidArgumentException
      * @return TemplateMapResolver
      */
@@ -128,6 +132,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
         }
 
         $this->map = array_replace_recursive($this->map, $map);
+
         return $this;
     }
 
@@ -145,7 +150,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
     /**
      * Retrieve a template path by name
      *
-     * @param  string $name
+     * @param  string                    $name
      * @return false|string
      * @throws Exception\DomainException if no entry exists
      */
@@ -154,6 +159,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
         if (!$this->has($name)) {
             return false;
         }
+
         return $this->map[$name];
     }
 
@@ -170,7 +176,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
     /**
      * Resolve a template/pattern name to a resource the renderer can consume
      *
-     * @param  string $name
+     * @param  string        $name
      * @param  null|Renderer $renderer
      * @return string
      */

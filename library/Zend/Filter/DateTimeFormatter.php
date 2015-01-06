@@ -48,7 +48,7 @@ class DateTimeFormatter extends AbstractFilter
     /**
      * Filter a datetime string by normalizing it to the filters specified format
      *
-     * @param  DateTime|string|integer $value
+     * @param  DateTime|string|integer            $value
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -86,7 +86,7 @@ class DateTimeFormatter extends AbstractFilter
 
         if (is_int($value)) {
             //timestamp
-            $value = new DateTime('@' . $value);
+            $value = new DateTime('@'.$value);
         } elseif (!$value instanceof DateTime) {
             $value = new DateTime($value);
         }

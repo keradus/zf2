@@ -22,11 +22,11 @@ class PostgresqlMetadata extends AbstractSource
 
         $p = $this->adapter->getPlatform();
 
-        $sql = 'SELECT ' . $p->quoteIdentifier('schema_name')
-            . ' FROM ' . $p->quoteIdentifierChain(array('information_schema', 'schemata'))
-            . ' WHERE ' . $p->quoteIdentifier('schema_name')
-            . ' != \'information_schema\''
-            . ' AND ' . $p->quoteIdentifier('schema_name') . " NOT LIKE 'pg_%'";
+        $sql = 'SELECT '.$p->quoteIdentifier('schema_name')
+            .' FROM '.$p->quoteIdentifierChain(array('information_schema', 'schemata'))
+            .' WHERE '.$p->quoteIdentifier('schema_name')
+            .' != \'information_schema\''
+            .' AND '.$p->quoteIdentifier('schema_name')." NOT LIKE 'pg_%'";
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
 
@@ -57,24 +57,24 @@ class PostgresqlMetadata extends AbstractSource
 
         array_walk($isColumns, function (&$c) use ($p) { $c = $p->quoteIdentifierChain($c); });
 
-        $sql = 'SELECT ' . implode(', ', $isColumns)
-            . ' FROM ' . $p->quoteIdentifierChain(array('information_schema', 'tables')) . ' t'
+        $sql = 'SELECT '.implode(', ', $isColumns)
+            .' FROM '.$p->quoteIdentifierChain(array('information_schema', 'tables')).' t'
 
-            . ' LEFT JOIN ' . $p->quoteIdentifierChain(array('information_schema', 'views')) . ' v'
-            . ' ON ' . $p->quoteIdentifierChain(array('t', 'table_schema'))
-            . '  = ' . $p->quoteIdentifierChain(array('v', 'table_schema'))
-            . ' AND ' . $p->quoteIdentifierChain(array('t', 'table_name'))
-            . '  = ' . $p->quoteIdentifierChain(array('v', 'table_name'))
+            .' LEFT JOIN '.$p->quoteIdentifierChain(array('information_schema', 'views')).' v'
+            .' ON '.$p->quoteIdentifierChain(array('t', 'table_schema'))
+            .'  = '.$p->quoteIdentifierChain(array('v', 'table_schema'))
+            .' AND '.$p->quoteIdentifierChain(array('t', 'table_name'))
+            .'  = '.$p->quoteIdentifierChain(array('v', 'table_name'))
 
-            . ' WHERE ' . $p->quoteIdentifierChain(array('t', 'table_type'))
-            . ' IN (\'BASE TABLE\', \'VIEW\')';
+            .' WHERE '.$p->quoteIdentifierChain(array('t', 'table_type'))
+            .' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= ' AND ' . $p->quoteIdentifierChain(array('t', 'table_schema'))
-                . ' = ' . $p->quoteTrustedValue($schema);
+            $sql .= ' AND '.$p->quoteIdentifierChain(array('t', 'table_schema'))
+                .' = '.$p->quoteTrustedValue($schema);
         } else {
-            $sql .= ' AND ' . $p->quoteIdentifierChain(array('t', 'table_schema'))
-                . ' != \'information_schema\'';
+            $sql .= ' AND '.$p->quoteIdentifierChain(array('t', 'table_schema'))
+                .' != \'information_schema\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -117,17 +117,17 @@ class PostgresqlMetadata extends AbstractSource
 
         array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifier($c); });
 
-        $sql = 'SELECT ' . implode(', ', $isColumns)
-            . ' FROM ' . $platform->quoteIdentifier('information_schema')
-            . $platform->getIdentifierSeparator() . $platform->quoteIdentifier('columns')
-            . ' WHERE ' . $platform->quoteIdentifier('table_schema')
-            . ' != \'information\''
-            . ' AND ' . $platform->quoteIdentifier('table_name')
-            . ' = ' . $platform->quoteTrustedValue($table);
+        $sql = 'SELECT '.implode(', ', $isColumns)
+            .' FROM '.$platform->quoteIdentifier('information_schema')
+            .$platform->getIdentifierSeparator().$platform->quoteIdentifier('columns')
+            .' WHERE '.$platform->quoteIdentifier('table_schema')
+            .' != \'information\''
+            .' AND '.$platform->quoteIdentifier('table_name')
+            .' = '.$platform->quoteTrustedValue($table);
 
         if ($schema != '__DEFAULT_SCHEMA__') {
-            $sql .= ' AND ' . $platform->quoteIdentifier('table_schema')
-                . ' = ' . $platform->quoteTrustedValue($schema);
+            $sql .= ' AND '.$platform->quoteIdentifier('table_schema')
+                .' = '.$platform->quoteTrustedValue($schema);
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -178,68 +178,68 @@ class PostgresqlMetadata extends AbstractSource
             $alias = key($c);
             $c = $p->quoteIdentifierChain($c);
             if (is_string($alias)) {
-                $c .= ' ' . $p->quoteIdentifier($alias);
+                $c .= ' '.$p->quoteIdentifier($alias);
             }
         });
 
-        $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM ' . $p->quoteIdentifierChain(array('information_schema', 'tables')) . ' t'
+        $sql = 'SELECT '.implode(', ', $isColumns)
+             .' FROM '.$p->quoteIdentifierChain(array('information_schema', 'tables')).' t'
 
-             . ' INNER JOIN ' . $p->quoteIdentifierChain(array('information_schema', 'table_constraints')) . ' tc'
-             . ' ON ' . $p->quoteIdentifierChain(array('t', 'table_schema'))
-             . '  = ' . $p->quoteIdentifierChain(array('tc', 'table_schema'))
-             . ' AND ' . $p->quoteIdentifierChain(array('t', 'table_name'))
-             . '  = ' . $p->quoteIdentifierChain(array('tc', 'table_name'))
+             .' INNER JOIN '.$p->quoteIdentifierChain(array('information_schema', 'table_constraints')).' tc'
+             .' ON '.$p->quoteIdentifierChain(array('t', 'table_schema'))
+             .'  = '.$p->quoteIdentifierChain(array('tc', 'table_schema'))
+             .' AND '.$p->quoteIdentifierChain(array('t', 'table_name'))
+             .'  = '.$p->quoteIdentifierChain(array('tc', 'table_name'))
 
-             . ' LEFT JOIN ' . $p->quoteIdentifierChain(array('information_schema', 'key_column_usage')) . ' kcu'
-             . ' ON ' . $p->quoteIdentifierChain(array('tc', 'table_schema'))
-             . '  = ' . $p->quoteIdentifierChain(array('kcu', 'table_schema'))
-             . ' AND ' . $p->quoteIdentifierChain(array('tc', 'table_name'))
-             . '  = ' . $p->quoteIdentifierChain(array('kcu', 'table_name'))
-             . ' AND ' . $p->quoteIdentifierChain(array('tc', 'constraint_name'))
-             . '  = ' . $p->quoteIdentifierChain(array('kcu', 'constraint_name'))
+             .' LEFT JOIN '.$p->quoteIdentifierChain(array('information_schema', 'key_column_usage')).' kcu'
+             .' ON '.$p->quoteIdentifierChain(array('tc', 'table_schema'))
+             .'  = '.$p->quoteIdentifierChain(array('kcu', 'table_schema'))
+             .' AND '.$p->quoteIdentifierChain(array('tc', 'table_name'))
+             .'  = '.$p->quoteIdentifierChain(array('kcu', 'table_name'))
+             .' AND '.$p->quoteIdentifierChain(array('tc', 'constraint_name'))
+             .'  = '.$p->quoteIdentifierChain(array('kcu', 'constraint_name'))
 
-             . ' LEFT JOIN ' . $p->quoteIdentifierChain(array('information_schema', 'check_constraints')) . ' cc'
-             . ' ON ' . $p->quoteIdentifierChain(array('tc', 'constraint_schema'))
-             . '  = ' . $p->quoteIdentifierChain(array('cc', 'constraint_schema'))
-             . ' AND ' . $p->quoteIdentifierChain(array('tc', 'constraint_name'))
-             . '  = ' . $p->quoteIdentifierChain(array('cc', 'constraint_name'))
+             .' LEFT JOIN '.$p->quoteIdentifierChain(array('information_schema', 'check_constraints')).' cc'
+             .' ON '.$p->quoteIdentifierChain(array('tc', 'constraint_schema'))
+             .'  = '.$p->quoteIdentifierChain(array('cc', 'constraint_schema'))
+             .' AND '.$p->quoteIdentifierChain(array('tc', 'constraint_name'))
+             .'  = '.$p->quoteIdentifierChain(array('cc', 'constraint_name'))
 
-             . ' LEFT JOIN ' . $p->quoteIdentifierChain(array('information_schema', 'referential_constraints')) . ' rc'
-             . ' ON ' . $p->quoteIdentifierChain(array('tc', 'constraint_schema'))
-             . '  = ' . $p->quoteIdentifierChain(array('rc', 'constraint_schema'))
-             . ' AND ' . $p->quoteIdentifierChain(array('tc', 'constraint_name'))
-             . '  = ' . $p->quoteIdentifierChain(array('rc', 'constraint_name'))
+             .' LEFT JOIN '.$p->quoteIdentifierChain(array('information_schema', 'referential_constraints')).' rc'
+             .' ON '.$p->quoteIdentifierChain(array('tc', 'constraint_schema'))
+             .'  = '.$p->quoteIdentifierChain(array('rc', 'constraint_schema'))
+             .' AND '.$p->quoteIdentifierChain(array('tc', 'constraint_name'))
+             .'  = '.$p->quoteIdentifierChain(array('rc', 'constraint_name'))
 
-             . ' LEFT JOIN ' . $p->quoteIdentifierChain(array('information_schema', 'key_column_usage')) . ' kcu2'
-             . ' ON ' . $p->quoteIdentifierChain(array('rc', 'unique_constraint_schema'))
-             . '  = ' . $p->quoteIdentifierChain(array('kcu2', 'constraint_schema'))
-             . ' AND ' . $p->quoteIdentifierChain(array('rc', 'unique_constraint_name'))
-             . '  = ' . $p->quoteIdentifierChain(array('kcu2', 'constraint_name'))
-             . ' AND ' . $p->quoteIdentifierChain(array('kcu', 'position_in_unique_constraint'))
-             . '  = ' . $p->quoteIdentifierChain(array('kcu2', 'ordinal_position'))
+             .' LEFT JOIN '.$p->quoteIdentifierChain(array('information_schema', 'key_column_usage')).' kcu2'
+             .' ON '.$p->quoteIdentifierChain(array('rc', 'unique_constraint_schema'))
+             .'  = '.$p->quoteIdentifierChain(array('kcu2', 'constraint_schema'))
+             .' AND '.$p->quoteIdentifierChain(array('rc', 'unique_constraint_name'))
+             .'  = '.$p->quoteIdentifierChain(array('kcu2', 'constraint_name'))
+             .' AND '.$p->quoteIdentifierChain(array('kcu', 'position_in_unique_constraint'))
+             .'  = '.$p->quoteIdentifierChain(array('kcu2', 'ordinal_position'))
 
-             . ' WHERE ' . $p->quoteIdentifierChain(array('t', 'table_name'))
-             . ' = ' . $p->quoteTrustedValue($table)
-             . ' AND ' . $p->quoteIdentifierChain(array('t', 'table_type'))
-             . ' IN (\'BASE TABLE\', \'VIEW\')';
+             .' WHERE '.$p->quoteIdentifierChain(array('t', 'table_name'))
+             .' = '.$p->quoteTrustedValue($table)
+             .' AND '.$p->quoteIdentifierChain(array('t', 'table_type'))
+             .' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= ' AND ' . $p->quoteIdentifierChain(array('t', 'table_schema'))
-            . ' = ' . $p->quoteTrustedValue($schema);
+            $sql .= ' AND '.$p->quoteIdentifierChain(array('t', 'table_schema'))
+            .' = '.$p->quoteTrustedValue($schema);
         } else {
-            $sql .= ' AND ' . $p->quoteIdentifierChain(array('t', 'table_schema'))
-            . ' != \'information_schema\'';
+            $sql .= ' AND '.$p->quoteIdentifierChain(array('t', 'table_schema'))
+            .' != \'information_schema\'';
         }
 
-        $sql .= ' ORDER BY CASE ' . $p->quoteIdentifierChain(array('tc', 'constraint_type'))
-              . " WHEN 'PRIMARY KEY' THEN 1"
-              . " WHEN 'UNIQUE' THEN 2"
-              . " WHEN 'FOREIGN KEY' THEN 3"
-              . " WHEN 'CHECK' THEN 4"
-              . " ELSE 5 END"
-              . ', ' . $p->quoteIdentifierChain(array('tc', 'constraint_name'))
-              . ', ' . $p->quoteIdentifierChain(array('kcu', 'ordinal_position'));
+        $sql .= ' ORDER BY CASE '.$p->quoteIdentifierChain(array('tc', 'constraint_type'))
+              ." WHEN 'PRIMARY KEY' THEN 1"
+              ." WHEN 'UNIQUE' THEN 2"
+              ." WHEN 'FOREIGN KEY' THEN 3"
+              ." WHEN 'CHECK' THEN 4"
+              ." ELSE 5 END"
+              .', '.$p->quoteIdentifierChain(array('tc', 'constraint_name'))
+              .', '.$p->quoteIdentifierChain(array('kcu', 'ordinal_position'));
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
 
@@ -308,23 +308,23 @@ class PostgresqlMetadata extends AbstractSource
                 $alias = key($c);
                 $c = $p->quoteIdentifierChain($c);
                 if (is_string($alias)) {
-                    $c .= ' ' . $p->quoteIdentifier($alias);
+                    $c .= ' '.$p->quoteIdentifier($alias);
                 }
             } else {
                 $c = $p->quoteIdentifier($c);
             }
         });
 
-        $sql = 'SELECT ' . implode(', ', $isColumns)
-            . ' FROM ' . $p->quoteIdentifierChain(array('information_schema', 'triggers'))
-            . ' WHERE ';
+        $sql = 'SELECT '.implode(', ', $isColumns)
+            .' FROM '.$p->quoteIdentifierChain(array('information_schema', 'triggers'))
+            .' WHERE ';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= $p->quoteIdentifier('trigger_schema')
-                . ' = ' . $p->quoteTrustedValue($schema);
+                .' = '.$p->quoteTrustedValue($schema);
         } else {
             $sql .= $p->quoteIdentifier('trigger_schema')
-                . ' != \'information_schema\'';
+                .' != \'information_schema\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);

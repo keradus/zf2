@@ -42,7 +42,6 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
     public function testCanParseCommaSeparatedValues()
     {
         $header = AcceptLanguage::fromString('Accept-Language: da;q=0.8, en-gb');
@@ -56,7 +55,7 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'en-gb',
             'da',
-            '*'
+            '*',
         );
 
         $test = array();

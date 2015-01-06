@@ -37,7 +37,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts = new Getopt(array(
                 'apple|a' => 'Apple option',
                 'banana|b' => 'Banana option',
-                'pear|p=s' => 'Pear option'
+                'pear|p=s' => 'Pear option',
             ),
             array('-a', '-p', 'p_arg'));
         $this->assertTrue($opts->apple);
@@ -50,7 +50,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts = new Getopt(array(
                 'apple|a' => 'Apple option',
                 'banana|b' => 'Banana option',
-                'pear|p=s' => 'Pear option'
+                'pear|p=s' => 'Pear option',
             ),
             array('--pear=pear.phpunit.de'));
         $this->assertEquals($opts->pear, 'pear.phpunit.de');
@@ -91,21 +91,21 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     public function testGetoptExceptionForMissingFlag()
     {
         $this->setExpectedException('\Zend\Console\Exception\InvalidArgumentException', 'Blank flag not allowed in rule');
-        $opts = new Getopt(array('|a'=>'Apple option'));
+        $opts = new Getopt(array('|a' => 'Apple option'));
     }
 
     public function testGetoptExceptionForKeyWithDuplicateFlagsViaOrOperator()
     {
         $this->setExpectedException('\Zend\Console\Exception\InvalidArgumentException', 'defined more than once');
         $opts = new Getopt(
-            array('apple|apple'=>'apple-option'));
+            array('apple|apple' => 'apple-option'));
     }
 
     public function testGetoptExceptionForKeysThatDuplicateFlags()
     {
         $this->setExpectedException('\Zend\Console\Exception\InvalidArgumentException', 'defined more than once');
         $opts = new Getopt(
-            array('a'=>'Apple option', 'apple|a'=>'Apple option'));
+            array('a' => 'Apple option', 'apple|a' => 'Apple option'));
     }
 
     public function testGetoptAddRules()
@@ -113,7 +113,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts = new Getopt(
             array(
                 'apple|a' => 'Apple option',
-                'banana|b' => 'Banana option'
+                'banana|b' => 'Banana option',
             ),
             array('--pear', 'pear_param'));
         try {
@@ -131,7 +131,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts = new Getopt(
             array(
                 'apple|a=s' => 'Apple with required parameter',
-                'banana|b' => 'Banana'
+                'banana|b' => 'Banana',
             ),
             array('--apple'));
         $this->setExpectedException('\Zend\Console\Exception\RuntimeException', 'requires a parameter');
@@ -143,7 +143,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts = new Getopt(
             array(
                 'apple|a-s' => 'Apple with optional parameter',
-                'banana|b' => 'Banana'
+                'banana|b' => 'Banana',
             ),
             array('--apple', '--banana'));
         $this->assertTrue($opts->apple);
@@ -163,7 +163,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts = new Getopt(
             array(
                 'apple|a' => 'Apple-option',
-                'Banana|B' => 'Banana-option'
+                'Banana|B' => 'Banana-option',
             ),
             array('--Apple', '--bAnaNa'),
             array(Getopt::CONFIG_IGNORECASE => true));
@@ -280,7 +280,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             $opts = new Getopt(array(
                 'apple|a-s' => 'apple',
                 'banana1|banana2|banana3|banana4' => 'banana',
-                'pear=s' => 'pear'),
+                'pear=s' => 'pear', ),
                 array('-x'));
             $opts->parse();
             $this->fail('Expected to catch \Zend\Console\Exception\RuntimeException');
@@ -334,7 +334,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts->setHelp(array(
             'a' => 'apple',
             'b' => 'banana',
-            'p' => 'pear'));
+            'p' => 'pear', ));
         $message = preg_replace('/Usage: .* \[ options \]/',
             'Usage: <progname> [ options ]',
             $opts->getUsageMessage());
@@ -350,7 +350,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             'a' => 'apple',
             'b' => 'banana',
             'p' => 'pear',
-            'c' => 'cumquat'));
+            'c' => 'cumquat', ));
         $message = preg_replace('/Usage: .* \[ options \]/',
             'Usage: <progname> [ options ]',
             $opts->getUsageMessage());
@@ -367,7 +367,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             'pear|p=s' => 'pear with string',
             'orange|o-i' => 'orange with optional integer',
             'lemon|l-w' => 'lemon with optional word',
-            'kumquat|k-s' => 'kumquat with optional string'));
+            'kumquat|k-s' => 'kumquat with optional string', ));
 
         $opts->setArguments(array('-a', 327));
         $opts->parse();
@@ -441,7 +441,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             array( // arguments
                 '--man-bear-pig=mbp',
                 '--man-bear',
-                'foobar'
+                'foobar',
                 )
             );
 
@@ -459,7 +459,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $opts = new Getopt('abp:');
         $opts->addRules(
           array(
-            'verbose|v' => 'Print verbose output'
+            'verbose|v' => 'Print verbose output',
           )
         );
     }
@@ -496,7 +496,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
 
         $opts = new Getopt(
             array('foo=s' => 'Option One (string)'),
-            array('--foo=' . $fooValue)
+            array('--foo='.$fooValue)
         );
         $this->assertEquals($fooValue, $opts->foo);
     }
@@ -661,10 +661,10 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     {
         $opts = new Getopt(array(
             'a|apples|apple=s' => "APPLES",
-            'b|bears|bear=s' => "BEARS"
+            'b|bears|bear=s' => "BEARS",
         ), array(
             '--apples=Gala',
-            '--bears=Grizzly'
+            '--bears=Grizzly',
         ));
 
         $appleCallbackCalled = null;
@@ -688,9 +688,9 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     {
         $opts = new Getopt(array(
             'a|apples|apple' => "APPLES",
-            'b|bears|bear' => "BEARS"
+            'b|bears|bear' => "BEARS",
         ), array(
-            '--apples=Gala'
+            '--apples=Gala',
         ));
 
         $bearCallbackCalled = null;

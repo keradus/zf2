@@ -172,7 +172,7 @@ class PhoneNumber extends AbstractValidator
                 return false;
             }
 
-            $file = __DIR__ . '/PhoneNumber/' . $code . '.php';
+            $file = __DIR__.'/PhoneNumber/'.$code.'.php';
             if (!file_exists($file)) {
                 return false;
             }
@@ -221,9 +221,9 @@ class PhoneNumber extends AbstractValidator
          *   2) International double-O prefix
          *   3) Bare country prefix
          */
-        if (('+' . $countryPattern['code']) == substr($value, 0, $codeLength + 1)) {
+        if (('+'.$countryPattern['code']) == substr($value, 0, $codeLength + 1)) {
             $valueNoCountry = substr($value, $codeLength + 1);
-        } elseif (('00' . $countryPattern['code']) == substr($value, 0, $codeLength + 2)) {
+        } elseif (('00'.$countryPattern['code']) == substr($value, 0, $codeLength + 2)) {
             $valueNoCountry = substr($value, $codeLength + 2);
         } elseif ($countryPattern['code'] == substr($value, 0, $codeLength)) {
             $valueNoCountry = substr($value, $codeLength);

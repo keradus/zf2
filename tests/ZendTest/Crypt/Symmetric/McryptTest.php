@@ -36,7 +36,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
             $this->key .= chr(rand(0, 255));
             $this->salt .= chr(rand(0, 255));
         }
-        $this->plaintext = file_get_contents(__DIR__ . '/../_files/plaintext');
+        $this->plaintext = file_get_contents(__DIR__.'/../_files/plaintext');
     }
 
     public function testConstructByParams()
@@ -46,7 +46,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
             'mode'      => 'cfb',
             'key'       => $this->key,
             'salt'      => $this->salt,
-            'padding'   => 'pkcs7'
+            'padding'   => 'pkcs7',
         );
         $mcrypt  = new Mcrypt($options);
         $this->assertTrue($mcrypt instanceof Mcrypt);
@@ -64,7 +64,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
             'mode'      => 'cfb',
             'key'       => $this->key,
             'salt'      => $this->salt,
-            'padding'   => 'pkcs7'
+            'padding'   => 'pkcs7',
         );
         $config  = new Config($options);
         $mcrypt  = new Mcrypt($config);

@@ -18,7 +18,7 @@ class FormCheckbox extends FormInput
     /**
      * Render a form <input> element from the provided $element
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface                   $element
      * @throws Exception\InvalidArgumentException
      * @throws Exception\DomainException
      * @return string
@@ -66,7 +66,7 @@ class FormCheckbox extends FormInput
                 '<input type="hidden" %s%s',
                 $this->createAttributesString($hiddenAttributes),
                 $closingBracket
-            ) . $rendered;
+            ).$rendered;
         }
 
         return $rendered;

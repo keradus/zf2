@@ -47,7 +47,7 @@ class GenericAnnotationParser implements ParserInterface
      * present, calls {@link AnnotationInterface::initialize()} with the
      * content.
      *
-     * @param  EventInterface $e
+     * @param  EventInterface            $e
      * @return false|AnnotationInterface
      */
     public function onCreateAnnotation(EventInterface $e)
@@ -78,8 +78,8 @@ class GenericAnnotationParser implements ParserInterface
     /**
      * Register annotations
      *
-     * @param  string|AnnotationInterface $annotation String class name of an
-     *         AnnotationInterface implementation, or actual instance
+     * @param  string|AnnotationInterface         $annotation String class name of an
+     *                                                        AnnotationInterface implementation, or actual instance
      * @return GenericAnnotationParser
      * @throws Exception\InvalidArgumentException
      */
@@ -116,7 +116,7 @@ class GenericAnnotationParser implements ParserInterface
     /**
      * Register many annotations at once
      *
-     * @param  array|Traversable $annotations
+     * @param  array|Traversable                  $annotations
      * @throws Exception\InvalidArgumentException
      * @return GenericAnnotationParser
      */
@@ -159,8 +159,8 @@ class GenericAnnotationParser implements ParserInterface
     /**
      * Alias an annotation name
      *
-     * @param  string $alias
-     * @param  string $class May be either a registered annotation name or another alias
+     * @param  string                             $alias
+     * @param  string                             $class May be either a registered annotation name or another alias
      * @throws Exception\InvalidArgumentException
      * @return GenericAnnotationParser
      */

@@ -140,6 +140,7 @@ class Serializer extends AbstractPlugin
         }
 
         $event->stopPropagation(true);
+
         return $result;
     }
 
@@ -156,7 +157,7 @@ class Serializer extends AbstractPlugin
         $keyValuePairs = $storage->getItems(array_keys($params['keyValuePairs']));
         foreach ($params['keyValuePairs'] as $key => & $value) {
             if (isset($keyValuePairs[$key])) {
-                $keyValuePairs[$key]+= $value;
+                $keyValuePairs[$key] += $value;
             } else {
                 $keyValuePairs[$key] = $value;
             }
@@ -168,6 +169,7 @@ class Serializer extends AbstractPlugin
         }
 
         $event->stopPropagation(true);
+
         return $keyValuePairs;
     }
 
@@ -194,6 +196,7 @@ class Serializer extends AbstractPlugin
         }
 
         $event->stopPropagation(true);
+
         return $result;
     }
 
@@ -210,7 +213,7 @@ class Serializer extends AbstractPlugin
         $keyValuePairs = $storage->getItems(array_keys($params['keyValuePairs']));
         foreach ($params['keyValuePairs'] as $key => &$value) {
             if (isset($keyValuePairs[$key])) {
-                $keyValuePairs[$key]-= $value;
+                $keyValuePairs[$key] -= $value;
             } else {
                 $keyValuePairs[$key] = -$value;
             }
@@ -222,6 +225,7 @@ class Serializer extends AbstractPlugin
         }
 
         $event->stopPropagation(true);
+
         return $keyValuePairs;
     }
 

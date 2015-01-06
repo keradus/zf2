@@ -17,7 +17,7 @@ class DiStrictAbstractServiceFactoryFactory implements FactoryInterface
     /**
      * Class responsible for instantiating a DiStrictAbstractServiceFactory
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface        $serviceLocator
      * @return DiStrictAbstractServiceFactory
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

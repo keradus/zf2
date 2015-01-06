@@ -36,7 +36,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
                         'function' => 'test',
                         'class'    => 'Test',
                         'type'     => '::',
-                        'args'     => array(1)
+                        'args'     => array(1),
                     ),
                     array(
                         'file'     => 'test.php',
@@ -44,15 +44,15 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
                         'function' => 'test',
                         'class'    => 'Test',
                         'type'     => '::',
-                        'args'     => array(1)
-                    )
-                )
-            )
+                        'args'     => array(1),
+                    ),
+                ),
+            ),
         );
 
         // The formatter ends with unix style line endings so make sure we expect that
         // output as well:
-        $expected = $date->format('c') . " CRIT (1) test in test.php on line 1\n";
+        $expected = $date->format('c')." CRIT (1) test in test.php on line 1\n";
         $expected .= "[Trace]\n";
         $expected .= "File  : test.php\n";
         $expected .= "Line  : 1\n";
@@ -97,7 +97,7 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $expected = $date->format($dateTimeFormat) . ' CRIT (1) test in test.php on line 1';
+        $expected = $date->format($dateTimeFormat).' CRIT (1) test in test.php on line 1';
 
         $formatter = new ExceptionHandler();
 

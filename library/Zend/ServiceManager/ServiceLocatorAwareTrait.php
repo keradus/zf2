@@ -19,7 +19,7 @@ trait ServiceLocatorAwareTrait
     /**
      * Set service locator
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return mixed
      */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)

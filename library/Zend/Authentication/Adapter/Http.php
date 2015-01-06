@@ -137,14 +137,14 @@ class Http implements AdapterInterface
     /**
      * Constructor
      *
-     * @param  array $config Configuration settings:
-     *    'accept_schemes' => 'basic'|'digest'|'basic digest'
-     *    'realm' => <string>
-     *    'digest_domains' => <string> Space-delimited list of URIs
-     *    'nonce_timeout' => <int>
-     *    'use_opaque' => <bool> Whether to send the opaque value in the header
-     *    'algorithm' => <string> See $supportedAlgos. Default: MD5
-     *    'proxy_auth' => <bool> Whether to do authentication as a Proxy
+     * @param  array                              $config Configuration settings:
+     *                                                    'accept_schemes' => 'basic'|'digest'|'basic digest'
+     *                                                    'realm' => <string>
+     *                                                    'digest_domains' => <string> Space-delimited list of URIs
+     *                                                    'nonce_timeout' => <int>
+     *                                                    'use_opaque' => <bool> Whether to send the opaque value in the header
+     *                                                    'algorithm' => <string> See $supportedAlgos. Default: MD5
+     *                                                    'proxy_auth' => <bool> Whether to do authentication as a Proxy
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(array $config)
@@ -170,7 +170,7 @@ class Http implements AdapterInterface
             strpos($config['realm'], '"') !== false) {
             throw new Exception\InvalidArgumentException(
                 'Config key \'realm\' is required, and must contain only printable characters,'
-                . 'excluding quotation marks and colons'
+                .'excluding quotation marks and colons'
             );
         } else {
             $this->realm = $config['realm'];
@@ -185,7 +185,7 @@ class Http implements AdapterInterface
                 strpos($config['digest_domains'], '"') !== false) {
                 throw new Exception\InvalidArgumentException(
                     'Config key \'digest_domains\' is required, and must contain '
-                    . 'only printable characters, excluding quotation marks'
+                    .'only printable characters, excluding quotation marks'
                 );
             } else {
                 $this->domains = $config['digest_domains'];
@@ -220,7 +220,7 @@ class Http implements AdapterInterface
      * Setter for the basicResolver property
      *
      * @param  Http\ResolverInterface $resolver
-     * @return Http Provides a fluent interface
+     * @return Http                   Provides a fluent interface
      */
     public function setBasicResolver(Http\ResolverInterface $resolver)
     {
@@ -243,7 +243,7 @@ class Http implements AdapterInterface
      * Setter for the digestResolver property
      *
      * @param  Http\ResolverInterface $resolver
-     * @return Http Provides a fluent interface
+     * @return Http                   Provides a fluent interface
      */
     public function setDigestResolver(Http\ResolverInterface $resolver)
     {
@@ -266,7 +266,7 @@ class Http implements AdapterInterface
      * Setter for the Request object
      *
      * @param  HTTPRequest $request
-     * @return Http Provides a fluent interface
+     * @return Http        Provides a fluent interface
      */
     public function setRequest(HTTPRequest $request)
     {
@@ -289,7 +289,7 @@ class Http implements AdapterInterface
      * Setter for the Response object
      *
      * @param  HTTPResponse $response
-     * @return Http Provides a fluent interface
+     * @return Http         Provides a fluent interface
      */
     public function setResponse(HTTPResponse $response)
     {
@@ -344,6 +344,7 @@ class Http implements AdapterInterface
         // answer with only the selected auth scheme.
         if (!in_array($clientScheme, $this->supportedSchemes)) {
             $this->response->setStatusCode(400);
+
             return new Authentication\Result(
                 Authentication\Result::FAILURE_UNCATEGORIZED,
                 array(),
@@ -365,7 +366,7 @@ class Http implements AdapterInterface
                 $result = $this->_digestAuth($authHeader);
                 break;
             default:
-                throw new Exception\RuntimeException('Unsupported authentication scheme: ' . $clientScheme);
+                throw new Exception\RuntimeException('Unsupported authentication scheme: '.$clientScheme);
         }
 
         return $result;
@@ -380,7 +381,7 @@ class Http implements AdapterInterface
     {
         trigger_error(sprintf(
             'The method "%s" is deprecated and will be removed in the future; '
-            . 'please use the public method "%s::challengeClient()" instead',
+            .'please use the public method "%s::challengeClient()" instead',
             __METHOD__,
             __CLASS__
         ), E_USER_DEPRECATED);
@@ -416,6 +417,7 @@ class Http implements AdapterInterface
         if (in_array('digest', $this->acceptSchemes)) {
             $headers->addHeaderLine($headerName, $this->_digestHeader());
         }
+
         return new Authentication\Result(
             Authentication\Result::FAILURE_CREDENTIAL_INVALID,
             array(),
@@ -433,7 +435,7 @@ class Http implements AdapterInterface
      */
     protected function _basicHeader()
     {
-        return 'Basic realm="' . $this->realm . '"';
+        return 'Basic realm="'.$this->realm.'"';
     }
 
     /**
@@ -446,12 +448,12 @@ class Http implements AdapterInterface
      */
     protected function _digestHeader()
     {
-        $wwwauth = 'Digest realm="' . $this->realm . '", '
-                 . 'domain="' . $this->domains . '", '
-                 . 'nonce="' . $this->_calcNonce() . '", '
-                 . ($this->useOpaque ? 'opaque="' . $this->_calcOpaque() . '", ' : '')
-                 . 'algorithm="' . $this->algo . '", '
-                 . 'qop="' . implode(',', $this->supportedQops) . '"';
+        $wwwauth = 'Digest realm="'.$this->realm.'", '
+                 .'domain="'.$this->domains.'", '
+                 .'nonce="'.$this->_calcNonce().'", '
+                 .($this->useOpaque ? 'opaque="'.$this->_calcOpaque().'", ' : '')
+                 .'algorithm="'.$this->algo.'", '
+                 .'qop="'.implode(',', $this->supportedQops).'"';
 
         return $wwwauth;
     }
@@ -459,7 +461,7 @@ class Http implements AdapterInterface
     /**
      * Basic Authentication
      *
-     * @param  string $header Client's Authorization header
+     * @param  string                       $header Client's Authorization header
      * @throws Exception\ExceptionInterface
      * @return Authentication\Result
      */
@@ -504,6 +506,7 @@ class Http implements AdapterInterface
             && CryptUtils::compareStrings($result, $creds[1])
         ) {
             $identity = array('username' => $creds[0], 'realm' => $this->realm);
+
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
         } elseif (is_array($result)) {
             return new Authentication\Result(Authentication\Result::SUCCESS, $result);
@@ -515,9 +518,9 @@ class Http implements AdapterInterface
     /**
      * Digest Authentication
      *
-     * @param  string $header Client's Authorization header
+     * @param  string                       $header Client's Authorization header
      * @throws Exception\ExceptionInterface
-     * @return Authentication\Result Valid auth result only on successful auth
+     * @return Authentication\Result        Valid auth result only on successful auth
      */
     protected function _digestAuth($header)
     {
@@ -531,6 +534,7 @@ class Http implements AdapterInterface
         $data = $this->_parseDigestAuth($header);
         if ($data === false) {
             $this->response->setStatusCode(400);
+
             return new Authentication\Result(
                 Authentication\Result::FAILURE_UNCATEGORIZED,
                 array(),
@@ -567,14 +571,14 @@ class Http implements AdapterInterface
         // hash with the server and client nonce appended, separated by
         // colons.
         if ($this->algo == 'MD5-sess') {
-            $ha1 = hash('md5', $ha1 . ':' . $data['nonce'] . ':' . $data['cnonce']);
+            $ha1 = hash('md5', $ha1.':'.$data['nonce'].':'.$data['cnonce']);
         }
 
         // Calculate h(a2). The value of this hash depends on the qop
         // option selected by the client and the supported hash functions
         switch ($data['qop']) {
             case 'auth':
-                $a2 = $this->request->getMethod() . ':' . $data['uri'];
+                $a2 = $this->request->getMethod().':'.$data['uri'];
                 break;
             case 'auth-int':
                 // Should be REQUEST_METHOD . ':' . uri . ':' . hash(entity-body),
@@ -588,13 +592,14 @@ class Http implements AdapterInterface
 
         // Calculate the server's version of the request-digest. This must
         // match $data['response']. See RFC 2617, section 3.2.2.1
-        $message = $data['nonce'] . ':' . $data['nc'] . ':' . $data['cnonce'] . ':' . $data['qop'] . ':' . $ha2;
-        $digest  = hash('md5', $ha1 . ':' . $message);
+        $message = $data['nonce'].':'.$data['nc'].':'.$data['cnonce'].':'.$data['qop'].':'.$ha2;
+        $digest  = hash('md5', $ha1.':'.$message);
 
         // If our digest matches the client's let them in, otherwise return
         // a 401 code and exit to prevent access to the protected resource.
         if (CryptUtils::compareStrings($digest, $data['response'])) {
             $identity = array('username' => $data['username'], 'realm' => $data['realm']);
+
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
         }
 
@@ -627,7 +632,8 @@ class Http implements AdapterInterface
         } else {
             $userAgent = 'Zend_Authenticaion';
         }
-        $nonce = hash('md5', $timeout . ':' . $userAgent . ':' . __CLASS__);
+        $nonce = hash('md5', $timeout.':'.$userAgent.':'.__CLASS__);
+
         return $nonce;
     }
 
@@ -645,15 +651,15 @@ class Http implements AdapterInterface
      */
     protected function _calcOpaque()
     {
-        return hash('md5', 'Opaque Data:' . __CLASS__);
+        return hash('md5', 'Opaque Data:'.__CLASS__);
     }
 
     /**
      * Parse Digest Authorization header
      *
-     * @param  string $header Client's Authorization: HTTP header
+     * @param  string     $header Client's Authorization: HTTP header
      * @return array|bool Data elements from header, or false if any part of
-     *                    the header is invalid
+     *                           the header is invalid
      */
     protected function _parseDigestAuth($header)
     {
@@ -730,7 +736,7 @@ class Http implements AdapterInterface
         // The spec says this should default to MD5 if omitted. OK, so how does
         // that square with the algo we send out in the WWW-Authenticate header,
         // if it can easily be overridden by the client?
-        $ret = preg_match('/algorithm="?(' . $this->algo . ')"?/', $header, $temp);
+        $ret = preg_match('/algorithm="?('.$this->algo.')"?/', $header, $temp);
         if ($ret && !empty($temp[1])
                  && in_array($temp[1], $this->supportedAlgos)) {
             $data['algorithm'] = $temp[1];
@@ -781,7 +787,7 @@ class Http implements AdapterInterface
 
         // Not optional in this implementation, but must be one of the supported
         // qop types
-        $ret = preg_match('/qop="?(' . implode('|', $this->supportedQops) . ')"?/', $header, $temp);
+        $ret = preg_match('/qop="?('.implode('|', $this->supportedQops).')"?/', $header, $temp);
         if (!$ret || empty($temp[1])) {
             return false;
         }
@@ -810,7 +816,7 @@ class Http implements AdapterInterface
 
     /**
      * validates if $value is a valid Md5 hash
-     * @param string $value
+     * @param  string $value
      * @return bool
      */
     private function isValidMd5Hash($value)

@@ -96,18 +96,19 @@ class Smd
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
     /**
      * Set transport
      *
-     * @param  string $transport
+     * @param  string                             $transport
      * @throws Exception\InvalidArgumentException
      * @return \Zend\Json\Server\Smd
      */
@@ -117,6 +118,7 @@ class Smd
             throw new InvalidArgumentException("Invalid transport '{$transport}' specified");
         }
         $this->transport = $transport;
+
         return $this;
     }
 
@@ -133,7 +135,7 @@ class Smd
     /**
      * Set envelope
      *
-     * @param  string $envelopeType
+     * @param  string                             $envelopeType
      * @throws Exception\InvalidArgumentException
      * @return Smd
      */
@@ -143,6 +145,7 @@ class Smd
             throw new InvalidArgumentException("Invalid envelope type '{$envelopeType}'");
         }
         $this->envelope = $envelopeType;
+
         return $this;
     }
 
@@ -160,7 +163,7 @@ class Smd
     /**
      * Set content type
      *
-     * @param  string $type
+     * @param  string                             $type
      * @throws Exception\InvalidArgumentException
      * @return \Zend\Json\Server\Smd
      */
@@ -170,6 +173,7 @@ class Smd
             throw new InvalidArgumentException("Invalid content type '{$type}' specified");
         }
         $this->contentType = $type;
+
         return $this;
     }
 
@@ -192,6 +196,7 @@ class Smd
     public function setTarget($target)
     {
         $this->target = (string) $target;
+
         return $this;
     }
 
@@ -214,6 +219,7 @@ class Smd
     public function setId($id)
     {
         $this->id = (string) $id;
+
         return $this->id;
     }
 
@@ -236,6 +242,7 @@ class Smd
     public function setDescription($description)
     {
         $this->description = (string) $description;
+
         return $this->description;
     }
 
@@ -258,6 +265,7 @@ class Smd
     public function setDojoCompatible($flag)
     {
         $this->dojoCompatible = (bool) $flag;
+
         return $this;
     }
 
@@ -274,7 +282,7 @@ class Smd
     /**
      * Add Service
      *
-     * @param Smd\Service|array $service
+     * @param  Smd\Service|array                  $service
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      * @return Smd
@@ -294,6 +302,7 @@ class Smd
             throw new RuntimeException('Attempt to register a service already registered detected');
         }
         $this->services[$name] = $service;
+
         return $this;
     }
 
@@ -308,6 +317,7 @@ class Smd
         foreach ($services as $service) {
             $this->addService($service);
         }
+
         return $this;
     }
 
@@ -320,13 +330,14 @@ class Smd
     public function setServices(array $services)
     {
         $this->services = array();
+
         return $this->addServices($services);
     }
 
     /**
      * Get service object
      *
-     * @param  string $name
+     * @param  string           $name
      * @return bool|Smd\Service
      */
     public function getService($name)
@@ -334,6 +345,7 @@ class Smd
         if (array_key_exists($name, $this->services)) {
             return $this->services[$name];
         }
+
         return false;
     }
 
@@ -357,8 +369,10 @@ class Smd
     {
         if (array_key_exists($name, $this->services)) {
             unset($this->services[$name]);
+
             return true;
         }
+
         return false;
     }
 

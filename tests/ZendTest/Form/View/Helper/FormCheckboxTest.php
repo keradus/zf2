@@ -28,6 +28,7 @@ class FormCheckboxTest extends CommonTestCase
             'unchecked_value' => 'unchecked',
         );
         $element->setOptions($options);
+
         return $element;
     }
 

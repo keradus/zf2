@@ -30,7 +30,7 @@ class Hash extends AbstractValidator
     protected $messageTemplates = array(
         self::DOES_NOT_MATCH => "File does not match the given hashes",
         self::NOT_DETECTED   => "A hash could not be evaluated for the given file",
-        self::NOT_FOUND      => "File is not readable or does not exist"
+        self::NOT_FOUND      => "File is not readable or does not exist",
     );
 
     /**
@@ -76,7 +76,7 @@ class Hash extends AbstractValidator
      * Sets the hash for one or multiple files
      *
      * @param  string|array $options
-     * @return Hash Provides a fluent interface
+     * @return Hash         Provides a fluent interface
      */
     public function setHash($options)
     {
@@ -89,8 +89,8 @@ class Hash extends AbstractValidator
     /**
      * Adds the hash for one or multiple files
      *
-     * @param  string|array $options
-     * @return Hash Provides a fluent interface
+     * @param  string|array                       $options
+     * @return Hash                               Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function addHash($options)
@@ -150,6 +150,7 @@ class Hash extends AbstractValidator
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+
             return false;
         }
 
@@ -159,6 +160,7 @@ class Hash extends AbstractValidator
             $filehash = hash_file($algorithm, $file);
             if ($filehash === false) {
                 $this->error(self::NOT_DETECTED);
+
                 return false;
             }
 
@@ -170,6 +172,7 @@ class Hash extends AbstractValidator
         }
 
         $this->error(self::DOES_NOT_MATCH);
+
         return false;
     }
 }

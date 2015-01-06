@@ -22,10 +22,10 @@ abstract class Scrypt
      *
      * @param  string $password
      * @param  string $salt
-     * @param  int $n CPU cost
-     * @param  int $r Memory cost
-     * @param  int $p parallelization cost
-     * @param  int $length size of the output key
+     * @param  int    $n        CPU cost
+     * @param  int    $r        Memory cost
+     * @param  int    $p        parallelization cost
+     * @param  int    $length   size of the output key
      * @return string
      */
     public static function calc($password, $salt, $n, $r, $p, $length)
@@ -44,6 +44,7 @@ abstract class Scrypt
             if ($length < 16) {
                 throw new Exception\InvalidArgumentException("Key length is too low, must be greater or equal to 16");
             }
+
             return self::hex2bin(scrypt($password, $salt, $n, $r, $p, $length));
         }
 
@@ -57,15 +58,15 @@ abstract class Scrypt
         return Pbkdf2::calc('sha256', $password, $s, 1, $length);
     }
 
-   /**
-    * scryptROMix
-    *
-    * @param  string $b
-    * @param  int $n
-    * @param  int $r
-    * @return string
-    * @see    https://tools.ietf.org/html/draft-josefsson-scrypt-kdf-01#section-4
-    */
+    /**
+     * scryptROMix
+     *
+     * @param  string $b
+     * @param  int    $n
+     * @param  int    $r
+     * @return string
+     * @see    https://tools.ietf.org/html/draft-josefsson-scrypt-kdf-01#section-4
+     */
     protected static function scryptROMix($b, $n, $r)
     {
         $x = $b;
@@ -79,6 +80,7 @@ abstract class Scrypt
             $t = $x ^  $v[$j];
             $x = self::scryptBlockMix($t, $r);
         }
+
         return $x;
     }
 
@@ -86,7 +88,7 @@ abstract class Scrypt
      * scryptBlockMix
      *
      * @param  string $b
-     * @param  int $r
+     * @param  int    $r
      * @return string
      * @see    https://tools.ietf.org/html/draft-josefsson-scrypt-kdf-01#section-3
      */
@@ -109,7 +111,8 @@ abstract class Scrypt
                 $odd .= $x;
             }
         }
-        return $even . $odd;
+
+        return $even.$odd;
     }
 
     /**
@@ -316,6 +319,7 @@ abstract class Scrypt
             $v = 'V';
         }
         list(, $n) = unpack($v, substr($b, -64));
+
         return $n;
     }
 
@@ -332,9 +336,10 @@ abstract class Scrypt
         }
         $len    = strlen($hex);
         $result = '';
-        for ($i = 0; $i < $len; $i+=2) {
-            $result .= chr(hexdec($hex[$i] . $hex[$i+1]));
+        for ($i = 0; $i < $len; $i += 2) {
+            $result .= chr(hexdec($hex[$i].$hex[$i+1]));
         }
+
         return $result;
     }
 }

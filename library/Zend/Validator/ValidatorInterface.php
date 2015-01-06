@@ -18,7 +18,7 @@ interface ValidatorInterface
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @return bool
      * @throws Exception\RuntimeException If validation of $value is impossible
      */

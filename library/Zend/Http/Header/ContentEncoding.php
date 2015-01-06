@@ -24,7 +24,7 @@ class ContentEncoding implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-encoding') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Encoding string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Encoding string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class ContentEncoding implements HeaderInterface
 
     public function toString()
     {
-        return 'Content-Encoding: ' . $this->getFieldValue();
+        return 'Content-Encoding: '.$this->getFieldValue();
     }
 }

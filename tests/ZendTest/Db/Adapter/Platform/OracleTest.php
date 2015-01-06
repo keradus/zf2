@@ -24,7 +24,7 @@ class OracleTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->platform = new Oracle;
+        $this->platform = new Oracle();
     }
 
     /**

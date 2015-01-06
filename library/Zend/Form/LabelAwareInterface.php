@@ -29,7 +29,7 @@ interface LabelAwareInterface
     /**
      * Set the attributes to use with the label
      *
-     * @param array $labelAttributes
+     * @param  array $labelAttributes
      * @return self
      */
     public function setLabelAttributes(array $labelAttributes);
@@ -58,11 +58,11 @@ interface LabelAwareInterface
      */
     public function getLabelOptions();
 
-     /**
+    /**
      * Set a single label optionn
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  string                   $key
+     * @param  mixed                    $value
      * @return Element|ElementInterface
      */
     public function setLabelOption($key, $value);
@@ -78,7 +78,7 @@ interface LabelAwareInterface
     /**
      * Remove a single label option
      *
-     * @param string $key
+     * @param  string           $key
      * @return ElementInterface
      */
     public function removeLabelOption($key);
@@ -94,7 +94,7 @@ interface LabelAwareInterface
     /**
      * Remove many attributes at once
      *
-     * @param array $keys
+     * @param  array            $keys
      * @return ElementInterface
      */
     public function removeLabelOptions(array $keys);

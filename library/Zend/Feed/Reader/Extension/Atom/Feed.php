@@ -21,7 +21,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get a single author
      *
-     * @param  int $index
+     * @param  int         $index
      * @return string|null
      */
     public function getAuthor($index = 0)
@@ -86,9 +86,9 @@ class Feed extends Extension\AbstractFeed
         $copyright = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $copyright = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:copyright)');
+            $copyright = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:copyright)');
         } else {
-            $copyright = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:rights)');
+            $copyright = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:rights)');
         }
 
         if (!$copyright) {
@@ -114,9 +114,9 @@ class Feed extends Extension\AbstractFeed
         $date = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $dateCreated = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:created)');
+            $dateCreated = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:created)');
         } else {
-            $dateCreated = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:published)');
+            $dateCreated = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:published)');
         }
 
         if ($dateCreated) {
@@ -142,9 +142,9 @@ class Feed extends Extension\AbstractFeed
         $date = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $dateModified = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:modified)');
+            $dateModified = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:modified)');
         } else {
-            $dateModified = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:updated)');
+            $dateModified = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:updated)');
         }
 
         if ($dateModified) {
@@ -170,9 +170,9 @@ class Feed extends Extension\AbstractFeed
         $description = null;
 
         if ($this->getType() === Reader\Reader::TYPE_ATOM_03) {
-            $description = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:tagline)');
+            $description = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:tagline)');
         } else {
-            $description = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:subtitle)');
+            $description = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:subtitle)');
         }
 
         if (!$description) {
@@ -195,7 +195,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['generator'];
         }
         // TODO: Add uri support
-        $generator = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:generator)');
+        $generator = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:generator)');
 
         if (!$generator) {
             $generator = null;
@@ -217,7 +217,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['id'];
         }
 
-        $id = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
+        $id = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:id)');
 
         if (!$id) {
             if ($this->getLink()) {
@@ -245,7 +245,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['language'];
         }
 
-        $language = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:lang)');
+        $language = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:lang)');
 
         if (!$language) {
             $language = $this->xpath->evaluate('string(//@xml:lang[1])');
@@ -271,7 +271,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['image'];
         }
 
-        $imageUrl = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:logo)');
+        $imageUrl = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:logo)');
 
         if (!$imageUrl) {
             $image = null;
@@ -319,8 +319,8 @@ class Feed extends Extension\AbstractFeed
         $link = null;
 
         $list = $this->xpath->query(
-            $this->getXpathPrefix() . '/atom:link[@rel="alternate"]/@href' . '|' .
-            $this->getXpathPrefix() . '/atom:link[not(@rel)]/@href'
+            $this->getXpathPrefix().'/atom:link[@rel="alternate"]/@href'.'|'.
+            $this->getXpathPrefix().'/atom:link[not(@rel)]/@href'
         );
 
         if ($list->length) {
@@ -344,7 +344,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['feedlink'];
         }
 
-        $link = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:link[@rel="self"]/@href)');
+        $link = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:link[@rel="self"]/@href)');
 
         $link = $this->absolutiseUri($link);
 
@@ -366,7 +366,7 @@ class Feed extends Extension\AbstractFeed
         $hubs = array();
 
         $list = $this->xpath->query($this->getXpathPrefix()
-            . '//atom:link[@rel="hub"]/@href');
+            .'//atom:link[@rel="hub"]/@href');
 
         if ($list->length) {
             foreach ($list as $uri) {
@@ -392,7 +392,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['title'];
         }
 
-        $title = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
+        $title = $this->xpath->evaluate('string('.$this->getXpathPrefix().'/atom:title)');
 
         if (!$title) {
             $title = null;
@@ -415,7 +415,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($this->getType() == Reader\Reader::TYPE_ATOM_10) {
-            $list = $this->xpath->query($this->getXpathPrefix() . '/atom:category');
+            $list = $this->xpath->query($this->getXpathPrefix().'/atom:category');
         } else {
             /**
              * Since Atom 0.3 did not support categories, it would have used the
@@ -423,20 +423,20 @@ class Feed extends Extension\AbstractFeed
              * may have been retrofittied to use Atom 1.0 instead.
              */
             $this->xpath->registerNamespace('atom10', Reader\Reader::NAMESPACE_ATOM_10);
-            $list = $this->xpath->query($this->getXpathPrefix() . '/atom10:category');
+            $list = $this->xpath->query($this->getXpathPrefix().'/atom10:category');
         }
 
         if ($list->length) {
-            $categoryCollection = new Collection\Category;
+            $categoryCollection = new Collection\Category();
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->getAttribute('term'),
                     'scheme' => $category->getAttribute('scheme'),
-                    'label' => $category->getAttribute('label')
+                    'label' => $category->getAttribute('label'),
                 );
             }
         } else {
-            return new Collection\Category;
+            return new Collection\Category();
         }
 
         $this->data['categories'] = $categoryCollection;
@@ -473,6 +473,7 @@ class Feed extends Extension\AbstractFeed
         if (empty($author)) {
             return;
         }
+
         return $author;
     }
 
@@ -484,12 +485,13 @@ class Feed extends Extension\AbstractFeed
     {
         if (!Uri::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
-                $link = $this->getBaseUrl() . $link;
+                $link = $this->getBaseUrl().$link;
                 if (!Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }
         }
+
         return $link;
     }
 

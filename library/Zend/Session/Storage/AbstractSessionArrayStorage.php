@@ -81,7 +81,7 @@ abstract class AbstractSessionArrayStorage implements
     /**
      * Isset Offset
      *
-     * @param  mixed   $key
+     * @param  mixed $key
      * @return bool
      */
     public function __isset($key)
@@ -107,13 +107,13 @@ abstract class AbstractSessionArrayStorage implements
      */
     public function __destruct()
     {
-        return ;
+        return;
     }
 
     /**
      * Offset Exists
      *
-     * @param  mixed   $key
+     * @param  mixed $key
      * @return bool
      */
     public function offsetExists($key)
@@ -462,7 +462,7 @@ abstract class AbstractSessionArrayStorage implements
     /**
      * Cast the object to an array
      *
-     * @param  bool $metaData Whether to include metadata
+     * @param  bool  $metaData Whether to include metadata
      * @return array
      */
     public function toArray($metaData = false)

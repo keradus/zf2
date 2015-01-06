@@ -28,7 +28,7 @@ class ApacheTest extends \PHPUnit_Framework_TestCase
     public function testConstruct()
     {
         $this->apache = new Apache(array(
-            'format' => 'crypt'
+            'format' => 'crypt',
         ));
         $this->assertInstanceOf('Zend\Crypt\Password\Apache', $this->apache);
     }
@@ -47,7 +47,7 @@ class ApacheTest extends \PHPUnit_Framework_TestCase
     public function testWrongParamConstruct()
     {
         $this->apache = new Apache(array(
-            'format' => 'crypto'
+            'format' => 'crypto',
         ));
     }
 
@@ -155,7 +155,7 @@ class ApacheTest extends \PHPUnit_Framework_TestCase
             // openssl passwd -crypt -salt z0Hhe5Lq myPassword
             array('myPassword', 'z0yXKQm465G4o'),
             // htpasswd -nbs myName myPassword
-            array('myPassword', '{SHA}VBPuJHI7uixaa6LQGWx4s+5GKNE=')
+            array('myPassword', '{SHA}VBPuJHI7uixaa6LQGWx4s+5GKNE='),
         );
     }
 

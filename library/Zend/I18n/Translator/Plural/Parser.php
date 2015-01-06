@@ -70,6 +70,7 @@ class Parser
                 $self->second = $self->parser->expression();
                 $self->parser->advance(':');
                 $self->third  = $self->parser->expression();
+
                 return $self;
             }
         );
@@ -118,6 +119,7 @@ class Parser
             function (Symbol $self) {
                 $expression = $self->parser->expression();
                 $self->parser->advance(')');
+
                 return $expression;
             }
         );
@@ -130,8 +132,8 @@ class Parser
     /**
      * Register a left infix symbol.
      *
-     * @param  string  $id
-     * @param  int $leftBindingPower
+     * @param  string $id
+     * @param  int    $leftBindingPower
      * @return void
      */
     protected function registerLeftInfixSymbol($id, $leftBindingPower)
@@ -140,6 +142,7 @@ class Parser
             function (Symbol $self, Symbol $left) use ($leftBindingPower) {
                 $self->first  = $left;
                 $self->second = $self->parser->expression($leftBindingPower);
+
                 return $self;
             }
         );
@@ -148,8 +151,8 @@ class Parser
     /**
      * Register a right infix symbol.
      *
-     * @param  string  $id
-     * @param  int $leftBindingPower
+     * @param  string $id
+     * @param  int    $leftBindingPower
      * @return void
      */
     protected function registerRightInfixSymbol($id, $leftBindingPower)
@@ -158,6 +161,7 @@ class Parser
             function (Symbol $self, Symbol $left) use ($leftBindingPower) {
                 $self->first  = $left;
                 $self->second = $self->parser->expression($leftBindingPower - 1);
+
                 return $self;
             }
         );
@@ -166,8 +170,8 @@ class Parser
     /**
      * Register a prefix symbol.
      *
-     * @param  string  $id
-     * @param  int $leftBindingPower
+     * @param  string $id
+     * @param  int    $leftBindingPower
      * @return void
      */
     protected function registerPrefixSymbol($id, $leftBindingPower)
@@ -176,6 +180,7 @@ class Parser
             function (Symbol $self) use ($leftBindingPower) {
                 $self->first  = $self->parser->expression($leftBindingPower);
                 $self->second = null;
+
                 return $self;
             }
         );
@@ -184,8 +189,8 @@ class Parser
     /**
      * Register a symbol.
      *
-     * @param  string  $id
-     * @param  int $leftBindingPower
+     * @param  string $id
+     * @param  int    $leftBindingPower
      * @return Symbol
      */
     protected function registerSymbol($id, $leftBindingPower = 0)
@@ -226,7 +231,7 @@ class Parser
      */
     public function parse($string)
     {
-        $this->string       = $string . "\0";
+        $this->string       = $string."\0";
         $this->currentPos   = 0;
         $this->currentToken = $this->getNextToken();
 
@@ -236,7 +241,7 @@ class Parser
     /**
      * Parse an expression.
      *
-     * @param  int $rightBindingPower
+     * @param  int    $rightBindingPower
      * @return Symbol
      */
     public function expression($rightBindingPower = 0)
@@ -257,7 +262,7 @@ class Parser
     /**
      * Advance the current token and optionally check the old token id.
      *
-     * @param  string $id
+     * @param  string                   $id
      * @return void
      * @throws Exception\ParseException
      */
@@ -311,7 +316,7 @@ class Parser
             case '|':
                 if ($this->string[$this->currentPos] === $result) {
                     $this->currentPos++;
-                    $id = $result . $result;
+                    $id = $result.$result;
                 } else {
                     // Yield error
                 }

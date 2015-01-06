@@ -12,14 +12,14 @@ namespace ZendTest\Feed\Writer\Extension\ITunes;
 use Zend\Feed\Writer;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Writer
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Writer
+ */
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetBlock()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesBlock('yes');
         $this->assertEquals('yes', $entry->getItunesBlock());
     }
@@ -29,7 +29,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetBlockThrowsExceptionOnNonAlphaValue()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesBlock('123');
     }
 
@@ -38,20 +38,20 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetBlockThrowsExceptionIfValueGreaterThan255CharsLength()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesBlock(str_repeat('a', 256));
     }
 
     public function testAddAuthors()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->addItunesAuthors(array('joe', 'jane'));
         $this->assertEquals(array('joe', 'jane'), $entry->getItunesAuthors());
     }
 
     public function testAddAuthor()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->addItunesAuthor('joe');
         $this->assertEquals(array('joe'), $entry->getItunesAuthors());
     }
@@ -61,27 +61,27 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddAuthorThrowsExceptionIfValueGreaterThan255CharsLength()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->addItunesAuthor(str_repeat('a', 256));
     }
 
     public function testSetDurationAsSeconds()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesDuration(23);
         $this->assertEquals(23, $entry->getItunesDuration());
     }
 
     public function testSetDurationAsMinutesAndSeconds()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesDuration('23:23');
         $this->assertEquals('23:23', $entry->getItunesDuration());
     }
 
     public function testSetDurationAsHoursMinutesAndSeconds()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesDuration('23:23:23');
         $this->assertEquals('23:23:23', $entry->getItunesDuration());
     }
@@ -91,7 +91,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDurationThrowsExceptionOnUnknownFormat()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesDuration('abc');
     }
 
@@ -100,7 +100,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDurationThrowsExceptionOnInvalidSeconds()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesDuration('23:456');
     }
 
@@ -109,27 +109,27 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDurationThrowsExceptionOnInvalidMinutes()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesDuration('23:234:45');
     }
 
     public function testSetExplicitToYes()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesExplicit('yes');
         $this->assertEquals('yes', $entry->getItunesExplicit());
     }
 
     public function testSetExplicitToNo()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesExplicit('no');
         $this->assertEquals('no', $entry->getItunesExplicit());
     }
 
     public function testSetExplicitToClean()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesExplicit('clean');
         $this->assertEquals('clean', $entry->getItunesExplicit());
     }
@@ -139,15 +139,15 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetExplicitThrowsExceptionOnUnknownTerm()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesExplicit('abc');
     }
 
     public function testSetKeywords()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $words = array(
-            'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12'
+            'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12',
         );
         $entry->setItunesKeywords($words);
         $this->assertEquals($words, $entry->getItunesKeywords());
@@ -158,9 +158,9 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $words = array(
-            'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13'
+            'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13',
         );
         $entry->setItunesKeywords($words);
     }
@@ -170,16 +170,16 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $words = array(
-            str_repeat('a', 253), str_repeat('b', 2)
+            str_repeat('a', 253), str_repeat('b', 2),
         );
         $entry->setItunesKeywords($words);
     }
 
     public function testSetSubtitle()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesSubtitle('abc');
         $this->assertEquals('abc', $entry->getItunesSubtitle());
     }
@@ -189,13 +189,13 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetSubtitleThrowsExceptionWhenValueExceeds255Chars()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesSubtitle(str_repeat('a', 256));
     }
 
     public function testSetSummary()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesSummary('abc');
         $this->assertEquals('abc', $entry->getItunesSummary());
     }
@@ -205,7 +205,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetSummaryThrowsExceptionWhenValueExceeds255Chars()
     {
-        $entry = new Writer\Entry;
+        $entry = new Writer\Entry();
         $entry->setItunesSummary(str_repeat('a', 4001));
     }
 }

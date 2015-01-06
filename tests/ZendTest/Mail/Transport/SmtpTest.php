@@ -48,6 +48,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
+
         return $message;
     }
 
@@ -91,10 +92,10 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
             ->addTo('zf-devteam@zend.com', 'ZF DevTeam')
         ;
         $expectedMessage = "Date: Sun, 10 Jun 2012 20:07:24 +0200\r\n"
-                           . "Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
-                           . "To: ZF DevTeam <zf-devteam@zend.com>\r\n"
-                           . "\r\n"
-                           . "testSendMailWithoutMinimalHeaders";
+                           ."Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
+                           ."To: ZF DevTeam <zf-devteam@zend.com>\r\n"
+                           ."\r\n"
+                           ."testSendMailWithoutMinimalHeaders";
 
         $this->transport->send($message);
 

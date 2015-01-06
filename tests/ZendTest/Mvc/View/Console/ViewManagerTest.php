@@ -61,39 +61,39 @@ class ViewManagerTest extends TestCase
                         'display_exceptions' => false,
                         'display_not_found_reason' => false,
                     ),
-                )
+                ),
             ),
             'with-console' => array(
                 array(
                     'view_manager' => array(
                         'display_exceptions' => true,
-                        'display_not_found_reason' => true
+                        'display_not_found_reason' => true,
                     ),
                     'console' => array(
                         'view_manager' => array(
                             'display_exceptions' => false,
                             'display_not_found_reason' => false,
-                        )
-                    )
-                )
+                        ),
+                    ),
+                ),
             ),
             'without-console' => array(
                 array(
                     'view_manager' => array(
                         'display_exceptions' => false,
-                        'display_not_found_reason' => false
+                        'display_not_found_reason' => false,
                     ),
-                )
+                ),
             ),
             'console-only' => array(
                 array(
                     'console' => array(
                         'view_manager' => array(
                             'display_exceptions' => false,
-                            'display_not_found_reason' => false
-                        )
+                            'display_not_found_reason' => false,
+                        ),
                     ),
-                )
+                ),
             ),
         );
     }

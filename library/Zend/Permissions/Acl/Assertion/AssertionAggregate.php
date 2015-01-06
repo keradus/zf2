@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Permissions\Acl\Assertion;
 
 use Zend\Permissions\Acl\Acl;
@@ -34,7 +35,7 @@ class AssertionAggregate implements AssertionInterface
      * Stacks an assertion in aggregate
      *
      * @param AssertionInterface|string $assertion
-     *            if string, must match a AssertionManager declared service (checked later)
+     *                                             if string, must match a AssertionManager declared service (checked later)
      *
      * @return self
      */
@@ -92,8 +93,8 @@ class AssertionAggregate implements AssertionInterface
      * - all assertions are true with MODE_ALL
      * - at least one assertion is true with MODE_AT_LEAST_ONE
      *
-     * @param string $mode
-     *            indicates how assertion chain result should interpreted (either 'all' or 'at_least_one')
+     * @param  string                   $mode
+     *                                        indicates how assertion chain result should interpreted (either 'all' or 'at_least_one')
      * @throws InvalidArgumentException
      *
      * @return self
@@ -142,7 +143,7 @@ class AssertionAggregate implements AssertionInterface
                         try {
                             $assertion = $manager->get($assertion);
                         } catch (\Exception $e) {
-                            throw new Exception\InvalidAssertionException('assertion "' . $assertion . '" is not defined in assertion manager');
+                            throw new Exception\InvalidAssertionException('assertion "'.$assertion.'" is not defined in assertion manager');
                         }
                     } else {
                         throw new RuntimeException('no assertion manager is set - cannot look up for assertions');

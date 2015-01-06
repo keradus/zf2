@@ -23,7 +23,7 @@ class InputFilterAwareTraitTest extends TestCase
 
         $this->assertAttributeEquals(null, 'inputFilter', $object);
 
-        $inputFilter = new InputFilter;
+        $inputFilter = new InputFilter();
 
         $object->setInputFilter($inputFilter);
 
@@ -36,7 +36,7 @@ class InputFilterAwareTraitTest extends TestCase
 
         $this->assertNull($object->getInputFilter());
 
-        $inputFilter = new InputFilter;
+        $inputFilter = new InputFilter();
 
         $object->setInputFilter($inputFilter);
 

@@ -55,7 +55,7 @@ class MultiCheckbox extends Checkbox
     }
 
     /**
-     * @param  array $options
+     * @param  array         $options
      * @return MultiCheckbox
      */
     public function setValueOptions(array $options)
@@ -72,7 +72,7 @@ class MultiCheckbox extends Checkbox
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      * @return self
      */
     public function unsetValueOption($key)
@@ -90,7 +90,7 @@ class MultiCheckbox extends Checkbox
      * - label_attributes: attributes to use when the label is rendered
      * - value_options: list of values and labels for the select options
      *
-     * @param  array|\Traversable $options
+     * @param  array|\Traversable             $options
      * @return MultiCheckbox|ElementInterface
      * @throws InvalidArgumentException
      */
@@ -115,8 +115,8 @@ class MultiCheckbox extends Checkbox
     /**
      * Set a single element attribute
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  string                         $key
+     * @param  mixed                          $value
      * @return MultiCheckbox|ElementInterface
      */
     public function setAttribute($key, $value)
@@ -125,20 +125,23 @@ class MultiCheckbox extends Checkbox
         // TODO: Deprecate this
         if ($key === 'options') {
             $this->setValueOptions($value);
+
             return $this;
         }
+
         return parent::setAttribute($key, $value);
     }
 
     /**
      * Set the flag to allow for disabling the automatic addition of an InArray validator.
      *
-     * @param bool $disableOption
+     * @param  bool   $disableOption
      * @return Select
      */
     public function setDisableInArrayValidator($disableOption)
     {
         $this->disableInArrayValidator = (bool) $disableOption;
+
         return $this;
     }
 
@@ -169,6 +172,7 @@ class MultiCheckbox extends Checkbox
                 'valueDelimiter' => null, // skip explode if only one value
             ));
         }
+
         return $this->validator;
     }
 
@@ -188,18 +192,20 @@ class MultiCheckbox extends Checkbox
         if ($this->useHiddenElement()) {
             $values[] = $this->getUncheckedValue();
         }
+
         return $values;
     }
 
     /**
      * Sets the value that should be selected.
      *
-     * @param mixed $value The value to set.
+     * @param  mixed         $value The value to set.
      * @return MultiCheckbox
      */
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 }

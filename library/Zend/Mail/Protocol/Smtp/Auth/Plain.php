@@ -33,9 +33,9 @@ class Plain extends Smtp
     /**
      * Constructor.
      *
-     * @param  string $host   (Default: 127.0.0.1)
-     * @param  int    $port   (Default: null)
-     * @param  array  $config Auth-specific parameters
+     * @param string $host   (Default: 127.0.0.1)
+     * @param int    $port   (Default: null)
+     * @param array  $config Auth-specific parameters
      */
     public function __construct($host = '127.0.0.1', $port = null, $config = null)
     {
@@ -74,7 +74,7 @@ class Plain extends Smtp
 
         $this->_send('AUTH PLAIN');
         $this->_expect(334);
-        $this->_send(base64_encode("\0" . $this->getUsername() . "\0" . $this->getPassword()));
+        $this->_send(base64_encode("\0".$this->getUsername()."\0".$this->getPassword()));
         $this->_expect(235);
         $this->auth = true;
     }
@@ -88,6 +88,7 @@ class Plain extends Smtp
     public function setUsername($username)
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -110,6 +111,7 @@ class Plain extends Smtp
     public function setPassword($password)
     {
         $this->password = $password;
+
         return $this;
     }
 

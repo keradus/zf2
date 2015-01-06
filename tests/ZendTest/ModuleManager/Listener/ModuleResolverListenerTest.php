@@ -30,7 +30,7 @@ class ModuleResolverListenerTest extends TestCase
         $this->includePath = get_include_path();
 
         $autoloader = new ModuleAutoloader(array(
-            dirname(__DIR__) . '/TestAsset',
+            dirname(__DIR__).'/TestAsset',
         ));
         $autoloader->register();
     }
@@ -56,8 +56,8 @@ class ModuleResolverListenerTest extends TestCase
 
     public function testModuleResolverListenerCanResolveModuleClasses()
     {
-        $moduleResolver = new ModuleResolverListener;
-        $e = new ModuleEvent;
+        $moduleResolver = new ModuleResolverListener();
+        $e = new ModuleEvent();
 
         $e->setModuleName('ListenerTestModule');
         $this->assertInstanceOf('ListenerTestModule\Module', $moduleResolver($e));

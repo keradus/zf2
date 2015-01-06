@@ -67,7 +67,6 @@ class ProxyAdapterTest extends SocketTest
                 $pass = TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS;
             }
 
-
             $this->config = array(
                 'adapter'    => '\Zend\Http\Client\Adapter\Proxy',
                 'proxy_host' => $host,
@@ -91,7 +90,7 @@ class ProxyAdapterTest extends SocketTest
             'proxy_host' => null,
         ));
 
-        $this->client->setUri($this->baseuri . 'testGetLastRequest.php');
+        $this->client->setUri($this->baseuri.'testGetLastRequest.php');
         $res = $this->client->setMethod(\Zend\Http\Request::METHOD_TRACE)->send();
         if ($res->getStatusCode() == 405 || $res->getStatusCode() == 501) {
             $this->markTestSkipped('Server does not allow the TRACE method');
@@ -103,17 +102,17 @@ class ProxyAdapterTest extends SocketTest
     public function testGetLastRequest()
     {
         /**
-         * This test will never work for the proxy adapter (and shouldn't!)
-         * because the proxy server modifies the request which is sent back in
-         * the TRACE response
-         */
+     * This test will never work for the proxy adapter (and shouldn't!)
+     * because the proxy server modifies the request which is sent back in
+     * the TRACE response
+     */
     }
 
     public function testDefaultConfig()
     {
         $config = $this->_adapter->getConfig();
-        $this->assertEquals(TRUE, $config['sslverifypeer']);
-        $this->assertEquals(FALSE, $config['sslallowselfsigned']);
+        $this->assertEquals(true, $config['sslverifypeer']);
+        $this->assertEquals(false, $config['sslallowselfsigned']);
     }
 
     /**

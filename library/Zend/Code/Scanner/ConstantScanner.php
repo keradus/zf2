@@ -63,7 +63,7 @@ class ConstantScanner implements ScannerInterface
     /**
      * Constructor
      *
-     * @param array $constantTokens
+     * @param array           $constantTokens
      * @param NameInformation $nameInformation
      */
     public function __construct(array $constantTokens, NameInformation $nameInformation = null)
@@ -102,6 +102,7 @@ class ConstantScanner implements ScannerInterface
     public function getName()
     {
         $this->scan();
+
         return $this->name;
     }
 
@@ -111,6 +112,7 @@ class ConstantScanner implements ScannerInterface
     public function getValue()
     {
         $this->scan();
+
         return $this->value;
     }
 
@@ -120,11 +122,12 @@ class ConstantScanner implements ScannerInterface
     public function getDocComment()
     {
         $this->scan();
+
         return $this->docComment;
     }
 
     /**
-     * @param Annotation\AnnotationManager $annotationManager
+     * @param  Annotation\AnnotationManager $annotationManager
      * @return AnnotationScanner
      */
     public function getAnnotations(Annotation\AnnotationManager $annotationManager)
@@ -142,6 +145,7 @@ class ConstantScanner implements ScannerInterface
     public function __toString()
     {
         $this->scan();
+
         return var_export($this, true);
     }
 

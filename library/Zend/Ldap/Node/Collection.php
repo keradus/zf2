@@ -19,13 +19,14 @@ class Collection extends Ldap\Collection
     /**
      * Creates the data structure for the given entry data
      *
-     * @param  array $data
+     * @param  array           $data
      * @return \Zend\Ldap\Node
      */
     protected function createEntry(array $data)
     {
         $node = Ldap\Node::fromArray($data, true);
         $node->attachLDAP($this->iterator->getLDAP());
+
         return $node;
     }
 

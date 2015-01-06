@@ -55,8 +55,8 @@ class Platform extends AbstractPlatform
     }
 
     /**
-     * @param PreparableSqlInterface|SqlInterface     $subject
-     * @param AdapterInterface|PlatformInterface|null $adapterOrPlatform
+     * @param  PreparableSqlInterface|SqlInterface                            $subject
+     * @param  AdapterInterface|PlatformInterface|null                        $adapterOrPlatform
      * @return PlatformDecoratorInterface|PreparableSqlInterface|SqlInterface
      */
     public function getTypeDecorator($subject, $adapterOrPlatform = null)
@@ -67,6 +67,7 @@ class Platform extends AbstractPlatform
             foreach ($this->decorators[$platformName] as $type => $decorator) {
                 if ($subject instanceof $type && is_a($decorator, $type, true)) {
                     $decorator->setSubject($subject);
+
                     return $decorator;
                 }
             }
@@ -81,6 +82,7 @@ class Platform extends AbstractPlatform
     public function getDecorators()
     {
         $platformName = $this->resolvePlatformName($this->getDefaultPlatform());
+
         return $this->decorators[$platformName];
     }
 
@@ -119,6 +121,7 @@ class Platform extends AbstractPlatform
     protected function resolvePlatformName($adapterOrPlatform)
     {
         $platformName = $this->resolvePlatform($adapterOrPlatform)->getName();
+
         return str_replace(array(' ', '_'), '', strtolower($platformName));
     }
     /**

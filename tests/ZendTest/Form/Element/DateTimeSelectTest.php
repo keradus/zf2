@@ -27,7 +27,7 @@ class DateTimeSelectTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\Date'
+            'Zend\Validator\Date',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);
@@ -55,7 +55,7 @@ class DateTimeSelectTest extends TestCase
                 'month' => '02',
                 'day' => '07',
                 'hour' => '03',
-                'minute' => '14'
+                'minute' => '14',
             ),
         ));
         $this->assertTrue($inputFilter->isValid());
@@ -112,7 +112,7 @@ class DateTimeSelectTest extends TestCase
             'month' => '09',
             'day' => '24',
             'hour' => '03',
-            'minute' => '04'
+            'minute' => '04',
         ));
 
         $this->assertEquals('2012', $element->getYearElement()->getValue());
@@ -140,7 +140,7 @@ class DateTimeSelectTest extends TestCase
 
     public function testPassingNullValueToSetValueWillUseCurrentDate()
     {
-        $now     = new DateTime;
+        $now     = new DateTime();
         $element = new DateTimeSelectElement();
         $element->setValue(null);
         $yearElement = $element->getYearElement();

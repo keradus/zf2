@@ -49,7 +49,7 @@ class CreateViewModelListenerTest extends TestCase
             array(1.00),
             array('string'),
             array(array('foo', 'bar')),
-            array(new stdClass),
+            array(new stdClass()),
         );
     }
 

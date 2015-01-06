@@ -78,7 +78,7 @@ abstract class StringUtils
     /**
      * Register a string wrapper class
      *
-     * @param string $wrapper
+     * @param  string $wrapper
      * @return void
      */
     public static function registerWrapper($wrapper)
@@ -92,7 +92,7 @@ abstract class StringUtils
     /**
      * Unregister a string wrapper class
      *
-     * @param string $wrapper
+     * @param  string $wrapper
      * @return void
      */
     public static function unregisterWrapper($wrapper)
@@ -117,8 +117,8 @@ abstract class StringUtils
      * Get the first string wrapper supporting the given character encoding
      * and supports to convert into the given convert encoding.
      *
-     * @param string      $encoding        Character encoding to support
-     * @param string|null $convertEncoding OPTIONAL character encoding to convert in
+     * @param  string                     $encoding        Character encoding to support
+     * @param  string|null                $convertEncoding OPTIONAL character encoding to convert in
      * @return StringWrapperInterface
      * @throws Exception\RuntimeException If no wrapper supports given character encodings
      */
@@ -128,13 +128,14 @@ abstract class StringUtils
             if ($wrapperClass::isSupported($encoding, $convertEncoding)) {
                 $wrapper = new $wrapperClass($encoding, $convertEncoding);
                 $wrapper->setEncoding($encoding, $convertEncoding);
+
                 return $wrapper;
             }
         }
 
         throw new Exception\RuntimeException(
-            'No wrapper found supporting "' . $encoding . '"'
-            . (($convertEncoding !== null) ? ' and "' . $convertEncoding . '"' : '')
+            'No wrapper found supporting "'.$encoding.'"'
+            .(($convertEncoding !== null) ? ' and "'.$convertEncoding.'"' : '')
         );
     }
 
@@ -151,7 +152,7 @@ abstract class StringUtils
     /**
      * Check if a given encoding is a known single-byte character encoding
      *
-     * @param string $encoding
+     * @param  string $encoding
      * @return bool
      */
     public static function isSingleByteEncoding($encoding)
@@ -162,7 +163,7 @@ abstract class StringUtils
     /**
      * Check if a given string is valid UTF-8 encoded
      *
-     * @param string $str
+     * @param  string $str
      * @return bool
      */
     public static function isValidUtf8($str)
@@ -182,6 +183,7 @@ abstract class StringUtils
             static::$hasPcreUnicodeSupport = defined('PREG_BAD_UTF8_OFFSET_ERROR') && preg_match('/\pL/u', 'a') == 1;
             ErrorHandler::stop();
         }
+
         return static::$hasPcreUnicodeSupport;
     }
 }

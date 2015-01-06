@@ -24,7 +24,7 @@ class Encoder
     protected $options = array(
         'sort'    => true,
         'version' => 1,
-        'wrap'    => 78
+        'wrap'    => 78,
     );
 
     /**
@@ -35,7 +35,7 @@ class Encoder
     /**
      * Constructor.
      *
-     * @param  array $options Additional options used during encoding
+     * @param array $options Additional options used during encoding
      */
     protected function __construct(array $options = array())
     {
@@ -51,6 +51,7 @@ class Encoder
     public static function decode($string)
     {
         $encoder = new static(array());
+
         return $encoder->_decode($string);
     }
 
@@ -127,8 +128,8 @@ class Encoder
     /**
      * Encode $value into a Ldif representation
      *
-     * @param  mixed $value   The value to be encoded
-     * @param  array $options Additional options used during encoding
+     * @param  mixed  $value   The value to be encoded
+     * @param  array  $options Additional options used during encoding
      * @return string The encoded value
      */
     public static function encode($value, array $options = array())
@@ -142,7 +143,7 @@ class Encoder
      * Recursive driver which determines the type of value to be encoded
      * and then dispatches to the appropriate method.
      *
-     * @param  mixed $value The value to be encoded
+     * @param  mixed  $value The value to be encoded
      * @return string Encoded value
      */
     protected function _encode($value)
@@ -163,8 +164,8 @@ class Encoder
      *
      * @link http://www.faqs.org/rfcs/rfc2849.html
      *
-     * @param  string  $string
-     * @param  bool $base64
+     * @param  string $string
+     * @param  bool   $base64
      * @return string
      */
     protected function encodeString($string, &$base64 = null)
@@ -234,22 +235,22 @@ class Encoder
         $output = '';
 
         if (count($value) < 1) {
-            return $name . ': ';
+            return $name.': ';
         }
 
         foreach ($value as $v) {
             $base64    = null;
             $v         = $this->encodeString($v, $base64);
-            $attribute = $name . ':';
+            $attribute = $name.':';
             if ($base64 === true) {
-                $attribute .= ': ' . $v;
+                $attribute .= ': '.$v;
             } else {
-                $attribute .= ' ' . $v;
+                $attribute .= ' '.$v;
             }
             if (isset($this->options['wrap']) && strlen($attribute) > $this->options['wrap']) {
-                $attribute = trim(chunk_split($attribute, $this->options['wrap'], PHP_EOL . ' '));
+                $attribute = trim(chunk_split($attribute, $this->options['wrap'], PHP_EOL.' '));
             }
-            $output .= $attribute . PHP_EOL;
+            $output .= $attribute.PHP_EOL;
         }
 
         return trim($output, PHP_EOL);
@@ -260,7 +261,7 @@ class Encoder
      *
      * @link http://www.faqs.org/rfcs/rfc2849.html
      *
-     * @param  array $attributes
+     * @param  array  $attributes
      * @return string
      */
     protected function encodeAttributes(array $attributes)
@@ -270,7 +271,7 @@ class Encoder
         if (!$this->versionWritten && array_key_exists('dn', $attributes) && isset($this->options['version'])
             && array_key_exists('objectclass', $attributes)
         ) {
-            $string .= sprintf('version: %d', $this->options['version']) . PHP_EOL;
+            $string .= sprintf('version: %d', $this->options['version']).PHP_EOL;
             $this->versionWritten = true;
         }
 
@@ -288,7 +289,7 @@ class Encoder
             }
         }
         foreach ($attributes as $key => $value) {
-            $string .= $this->encodeAttribute($key, $value) . PHP_EOL;
+            $string .= $this->encodeAttribute($key, $value).PHP_EOL;
         }
 
         return trim($string, PHP_EOL);

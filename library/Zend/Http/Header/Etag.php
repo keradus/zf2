@@ -24,7 +24,7 @@ class Etag implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'etag') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Etag string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Etag string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Etag implements HeaderInterface
 
     public function toString()
     {
-        return 'Etag: ' . $this->getFieldValue();
+        return 'Etag: '.$this->getFieldValue();
     }
 }

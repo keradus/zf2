@@ -96,7 +96,7 @@ class Curl implements HttpAdapter, StreamInterface
     /**
      * Set the configuration array for the adapter
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                         $options
      * @return Curl
      * @throws AdapterException\InvalidArgumentException
      */
@@ -107,7 +107,7 @@ class Curl implements HttpAdapter, StreamInterface
         }
         if (!is_array($options)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Traversable object expected, got ' . gettype($options)
+                'Array or Traversable object expected, got '.gettype($options)
             );
         }
 
@@ -118,7 +118,7 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         if (isset($options['proxyuser']) && isset($options['proxypass'])) {
-            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'] . ":" . $options['proxypass']);
+            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'].":".$options['proxypass']);
             unset($options['proxyuser'], $options['proxypass']);
         }
 
@@ -143,7 +143,7 @@ class Curl implements HttpAdapter, StreamInterface
         return $this;
     }
 
-    /**
+     /**
       * Retrieve the array of all configuration options
       *
       * @return array
@@ -157,7 +157,7 @@ class Curl implements HttpAdapter, StreamInterface
      * Direct setter for cURL adapter related options.
      *
      * @param  string|int $option
-     * @param  mixed $value
+     * @param  mixed      $value
      * @return Curl
      */
     public function setCurlOption($option, $value)
@@ -166,15 +166,16 @@ class Curl implements HttpAdapter, StreamInterface
             $this->config['curloptions'] = array();
         }
         $this->config['curloptions'][$option] = $value;
+
         return $this;
     }
 
     /**
      * Initialize curl
      *
-     * @param  string  $host
-     * @param  int     $port
-     * @param  bool $secure
+     * @param  string                            $host
+     * @param  int                               $port
+     * @param  bool                              $secure
      * @return void
      * @throws AdapterException\RuntimeException if unable to connect
      */
@@ -213,7 +214,7 @@ class Curl implements HttpAdapter, StreamInterface
         if (!$this->curl) {
             $this->close();
 
-            throw new AdapterException\RuntimeException('Unable to Connect to ' . $host . ':' . $port);
+            throw new AdapterException\RuntimeException('Unable to Connect to '.$host.':'.$port);
         }
 
         if ($secure !== false) {
@@ -233,13 +234,13 @@ class Curl implements HttpAdapter, StreamInterface
     /**
      * Send request to the remote server
      *
-     * @param  string        $method
-     * @param  \Zend\Uri\Uri $uri
-     * @param  float         $httpVersion
-     * @param  array         $headers
-     * @param  string        $body
-     * @return string        $request
-     * @throws AdapterException\RuntimeException If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
+     * @param  string                                    $method
+     * @param  \Zend\Uri\Uri                             $uri
+     * @param  float                                     $httpVersion
+     * @param  array                                     $headers
+     * @param  string                                    $body
+     * @return string                                    $request
+     * @throws AdapterException\RuntimeException         If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
      * @throws AdapterException\InvalidArgumentException if $method is currently not supported
      */
     public function write($method, $uri, $httpVersion = 1.1, $headers = array(), $body = '')
@@ -366,7 +367,7 @@ class Curl implements HttpAdapter, StreamInterface
         }
         $curlHeaders = array();
         foreach ($headers as $key => $value) {
-            $curlHeaders[] = $key . ': ' . $value;
+            $curlHeaders[] = $key.': '.$value;
         }
 
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
@@ -410,7 +411,7 @@ class Curl implements HttpAdapter, StreamInterface
         $request .= $body;
 
         if (empty($this->response)) {
-            throw new AdapterException\RuntimeException("Error in cURL request: " . curl_error($this->curl));
+            throw new AdapterException\RuntimeException("Error in cURL request: ".curl_error($this->curl));
         }
 
         // cURL automatically decodes chunked-messages, this means we have to disallow the Zend\Http\Response to do it again
@@ -481,25 +482,27 @@ class Curl implements HttpAdapter, StreamInterface
     /**
      * Set output stream for the response
      *
-     * @param resource $stream
+     * @param  resource $stream
      * @return Curl
      */
     public function setOutputStream($stream)
     {
         $this->outputStream = $stream;
+
         return $this;
     }
 
     /**
      * Header reader function for CURL
      *
-     * @param resource $curl
-     * @param string $header
+     * @param  resource $curl
+     * @param  string   $header
      * @return int
      */
     public function readHeader($curl, $header)
     {
         $this->response .= $header;
+
         return strlen($header);
     }
 }

@@ -25,7 +25,7 @@ class Regex implements FilterInterface
     /**
      * Filter out any log messages not matching the pattern
      *
-     * @param string|array|Traversable $regex Regular expression to test the log message
+     * @param  string|array|Traversable           $regex Regular expression to test the log message
      * @return Regex
      * @throws Exception\InvalidArgumentException
      */
@@ -52,8 +52,8 @@ class Regex implements FilterInterface
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param array $event event data
-     * @return bool accepted?
+     * @param  array $event event data
+     * @return bool  accepted?
      */
     public function filter(array $event)
     {
@@ -61,6 +61,7 @@ class Regex implements FilterInterface
         if (is_array($event['message'])) {
             $message = var_export($message, true);
         }
+
         return preg_match($this->regex, $message) > 0;
     }
 }

@@ -26,7 +26,7 @@ class FeedStrategy extends AbstractListenerAggregate
     /**
      * Constructor
      *
-     * @param  FeedRenderer $renderer
+     * @param FeedRenderer $renderer
      */
     public function __construct(FeedRenderer $renderer)
     {
@@ -46,7 +46,7 @@ class FeedStrategy extends AbstractListenerAggregate
      * Detect if we should use the FeedRenderer based on model type and/or
      * Accept header
      *
-     * @param  ViewEvent $e
+     * @param  ViewEvent         $e
      * @return null|FeedRenderer
      */
     public function selectRenderer(ViewEvent $e)
@@ -99,13 +99,13 @@ class FeedStrategy extends AbstractListenerAggregate
         if ($model instanceof Model\FeedModel) {
             $feed = $model->getFeed();
 
-            $charset = '; charset=' . $feed->getEncoding() . ';';
+            $charset = '; charset='.$feed->getEncoding().';';
         }
 
         // Populate response
         $response = $e->getResponse();
         $response->setContent($result);
         $headers = $response->getHeaders();
-        $headers->addHeaderLine('content-type', $feedType . $charset);
+        $headers->addHeaderLine('content-type', $feedType.$charset);
     }
 }

@@ -18,8 +18,8 @@ interface SharedEventAggregateAwareInterface
      * Attach a listener aggregate
      *
      * @param  SharedListenerAggregateInterface $aggregate
-     * @param  int $priority If provided, a suggested priority for the aggregate to use
-     * @return mixed return value of {@link SharedListenerAggregateInterface::attachShared()}
+     * @param  int                              $priority  If provided, a suggested priority for the aggregate to use
+     * @return mixed                            return value of {@link SharedListenerAggregateInterface::attachShared()}
      */
     public function attachAggregate(SharedListenerAggregateInterface $aggregate, $priority = 1);
 
@@ -27,7 +27,7 @@ interface SharedEventAggregateAwareInterface
      * Detach a listener aggregate
      *
      * @param  SharedListenerAggregateInterface $aggregate
-     * @return mixed return value of {@link SharedListenerAggregateInterface::detachShared()}
-    */
+     * @return mixed                            return value of {@link SharedListenerAggregateInterface::detachShared()}
+     */
     public function detachAggregate(SharedListenerAggregateInterface $aggregate);
 }

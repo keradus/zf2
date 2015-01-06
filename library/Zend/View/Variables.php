@@ -31,8 +31,8 @@ class Variables extends ArrayObject
     /**
      * Constructor
      *
-     * @param  array $variables
-     * @param  array $options
+     * @param array $variables
+     * @param array $options
      */
     public function __construct(array $variables = array(), array $options = array())
     {
@@ -48,7 +48,7 @@ class Variables extends ArrayObject
     /**
      * Configure object
      *
-     * @param  array $options
+     * @param  array     $options
      * @return Variables
      */
     public function setOptions(array $options)
@@ -64,18 +64,20 @@ class Variables extends ArrayObject
                     break;
             }
         }
+
         return $this;
     }
 
     /**
      * Set status of "strict vars" flag
      *
-     * @param  bool $flag
+     * @param  bool      $flag
      * @return Variables
      */
     public function setStrictVars($flag)
     {
         $this->strictVars = (bool) $flag;
+
         return $this;
     }
 
@@ -92,7 +94,7 @@ class Variables extends ArrayObject
     /**
      * Assign many values at once
      *
-     * @param  array|object $spec
+     * @param  array|object                       $spec
      * @return Variables
      * @throws Exception\InvalidArgumentException
      */
@@ -138,6 +140,7 @@ class Variables extends ArrayObject
                     $key
                 ), E_USER_NOTICE);
             }
+
             return;
         }
 

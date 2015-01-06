@@ -18,13 +18,13 @@ class RealPath extends AbstractFilter
      * @var array $options
      */
     protected $options = array(
-        'exists' => true
+        'exists' => true,
     );
 
     /**
      * Class constructor
      *
-     * @param  bool|Traversable $existsOrOptions Options to set
+     * @param bool|Traversable $existsOrOptions Options to set
      */
     public function __construct($existsOrOptions = true)
     {
@@ -48,6 +48,7 @@ class RealPath extends AbstractFilter
     public function setExists($flag = true)
     {
         $this->options['exists'] = (bool) $flag;
+
         return $this;
     }
 
@@ -68,7 +69,7 @@ class RealPath extends AbstractFilter
      *
      * If the value provided is non-scalar, the value will remain unfiltered
      *
-     * @param  string $value
+     * @param  string       $value
      * @return string|mixed
      */
     public function filter($value)
@@ -98,11 +99,11 @@ class RealPath extends AbstractFilter
                 $cwd   = getcwd();
                 $drive = substr($cwd, 0, 2);
                 if (substr($path, 0, 1) != DIRECTORY_SEPARATOR) {
-                    $path = substr($cwd, 3) . DIRECTORY_SEPARATOR . $path;
+                    $path = substr($cwd, 3).DIRECTORY_SEPARATOR.$path;
                 }
             }
         } elseif (substr($path, 0, 1) != DIRECTORY_SEPARATOR) {
-            $path = getcwd() . DIRECTORY_SEPARATOR . $path;
+            $path = getcwd().DIRECTORY_SEPARATOR.$path;
         }
 
         $stack = array();
@@ -117,6 +118,6 @@ class RealPath extends AbstractFilter
             }
         }
 
-        return $drive . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $stack);
+        return $drive.DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $stack);
     }
 }

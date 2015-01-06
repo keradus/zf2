@@ -28,19 +28,19 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
 
         $this->_params = array('host'     => TESTS_ZEND_MAIL_POP3_HOST,
                                'user'     => TESTS_ZEND_MAIL_POP3_USER,
-                               'password' => TESTS_ZEND_MAIL_POP3_PASSWORD);
+                               'password' => TESTS_ZEND_MAIL_POP3_PASSWORD, );
 
         if (defined('TESTS_ZEND_MAIL_SERVER_TESTDIR') && TESTS_ZEND_MAIL_SERVER_TESTDIR) {
-            if (!file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'inbox')
-             && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'INBOX')) {
+            if (!file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR.DIRECTORY_SEPARATOR.'inbox')
+             && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR.DIRECTORY_SEPARATOR.'INBOX')) {
                 $this->markTestSkipped('There is no file name "inbox" or "INBOX" in '
-                                       . TESTS_ZEND_MAIL_SERVER_TESTDIR . '. I won\'t use it for testing. '
-                                       . 'This is you safety net. If you think it is the right directory just '
-                                       . 'create an empty file named INBOX or remove/deactived this message.');
+                                       .TESTS_ZEND_MAIL_SERVER_TESTDIR.'. I won\'t use it for testing. '
+                                       .'This is you safety net. If you think it is the right directory just '
+                                       .'create an empty file named INBOX or remove/deactived this message.');
             }
 
             $this->_cleanDir(TESTS_ZEND_MAIL_SERVER_TESTDIR);
-            $this->_copyDir(__DIR__ . '/../_files/test.' . TESTS_ZEND_MAIL_SERVER_FORMAT,
+            $this->_copyDir(__DIR__.'/../_files/test.'.TESTS_ZEND_MAIL_SERVER_FORMAT,
                             TESTS_ZEND_MAIL_SERVER_TESTDIR);
         }
     }
@@ -52,7 +52,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
             if ($entry == '.' || $entry == '..') {
                 continue;
             }
-            $fullname = $dir . DIRECTORY_SEPARATOR . $entry;
+            $fullname = $dir.DIRECTORY_SEPARATOR.$entry;
             if (is_dir($fullname)) {
                 $this->_cleanDir($fullname);
                 rmdir($fullname);
@@ -70,8 +70,8 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
             if ($entry == '.' || $entry == '..' || $entry == '.svn') {
                 continue;
             }
-            $fullname = $dir  . DIRECTORY_SEPARATOR . $entry;
-            $destname = $dest . DIRECTORY_SEPARATOR . $entry;
+            $fullname = $dir.DIRECTORY_SEPARATOR.$entry;
+            $destname = $dest.DIRECTORY_SEPARATOR.$entry;
             if (is_dir($fullname)) {
                 mkdir($destname);
                 $this->_copyDir($fullname, $destname);
@@ -91,7 +91,6 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
     {
         new Storage\Pop3(new Config\Config($this->_params));
     }
-
 
     public function testConnectFailure()
     {
@@ -185,7 +184,6 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Pop3($this->_params);
         $shouldSizes = array(1 => 397, 89, 694, 452, 497, 101, 139);
-
 
         $sizes = $mail->getSize();
         $this->assertEquals($shouldSizes, $sizes);

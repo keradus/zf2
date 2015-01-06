@@ -19,7 +19,7 @@ abstract class AbstractSeparator extends AbstractFilter
     /**
      * Constructor
      *
-     * @param  string $separator Space by default
+     * @param string $separator Space by default
      */
     public function __construct($separator = ' ')
     {
@@ -36,16 +36,17 @@ abstract class AbstractSeparator extends AbstractFilter
     /**
      * Sets a new separator
      *
-     * @param  string $separator Separator
+     * @param  string                             $separator Separator
      * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setSeparator($separator)
     {
         if (!is_string($separator)) {
-            throw new Exception\InvalidArgumentException('"' . $separator . '" is not a valid separator.');
+            throw new Exception\InvalidArgumentException('"'.$separator.'" is not a valid separator.');
         }
         $this->separator = $separator;
+
         return $this;
     }
 

@@ -48,6 +48,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         }
         if ($parameterContainer) {
             $parameterContainer->offsetSet('limit', $this->limit, ParameterContainer::TYPE_INTEGER);
+
             return array($driver->formatParameterName('limit'));
         }
 
@@ -61,6 +62,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         }
         if ($parameterContainer) {
             $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
+
             return array($driver->formatParameterName('offset'));
         }
 

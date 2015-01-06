@@ -46,27 +46,28 @@ class SaltedS2k
         'snefru256'  => MHASH_SNEFRU256,
         'gost'       => MHASH_GOST,
         'crc32'      => MHASH_CRC32,
-        'crc32b'     => MHASH_CRC32B
+        'crc32b'     => MHASH_CRC32B,
     );
 
     /**
      * Generate the new key
      *
-     * @param  string  $hash       The hash algorithm to be used by HMAC
-     * @param  string  $password   The source password/key
-     * @param  int $bytes      The output size in bytes
-     * @param  string  $salt       The salt of the algorithm
+     * @param  string                             $hash     The hash algorithm to be used by HMAC
+     * @param  string                             $password The source password/key
+     * @param  int                                $bytes    The output size in bytes
+     * @param  string                             $salt     The salt of the algorithm
      * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function calc($hash, $password, $salt, $bytes)
     {
         if (!in_array($hash, array_keys(static::$supportedMhashAlgos))) {
-            throw new Exception\InvalidArgumentException("The hash algorithm $hash is not supported by " . __CLASS__);
+            throw new Exception\InvalidArgumentException("The hash algorithm $hash is not supported by ".__CLASS__);
         }
         if (strlen($salt)<8) {
             throw new Exception\InvalidArgumentException('The salt size must be at least of 8 bytes');
         }
+
         return mhash_keygen_s2k(static::$supportedMhashAlgos[$hash], $password, $salt, $bytes);
     }
 }

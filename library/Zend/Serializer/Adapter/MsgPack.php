@@ -42,7 +42,7 @@ class MsgPack extends AbstractAdapter
     /**
      * Serialize PHP value to msgpack
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @return string
      * @throws Exception\RuntimeException on msgpack error
      */
@@ -62,7 +62,7 @@ class MsgPack extends AbstractAdapter
     /**
      * Deserialize msgpack string to PHP value
      *
-     * @param  string $serialized
+     * @param  string                     $serialized
      * @return mixed
      * @throws Exception\RuntimeException on msgpack error
      */

@@ -57,10 +57,10 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel for request.
      *
-     * @param array $matchAgainst (optional) The Array to match against
-     * @param bool $returnDefault (optional) If no match is available. Return default instead
-     * @param AbstractFieldValuePart|null $resultReference (optional) The object that was matched
-     * @throws InvalidArgumentException If the supplied and matched View Model could not be found
+     * @param  array                       $matchAgainst    (optional) The Array to match against
+     * @param  bool                        $returnDefault   (optional) If no match is available. Return default instead
+     * @param  AbstractFieldValuePart|null $resultReference (optional) The object that was matched
+     * @throws InvalidArgumentException    If the supplied and matched View Model could not be found
      * @return ModelInterface|null
      */
     public function __invoke(
@@ -74,10 +74,10 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel for request.
      *
-     * @param array $matchAgainst (optional) The Array to match against
-     * @param bool $returnDefault (optional) If no match is available. Return default instead
-     * @param AbstractFieldValuePart|null $resultReference (optional) The object that was matched
-     * @throws InvalidArgumentException If the supplied and matched View Model could not be found
+     * @param  array                       $matchAgainst    (optional) The Array to match against
+     * @param  bool                        $returnDefault   (optional) If no match is available. Return default instead
+     * @param  AbstractFieldValuePart|null $resultReference (optional) The object that was matched
+     * @throws InvalidArgumentException    If the supplied and matched View Model could not be found
      * @return ModelInterface|null
      */
     public function getViewModel(
@@ -101,10 +101,10 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel name for request.
      *
-     * @param array $matchAgainst (optional) The Array to match against
-     * @param bool $returnDefault (optional) If no match is available. Return default instead
-     * @param AbstractFieldValuePart|null $resultReference (optional) The object that was matched.
-     * @return ModelInterface|null Returns null if $returnDefault = false and no match could be made
+     * @param  array                       $matchAgainst    (optional) The Array to match against
+     * @param  bool                        $returnDefault   (optional) If no match is available. Return default instead
+     * @param  AbstractFieldValuePart|null $resultReference (optional) The object that was matched.
+     * @return ModelInterface|null         Returns null if $returnDefault = false and no match could be made
      */
     public function getViewModelName(
         array $matchAgainst = null,
@@ -114,6 +114,7 @@ class AcceptableViewModelSelector extends AbstractPlugin
         $res = $this->match($matchAgainst);
         if ($res) {
             $resultReference = $res;
+
             return $this->extractViewModelName($res);
         }
 
@@ -125,7 +126,7 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Detects an appropriate viewmodel name for request.
      *
-     * @param array $matchAgainst (optional) The Array to match against
+     * @param  array                       $matchAgainst (optional) The Array to match against
      * @return AbstractFieldValuePart|null The object that was matched
      */
     public function match(array $matchAgainst = null)
@@ -159,12 +160,13 @@ class AcceptableViewModelSelector extends AbstractPlugin
 
     /**
      * Set the default View Model (name) to return if no match could be made
-     * @param string $defaultViewModelName The default View Model name
+     * @param  string                      $defaultViewModelName The default View Model name
      * @return AcceptableViewModelSelector provides fluent interface
      */
     public function setDefaultViewModelName($defaultViewModelName)
     {
         $this->defaultViewModelName = (string) $defaultViewModelName;
+
         return $this;
     }
 
@@ -180,12 +182,13 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Set the default Accept Types and View Model combinations to match against if none are specified.
      *
-     * @param array $matchAgainst (optional) The Array to match against
+     * @param  array                       $matchAgainst (optional) The Array to match against
      * @return AcceptableViewModelSelector provides fluent interface
      */
     public function setDefaultMatchAgainst(array $matchAgainst = null)
     {
         $this->defaultMatchAgainst = $matchAgainst;
+
         return $this;
     }
 
@@ -202,24 +205,26 @@ class AcceptableViewModelSelector extends AbstractPlugin
     /**
      * Inject the viewmodel name into the accept header string
      *
-     * @param string $modelAcceptString
-     * @param string $modelName
+     * @param  string $modelAcceptString
+     * @param  string $modelName
      * @return string
      */
     protected function injectViewModelName($modelAcceptString, $modelName)
     {
         $modelName = str_replace('\\', '|', $modelName);
-        return $modelAcceptString . '; ' . self::INJECT_VIEWMODEL_NAME . '="' . $modelName . '", ';
+
+        return $modelAcceptString.'; '.self::INJECT_VIEWMODEL_NAME.'="'.$modelName.'", ';
     }
 
     /**
      * Extract the viewmodel name from a match
-     * @param AbstractFieldValuePart $res
+     * @param  AbstractFieldValuePart $res
      * @return string
      */
     protected function extractViewModelName(AbstractFieldValuePart $res)
     {
         $modelName = $res->getMatchedAgainst()->params[self::INJECT_VIEWMODEL_NAME];
+
         return str_replace('|', '\\', $modelName);
     }
 
@@ -244,6 +249,7 @@ class AcceptableViewModelSelector extends AbstractPlugin
         }
 
         $this->request = $request;
+
         return $request;
     }
 
@@ -263,7 +269,7 @@ class AcceptableViewModelSelector extends AbstractPlugin
         if (!$controller instanceof InjectApplicationEventInterface) {
             throw new DomainException(
                     'A controller that implements InjectApplicationEventInterface '
-                  . 'is required to use ' . __CLASS__
+                  .'is required to use '.__CLASS__
             );
         }
 

@@ -35,7 +35,7 @@ class Identcode extends Code25interleaved
 
     /**
      * Check allowed characters
-     * @param  string $value
+     * @param  string                               $value
      * @return string
      * @throws Exception\BarcodeValidationException
      */

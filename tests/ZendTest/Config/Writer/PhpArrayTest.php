@@ -102,12 +102,12 @@ class PhpArrayTest extends AbstractWriterTestCase
     public function testWriteConvertsPathToDirWhenWritingBackToFile()
     {
         $filename = $this->getTestAssetFileName();
-        file_put_contents($filename, file_get_contents(__DIR__ . '/_files/array.php'));
+        file_put_contents($filename, file_get_contents(__DIR__.'/_files/array.php'));
 
         $this->writer->toFile($filename, include $filename);
 
         // Ensure file endings are same
-        $expected = trim(file_get_contents(__DIR__ . '/_files/array.php'));
+        $expected = trim(file_get_contents(__DIR__.'/_files/array.php'));
         $expected = preg_replace("~\r\n|\n|\r~", PHP_EOL, $expected);
 
         $result = trim(file_get_contents($filename));

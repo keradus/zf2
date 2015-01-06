@@ -73,7 +73,7 @@ class PropertyGenerator extends AbstractMemberGenerator
      * @configkey visibility   string
      *
      * @throws Exception\InvalidArgumentException
-     * @param  array $array
+     * @param  array                              $array
      * @return PropertyGenerator
      */
     public static function fromArray(array $array)
@@ -120,9 +120,9 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param string $name
+     * @param string                              $name
      * @param PropertyValueGenerator|string|array $defaultValue
-     * @param int $flags
+     * @param int                                 $flags
      */
     public function __construct($name = null, $defaultValue = null, $flags = self::FLAG_PUBLIC)
     {
@@ -138,7 +138,7 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  bool $const
+     * @param  bool              $const
      * @return PropertyGenerator
      */
     public function setConst($const)
@@ -207,18 +207,18 @@ class PropertyGenerator extends AbstractMemberGenerator
             if ($defaultValue != null && !$defaultValue->isValidConstantType()) {
                 throw new Exception\RuntimeException(sprintf(
                     'The property %s is said to be '
-                    . 'constant but does not have a valid constant value.',
+                    .'constant but does not have a valid constant value.',
                     $this->name
                 ));
             }
-            $output .= $this->indentation . 'const ' . $name . ' = '
-                . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
+            $output .= $this->indentation.'const '.$name.' = '
+                .(($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         } else {
             $output .= $this->indentation
-                . $this->getVisibility()
-                . (($this->isStatic()) ? ' static' : '')
-                . ' $' . $name . ' = '
-                . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
+                .$this->getVisibility()
+                .(($this->isStatic()) ? ' static' : '')
+                .' $'.$name.' = '
+                .(($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         }
 
         return $output;

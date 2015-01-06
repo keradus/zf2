@@ -83,7 +83,7 @@ class Mcrypt implements SymmetricInterface
         'rijndael-256' => 'rijndael-256',
         'saferplus'    => 'saferplus',
         'serpent'      => 'serpent',
-        'twofish'      => 'twofish'
+        'twofish'      => 'twofish',
     );
 
     /**
@@ -97,7 +97,7 @@ class Mcrypt implements SymmetricInterface
         'ctr'  => 'ctr',
         'ofb'  => 'ofb',
         'nofb' => 'nofb',
-        'ncfb' => 'ncfb'
+        'ncfb' => 'ncfb',
     );
 
     /**
@@ -111,7 +111,7 @@ class Mcrypt implements SymmetricInterface
     {
         if (!extension_loaded('mcrypt')) {
             throw new Exception\RuntimeException(
-                'You cannot use ' . __CLASS__ . ' without the Mcrypt extension'
+                'You cannot use '.__CLASS__.' without the Mcrypt extension'
             );
         }
         if (!empty($options)) {
@@ -241,7 +241,7 @@ class Mcrypt implements SymmetricInterface
         if (!empty($keySizes) && $keyLen < $maxKey) {
             if (!in_array($keyLen, $keySizes)) {
                 throw new Exception\InvalidArgumentException(
-                    "The size of the key must be one of " . implode(", ", $keySizes) . " bytes or longer"
+                    "The size of the key must be one of ".implode(", ", $keySizes)." bytes or longer"
                 );
             }
         }
@@ -260,6 +260,7 @@ class Mcrypt implements SymmetricInterface
         if (empty($this->key)) {
             return;
         }
+
         return substr($this->key, 0, $this->getKeySize());
     }
 
@@ -274,7 +275,7 @@ class Mcrypt implements SymmetricInterface
     {
         if (!array_key_exists($algo, $this->supportedAlgos)) {
             throw new Exception\InvalidArgumentException(
-                "The algorithm $algo is not supported by " . __CLASS__
+                "The algorithm $algo is not supported by ".__CLASS__
             );
         }
         $this->algo = $algo;
@@ -349,7 +350,7 @@ class Mcrypt implements SymmetricInterface
             $iv
         );
 
-        return $iv . $result;
+        return $iv.$result;
     }
 
     /**
@@ -417,7 +418,7 @@ class Mcrypt implements SymmetricInterface
         }
         if (strlen($salt) < $this->getSaltSize()) {
             throw new Exception\InvalidArgumentException(
-                'The size of the salt (IV) must be at least ' . $this->getSaltSize() . ' bytes'
+                'The size of the salt (IV) must be at least '.$this->getSaltSize().' bytes'
             );
         }
         $this->iv = $salt;
@@ -437,7 +438,7 @@ class Mcrypt implements SymmetricInterface
         }
         if (strlen($this->iv) < $this->getSaltSize()) {
             throw new Exception\RuntimeException(
-                'The size of the salt (IV) must be at least ' . $this->getSaltSize() . ' bytes'
+                'The size of the salt (IV) must be at least '.$this->getSaltSize().' bytes'
             );
         }
 
@@ -467,7 +468,7 @@ class Mcrypt implements SymmetricInterface
             $mode = strtolower($mode);
             if (!array_key_exists($mode, $this->supportedModes)) {
                 throw new Exception\InvalidArgumentException(
-                    "The mode $mode is not supported by " . __CLASS__
+                    "The mode $mode is not supported by ".__CLASS__
                 );
             }
             $this->mode = $mode;

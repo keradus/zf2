@@ -32,7 +32,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         foreach ($this->variables as $name => $value) {
             if (!isset($GLOBALS[$value])) {
-                $this->fail('Missing required variable ' . $value . ' from phpunit.xml for this integration test');
+                $this->fail('Missing required variable '.$value.' from phpunit.xml for this integration test');
             }
             $this->variables[$name] = $GLOBALS[$value];
         }
@@ -49,7 +49,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $db2Resource = db2_connect($this->variables['database'], $this->variables['username'], $this->variables['password']);
 
-        $statement = new Statement;
+        $statement = new Statement();
         $this->assertSame($statement, $statement->initialize($db2Resource));
         unset($stmtResource, $db2Resource);
     }
@@ -61,7 +61,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $db2Resource = db2_connect($this->variables['database'], $this->variables['username'], $this->variables['password']);
 
-        $statement = new Statement;
+        $statement = new Statement();
         $statement->initialize($db2Resource);
         $statement->prepare("SELECT 'foo'");
         $resource = $statement->getResource();
@@ -77,7 +77,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $db2Resource = db2_connect($this->variables['database'], $this->variables['username'], $this->variables['password']);
 
-        $statement = new Statement;
+        $statement = new Statement();
         $statement->initialize($db2Resource);
         $this->assertFalse($statement->isPrepared());
         $this->assertSame($statement, $statement->prepare("SELECT 'foo' FROM SYSIBM.SYSDUMMY1"));

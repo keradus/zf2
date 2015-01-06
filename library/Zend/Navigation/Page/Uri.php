@@ -34,10 +34,10 @@ class Uri extends AbstractPage
     /**
      * Sets page URI
      *
-     * @param  string $uri                page URI, must a string or null
+     * @param string $uri page URI, must a string or null
      *
-     * @return Uri   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if $uri is invalid
+     * @return Uri                                fluent interface, returns self
+     * @throws Exception\InvalidArgumentException if $uri is invalid
      */
     public function setUri($uri)
     {
@@ -48,6 +48,7 @@ class Uri extends AbstractPage
         }
 
         $this->uri = $uri;
+
         return $this;
     }
 
@@ -75,9 +76,9 @@ class Uri extends AbstractPage
         $fragment = $this->getFragment();
         if (null !== $fragment) {
             if ('#' == substr($uri, -1)) {
-                return $uri . $fragment;
+                return $uri.$fragment;
             } else {
-                return $uri . '#' . $fragment;
+                return $uri.'#'.$fragment;
             }
         }
 
@@ -89,10 +90,10 @@ class Uri extends AbstractPage
      *
      * This method will compare the page properties against the request uri.
      *
-     * @param bool $recursive
-     *            [optional] whether page should be considered
-     *            active if any child pages are active. Default is
-     *            false.
+     * @param  bool $recursive
+     *                         [optional] whether page should be considered
+     *                         active if any child pages are active. Default is
+     *                         false.
      * @return bool whether page should be considered active or not
      */
     public function isActive($recursive = false)
@@ -101,6 +102,7 @@ class Uri extends AbstractPage
             if ($this->getRequest() instanceof Request) {
                 if ($this->getRequest()->getUri()->getPath() == $this->getUri()) {
                     $this->active = true;
+
                     return true;
                 }
             }
@@ -122,12 +124,13 @@ class Uri extends AbstractPage
     /**
      * Sets request for assembling URLs
      *
-     * @param Request $request
-     * @return self Fluent interface, returns self
+     * @param  Request $request
+     * @return self    Fluent interface, returns self
      */
     public function setRequest(Request $request = null)
     {
         $this->request = $request;
+
         return $this;
     }
 

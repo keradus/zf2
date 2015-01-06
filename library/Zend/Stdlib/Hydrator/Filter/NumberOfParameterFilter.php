@@ -30,7 +30,7 @@ class NumberOfParameterFilter implements FilterInterface
     }
 
     /**
-     * @param string $property the name of the property
+     * @param  string                   $property the name of the property
      * @return bool
      * @throws InvalidArgumentException
      */

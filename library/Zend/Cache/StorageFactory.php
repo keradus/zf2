@@ -33,7 +33,7 @@ abstract class StorageFactory
      * The storage factory
      * This can instantiate storage adapters and plugins.
      *
-     * @param array|Traversable $cfg
+     * @param  array|Traversable                  $cfg
      * @return Storage\StorageInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -46,7 +46,7 @@ abstract class StorageFactory
         if (!is_array($cfg)) {
             throw new Exception\InvalidArgumentException(
                 'The factory needs an associative array '
-                . 'or a Traversable object as an argument'
+                .'or a Traversable object as an argument'
             );
         }
 
@@ -159,6 +159,7 @@ abstract class StorageFactory
         if (static::$adapters === null) {
             static::$adapters = new Storage\AdapterPluginManager();
         }
+
         return static::$adapters;
     }
 
@@ -186,8 +187,8 @@ abstract class StorageFactory
     /**
      * Instantiate a storage plugin
      *
-     * @param string|Storage\Plugin\PluginInterface     $pluginName
-     * @param array|Traversable|Storage\Plugin\PluginOptions $options
+     * @param  string|Storage\Plugin\PluginInterface          $pluginName
+     * @param  array|Traversable|Storage\Plugin\PluginOptions $options
      * @return Storage\Plugin\PluginInterface
      * @throws Exception\RuntimeException
      */
@@ -221,6 +222,7 @@ abstract class StorageFactory
         if (static::$plugins === null) {
             static::$plugins = new Storage\PluginManager();
         }
+
         return static::$plugins;
     }
 

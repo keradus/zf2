@@ -58,7 +58,7 @@ class SessionManagerFactory implements FactoryInterface
      * @param  ServiceLocatorInterface    $services
      * @return SessionManager
      * @throws ServiceNotCreatedException if any collaborators are not of the
-     *         correct type
+     *                                             correct type
      */
     public function createService(ServiceLocatorInterface $services)
     {

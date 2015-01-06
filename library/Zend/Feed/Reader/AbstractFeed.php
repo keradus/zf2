@@ -68,7 +68,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
      * Constructor
      *
      * @param DomDocument $domDocument The DOM object for the feed's XML
-     * @param string $type Feed type
+     * @param string      $type        Feed type
      */
     public function __construct(DOMDocument $domDocument, $type = null)
     {
@@ -158,6 +158,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
         if (empty($assumed)) {
             $assumed = 'UTF-8';
         }
+
         return $assumed;
     }
 
@@ -251,21 +252,22 @@ abstract class AbstractFeed implements Feed\FeedInterface
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new Exception\BadMethodCallException('Method: ' . $method
-        . 'does not exist and could not be located on a registered Extension');
+        throw new Exception\BadMethodCallException('Method: '.$method
+        .'does not exist and could not be located on a registered Extension');
     }
 
     /**
      * Return an Extension object with the matching name (postfixed with _Feed)
      *
-     * @param string $name
+     * @param  string                                   $name
      * @return \Zend\Feed\Reader\Extension\AbstractFeed
      */
     public function getExtension($name)
     {
-        if (array_key_exists($name . '\Feed', $this->extensions)) {
-            return $this->extensions[$name . '\Feed'];
+        if (array_key_exists($name.'\Feed', $this->extensions)) {
+            return $this->extensions[$name.'\Feed'];
         }
+
         return;
     }
 

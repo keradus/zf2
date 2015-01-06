@@ -40,7 +40,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
      * Accepted options for Csrf:
      * - csrf_options: an array used in the Csrf
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable $options
      * @return Csrf
      */
     public function setOptions($options)
@@ -69,6 +69,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     public function setCsrfValidatorOptions(array $options)
     {
         $this->csrfValidatorOptions = $options;
+
         return $this;
     }
 
@@ -84,6 +85,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
             $csrfOptions = array_merge($csrfOptions, array('name' => $this->getName()));
             $this->setCsrfValidator(new CsrfValidator($csrfOptions));
         }
+
         return $this->csrfValidator;
     }
 
@@ -94,6 +96,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     public function setCsrfValidator(CsrfValidator $validator)
     {
         $this->csrfValidator = $validator;
+
         return $this;
     }
 
@@ -107,6 +110,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
     public function getValue()
     {
         $validator = $this->getCsrfValidator();
+
         return $validator->getHash();
     }
 
@@ -122,6 +126,7 @@ class Csrf extends Element implements InputProviderInterface, ElementPrepareAwar
         $attributes = parent::getAttributes();
         $validator  = $this->getCsrfValidator();
         $attributes['value'] = $validator->getHash();
+
         return $attributes;
     }
 

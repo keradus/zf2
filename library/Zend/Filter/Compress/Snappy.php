@@ -19,7 +19,7 @@ class Snappy implements CompressionAlgorithmInterface
     /**
      * Class constructor
      *
-     * @param null|array|\Traversable $options (Optional) Options to set
+     * @param  null|array|\Traversable               $options (Optional) Options to set
      * @throws Exception\ExtensionNotLoadedException if snappy extension not loaded
      */
     public function __construct($options = null)
@@ -32,7 +32,7 @@ class Snappy implements CompressionAlgorithmInterface
     /**
      * Compresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException on memory, output length or data warning
      */
@@ -50,7 +50,7 @@ class Snappy implements CompressionAlgorithmInterface
     /**
      * Decompresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException on memory, output length or data warning
      */

@@ -44,5 +44,5 @@ class TransferEncodingTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Transfer-Encoding: xxx', $transferEncodingHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

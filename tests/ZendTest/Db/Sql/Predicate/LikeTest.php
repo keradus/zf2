@@ -43,15 +43,15 @@ class LikeTest extends \PHPUnit_Framework_TestCase
         $like = new Like('bar', 'Foo%');
         $this->assertEquals(
             array(
-                array('%1$s LIKE %2$s', array('bar', 'Foo%'), array($like::TYPE_IDENTIFIER, $like::TYPE_VALUE))
+                array('%1$s LIKE %2$s', array('bar', 'Foo%'), array($like::TYPE_IDENTIFIER, $like::TYPE_VALUE)),
             ),
             $like->getExpressionData()
         );
 
-        $like = new Like(array('Foo%'=>$like::TYPE_VALUE), array('bar'=>$like::TYPE_IDENTIFIER));
+        $like = new Like(array('Foo%' => $like::TYPE_VALUE), array('bar' => $like::TYPE_IDENTIFIER));
         $this->assertEquals(
             array(
-                array('%1$s LIKE %2$s', array('Foo%', 'bar'), array($like::TYPE_VALUE, $like::TYPE_IDENTIFIER))
+                array('%1$s LIKE %2$s', array('Foo%', 'bar'), array($like::TYPE_VALUE, $like::TYPE_IDENTIFIER)),
             ),
             $like->getExpressionData()
         );

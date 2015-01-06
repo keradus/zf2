@@ -49,6 +49,7 @@ class Session extends AbstractAdapter implements
         if (!$this->options) {
             $this->setOptions(new SessionOptions());
         }
+
         return $this->options;
     }
 
@@ -63,6 +64,7 @@ class Session extends AbstractAdapter implements
         if (!$sessionContainer) {
             throw new Exception\RuntimeException("No session container configured");
         }
+
         return $sessionContainer;
     }
 
@@ -97,6 +99,7 @@ class Session extends AbstractAdapter implements
     public function flush()
     {
         $this->getSessionContainer()->exchangeArray(array());
+
         return true;
     }
 
@@ -105,7 +108,7 @@ class Session extends AbstractAdapter implements
     /**
      * Remove items matching given prefix
      *
-     * @param string $prefix
+     * @param  string $prefix
      * @return bool
      */
     public function clearByPrefix($prefix)
@@ -139,10 +142,10 @@ class Session extends AbstractAdapter implements
     /**
      * Internal method to get an item.
      *
-     * @param  string  $normalizedKey
-     * @param  bool $success
-     * @param  mixed   $casToken
-     * @return mixed Data on success, null on failure
+     * @param  string                       $normalizedKey
+     * @param  bool                         $success
+     * @param  mixed                        $casToken
+     * @return mixed                        Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
@@ -152,6 +155,7 @@ class Session extends AbstractAdapter implements
 
         if (!$cntr->offsetExists($ns)) {
             $success = false;
+
             return;
         }
 
@@ -162,14 +166,15 @@ class Session extends AbstractAdapter implements
         }
 
         $casToken = $value = $data[$normalizedKey];
+
         return $value;
     }
 
     /**
      * Internal method to get multiple items.
      *
-     * @param  array $normalizedKeys
-     * @return array Associative array of keys and values
+     * @param  array                        $normalizedKeys
+     * @return array                        Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys)
@@ -208,13 +213,14 @@ class Session extends AbstractAdapter implements
         }
 
         $data = $cntr->offsetGet($ns);
+
         return array_key_exists($normalizedKey, $data);
     }
 
     /**
      * Internal method to test multiple items.
      *
-     * @param array $normalizedKeys
+     * @param  array $normalizedKeys
      * @return array Array of found keys
      */
     protected function internalHasItems(array & $normalizedKeys)
@@ -240,8 +246,8 @@ class Session extends AbstractAdapter implements
     /**
      * Get metadata of an item.
      *
-     * @param  string $normalizedKey
-     * @return array|bool Metadata on success, false on failure
+     * @param  string                       $normalizedKey
+     * @return array|bool                   Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
@@ -258,8 +264,8 @@ class Session extends AbstractAdapter implements
     /**
      * Internal method to store an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -270,14 +276,15 @@ class Session extends AbstractAdapter implements
         $data = $cntr->offsetExists($ns) ? $cntr->offsetGet($ns) : array();
         $data[$normalizedKey] = $value;
         $cntr->offsetSet($ns, $data);
+
         return true;
     }
 
     /**
      * Internal method to store multiple items.
      *
-     * @param  array $normalizedKeyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                        $normalizedKeyValuePairs
+     * @return array                        Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
@@ -298,8 +305,8 @@ class Session extends AbstractAdapter implements
     /**
      * Add an item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -321,14 +328,15 @@ class Session extends AbstractAdapter implements
         }
 
         $cntr->offsetSet($ns, $data);
+
         return true;
     }
 
     /**
      * Internal method to add multiple items.
      *
-     * @param  array $normalizedKeyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                        $normalizedKeyValuePairs
+     * @return array                        Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs)
@@ -352,14 +360,15 @@ class Session extends AbstractAdapter implements
         }
 
         $cntr->offsetSet($ns, $data);
+
         return $result;
     }
 
     /**
      * Internal method to replace an existing item.
      *
-     * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  string                       $normalizedKey
+     * @param  mixed                        $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -385,8 +394,8 @@ class Session extends AbstractAdapter implements
     /**
      * Internal method to replace multiple existing items.
      *
-     * @param  array $normalizedKeyValuePairs
-     * @return array Array of not stored keys
+     * @param  array                        $normalizedKeyValuePairs
+     * @return array                        Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItems(array & $normalizedKeyValuePairs)
@@ -414,7 +423,7 @@ class Session extends AbstractAdapter implements
     /**
      * Internal method to remove an item.
      *
-     * @param  string $normalizedKey
+     * @param  string                       $normalizedKey
      * @return bool
      * @throws Exception\ExceptionInterface
      */
@@ -446,9 +455,9 @@ class Session extends AbstractAdapter implements
     /**
      * Internal method to increment an item.
      *
-     * @param  string $normalizedKey
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                       $normalizedKey
+     * @param  int                          $value
+     * @return int|bool                     The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
@@ -463,7 +472,7 @@ class Session extends AbstractAdapter implements
         }
 
         if (array_key_exists($normalizedKey, $data)) {
-            $data[$normalizedKey]+= $value;
+            $data[$normalizedKey] += $value;
             $newValue = $data[$normalizedKey];
         } else {
             // initial value
@@ -472,15 +481,16 @@ class Session extends AbstractAdapter implements
         }
 
         $cntr->offsetSet($ns, $data);
+
         return $newValue;
     }
 
     /**
      * Internal method to decrement an item.
      *
-     * @param  string $normalizedKey
-     * @param  int    $value
-     * @return int|bool The new value on success, false on failure
+     * @param  string                       $normalizedKey
+     * @param  int                          $value
+     * @return int|bool                     The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
@@ -495,7 +505,7 @@ class Session extends AbstractAdapter implements
         }
 
         if (array_key_exists($normalizedKey, $data)) {
-            $data[$normalizedKey]-= $value;
+            $data[$normalizedKey] -= $value;
             $newValue = $data[$normalizedKey];
         } else {
             // initial value
@@ -504,6 +514,7 @@ class Session extends AbstractAdapter implements
         }
 
         $cntr->offsetSet($ns, $data);
+
         return $newValue;
     }
 

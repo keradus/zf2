@@ -10,6 +10,7 @@
 /**
  * @namespace
  */
+
 namespace Zend\Mvc\Router\Console;
 
 use Zend\Mvc\Router\RouteInterface as BaseRoute;

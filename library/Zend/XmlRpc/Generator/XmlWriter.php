@@ -36,7 +36,7 @@ class XmlWriter extends AbstractGenerator
     /**
      * Open a new XML element
      *
-     * @param string $name XML element name
+     * @param  string $name XML element name
      * @return void
      */
     protected function _openElement($name)
@@ -47,7 +47,7 @@ class XmlWriter extends AbstractGenerator
     /**
      * Write XML text data into the currently opened XML element
      *
-     * @param string $text XML text data
+     * @param  string $text XML text data
      * @return void
      */
     protected function _writeTextData($text)
@@ -58,7 +58,7 @@ class XmlWriter extends AbstractGenerator
     /**
      * Close a previously opened XML element
      *
-     * @param string $name
+     * @param  string    $name
      * @return XmlWriter
      */
     protected function _closeElement($name)

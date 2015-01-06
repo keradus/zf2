@@ -56,15 +56,15 @@ class DefaultIterator implements Iterator, Countable
     /**
      * The method that will be applied to the attribute's names.
      *
-     * @var  integer|callable
+     * @var integer|callable
      */
     protected $attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
 
     /**
      * Constructor.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @param  resource        $resultId
+     * @param  \Zend\Ldap\Ldap                    $ldap
+     * @param  resource                           $resultId
      * @throws \Zend\Ldap\Exception\LdapException if no entries was found.
      * @return DefaultIterator
      */
@@ -103,6 +103,7 @@ class DefaultIterator implements Iterator, Countable
             $this->resultId = null;
             $this->current  = null;
         }
+
         return $isClosed;
     }
 
@@ -126,7 +127,7 @@ class DefaultIterator implements Iterator, Countable
      * or a valid callback accepting the attribute's name as it's only
      * argument and returning the new attribute's name.
      *
-     * @param  int|callable $attributeNameTreatment
+     * @param  int|callable    $attributeNameTreatment
      * @return DefaultIterator Provides a fluent interface
      */
     public function setAttributeNameTreatment($attributeNameTreatment)
@@ -243,6 +244,7 @@ class DefaultIterator implements Iterator, Countable
             ErrorHandler::stop();
         }
         ksort($entry, SORT_LOCALE_STRING);
+
         return $entry;
     }
 
@@ -295,7 +297,7 @@ class DefaultIterator implements Iterator, Countable
                     // we have reached the size limit enforced by the server
                     return;
                 } elseif ($code > Exception\LdapException::LDAP_SUCCESS) {
-                    throw new Exception\LdapException($this->ldap, 'getting next entry (' . $msg . ')');
+                    throw new Exception\LdapException($this->ldap, 'getting next entry ('.$msg.')');
                 }
             }
         } else {

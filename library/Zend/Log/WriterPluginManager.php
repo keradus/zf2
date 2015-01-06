@@ -43,7 +43,7 @@ class WriterPluginManager extends AbstractPluginManager
      *
      * Checks that the writer loaded is an instance of Writer\WriterInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

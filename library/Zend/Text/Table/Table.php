@@ -103,7 +103,7 @@ class Table
     /**
      * Create a basic table object
      *
-     * @param  array|Traversable $options Configuration options
+     * @param  array|Traversable                  $options Configuration options
      * @throws Exception\UnexpectedValueException When no columns widths were set
      */
     public function __construct($options = null)
@@ -139,7 +139,7 @@ class Table
                 continue;
             }
 
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -151,7 +151,7 @@ class Table
     /**
      * Set column widths
      *
-     * @param  array $columnWidths Widths of all columns
+     * @param  array                              $columnWidths Widths of all columns
      * @throws Exception\InvalidArgumentException When no columns were supplied
      * @throws Exception\InvalidArgumentException When a column has an invalid width
      * @return Table
@@ -164,7 +164,7 @@ class Table
 
         foreach ($columnWidths as $columnNum => $columnWidth) {
             if (is_int($columnWidth) === false or $columnWidth < 1) {
-                throw new Exception\InvalidArgumentException('Column ' . $columnNum . ' has an invalid column width');
+                throw new Exception\InvalidArgumentException('Column '.$columnNum.' has an invalid column width');
             }
         }
 
@@ -176,12 +176,13 @@ class Table
     /**
      * Set auto separation mode
      *
-     * @param  int $autoSeparate Auto separation mode
+     * @param  int   $autoSeparate Auto separation mode
      * @return Table
      */
     public function setAutoSeparate($autoSeparate)
     {
         $this->autoSeparate = (int) $autoSeparate;
+
         return $this;
     }
 
@@ -205,12 +206,13 @@ class Table
     /**
      * Set the column padding
      *
-     * @param  int $padding The padding for the columns
+     * @param  int   $padding The padding for the columns
      * @return Table
      */
     public function setPadding($padding)
     {
         $this->padding = max(0, (int) $padding);
+
         return $this;
     }
 
@@ -226,6 +228,7 @@ class Table
         }
 
         $this->setDecoratorManager(new DecoratorManager());
+
         return $this->decoratorManager;
     }
 
@@ -238,14 +241,15 @@ class Table
     public function setDecoratorManager(DecoratorManager $decoratorManager)
     {
         $this->decoratorManager = $decoratorManager;
+
         return $this;
     }
 
     /**
      * Set default column align for rows created by appendRow(array $data)
      *
-     * @param  int $columnNum
-     * @param  string  $align
+     * @param  int    $columnNum
+     * @param  string $align
      * @return Table
      */
     public function setDefaultColumnAlign($columnNum, $align)
@@ -298,9 +302,9 @@ class Table
     /**
      * Append a row to the table
      *
-     * @param  array|Row $row The row to append to the table
+     * @param  array|Row                          $row The row to append to the table
      * @throws Exception\InvalidArgumentException When $row is neither an array nor Zend\Text\Table\Row
-     * @throws Exception\OverflowException When a row contains too many columns
+     * @throws Exception\OverflowException        When a row contains too many columns
      * @return Table
      */
     public function appendRow($row)
@@ -461,7 +465,7 @@ class Table
                         }
                     }
 
-                    $result .= $this->decorator->getVerticalLeft() . "\n";
+                    $result .= $this->decorator->getVerticalLeft()."\n";
                 }
             }
 

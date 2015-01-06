@@ -14,7 +14,7 @@ interface HydrationInterface
     /**
      * Hydrate $object with the provided $data.
      *
-     * @param  array $data
+     * @param  array  $data
      * @param  object $object
      * @return object
      */

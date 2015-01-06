@@ -27,7 +27,7 @@ class DirTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'filename'              => '.',
             '/path/to/filename'     => '/path/to',
-            '/path/to/filename.ext' => '/path/to'
+            '/path/to/filename.ext' => '/path/to',
             );
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
@@ -41,8 +41,8 @@ class DirTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 '/path/to/filename',
-                '/path/to/filename.ext'
-            ))
+                '/path/to/filename.ext',
+            )),
         );
     }
 

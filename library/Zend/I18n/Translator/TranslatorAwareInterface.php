@@ -14,10 +14,10 @@ interface TranslatorAwareInterface
     /**
      * Sets translator to use in helper
      *
-     * @param  TranslatorInterface $translator  [optional] translator.
-     *                                           Default is null, which sets no translator.
-     * @param  string              $textDomain  [optional] text domain
-     *                                           Default is null, which skips setTranslatorTextDomain
+     * @param  TranslatorInterface      $translator [optional] translator.
+     *                                              Default is null, which sets no translator.
+     * @param  string                   $textDomain [optional] text domain
+     *                                              Default is null, which skips setTranslatorTextDomain
      * @return TranslatorAwareInterface
      */
     public function setTranslator(TranslatorInterface $translator = null, $textDomain = null);
@@ -39,8 +39,8 @@ interface TranslatorAwareInterface
     /**
      * Sets whether translator is enabled and should be used
      *
-     * @param  bool $enabled [optional] whether translator should be used.
-     *                       Default is true.
+     * @param  bool                     $enabled [optional] whether translator should be used.
+     *                                           Default is true.
      * @return TranslatorAwareInterface
      */
     public function setTranslatorEnabled($enabled = true);
@@ -55,7 +55,7 @@ interface TranslatorAwareInterface
     /**
      * Set translation text domain
      *
-     * @param  string $textDomain
+     * @param  string                   $textDomain
      * @return TranslatorAwareInterface
      */
     public function setTranslatorTextDomain($textDomain = 'default');

@@ -18,7 +18,7 @@ class PropertyTag extends AbstractTypeableTag implements TagInterface
 
     /**
      * @param string $propertyName
-     * @param array $types
+     * @param array  $types
      * @param string $description
      */
     public function __construct($propertyName = null, $types = array(), $description = null)
@@ -39,12 +39,13 @@ class PropertyTag extends AbstractTypeableTag implements TagInterface
     }
 
     /**
-     * @param string $propertyName
+     * @param  string $propertyName
      * @return self
      */
     public function setPropertyName($propertyName)
     {
         $this->propertyName = ltrim($propertyName, '$');
+
         return $this;
     }
 
@@ -62,9 +63,9 @@ class PropertyTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@property'
-            . ((!empty($this->types)) ? ' ' . $this->getTypesAsString() : '')
-            . ((!empty($this->propertyName)) ? ' $' . $this->propertyName : '')
-            . ((!empty($this->description)) ? ' ' . $this->description : '');
+            .((!empty($this->types)) ? ' '.$this->getTypesAsString() : '')
+            .((!empty($this->propertyName)) ? ' $'.$this->propertyName : '')
+            .((!empty($this->description)) ? ' '.$this->description : '');
 
         return $output;
     }

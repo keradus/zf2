@@ -55,7 +55,7 @@ class FormTextarea extends AbstractHelper
     /**
      * Render a form <textarea> element from the provided $element
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface          $element
      * @throws Exception\DomainException
      * @return string
      */

@@ -110,7 +110,7 @@ class Client implements Stdlib\DispatchableInterface
         'outputstream'    => false,
         'encodecookies'   => true,
         'argseparator'    => null,
-        'rfc3986strict'   => false
+        'rfc3986strict'   => false,
     );
 
     /**
@@ -126,7 +126,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Constructor
      *
-     * @param string $uri
+     * @param string            $uri
      * @param array|Traversable $options
      */
     public function __construct($uri = null, $options = null)
@@ -142,7 +142,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set configuration parameters for this HTTP client
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                         $options
      * @return Client
      * @throws Client\Exception\InvalidArgumentException
      */
@@ -174,7 +174,7 @@ class Client implements Stdlib\DispatchableInterface
      * While this method is not called more than one for a client, it is
      * separated from ->request() to preserve logic and readability
      *
-     * @param  Client\Adapter\AdapterInterface|string $adapter
+     * @param  Client\Adapter\AdapterInterface|string    $adapter
      * @return Client
      * @throws Client\Exception\InvalidArgumentException
      */
@@ -182,9 +182,9 @@ class Client implements Stdlib\DispatchableInterface
     {
         if (is_string($adapter)) {
             if (!class_exists($adapter)) {
-                throw new Client\Exception\InvalidArgumentException('Unable to locate adapter class "' . $adapter . '"');
+                throw new Client\Exception\InvalidArgumentException('Unable to locate adapter class "'.$adapter.'"');
             }
-            $adapter = new $adapter;
+            $adapter = new $adapter();
         }
 
         if (! $adapter instanceof Client\Adapter\AdapterInterface) {
@@ -195,6 +195,7 @@ class Client implements Stdlib\DispatchableInterface
         $config = $this->config;
         unset($config['adapter']);
         $this->adapter->setOptions($config);
+
         return $this;
     }
 
@@ -215,12 +216,13 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set request
      *
-     * @param Request $request
+     * @param  Request $request
      * @return Client
      */
     public function setRequest(Request $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -235,18 +237,20 @@ class Client implements Stdlib\DispatchableInterface
             $this->request = new Request();
             $this->request->setAllowCustomMethods(false);
         }
+
         return $this->request;
     }
 
     /**
      * Set response
      *
-     * @param Response $response
+     * @param  Response $response
      * @return Client
      */
     public function setResponse(Response $response)
     {
         $this->response = $response;
+
         return $this;
     }
 
@@ -260,6 +264,7 @@ class Client implements Stdlib\DispatchableInterface
         if (empty($this->response)) {
             $this->response = new Response();
         }
+
         return $this->response;
     }
 
@@ -296,7 +301,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set Uri (to the request)
      *
-     * @param string|Http $uri
+     * @param  string|Http $uri
      * @return Client
      */
     public function setUri($uri)
@@ -310,7 +315,7 @@ class Client implements Stdlib\DispatchableInterface
             // reasons, see #4215 for a discussion - currently authentication is also
             // cleared for peer subdomains due to technical limits
             $nextHost = $this->getRequest()->getUri()->getHost();
-            if (!preg_match('/' . preg_quote($lastHost, '/') . '$/i', $nextHost)) {
+            if (!preg_match('/'.preg_quote($lastHost, '/').'$/i', $nextHost)) {
                 $this->clearAuth();
             }
 
@@ -324,6 +329,7 @@ class Client implements Stdlib\DispatchableInterface
                 $this->getUri()->setPort(($this->getUri()->getScheme() == 'https' ? 443 : 80));
             }
         }
+
         return $this;
     }
 
@@ -340,7 +346,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set the HTTP method (to the request)
      *
-     * @param string $method
+     * @param  string $method
      * @return Client
      */
     public function setMethod($method)
@@ -379,12 +385,13 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set the query string argument separator
      *
-     * @param string $argSeparator
+     * @param  string $argSeparator
      * @return Client
      */
     public function setArgSeparator($argSeparator)
     {
         $this->setOptions(array("argseparator" => $argSeparator));
+
         return $this;
     }
 
@@ -400,25 +407,27 @@ class Client implements Stdlib\DispatchableInterface
             $argSeparator = ini_get('arg_separator.output');
             $this->setArgSeparator($argSeparator);
         }
+
         return $argSeparator;
     }
 
     /**
      * Set the encoding type and the boundary (if any)
      *
-     * @param string $encType
-     * @param string $boundary
+     * @param  string $encType
+     * @param  string $boundary
      * @return Client
      */
     public function setEncType($encType, $boundary = null)
     {
         if (!empty($encType)) {
             if (!empty($boundary)) {
-                $this->encType = $encType . "; boundary={$boundary}";
+                $this->encType = $encType."; boundary={$boundary}";
             } else {
                 $this->encType = $encType;
             }
         }
+
         return $this;
     }
 
@@ -435,44 +444,47 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set raw body (for advanced use cases)
      *
-     * @param string $body
+     * @param  string $body
      * @return Client
      */
     public function setRawBody($body)
     {
         $this->getRequest()->setContent($body);
+
         return $this;
     }
 
     /**
      * Set the POST parameters
      *
-     * @param array $post
+     * @param  array  $post
      * @return Client
      */
     public function setParameterPost(array $post)
     {
         $this->getRequest()->getPost()->fromArray($post);
+
         return $this;
     }
 
     /**
      * Set the GET parameters
      *
-     * @param array $query
+     * @param  array  $query
      * @return Client
      */
     public function setParameterGet(array $query)
     {
         $this->getRequest()->getQuery()->fromArray($query);
+
         return $this;
     }
 
     /**
      * Reset all the HTTP parameters (request, response, etc)
      *
-     * @param  bool   $clearCookies  Also clear all valid cookies? (defaults to false)
-     * @param  bool   $clearAuth     Also clear http authentication? (defaults to true)
+     * @param  bool   $clearCookies Also clear all valid cookies? (defaults to false)
+     * @param  bool   $clearAuth    Also clear http authentication? (defaults to true)
      * @return Client
      */
     public function resetParameters($clearCookies = false /*, $clearAuth = true */)
@@ -523,23 +535,24 @@ class Client implements Stdlib\DispatchableInterface
     protected function getCookieId($cookie)
     {
         if (($cookie instanceof Header\SetCookie) || ($cookie instanceof Header\Cookie)) {
-            return $cookie->getName() . $cookie->getDomain() . $cookie->getPath();
+            return $cookie->getName().$cookie->getDomain().$cookie->getPath();
         }
+
         return false;
     }
 
     /**
      * Add a cookie
      *
-     * @param array|ArrayIterator|Header\SetCookie|string $cookie
-     * @param string  $value
-     * @param string  $expire
-     * @param string  $path
-     * @param string  $domain
-     * @param  bool $secure
-     * @param  bool $httponly
-     * @param string  $maxAge
-     * @param string  $version
+     * @param  array|ArrayIterator|Header\SetCookie|string $cookie
+     * @param  string                                      $value
+     * @param  string                                      $expire
+     * @param  string                                      $path
+     * @param  string                                      $domain
+     * @param  bool                                        $secure
+     * @param  bool                                        $httponly
+     * @param  string                                      $maxAge
+     * @param  string                                      $version
      * @throws Exception\InvalidArgumentException
      * @return Client
      */
@@ -561,13 +574,14 @@ class Client implements Stdlib\DispatchableInterface
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');
         }
+
         return $this;
     }
 
     /**
      * Set an array of cookies
      *
-     * @param  array $cookies
+     * @param  array                              $cookies
      * @throws Exception\InvalidArgumentException
      * @return Client
      */
@@ -581,6 +595,7 @@ class Client implements Stdlib\DispatchableInterface
         } else {
             throw new Exception\InvalidArgumentException('Invalid cookies passed as parameter, it must be an array');
         }
+
         return $this;
     }
 
@@ -595,7 +610,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set the headers (for the request)
      *
-     * @param  Headers|array $headers
+     * @param  Headers|array                      $headers
      * @throws Exception\InvalidArgumentException
      * @return Client
      */
@@ -610,6 +625,7 @@ class Client implements Stdlib\DispatchableInterface
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter headers passed');
         }
+
         return $this;
     }
 
@@ -633,7 +649,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Get the header value of the request
      *
-     * @param  string $name
+     * @param  string      $name
      * @return string|bool
      */
     public function getHeader($name)
@@ -645,18 +661,20 @@ class Client implements Stdlib\DispatchableInterface
                 return $headers->get($name)->getFieldValue();
             }
         }
+
         return false;
     }
 
     /**
      * Set streaming for received data
      *
-     * @param string|bool $streamfile Stream file, true for temp file, false/null for no streaming
+     * @param  string|bool       $streamfile Stream file, true for temp file, false/null for no streaming
      * @return \Zend\Http\Client
      */
     public function setStream($streamfile = true)
     {
         $this->setOptions(array("outputstream" => $streamfile));
+
         return $this;
     }
 
@@ -708,15 +726,15 @@ class Client implements Stdlib\DispatchableInterface
      * Create a HTTP authentication "Authorization:" header according to the
      * specified user, password and authentication method.
      *
-     * @param string $user
-     * @param string $password
-     * @param string $type
+     * @param  string                             $user
+     * @param  string                             $password
+     * @param  string                             $type
      * @throws Exception\InvalidArgumentException
      * @return Client
      */
     public function setAuth($user, $password, $type = self::AUTH_BASIC)
     {
-        if (!defined('static::AUTH_' . strtoupper($type))) {
+        if (!defined('static::AUTH_'.strtoupper($type))) {
             throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
         }
 
@@ -727,7 +745,7 @@ class Client implements Stdlib\DispatchableInterface
         $this->auth = array(
             'user'     => $user,
             'password' => $password,
-            'type'     => $type
+            'type'     => $type,
         );
 
         return $this;
@@ -745,17 +763,17 @@ class Client implements Stdlib\DispatchableInterface
      * Calculate the response value according to the HTTP authentication type
      *
      * @see http://www.faqs.org/rfcs/rfc2617.html
-     * @param string $user
-     * @param string $password
-     * @param string $type
-     * @param array $digest
-     * @param null|string $entityBody
+     * @param  string                             $user
+     * @param  string                             $password
+     * @param  string                             $type
+     * @param  array                              $digest
+     * @param  null|string                        $entityBody
      * @throws Exception\InvalidArgumentException
      * @return string|bool
      */
     protected function calcAuthDigest($user, $password, $type = self::AUTH_BASIC, $digest = array(), $entityBody = null)
     {
-        if (!defined('self::AUTH_' . strtoupper($type))) {
+        if (!defined('self::AUTH_'.strtoupper($type))) {
             throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
         }
         $response = false;
@@ -765,54 +783,56 @@ class Client implements Stdlib\DispatchableInterface
                 if (strpos($user, ':') !== false) {
                     throw new Exception\InvalidArgumentException("The user name cannot contain ':' in Basic HTTP authentication");
                 }
-                $response = base64_encode($user . ':' . $password);
+                $response = base64_encode($user.':'.$password);
                 break;
             case self::AUTH_DIGEST :
                 if (empty($digest)) {
                     throw new Exception\InvalidArgumentException("The digest cannot be empty");
                 }
                 foreach ($digest as $key => $value) {
-                    if (!defined('self::DIGEST_' . strtoupper($key))) {
+                    if (!defined('self::DIGEST_'.strtoupper($key))) {
                         throw new Exception\InvalidArgumentException("Invalid or not supported digest authentication parameter: '$key'");
                     }
                 }
-                $ha1 = md5($user . ':' . $digest['realm'] . ':' . $password);
+                $ha1 = md5($user.':'.$digest['realm'].':'.$password);
                 if (empty($digest['qop']) || strtolower($digest['qop']) == 'auth') {
-                    $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath());
+                    $ha2 = md5($this->getMethod().':'.$this->getUri()->getPath());
                 } elseif (strtolower($digest['qop']) == 'auth-int') {
                     if (empty($entityBody)) {
                         throw new Exception\InvalidArgumentException("I cannot use the auth-int digest authentication without the entity body");
                     }
-                    $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath() . ':' . md5($entityBody));
+                    $ha2 = md5($this->getMethod().':'.$this->getUri()->getPath().':'.md5($entityBody));
                 }
                 if (empty($digest['qop'])) {
-                    $response = md5($ha1 . ':' . $digest['nonce'] . ':' . $ha2);
+                    $response = md5($ha1.':'.$digest['nonce'].':'.$ha2);
                 } else {
-                    $response = md5($ha1 . ':' . $digest['nonce'] . ':' . $digest['nc']
-                                    . ':' . $digest['cnonce'] . ':' . $digest['qoc'] . ':' . $ha2);
+                    $response = md5($ha1.':'.$digest['nonce'].':'.$digest['nc']
+                                    .':'.$digest['cnonce'].':'.$digest['qoc'].':'.$ha2);
                 }
                 break;
         }
+
         return $response;
     }
 
     /**
      * Dispatch
      *
-     * @param Stdlib\RequestInterface $request
-     * @param Stdlib\ResponseInterface $response
+     * @param  Stdlib\RequestInterface  $request
+     * @param  Stdlib\ResponseInterface $response
      * @return Stdlib\ResponseInterface
      */
     public function dispatch(Stdlib\RequestInterface $request, Stdlib\ResponseInterface $response = null)
     {
         $response = $this->send($request);
+
         return $response;
     }
 
     /**
      * Send HTTP request
      *
-     * @param  Request $request
+     * @param  Request                           $request
      * @return Response
      * @throws Exception\RuntimeException
      * @throws Client\Exception\RuntimeException
@@ -847,9 +867,9 @@ class Client implements Stdlib\DispatchableInterface
                     }
 
                     if (strpos($newUri, '?') !== false) {
-                        $newUri .= $this->getArgSeparator() . $queryString;
+                        $newUri .= $this->getArgSeparator().$queryString;
                     } else {
-                        $newUri .= '?' . $queryString;
+                        $newUri .= '?'.$queryString;
                     }
 
                     $uri = new Http($newUri);
@@ -963,7 +983,7 @@ class Client implements Stdlib\DispatchableInterface
                         // Get the current path directory, removing any trailing slashes
                         $path = $this->getUri()->getPath();
                         $path = rtrim(substr($path, 0, strrpos($path, '/')), "/");
-                        $this->getUri()->setPath($path . '/' . $location);
+                        $this->getUri()->setPath($path.'/'.$location);
                     }
                 }
                 ++$this->redirectCounter;
@@ -974,6 +994,7 @@ class Client implements Stdlib\DispatchableInterface
         } while ($this->redirectCounter <= $this->config['maxredirects']);
 
         $this->response = $response;
+
         return $response;
     }
 
@@ -1003,11 +1024,11 @@ class Client implements Stdlib\DispatchableInterface
      * manually set the Content-Type ($ctype) or it will default to
      * application/octet-stream.
      *
-     * @param  string $filename Name of file to upload, or name to save as
-     * @param  string $formname Name of form element to send as
-     * @param  string $data Data to send (if null, $filename is read and sent)
-     * @param  string $ctype Content type to use (if $data is set and $ctype is
-     *                null, will be application/octet-stream)
+     * @param  string                     $filename Name of file to upload, or name to save as
+     * @param  string                     $formname Name of form element to send as
+     * @param  string                     $data     Data to send (if null, $filename is read and sent)
+     * @param  string                     $ctype    Content type to use (if $data is set and $ctype is
+     *                                              null, will be application/octet-stream)
      * @return Client
      * @throws Exception\RuntimeException
      */
@@ -1029,7 +1050,7 @@ class Client implements Stdlib\DispatchableInterface
             'formname' => $formname,
             'filename' => basename($filename),
             'ctype' => $ctype,
-            'data' => $data
+            'data' => $data,
         ));
 
         return $this;
@@ -1046,18 +1067,20 @@ class Client implements Stdlib\DispatchableInterface
         $file = $this->getRequest()->getFiles()->get($filename);
         if (!empty($file)) {
             $this->getRequest()->getFiles()->set($filename, null);
+
             return true;
         }
+
         return false;
     }
 
     /**
      * Prepare Cookies
      *
-     * @param   string $domain
-     * @param   string $path
-     * @param   bool $secure
-     * @return  Header\Cookie|bool
+     * @param  string             $domain
+     * @param  string             $path
+     * @param  bool               $secure
+     * @return Header\Cookie|bool
      */
     protected function prepareCookies($domain, $path, $secure)
     {
@@ -1086,8 +1109,8 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Prepare the request headers
      *
-     * @param resource|string $body
-     * @param Http $uri
+     * @param  resource|string            $body
+     * @param  Http                       $uri
      * @throws Exception\RuntimeException
      * @return array
      */
@@ -1101,7 +1124,7 @@ class Client implements Stdlib\DispatchableInterface
             // If the port is not default, add it
             if (!(($uri->getScheme() == 'http' && $uri->getPort() == 80) ||
                 ($uri->getScheme() == 'https' && $uri->getPort() == 443))) {
-                $host .= ':' . $uri->getPort();
+                $host .= ':'.$uri->getPort();
             }
 
             $headers['Host'] = $host;
@@ -1124,7 +1147,6 @@ class Client implements Stdlib\DispatchableInterface
             }
         }
 
-
         // Set the user agent header
         if (!$this->getRequest()->getHeaders()->has('User-Agent') && isset($this->config['useragent'])) {
             $headers['User-Agent'] = $this->config['useragent'];
@@ -1136,7 +1158,7 @@ class Client implements Stdlib\DispatchableInterface
                 case self::AUTH_BASIC :
                     $auth = $this->calcAuthDigest($this->auth['user'], $this->auth['password'], $this->auth['type']);
                     if ($auth !== false) {
-                        $headers['Authorization'] = 'Basic ' . $auth;
+                        $headers['Authorization'] = 'Basic '.$auth;
                     }
                     break;
                 case self::AUTH_DIGEST :
@@ -1165,9 +1187,9 @@ class Client implements Stdlib\DispatchableInterface
         foreach ($requestHeaders as $requestHeaderElement) {
             $headers[$requestHeaderElement->getFieldName()] = $requestHeaderElement->getFieldValue();
         }
+
         return $headers;
     }
-
 
     /**
      * Prepare the request body (for PATCH, POST and PUT requests)
@@ -1203,7 +1225,7 @@ class Client implements Stdlib\DispatchableInterface
         // If we have POST parameters or files, encode and add them to the body
         if (count($this->getRequest()->getPost()->toArray()) > 0 || $totalFiles > 0) {
             if (stripos($this->getEncType(), self::ENC_FORMDATA) === 0) {
-                $boundary = '---ZENDHTTPCLIENT-' . md5(microtime());
+                $boundary = '---ZENDHTTPCLIENT-'.md5(microtime());
                 $this->setEncType(self::ENC_FORMDATA, $boundary);
 
                 // Get POST parameters and encode them
@@ -1229,7 +1251,6 @@ class Client implements Stdlib\DispatchableInterface
         return $body;
     }
 
-
     /**
      * Attempt to detect the MIME type of a file using available extensions
      *
@@ -1241,7 +1262,7 @@ class Client implements Stdlib\DispatchableInterface
      * If neither extension is available, the default application/octet-stream
      * MIME type will be returned
      *
-     * @param string $file File path
+     * @param  string $file File path
      * @return string MIME type
      */
     protected function detectFileMimeType($file)
@@ -1274,20 +1295,20 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Encode data to a multipart/form-data part suitable for a POST request.
      *
-     * @param string $boundary
-     * @param string $name
-     * @param mixed $value
-     * @param string $filename
-     * @param array $headers Associative array of optional headers @example ("Content-Transfer-Encoding" => "binary")
+     * @param  string $boundary
+     * @param  string $name
+     * @param  mixed  $value
+     * @param  string $filename
+     * @param  array  $headers  Associative array of optional headers @example ("Content-Transfer-Encoding" => "binary")
      * @return string
      */
     public function encodeFormData($boundary, $name, $value, $filename = null, $headers = array())
     {
-        $ret = "--{$boundary}\r\n" .
-            'Content-Disposition: form-data; name="' . $name . '"';
+        $ret = "--{$boundary}\r\n".
+            'Content-Disposition: form-data; name="'.$name.'"';
 
         if ($filename) {
-            $ret .= '; filename="' . $filename . '"';
+            $ret .= '; filename="'.$filename.'"';
         }
         $ret .= "\r\n";
 
@@ -1310,8 +1331,8 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @since 1.9
      *
-     * @param array $parray
-     * @param string $prefix
+     * @param  array  $parray
+     * @param  string $prefix
      * @return array
      */
     protected function flattenParametersArray($parray, $prefix = null)
@@ -1326,9 +1347,9 @@ class Client implements Stdlib\DispatchableInterface
             // Calculate array key
             if ($prefix) {
                 if (is_int($name)) {
-                    $key = $prefix . '[]';
+                    $key = $prefix.'[]';
                 } else {
-                    $key = $prefix . "[$name]";
+                    $key = $prefix."[$name]";
                 }
             } else {
                 $key = $name;
@@ -1348,12 +1369,12 @@ class Client implements Stdlib\DispatchableInterface
      * Separating this from send method allows subclasses to wrap
      * the interaction with the adapter
      *
-     * @param Http $uri
-     * @param string $method
-     * @param  bool $secure
-     * @param array $headers
-     * @param string $body
-     * @return string the raw response
+     * @param  Http                       $uri
+     * @param  string                     $method
+     * @param  bool                       $secure
+     * @param  array                      $headers
+     * @param  string                     $body
+     * @return string                     the raw response
      * @throws Exception\RuntimeException
      */
     protected function doRequest(Http $uri, $method, $secure = false, $headers = array(), $body = '')
@@ -1386,9 +1407,9 @@ class Client implements Stdlib\DispatchableInterface
      * specified user, password and authentication method.
      *
      * @see http://www.faqs.org/rfcs/rfc2617.html
-     * @param string $user
-     * @param string $password
-     * @param string $type
+     * @param  string                                    $user
+     * @param  string                                    $password
+     * @param  string                                    $type
      * @return string
      * @throws Client\Exception\InvalidArgumentException
      */
@@ -1401,12 +1422,12 @@ class Client implements Stdlib\DispatchableInterface
                     throw new Client\Exception\InvalidArgumentException("The user name cannot contain ':' in 'Basic' HTTP authentication");
                 }
 
-                return 'Basic ' . base64_encode($user . ':' . $password);
+                return 'Basic '.base64_encode($user.':'.$password);
 
             //case self::AUTH_DIGEST:
-                /**
-                * @todo Implement digest authentication
-                */
+            /**
+             * @todo Implement digest authentication
+             */
                 //    break;
 
             default:

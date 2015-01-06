@@ -54,9 +54,9 @@ class PriorityList implements Iterator, Countable
     /**
      * Insert a new item.
      *
-     * @param  string  $name
-     * @param  mixed   $value
-     * @param  int     $priority
+     * @param string $name
+     * @param mixed  $value
+     * @param int    $priority
      *
      * @return void
      */
@@ -209,6 +209,7 @@ class PriorityList implements Iterator, Countable
     public function key()
     {
         $this->sorted || $this->sort();
+
         return key($this->items);
     }
 

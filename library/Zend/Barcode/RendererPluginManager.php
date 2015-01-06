@@ -33,7 +33,7 @@ class RendererPluginManager extends AbstractPluginManager
     protected $invokableClasses = array(
         'image' => 'Zend\Barcode\Renderer\Image',
         'pdf'   => 'Zend\Barcode\Renderer\Pdf',
-        'svg'   => 'Zend\Barcode\Renderer\Svg'
+        'svg'   => 'Zend\Barcode\Renderer\Svg',
     );
 
     /**
@@ -42,7 +42,7 @@ class RendererPluginManager extends AbstractPluginManager
      * Checks that the barcode parser loaded is an instance
      * of Renderer\AbstractRenderer.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

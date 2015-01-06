@@ -31,7 +31,7 @@ class PhpRendererStrategy extends AbstractListenerAggregate
     /**
      * Constructor
      *
-     * @param  PhpRenderer $renderer
+     * @param PhpRenderer $renderer
      */
     public function __construct(PhpRenderer $renderer)
     {
@@ -51,12 +51,13 @@ class PhpRendererStrategy extends AbstractListenerAggregate
     /**
      * Set list of possible content placeholders
      *
-     * @param  array $contentPlaceholders
+     * @param  array               $contentPlaceholders
      * @return PhpRendererStrategy
      */
     public function setContentPlaceholders(array $contentPlaceholders)
     {
         $this->contentPlaceholders = $contentPlaceholders;
+
         return $this;
     }
 
@@ -83,7 +84,7 @@ class PhpRendererStrategy extends AbstractListenerAggregate
      * Select the PhpRenderer; typically, this will be registered last or at
      * low priority.
      *
-     * @param  ViewEvent $e
+     * @param  ViewEvent   $e
      * @return PhpRenderer
      */
     public function selectRenderer(ViewEvent $e)
@@ -97,7 +98,7 @@ class PhpRendererStrategy extends AbstractListenerAggregate
      * Populates the content of the response object from the view rendering
      * results.
      *
-     * @param ViewEvent $e
+     * @param  ViewEvent $e
      * @return void
      */
     public function injectResponse(ViewEvent $e)

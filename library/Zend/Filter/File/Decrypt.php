@@ -43,6 +43,7 @@ class Decrypt extends Filter\Decrypt
     public function setFilename($filename = null)
     {
         $this->filename = $filename;
+
         return $this;
     }
 
@@ -51,8 +52,8 @@ class Decrypt extends Filter\Decrypt
      *
      * Decrypts the file $value with the defined settings
      *
-     * @param  string|array $value Full path of file to change or $_FILES data array
-     * @return string|array The filename which has been set
+     * @param  string|array                       $value Full path of file to change or $_FILES data array
+     * @return string|array                       The filename which has been set
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
@@ -100,8 +101,10 @@ class Decrypt extends Filter\Decrypt
 
         if ($isFileUpload) {
             $uploadData['tmp_name'] = $this->filename;
+
             return $uploadData;
         }
+
         return $this->filename;
     }
 }

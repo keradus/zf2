@@ -92,7 +92,7 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
                         '127.0.0.1',
                         '192.1.0.1?weight=3',
                         'localhost',
-                        '127.0.0.1:11211?weight=0'
+                        '127.0.0.1:11211?weight=0',
                     ),
                 ),
                 '',

@@ -51,6 +51,7 @@ class HtmlQuicktime extends AbstractHtmlElement
         $params = array_merge(array('src' => $data), $params);
 
         $htmlObject = $this->getView()->plugin('htmlObject');
+
         return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

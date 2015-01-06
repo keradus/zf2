@@ -57,9 +57,9 @@ class InTest extends TestCase
 
         $in->setIdentifier('foo.bar')
             ->setValueSet(array(
-                array(1=>In::TYPE_LITERAL),
-                array(2=>In::TYPE_VALUE),
-                array(3=>In::TYPE_LITERAL),
+                array(1 => In::TYPE_LITERAL),
+                array(2 => In::TYPE_VALUE),
+                array(3 => In::TYPE_LITERAL),
             ));
         $expected = array(array(
             '%s IN (%s, %s, %s)',
@@ -72,36 +72,36 @@ class InTest extends TestCase
 
     public function testGetExpressionDataWithSubselect()
     {
-        $select = new Select;
+        $select = new Select();
         $in = new In('foo', $select);
         $expected = array(array(
             '%s IN %s',
             array('foo', $select),
-            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE),
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }
 
     public function testGetExpressionDataWithSubselectAndIdentifier()
     {
-        $select = new Select;
+        $select = new Select();
         $in = new In('foo', $select);
         $expected = array(array(
             '%s IN %s',
             array('foo', $select),
-            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE),
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }
 
     public function testGetExpressionDataWithSubselectAndArrayIdentifier()
     {
-        $select = new Select;
+        $select = new Select();
         $in = new In(array('foo', 'bar'), $select);
         $expected = array(array(
             '(%s, %s) IN %s',
             array('foo', 'bar', $select),
-            array($in::TYPE_IDENTIFIER, $in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+            array($in::TYPE_IDENTIFIER, $in::TYPE_IDENTIFIER, $in::TYPE_VALUE),
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }

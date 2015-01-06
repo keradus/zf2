@@ -44,9 +44,9 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * match(): defined by \Zend\Mvc\Router\RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request      $request
-     * @param  integer|null $pathOffset
-     * @param  array        $options
+     * @param  Request         $request
+     * @param  integer|null    $pathOffset
+     * @param  array           $options
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null, array $options = array())
@@ -66,8 +66,8 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * assemble(): defined by \Zend\Mvc\Router\RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::assemble()
-     * @param  array $params
-     * @param  array $options
+     * @param  array                              $params
+     * @param  array                              $options
      * @return mixed
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -89,8 +89,8 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * setTranslator(): defined by TranslatorAwareInterface.
      *
      * @see    TranslatorAwareInterface::setTranslator()
-     * @param  Translator $translator
-     * @param  string     $textDomain
+     * @param  Translator     $translator
+     * @param  string         $textDomain
      * @return TreeRouteStack
      */
     public function setTranslator(Translator $translator = null, $textDomain = null)
@@ -130,12 +130,13 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * setTranslatorEnabled(): defined by TranslatorAwareInterface.
      *
      * @see    TranslatorAwareInterface::setTranslatorEnabled()
-     * @param  bool $enabled
+     * @param  bool           $enabled
      * @return TreeRouteStack
      */
     public function setTranslatorEnabled($enabled = true)
     {
         $this->translatorEnabled = $enabled;
+
         return $this;
     }
 

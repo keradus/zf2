@@ -226,7 +226,7 @@ class PostCode extends AbstractValidator
      *
      * Accepts a string locale and/or "format".
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                     $options
      * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = array())
@@ -271,11 +271,12 @@ class PostCode extends AbstractValidator
      * Sets the locale to use
      *
      * @param  string|null $locale
-     * @return PostCode  Provides fluid interface
+     * @return PostCode    Provides fluid interface
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
         return $this;
     }
 
@@ -292,12 +293,13 @@ class PostCode extends AbstractValidator
     /**
      * Sets a self defined postal format as regex
      *
-     * @param  string $format
-     * @return PostCode  Provides fluid interface
+     * @param  string   $format
+     * @return PostCode Provides fluid interface
      */
     public function setFormat($format)
     {
         $this->format = $format;
+
         return $this;
     }
 
@@ -314,19 +316,20 @@ class PostCode extends AbstractValidator
     /**
      * Sets a new callback for service validation
      *
-     * @param mixed $service
-     * @return PostCode  Provides fluid interface
+     * @param  mixed    $service
+     * @return PostCode Provides fluid interface
      */
     public function setService($service)
     {
         $this->service = $service;
+
         return $this;
     }
 
     /**
      * Returns true if and only if $value is a valid postalcode
      *
-     * @param  string $value
+     * @param  string                             $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */
@@ -334,6 +337,7 @@ class PostCode extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -356,7 +360,7 @@ class PostCode extends AbstractValidator
         }
 
         if ($format[0] !== '/') {
-            $format = '/^' . $format;
+            $format = '/^'.$format;
         }
         if ($format[strlen($format) - 1] !== '/') {
             $format .= '$/';
@@ -375,16 +379,19 @@ class PostCode extends AbstractValidator
                 ));
                 if (!$callback->isValid($value)) {
                     $this->error(self::SERVICE, $value);
+
                     return false;
                 }
             } catch (\Exception $e) {
                 $this->error(self::SERVICEFAILURE, $value);
+
                 return false;
             }
         }
 
         if (!preg_match($format, $value)) {
             $this->error(self::NO_MATCH);
+
             return false;
         }
 

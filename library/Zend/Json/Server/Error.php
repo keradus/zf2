@@ -39,9 +39,9 @@ class Error
     /**
      * Constructor
      *
-     * @param  string $message
-     * @param  int $code
-     * @param  mixed $data
+     * @param string $message
+     * @param int    $code
+     * @param mixed  $data
      */
     public function __construct($message = null, $code = self::ERROR_OTHER, $data = null)
     {
@@ -55,7 +55,7 @@ class Error
      *
      * If the error code is 0, it will be set to -32000 (ERROR_OTHER).
      *
-     * @param  int $code
+     * @param  int                     $code
      * @return \Zend\Json\Server\Error
      */
     public function setCode($code)
@@ -92,7 +92,7 @@ class Error
     /**
      * Set error message
      *
-     * @param  string $message
+     * @param  string                  $message
      * @return \Zend\Json\Server\Error
      */
     public function setMessage($message)
@@ -102,6 +102,7 @@ class Error
         }
 
         $this->message = (string) $message;
+
         return $this;
     }
 
@@ -118,12 +119,13 @@ class Error
     /**
      * Set error data
      *
-     * @param  mixed $data
+     * @param  mixed                   $data
      * @return \Zend\Json\Server\Error
      */
     public function setData($data)
     {
         $this->data = $data;
+
         return $this;
     }
 

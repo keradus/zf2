@@ -24,7 +24,7 @@ class From implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'from') {
-            throw new Exception\InvalidArgumentException('Invalid header line for From string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for From string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class From implements HeaderInterface
 
     public function toString()
     {
-        return 'From: ' . $this->getFieldValue();
+        return 'From: '.$this->getFieldValue();
     }
 }

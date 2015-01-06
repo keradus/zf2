@@ -38,7 +38,7 @@ class XmlTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/Xml/' . $name . '.xml';
+        return __DIR__.'/TestAssets/Xml/'.$name.'.xml';
     }
 
     public function testInvalidXmlFile()
@@ -60,7 +60,7 @@ class XmlTest extends AbstractReaderTestCase
 
 ECS;
 
-        $arrayXml= $this->reader->fromString($xml);
+        $arrayXml = $this->reader->fromString($xml);
         $this->assertEquals($arrayXml['test'], 'foo');
         $this->assertEquals($arrayXml['bar'][0], 'baz');
         $this->assertEquals($arrayXml['bar'][1], 'foo');
@@ -136,7 +136,7 @@ ECS;
 
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
 
-        $configReader->fromFile(sys_get_temp_dir() . '/path/that/does/not/exist');
+        $configReader->fromFile(sys_get_temp_dir().'/path/that/does/not/exist');
     }
 
     /**

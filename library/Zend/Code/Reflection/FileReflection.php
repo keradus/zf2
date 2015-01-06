@@ -64,10 +64,10 @@ class FileReflection implements ReflectionInterface
     protected $contents = null;
 
     /**
-     * @param  string $filename
-     * @param  bool $includeIfNotAlreadyIncluded
+     * @param  string                             $filename
+     * @param  bool                               $includeIfNotAlreadyIncluded
      * @throws Exception\InvalidArgumentException If file does not exists
-     * @throws Exception\RuntimeException If file exists but is not included or required
+     * @throws Exception\RuntimeException         If file exists but is not included or required
      */
     public function __construct($filename, $includeIfNotAlreadyIncluded = false)
     {
@@ -221,7 +221,7 @@ class FileReflection implements ReflectionInterface
     /**
      * Retrieve the reflection class of a given class found in this file
      *
-     * @param  null|string $name
+     * @param  null|string                        $name
      * @return ClassReflection
      * @throws Exception\InvalidArgumentException for invalid class name or invalid reflection class
      */

@@ -29,8 +29,8 @@ trait TranslatorAwareTrait
     /**
      * Sets translator to use in helper
      *
-     * @param TranslatorInterface $translator
-     * @param string              $textDomain
+     * @param  TranslatorInterface $translator
+     * @param  string              $textDomain
      * @return mixed
      */
     public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
@@ -67,7 +67,7 @@ trait TranslatorAwareTrait
     /**
      * Sets whether translator is enabled and should be used
      *
-     * @param bool $enabled
+     * @param  bool  $enabled
      * @return mixed
      */
     public function setTranslatorEnabled($enabled = true)
@@ -90,7 +90,7 @@ trait TranslatorAwareTrait
     /**
      * Set translation text domain
      *
-     * @param string $textDomain
+     * @param  string $textDomain
      * @return mixed
      */
     public function setTranslatorTextDomain($textDomain = 'default')

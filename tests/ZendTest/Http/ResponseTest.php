@@ -15,7 +15,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     public function testResponseFactoryFromStringCreatesValidResponse()
     {
-        $string = 'HTTP/1.0 200 OK' . "\r\n\r\n" . 'Foo Bar';
+        $string = 'HTTP/1.0 200 OK'."\r\n\r\n".'Foo Bar';
         $response = Response::fromString($string);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Foo Bar', $response->getContent());
@@ -23,7 +23,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testResponseCanRenderStatusLine()
     {
-        $response = new Response;
+        $response = new Response();
         $response->setVersion(1.1);
         $response->setStatusCode(Response::STATUS_CODE_404);
         $this->assertEquals('HTTP/1.1 404 Not Found', $response->renderStatusLine());
@@ -50,7 +50,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testResponseCanSetStatusCode()
     {
-        $response = new Response;
+        $response = new Response();
         $this->assertEquals(200, $response->getStatusCode());
         $response->setStatusCode('303');
         $this->assertEquals(303, $response->getStatusCode());
@@ -58,21 +58,21 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testResponseSetStatusCodeThrowsExceptionOnInvalidCode()
     {
-        $response = new Response;
+        $response = new Response();
         $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException', 'Invalid status code');
         $response->setStatusCode(606);
     }
 
     public function testResponseGetReasonPhraseWillReturnEmptyPhraseAsDefault()
     {
-        $response = new Response;
+        $response = new Response();
         $response->setCustomStatusCode(998);
-        $this->assertSame('HTTP/1.1 998' . "\r\n\r\n", (string) $response);
+        $this->assertSame('HTTP/1.1 998'."\r\n\r\n", (string) $response);
     }
 
     public function testResponseCanSetCustomStatusCode()
     {
-        $response = new Response;
+        $response = new Response();
         $this->assertEquals(200, $response->getStatusCode());
         $response->setCustomStatusCode('999');
         $this->assertEquals(999, $response->getStatusCode());
@@ -80,7 +80,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testResponseSetCustomStatusCodeThrowsExceptionOnInvalidCode()
     {
-        $response = new Response;
+        $response = new Response();
         $this->setExpectedException(
             'Zend\Http\Exception\InvalidArgumentException',
             'Invalid status code provided: "foo"'
@@ -90,7 +90,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testResponseEndsAtStatusCode()
     {
-        $string = 'HTTP/1.0 200' . "\r\n\r\n" . 'Foo Bar';
+        $string = 'HTTP/1.0 200'."\r\n\r\n".'Foo Bar';
         $response = Response::fromString($string);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Foo Bar', $response->getContent());
@@ -101,7 +101,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         // Space after status code is mandatory,
         // though, reason phrase can be empty.
         // @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1
-        $string = 'HTTP/1.0 200 ' . "\r\n\r\n" . 'Foo Bar';
+        $string = 'HTTP/1.0 200 '."\r\n\r\n".'Foo Bar';
 
         $response = Response::fromString($string);
         $this->assertEquals(200, $response->getStatusCode());
@@ -113,7 +113,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testGzipResponse()
     {
-        $response_text = file_get_contents(__DIR__ . '/_files/response_gzip');
+        $response_text = file_get_contents(__DIR__.'/_files/response_gzip');
 
         $res = Response::fromString($response_text);
 
@@ -124,7 +124,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testDeflateResponse()
     {
-        $response_text = file_get_contents(__DIR__ . '/_files/response_deflate');
+        $response_text = file_get_contents(__DIR__.'/_files/response_deflate');
 
         $res = Response::fromString($response_text);
 
@@ -145,7 +145,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     public function testNonStandardDeflateResponseZF6040()
     {
         $this->markTestSkipped('Not correctly handling non-RFC complient "deflate" responses');
-        $response_text = file_get_contents(__DIR__ . '/_files/response_deflate_iis');
+        $response_text = file_get_contents(__DIR__.'/_files/response_deflate_iis');
 
         $res = Response::fromString($response_text);
 
@@ -156,7 +156,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testChunkedResponse()
     {
-        $response_text = file_get_contents(__DIR__ . '/_files/response_chunked');
+        $response_text = file_get_contents(__DIR__.'/_files/response_chunked');
 
         $res = Response::fromString($response_text);
 
@@ -167,7 +167,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testChunkedResponseCaseInsensitiveZF5438()
     {
-        $response_text = file_get_contents(__DIR__ . '/_files/response_chunked_case');
+        $response_text = file_get_contents(__DIR__.'/_files/response_chunked_case');
 
         $res = Response::fromString($response_text);
 
@@ -295,7 +295,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response = Response::fromString($response_str);
 
         $this->assertEquals(strtolower(str_replace("\n", "\r\n", $response_str)), strtolower($response->toString()), 'Response convertion to string does not match original string');
-        $this->assertEquals(strtolower(str_replace("\n", "\r\n", $response_str)), strtolower((string)$response), 'Response convertion to string does not match original string');
+        $this->assertEquals(strtolower(str_replace("\n", "\r\n", $response_str)), strtolower((string) $response), 'Response convertion to string does not match original string');
     }
 
     public function testToStringGzip()
@@ -304,7 +304,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response = Response::fromString($response_str);
 
         $this->assertEquals(strtolower($response_str), strtolower($response->toString()), 'Response convertion to string does not match original string');
-        $this->assertEquals(strtolower($response_str), strtolower((string)$response), 'Response convertion to string does not match original string');
+        $this->assertEquals(strtolower($response_str), strtolower((string) $response), 'Response convertion to string does not match original string');
     }
 
     public function testGetHeaders()
@@ -388,11 +388,11 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * Helper function: read test response from file
      *
-     * @param string $response
+     * @param  string $response
      * @return string
      */
     protected function readResponse($response)
     {
-        return file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $response);
+        return file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'_files'.DIRECTORY_SEPARATOR.$response);
     }
 }

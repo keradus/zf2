@@ -138,8 +138,8 @@ class Server extends AbstractServer
     /**
      * Proxy calls to system object
      *
-     * @param  string $method
-     * @param  array $params
+     * @param  string                                  $method
+     * @param  array                                   $params
      * @return mixed
      * @throws Server\Exception\BadMethodCallException
      */
@@ -147,8 +147,9 @@ class Server extends AbstractServer
     {
         $system = $this->getSystem();
         if (!method_exists($system, $method)) {
-            throw new Server\Exception\BadMethodCallException('Unknown instance method called on server: ' . $method);
+            throw new Server\Exception\BadMethodCallException('Unknown instance method called on server: '.$method);
         }
+
         return call_user_func_array(array($system, $method), $params);
     }
 
@@ -163,8 +164,8 @@ class Server extends AbstractServer
      * any arguments following the namespace will be aggregated and passed at
      * dispatch time.
      *
-     * @param string|array|callable $function  Valid callback
-     * @param string                $namespace Optional namespace prefix
+     * @param  string|array|callable                     $function  Valid callback
+     * @param  string                                    $namespace Optional namespace prefix
      * @throws Server\Exception\InvalidArgumentException
      * @return void
      */
@@ -201,9 +202,9 @@ class Server extends AbstractServer
      * Any additional arguments beyond $namespace will be passed to a method at
      * invocation.
      *
-     * @param string|object $class
-     * @param string $namespace Optional
-     * @param mixed $argv Optional arguments to pass to methods
+     * @param  string|object                             $class
+     * @param  string                                    $namespace Optional
+     * @param  mixed                                     $argv      Optional arguments to pass to methods
      * @return void
      * @throws Server\Exception\InvalidArgumentException on invalid input
      */
@@ -227,8 +228,8 @@ class Server extends AbstractServer
     /**
      * Raise an xmlrpc server fault
      *
-     * @param string|\Exception $fault
-     * @param int $code
+     * @param  string|\Exception $fault
+     * @param  int               $code
      * @return Server\Fault
      */
     public function fault($fault = null, $code = 404)
@@ -252,12 +253,13 @@ class Server extends AbstractServer
      *
      * The response is always available via {@link getResponse()}.
      *
-     * @param  bool $flag
+     * @param  bool   $flag
      * @return Server
      */
     public function setReturnResponse($flag = true)
     {
         $this->returnResponse = ($flag) ? true : false;
+
         return $this;
     }
 
@@ -274,7 +276,7 @@ class Server extends AbstractServer
     /**
      * Handle an xmlrpc call
      *
-     * @param  Request $request Optional
+     * @param  Request        $request Optional
      * @return Response|Fault
      */
     public function handle($request = false)
@@ -305,6 +307,7 @@ class Server extends AbstractServer
 
         if (!$this->returnResponse) {
             echo $response;
+
             return;
         }
 
@@ -317,7 +320,7 @@ class Server extends AbstractServer
      * Typically, you will not use this method; it will be called using the
      * results pulled from {@link Zend\XmlRpc\Server\Cache::get()}.
      *
-     * @param  array|Definition $definition
+     * @param  array|Definition                          $definition
      * @return void
      * @throws Server\Exception\InvalidArgumentException on invalid input
      */
@@ -330,7 +333,7 @@ class Server extends AbstractServer
                 $type = gettype($definition);
             }
             throw new Server\Exception\InvalidArgumentException(
-                'Unable to load server definition; must be an array or Zend\Server\Definition, received ' . $type,
+                'Unable to load server definition; must be an array or Zend\Server\Definition, received '.$type,
                 612
             );
         }
@@ -360,6 +363,7 @@ class Server extends AbstractServer
     {
         $this->encoding = $encoding;
         AbstractValue::setEncoding($encoding);
+
         return $this;
     }
 
@@ -386,7 +390,7 @@ class Server extends AbstractServer
     /**
      * Set the request object
      *
-     * @param  string|Request $request
+     * @param  string|Request                            $request
      * @return Server
      * @throws Server\Exception\InvalidArgumentException on invalid request class or object
      */
@@ -403,6 +407,7 @@ class Server extends AbstractServer
         }
 
         $this->request = $request;
+
         return $this;
     }
 
@@ -429,9 +434,9 @@ class Server extends AbstractServer
     /**
      * Set the class to use for the response
      *
-     * @param  string $class
+     * @param  string                                    $class
      * @throws Server\Exception\InvalidArgumentException if invalid response class
-     * @return bool True if class was set, false if not
+     * @return bool                                      True if class was set, false if not
      */
     public function setResponseClass($class)
     {
@@ -439,6 +444,7 @@ class Server extends AbstractServer
             throw new Server\Exception\InvalidArgumentException('Invalid response class');
         }
         $this->responseClass = $class;
+
         return true;
     }
 
@@ -500,6 +506,7 @@ class Server extends AbstractServer
         }
 
         $this->sendArgumentsToAllMethods = (bool) $flag;
+
         return $this;
     }
 
@@ -514,17 +521,18 @@ class Server extends AbstractServer
         if (isset($this->typeMap[$type])) {
             return $this->typeMap[$type];
         }
+
         return 'void';
     }
 
     /**
      * Handle an xmlrpc call (actual work)
      *
-     * @param  Request $request
+     * @param  Request                           $request
      * @return Response
      * @throws Server\Exception\RuntimeException
-     * Zend\XmlRpc\Server\Exceptions are thrown for internal errors; otherwise,
-     * any other exception may be thrown by the callback
+     *                                                   Zend\XmlRpc\Server\Exceptions are thrown for internal errors; otherwise,
+     *                                                   any other exception may be thrown by the callback
      */
     protected function handleRequest(Request $request)
     {
@@ -532,7 +540,7 @@ class Server extends AbstractServer
 
         // Check for valid method
         if (!$this->table->hasMethod($method)) {
-            throw new Server\Exception\RuntimeException('Method "' . $method . '" does not exist', 620);
+            throw new Server\Exception\RuntimeException('Method "'.$method.'" does not exist', 620);
         }
 
         $info     = $this->table->getMethod($method);
@@ -569,6 +577,7 @@ class Server extends AbstractServer
 
         $return        = $this->_dispatch($info, $params);
         $responseClass = $this->getResponseClass();
+
         return new $responseClass($return);
     }
 
@@ -592,8 +601,8 @@ class Server extends AbstractServer
      *
      * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *
-     * @param string $className
-     * @param string $type
+     * @param  string $className
+     * @param  string $type
      * @return bool
      */
     protected static function isSubclassOf($className, $type)

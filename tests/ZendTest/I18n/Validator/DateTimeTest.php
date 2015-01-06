@@ -44,7 +44,7 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
 
         $this->validator = new DateTimeValidator(array(
             'locale' => 'en',
-            'timezone' => 'Europe/Amsterdam'
+            'timezone' => 'Europe/Amsterdam',
         ));
     }
 
@@ -72,7 +72,7 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
             $expected,
             $this->validator->isValid($value),
             sprintf('Failed expecting %s being %s', $value, ($expected ? 'true' : 'false'))
-                . sprintf(
+                .sprintf(
                     ' (locale:%s, dateType: %s, timeType: %s, pattern:%s)',
                     $this->validator->getLocale(),
                     $this->validator->getDateType(),
@@ -89,7 +89,7 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
                 $this->markTestSkipped('ext/intl not enabled');
             } else {
                 return array(
-                    array()
+                    array(),
                 );
             }
         }
@@ -102,7 +102,7 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
             IntlDateFormatter::LONG,
             IntlDateFormatter::MEDIUM,
             IntlDateFormatter::SHORT,
-            IntlDateFormatter::NONE
+            IntlDateFormatter::NONE,
         );
 
         //Loop locales and formats for a more thorough set of "true" test data
@@ -113,7 +113,7 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
                         $trueArray[] = array(
                             IntlDateFormatter::create($locale, $dateFormat, $timeFormat)->format($testingDate),
                             true,
-                            array('locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat)
+                            array('locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat),
                         );
                     }
                 }
@@ -127,9 +127,9 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
                 array(
                     'locale' => 'en',
                     'dateType' => IntlDateFormatter::FULL,
-                    'timeType' => IntlDateFormatter::NONE
-                )
-            )
+                    'timeType' => IntlDateFormatter::NONE,
+                ),
+            ),
         );
 
         return array_merge($trueArray, $falseArray);
@@ -196,7 +196,7 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testOptionPattern()
     {
-        $this->validator->setOptions(array('pattern'=>'hh:mm'));
+        $this->validator->setOptions(array('pattern' => 'hh:mm'));
 
         $this->assertTrue($this->validator->isValid('02:00'));
         $this->assertEquals('hh:mm', $this->validator->getPattern());

@@ -24,7 +24,7 @@ class TE implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'te') {
-            throw new Exception\InvalidArgumentException('Invalid header line for TE string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for TE string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class TE implements HeaderInterface
 
     public function toString()
     {
-        return 'TE: ' . $this->getFieldValue();
+        return 'TE: '.$this->getFieldValue();
     }
 }

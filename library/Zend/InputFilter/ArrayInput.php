@@ -17,7 +17,7 @@ class ArrayInput extends Input
     protected $value = array();
 
     /**
-     * @param  array $value
+     * @param  array                              $value
      * @throws Exception\InvalidArgumentException
      * @return Input
      */
@@ -28,6 +28,7 @@ class ArrayInput extends Input
                 sprintf('Value must be an array, %s given.', gettype($value))
             );
         }
+
         return parent::setValue($value);
     }
 
@@ -41,6 +42,7 @@ class ArrayInput extends Input
         foreach ($this->value as $key => $value) {
             $result[$key] = $filter->filter($value);
         }
+
         return $result;
     }
 

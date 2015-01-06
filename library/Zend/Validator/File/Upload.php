@@ -45,7 +45,7 @@ class Upload extends AbstractValidator
         self::EXTENSION      => "A PHP extension returned an error while uploading the file '%value%'",
         self::ATTACK         => "File '%value%' was illegally uploaded. This could be a possible attack",
         self::FILE_NOT_FOUND => "File '%value%' was not found",
-        self::UNKNOWN        => "Unknown error while uploading file '%value%'"
+        self::UNKNOWN        => "Unknown error while uploading file '%value%'",
     );
 
     protected $options = array(
@@ -59,7 +59,7 @@ class Upload extends AbstractValidator
      * If no files are given the $_FILES array will be used automatically.
      * NOTE: This validator will only work with HTTP POST uploads!
      *
-     * @param  array|\Traversable $options Array of files in syntax of \Zend\File\Transfer\Transfer
+     * @param array|\Traversable $options Array of files in syntax of \Zend\File\Transfer\Transfer
      */
     public function __construct($options = array())
     {
@@ -73,7 +73,7 @@ class Upload extends AbstractValidator
     /**
      * Returns the array of set files
      *
-     * @param  string $file (Optional) The file to return in detail
+     * @param  string                             $file (Optional) The file to return in detail
      * @return array
      * @throws Exception\InvalidArgumentException If file is not found
      */
@@ -104,7 +104,7 @@ class Upload extends AbstractValidator
     /**
      * Sets the files to be checked
      *
-     * @param  array $files The files to check in syntax of \Zend\File\Transfer\Transfer
+     * @param  array  $files The files to check in syntax of \Zend\File\Transfer\Transfer
      * @return Upload Provides a fluent interface
      */
     public function setFiles($files = array())
@@ -228,6 +228,7 @@ class Upload extends AbstractValidator
         }
 
         $this->error($errorType);
+
         return false;
     }
 }

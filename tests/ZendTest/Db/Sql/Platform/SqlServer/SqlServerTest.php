@@ -19,7 +19,7 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $sqlServer = new SqlServer;
+        $sqlServer = new SqlServer();
         $decorators = $sqlServer->getDecorators();
 
         list($type, $decorator) = each($decorators);

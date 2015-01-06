@@ -48,7 +48,7 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return IbmDb2
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
@@ -60,6 +60,7 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -79,6 +80,7 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
+
         return $this;
     }
 
@@ -90,6 +92,7 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
+
         return $this;
     }
 
@@ -100,13 +103,14 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
+
         return $this;
     }
 
     /**
      * Get database platform name
      *
-     * @param string $nameFormat
+     * @param  string $nameFormat
      * @return string
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
@@ -143,7 +147,7 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Create statement
      *
-     * @param string|resource $sqlOrResource
+     * @param  string|resource $sqlOrResource
      * @return Statement
      */
     public function createStatement($sqlOrResource = null)
@@ -156,7 +160,7 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
                 $statement->setSql($sqlOrResource);
             } elseif ($sqlOrResource !== null) {
                 throw new Exception\InvalidArgumentException(
-                    __FUNCTION__ . ' only accepts an SQL string or an ibm_db2 resource'
+                    __FUNCTION__.' only accepts an SQL string or an ibm_db2 resource'
                 );
             }
             if (!$this->connection->isConnected()) {
@@ -164,19 +168,21 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
             }
             $statement->initialize($this->connection->getResource());
         }
+
         return $statement;
     }
 
     /**
      * Create result
      *
-     * @param resource $resource
+     * @param  resource $resource
      * @return Result
      */
     public function createResult($resource)
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue());
+
         return $result;
     }
 
@@ -193,8 +199,8 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
     /**
      * Format parameter name
      *
-     * @param string $name
-     * @param mixed  $type
+     * @param  string $name
+     * @param  mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)

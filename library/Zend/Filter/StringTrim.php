@@ -23,7 +23,7 @@ class StringTrim extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param  string|array|Traversable $charlistOrOptions
+     * @param string|array|Traversable $charlistOrOptions
      */
     public function __construct($charlistOrOptions = null)
     {
@@ -40,7 +40,7 @@ class StringTrim extends AbstractFilter
      * Sets the charList option
      *
      * @param  string $charList
-     * @return self Provides a fluent interface
+     * @return self   Provides a fluent interface
      */
     public function setCharList($charList)
     {
@@ -89,8 +89,8 @@ class StringTrim extends AbstractFilter
      * Unicode aware trim method
      * Fixes a PHP problem
      *
-     * @param string $value
-     * @param string $charlist
+     * @param  string $value
+     * @param  string $charlist
      * @return string
      */
     protected function unicodeTrim($value, $charlist = '\\\\s')
@@ -101,7 +101,7 @@ class StringTrim extends AbstractFilter
             $charlist
         );
 
-        $pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usSD';
+        $pattern = '/^['.$chars.']+|['.$chars.']+$/usSD';
 
         return preg_replace($pattern, '', $value);
     }

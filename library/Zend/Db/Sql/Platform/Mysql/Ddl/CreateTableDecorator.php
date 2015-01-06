@@ -48,7 +48,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     }
 
     /**
-     * @param string $sql
+     * @param  string $sql
      * @return array
      */
     protected function getSqlInsertOffsets($sql)
@@ -57,7 +57,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
         $insertStart = array();
 
         foreach (array('NOT NULL', 'NULL', 'DEFAULT', 'UNIQUE', 'PRIMARY', 'REFERENCES') as $needle) {
-            $insertPos = strpos($sql, ' ' . $needle);
+            $insertPos = strpos($sql, ' '.$needle);
 
             if ($insertPos !== false) {
                 switch ($needle) {
@@ -122,16 +122,16 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
                         $j = 1;
                         break;
                     case 'comment':
-                        $insert = ' COMMENT ' . $platform->quoteValue($coValue);
+                        $insert = ' COMMENT '.$platform->quoteValue($coValue);
                         $j = 2;
                         break;
                     case 'columnformat':
                     case 'format':
-                        $insert = ' COLUMN_FORMAT ' . strtoupper($coValue);
+                        $insert = ' COLUMN_FORMAT '.strtoupper($coValue);
                         $j = 2;
                         break;
                     case 'storage':
-                        $insert = ' STORAGE ' . strtoupper($coValue);
+                        $insert = ' STORAGE '.strtoupper($coValue);
                         $j = 2;
                         break;
                 }

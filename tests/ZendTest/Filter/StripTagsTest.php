@@ -64,13 +64,13 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $tagsAllowed = array(
             'b',
             'a'   => 'href',
-            'div' => array('id', 'class')
+            'div' => array('id', 'class'),
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $tagsAllowedExpected = array(
             'b'   => array(),
             'a'   => array('href' => null),
-            'div' => array('id' => null, 'class' => null)
+            'div' => array('id' => null, 'class' => null),
             );
         $this->assertEquals($tagsAllowedExpected, $this->_filter->getTagsAllowed());
     }
@@ -107,13 +107,13 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
             'clAss',
             4    => 'inT',
             'ok' => 'String',
-            null
+            null,
             );
         $this->_filter->setAttributesAllowed($attributesAllowed);
         $attributesAllowedExpected = array(
             'class'  => null,
             'int'    => null,
-            'string' => null
+            'string' => null,
             );
         $this->assertEquals($attributesAllowedExpected, $this->_filter->getAttributesAllowed());
     }
@@ -247,7 +247,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $tagsAllowed = array(
-            'img' => 'alt'
+            'img' => 'alt',
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<IMG ALT="FOO" />';
@@ -266,7 +266,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $tagsAllowed = array(
-            'img' => 'alt'
+            'img' => 'alt',
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<img alt="$object->property" />';
@@ -283,7 +283,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $tagsAllowed = array(
-            'img' => 'alt'
+            'img' => 'alt',
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<img alt="$object-&gt;property" />';
@@ -301,7 +301,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $tagsAllowed = array(
-            'img' => array('alt', 'height', 'src', 'width')
+            'img' => array('alt', 'height', 'src', 'width'),
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<img src="image.png" alt="square height="100" width="100" />';
@@ -318,7 +318,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $tagsAllowed = array(
-            'input' => array('checked', 'name', 'type')
+            'input' => array('checked', 'name', 'type'),
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input    = '<input name="foo" type="checkbox" checked />';
@@ -342,13 +342,13 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
             );
         $this->_filter->setTagsAllowed($tagsAllowed);
         $input = '<object width="425" height="350"><param name="movie" value="http://www.example.com/path/to/movie">'
-               . '</param><param name="wmode" value="transparent"></param><embed '
-               . 'src="http://www.example.com/path/to/movie" type="application/x-shockwave-flash" '
-               . 'wmode="transparent" width="425" height="350"></embed></object>';
+               .'</param><param name="wmode" value="transparent"></param><embed '
+               .'src="http://www.example.com/path/to/movie" type="application/x-shockwave-flash" '
+               .'wmode="transparent" width="425" height="350"></embed></object>';
         $expected = '<object width="425" height="350"><param name="movie" value="http://www.example.com/path/to/movie">'
-               . '</param><param name="wmode" value="transparent"></param><embed '
-               . 'src="http://www.example.com/path/to/movie" type="application/x-shockwave-flash" '
-               . 'wmode="transparent" width="425" height="350"></embed></object>';
+               .'</param><param name="wmode" value="transparent"></param><embed '
+               .'src="http://www.example.com/path/to/movie" type="application/x-shockwave-flash" '
+               .'wmode="transparent" width="425" height="350"></embed></object>';
         $this->assertEquals($expected, $filter($input));
     }
 
@@ -388,7 +388,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $tagsAllowed = array(
-            'a' => 'href'
+            'a' => 'href',
             );
         $filter->setTagsAllowed($tagsAllowed);
         $input    = '<a href="Some &gt; Text">';
@@ -406,7 +406,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $tagsAllowed = array(
-            'element' => 'attribute'
+            'element' => 'attribute',
         );
         $filter->setTagsAllowed($tagsAllowed);
         $input = '<element attribute="a=">contents</element>';
@@ -502,7 +502,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $filter = new StripTagsFilter(
             array(
                 'allowTags' => 'img',
-                'allowAttribs' => array('width', 'height', 'src')
+                'allowAttribs' => array('width', 'height', 'src'),
             )
         );
 
@@ -511,7 +511,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $filter->filter($input));
     }
 
-     /**
+    /**
      * @group ZF-10256
      */
     public function testNotClosedHtmlCommentAtEndOfString()
@@ -542,8 +542,8 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(array(
                 '<li data-name="Test User" data-id="11223"></li>',
-                '<li data-name="Test User 2" data-id="456789"></li>'
-            ))
+                '<li data-name="Test User 2" data-id="456789"></li>',
+            )),
         );
     }
 

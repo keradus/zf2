@@ -130,7 +130,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
     {
         $ret = null;
         if ($this->flag == self::ARRAY_AS_PROPS) {
-            $ret =& $this->offsetGet($key);
+            $ret = & $this->offsetGet($key);
 
             return $ret;
         }
@@ -293,7 +293,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
         if (!$this->offsetExists($key)) {
             return $ret;
         }
-        $ret =& $this->storage[$key];
+        $ret = & $this->storage[$key];
 
         return $ret;
     }
@@ -355,15 +355,15 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
         if (class_exists($class)) {
             $this->iteratorClass = $class;
 
-            return ;
+            return;
         }
 
         if (strpos($class, '\\') === 0) {
-            $class = '\\' . $class;
+            $class = '\\'.$class;
             if (class_exists($class)) {
                 $this->iteratorClass = $class;
 
-                return ;
+                return;
             }
         }
 

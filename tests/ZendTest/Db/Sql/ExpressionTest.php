@@ -28,6 +28,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression();
         $return = $expression->setExpression('Foo Bar');
         $this->assertSame($expression, $return);
+
         return $return;
     }
 
@@ -58,6 +59,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression();
         $return = $expression->setParameters('foo');
         $this->assertSame($expression, $return);
+
         return $return;
     }
 
@@ -89,6 +91,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression();
         $return = $expression->setTypes(array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL));
         $this->assertSame($expression, $return);
+
         return $expression;
     }
 
@@ -119,7 +122,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
             array(array(
                 'X SAME AS %s AND Y = %s BUT LITERALLY %s',
                 array('foo', 5, 'FUNC(FF%X)'),
-                array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL)
+                array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL),
             )),
             $expression->getExpressionData()
         );
@@ -135,7 +138,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expected = array(array(
             'X SAME AS %s AND Y = %s BUT LITERALLY %s',
             array('foo', 5, 'FUNC(FF%X)'),
-            array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL)
+            array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL),
         ));
 
         $this->assertEquals($expected, $expression->getExpressionData());

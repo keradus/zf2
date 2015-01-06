@@ -79,6 +79,7 @@ class Layout extends AbstractHelper
     public function setTemplate($template)
     {
         $this->getRoot()->setTemplate((string) $template);
+
         return $this;
     }
 

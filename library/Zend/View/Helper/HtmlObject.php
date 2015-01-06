@@ -16,11 +16,11 @@ class HtmlObject extends AbstractHtmlElement
     /**
      * Output an object set
      *
-     * @param  string $data    The data file
-     * @param  string $type    Data file type
-     * @param  array  $attribs Attribs for the object tag
-     * @param  array  $params  Params for in the object tag
-     * @param  string $content Alternative content for object
+     * @param  string                   $data    The data file
+     * @param  string                   $type    Data file type
+     * @param  array                    $attribs Attribs for the object tag
+     * @param  array                    $params  Params for in the object tag
+     * @param  string                   $content Alternative content for object
      * @throws InvalidArgumentException
      * @return string
      */
@@ -34,7 +34,7 @@ class HtmlObject extends AbstractHtmlElement
         if ($data == null || $type == null) {
             throw new InvalidArgumentException(
                 'HTMLObject: missing argument. $data and $type are required in '
-                . 'htmlObject($data, $type, array $attribs = array(), array $params = array(), $content = null)'
+                .'htmlObject($data, $type, array $attribs = array(), array $params = array(), $content = null)'
             );
         }
 
@@ -52,7 +52,7 @@ class HtmlObject extends AbstractHtmlElement
 
             $options = array_merge(array('name' => $param), $options);
 
-            $paramHtml[] = '<param' . $this->htmlAttribs($options) . $closingBracket;
+            $paramHtml[] = '<param'.$this->htmlAttribs($options).$closingBracket;
         }
 
         // Content
@@ -61,10 +61,10 @@ class HtmlObject extends AbstractHtmlElement
         }
 
         // Object header
-        $xhtml = '<object' . $this->htmlAttribs($attribs) . '>' . self::EOL
-                 . implode(self::EOL, $paramHtml) . self::EOL
-                 . ($content ? $content . self::EOL : '')
-                 . '</object>';
+        $xhtml = '<object'.$this->htmlAttribs($attribs).'>'.self::EOL
+                 .implode(self::EOL, $paramHtml).self::EOL
+                 .($content ? $content.self::EOL : '')
+                 .'</object>';
 
         return $xhtml;
     }

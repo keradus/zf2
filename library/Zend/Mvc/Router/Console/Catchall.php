@@ -10,6 +10,7 @@
 /**
  * @namespace
  */
+
 namespace Zend\Mvc\Router\Console;
 
 use Traversable;
@@ -68,7 +69,7 @@ class Catchall implements RouteInterface
     /**
      * Create a new simple console route.
      *
-     * @param  array                                    $defaults
+     * @param  array    $defaults
      * @return Catchall
      */
     public function __construct(array $defaults = array())
@@ -92,8 +93,8 @@ class Catchall implements RouteInterface
      * match(): defined by Route interface.
      *
      * @see     Route::match()
-     * @param   Request             $request
-     * @return  RouteMatch
+     * @param  Request    $request
+     * @return RouteMatch
      */
     public function match(Request $request)
     {

@@ -42,7 +42,7 @@ class Mysql extends AbstractPlatform
     }
 
     /**
-     * @param \Zend\Db\Adapter\Driver\Mysqli\Mysqli|\Zend\Db\Adapter\Driver\Pdo\Pdo|\mysqli|\PDO $driver
+     * @param  \Zend\Db\Adapter\Driver\Mysqli\Mysqli|\Zend\Db\Adapter\Driver\Pdo\Pdo|\mysqli|\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      *
      * @return self
@@ -56,6 +56,7 @@ class Mysql extends AbstractPlatform
             || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql')
         ) {
             $this->resource = $driver;
+
             return $this;
         }
 
@@ -75,7 +76,7 @@ class Mysql extends AbstractPlatform
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        return '`' . implode('`.`', (array) str_replace('`', '``', $identifierChain)) . '`';
+        return '`'.implode('`.`', (array) str_replace('`', '``', $identifierChain)).'`';
     }
 
     /**
@@ -95,16 +96,17 @@ class Mysql extends AbstractPlatform
             $this->resource = $this->resource->getConnection()->getResource();
         }
         if ($this->resource instanceof \mysqli) {
-            return '\'' . $this->resource->real_escape_string($value) . '\'';
+            return '\''.$this->resource->real_escape_string($value).'\'';
         }
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
         trigger_error(
-            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-                . 'can introduce security vulnerabilities in a production environment.'
+            'Attempting to quote a value in '.__CLASS__.' without extension/driver support '
+                .'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+
+        return '\''.addcslashes($value, "\x00\n\r\\'\"\x1a").'\'';
     }
 
     /**
@@ -116,12 +118,13 @@ class Mysql extends AbstractPlatform
             $this->resource = $this->resource->getConnection()->getResource();
         }
         if ($this->resource instanceof \mysqli) {
-            return '\'' . $this->resource->real_escape_string($value) . '\'';
+            return '\''.$this->resource->real_escape_string($value).'\'';
         }
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+
+        return '\''.addcslashes($value, "\x00\n\r\\'\"\x1a").'\'';
     }
 
     /**

@@ -119,7 +119,7 @@ class SqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrepareStatementForSqlObject()
     {
-        $insert = $this->sql->insert()->columns(array('foo'))->values(array('foo'=>'bar'));
+        $insert = $this->sql->insert()->columns(array('foo'))->values(array('foo' => 'bar'));
         $stmt = $this->sql->prepareStatementForSqlObject($insert);
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\StatementInterface', $stmt);
     }

@@ -47,13 +47,14 @@ class Lastmod extends AbstractValidator
      *
      * @link http://www.sitemaps.org/protocol.php#lastmoddef <lastmod>
      *
-     * @param  string  $value  value to validate
+     * @param  string $value value to validate
      * @return bool
      */
     public function isValid($value)
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -63,6 +64,7 @@ class Lastmod extends AbstractValidator
         ErrorHandler::stop();
         if ($result != 1) {
             $this->error(self::NOT_VALID);
+
             return false;
         }
 

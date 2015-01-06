@@ -75,7 +75,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterhShouldRaiseExceptionWhenAddingInvalidValidatorType()
     {
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid validator provided to addValidator');
-        $this->adapter->addValidator(new Filter\BaseName);
+        $this->adapter->addValidator(new Filter\BaseName());
     }
 
     public function testAdapterShouldAllowAddingMultipleValidatorsAtOnceUsingBothInstancesAndPluginLoader()
@@ -85,7 +85,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             'Exists' => 'C:\temp',
             array(
                 'validator' => 'Upload',
-                'options' => array(realpath(__FILE__))
+                'options' => array(realpath(__FILE__)),
             ),
             new FileValidator\Extension('jpg'),
         );
@@ -265,7 +265,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($test instanceof Filter\StringTrim);
     }
 
-
     public function testAdapterhShouldRaiseExceptionWhenAddingInvalidFilterType()
     {
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid filter specified');
@@ -278,7 +277,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             'Word\SeparatorToCamelCase' => array('separator' => ' '),
             array(
                 'filter' => 'Boolean',
-                'casting' => true
+                'casting' => true,
             ),
             new Filter\BaseName(),
         );
@@ -393,7 +392,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         }
 
         $newdirectory = __DIR__
-                      . DIRECTORY_SEPARATOR . '_files';
+                      .DIRECTORY_SEPARATOR.'_files';
         $this->adapter->setDestination($newdirectory, 'foo');
         $this->assertEquals($newdirectory, $this->adapter->getDestination('foo'));
         $this->assertEquals($directory, $this->adapter->getDestination('bar'));
@@ -466,15 +465,15 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldAllowRetrievingFileName()
     {
         $path = __DIR__
-              . DIRECTORY_SEPARATOR . '_files';
+              .DIRECTORY_SEPARATOR.'_files';
         $this->adapter->setDestination($path);
-        $this->assertEquals($path . DIRECTORY_SEPARATOR . 'foo.jpg', $this->adapter->getFileName('foo'));
+        $this->assertEquals($path.DIRECTORY_SEPARATOR.'foo.jpg', $this->adapter->getFileName('foo'));
     }
 
     public function testAdapterShouldAllowRetrievingFileNameWithoutPath()
     {
         $path = __DIR__
-              . DIRECTORY_SEPARATOR . '_files';
+              .DIRECTORY_SEPARATOR.'_files';
         $this->adapter->setDestination($path);
         $this->assertEquals('foo.jpg', $this->adapter->getFileName('foo', false));
     }
@@ -482,17 +481,17 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldAllowRetrievingAllFileNames()
     {
         $path = __DIR__
-              . DIRECTORY_SEPARATOR . '_files';
+              .DIRECTORY_SEPARATOR.'_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName();
         $this->assertTrue(is_array($files));
-        $this->assertEquals($path . DIRECTORY_SEPARATOR . 'bar.png', $files['bar']);
+        $this->assertEquals($path.DIRECTORY_SEPARATOR.'bar.png', $files['bar']);
     }
 
     public function testAdapterShouldAllowRetrievingAllFileNamesWithoutPath()
     {
         $path = __DIR__
-              . DIRECTORY_SEPARATOR . '_files';
+              .DIRECTORY_SEPARATOR.'_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName(null, false);
         $this->assertTrue(is_array($files));
@@ -653,12 +652,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             'foo' => array(
                 'ignoreNoFile' => false,
                 'useByteString' => true,
-                'detectInfos' => true)), $this->adapter->getOptions('foo'));
+                'detectInfos' => true, ), ), $this->adapter->getOptions('foo'));
         $this->adapter->setOptions(array('detectInfos' => false));
         $this->assertEquals(array(
             'foo' => array(
                 'ignoreNoFile' => false,
                 'useByteString' => true,
-                'detectInfos' => false)), $this->adapter->getOptions('foo'));
+                'detectInfos' => false, ), ), $this->adapter->getOptions('foo'));
     }
 }

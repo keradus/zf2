@@ -97,7 +97,7 @@ class Menu extends AbstractHelper
      * @see renderMenu()
      *
      * @param  AbstractContainer $container [optional] container to render. Default is
-     *                              to render the container registered in the helper.
+     *                                      to render the container registered in the helper.
      * @return string
      */
     public function render($container = null)
@@ -153,8 +153,8 @@ class Menu extends AbstractHelper
 
         /* @var $escaper \Zend\View\Helper\EscapeHtmlAttr */
         $escaper = $this->view->plugin('escapeHtmlAttr');
-        $ulClass = $ulClass ? ' class="' . $escaper($ulClass) . '"' : '';
-        $html = $indent . '<ul' . $ulClass . '>' . PHP_EOL;
+        $ulClass = $ulClass ? ' class="'.$escaper($ulClass).'"' : '';
+        $html = $indent.'<ul'.$ulClass.'>'.PHP_EOL;
 
         foreach ($active['page'] as $subPage) {
             if (!$this->accept($subPage)) {
@@ -171,14 +171,14 @@ class Menu extends AbstractHelper
             if ($addClassToListItem && $subPage->getClass()) {
                 $liClasses[] = $subPage->getClass();
             }
-            $liClass = empty($liClasses) ? '' : ' class="' . $escaper(implode(' ', $liClasses)) . '"';
+            $liClass = empty($liClasses) ? '' : ' class="'.$escaper(implode(' ', $liClasses)).'"';
 
-            $html .= $indent . '    <li' . $liClass . '>' . PHP_EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addClassToListItem) . PHP_EOL;
-            $html .= $indent . '    </li>' . PHP_EOL;
+            $html .= $indent.'    <li'.$liClass.'>'.PHP_EOL;
+            $html .= $indent.'        '.$this->htmlify($subPage, $escapeLabels, $addClassToListItem).PHP_EOL;
+            $html .= $indent.'    </li>'.PHP_EOL;
         }
 
-        $html .= $indent . '</ul>';
+        $html .= $indent.'</ul>';
 
         return $html;
     }
@@ -204,7 +204,6 @@ class Menu extends AbstractHelper
         if (null === $container) {
             $container = $this->getContainer();
         }
-
 
         $options = $this->normalizeOptions($options);
 
@@ -317,28 +316,28 @@ class Menu extends AbstractHelper
 
             // make sure indentation is correct
             $depth -= $minDepth;
-            $myIndent = $indent . str_repeat('        ', $depth);
+            $myIndent = $indent.str_repeat('        ', $depth);
 
             if ($depth > $prevDepth) {
                 // start new ul tag
                 if ($ulClass && $depth ==  0) {
-                    $ulClass = ' class="' . $escaper($ulClass) . '"';
+                    $ulClass = ' class="'.$escaper($ulClass).'"';
                 } else {
                     $ulClass = '';
                 }
-                $html .= $myIndent . '<ul' . $ulClass . '>' . PHP_EOL;
+                $html .= $myIndent.'<ul'.$ulClass.'>'.PHP_EOL;
             } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
-                    $ind = $indent . str_repeat('        ', $i);
-                    $html .= $ind . '    </li>' . PHP_EOL;
-                    $html .= $ind . '</ul>' . PHP_EOL;
+                    $ind = $indent.str_repeat('        ', $i);
+                    $html .= $ind.'    </li>'.PHP_EOL;
+                    $html .= $ind.'</ul>'.PHP_EOL;
                 }
                 // close previous li tag
-                $html .= $myIndent . '    </li>' . PHP_EOL;
+                $html .= $myIndent.'    </li>'.PHP_EOL;
             } else {
                 // close previous li tag
-                $html .= $myIndent . '    </li>' . PHP_EOL;
+                $html .= $myIndent.'    </li>'.PHP_EOL;
             }
 
             // render li tag and page
@@ -351,10 +350,10 @@ class Menu extends AbstractHelper
             if ($addClassToListItem && $page->getClass()) {
                 $liClasses[] = $page->getClass();
             }
-            $liClass = empty($liClasses) ? '' : ' class="' . $escaper(implode(' ', $liClasses)) . '"';
+            $liClass = empty($liClasses) ? '' : ' class="'.$escaper(implode(' ', $liClasses)).'"';
 
-            $html .= $myIndent . '    <li' . $liClass . '>' . PHP_EOL
-                . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addClassToListItem) . PHP_EOL;
+            $html .= $myIndent.'    <li'.$liClass.'>'.PHP_EOL
+                .$myIndent.'        '.$this->htmlify($page, $escapeLabels, $addClassToListItem).PHP_EOL;
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -363,9 +362,9 @@ class Menu extends AbstractHelper
         if ($html) {
             // done iterating container; close open ul/li tags
             for ($i = $prevDepth+1; $i > 0; $i--) {
-                $myIndent = $indent . str_repeat('        ', $i-1);
-                $html .= $myIndent . '    </li>' . PHP_EOL
-                    . $myIndent . '</ul>' . PHP_EOL;
+                $myIndent = $indent.str_repeat('        ', $i-1);
+                $html .= $myIndent.'    </li>'.PHP_EOL
+                    .$myIndent.'</ul>'.PHP_EOL;
             }
             $html = rtrim($html, PHP_EOL);
         }
@@ -380,18 +379,18 @@ class Menu extends AbstractHelper
      * as-is, and will be available in the partial script as 'container', e.g.
      * <code>echo 'Number of pages: ', count($this->container);</code>.
      *
-     * @param  AbstractContainer     $container [optional] container to pass to view
-     *                                  script. Default is to use the container
-     *                                  registered in the helper.
-     * @param  string|array  $partial   [optional] partial view script to use.
-     *                                  Default is to use the partial
-     *                                  registered in the helper. If an array
-     *                                  is given, it is expected to contain two
-     *                                  values; the partial view script to use,
-     *                                  and the module where the script can be
-     *                                  found.
+     * @param  AbstractContainer                  $container [optional] container to pass to view
+     *                                                       script. Default is to use the container
+     *                                                       registered in the helper.
+     * @param  string|array                       $partial   [optional] partial view script to use.
+     *                                                       Default is to use the partial
+     *                                                       registered in the helper. If an array
+     *                                                       is given, it is expected to contain two
+     *                                                       values; the partial view script to use,
+     *                                                       and the module where the script can be
+     *                                                       found.
      * @return string
-     * @throws Exception\RuntimeException if no partial provided
+     * @throws Exception\RuntimeException         if no partial provided
      * @throws Exception\InvalidArgumentException if partial is invalid array
      */
     public function renderPartial($container = null, $partial = null)
@@ -412,7 +411,7 @@ class Menu extends AbstractHelper
         }
 
         $model = array(
-            'container' => $container
+            'container' => $container,
         );
 
         /** @var \Zend\View\Helper\Partial $partialHelper */
@@ -422,8 +421,8 @@ class Menu extends AbstractHelper
             if (count($partial) != 2) {
                 throw new Exception\InvalidArgumentException(
                     'Unable to render menu: A view partial supplied as '
-                    .  'an array must contain two values: partial view '
-                    .  'script and module where script can be found'
+                    .'an array must contain two values: partial view '
+                    .'script and module where script can be found'
                 );
             }
 
@@ -483,7 +482,7 @@ class Menu extends AbstractHelper
             'renderParents'      => false,
             'escapeLabels'       => true,
             'addClassToListItem' => false,
-            'liActiveClass'      => $liActiveClass
+            'liActiveClass'      => $liActiveClass,
         ));
     }
 
@@ -520,7 +519,7 @@ class Menu extends AbstractHelper
             $element = 'span';
         }
 
-        $html  = '<' . $element . $this->htmlAttribs($attribs) . '>';
+        $html  = '<'.$element.$this->htmlAttribs($attribs).'>';
         $label = $this->translate($page->getLabel(), $page->getTextDomain());
         if ($escapeLabel === true) {
             /** @var \Zend\View\Helper\EscapeHtml $escaper */
@@ -529,7 +528,7 @@ class Menu extends AbstractHelper
         } else {
             $html .= $label;
         }
-        $html .= '</' . $element . '>';
+        $html .= '</'.$element.'>';
 
         return $html;
     }
@@ -537,7 +536,7 @@ class Menu extends AbstractHelper
     /**
      * Normalizes given render options
      *
-     * @param  array $options  [optional] options to normalize
+     * @param  array $options [optional] options to normalize
      * @return array
      */
     protected function normalizeOptions(array $options = array())
@@ -602,12 +601,13 @@ class Menu extends AbstractHelper
     /**
      * Sets a flag indicating whether labels should be escaped
      *
-     * @param bool $flag [optional] escape labels
+     * @param  bool $flag [optional] escape labels
      * @return self
      */
     public function escapeLabels($flag = true)
     {
         $this->escapeLabels = (bool) $flag;
+
         return $this;
     }
 
@@ -616,11 +616,12 @@ class Menu extends AbstractHelper
      *
      * @param  bool $flag [optional] page class applied to <li> element
      *                    Default is true.
-     * @return self  fluent interface, returns self
+     * @return self fluent interface, returns self
      */
     public function setAddClassToListItem($flag = true)
     {
         $this->addClassToListItem = (bool) $flag;
+
         return $this;
     }
 
@@ -629,7 +630,7 @@ class Menu extends AbstractHelper
      *
      * By default, this value is false.
      *
-     * @return bool  whether parents should be rendered
+     * @return bool whether parents should be rendered
      */
     public function getAddClassToListItem()
     {
@@ -645,6 +646,7 @@ class Menu extends AbstractHelper
     public function setOnlyActiveBranch($flag = true)
     {
         $this->onlyActiveBranch = (bool) $flag;
+
         return $this;
     }
 
@@ -701,6 +703,7 @@ class Menu extends AbstractHelper
     public function setRenderParents($flag = true)
     {
         $this->renderParents = (bool) $flag;
+
         return $this;
     }
 

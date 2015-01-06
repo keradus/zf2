@@ -46,7 +46,7 @@ class PluginManager extends AbstractPluginManager
      *
      * Checks that the plugin loaded is an instance of Plugin\PluginInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                      $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

@@ -35,7 +35,7 @@ class AdapterPluginManager extends AbstractPluginManager
      *
      * Checks that the adapter loaded is an instance of Adapter\AdapterInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                      $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

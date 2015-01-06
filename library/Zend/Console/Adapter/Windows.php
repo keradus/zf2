@@ -189,7 +189,7 @@ class Windows extends Virtual
      */
     public function getDefaultCharset()
     {
-        return new Charset\AsciiExtended;
+        return new Charset\AsciiExtended();
     }
 
     /**
@@ -221,13 +221,13 @@ class Windows extends Virtual
      */
     public function clearLine()
     {
-        echo "\r" . str_repeat(' ', $this->getWidth()) . "\r";
+        echo "\r".str_repeat(' ', $this->getWidth())."\r";
     }
 
     /**
      * Read a single character from the console input
      *
-     * @param  string|null $mask A list of allowed chars
+     * @param  string|null                $mask A list of allowed chars
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -241,7 +241,7 @@ class Windows extends Virtual
             // single character matching a mask, but is limited to lower ASCII
             // range.
             do {
-                exec('choice /n /cs /c:' . $mask, $output, $return);
+                exec('choice /n /cs /c:'.$mask, $output, $return);
                 if ($return == 255 || $return < 1 || $return > strlen($mask)) {
                     throw new Exception\RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
                 }
@@ -261,9 +261,9 @@ class Windows extends Virtual
         if ($mask === null) {
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                . 'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
-                . 'write $key.VirtualKeyCode;'
-                . '"',
+                .'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
+                .'write $key.VirtualKeyCode;'
+                .'"',
                 $result,
                 $return
             );
@@ -299,12 +299,12 @@ class Windows extends Virtual
 
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                . '[int[]] $mask = ' . implode(',', $asciiMask) . ';'
-                . 'do {'
-                    . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
-                . '} while ( !($mask -contains $key) );'
-                . 'write $key;'
-                . '"',
+                .'[int[]] $mask = '.implode(',', $asciiMask).';'
+                .'do {'
+                    .'$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
+                .'} while ( !($mask -contains $key) );'
+                .'write $key;'
+                .'"',
                 $result,
                 $return
             );
@@ -342,7 +342,7 @@ class Windows extends Virtual
     /**
      * Read a single line from the console input.
      *
-     * @param  int $maxLength Maximum response length
+     * @param  int    $maxLength Maximum response length
      * @return string
      */
     public function readLine($maxLength = 2048)

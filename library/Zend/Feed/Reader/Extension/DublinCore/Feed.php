@@ -19,7 +19,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get a single author
      *
-     * @param  int $index
+     * @param  int         $index
      * @return string|null
      */
     public function getAuthor($index = 0)
@@ -61,7 +61,7 @@ class Feed extends Extension\AbstractFeed
         if ($list->length) {
             foreach ($list as $author) {
                 $authors[] = array(
-                    'name' => $author->nodeValue
+                    'name' => $author->nodeValue,
                 );
             }
             $authors = new Collection\Author(
@@ -87,10 +87,10 @@ class Feed extends Extension\AbstractFeed
             return $this->data['copyright'];
         }
 
-        $copyright = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:rights)');
+        $copyright = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:rights)');
 
         if (!$copyright) {
-            $copyright = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:rights)');
+            $copyright = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:rights)');
         }
 
         if (!$copyright) {
@@ -113,10 +113,10 @@ class Feed extends Extension\AbstractFeed
             return $this->data['description'];
         }
 
-        $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:description)');
+        $description = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:description)');
 
         if (!$description) {
-            $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:description)');
+            $description = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:description)');
         }
 
         if (!$description) {
@@ -139,10 +139,10 @@ class Feed extends Extension\AbstractFeed
             return $this->data['id'];
         }
 
-        $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:identifier)');
+        $id = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:identifier)');
 
         if (!$id) {
-            $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:identifier)');
+            $id = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:identifier)');
         }
 
         $this->data['id'] = $id;
@@ -161,10 +161,10 @@ class Feed extends Extension\AbstractFeed
             return $this->data['language'];
         }
 
-        $language = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:language)');
+        $language = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:language)');
 
         if (!$language) {
-            $language = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:language)');
+            $language = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:language)');
         }
 
         if (!$language) {
@@ -187,10 +187,10 @@ class Feed extends Extension\AbstractFeed
             return $this->data['title'];
         }
 
-        $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:title)');
+        $title = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:title)');
 
         if (!$title) {
-            $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:title)');
+            $title = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:title)');
         }
 
         if (!$title) {
@@ -214,10 +214,10 @@ class Feed extends Extension\AbstractFeed
         }
 
         $d = null;
-        $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:date)');
+        $date = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc11:date)');
 
         if (!$date) {
-            $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:date)');
+            $date = $this->getXpath()->evaluate('string('.$this->getXpathPrefix().'/dc10:date)');
         }
 
         if ($date) {
@@ -240,14 +240,14 @@ class Feed extends Extension\AbstractFeed
             return $this->data['categories'];
         }
 
-        $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc11:subject');
+        $list = $this->getXpath()->evaluate($this->getXpathPrefix().'//dc11:subject');
 
         if (!$list->length) {
-            $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc10:subject');
+            $list = $this->getXpath()->evaluate($this->getXpathPrefix().'//dc10:subject');
         }
 
         if ($list->length) {
-            $categoryCollection = new Collection\Category;
+            $categoryCollection = new Collection\Category();
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->nodeValue,
@@ -256,10 +256,11 @@ class Feed extends Extension\AbstractFeed
                 );
             }
         } else {
-            $categoryCollection = new Collection\Category;
+            $categoryCollection = new Collection\Category();
         }
 
         $this->data['categories'] = $categoryCollection;
+
         return $this->data['categories'];
     }
 

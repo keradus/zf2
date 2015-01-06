@@ -19,9 +19,9 @@ class Translate extends AbstractTranslatorHelper
     /**
      * Translate a message
      *
-     * @param  string $message
-     * @param  string $textDomain
-     * @param  string $locale
+     * @param  string                     $message
+     * @param  string                     $textDomain
+     * @param  string                     $locale
      * @throws Exception\RuntimeException
      * @return string
      */

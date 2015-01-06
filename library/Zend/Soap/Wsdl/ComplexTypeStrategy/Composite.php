@@ -36,7 +36,7 @@ class Composite implements ComplexTypeStrategy
     /**
      * Construct Composite WSDL Strategy.
      *
-     * @param array $typeMap
+     * @param array                      $typeMap
      * @param string|ComplexTypeStrategy $defaultStrategy
      */
     public function __construct(
@@ -53,8 +53,8 @@ class Composite implements ComplexTypeStrategy
     /**
      * Connect a complex type to a given strategy.
      *
-     * @param  string $type
-     * @param  string|ComplexTypeStrategy $strategy
+     * @param  string                             $type
+     * @param  string|ComplexTypeStrategy         $strategy
      * @return Composite
      * @throws Exception\InvalidArgumentException
      */
@@ -64,6 +64,7 @@ class Composite implements ComplexTypeStrategy
             throw new Exception\InvalidArgumentException('Invalid type given to Composite Type Map.');
         }
         $this->typeMap[$type] = $strategy;
+
         return $this;
     }
 
@@ -77,7 +78,7 @@ class Composite implements ComplexTypeStrategy
     {
         $strategy = $this->defaultStrategy;
         if (is_string($strategy) && class_exists($strategy)) {
-            $strategy = new $strategy;
+            $strategy = new $strategy();
         }
         if (!($strategy instanceof ComplexTypeStrategy)) {
             throw new Exception\InvalidArgumentException(
@@ -85,13 +86,14 @@ class Composite implements ComplexTypeStrategy
             );
         }
         $this->defaultStrategy = $strategy;
+
         return $strategy;
     }
 
     /**
      * Return specific strategy or the default strategy of this type.
      *
-     * @param string $type
+     * @param  string                             $type
      * @return ComplexTypeStrategy
      * @throws Exception\InvalidArgumentException
      */
@@ -121,20 +123,21 @@ class Composite implements ComplexTypeStrategy
     /**
      * Method accepts the current WSDL context file.
      *
-     * @param  Wsdl $context
+     * @param  Wsdl      $context
      * @return Composite
      */
     public function setContext(Wsdl $context)
     {
         $this->context = $context;
+
         return $this;
     }
 
     /**
      * Create a complex type based on a strategy
      *
-     * @param  string $type
-     * @return string XSD type
+     * @param  string                             $type
+     * @return string                             XSD type
      * @throws Exception\InvalidArgumentException
      */
     public function addComplexType($type)

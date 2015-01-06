@@ -41,7 +41,7 @@ class FilterPluginManager extends AbstractPluginManager
      *
      * Checks that the filter loaded is an instance of Filter\FilterInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

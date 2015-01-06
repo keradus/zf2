@@ -48,7 +48,7 @@ class Insert extends AbstractPreparableSql
     /**
      * Constructor
      *
-     * @param  null|string|TableIdentifier $table
+     * @param null|string|TableIdentifier $table
      */
     public function __construct($table = null)
     {
@@ -66,26 +66,28 @@ class Insert extends AbstractPreparableSql
     public function into($table)
     {
         $this->table = $table;
+
         return $this;
     }
 
     /**
      * Specify columns
      *
-     * @param  array $columns
+     * @param  array  $columns
      * @return Insert
      */
     public function columns(array $columns)
     {
         $this->columns = array_flip($columns);
+
         return $this;
     }
 
     /**
      * Specify values to insert
      *
-     * @param  array|Select $values
-     * @param  string $flag one of VALUES_MERGE or VALUES_SET; defaults to VALUES_SET
+     * @param  array|Select                       $values
+     * @param  string                             $flag   one of VALUES_MERGE or VALUES_SET; defaults to VALUES_SET
      * @throws Exception\InvalidArgumentException
      * @return Insert
      */
@@ -98,6 +100,7 @@ class Insert extends AbstractPreparableSql
                 );
             }
             $this->select = $values;
+
             return $this;
         }
 
@@ -115,17 +118,18 @@ class Insert extends AbstractPreparableSql
         if ($flag == self::VALUES_SET) {
             $this->columns = $values;
         } else {
-            foreach ($values as $column=>$value) {
+            foreach ($values as $column => $value) {
                 $this->columns[$column] = $value;
             }
         }
+
         return $this;
     }
 
     /**
      * Create INTO SELECT clause
      *
-     * @param Select $select
+     * @param  Select $select
      * @return self
      */
     public function select(Select $select)
@@ -136,7 +140,7 @@ class Insert extends AbstractPreparableSql
     /**
      * Get raw state
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function getRawState($key = null)
@@ -144,8 +148,9 @@ class Insert extends AbstractPreparableSql
         $rawState = array(
             'table' => $this->table,
             'columns' => array_keys($this->columns),
-            'values' => array_values($this->columns)
+            'values' => array_values($this->columns),
         );
+
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
@@ -160,7 +165,7 @@ class Insert extends AbstractPreparableSql
 
         $columns = array();
         $values  = array();
-        foreach ($this->columns as $column=>$value) {
+        foreach ($this->columns as $column => $value) {
             $columns[] = $platform->quoteIdentifier($column);
             if (is_scalar($value) && $parameterContainer) {
                 $values[] = $driver->formatParameterName($column);
@@ -174,6 +179,7 @@ class Insert extends AbstractPreparableSql
                 );
             }
         }
+
         return sprintf(
             $this->specifications[static::SPECIFICATION_INSERT],
             $this->resolveTable($this->table, $platform, $driver, $parameterContainer),
@@ -206,12 +212,13 @@ class Insert extends AbstractPreparableSql
      * Proxies to values, using VALUES_MERGE strategy
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return Insert
      */
     public function __set($name, $value)
     {
         $this->columns[$name] = $value;
+
         return $this;
     }
 
@@ -220,14 +227,14 @@ class Insert extends AbstractPreparableSql
      *
      * Proxies to values and columns
      *
-     * @param  string $name
+     * @param  string                             $name
      * @throws Exception\InvalidArgumentException
      * @return void
      */
     public function __unset($name)
     {
         if (!isset($this->columns[$name])) {
-            throw new Exception\InvalidArgumentException('The key ' . $name . ' was not found in this objects column list');
+            throw new Exception\InvalidArgumentException('The key '.$name.' was not found in this objects column list');
         }
 
         unset($this->columns[$name]);
@@ -251,15 +258,16 @@ class Insert extends AbstractPreparableSql
      *
      * Retrieves value by column name
      *
-     * @param  string $name
+     * @param  string                             $name
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
     public function __get($name)
     {
         if (!isset($this->columns[$name])) {
-            throw new Exception\InvalidArgumentException('The key ' . $name . ' was not found in this objects column list');
+            throw new Exception\InvalidArgumentException('The key '.$name.' was not found in this objects column list');
         }
+
         return $this->columns[$name];
     }
 }

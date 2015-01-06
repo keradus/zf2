@@ -37,7 +37,7 @@ class FilterChain implements Filter\FilterInterface
      * Begins iteration of the filters.
      *
      * @param  mixed $context Object under observation
-     * @param  mixed $argv Associative array of arguments
+     * @param  mixed $argv    Associative array of arguments
      * @return mixed
      */
     public function run($context, array $argv = array())
@@ -59,9 +59,9 @@ class FilterChain implements Filter\FilterInterface
     /**
      * Connect a filter to the chain
      *
-     * @param  callable $callback PHP Callback
-     * @param  int $priority Priority in the queue at which to execute; defaults to 1 (higher numbers == higher priority)
-     * @return CallbackHandler (to allow later unsubscribe)
+     * @param  callable                           $callback PHP Callback
+     * @param  int                                $priority Priority in the queue at which to execute; defaults to 1 (higher numbers == higher priority)
+     * @return CallbackHandler                    (to allow later unsubscribe)
      * @throws Exception\InvalidCallbackException
      */
     public function attach($callback, $priority = 1)
@@ -71,6 +71,7 @@ class FilterChain implements Filter\FilterInterface
         }
         $filter = new CallbackHandler($callback, array('priority' => $priority));
         $this->filters->insert($filter, $priority);
+
         return $filter;
     }
 
@@ -78,7 +79,7 @@ class FilterChain implements Filter\FilterInterface
      * Detach a filter from the chain
      *
      * @param  CallbackHandler $filter
-     * @return bool Returns true if filter found and unsubscribed; returns false otherwise
+     * @return bool            Returns true if filter found and unsubscribed; returns false otherwise
      */
     public function detach(CallbackHandler $filter)
     {

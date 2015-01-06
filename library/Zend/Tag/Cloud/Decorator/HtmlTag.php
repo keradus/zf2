@@ -45,7 +45,7 @@ class HtmlTag extends AbstractTag
      * @var array
      */
     protected $htmlTags = array(
-        'li'
+        'li',
     );
 
     /**
@@ -65,7 +65,7 @@ class HtmlTag extends AbstractTag
     /**
      * Set a list of classes to use instead of fontsizes
      *
-     * @param  array $classList
+     * @param  array                    $classList
      * @throws InvalidArgumentException When the classlist is empty
      * @throws InvalidArgumentException When the classlist contains an invalid classname
      * @return HTMLTag
@@ -85,6 +85,7 @@ class HtmlTag extends AbstractTag
         }
 
         $this->classList = $classList;
+
         return $this;
     }
 
@@ -103,7 +104,7 @@ class HtmlTag extends AbstractTag
      *
      * Possible values are: em, ex, px, in, cm, mm, pt, pc and %
      *
-     * @param  string $fontSizeUnit
+     * @param  string                   $fontSizeUnit
      * @throws InvalidArgumentException When an invalid fontsize unit is specified
      * @return HTMLTag
      */
@@ -115,6 +116,7 @@ class HtmlTag extends AbstractTag
 
         $this->fontSizeUnit = (string) $fontSizeUnit;
         $this->setClassList(null);
+
         return $this;
     }
 
@@ -127,15 +129,16 @@ class HtmlTag extends AbstractTag
     {
         return $this->fontSizeUnit;
     }
-     /**
+    /**
      * Set the HTML tags surrounding the <a> element
      *
-     * @param  array $htmlTags
+     * @param  array   $htmlTags
      * @return HTMLTag
      */
     public function setHTMLTags(array $htmlTags)
     {
         $this->htmlTags = $htmlTags;
+
         return $this;
     }
 
@@ -152,7 +155,7 @@ class HtmlTag extends AbstractTag
     /**
      * Set maximum font size
      *
-     * @param  int $maxFontSize
+     * @param  int                      $maxFontSize
      * @throws InvalidArgumentException When fontsize is not numeric
      * @return HTMLTag
      */
@@ -164,6 +167,7 @@ class HtmlTag extends AbstractTag
 
         $this->maxFontSize = (int) $maxFontSize;
         $this->setClassList(null);
+
         return $this;
     }
 
@@ -180,7 +184,7 @@ class HtmlTag extends AbstractTag
     /**
      * Set minimum font size
      *
-     * @param  int $minFontSize
+     * @param  int                      $minFontSize
      * @throws InvalidArgumentException When fontsize is not numeric
      * @return HTMLTag
      */
@@ -192,6 +196,7 @@ class HtmlTag extends AbstractTag
 
         $this->minFontSize = (int) $minFontSize;
         $this->setClassList(null);
+
         return $this;
     }
 
@@ -208,7 +213,7 @@ class HtmlTag extends AbstractTag
     /**
      * Defined by Tag
      *
-     * @param  ItemList $tags
+     * @param  ItemList                 $tags
      * @throws InvalidArgumentException
      * @return array
      */

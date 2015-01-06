@@ -25,14 +25,15 @@ class Cookie extends ArrayObject implements HeaderInterface
         /* @var $setCookie SetCookie */
         foreach ($setCookies as $setCookie) {
             if (!$setCookie instanceof SetCookie) {
-                throw new Exception\InvalidArgumentException(__CLASS__ . '::' . __METHOD__ . ' requires an array of SetCookie objects');
+                throw new Exception\InvalidArgumentException(__CLASS__.'::'.__METHOD__.' requires an array of SetCookie objects');
             }
             if (array_key_exists($setCookie->getName(), $nvPairs)) {
-                throw new Exception\InvalidArgumentException('Two cookies with the same name were provided to ' . __CLASS__ . '::' . __METHOD__);
+                throw new Exception\InvalidArgumentException('Two cookies with the same name were provided to '.__CLASS__.'::'.__METHOD__);
             }
 
             $nvPairs[$setCookie->getName()] = $setCookie->getValue();
         }
+
         return new static($nvPairs);
     }
 
@@ -44,7 +45,7 @@ class Cookie extends ArrayObject implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'cookie') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Server string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Server string: "'.$name.'"');
         }
 
         $nvPairs = preg_split('#;\s*#', $value);
@@ -72,6 +73,7 @@ class Cookie extends ArrayObject implements HeaderInterface
     public function setEncodeValue($encodeValue)
     {
         $this->encodeValue = (bool) $encodeValue;
+
         return $this;
     }
 
@@ -90,7 +92,7 @@ class Cookie extends ArrayObject implements HeaderInterface
         $nvPairs = array();
 
         foreach ($this as $name => $value) {
-            $nvPairs[] = $name . '=' . (($this->encodeValue) ? urlencode($value) : $value);
+            $nvPairs[] = $name.'='.(($this->encodeValue) ? urlencode($value) : $value);
         }
 
         return implode('; ', $nvPairs);
@@ -98,7 +100,7 @@ class Cookie extends ArrayObject implements HeaderInterface
 
     public function toString()
     {
-        return 'Cookie: ' . $this->getFieldValue();
+        return 'Cookie: '.$this->getFieldValue();
     }
 
     /**

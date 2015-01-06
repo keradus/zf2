@@ -20,6 +20,7 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setName('xxxx'));
+
         return $fk;
     }
 
@@ -39,6 +40,7 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setReferenceTable('xxxx'));
+
         return $fk;
     }
 
@@ -58,6 +60,7 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setReferenceColumn('xxxx'));
+
         return $fk;
     }
 
@@ -77,6 +80,7 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setOnDeleteRule('CASCADE'));
+
         return $fk;
     }
 
@@ -96,6 +100,7 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setOnUpdateRule('CASCADE'));
+
         return $fk;
     }
 
@@ -118,7 +123,7 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
             array(array(
                 'CONSTRAINT %s FOREIGN KEY (%s) REFERENCES %s (%s) ON DELETE %s ON UPDATE %s',
                 array('foo', 'bar', 'baz', 'bam', 'CASCADE', 'SET NULL'),
-                array($fk::TYPE_IDENTIFIER, $fk::TYPE_IDENTIFIER, $fk::TYPE_IDENTIFIER, $fk::TYPE_IDENTIFIER, $fk::TYPE_LITERAL, $fk::TYPE_LITERAL)
+                array($fk::TYPE_IDENTIFIER, $fk::TYPE_IDENTIFIER, $fk::TYPE_IDENTIFIER, $fk::TYPE_IDENTIFIER, $fk::TYPE_LITERAL, $fk::TYPE_LITERAL),
             )),
             $fk->getExpressionData()
         );

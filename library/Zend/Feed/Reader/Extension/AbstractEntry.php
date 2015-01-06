@@ -63,13 +63,14 @@ abstract class AbstractEntry
      *
      * Has side effect of setting the DOMDocument for the entry.
      *
-     * @param  DOMElement $entry
+     * @param  DOMElement    $entry
      * @return AbstractEntry
      */
     public function setEntryElement(DOMElement $entry)
     {
         $this->entry = $entry;
         $this->domDocument = $entry->ownerDocument;
+
         return $this;
     }
 
@@ -86,12 +87,13 @@ abstract class AbstractEntry
     /**
      * Set the entry key
      *
-     * @param  string $entryKey
+     * @param  string        $entryKey
      * @return AbstractEntry
      */
     public function setEntryKey($entryKey)
     {
         $this->entryKey = $entryKey;
+
         return $this;
     }
 
@@ -113,6 +115,7 @@ abstract class AbstractEntry
     public function getEncoding()
     {
         $assumed = $this->getDomDocument()->encoding;
+
         return $assumed;
     }
 
@@ -121,13 +124,14 @@ abstract class AbstractEntry
      *
      * Has side effect of setting xpath prefix
      *
-     * @param  string $type
+     * @param  string        $type
      * @return AbstractEntry
      */
     public function setType($type)
     {
         if (null === $type) {
             $this->data['type'] = null;
+
             return $this;
         }
 
@@ -135,18 +139,21 @@ abstract class AbstractEntry
         if ($type === Reader\Reader::TYPE_RSS_10
             || $type === Reader\Reader::TYPE_RSS_090
         ) {
-            $this->setXpathPrefix('//rss:item[' . ($this->entryKey + 1) . ']');
+            $this->setXpathPrefix('//rss:item['.($this->entryKey + 1).']');
+
             return $this;
         }
 
         if ($type === Reader\Reader::TYPE_ATOM_10
             || $type === Reader\Reader::TYPE_ATOM_03
         ) {
-            $this->setXpathPrefix('//atom:entry[' . ($this->entryKey + 1) . ']');
+            $this->setXpathPrefix('//atom:entry['.($this->entryKey + 1).']');
+
             return $this;
         }
 
-        $this->setXpathPrefix('//item[' . ($this->entryKey + 1) . ']');
+        $this->setXpathPrefix('//item['.($this->entryKey + 1).']');
+
         return $this;
     }
 
@@ -169,13 +176,14 @@ abstract class AbstractEntry
     /**
      * Set the XPath query
      *
-     * @param  DOMXPath $xpath
+     * @param  DOMXPath      $xpath
      * @return AbstractEntry
      */
     public function setXpath(DOMXPath $xpath)
     {
         $this->xpath = $xpath;
         $this->registerNamespaces();
+
         return $this;
     }
 
@@ -189,6 +197,7 @@ abstract class AbstractEntry
         if (!$this->xpath) {
             $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
+
         return $this->xpath;
     }
 
@@ -215,12 +224,13 @@ abstract class AbstractEntry
     /**
      * Set the XPath prefix
      *
-     * @param  string $prefix
+     * @param  string        $prefix
      * @return AbstractEntry
      */
     public function setXpathPrefix($prefix)
     {
         $this->xpathPrefix = $prefix;
+
         return $this;
     }
 

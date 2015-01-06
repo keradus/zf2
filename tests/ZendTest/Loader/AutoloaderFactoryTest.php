@@ -54,7 +54,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
     {
         AutoloaderFactory::factory(array(
             'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/_files/goodmap.php',
+                __DIR__.'/_files/goodmap.php',
             ),
         ));
         $loader = AutoloaderFactory::getRegisteredAutoloader('Zend\Loader\ClassMapAutoloader');
@@ -70,9 +70,9 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testFactoryCatchesInvalidClasses()
     {
-        include __DIR__ . '/_files/InvalidInterfaceAutoloader.php';
+        include __DIR__.'/_files/InvalidInterfaceAutoloader.php';
         AutoloaderFactory::factory(array(
-            'InvalidInterfaceAutoloader' => array()
+            'InvalidInterfaceAutoloader' => array(),
         ));
     }
 
@@ -81,7 +81,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         AutoloaderFactory::factory(array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    'TestNamespace' => __DIR__ . '/TestAsset/TestNamespace',
+                    'TestNamespace' => __DIR__.'/TestAsset/TestNamespace',
                 ),
             ),
         ));
@@ -89,7 +89,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         AutoloaderFactory::factory(array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    'ZendTest\Loader\TestAsset\TestPlugins' => __DIR__ . '/TestAsset/TestPlugins',
+                    'ZendTest\Loader\TestAsset\TestPlugins' => __DIR__.'/TestAsset/TestPlugins',
                 ),
             ),
         ));
@@ -103,7 +103,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         AutoloaderFactory::factory(array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    'TestNamespace' => __DIR__ . '/TestAsset/TestNamespace',
+                    'TestNamespace' => __DIR__.'/TestAsset/TestNamespace',
                 ),
             ),
         ));
@@ -116,7 +116,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         AutoloaderFactory::factory(array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    'TestNamespace' => __DIR__ . '/TestAsset/TestNamespace',
+                    'TestNamespace' => __DIR__.'/TestAsset/TestNamespace',
                 ),
             ),
         ));
@@ -129,7 +129,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         AutoloaderFactory::factory(array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    'TestNamespace' => __DIR__ . '/TestAsset/TestNamespace',
+                    'TestNamespace' => __DIR__.'/TestAsset/TestNamespace',
                 ),
             ),
         ));

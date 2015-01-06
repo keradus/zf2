@@ -29,7 +29,7 @@ class JavaPropertiesTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/JavaProperties/' . $name . '.properties';
+        return __DIR__.'/TestAssets/JavaProperties/'.$name.'.properties';
     }
 
     public function testFromFile()

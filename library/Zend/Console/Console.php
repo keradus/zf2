@@ -30,12 +30,12 @@ abstract class Console
     /**
      * Create and return Adapter\AdapterInterface instance.
      *
-     * @param  null|string  $forceAdapter Optional adapter class name. Can be absolute namespace or class name
-     *                                    relative to Zend\Console\Adapter\. If not provided, a best matching
-     *                                    adapter will be automatically selected.
-     * @param  null|string  $forceCharset optional charset name can be absolute namespace or class name relative to
-     *                                    Zend\Console\Charset\. If not provided, charset will be detected
-     *                                    automatically.
+     * @param  null|string                        $forceAdapter Optional adapter class name. Can be absolute namespace or class name
+     *                                                          relative to Zend\Console\Adapter\. If not provided, a best matching
+     *                                                          adapter will be automatically selected.
+     * @param  null|string                        $forceCharset optional charset name can be absolute namespace or class name relative to
+     *                                                          Zend\Console\Charset\. If not provided, charset will be detected
+     *                                                          automatically.
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      * @return Adapter\AdapterInterface
@@ -53,9 +53,9 @@ abstract class Console
             if (substr($forceAdapter, 0, 1) == '\\') {
                 $className = $forceAdapter;
             } elseif (stristr($forceAdapter, '\\')) {
-                $className = __NAMESPACE__ . '\\' . ltrim($forceAdapter, '\\');
+                $className = __NAMESPACE__.'\\'.ltrim($forceAdapter, '\\');
             } else {
-                $className = __NAMESPACE__ . '\\Adapter\\' . $forceAdapter;
+                $className = __NAMESPACE__.'\\Adapter\\'.$forceAdapter;
             }
 
             if (!class_exists($className)) {
@@ -82,9 +82,9 @@ abstract class Console
             if (substr($forceCharset, 0, 1) == '\\') {
                 $className = $forceCharset;
             } elseif (stristr($forceAdapter, '\\')) {
-                $className = __NAMESPACE__ . '\\' . ltrim($forceCharset, '\\');
+                $className = __NAMESPACE__.'\\'.ltrim($forceCharset, '\\');
             } else {
-                $className = __NAMESPACE__ . '\\Charset\\' . $forceCharset;
+                $className = __NAMESPACE__.'\\Charset\\'.$forceCharset;
             }
 
             if (!class_exists($className)) {
@@ -146,13 +146,14 @@ abstract class Console
         if (null === static::$isConsole) {
             static::$isConsole = (PHP_SAPI == 'cli');
         }
+
         return static::$isConsole;
     }
 
     /**
      * Override the "is console environment" flag
      *
-     * @param  null|bool $flag
+     * @param null|bool $flag
      */
     public static function overrideIsConsole($flag)
     {
@@ -176,16 +177,17 @@ abstract class Console
         // Check if we're on windows
         if (static::isWindows()) {
             if (static::isAnsicon()) {
-                $className = __NAMESPACE__ . '\Adapter\WindowsAnsicon';
+                $className = __NAMESPACE__.'\Adapter\WindowsAnsicon';
             } else {
-                $className = __NAMESPACE__ . '\Adapter\Windows';
+                $className = __NAMESPACE__.'\Adapter\Windows';
             }
 
             return $className;
         }
 
         // Default is a Posix console
-        $className = __NAMESPACE__ . '\Adapter\Posix';
+        $className = __NAMESPACE__.'\Adapter\Posix';
+
         return $className;
     }
 
@@ -199,6 +201,7 @@ abstract class Console
     public static function __callStatic($funcName, $arguments)
     {
         $instance = static::getInstance();
+
         return call_user_func_array(array($instance, $funcName), $arguments);
     }
 }

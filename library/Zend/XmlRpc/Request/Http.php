@@ -49,6 +49,7 @@ class Http extends XmlRpcRequest
         ErrorHandler::stop();
         if (!$xml) {
             $this->fault = new Fault(630);
+
             return;
         }
 
@@ -98,7 +99,7 @@ class Http extends XmlRpcRequest
     {
         $request = '';
         foreach ($this->getHeaders() as $key => $value) {
-            $request .= $key . ': ' . $value . "\n";
+            $request .= $key.': '.$value."\n";
         }
 
         $request .= $this->xml;

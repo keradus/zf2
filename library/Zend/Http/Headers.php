@@ -45,7 +45,7 @@ class Headers implements Countable, Iterator
      * current instance, primarily as strings until they are needed (they
      * will be lazy loaded)
      *
-     * @param  string $string
+     * @param  string                     $string
      * @return Headers
      * @throws Exception\RuntimeException
      */
@@ -65,11 +65,11 @@ class Headers implements Countable, Iterator
                 }
                 $current = array(
                     'name' => $matches['name'],
-                    'line' => trim($line)
+                    'line' => trim($line),
                 );
             } elseif (preg_match('/^(?P<ws>\s+).*$/', $line, $matches)) {
                 // continuation: append to current line
-                $current['line'] .= "\r\n" . $matches['ws'] . trim($line);
+                $current['line'] .= "\r\n".$matches['ws'].trim($line);
             } elseif (preg_match('/^\s*$/', $line)) {
                 // empty line indicates end of headers
                 break;
@@ -85,18 +85,20 @@ class Headers implements Countable, Iterator
             $headers->headersKeys[] = static::createKey($current['name']);
             $headers->headers[]     = $current;
         }
+
         return $headers;
     }
 
     /**
      * Set an alternate implementation for the PluginClassLoader
      *
-     * @param \Zend\Loader\PluginClassLocator $pluginClassLoader
+     * @param  \Zend\Loader\PluginClassLocator $pluginClassLoader
      * @return Headers
      */
     public function setPluginClassLoader(PluginClassLocator $pluginClassLoader)
     {
         $this->pluginClassLoader = $pluginClassLoader;
+
         return $this;
     }
 
@@ -110,6 +112,7 @@ class Headers implements Countable, Iterator
         if ($this->pluginClassLoader === null) {
             $this->pluginClassLoader = new HeaderLoader();
         }
+
         return $this->pluginClassLoader;
     }
 
@@ -118,7 +121,7 @@ class Headers implements Countable, Iterator
      *
      * Expects an array (or Traversable object) of type/value pairs.
      *
-     * @param  array|Traversable $headers
+     * @param  array|Traversable                  $headers
      * @return Headers
      * @throws Exception\InvalidArgumentException
      */
@@ -157,8 +160,8 @@ class Headers implements Countable, Iterator
      * will be delayed until they are retrieved by either get() or current()
      *
      * @throws Exception\InvalidArgumentException
-     * @param string $headerFieldNameOrLine
-     * @param string $fieldValue optional
+     * @param  string                             $headerFieldNameOrLine
+     * @param  string                             $fieldValue            optional
      * @return Headers
      */
     public function addHeaderLine($headerFieldNameOrLine, $fieldValue = null)
@@ -178,7 +181,7 @@ class Headers implements Countable, Iterator
             if (is_array($fieldValue)) {
                 $fieldValue = implode(', ', $fieldValue);
             }
-            $line = $headerFieldNameOrLine . ': ' . $fieldValue;
+            $line = $headerFieldNameOrLine.': '.$fieldValue;
         }
 
         $this->headersKeys[] = $headerKey;
@@ -204,7 +207,7 @@ class Headers implements Countable, Iterator
     /**
      * Remove a Header from the container
      *
-     * @param Header\HeaderInterface $header
+     * @param  Header\HeaderInterface $header
      * @return bool
      */
     public function removeHeader(Header\HeaderInterface $header)
@@ -216,6 +219,7 @@ class Headers implements Countable, Iterator
 
             return true;
         }
+
         return false;
     }
 
@@ -229,13 +233,14 @@ class Headers implements Countable, Iterator
     public function clearHeaders()
     {
         $this->headers = $this->headersKeys = array();
+
         return $this;
     }
 
     /**
      * Get all headers of a certain name/type
      *
-     * @param  string $name
+     * @param  string                                    $name
      * @return bool|Header\HeaderInterface|ArrayIterator
      */
     public function get($name)
@@ -257,6 +262,7 @@ class Headers implements Countable, Iterator
             foreach (array_keys($this->headersKeys, $key) as $index) {
                 $headers[] = $this->headers[$index];
             }
+
             return new ArrayIterator($headers);
         }
 
@@ -268,6 +274,7 @@ class Headers implements Countable, Iterator
         if (is_array($this->headers[$index])) {
             return $this->lazyLoadHeader($index);
         }
+
         return $this->headers[$index];
     }
 
@@ -333,6 +340,7 @@ class Headers implements Countable, Iterator
         if (is_array($current)) {
             $current = $this->lazyLoadHeader(key($this->headers));
         }
+
         return $current;
     }
 
@@ -362,13 +370,14 @@ class Headers implements Countable, Iterator
             if (is_array($fieldValue)) {
                 // Handle multi-value headers
                 foreach ($fieldValue as $value) {
-                    $headers .= $fieldName . ': ' . $value . "\r\n";
+                    $headers .= $fieldName.': '.$value."\r\n";
                 }
                 continue;
             }
             // Handle single-value headers
-            $headers .= $fieldName . ': ' . $fieldValue . "\r\n";
+            $headers .= $fieldName.': '.$fieldValue."\r\n";
         }
+
         return $headers;
     }
 
@@ -399,6 +408,7 @@ class Headers implements Countable, Iterator
                 }
             }
         }
+
         return $headers;
     }
 
@@ -412,6 +422,7 @@ class Headers implements Countable, Iterator
         foreach ($this as $item) {
             // $item should now be loaded
         }
+
         return true;
     }
 
@@ -434,17 +445,19 @@ class Headers implements Countable, Iterator
                 $this->headersKeys[] = $key;
                 $this->headers[]     = $header;
             }
+
             return $current;
         }
 
         $this->headers[$index] = $current = $headers;
+
         return $current;
     }
 
     /**
      * Create array key from header name
      *
-     * @param string $name
+     * @param  string $name
      * @return string
      */
     protected static function createKey($name)

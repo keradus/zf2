@@ -20,7 +20,7 @@ class Digits extends AbstractFilter
      *
      * If the value provided is not integer, float or string, the value will remain unfiltered
      *
-     * @param  string $value
+     * @param  string       $value
      * @return string|mixed
      */
     public function filter($value)

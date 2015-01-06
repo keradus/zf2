@@ -25,7 +25,7 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->profiler = new Profiler;
+        $this->profiler = new Profiler();
     }
 
     /**
@@ -54,7 +54,7 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
         $ret = $this->profiler->profilerFinish();
         $this->assertSame($this->profiler, $ret);
 
-        $profiler = new Profiler;
+        $profiler = new Profiler();
         $this->setExpectedException(
             'Zend\Db\Adapter\Exception\RuntimeException',
             'A profile must be started before profilerFinish can be called'

@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Dom;
 
 use ErrorException;
@@ -26,7 +27,7 @@ class DOMXPath extends \DOMXPath
      * Evaluates an XPath expression; throws an ErrorException instead of
      * raising an error
      *
-     * @param string $expression The XPath expression to evaluate.
+     * @param  string         $expression The XPath expression to evaluate.
      * @return \DOMNodeList
      * @throws ErrorException
      */
@@ -49,10 +50,10 @@ class DOMXPath extends \DOMXPath
     /**
      * Adds an error to the stack of errors
      *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param int    $errline
+     * @param  int    $errno
+     * @param  string $errstr
+     * @param  string $errfile
+     * @param  int    $errline
      * @return void
      */
     public function addError($errno, $errstr = '', $errfile = '', $errline = 0)

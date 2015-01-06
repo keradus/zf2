@@ -74,7 +74,7 @@ class Fault extends \Zend\XmlRpc\Fault
     /**
      * Return Zend\XmlRpc\Server\Fault instance
      *
-     * @param \Exception $e
+     * @param  \Exception $e
      * @return Fault
      */
     public static function getInstance(\Exception $e)
@@ -85,7 +85,7 @@ class Fault extends \Zend\XmlRpc\Fault
     /**
      * Attach valid exceptions that can be used to define xmlrpc faults
      *
-     * @param string|array $classes Class name or array of class names
+     * @param  string|array $classes Class name or array of class names
      * @return void
      */
     public static function attachFaultException($classes)
@@ -104,7 +104,7 @@ class Fault extends \Zend\XmlRpc\Fault
     /**
      * Detach fault exception classes
      *
-     * @param string|array $classes Class name or array of class names
+     * @param  string|array $classes Class name or array of class names
      * @return void
      */
     public static function detachFaultException($classes)
@@ -129,7 +129,7 @@ class Fault extends \Zend\XmlRpc\Fault
      * Expects a valid class name; that class must have a public static method
      * 'observe' that accepts an exception as its sole argument.
      *
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public static function attachObserver($class)
@@ -148,7 +148,7 @@ class Fault extends \Zend\XmlRpc\Fault
     /**
      * Detach an observer
      *
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public static function detachObserver($class)
@@ -158,6 +158,7 @@ class Fault extends \Zend\XmlRpc\Fault
         }
 
         unset(static::$observers[$class]);
+
         return true;
     }
 

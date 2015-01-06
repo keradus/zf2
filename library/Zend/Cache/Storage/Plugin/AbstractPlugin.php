@@ -21,12 +21,13 @@ abstract class AbstractPlugin extends AbstractListenerAggregate implements Plugi
     /**
      * Set pattern options
      *
-     * @param  PluginOptions $options
+     * @param  PluginOptions  $options
      * @return AbstractPlugin
      */
     public function setOptions(PluginOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -40,6 +41,7 @@ abstract class AbstractPlugin extends AbstractListenerAggregate implements Plugi
         if (null === $this->options) {
             $this->setOptions(new PluginOptions());
         }
+
         return $this->options;
     }
 }

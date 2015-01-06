@@ -12,7 +12,7 @@ namespace Zend\Http\Header;
 /**
  * Content-Location Header
  *
-  */
+ */
 class GenericHeader implements HeaderInterface
 {
     /**
@@ -29,21 +29,22 @@ class GenericHeader implements HeaderInterface
      * Factory to generate a header object from a string
      *
      * @static
-     * @param string $headerLine
+     * @param  string        $headerLine
      * @return GenericHeader
      */
     public static function fromString($headerLine)
     {
         list($fieldName, $fieldValue) = GenericHeader::splitHeaderLine($headerLine);
         $header = new static($fieldName, $fieldValue);
+
         return $header;
     }
 
     /**
      * Splits the header line in `name` and `value` parts.
      *
-     * @param string $headerLine
-     * @return string[] `name` in the first index and `value` in the second.
+     * @param  string                             $headerLine
+     * @return string[]                           `name` in the first index and `value` in the second.
      * @throws Exception\InvalidArgumentException If header does not match with the format ``name:value``
      */
     public static function splitHeaderLine($headerLine)
@@ -78,7 +79,7 @@ class GenericHeader implements HeaderInterface
     /**
      * Set header field name
      *
-     * @param  string $fieldName
+     * @param  string                             $fieldName
      * @return GenericHeader
      * @throws Exception\InvalidArgumentException If the name does not match with RFC 2616 format.
      */
@@ -106,6 +107,7 @@ class GenericHeader implements HeaderInterface
         }
 
         $this->fieldName = $fieldName;
+
         return $this;
     }
 
@@ -122,7 +124,7 @@ class GenericHeader implements HeaderInterface
     /**
      * Set header field value
      *
-     * @param  string $fieldValue
+     * @param  string        $fieldValue
      * @return GenericHeader
      */
     public function setFieldValue($fieldValue)
@@ -134,6 +136,7 @@ class GenericHeader implements HeaderInterface
         }
 
         $this->fieldValue = $fieldValue;
+
         return $this;
     }
 
@@ -156,6 +159,6 @@ class GenericHeader implements HeaderInterface
      */
     public function toString()
     {
-        return $this->getFieldName() . ': ' . $this->getFieldValue();
+        return $this->getFieldName().': '.$this->getFieldValue();
     }
 }

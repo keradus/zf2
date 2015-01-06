@@ -123,7 +123,7 @@ class FormElement extends BaseAbstractHelper
     /**
      * Set default helper name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setDefaultHelper($name)
@@ -136,8 +136,8 @@ class FormElement extends BaseAbstractHelper
     /**
      * Add form element type to plugin map
      *
-     * @param string $type
-     * @param string $plugin
+     * @param  string $type
+     * @param  string $plugin
      * @return self
      */
     public function addType($type, $plugin)
@@ -150,8 +150,8 @@ class FormElement extends BaseAbstractHelper
     /**
      * Add instance class to plugin map
      *
-     * @param string $class
-     * @param string $plugin
+     * @param  string $class
+     * @param  string $plugin
      * @return self
      */
     public function addClass($class, $plugin)
@@ -164,20 +164,21 @@ class FormElement extends BaseAbstractHelper
     /**
      * Render element by helper name
      *
-     * @param string $name
-     * @param ElementInterface $element
+     * @param  string           $name
+     * @param  ElementInterface $element
      * @return string
      */
     protected function renderHelper($name, ElementInterface $element)
     {
         $helper = $this->getView()->plugin($name);
+
         return $helper($element);
     }
 
     /**
      * Render element by instance map
      *
-     * @param ElementInterface $element
+     * @param  ElementInterface $element
      * @return string|null
      */
     protected function renderInstance(ElementInterface $element)
@@ -187,13 +188,14 @@ class FormElement extends BaseAbstractHelper
                 return $this->renderHelper($pluginName, $element);
             }
         }
+
         return;
     }
 
     /**
      * Render element by type map
      *
-     * @param ElementInterface $element
+     * @param  ElementInterface $element
      * @return string|null
      */
     protected function renderType(ElementInterface $element)
@@ -203,6 +205,7 @@ class FormElement extends BaseAbstractHelper
         if (isset($this->typeMap[$type])) {
             return $this->renderHelper($this->typeMap[$type], $element);
         }
+
         return;
     }
 }

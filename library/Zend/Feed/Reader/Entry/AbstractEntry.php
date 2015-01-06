@@ -62,9 +62,9 @@ abstract class AbstractEntry
     /**
      * Constructor
      *
-     * @param  DOMElement $entry
-     * @param  int $entryKey
-     * @param  string $type
+     * @param DOMElement $entry
+     * @param int        $entryKey
+     * @param string     $type
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
@@ -112,6 +112,7 @@ abstract class AbstractEntry
         if (empty($assumed)) {
             $assumed = 'UTF-8';
         }
+
         return $assumed;
     }
 
@@ -125,6 +126,7 @@ abstract class AbstractEntry
         $dom = new DOMDocument('1.0', $this->getEncoding());
         $entry = $dom->importNode($this->getElement(), true);
         $dom->appendChild($entry);
+
         return $dom->saveXml();
     }
 
@@ -148,18 +150,20 @@ abstract class AbstractEntry
         if (!$this->xpath) {
             $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
+
         return $this->xpath;
     }
 
     /**
      * Set the XPath query
      *
-     * @param  DOMXPath $xpath
+     * @param  DOMXPath      $xpath
      * @return AbstractEntry
      */
     public function setXpath(DOMXPath $xpath)
     {
         $this->xpath = $xpath;
+
         return $this;
     }
 
@@ -176,22 +180,23 @@ abstract class AbstractEntry
     /**
      * Return an Extension object with the matching name (postfixed with _Entry)
      *
-     * @param string $name
+     * @param  string                         $name
      * @return Reader\Extension\AbstractEntry
      */
     public function getExtension($name)
     {
-        if (array_key_exists($name . '\\Entry', $this->extensions)) {
-            return $this->extensions[$name . '\\Entry'];
+        if (array_key_exists($name.'\\Entry', $this->extensions)) {
+            return $this->extensions[$name.'\\Entry'];
         }
+
         return;
     }
 
     /**
      * Method overloading: call given method on first extension implementing it
      *
-     * @param  string $method
-     * @param  array $args
+     * @param  string                     $method
+     * @param  array                      $args
      * @return mixed
      * @throws Exception\RuntimeException if no extensions implements the method
      */
@@ -202,8 +207,8 @@ abstract class AbstractEntry
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new Exception\RuntimeException('Method: ' . $method
-            . ' does not exist and could not be located on a registered Extension');
+        throw new Exception\RuntimeException('Method: '.$method
+            .' does not exist and could not be located on a registered Extension');
     }
 
     /**

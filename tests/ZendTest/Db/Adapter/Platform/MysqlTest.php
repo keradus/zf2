@@ -24,7 +24,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->platform = new Mysql;
+        $this->platform = new Mysql();
     }
 
     /**

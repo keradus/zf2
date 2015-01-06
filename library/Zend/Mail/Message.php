@@ -48,19 +48,21 @@ class Message
         if (!$from instanceof AddressList) {
             return false;
         }
+
         return (bool) count($from);
     }
 
     /**
      * Set the message encoding
      *
-     * @param  string $encoding
+     * @param  string  $encoding
      * @return Message
      */
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         $this->getHeaders()->setEncoding($encoding);
+
         return $this;
     }
 
@@ -84,6 +86,7 @@ class Message
     {
         $this->headers = $headers;
         $headers->setEncoding($this->getEncoding());
+
         return $this;
     }
 
@@ -98,9 +101,10 @@ class Message
     {
         if (null === $this->headers) {
             $this->setHeaders(new Headers());
-            $date = Header\Date::fromString('Date: ' . date('r'));
+            $date = Header\Date::fromString('Date: '.date('r'));
             $this->headers->addHeader($date);
         }
+
         return $this->headers;
     }
 
@@ -108,12 +112,13 @@ class Message
      * Set (overwrite) From addresses
      *
      * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList
-     * @param  string|null $name
+     * @param  string|null                                                   $name
      * @return Message
      */
     public function setFrom($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('from');
+
         return $this->addFrom($emailOrAddressList, $name);
     }
 
@@ -121,13 +126,14 @@ class Message
      * Add a "From" address
      *
      * @param  string|Address|array|AddressList|Traversable $emailOrAddressOrList
-     * @param  string|null $name
+     * @param  string|null                                  $name
      * @return Message
      */
     public function addFrom($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->getFrom();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
+
         return $this;
     }
 
@@ -138,19 +144,20 @@ class Message
      */
     public function getFrom()
     {
-        return $this->getAddressListFromHeader('from', __NAMESPACE__ . '\Header\From');
+        return $this->getAddressListFromHeader('from', __NAMESPACE__.'\Header\From');
     }
 
     /**
      * Overwrite the address list in the To recipients
      *
      * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList
-     * @param  null|string $name
+     * @param  null|string                                                   $name
      * @return Message
      */
     public function setTo($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('to');
+
         return $this->addTo($emailOrAddressList, $name);
     }
 
@@ -160,13 +167,14 @@ class Message
      * Appends to the list.
      *
      * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList
-     * @param  null|string $name
+     * @param  null|string                                                   $name
      * @return Message
      */
     public function addTo($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->getTo();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
+
         return $this;
     }
 
@@ -177,19 +185,20 @@ class Message
      */
     public function getTo()
     {
-        return $this->getAddressListFromHeader('to', __NAMESPACE__ . '\Header\To');
+        return $this->getAddressListFromHeader('to', __NAMESPACE__.'\Header\To');
     }
 
     /**
      * Set (overwrite) CC addresses
      *
      * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList
-     * @param  string|null $name
+     * @param  string|null                                                   $name
      * @return Message
      */
     public function setCc($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('cc');
+
         return $this->addCc($emailOrAddressList, $name);
     }
 
@@ -197,13 +206,14 @@ class Message
      * Add a "Cc" address
      *
      * @param  string|Address|array|AddressList|Traversable $emailOrAddressOrList
-     * @param  string|null $name
+     * @param  string|null                                  $name
      * @return Message
      */
     public function addCc($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->getCc();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
+
         return $this;
     }
 
@@ -214,19 +224,20 @@ class Message
      */
     public function getCc()
     {
-        return $this->getAddressListFromHeader('cc', __NAMESPACE__ . '\Header\Cc');
+        return $this->getAddressListFromHeader('cc', __NAMESPACE__.'\Header\Cc');
     }
 
     /**
      * Set (overwrite) BCC addresses
      *
      * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList
-     * @param  string|null $name
+     * @param  string|null                                                   $name
      * @return Message
      */
     public function setBcc($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('bcc');
+
         return $this->addBcc($emailOrAddressList, $name);
     }
 
@@ -234,13 +245,14 @@ class Message
      * Add a "Bcc" address
      *
      * @param  string|Address|array|AddressList|Traversable $emailOrAddressOrList
-     * @param  string|null $name
+     * @param  string|null                                  $name
      * @return Message
      */
     public function addBcc($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->getBcc();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
+
         return $this;
     }
 
@@ -251,19 +263,20 @@ class Message
      */
     public function getBcc()
     {
-        return $this->getAddressListFromHeader('bcc', __NAMESPACE__ . '\Header\Bcc');
+        return $this->getAddressListFromHeader('bcc', __NAMESPACE__.'\Header\Bcc');
     }
 
     /**
      * Overwrite the address list in the Reply-To recipients
      *
      * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList
-     * @param  null|string $name
+     * @param  null|string                                                   $name
      * @return Message
      */
     public function setReplyTo($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('reply-to');
+
         return $this->addReplyTo($emailOrAddressList, $name);
     }
 
@@ -273,13 +286,14 @@ class Message
      * Appends to the list.
      *
      * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList
-     * @param  null|string $name
+     * @param  null|string                                                   $name
      * @return Message
      */
     public function addReplyTo($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->getReplyTo();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
+
         return $this;
     }
 
@@ -290,20 +304,21 @@ class Message
      */
     public function getReplyTo()
     {
-        return $this->getAddressListFromHeader('reply-to', __NAMESPACE__ . '\Header\ReplyTo');
+        return $this->getAddressListFromHeader('reply-to', __NAMESPACE__.'\Header\ReplyTo');
     }
 
     /**
      * setSender
      *
-     * @param mixed $emailOrAddress
-     * @param mixed $name
+     * @param  mixed   $emailOrAddress
+     * @param  mixed   $name
      * @return Message
      */
     public function setSender($emailOrAddress, $name = null)
     {
-        $header = $this->getHeaderByName('sender', __NAMESPACE__ . '\Header\Sender');
+        $header = $this->getHeaderByName('sender', __NAMESPACE__.'\Header\Sender');
         $header->setAddress($emailOrAddress, $name);
+
         return $this;
     }
 
@@ -314,14 +329,15 @@ class Message
      */
     public function getSender()
     {
-        $header = $this->getHeaderByName('sender', __NAMESPACE__ . '\Header\Sender');
+        $header = $this->getHeaderByName('sender', __NAMESPACE__.'\Header\Sender');
+
         return $header->getAddress();
     }
 
     /**
      * Set the message subject header value
      *
-     * @param  string $subject
+     * @param  string  $subject
      * @return Message
      */
     public function setSubject($subject)
@@ -334,6 +350,7 @@ class Message
             $header = $headers->get('subject');
         }
         $header->setSubject($subject);
+
         return $this;
     }
 
@@ -349,6 +366,7 @@ class Message
             return;
         }
         $header = $headers->get('subject');
+
         return $header->getFieldValue();
     }
 
@@ -387,14 +405,15 @@ class Message
 
         // Get headers, and set Mime-Version header
         $headers = $this->getHeaders();
-        $this->getHeaderByName('mime-version', __NAMESPACE__ . '\Header\MimeVersion');
+        $this->getHeaderByName('mime-version', __NAMESPACE__.'\Header\MimeVersion');
 
         // Multipart content headers
         if ($this->body->isMultiPart()) {
             $mime   = $this->body->getMime();
-            $header = $this->getHeaderByName('content-type', __NAMESPACE__ . '\Header\ContentType');
+            $header = $this->getHeaderByName('content-type', __NAMESPACE__.'\Header\ContentType');
             $header->setType('multipart/mixed');
             $header->addParameter('boundary', $mime->boundary());
+
             return $this;
         }
 
@@ -404,6 +423,7 @@ class Message
             $part = array_shift($parts);
             $headers->addHeaders($part->getHeadersArray());
         }
+
         return $this;
     }
 
@@ -436,8 +456,8 @@ class Message
      *
      * If not found, instantiates one based on $headerClass.
      *
-     * @param  string $headerName
-     * @param  string $headerClass
+     * @param  string                                $headerName
+     * @param  string                                $headerClass
      * @return Header\HeaderInterface|\ArrayIterator header instance or collection of headers
      */
     protected function getHeaderByName($headerName, $headerClass)
@@ -449,13 +469,14 @@ class Message
             $header = new $headerClass();
             $headers->addHeader($header);
         }
+
         return $header;
     }
 
     /**
      * Clear a header by name
      *
-     * @param  string $headerName
+     * @param string $headerName
      */
     protected function clearHeaderByName($headerName)
     {
@@ -468,8 +489,8 @@ class Message
      * Used with To, From, Cc, Bcc, and ReplyTo headers. If the header does not
      * exist, instantiates it.
      *
-     * @param  string $headerName
-     * @param  string $headerClass
+     * @param  string                    $headerName
+     * @param  string                    $headerClass
      * @throws Exception\DomainException
      * @return AddressList
      */
@@ -482,6 +503,7 @@ class Message
                 get_class($header)
             ));
         }
+
         return $header->getAddressList();
     }
 
@@ -490,10 +512,10 @@ class Message
      *
      * Proxied to this from addFrom, addTo, addCc, addBcc, and addReplyTo.
      *
-     * @param  AddressList $addressList
+     * @param  AddressList                                                   $addressList
      * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList
-     * @param  null|string $name
-     * @param  string $callingMethod
+     * @param  null|string                                                   $name
+     * @param  string                                                        $callingMethod
      * @throws Exception\InvalidArgumentException
      */
     protected function updateAddressList(AddressList $addressList, $emailOrAddressOrList, $name, $callingMethod)
@@ -502,10 +524,12 @@ class Message
             foreach ($emailOrAddressOrList as $address) {
                 $addressList->add($address);
             }
+
             return;
         }
         if (is_array($emailOrAddressOrList)) {
             $addressList->addMany($emailOrAddressOrList);
+
             return;
         }
         if (!is_string($emailOrAddressOrList) && !$emailOrAddressOrList instanceof Address\AddressInterface) {
@@ -526,16 +550,17 @@ class Message
     public function toString()
     {
         $headers = $this->getHeaders();
+
         return $headers->toString()
-               . Headers::EOL
-               . $this->getBodyText();
+               .Headers::EOL
+               .$this->getBodyText();
     }
 
     /**
      * Instantiate from raw message string
      *
      * @todo   Restore body to Mime\Message
-     * @param  string $rawMessage
+     * @param  string  $rawMessage
      * @return Message
      */
     public static function fromString($rawMessage)
@@ -549,6 +574,7 @@ class Message
         }
         $message->setHeaders($headers);
         $message->setBody($content);
+
         return $message;
     }
 }

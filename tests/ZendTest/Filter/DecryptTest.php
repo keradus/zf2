@@ -38,7 +38,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'STRING' => 'STRING',
             'ABC1@3' => 'ABC1@3',
-            'A b C'  => 'A B C'
+            'A b C'  => 'A B C',
         );
 
         $enc = $filter->getEncryption();
@@ -80,12 +80,11 @@ ccL43V3Z4JN9OXRAfGWXyrBJNmwURkq7a2EyFElBBWK03OLYVMevQyRJcMKY0ai+
 tmnFUSkH2zwnkXQfPUxg9aV7TmGQv/3TkK1SziyDyNm7GwtyIlfcigCCRz3uc77U
 Izcez5wgmkpNElg/D7/VCd9E+grTfPYNmuTVccGOes+n8ISJJdW0vYX1xwWv5l
 bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt');
-        $filter->setPrivateKey(__DIR__ . '/_files/privatekey.pem');
+        $filter->setPrivateKey(__DIR__.'/_files/privatekey.pem');
 
         $key = $filter->getPrivateKey();
         $this->assertEquals(
-            array(__DIR__ . '/_files/privatekey.pem' =>
-                  '-----BEGIN RSA PRIVATE KEY-----
+            array(__DIR__.'/_files/privatekey.pem' => '-----BEGIN RSA PRIVATE KEY-----
 MIICXgIBAAKBgQDKTIp7FntJt1BioBZ0lmWBE8CyzngeGCHNMcAC4JLbi1Y0LwT4
 CSaQarbvAqBRmc+joHX+rcURm89wOibRaThrrZcvgl2pomzu7shJc0ObiRZC8H7p
 xTkZ1HHjN8cRSQlOHkcdtE9yoiSGSO+zZ9K5ReU1DOsFFDD4V7XpcNU63QIDAQAB
@@ -145,8 +144,8 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
             array(new \stdClass()),
             array(array(
                 'ec133eb7460682b0020b736ad6d2ef14c35de0f1e5976330ae1dd096ef3b4cb7MTIzNDU2Nzg5MDEyMzQ1NoZvxY1JkeL6TnQP3ug5F0k=',
-                'decrypt me too, please'
-            ))
+                'decrypt me too, please',
+            )),
         );
     }
 

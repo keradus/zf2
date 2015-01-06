@@ -30,7 +30,7 @@ class ConstructedNavigationFactory extends AbstractNavigationFactory
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface        $serviceLocator
      * @return array|null|\Zend\Config\Config
      */
     public function getPages(ServiceLocatorInterface $serviceLocator)
@@ -38,6 +38,7 @@ class ConstructedNavigationFactory extends AbstractNavigationFactory
         if (null === $this->pages) {
             $this->pages = $this->preparePages($serviceLocator, $this->getPagesFromConfig($this->config));
         }
+
         return $this->pages;
     }
 

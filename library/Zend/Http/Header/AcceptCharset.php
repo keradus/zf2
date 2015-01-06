@@ -37,13 +37,13 @@ class AcceptCharset extends AbstractAccept
      */
     public function toString()
     {
-        return 'Accept-Charset: ' . $this->getFieldValue();
+        return 'Accept-Charset: '.$this->getFieldValue();
     }
 
     /**
      * Add a charset, with the given priority
      *
-     * @param  string $type
+     * @param  string    $type
      * @param  int|float $priority
      * @return Accept
      */
@@ -66,7 +66,7 @@ class AcceptCharset extends AbstractAccept
     /**
      * Parse the keys contained in the header line
      *
-     * @param string $fieldValuePart
+     * @param  string                                                        $fieldValuePart
      * @return \Zend\Http\Header\Accept\FieldValuePart\CharsetFieldValuePart
      * @see \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
      */

@@ -19,8 +19,8 @@ class UpperCase extends StringToUpper
      *
      * Does a lowercase on the content of the given file
      *
-     * @param  string|array $value Full path of file to change or $_FILES data array
-     * @return string|array The given $value
+     * @param  string|array                       $value Full path of file to change or $_FILES data array
+     * @return string|array                       The given $value
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
@@ -65,6 +65,7 @@ class UpperCase extends StringToUpper
         if ($isFileUpload) {
             return $uploadData;
         }
+
         return $value;
     }
 }

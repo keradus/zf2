@@ -14,7 +14,7 @@ use DOMElement;
 use Zend\Feed\Writer\Extension;
 
 /**
-*/
+ */
 class Entry extends Extension\AbstractRenderer
 {
     /**
@@ -60,7 +60,7 @@ class Entry extends Extension\AbstractRenderer
      * Set entry authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -82,7 +82,7 @@ class Entry extends Extension\AbstractRenderer
      * Set itunes block
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setBlock(DOMDocument $dom, DOMElement $root)
@@ -102,7 +102,7 @@ class Entry extends Extension\AbstractRenderer
      * Set entry duration
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDuration(DOMDocument $dom, DOMElement $root)
@@ -122,7 +122,7 @@ class Entry extends Extension\AbstractRenderer
      * Set explicit flag
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setExplicit(DOMDocument $dom, DOMElement $root)
@@ -142,7 +142,7 @@ class Entry extends Extension\AbstractRenderer
      * Set entry keywords
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setKeywords(DOMDocument $dom, DOMElement $root)
@@ -162,7 +162,7 @@ class Entry extends Extension\AbstractRenderer
      * Set entry subtitle
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
@@ -182,7 +182,7 @@ class Entry extends Extension\AbstractRenderer
      * Set entry summary
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setSummary(DOMDocument $dom, DOMElement $root)

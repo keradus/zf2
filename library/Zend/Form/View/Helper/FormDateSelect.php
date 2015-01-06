@@ -21,7 +21,7 @@ class FormDateSelect extends FormMonthSelectHelper
     /**
      * Render a date element that is composed of three selects
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface                              $element
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @throws \Zend\Form\Exception\DomainException
      * @return string

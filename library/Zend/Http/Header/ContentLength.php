@@ -24,7 +24,7 @@ class ContentLength implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-length') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Length string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Length string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class ContentLength implements HeaderInterface
 
     public function toString()
     {
-        return 'Content-Length: ' . $this->getFieldValue();
+        return 'Content-Length: '.$this->getFieldValue();
     }
 }

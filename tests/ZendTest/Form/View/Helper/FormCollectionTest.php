@@ -30,7 +30,7 @@ class FormCollectionTest extends TestCase
 
         Doctype::unsetDoctypeRegistry();
 
-        $this->renderer = new PhpRenderer;
+        $this->renderer = new PhpRenderer();
         $helpers = $this->renderer->getHelperPluginManager();
         $config  = new HelperConfig();
         $config->configureServiceManager($helpers);

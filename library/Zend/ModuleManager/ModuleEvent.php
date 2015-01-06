@@ -54,7 +54,7 @@ class ModuleEvent extends Event
     /**
      * Set the name of a given module
      *
-     * @param  string $moduleName
+     * @param  string                             $moduleName
      * @throws Exception\InvalidArgumentException
      * @return ModuleEvent
      */
@@ -88,7 +88,7 @@ class ModuleEvent extends Event
     /**
      * Set module object to compose in this event
      *
-     * @param  object $module
+     * @param  object                             $module
      * @throws Exception\InvalidArgumentException
      * @return ModuleEvent
      */

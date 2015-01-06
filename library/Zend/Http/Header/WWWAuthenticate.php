@@ -24,7 +24,7 @@ class WWWAuthenticate implements MultipleHeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'www-authenticate') {
-            throw new Exception\InvalidArgumentException('Invalid header line for WWW-Authenticate string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for WWW-Authenticate string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,7 +50,7 @@ class WWWAuthenticate implements MultipleHeaderInterface
 
     public function toString()
     {
-        return 'WWW-Authenticate: ' . $this->getFieldValue();
+        return 'WWW-Authenticate: '.$this->getFieldValue();
     }
 
     public function toStringMultipleHeaders(array $headers)
@@ -64,6 +64,7 @@ class WWWAuthenticate implements MultipleHeaderInterface
             }
             $strings[] = $header->toString();
         }
+
         return implode("\r\n", $strings);
     }
 }

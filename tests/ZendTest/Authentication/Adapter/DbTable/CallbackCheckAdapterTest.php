@@ -43,12 +43,15 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
             constant('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') === false
         ) {
             $this->markTestSkipped('Tests are not enabled in TestConfiguration.php');
+
             return;
         } elseif (!extension_loaded('pdo')) {
             $this->markTestSkipped('PDO extension is not loaded');
+
             return;
         } elseif (!in_array('sqlite', \PDO::getAvailableDrivers())) {
             $this->markTestSkipped('SQLite PDO driver is not available');
+
             return;
         }
 
@@ -76,7 +79,6 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->isValid());
     }
 
-
     /**
      * Ensures expected behavior for authentication success
      */
@@ -88,7 +90,6 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
         $result = $this->_adapter->authenticate();
         $this->assertTrue($result->isValid());
     }
-
 
     /**
      * Ensures expected behavior for an invalid callback
@@ -298,7 +299,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldNotAuthenticateWhenFlagIsNotSet()
     {
         $sqlInsert = 'INSERT INTO users (username, password, real_name) '
-                   . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
+                   .'VALUES ("my_username", "my_otherpass", "Test user 2")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
@@ -319,7 +320,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldAuthenticateWhenFlagIsSet()
     {
         $sqlInsert = 'INSERT INTO users (username, password, real_name) '
-                   . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
+                   .'VALUES ("my_username", "my_otherpass", "Test user 2")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
@@ -346,11 +347,10 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('my_username', $result2->getIdentity());
     }
 
-
     protected function _setupDbAdapter($optionalParams = array())
     {
         $params = array('driver' => 'pdo_sqlite',
-                        'dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE);
+                        'dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE, );
 
         if (!empty($optionalParams)) {
             $params['options'] = $optionalParams;
@@ -359,17 +359,17 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_db = new DbAdapter($params);
 
         $sqlCreate = 'CREATE TABLE IF NOT EXISTS [users] ( '
-                   . '[id] INTEGER  NOT NULL PRIMARY KEY, '
-                   . '[username] VARCHAR(50) NOT NULL, '
-                   . '[password] VARCHAR(32) NULL, '
-                   . '[real_name] VARCHAR(150) NULL)';
+                   .'[id] INTEGER  NOT NULL PRIMARY KEY, '
+                   .'[username] VARCHAR(50) NOT NULL, '
+                   .'[password] VARCHAR(32) NULL, '
+                   .'[real_name] VARCHAR(150) NULL)';
         $this->_db->query($sqlCreate, DbAdapter::QUERY_MODE_EXECUTE);
 
         $sqlDelete = 'DELETE FROM users';
         $this->_db->query($sqlDelete, DbAdapter::QUERY_MODE_EXECUTE);
 
         $sqlInsert = 'INSERT INTO users (username, password, real_name) '
-                   . 'VALUES ("my_username", "my_password", "My Real Name")';
+                   .'VALUES ("my_username", "my_password", "My Real Name")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
     }
 

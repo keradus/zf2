@@ -57,7 +57,7 @@ class DotNet extends SOAPClient
      * Constructor
      *
      * @param string $wsdl
-     * @param array $options
+     * @param array  $options
      */
     public function __construct($wsdl = null, $options = null)
     {
@@ -75,8 +75,8 @@ class DotNet extends SOAPClient
      * @param  string       $location The SOAP URI.
      * @param  string       $action   The SOAP action to call.
      * @param  int          $version  The SOAP version to use.
-     * @param  int          $oneWay  (Optional) The number 1 if a response is not expected.
-     * @return string The XML SOAP response.
+     * @param  int          $oneWay   (Optional) The number 1 if a response is not expected.
+     * @return string       The XML SOAP response.
      */
     public function _doRequest(CommonClient $client, $request, $location, $action, $version, $oneWay = null)
     {
@@ -90,7 +90,7 @@ class DotNet extends SOAPClient
         $headers    = array(
             'Content-Type' => 'text/xml; charset=utf-8',
             'Method'       => 'POST',
-            'SOAPAction'   => '"' . $action . '"',
+            'SOAPAction'   => '"'.$action.'"',
             'User-Agent'   => 'PHP-SOAP-CURL',
         );
         $uri = new HttpUri($location);
@@ -99,7 +99,7 @@ class DotNet extends SOAPClient
         $curlClient->setCurlOption(CURLOPT_HTTPAUTH, CURLAUTH_NTLM)
                    ->setCurlOption(CURLOPT_SSL_VERIFYHOST, false)
                    ->setCurlOption(CURLOPT_SSL_VERIFYPEER, false)
-                   ->setCurlOption(CURLOPT_USERPWD, $this->options['login'] . ':' . $this->options['password']);
+                   ->setCurlOption(CURLOPT_USERPWD, $this->options['login'].':'.$this->options['password']);
 
         // Perform the cURL request and get the response
         $curlClient->connect($uri->getHost(), $uri->getPort());
@@ -127,6 +127,7 @@ class DotNet extends SOAPClient
         if ($this->curlClient === null) {
             $this->curlClient = new CurlClient();
         }
+
         return $this->curlClient;
     }
 
@@ -159,6 +160,7 @@ class DotNet extends SOAPClient
     public function setCurlClient(CurlClient $curlClient)
     {
         $this->curlClient = $curlClient;
+
         return $this;
     }
 
@@ -167,7 +169,7 @@ class DotNet extends SOAPClient
      *
      * Allows setting options as an associative array of option => value pairs.
      *
-     * @param  array|\Traversable $options Options.
+     * @param  array|\Traversable        $options Options.
      * @throws \InvalidArgumentException If an unsupported option is passed.
      * @return self
      */
@@ -179,6 +181,7 @@ class DotNet extends SOAPClient
         }
 
         $this->options = $options;
+
         return parent::setOptions($options);
     }
 
@@ -187,7 +190,7 @@ class DotNet extends SOAPClient
      *
      * My be overridden in descendant classes
      *
-     * @param  array $arguments
+     * @param  array                      $arguments
      * @return array
      * @throws Exception\RuntimeException
      */
@@ -215,17 +218,18 @@ class DotNet extends SOAPClient
      */
     protected function _preProcessResult($result)
     {
-        $resultProperty = $this->getLastMethod() . 'Result';
+        $resultProperty = $this->getLastMethod().'Result';
         if (property_exists($result, $resultProperty)) {
             return $result->$resultProperty;
         }
+
         return $result;
     }
 
     /**
      * Flattens an HTTP headers array into a string.
      *
-     * @param  array $headers The headers to flatten.
+     * @param  array  $headers The headers to flatten.
      * @return string The headers string.
      */
     protected function flattenHeaders(array $headers)
@@ -233,7 +237,7 @@ class DotNet extends SOAPClient
         $result = '';
 
         foreach ($headers as $name => $value) {
-            $result .= $name . ': ' . $value . "\r\n";
+            $result .= $name.': '.$value."\r\n";
         }
 
         return $result;

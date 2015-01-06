@@ -43,8 +43,8 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
                 $this->assertEquals('ou=Node', $rdn);
                 $this->assertEquals($this->createDn('ou=Node,'), $dn);
             } else {
-                $this->assertEquals('ou=Test' . ($i - 1), $rdn);
-                $this->assertEquals($this->createDn('ou=Test' . ($i - 1) . ','), $dn);
+                $this->assertEquals('ou=Test'.($i - 1), $rdn);
+                $this->assertEquals($this->createDn('ou=Test'.($i - 1).','), $dn);
             }
             $i++;
         }
@@ -75,8 +75,8 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
                     $base = Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE)
                         ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
                 }
-                $this->assertEquals('ou=Test' . $j, $rdn);
-                $this->assertEquals('ou=Test' . $j . ',' . $base, $dn);
+                $this->assertEquals('ou=Test'.$j, $rdn);
+                $this->assertEquals('ou=Test'.$j.','.$base, $dn);
             }
             $i++;
         }

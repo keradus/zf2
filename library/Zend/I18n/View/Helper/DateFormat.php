@@ -58,10 +58,10 @@ class DateFormat extends AbstractHelper
      * Format a date
      *
      * @param  DateTime|int|array $date
-     * @param  int                    $dateType
-     * @param  int                    $timeType
-     * @param  string                 $locale
-     * @param  string|null            $pattern
+     * @param  int                $dateType
+     * @param  int                $timeType
+     * @param  string             $locale
+     * @param  string|null        $pattern
      * @return string
      */
     public function __invoke(
@@ -76,7 +76,7 @@ class DateFormat extends AbstractHelper
         }
 
         $timezone    = $this->getTimezone();
-        $formatterId = md5($dateType . "\0" . $timeType . "\0" . $locale ."\0" . $pattern);
+        $formatterId = md5($dateType."\0".$timeType."\0".$locale."\0".$pattern);
 
         if (!isset($this->formatters[$formatterId])) {
             $this->formatters[$formatterId] = new IntlDateFormatter(
@@ -95,12 +95,13 @@ class DateFormat extends AbstractHelper
     /**
      * Set locale to use instead of the default
      *
-     * @param  string $locale
+     * @param  string     $locale
      * @return DateFormat
      */
     public function setLocale($locale)
     {
         $this->locale = (string) $locale;
+
         return $this;
     }
 
@@ -121,7 +122,7 @@ class DateFormat extends AbstractHelper
     /**
      * Set timezone to use instead of the default
      *
-     * @param  string $timezone
+     * @param  string     $timezone
      * @return DateFormat
      */
     public function setTimezone($timezone)

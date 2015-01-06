@@ -83,7 +83,7 @@ class MongoDb extends AbstractAdapter implements FlushableInterface
             $this->resourceManager = $options->getResourceManager();
             $this->resourceId      = $options->getResourceId();
             $namespace             = $options->getNamespace();
-            $this->namespacePrefix = ($namespace === '' ? '' : $namespace . $options->getNamespaceSeparator());
+            $this->namespacePrefix = ($namespace === '' ? '' : $namespace.$options->getNamespaceSeparator());
             $this->initialized     = true;
         }
 
@@ -127,9 +127,9 @@ class MongoDb extends AbstractAdapter implements FlushableInterface
             if (! $result['expires'] instanceof MongoDate) {
                 throw new Exception\RuntimeException(sprintf(
                     "The found item _id '%s' for key '%s' is not a valid cache item"
-                    . ": the field 'expired' isn't an instance of MongoDate, '%s' found instead",
+                    .": the field 'expired' isn't an instance of MongoDate, '%s' found instead",
                     (string) $result['_id'],
-                    $this->namespacePrefix . $normalizedKey,
+                    $this->namespacePrefix.$normalizedKey,
                     is_object($result['expires']) ? get_class($result['expires']) : gettype($result['expires'])
                 ));
             }
@@ -145,7 +145,7 @@ class MongoDb extends AbstractAdapter implements FlushableInterface
             throw new Exception\RuntimeException(sprintf(
                 "The found item _id '%s' for key '%s' is not a valid cache item: missing the field 'value'",
                 (string) $result['_id'],
-                $this->namespacePrefix . $normalizedKey
+                $this->namespacePrefix.$normalizedKey
             ));
         }
 
@@ -162,7 +162,7 @@ class MongoDb extends AbstractAdapter implements FlushableInterface
     protected function internalSetItem(& $normalizedKey, & $value)
     {
         $mongo     = $this->getMongoDbResource();
-        $key       = $this->namespacePrefix . $normalizedKey;
+        $key       = $this->namespacePrefix.$normalizedKey;
         $ttl       = $this->getOptions()->getTTl();
         $expires   = null;
         $cacheItem = array(
@@ -195,7 +195,7 @@ class MongoDb extends AbstractAdapter implements FlushableInterface
     protected function internalRemoveItem(& $normalizedKey)
     {
         try {
-            $result = $this->getMongoDbResource()->remove(array('key' => $this->namespacePrefix . $normalizedKey));
+            $result = $this->getMongoDbResource()->remove(array('key' => $this->namespacePrefix.$normalizedKey));
         } catch (MongoResourceException $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
@@ -277,7 +277,7 @@ class MongoDb extends AbstractAdapter implements FlushableInterface
     private function fetchFromCollection(& $normalizedKey)
     {
         try {
-            return $this->getMongoDbResource()->findOne(array('key' => $this->namespacePrefix . $normalizedKey));
+            return $this->getMongoDbResource()->findOne(array('key' => $this->namespacePrefix.$normalizedKey));
         } catch (MongoResourceException $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }

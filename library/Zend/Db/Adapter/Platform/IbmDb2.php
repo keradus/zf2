@@ -56,9 +56,10 @@ class IbmDb2 extends AbstractPlatform
         }
         $identifierChain = str_replace('"', '\\"', $identifierChain);
         if (is_array($identifierChain)) {
-            $identifierChain = implode('"' . $this->identifierSeparator . '"', $identifierChain);
+            $identifierChain = implode('"'.$this->identifierSeparator.'"', $identifierChain);
         }
-        return '"' . $identifierChain . '"';
+
+        return '"'.$identifierChain.'"';
     }
 
     /**
@@ -75,13 +76,14 @@ class IbmDb2 extends AbstractPlatform
     public function quoteValue($value)
     {
         if (function_exists('db2_escape_string')) {
-            return '\'' . db2_escape_string($value) . '\'';
+            return '\''.db2_escape_string($value).'\'';
         }
         trigger_error(
-            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-            . 'can introduce security vulnerabilities in a production environment.'
+            'Attempting to quote a value in '.__CLASS__.' without extension/driver support '
+            .'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . str_replace("'", "''", $value) . '\'';
+
+        return '\''.str_replace("'", "''", $value).'\'';
     }
 
     /**
@@ -90,9 +92,10 @@ class IbmDb2 extends AbstractPlatform
     public function quoteTrustedValue($value)
     {
         if (function_exists('db2_escape_string')) {
-            return '\'' . db2_escape_string($value) . '\'';
+            return '\''.db2_escape_string($value).'\'';
         }
-        return '\'' . str_replace("'", "''", $value) . '\'';
+
+        return '\''.str_replace("'", "''", $value).'\'';
     }
 
     /**

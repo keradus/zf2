@@ -21,8 +21,8 @@ interface MessageInterface
     /**
      * check if flag is set
      *
-     * @param mixed $flag a flag name, use constants defined in Zend\Mail\Storage
-     * @return bool true if set, otherwise false
+     * @param  mixed $flag a flag name, use constants defined in Zend\Mail\Storage
+     * @return bool  true if set, otherwise false
      */
     public function hasFlag($flag);
 

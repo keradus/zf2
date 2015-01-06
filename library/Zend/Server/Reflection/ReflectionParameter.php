@@ -43,8 +43,8 @@ class ReflectionParameter
      * Constructor
      *
      * @param \ReflectionParameter $r
-     * @param string $type Parameter type
-     * @param string $description Parameter description
+     * @param string               $type        Parameter type
+     * @param string               $description Parameter description
      */
     public function __construct(\ReflectionParameter $r, $type = 'mixed', $description = '')
     {
@@ -56,8 +56,8 @@ class ReflectionParameter
     /**
      * Proxy reflection calls
      *
-     * @param string $method
-     * @param array $args
+     * @param  string                           $method
+     * @param  array                            $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
@@ -83,7 +83,7 @@ class ReflectionParameter
     /**
      * Set parameter type
      *
-     * @param string|null $type
+     * @param  string|null                        $type
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -109,7 +109,7 @@ class ReflectionParameter
     /**
      * Set parameter description
      *
-     * @param string|null $description
+     * @param  string|null                        $description
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -125,7 +125,7 @@ class ReflectionParameter
     /**
      * Set parameter position
      *
-     * @param int $index
+     * @param  int  $index
      * @return void
      */
     public function setPosition($index)

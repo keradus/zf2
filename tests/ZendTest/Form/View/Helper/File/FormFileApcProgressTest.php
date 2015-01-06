@@ -31,7 +31,7 @@ class FormFileApcProgressTest extends CommonTestCase
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="hidden"', $markup);
         $this->assertContains('id="progress_key"', $markup);
-        $this->assertContains('name="' . $name . '"', $markup);
+        $this->assertContains('name="'.$name.'"', $markup);
         $this->assertContains('value="', $markup);
     }
 }

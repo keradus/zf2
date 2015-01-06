@@ -20,7 +20,7 @@ class Double extends AbstractScalar
     {
         $this->type = self::XMLRPC_TYPE_DOUBLE;
         $precision = (int) ini_get('precision');
-        $formatString = '%1.' . $precision . 'F';
+        $formatString = '%1.'.$precision.'F';
         $this->value = rtrim(sprintf($formatString, (float) $value), '0');
     }
 

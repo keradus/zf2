@@ -41,7 +41,7 @@ class CaptchaTest extends TestCase
             'class'   => 'dumb',
             'options' => array(
                 'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-            )
+            ),
         );
         $element->setCaptcha($captcha);
         $this->assertInstanceOf('Zend\Captcha\Dumb', $element->getCaptcha());
@@ -51,7 +51,7 @@ class CaptchaTest extends TestCase
             'class'   => 'dumb',
             'options' => array(
                     'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-            )
+            ),
         ));
         $element->setCaptcha($captcha);
         $this->assertInstanceOf('Zend\Captcha\Dumb', $element->getCaptcha());
@@ -85,9 +85,9 @@ class CaptchaTest extends TestCase
                     'class'   => 'dumb',
                     'options' => array(
                         'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         ));
         $this->assertInstanceOf('Zend\Form\Element\Captcha', $element);
         $captcha = $element->getCaptcha();

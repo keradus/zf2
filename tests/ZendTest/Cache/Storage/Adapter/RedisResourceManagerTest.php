@@ -59,7 +59,7 @@ class RedisResourceManagerTest extends \PHPUnit_Framework_TestCase
         $resource    = array(
             'persistent_id' => 1234,
             'server'        => $server,
-            'password'      => 'abcd1234'
+            'password'      => 'abcd1234',
         );
 
         $this->resourceManager->setResource($dummyResId2, $resource);
@@ -82,7 +82,7 @@ class RedisResourceManagerTest extends \PHPUnit_Framework_TestCase
         $resource    = array(
             'persistent_id' => 1234,
             'server'        => $server,
-            'password'      => 'abcd1234'
+            'password'      => 'abcd1234',
         );
 
         $this->resourceManager->setResource($dummyResId2, $resource);
@@ -105,7 +105,7 @@ class RedisResourceManagerTest extends \PHPUnit_Framework_TestCase
         $resource   = array(
             'persistent_id' => 1234,
             'server' => array(
-                'host' => 'localhost'
+                'host' => 'localhost',
             ),
         );
         $expectedPersistentId = '1234';
@@ -122,7 +122,7 @@ class RedisResourceManagerTest extends \PHPUnit_Framework_TestCase
         $resource   = array(
             'persistend_id' => 1234,
             'server' => array(
-                'host' => 'localhost'
+                'host' => 'localhost',
             ),
         );
         $expectedPersistentId = '1234';

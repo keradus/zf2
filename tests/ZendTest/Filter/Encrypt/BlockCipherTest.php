@@ -37,7 +37,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'STRING' => '5b68e3648f9136e5e9bfaa2242e5b668e7501b2c20e8f9e2c76638f017f62a8eWmVuZEZyYW1ld29yazIuMDpd5vWydswa0fyIo2dnF0Q=',
             'ABC1@3' => 'c7da11b89330f6bbbb15fcb6de574c7ec869ad7187a7d466e60f2437914d927aWmVuZEZyYW1ld29yazIuMKXsBdYXBLQx9elx0B20uxQ=',
-            'A b C' => 'ca1b9df732facf9dfadc7c3fdf1ccdc211bf21f638d459f43fefc74bbc9c8e01WmVuZEZyYW1ld29yazIuMM1som/As52rdK/4g7uoYx4='
+            'A b C' => 'ca1b9df732facf9dfadc7c3fdf1ccdc211bf21f638d459f43fefc74bbc9c8e01WmVuZEZyYW1ld29yazIuMM1som/As52rdK/4g7uoYx4=',
         );
         $filter->setVector('ZendFramework2.0');
         $enc = $filter->getEncryption();
@@ -79,7 +79,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
                   'algorithm'     => 'aes',
                   'vector'        => '1234567890123456',
                   'key_iteration' => 5000,
-                  'hash'          => 'sha256'),
+                  'hash'          => 'sha256', ),
             $filter->getEncryption()
         );
     }
@@ -101,7 +101,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
                   'algorithm'     => '3des',
                   'vector'        => '1234567890123456',
                   'key_iteration' => 5000,
-                  'hash'          => 'sha256'),
+                  'hash'          => 'sha256', ),
             $filter->getEncryption()
         );
     }

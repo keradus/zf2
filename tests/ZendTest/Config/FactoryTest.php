@@ -24,13 +24,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         if (empty($this->tmpfiles[$ext])) {
             $this->tmpfiles[$ext] = tempnam(sys_get_temp_dir(), 'zend-config-writer').'.'.$ext;
         }
+
         return $this->tmpfiles[$ext];
     }
 
     public function setUp()
     {
         $this->originalIncludePath = get_include_path();
-        set_include_path(__DIR__ . '/TestAssets');
+        set_include_path(__DIR__.'/TestAssets');
     }
 
     public function tearDown()
@@ -49,14 +50,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFromIni()
     {
-        $config = Factory::fromFile(__DIR__ . '/TestAssets/Ini/include-base.ini');
+        $config = Factory::fromFile(__DIR__.'/TestAssets/Ini/include-base.ini');
 
         $this->assertEquals('bar', $config['base']['foo']);
     }
 
     public function testFromXml()
     {
-        $config = Factory::fromFile(__DIR__ . '/TestAssets/Xml/include-base.xml');
+        $config = Factory::fromFile(__DIR__.'/TestAssets/Xml/include-base.xml');
 
         $this->assertEquals('bar', $config['base']['foo']);
     }
@@ -64,8 +65,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFromIniFiles()
     {
         $files = array(
-            __DIR__ . '/TestAssets/Ini/include-base.ini',
-            __DIR__ . '/TestAssets/Ini/include-base2.ini'
+            __DIR__.'/TestAssets/Ini/include-base.ini',
+            __DIR__.'/TestAssets/Ini/include-base2.ini',
         );
         $config = Factory::fromFiles($files);
 
@@ -76,8 +77,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFromXmlFiles()
     {
         $files = array(
-            __DIR__ . '/TestAssets/Xml/include-base.xml',
-            __DIR__ . '/TestAssets/Xml/include-base2.xml'
+            __DIR__.'/TestAssets/Xml/include-base.xml',
+            __DIR__.'/TestAssets/Xml/include-base2.xml',
         );
         $config = Factory::fromFiles($files);
 
@@ -88,8 +89,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFromPhpFiles()
     {
         $files = array(
-            __DIR__ . '/TestAssets/Php/include-base.php',
-            __DIR__ . '/TestAssets/Php/include-base2.php'
+            __DIR__.'/TestAssets/Php/include-base.php',
+            __DIR__.'/TestAssets/Php/include-base2.php',
         );
         $config = Factory::fromFiles($files);
 
@@ -100,9 +101,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFromIniAndXmlAndPhpFiles()
     {
         $files = array(
-            __DIR__ . '/TestAssets/Ini/include-base.ini',
-            __DIR__ . '/TestAssets/Xml/include-base2.xml',
-            __DIR__ . '/TestAssets/Php/include-base3.php',
+            __DIR__.'/TestAssets/Ini/include-base.ini',
+            __DIR__.'/TestAssets/Xml/include-base2.xml',
+            __DIR__.'/TestAssets/Php/include-base3.php',
         );
         $config = Factory::fromFiles($files);
 
@@ -128,7 +129,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testReturnsConfigObjectIfRequestedAndArrayOtherwise()
     {
         $files = array(
-            __DIR__ . '/TestAssets/Ini/include-base.ini',
+            __DIR__.'/TestAssets/Ini/include-base.ini',
         );
 
         $configArray = Factory::fromFile($files[0]);
@@ -153,14 +154,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testUnsupportedFileExtensionThrowsRuntimeException()
     {
         $this->setExpectedException('RuntimeException');
-        $config = Factory::fromFile(__DIR__ . '/TestAssets/bad.ext');
+        $config = Factory::fromFile(__DIR__.'/TestAssets/bad.ext');
     }
 
     public function testFactoryCanRegisterCustomReaderInstance()
     {
         Factory::registerReader('dum', new Reader\TestAssets\DummyReader());
 
-        $configObject = Factory::fromFile(__DIR__ . '/TestAssets/dummy.dum', true);
+        $configObject = Factory::fromFile(__DIR__.'/TestAssets/dummy.dum', true);
         $this->assertInstanceOf('Zend\Config\Config', $configObject);
 
         $this->assertEquals($configObject['one'], 1);
@@ -173,7 +174,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         Factory::registerReader('dum', 'DummyReader');
 
-        $configObject = Factory::fromFile(__DIR__ . '/TestAssets/dummy.dum', true);
+        $configObject = Factory::fromFile(__DIR__.'/TestAssets/dummy.dum', true);
         $this->assertInstanceOf('Zend\Config\Config', $configObject);
 
         $this->assertEquals($configObject['one'], 1);

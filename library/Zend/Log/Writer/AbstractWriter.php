@@ -66,7 +66,7 @@ abstract class AbstractWriter implements WriterInterface
      * - filters: array of filters to add to this filter
      * - formatter: formatter for this writer
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
@@ -113,8 +113,8 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Add a filter specific to this writer.
      *
-     * @param  int|string|Filter\FilterInterface $filter
-     * @param  array|null $options
+     * @param  int|string|Filter\FilterInterface  $filter
+     * @param  array|null                         $options
      * @return AbstractWriter
      * @throws Exception\InvalidArgumentException
      */
@@ -137,6 +137,7 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $this->filters[] = $filter;
+
         return $this;
     }
 
@@ -150,20 +151,21 @@ abstract class AbstractWriter implements WriterInterface
         if (null === $this->filterPlugins) {
             $this->setFilterPluginManager(new FilterPluginManager());
         }
+
         return $this->filterPlugins;
     }
 
     /**
      * Set filter plugin manager
      *
-     * @param  string|FilterPluginManager $plugins
+     * @param  string|FilterPluginManager         $plugins
      * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setFilterPluginManager($plugins)
     {
         if (is_string($plugins)) {
-            $plugins = new $plugins;
+            $plugins = new $plugins();
         }
         if (!$plugins instanceof FilterPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -174,14 +176,15 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $this->filterPlugins = $plugins;
+
         return $this;
     }
 
     /**
      * Get filter instance
      *
-     * @param string $name
-     * @param array|null $options
+     * @param  string                 $name
+     * @param  array|null             $options
      * @return Filter\FilterInterface
      */
     public function filterPlugin($name, array $options = null)
@@ -199,20 +202,21 @@ abstract class AbstractWriter implements WriterInterface
         if (null === $this->formatterPlugins) {
             $this->setFormatterPluginManager(new FormatterPluginManager());
         }
+
         return $this->formatterPlugins;
     }
 
     /**
      * Set formatter plugin manager
      *
-     * @param  string|FormatterPluginManager $plugins
+     * @param  string|FormatterPluginManager      $plugins
      * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setFormatterPluginManager($plugins)
     {
         if (is_string($plugins)) {
-            $plugins = new $plugins;
+            $plugins = new $plugins();
         }
         if (!$plugins instanceof FormatterPluginManager) {
             throw new Exception\InvalidArgumentException(
@@ -225,14 +229,15 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $this->formatterPlugins = $plugins;
+
         return $this;
     }
 
     /**
      * Get formatter instance
      *
-     * @param string $name
-     * @param array|null $options
+     * @param  string                       $name
+     * @param  array|null                   $options
      * @return Formatter\FormatterInterface
      */
     public function formatterPlugin($name, array $options = null)
@@ -243,7 +248,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Log a message to this writer.
      *
-     * @param array $event log data event
+     * @param  array $event log data event
      * @return void
      */
     public function write(array $event)
@@ -282,7 +287,7 @@ abstract class AbstractWriter implements WriterInterface
      * Set a new formatter for this writer
      *
      * @param  string|Formatter\FormatterInterface $formatter
-     * @param  array|null $options
+     * @param  array|null                          $options
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -301,6 +306,7 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $this->formatter = $formatter;
+
         return $this;
     }
 
@@ -346,7 +352,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Write a message to the log
      *
-     * @param array $event log data event
+     * @param  array $event log data event
      * @return void
      */
     abstract protected function doWrite(array $event);

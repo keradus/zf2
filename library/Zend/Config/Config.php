@@ -58,8 +58,8 @@ class Config implements Countable, Iterator, ArrayAccess
      * Data is read-only unless $allowModifications is set to true
      * on construction.
      *
-     * @param  array   $array
-     * @param  bool $allowModifications
+     * @param array $array
+     * @param bool  $allowModifications
      */
     public function __construct(array $array, $allowModifications = false)
     {
@@ -109,8 +109,8 @@ class Config implements Countable, Iterator, ArrayAccess
      * Only allow setting of a property if $allowModifications  was set to true
      * on construction. Otherwise, throw an exception.
      *
-     * @param  string $name
-     * @param  mixed  $value
+     * @param  string                     $name
+     * @param  mixed                      $value
      * @return void
      * @throws Exception\RuntimeException
      */
@@ -190,7 +190,7 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * unset() overloading
      *
-     * @param  string $name
+     * @param  string                             $name
      * @return void
      * @throws Exception\InvalidArgumentException
      */
@@ -225,6 +225,7 @@ class Config implements Countable, Iterator, ArrayAccess
     public function current()
     {
         $this->skipNextIteration = false;
+
         return current($this->data);
     }
 
@@ -249,6 +250,7 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         if ($this->skipNextIteration) {
             $this->skipNextIteration = false;
+
             return;
         }
 

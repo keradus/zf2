@@ -17,8 +17,8 @@ interface WritableInterface
      * This method also creates parent folders if necessary. Some mail storages may restrict, which folder
      * may be used as parent or which chars may be used in the folder name
      *
-     * @param string                           $name         global name of folder, local name if $parentFolder is set
-     * @param string|\Zend\Mail\Storage\Folder $parentFolder parent folder for new folder, else root folder is parent
+     * @param  string                                          $name         global name of folder, local name if $parentFolder is set
+     * @param  string|\Zend\Mail\Storage\Folder                $parentFolder parent folder for new folder, else root folder is parent
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function createFolder($name, $parentFolder = null);
@@ -26,7 +26,7 @@ interface WritableInterface
     /**
      * remove a folder
      *
-     * @param string|\Zend\Mail\Storage\Folder $name name or instance of folder
+     * @param  string|\Zend\Mail\Storage\Folder                $name name or instance of folder
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function removeFolder($name);
@@ -36,8 +36,8 @@ interface WritableInterface
      *
      * The new name has the same restrictions as in createFolder()
      *
-     * @param string|\Zend\Mail\Storage\Folder $oldName name or instance of folder
-     * @param string                           $newName new global name of folder
+     * @param  string|\Zend\Mail\Storage\Folder                $oldName name or instance of folder
+     * @param  string                                          $newName new global name of folder
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function renameFolder($oldName, $newName);
@@ -45,9 +45,9 @@ interface WritableInterface
     /**
      * append a new message to mail storage
      *
-     * @param  string|\Zend\Mail\Message|\Zend\Mime\Message $message message as string or instance of message class
-     * @param  null|string|\Zend\Mail\Storage\Folder        $folder  folder for new message, else current folder is taken
-     * @param  null|array                                   $flags   set flags for new message, else a default set is used
+     * @param  string|\Zend\Mail\Message|\Zend\Mime\Message    $message message as string or instance of message class
+     * @param  null|string|\Zend\Mail\Storage\Folder           $folder  folder for new message, else current folder is taken
+     * @param  null|array                                      $flags   set flags for new message, else a default set is used
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function appendMessage($message, $folder = null, $flags = null);
@@ -55,8 +55,8 @@ interface WritableInterface
     /**
      * copy an existing message
      *
-     * @param  int                              $id     number of message
-     * @param  string|\Zend\Mail\Storage\Folder $folder name or instance of target folder
+     * @param  int                                             $id     number of message
+     * @param  string|\Zend\Mail\Storage\Folder                $folder name or instance of target folder
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function copyMessage($id, $folder);
@@ -64,8 +64,8 @@ interface WritableInterface
     /**
      * move an existing message
      *
-     * @param  int                              $id     number of message
-     * @param  string|\Zend\Mail\Storage\Folder $folder name or instance of target folder
+     * @param  int                                             $id     number of message
+     * @param  string|\Zend\Mail\Storage\Folder                $folder name or instance of target folder
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function moveMessage($id, $folder);
@@ -75,8 +75,8 @@ interface WritableInterface
      *
      * NOTE: this method can't set the recent flag.
      *
-     * @param  int   $id    number of message
-     * @param  array $flags new flags for message
+     * @param  int                                             $id    number of message
+     * @param  array                                           $flags new flags for message
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function setFlags($id, $flags);

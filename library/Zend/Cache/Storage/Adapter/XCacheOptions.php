@@ -45,7 +45,7 @@ class XCacheOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $namespaceSeparator
+     * @param  string        $namespaceSeparator
      * @return XCacheOptions
      */
     public function setNamespaceSeparator($namespaceSeparator)
@@ -53,6 +53,7 @@ class XCacheOptions extends AdapterOptions
         $namespaceSeparator = (string) $namespaceSeparator;
         $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
         $this->namespaceSeparator = $namespaceSeparator;
+
         return $this;
     }
 
@@ -69,7 +70,7 @@ class XCacheOptions extends AdapterOptions
     /**
      * Set username to call admin functions
      *
-     * @param  null|string $adminUser
+     * @param  null|string   $adminUser
      * @return XCacheOptions
      */
     public function setAdminUser($adminUser)
@@ -79,6 +80,7 @@ class XCacheOptions extends AdapterOptions
             $this->triggerOptionEvent('admin_user', $adminUser);
             $this->adminUser = $adminUser;
         }
+
         return $this;
     }
 
@@ -95,7 +97,7 @@ class XCacheOptions extends AdapterOptions
     /**
      * Enable/Disable admin authentication handling
      *
-     * @param  bool $adminAuth
+     * @param  bool          $adminAuth
      * @return XCacheOptions
      */
     public function setAdminAuth($adminAuth)
@@ -105,6 +107,7 @@ class XCacheOptions extends AdapterOptions
             $this->triggerOptionEvent('admin_auth', $adminAuth);
             $this->adminAuth = $adminAuth;
         }
+
         return $this;
     }
 
@@ -121,7 +124,7 @@ class XCacheOptions extends AdapterOptions
     /**
      * Set password to call admin functions
      *
-     * @param  null|string $adminPass
+     * @param  null|string   $adminPass
      * @return XCacheOptions
      */
     public function setAdminPass($adminPass)
@@ -131,6 +134,7 @@ class XCacheOptions extends AdapterOptions
             $this->triggerOptionEvent('admin_pass', $adminPass);
             $this->adminPass = $adminPass;
         }
+
         return $this;
     }
 

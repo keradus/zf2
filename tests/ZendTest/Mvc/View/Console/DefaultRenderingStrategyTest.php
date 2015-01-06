@@ -66,7 +66,7 @@ class DefaultRenderingStrategyTest extends TestCase
         $sm = new ServiceManager();
         $sm->setService('console', new ConsoleAdapter());
 
-        $mockApplication = new MockApplication;
+        $mockApplication = new MockApplication();
         $mockApplication->setServiceManager($sm);
 
         $event    = new MvcEvent();

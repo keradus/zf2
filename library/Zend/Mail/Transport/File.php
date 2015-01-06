@@ -33,7 +33,7 @@ class File implements TransportInterface
     /**
      * Constructor
      *
-     * @param  null|FileOptions $options OPTIONAL (Default: null)
+     * @param null|FileOptions $options OPTIONAL (Default: null)
      */
     public function __construct(FileOptions $options = null)
     {
@@ -54,7 +54,7 @@ class File implements TransportInterface
     /**
      * Sets options
      *
-     * @param  FileOptions $options
+     * @param FileOptions $options
      */
     public function setOptions(FileOptions $options)
     {
@@ -64,15 +64,15 @@ class File implements TransportInterface
     /**
      * Saves e-mail message to a file
      *
-     * @param Message $message
+     * @param  Message                    $message
      * @throws Exception\RuntimeException on not writable target directory or
-     * on file_put_contents() failure
+     *                                            on file_put_contents() failure
      */
     public function send(Message $message)
     {
         $options  = $this->options;
         $filename = call_user_func($options->getCallback(), $this);
-        $file     = $options->getPath() . DIRECTORY_SEPARATOR . $filename;
+        $file     = $options->getPath().DIRECTORY_SEPARATOR.$filename;
         $email    = $message->toString();
 
         if (false === file_put_contents($file, $email)) {

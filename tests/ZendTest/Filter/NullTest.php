@@ -44,7 +44,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param int $type
+     * @param int   $type
      * @param array $testData
      * @dataProvider typeTestProvider
      */
@@ -138,7 +138,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                     array('1', '1'),
                     array(array(), array()),
                     array(array(0), array(0)),
-                )
+                ),
             ),
             array(
                 NullFilter::TYPE_INTEGER,
@@ -156,7 +156,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                     array('1', '1'),
                     array(array(), array()),
                     array(array(0), array(0)),
-                )
+                ),
             ),
             array(
                 NullFilter::TYPE_EMPTY_ARRAY,
@@ -174,7 +174,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                     array('1', '1'),
                     array(array(), null),
                     array(array(0), array(0)),
-                )
+                ),
             ),
             array(
                 NullFilter::TYPE_STRING,
@@ -192,7 +192,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                     array('1', '1'),
                     array(array(), array()),
                     array(array(0), array(0)),
-                )
+                ),
             ),
             array(
                 NullFilter::TYPE_ZERO_STRING,
@@ -210,7 +210,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                     array('1', '1'),
                     array(array(), array()),
                     array(array(0), array(0)),
-                )
+                ),
             ),
             array(
                 NullFilter::TYPE_FLOAT,
@@ -228,7 +228,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                     array('1', '1'),
                     array(array(), array()),
                     array(array(0), array(0)),
-                )
+                ),
             ),
             array(
                 NullFilter::TYPE_ALL,
@@ -246,7 +246,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
                     array('1', '1'),
                     array(array(), null),
                     array(array(0), array(0)),
-                )
+                ),
             ),
         );
     }
@@ -283,8 +283,8 @@ class NullTest extends \PHPUnit_Framework_TestCase
                     array('1', '1'),
                     array(array(), array()),
                     array(array(0), array(0)),
-                )
-            )
+                ),
+            ),
         );
     }
 }

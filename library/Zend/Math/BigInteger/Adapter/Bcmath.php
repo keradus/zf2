@@ -28,8 +28,8 @@ class Bcmath implements AdapterInterface
     /**
      * Create string representing big integer in decimal form from arbitrary integer format
      *
-     * @param  string $operand
-     * @param  int|null $base
+     * @param  string      $operand
+     * @param  int|null    $base
      * @return bool|string
      */
     public function init($operand, $base = null)
@@ -68,7 +68,7 @@ class Bcmath implements AdapterInterface
             return false;
         }
 
-        return $sign . $operand;
+        return $sign.$operand;
     }
 
     /**
@@ -98,8 +98,8 @@ class Bcmath implements AdapterInterface
     /**
      * Multiply two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function mul($leftOperand, $rightOperand)
@@ -111,8 +111,8 @@ class Bcmath implements AdapterInterface
      * Divide two big integers and return integer part result.
      * Raises exception if the divisor is zero.
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string                            $leftOperand
+     * @param  string                            $rightOperand
      * @return string
      * @throws Exception\DivisionByZeroException
      */
@@ -206,7 +206,7 @@ class Bcmath implements AdapterInterface
      * Convert big integer into it's binary number representation
      *
      * @param  string $operand
-     * @param  bool $twoc return in two's complement form
+     * @param  bool   $twoc    return in two's complement form
      * @return string
      */
     public function intToBin($operand, $twoc = false)
@@ -226,15 +226,16 @@ class Bcmath implements AdapterInterface
         $bytes = '';
         while (bccomp($operand, '0', 0) > 0) {
             $temp    = bcmod($operand, '16777216');
-            $bytes   = chr($temp >> 16) . chr($temp >> 8) . chr($temp) . $bytes;
+            $bytes   = chr($temp >> 16).chr($temp >> 8).chr($temp).$bytes;
             $operand = bcdiv($operand, '16777216');
         }
         $bytes = ltrim($bytes, $nb);
 
         if ($twoc) {
             if (ord($bytes[0]) & 0x80) {
-                $bytes = $nb . $bytes;
+                $bytes = $nb.$bytes;
             }
+
             return $isNegative ? ~$bytes : $bytes;
         }
 
@@ -245,7 +246,7 @@ class Bcmath implements AdapterInterface
      * Convert big integer into it's binary number representation
      *
      * @param  string $bytes
-     * @param  bool   $twoc whether binary number is in twos' complement form
+     * @param  bool   $twoc  whether binary number is in twos' complement form
      * @return string
      */
     public function binToInt($bytes, $twoc = false)
@@ -269,7 +270,7 @@ class Bcmath implements AdapterInterface
         }
 
         if ($isNegative) {
-            $result = bcsub('-' . $result, '1');
+            $result = bcsub('-'.$result, '1');
         }
 
         return $result;
@@ -278,9 +279,9 @@ class Bcmath implements AdapterInterface
     /**
      * Base conversion. Bases 2..62 are supported
      *
-     * @param  string $operand
-     * @param  int    $fromBase
-     * @param  int    $toBase
+     * @param  string                             $operand
+     * @param  int                                $fromBase
+     * @param  int                                $toBase
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -326,9 +327,9 @@ class Bcmath implements AdapterInterface
         do {
             $remainder = bcmod($decimal, $toBase);
             $decimal   = bcdiv($decimal, $toBase);
-            $result    = $chars[$remainder] . $result;
+            $result    = $chars[$remainder].$result;
         } while (bccomp($decimal, '0'));
 
-        return $sign . $result;
+        return $sign.$result;
     }
 }

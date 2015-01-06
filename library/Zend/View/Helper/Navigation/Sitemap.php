@@ -102,7 +102,7 @@ class Sitemap extends AbstractHelper
      * Implements {@link HelperInterface::render()}.
      *
      * @param  AbstractContainer $container [optional] container to render. Default is
-     *                           to render the container registered in the helper.
+     *                                      to render the container registered in the helper.
      * @return string
      */
     public function render($container = null)
@@ -118,18 +118,18 @@ class Sitemap extends AbstractHelper
     /**
      * Returns a DOMDocument containing the Sitemap XML for the given container
      *
-     * @param  AbstractContainer                 $container  [optional] container to get
+     * @param  AbstractContainer          $container [optional] container to get
      *                                               breadcrumbs from, defaults
      *                                               to what is registered in the
      *                                               helper
-     * @return DOMDocument                           DOM representation of the
-     *                                               container
-     * @throws Exception\RuntimeException            if schema validation is on
-     *                                               and the sitemap is invalid
-     *                                               according to the sitemap
-     *                                               schema, or if sitemap
-     *                                               validators are used and the
-     *                                               loc element fails validation
+     * @return DOMDocument                DOM representation of the
+     *                                              container
+     * @throws Exception\RuntimeException if schema validation is on
+     *                                              and the sitemap is invalid
+     *                                              according to the sitemap
+     *                                              schema, or if sitemap
+     *                                              validators are used and the
+     *                                              loc element fails validation
      */
     public function getDomSitemap(AbstractContainer $container = null)
     {
@@ -270,7 +270,7 @@ class Sitemap extends AbstractHelper
             return '';
         } elseif ($href{0} == '/') {
             // href is relative to root; use serverUrl helper
-            $url = $this->getServerUrl() . $href;
+            $url = $this->getServerUrl().$href;
         } elseif (preg_match('/^[a-z]+:/im', (string) $href)) {
             // scheme is given in href; assume absolute URL already
             $url = (string) $href;
@@ -279,13 +279,14 @@ class Sitemap extends AbstractHelper
             $basePathHelper = $this->getView()->plugin('basepath');
             $curDoc         = $basePathHelper();
             $curDoc         = ('/' == $curDoc) ? '' : trim($curDoc, '/');
-            $url            = rtrim($this->getServerUrl(), '/') . '/'
-                                                                . $curDoc
-                                                                . (empty($curDoc) ? '' : '/') . $href;
+            $url            = rtrim($this->getServerUrl(), '/').'/'
+                                                                .$curDoc
+                                                                .(empty($curDoc) ? '' : '/').$href;
         }
 
         if (! in_array($url, $this->urls)) {
             $this->urls[] = $url;
+
             return $this->xmlEscape($url);
         }
 
@@ -301,18 +302,20 @@ class Sitemap extends AbstractHelper
     protected function xmlEscape($string)
     {
         $escaper = $this->view->plugin('escapeHtml');
+
         return $escaper($string);
     }
 
     /**
      * Sets whether XML output should be formatted
      *
-     * @param  bool $formatOutput
+     * @param  bool    $formatOutput
      * @return Sitemap
      */
     public function setFormatOutput($formatOutput = true)
     {
         $this->formatOutput = (bool) $formatOutput;
+
         return $this;
     }
 
@@ -331,7 +334,7 @@ class Sitemap extends AbstractHelper
      *
      * E.g. http://www.example.com
      *
-     * @param  string $serverUrl
+     * @param  string                             $serverUrl
      * @return Sitemap
      * @throws Exception\InvalidArgumentException
      */
@@ -372,12 +375,13 @@ class Sitemap extends AbstractHelper
     /**
      * Sets whether sitemap should be validated using Zend\Validate\Sitemap_*
      *
-     * @param  bool $useSitemapValidators
+     * @param  bool    $useSitemapValidators
      * @return Sitemap
      */
     public function setUseSitemapValidators($useSitemapValidators)
     {
         $this->useSitemapValidators = (bool) $useSitemapValidators;
+
         return $this;
     }
 
@@ -394,12 +398,13 @@ class Sitemap extends AbstractHelper
     /**
      * Sets whether sitemap should be schema validated when generated
      *
-     * @param  bool $schemaValidation
+     * @param  bool    $schemaValidation
      * @return Sitemap
      */
     public function setUseSchemaValidation($schemaValidation)
     {
         $this->useSchemaValidation = (bool) $schemaValidation;
+
         return $this;
     }
 
@@ -416,12 +421,13 @@ class Sitemap extends AbstractHelper
     /**
      * Sets whether the XML declaration should be used in output
      *
-     * @param  bool $useXmlDecl
+     * @param  bool    $useXmlDecl
      * @return Sitemap
      */
     public function setUseXmlDeclaration($useXmlDecl)
     {
         $this->useXmlDeclaration = (bool) $useXmlDecl;
+
         return $this;
     }
 

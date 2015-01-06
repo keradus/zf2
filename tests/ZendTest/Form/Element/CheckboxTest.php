@@ -30,7 +30,7 @@ class CheckboxTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\InArray'
+            'Zend\Validator\InArray',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);

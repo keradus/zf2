@@ -52,7 +52,7 @@ class Encrypt extends AbstractFilter
     /**
      * Sets new encryption options
      *
-     * @param  string|array $options (Optional) Encryption options
+     * @param  string|array                       $options (Optional) Encryption options
      * @return self
      * @throws Exception\DomainException
      * @throws Exception\InvalidArgumentException
@@ -72,8 +72,8 @@ class Encrypt extends AbstractFilter
             $options = array();
         }
 
-        if (class_exists('Zend\Filter\Encrypt\\' . ucfirst($adapter))) {
-            $adapter = 'Zend\Filter\Encrypt\\' . ucfirst($adapter);
+        if (class_exists('Zend\Filter\Encrypt\\'.ucfirst($adapter))) {
+            $adapter = 'Zend\Filter\Encrypt\\'.ucfirst($adapter);
         } elseif (!class_exists($adapter)) {
             throw new Exception\DomainException(
                 sprintf(
@@ -87,8 +87,8 @@ class Encrypt extends AbstractFilter
         $this->adapter = new $adapter($options);
         if (!$this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
             throw new Exception\InvalidArgumentException(
-                "Encoding adapter '" . $adapter
-                . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface"
+                "Encoding adapter '".$adapter
+                ."' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface"
             );
         }
 
@@ -98,8 +98,8 @@ class Encrypt extends AbstractFilter
     /**
      * Calls adapter methods
      *
-     * @param string       $method  Method to call
-     * @param string|array $options Options for this method
+     * @param  string                           $method  Method to call
+     * @param  string|array                     $options Options for this method
      * @return mixed
      * @throws Exception\BadMethodCallException
      */

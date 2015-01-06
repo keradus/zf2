@@ -19,8 +19,8 @@ class LowerCase extends StringToLower
      *
      * Does a lowercase on the content of the given file
      *
-     * @param  string|array $value Full path of file to change or $_FILES data array
-     * @return string|array The given $value
+     * @param  string|array                       $value Full path of file to change or $_FILES data array
+     * @return string|array                       The given $value
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
@@ -65,6 +65,7 @@ class LowerCase extends StringToLower
         if ($isFileUpload) {
             return $uploadData;
         }
+
         return $value;
     }
 }

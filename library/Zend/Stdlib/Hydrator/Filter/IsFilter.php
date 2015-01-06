@@ -6,6 +6,7 @@
  * @copyright      Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license        http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Stdlib\Hydrator\Filter;
 
 class IsFilter implements FilterInterface
@@ -22,6 +23,7 @@ class IsFilter implements FilterInterface
         if (substr($property, $pos, 2) === 'is') {
             return true;
         }
+
         return false;
     }
 }

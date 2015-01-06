@@ -17,8 +17,8 @@ interface RemoteLoaderInterface
     /**
      * Load translations from a remote source.
      *
-     * @param  string $locale
-     * @param  string $textDomain
+     * @param  string                                $locale
+     * @param  string                                $textDomain
      * @return \Zend\I18n\Translator\TextDomain|null
      */
     public function load($locale, $textDomain);

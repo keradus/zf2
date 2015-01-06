@@ -44,7 +44,7 @@ class ContentType implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-type') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string: "'.$name.'"');
         }
 
         $parts             = explode(';', $value);
@@ -76,7 +76,7 @@ class ContentType implements HeaderInterface
      * Determine if the mediatype value in this header matches the provided criteria
      *
      * @param  array|string $matchAgainst
-     * @return string|bool Matched value or false
+     * @return string|bool  Matched value or false
      */
     public function match($matchAgainst)
     {
@@ -121,7 +121,7 @@ class ContentType implements HeaderInterface
      */
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue();
+        return 'Content-Type: '.$this->getFieldValue();
     }
 
     /**
@@ -144,6 +144,7 @@ class ContentType implements HeaderInterface
         if (null !== $this->value) {
             return $this->value;
         }
+
         return $this->assembleValue();
     }
 
@@ -157,6 +158,7 @@ class ContentType implements HeaderInterface
     {
         $this->mediaType = strtolower($mediaType);
         $this->value     = null;
+
         return $this;
     }
 
@@ -180,6 +182,7 @@ class ContentType implements HeaderInterface
     {
         $this->parameters = array_merge($this->parameters, $parameters);
         $this->value      = null;
+
         return $this;
     }
 
@@ -203,6 +206,7 @@ class ContentType implements HeaderInterface
     {
         $this->parameters['charset'] = $charset;
         $this->value = null;
+
         return $this;
     }
 
@@ -216,6 +220,7 @@ class ContentType implements HeaderInterface
         if (isset($this->parameters['charset'])) {
             return $this->parameters['charset'];
         }
+
         return;
     }
 
@@ -265,7 +270,7 @@ class ContentType implements HeaderInterface
      * - subtype
      * - format
      *
-     * @param  string $string
+     * @param  string   $string
      * @return stdClass
      */
     protected function getMediaTypeObjectFromString($string)
@@ -359,6 +364,7 @@ class ContentType implements HeaderInterface
             if ($right->format == $left->format) {
                 return true;
             }
+
             return false;
         }
 

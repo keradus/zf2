@@ -24,7 +24,7 @@ class AuthenticationInfo implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'authentication-info') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Authentication-Info string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Authentication-Info string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class AuthenticationInfo implements HeaderInterface
 
     public function toString()
     {
-        return 'Authentication-Info: ' . $this->getFieldValue();
+        return 'Authentication-Info: '.$this->getFieldValue();
     }
 }

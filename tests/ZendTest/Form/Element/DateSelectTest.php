@@ -25,7 +25,7 @@ class DateSelectTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\Validator\Date'
+            'Zend\Validator\Date',
         );
         foreach ($inputSpec['validators'] as $validator) {
             $class = get_class($validator);

@@ -52,9 +52,9 @@ class Regex implements RouteInterface
     /**
      * Create a new regex route.
      *
-     * @param  string $regex
-     * @param  string $spec
-     * @param  array  $defaults
+     * @param string $regex
+     * @param string $spec
+     * @param array  $defaults
      */
     public function __construct($regex, $spec, array $defaults = array())
     {
@@ -67,7 +67,7 @@ class Regex implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
-     * @param  array|Traversable $options
+     * @param  array|Traversable                                   $options
      * @return Regex
      * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      */
@@ -76,7 +76,7 @@ class Regex implements RouteInterface
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(__METHOD__.' expects an array or Traversable set of options');
         }
 
         if (!isset($options['regex'])) {
@@ -97,8 +97,8 @@ class Regex implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @param  Request $request
-     * @param  int $pathOffset
+     * @param  Request         $request
+     * @param  int             $pathOffset
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null)
@@ -111,9 +111,9 @@ class Regex implements RouteInterface
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
+            $result = preg_match('(\G'.$this->regex.')', $path, $matches, null, $pathOffset);
         } else {
-            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
+            $result = preg_match('(^'.$this->regex.'$)', $path, $matches);
         }
 
         if (!$result) {
@@ -148,7 +148,7 @@ class Regex implements RouteInterface
         $this->assembledParams = array();
 
         foreach ($mergedParams as $key => $value) {
-            $spec = '%' . $key . '%';
+            $spec = '%'.$key.'%';
 
             if (strpos($url, $spec) !== false) {
                 $url = str_replace($spec, rawurlencode($value), $url);

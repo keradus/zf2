@@ -44,5 +44,5 @@ class TrailerTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Trailer: xxx', $trailerHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

@@ -92,9 +92,9 @@ class Foo
     /**
      * Bar
      *
-     * @param  bool $one
+     * @param  bool   $one
      * @param  string $two
-     * @param  mixed $three
+     * @param  mixed  $three
      * @return array
      */
     public function bar($one, $two = 'two', $three = null)

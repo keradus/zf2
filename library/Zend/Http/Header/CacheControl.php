@@ -28,7 +28,7 @@ class CacheControl implements HeaderInterface
     /**
      * Creates a CacheControl object from a headerLine
      *
-     * @param string $headerLine
+     * @param  string                             $headerLine
      * @throws Exception\InvalidArgumentException
      * @return CacheControl
      */
@@ -38,7 +38,7 @@ class CacheControl implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'cache-control') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Cache-Control string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Cache-Control string: "'.$name.'"');
         }
 
         $directives = static::parseValue($value);
@@ -77,20 +77,21 @@ class CacheControl implements HeaderInterface
      * For directives like 'max-age=60', $value = '60'
      * For directives like 'private', use the default $value = true
      *
-     * @param string $key
-     * @param string|bool $value
+     * @param  string       $key
+     * @param  string|bool  $value
      * @return CacheControl - provides the fluent interface
      */
     public function addDirective($key, $value = true)
     {
         $this->directives[$key] = $value;
+
         return $this;
     }
 
     /**
      * Check the internal directives array for a directive
      *
-     * @param string $key
+     * @param  string $key
      * @return bool
      */
     public function hasDirective($key)
@@ -101,7 +102,7 @@ class CacheControl implements HeaderInterface
     /**
      * Fetch the value of a directive from the internal directive array
      *
-     * @param string $key
+     * @param  string      $key
      * @return string|null
      */
     public function getDirective($key)
@@ -112,12 +113,13 @@ class CacheControl implements HeaderInterface
     /**
      * Remove a directive
      *
-     * @param string $key
+     * @param  string       $key
      * @return CacheControl - provides the fluent interface
      */
     public function removeDirective($key)
     {
         unset($this->directives[$key]);
+
         return $this;
     }
 
@@ -135,11 +137,12 @@ class CacheControl implements HeaderInterface
                 $parts[] = $key;
             } else {
                 if (preg_match('#[^a-zA-Z0-9._-]#', $value)) {
-                    $value = '"' . $value.'"';
+                    $value = '"'.$value.'"';
                 }
                 $parts[] = "$key=$value";
             }
         }
+
         return implode(', ', $parts);
     }
 
@@ -150,14 +153,14 @@ class CacheControl implements HeaderInterface
      */
     public function toString()
     {
-        return 'Cache-Control: ' . $this->getFieldValue();
+        return 'Cache-Control: '.$this->getFieldValue();
     }
 
     /**
      * Internal function for parsing the value part of a
      * HTTP Cache-Control header
      *
-     * @param string $value
+     * @param  string                             $value
      * @throws Exception\InvalidArgumentException
      * @return array
      */
@@ -216,20 +219,22 @@ class CacheControl implements HeaderInterface
     /**
      * Internal function used by parseValue to match tokens
      *
-     * @param array $tokens
-     * @param string $string
-     * @param string $lastMatch
+     * @param  array  $tokens
+     * @param  string $string
+     * @param  string $lastMatch
      * @return int
      */
     protected static function match($tokens, &$string, &$lastMatch)
     {
         foreach ($tokens as $i => $token) {
-            if (preg_match('/^' . $token . '/', $string, $matches)) {
+            if (preg_match('/^'.$token.'/', $string, $matches)) {
                 $lastMatch = $matches[0];
                 $string = substr($string, strlen($matches[0]));
+
                 return $i;
             }
         }
+
         return -1;
     }
 }

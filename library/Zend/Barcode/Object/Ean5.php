@@ -24,7 +24,7 @@ class Ean5 extends Ean13
         6 => array('A','A','A','B','B'),
         7 => array('A','B','A','B','A'),
         8 => array('A','B','A','A','B'),
-        9 => array('A','A','B','A','B')
+        9 => array('A','A','B','A','B'),
     );
 
     /**
@@ -46,6 +46,7 @@ class Ean5 extends Ean13
         $startCharacter  = (5 * $this->barThinWidth) * $this->factor;
         $middleCharacter = (2 * $this->barThinWidth) * $this->factor;
         $encodedData     = (7 * $this->barThinWidth) * $this->factor;
+
         return $quietZone + $startCharacter + ($this->barcodeLength - 1) * $middleCharacter + $this->barcodeLength * $encodedData + $quietZone;
     }
 
@@ -104,12 +105,13 @@ class Ean5 extends Ean13
     }
 
     /**
-     * @param int $i
+     * @param  int    $i
      * @return string
      */
     protected function getParity($i)
     {
         $checksum = $this->getChecksum($this->getText());
+
         return $this->parities[$checksum][$i];
     }
 

@@ -44,5 +44,5 @@ class WWWAuthenticateTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('WWW-Authenticate: xxx', $wWWAuthenticateHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

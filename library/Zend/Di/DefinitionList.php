@@ -46,7 +46,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     }
 
     /**
-     * @param  string       $type
+     * @param  string                           $type
      * @return Definition\DefinitionInterface[]
      */
     public function getDefinitionsByType($type)
@@ -149,6 +149,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
                 return $supertypes;
             }
         }
+
         return $supertypes;
     }
 

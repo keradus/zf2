@@ -13,9 +13,9 @@ use DateTime;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class AtomSourceTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -29,35 +29,35 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/AtomSource';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/AtomSource';
         $this->expectedCats = array(
             array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema1',
-                'label' => 'topic1'
+                'label' => 'topic1',
             ),
             array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema2',
-                'label' => 'topic1'
+                'label' => 'topic1',
             ),
             array(
                 'term' => 'cat_dog',
                 'scheme' => 'http://example.com/schema1',
-                'label' => 'Cat & Dog'
-            )
+                'label' => 'Cat & Dog',
+            ),
         );
         $this->expectedCatsDc = array(
             array(
                 'term' => 'topic1',
                 'scheme' => null,
-                'label' => 'topic1'
+                'label' => 'topic1',
             ),
             array(
                 'term' => 'topic2',
                 'scheme' => null,
-                'label' => 'topic2'
-            )
+                'label' => 'topic2',
+            ),
         );
     }
 
@@ -73,7 +73,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Title (Unencoded Text)
      */
-
     public function testGetsTitleFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -86,7 +85,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Authors (Unencoded Text)
      */
-
     public function testGetsAuthorArrayFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -95,12 +93,12 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         $source = $feed->current()->getSource();
 
         $authors = array(
-            array('email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
-            array('name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
-            array('name'=>'Joe Bloggs'),
-            array('email'=>'joe@example.com','uri'=>'http://www.example.com'),
-            array('uri'=>'http://www.example.com'),
-            array('email'=>'joe@example.com')
+            array('email' => 'joe@example.com','name' => 'Joe Bloggs','uri' => 'http://www.example.com'),
+            array('name' => 'Joe Bloggs','uri' => 'http://www.example.com'),
+            array('name' => 'Joe Bloggs'),
+            array('email' => 'joe@example.com','uri' => 'http://www.example.com'),
+            array('uri' => 'http://www.example.com'),
+            array('email' => 'joe@example.com'),
         );
 
         $this->assertEquals($authors, (array) $source->getAuthors());
@@ -109,7 +107,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Single Author (Unencoded Text)
      */
-
     public function testGetsSingleAuthorFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -117,17 +114,16 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         );
         $source = $feed->current()->getSource();
 
-        $this->assertEquals(array('name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'), $feed->getAuthor());
+        $this->assertEquals(array('name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'), $feed->getAuthor());
     }
 
     /**
      * Get creation date (Unencoded Text)
      */
-
     public function testGetsDateCreatedFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath . '/datecreated/atom10.xml')
+            file_get_contents($this->feedSamplePath.'/datecreated/atom10.xml')
         );
         $source = $feed->current()->getSource();
 
@@ -138,11 +134,10 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get modification date (Unencoded Text)
      */
-
     public function testGetsDateModifiedFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath . '/datemodified/atom10.xml')
+            file_get_contents($this->feedSamplePath.'/datemodified/atom10.xml')
         );
         $source = $feed->current()->getSource();
 
@@ -153,7 +148,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Generator (Unencoded Text)
      */
-
     public function testGetsGeneratorFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -166,7 +160,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Copyright (Unencoded Text)
      */
-
     public function testGetsCopyrightFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -179,7 +172,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Description (Unencoded Text)
      */
-
     public function testGetsDescriptionFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -192,7 +184,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Id (Unencoded Text)
      */
-
     public function testGetsIdFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -205,7 +196,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Language (Unencoded Text)
      */
-
     public function testGetsLanguageFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -218,7 +208,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Link (Unencoded Text)
      */
-
     public function testGetsLinkFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -231,7 +220,6 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Feed Link (Unencoded Text)
      */
-
     public function testGetsFeedLinkFromAtom10()
     {
         $feed = Reader\Reader::importString(
@@ -252,7 +240,7 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         $source = $feed->current()->getSource();
         $this->assertEquals(array(
             'http://www.example.com/hub1',
-            'http://www.example.com/hub2'
+            'http://www.example.com/hub2',
         ), $source->getHubs());
     }
 

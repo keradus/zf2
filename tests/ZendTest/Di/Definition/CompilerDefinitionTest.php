@@ -18,8 +18,8 @@ class CompilerDefinitionTest extends TestCase
 {
     public function testCompilerCompilesAgainstConstructorInjectionAssets()
     {
-        $definition = new CompilerDefinition;
-        $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
+        $definition = new CompilerDefinition();
+        $definition->addDirectory(__DIR__.'/../TestAsset/CompilerClasses');
         $definition->compile();
 
         $this->assertTrue($definition->hasClass('ZendTest\Di\TestAsset\CompilerClasses\A'));
@@ -41,7 +41,6 @@ class CompilerDefinitionTest extends TestCase
         $this->assertEquals('__construct', $definition->getInstantiator('ZendTest\Di\TestAsset\CompilerClasses\A'));
         $this->assertTrue($definition->hasMethods('ZendTest\Di\TestAsset\CompilerClasses\C'));
 
-
         $this->assertArrayHasKey('setB', $definition->getMethods('ZendTest\Di\TestAsset\CompilerClasses\C'));
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB'));
 
@@ -53,8 +52,8 @@ class CompilerDefinitionTest extends TestCase
 
     public function testCompilerSupertypes()
     {
-        $definition = new CompilerDefinition;
-        $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
+        $definition = new CompilerDefinition();
+        $definition->addDirectory(__DIR__.'/../TestAsset/CompilerClasses');
         $definition->compile();
         $this->assertEquals(0, count($definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\C')));
         $this->assertEquals(1, count($definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D')));
@@ -66,9 +65,9 @@ class CompilerDefinitionTest extends TestCase
 
     public function testCompilerDirectoryScannerAndFileScanner()
     {
-        $definition = new CompilerDefinition;
-        $definition->addDirectoryScanner(new DirectoryScanner(__DIR__ . '/../TestAsset/CompilerClasses'));
-        $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/A.php'));
+        $definition = new CompilerDefinition();
+        $definition->addDirectoryScanner(new DirectoryScanner(__DIR__.'/../TestAsset/CompilerClasses'));
+        $definition->addCodeScannerFile(new FileScanner(__DIR__.'/../TestAsset/CompilerClasses/A.php'));
         $definition->compile();
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
@@ -77,10 +76,10 @@ class CompilerDefinitionTest extends TestCase
 
     public function testCompilerFileScanner()
     {
-        $definition = new CompilerDefinition;
-        $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/C.php'));
-        $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/D.php'));
-        $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/E.php'));
+        $definition = new CompilerDefinition();
+        $definition->addCodeScannerFile(new FileScanner(__DIR__.'/../TestAsset/CompilerClasses/C.php'));
+        $definition->addCodeScannerFile(new FileScanner(__DIR__.'/../TestAsset/CompilerClasses/D.php'));
+        $definition->addCodeScannerFile(new FileScanner(__DIR__.'/../TestAsset/CompilerClasses/E.php'));
         $definition->compile();
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
@@ -90,16 +89,16 @@ class CompilerDefinitionTest extends TestCase
     public function testCompilerReflectionException()
     {
         $this->setExpectedException('ReflectionException', 'Class ZendTest\Di\TestAsset\InvalidCompilerClasses\Foo does not exist');
-        $definition = new CompilerDefinition;
-        $definition->addDirectory(__DIR__ . '/../TestAsset/InvalidCompilerClasses');
+        $definition = new CompilerDefinition();
+        $definition->addDirectory(__DIR__.'/../TestAsset/InvalidCompilerClasses');
         $definition->compile();
     }
 
     public function testCompilerAllowReflectionException()
     {
-        $definition = new CompilerDefinition;
+        $definition = new CompilerDefinition();
         $definition->setAllowReflectionExceptions();
-        $definition->addDirectory(__DIR__ . '/../TestAsset/InvalidCompilerClasses');
+        $definition->addDirectory(__DIR__.'/../TestAsset/InvalidCompilerClasses');
         $definition->compile();
         $parameters = $definition->getMethodParameters('ZendTest\Di\TestAsset\InvalidCompilerClasses\InvalidClass', '__construct');
 
@@ -112,8 +111,8 @@ class CompilerDefinitionTest extends TestCase
      */
     public function testStaticMethodsNotIncludedInDefinitions()
     {
-        $definition = new CompilerDefinition;
-        $definition->addDirectory(__DIR__ . '/../TestAsset/SetterInjection');
+        $definition = new CompilerDefinition();
+        $definition->addDirectory(__DIR__.'/../TestAsset/SetterInjection');
         $definition->compile();
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setFoo'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setName'));
@@ -125,7 +124,7 @@ class CompilerDefinitionTest extends TestCase
     public function testExcludeAwareMethodsWithoutParameters()
     {
         $definition = new CompilerDefinition();
-        $definition->addDirectory(__DIR__ . '/../TestAsset/AwareClasses');
+        $definition->addDirectory(__DIR__.'/../TestAsset/AwareClasses');
         $definition->compile();
 
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'setSomething'));
@@ -135,9 +134,9 @@ class CompilerDefinitionTest extends TestCase
     public function testHasMethodParameters()
     {
         $definition = new CompilerDefinition();
-        $definition->addDirectory(__DIR__ . '/../TestAsset/ConstructorInjection');
-        $definition->addDirectory(__DIR__ . '/../TestAsset/SetterInjection');
-        $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
+        $definition->addDirectory(__DIR__.'/../TestAsset/ConstructorInjection');
+        $definition->addDirectory(__DIR__.'/../TestAsset/SetterInjection');
+        $definition->addDirectory(__DIR__.'/../TestAsset/CompilerClasses');
         $definition->compile();
 
         // constructor injection

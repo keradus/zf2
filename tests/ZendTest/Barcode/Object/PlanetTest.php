@@ -87,7 +87,6 @@ class PlanetTest extends TestCommon
         $this->assertTrue($this->object->checkParams());
     }
 
-
     public function testGetKnownWidthWithoutOrientation()
     {
         $this->object->setText('00000012345');

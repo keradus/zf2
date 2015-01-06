@@ -26,11 +26,11 @@ class Reflection
      * If extra arguments should be passed to dispatchable methods, these may
      * be provided as an array to $argv.
      *
-     * @param string|object $class Class name or object
-     * @param  bool|array $argv Optional arguments to be used during the method call
-     * @param string $namespace Optional namespace with which to prefix the
-     * method name (used for the signature key). Primarily to avoid collisions,
-     * also for XmlRpc namespacing
+     * @param  string|object                                              $class     Class name or object
+     * @param  bool|array                                                 $argv      Optional arguments to be used during the method call
+     * @param  string                                                     $namespace Optional namespace with which to prefix the
+     *                                                                               method name (used for the signature key). Primarily to avoid collisions,
+     *                                                                               also for XmlRpc namespacing
      * @return \Zend\Server\Reflection\ReflectionClass
      * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
      */
@@ -60,18 +60,18 @@ class Reflection
      * If extra arguments should be passed to the dispatchable function, these
      * may be provided as an array to $argv.
      *
-     * @param string $function Function name
-     * @param  bool|array $argv Optional arguments to be used during the method call
-     * @param string $namespace Optional namespace with which to prefix the
-     * function name (used for the signature key). Primarily to avoid
-     * collisions, also for XmlRpc namespacing
+     * @param  string                                                     $function  Function name
+     * @param  bool|array                                                 $argv      Optional arguments to be used during the method call
+     * @param  string                                                     $namespace Optional namespace with which to prefix the
+     *                                                                               function name (used for the signature key). Primarily to avoid
+     *                                                                               collisions, also for XmlRpc namespacing
      * @return \Zend\Server\Reflection\ReflectionFunction
      * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
      */
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {
         if (!is_string($function) || !function_exists($function)) {
-            throw new Reflection\Exception\InvalidArgumentException('Invalid function "' . $function . '" passed to reflectFunction');
+            throw new Reflection\Exception\InvalidArgumentException('Invalid function "'.$function.'" passed to reflectFunction');
         }
 
         if ($argv && !is_array($argv)) {

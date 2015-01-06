@@ -22,9 +22,9 @@ class Hash
     protected static $lastAlgorithmSupported;
 
     /**
-     * @param  string  $hash
-     * @param  string  $data
-     * @param  bool $output
+     * @param  string                             $hash
+     * @param  string                             $data
+     * @param  bool                               $output
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -42,8 +42,8 @@ class Hash
     /**
      * Get the output size according to the hash algorithm and the output format
      *
-     * @param  string  $hash
-     * @param  bool $output
+     * @param  string $hash
+     * @param  bool   $output
      * @return int
      */
     public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
@@ -75,6 +75,7 @@ class Hash
 
         if (in_array(strtolower($algorithm), hash_algos(), true)) {
             static::$lastAlgorithmSupported = $algorithm;
+
             return true;
         }
 

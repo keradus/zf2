@@ -106,7 +106,7 @@ class LdapException extends \Exception implements ExceptionInterface
         $message       = '';
         if ($ldap !== null) {
             $oldCode = $code;
-            $message = $ldap->getLastError($code, $errorMessages) . ': ';
+            $message = $ldap->getLastError($code, $errorMessages).': ';
             if ($code === 0) {
                 $message = '';
                 $code    = $oldCode;
@@ -114,7 +114,7 @@ class LdapException extends \Exception implements ExceptionInterface
         }
         if (empty($message)) {
             if ($code > 0) {
-                $message = '0x' . dechex($code) . ': ';
+                $message = '0x'.dechex($code).': ';
             }
         }
 

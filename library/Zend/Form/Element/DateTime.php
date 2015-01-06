@@ -47,7 +47,7 @@ class DateTime extends Element implements InputProviderInterface
      * Accepted options for DateTime:
      * - format: A \DateTime compatible string
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable $options
      * @return DateTime
      */
     public function setOptions($options)
@@ -71,7 +71,7 @@ class DateTime extends Element implements InputProviderInterface
      * If $returnFormattedValue is false, the original value will be
      * returned, regardless of type.
      *
-     * @param  bool $returnFormattedValue
+     * @param  bool  $returnFormattedValue
      * @return mixed
      */
     public function getValue($returnFormattedValue = true)
@@ -81,18 +81,20 @@ class DateTime extends Element implements InputProviderInterface
             return $value;
         }
         $format = $this->getFormat();
+
         return $value->format($format);
     }
 
     /**
      * Set value for format
      *
-     * @param  string $format
+     * @param  string   $format
      * @return DateTime
      */
     public function setFormat($format)
     {
         $this->format = (string) $format;
+
         return $this;
     }
 
@@ -139,6 +141,7 @@ class DateTime extends Element implements InputProviderInterface
         }
 
         $this->validators = $validators;
+
         return $this->validators;
     }
 

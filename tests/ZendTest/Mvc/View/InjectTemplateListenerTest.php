@@ -108,7 +108,7 @@ class InjectTemplateListenerTest extends TestCase
         $this->routeMatch->setParam('controller', 'CiderSales');
         $this->routeMatch->setParam('action', 'PinkiePieRevenue');
 
-        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($this->event);
 
         $model = new ViewModel();
@@ -124,7 +124,7 @@ class InjectTemplateListenerTest extends TestCase
         $this->routeMatch->setParam('controller', 'Sub\CiderSales');
         $this->routeMatch->setParam('action', 'PinkiePieRevenue');
 
-        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($this->event);
 
         $model  = new ViewModel();
@@ -139,7 +139,7 @@ class InjectTemplateListenerTest extends TestCase
         $this->routeMatch->setParam(ModuleRouteListener::MODULE_NAMESPACE, 'ZendTest\Mvc\Controller\TestAsset');
         $this->routeMatch->setParam('action', 'test');
 
-        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($this->event);
 
         $myViewModel  = new ViewModel();
@@ -158,7 +158,7 @@ class InjectTemplateListenerTest extends TestCase
         $this->routeMatch->setParam('controller', 'TestAsset\SampleController');
         $this->routeMatch->setParam('action', 'test');
 
-        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($this->event);
 
         $myViewModel  = new ViewModel();
@@ -252,7 +252,7 @@ class InjectTemplateListenerTest extends TestCase
         $this->routeMatch->setParam(ModuleRouteListener::MODULE_NAMESPACE, 'MappedNs\Foo\Controller\Bar');
         $this->routeMatch->setParam('controller', 'Baz\Sample');
 
-        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($this->event);
 
         $myViewModel  = new ViewModel();

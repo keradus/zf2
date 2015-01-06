@@ -40,14 +40,14 @@ class CreateTable extends AbstractSql implements SqlInterface
         self::TABLE => 'CREATE %1$sTABLE %2$s (',
         self::COLUMNS  => array(
             "\n    %1\$s" => array(
-                array(1 => '%1$s', 'combinedby' => ",\n    ")
-            )
+                array(1 => '%1$s', 'combinedby' => ",\n    "),
+            ),
         ),
         'combinedBy' => ",",
         self::CONSTRAINTS => array(
             "\n    %1\$s" => array(
-                array(1 => '%1$s', 'combinedby' => ",\n    ")
-            )
+                array(1 => '%1$s', 'combinedby' => ",\n    "),
+            ),
         ),
         'statementEnd' => '%1$s',
     );
@@ -74,6 +74,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function setTemporary($temporary)
     {
         $this->isTemporary = (bool) $temporary;
+
         return $this;
     }
 
@@ -92,6 +93,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function setTable($name)
     {
         $this->table = $name;
+
         return $this;
     }
 
@@ -102,6 +104,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function addColumn(Column\ColumnInterface $column)
     {
         $this->columns[] = $column;
+
         return $this;
     }
 
@@ -112,6 +115,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function addConstraint(Constraint\ConstraintInterface $constraint)
     {
         $this->constraints[] = $constraint;
+
         return $this;
     }
 

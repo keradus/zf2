@@ -28,7 +28,7 @@ class PhpMemoryArrayTest extends TestCase
         $this->originalLocale = Locale::getDefault();
         Locale::setDefault('en_US');
 
-        $this->testFilesDir = realpath(__DIR__ . '/../_files/phpmemoryarray');
+        $this->testFilesDir = realpath(__DIR__.'/../_files/phpmemoryarray');
     }
 
     public function tearDown()
@@ -63,14 +63,14 @@ class PhpMemoryArrayTest extends TestCase
 
     public function testLoaderLoadsEmptyArray()
     {
-        $loader = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_empty.php');
+        $loader = new PhpMemoryArrayLoader(include $this->testFilesDir.'/translation_empty.php');
         $textDomain = $loader->load('en_US', 'default');
         $this->assertInstanceOf('Zend\I18n\Translator\TextDomain', $textDomain);
     }
 
     public function testLoaderReturnsValidTextDomain()
     {
-        $loader = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
+        $loader = new PhpMemoryArrayLoader(include $this->testFilesDir.'/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
@@ -79,7 +79,7 @@ class PhpMemoryArrayTest extends TestCase
 
     public function testLoaderLoadsPluralRules()
     {
-        $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
+        $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir.'/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
 
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));

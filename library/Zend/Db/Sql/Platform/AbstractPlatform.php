@@ -50,7 +50,7 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
     }
 
     /**
-     * @param PreparableSqlInterface|SqlInterface $subject
+     * @param  PreparableSqlInterface|SqlInterface                            $subject
      * @return PlatformDecoratorInterface|PreparableSqlInterface|SqlInterface
      */
     public function getTypeDecorator($subject)

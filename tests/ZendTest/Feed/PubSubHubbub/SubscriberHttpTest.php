@@ -49,11 +49,11 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             if (($pos = strpos($name, ' ')) !== false) {
                 $name = substr($name, 0, $pos);
             }
-            $uri = $this->baseuri . $name . '.php';
+            $uri = $this->baseuri.$name.'.php';
             $this->client = new HttpClient($uri);
             $this->client->setAdapter('\Zend\Http\Client\Adapter\Socket');
             PubSubHubbub::setHttpClient($this->client);
-            $this->subscriber = new Subscriber;
+            $this->subscriber = new Subscriber();
 
             $this->storage = $this->_getCleanMock('\Zend\Feed\PubSubHubbub\Model\Subscription');
             $this->subscriber->setStorage($this->storage);
@@ -66,7 +66,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
     public function testSubscriptionRequestSendsExpectedPostData()
     {
         $this->subscriber->setTopicUrl('http://www.example.com/topic');
-        $this->subscriber->addHubUrl($this->baseuri . '/testRawPostData.php');
+        $this->subscriber->addHubUrl($this->baseuri.'/testRawPostData.php');
         $this->subscriber->setCallbackUrl('http://www.example.com/callback');
         $this->subscriber->setTestStaticToken('abc'); // override for testing
         $this->subscriber->subscribeAll();
@@ -81,7 +81,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
     public function testUnsubscriptionRequestSendsExpectedPostData()
     {
         $this->subscriber->setTopicUrl('http://www.example.com/topic');
-        $this->subscriber->addHubUrl($this->baseuri . '/testRawPostData.php');
+        $this->subscriber->addHubUrl($this->baseuri.'/testRawPostData.php');
         $this->subscriber->setCallbackUrl('http://www.example.com/callback');
         $this->subscriber->setTestStaticToken('abc'); //override for testing
         $this->subscriber->unsubscribeAll();
@@ -111,6 +111,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             $className,
             $stubMethods
         );
+
         return $mocked;
     }
 }

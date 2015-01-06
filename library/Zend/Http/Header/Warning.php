@@ -24,7 +24,7 @@ class Warning implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'warning') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Warning string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Warning string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Warning implements HeaderInterface
 
     public function toString()
     {
-        return 'Warning: ' . $this->getFieldValue();
+        return 'Warning: '.$this->getFieldValue();
     }
 }

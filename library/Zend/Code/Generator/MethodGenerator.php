@@ -80,7 +80,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * @configkey visibility     string
      *
      * @throws Exception\InvalidArgumentException
-     * @param  array $array
+     * @param  array                              $array
      * @return MethodGenerator
      */
     public static function fromArray(array $array)
@@ -127,11 +127,11 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  string $name
-     * @param  array $parameters
-     * @param  int $flags
-     * @param  string $body
-     * @param  DocBlockGenerator|string $docBlock
+     * @param string                   $name
+     * @param array                    $parameters
+     * @param int                      $flags
+     * @param string                   $body
+     * @param DocBlockGenerator|string $docBlock
      */
     public function __construct(
         $name = null,
@@ -158,7 +158,7 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  array $parameters
+     * @param  array           $parameters
      * @return MethodGenerator
      */
     public function setParameters(array $parameters)
@@ -171,7 +171,7 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  ParameterGenerator|array|string $parameter
+     * @param  ParameterGenerator|array|string    $parameter
      * @throws Exception\InvalidArgumentException
      * @return MethodGenerator
      */
@@ -207,12 +207,13 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  string $body
+     * @param  string          $body
      * @return MethodGenerator
      */
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -247,8 +248,8 @@ class MethodGenerator extends AbstractMemberGenerator
         }
 
         $output .= $this->getVisibility()
-            . (($this->isStatic()) ? ' static' : '')
-            . ' function ' . $this->getName() . '(';
+            .(($this->isStatic()) ? ' static' : '')
+            .' function '.$this->getName().'(';
 
         $parameters = $this->getParameters();
         if (!empty($parameters)) {
@@ -262,17 +263,17 @@ class MethodGenerator extends AbstractMemberGenerator
         $output .= ')';
 
         if ($this->isAbstract()) {
-            return $output . ';';
+            return $output.';';
         }
 
-        $output .= self::LINE_FEED . $indent . '{' . self::LINE_FEED;
+        $output .= self::LINE_FEED.$indent.'{'.self::LINE_FEED;
 
         if ($this->body) {
-            $output .= preg_replace('#^((?![a-zA-Z0-9_-]+;).+?)$#m', $indent . $indent . '$1', trim($this->body))
-                . self::LINE_FEED;
+            $output .= preg_replace('#^((?![a-zA-Z0-9_-]+;).+?)$#m', $indent.$indent.'$1', trim($this->body))
+                .self::LINE_FEED;
         }
 
-        $output .= $indent . '}' . self::LINE_FEED;
+        $output .= $indent.'}'.self::LINE_FEED;
 
         return $output;
     }

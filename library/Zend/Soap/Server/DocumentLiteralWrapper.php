@@ -93,7 +93,7 @@ class DocumentLiteralWrapper
      * Proxy method that does the heavy document/literal decomposing.
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      */
     public function __call($method, $args)
@@ -103,6 +103,7 @@ class DocumentLiteralWrapper
 
         $delegateArgs = $this->_parseArguments($method, $args[0]);
         $ret          = call_user_func_array(array($this->object, $method), $delegateArgs);
+
         return $this->_getResultMessage($method, $ret);
     }
 
@@ -110,8 +111,8 @@ class DocumentLiteralWrapper
      * Parse the document/literal wrapper into arguments to call the real
      * service.
      *
-     * @param  string $method
-     * @param  object $document
+     * @param  string                             $method
+     * @param  object                             $document
      * @return array
      * @throws Exception\UnexpectedValueException
      */
@@ -143,16 +144,16 @@ class DocumentLiteralWrapper
      * Returns result message content
      *
      * @param  string $method
-     * @param  mixed $ret
+     * @param  mixed  $ret
      * @return array
      */
     protected function _getResultMessage($method, $ret)
     {
-        return array($method . 'Result' => $ret);
+        return array($method.'Result' => $ret);
     }
 
     /**
-     * @param  string $method
+     * @param  string                           $method
      * @throws Exception\BadMethodCallException
      */
     protected function _assertServiceDelegateHasMethod($method)
@@ -167,7 +168,7 @@ class DocumentLiteralWrapper
     }
 
     /**
-     * @param  array $args
+     * @param  array                              $args
      * @throws Exception\UnexpectedValueException
      */
     protected function _assertOnlyOneArgument(array $args)

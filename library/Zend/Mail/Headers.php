@@ -39,7 +39,7 @@ class Headers implements Countable, Iterator
     protected $headersKeys = array();
 
     /**
-     * @var  Header\HeaderInterface[] instances
+     * @var Header\HeaderInterface[] instances
      */
     protected $headers = array();
 
@@ -57,8 +57,8 @@ class Headers implements Countable, Iterator
      * current instance, primarily as strings until they are needed (they
      * will be lazy loaded)
      *
-     * @param  string $string
-     * @param  string $EOL EOL string; defaults to {@link EOL}
+     * @param  string                     $string
+     * @param  string                     $EOL    EOL string; defaults to {@link EOL}
      * @throws Exception\RuntimeException
      * @return Headers
      */
@@ -79,7 +79,7 @@ class Headers implements Countable, Iterator
             } elseif (preg_match('/^\s+.*$/', $line)) {
                 // continuation: append to current line
                 // recover the whitespace that break the line (unfolding, rfc2822#section-2.2.3)
-                $currentLine .= ' ' . trim($line);
+                $currentLine .= ' '.trim($line);
             } elseif (preg_match('/^\s*$/', $line)) {
                 // empty line indicates end of headers
                 break;
@@ -94,6 +94,7 @@ class Headers implements Countable, Iterator
         if ($currentLine) {
             $headers->addHeaderLine($currentLine);
         }
+
         return $headers;
     }
 
@@ -106,6 +107,7 @@ class Headers implements Countable, Iterator
     public function setPluginClassLoader(PluginClassLocator $pluginClassLoader)
     {
         $this->pluginClassLoader = $pluginClassLoader;
+
         return $this;
     }
 
@@ -119,13 +121,14 @@ class Headers implements Countable, Iterator
         if ($this->pluginClassLoader === null) {
             $this->pluginClassLoader = new Header\HeaderLoader();
         }
+
         return $this->pluginClassLoader;
     }
 
     /**
      * Set the header encoding
      *
-     * @param  string $encoding
+     * @param  string  $encoding
      * @return Headers
      */
     public function setEncoding($encoding)
@@ -134,6 +137,7 @@ class Headers implements Countable, Iterator
         foreach ($this as $header) {
             $header->setEncoding($encoding);
         }
+
         return $this;
     }
 
@@ -152,7 +156,7 @@ class Headers implements Countable, Iterator
      *
      * Expects an array (or Traversable object) of type/value pairs.
      *
-     * @param  array|Traversable $headers
+     * @param  array|Traversable                  $headers
      * @throws Exception\InvalidArgumentException
      * @return Headers
      */
@@ -191,8 +195,8 @@ class Headers implements Countable, Iterator
      * will be delayed until they are retrieved by either get() or current()
      *
      * @throws Exception\InvalidArgumentException
-     * @param  string $headerFieldNameOrLine
-     * @param  string $fieldValue optional
+     * @param  string                             $headerFieldNameOrLine
+     * @param  string                             $fieldValue            optional
      * @return Headers
      */
     public function addHeaderLine($headerFieldNameOrLine, $fieldValue = null)
@@ -231,6 +235,7 @@ class Headers implements Countable, Iterator
         if ($this->getEncoding() !== 'ASCII') {
             $header->setEncoding($this->getEncoding());
         }
+
         return $this;
     }
 
@@ -254,6 +259,7 @@ class Headers implements Countable, Iterator
                 unset($this->headersKeys[$index]);
                 unset($this->headers[$index]);
             }
+
             return true;
         }
 
@@ -270,16 +276,17 @@ class Headers implements Countable, Iterator
     public function clearHeaders()
     {
         $this->headers = $this->headersKeys = array();
+
         return $this;
     }
 
     /**
      * Get all headers of a certain name/type
      *
-     * @param  string $name
+     * @param  string                                    $name
      * @return bool|ArrayIterator|Header\HeaderInterface Returns false if there is no headers with $name in this
-     * contain, an ArrayIterator if the header is a MultipleHeadersInterface instance and finally returns
-     * HeaderInterface for the rest of cases.
+     *                                                        contain, an ArrayIterator if the header is a MultipleHeadersInterface instance and finally returns
+     *                                                        HeaderInterface for the rest of cases.
      */
     public function get($name)
     {
@@ -318,6 +325,7 @@ class Headers implements Countable, Iterator
     public function has($name)
     {
         $name = $this->normalizeFieldName($name);
+
         return in_array($name, $this->headersKeys);
     }
 
@@ -370,6 +378,7 @@ class Headers implements Countable, Iterator
         if ($current instanceof Header\GenericHeader) {
             $current = $this->lazyLoadHeader(key($this->headers));
         }
+
         return $current;
     }
 
@@ -397,7 +406,7 @@ class Headers implements Countable, Iterator
         $headers = '';
         foreach ($this as $header) {
             if ($str = $header->toString()) {
-                $headers .= $str . self::EOL;
+                $headers .= $str.self::EOL;
             }
         }
 
@@ -425,6 +434,7 @@ class Headers implements Countable, Iterator
                 $headers[$header->getFieldName()] = $header->getFieldValue();
             }
         }
+
         return $headers;
     }
 
@@ -438,6 +448,7 @@ class Headers implements Countable, Iterator
         foreach ($this as $item) {
             // $item should now be loaded
         }
+
         return true;
     }
 
@@ -464,12 +475,14 @@ class Headers implements Countable, Iterator
                 $this->headersKeys[] = $key;
                 $this->headers[]     = $header;
             }
+
             return $current;
         }
 
         $current = $headers;
         $current->setEncoding($encoding);
         $this->headers[$index] = $current;
+
         return $current;
     }
 

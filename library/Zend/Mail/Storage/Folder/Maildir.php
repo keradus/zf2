@@ -59,7 +59,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
             throw new Exception\InvalidArgumentException('no valid dirname given in params');
         }
 
-        $this->rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $this->rootdir = rtrim($params->dirname, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 
         $this->delim = isset($params->delim) ? $params->delim : '.';
 
@@ -96,7 +96,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
                 continue;
             }
 
-            if ($this->_isMaildir($this->rootdir . $entry)) {
+            if ($this->_isMaildir($this->rootdir.$entry)) {
                 $dirs[] = $entry;
             }
         }
@@ -116,7 +116,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
                         throw new Exception\RuntimeException('error while reading maildir');
                     }
                     array_push($stack, $parent);
-                    $parent = $dir . $this->delim;
+                    $parent = $dir.$this->delim;
                     $folder = new Storage\Folder($local, substr($dir, 1), true);
                     $parentFolder->$local = $folder;
                     array_push($folderStack, $parentFolder);
@@ -136,9 +136,9 @@ class Maildir extends Storage\Maildir implements FolderInterface
     /**
      * get root folder or given folder
      *
-     * @param string $rootFolder get folder structure for given folder, else root
+     * @param  string                                                $rootFolder get folder structure for given folder, else root
      * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
-     * @return \Zend\Mail\Storage\Folder root or wanted folder
+     * @return \Zend\Mail\Storage\Folder                             root or wanted folder
      */
     public function getFolders($rootFolder = null)
     {
@@ -147,7 +147,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
         }
 
         // rootdir is same as INBOX in maildir
-        if (strpos($rootFolder, 'INBOX' . $this->delim) === 0) {
+        if (strpos($rootFolder, 'INBOX'.$this->delim) === 0) {
             $rootFolder = substr($rootFolder, 6);
         }
         $currentFolder = $this->rootFolder;
@@ -166,6 +166,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
         if ($currentFolder->getGlobalName() != rtrim($rootFolder, $this->delim)) {
             throw new Exception\InvalidArgumentException("folder $rootFolder not found");
         }
+
         return $currentFolder;
     }
 
@@ -174,7 +175,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
      *
      * folder must be selectable!
      *
-     * @param \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
+     * @param  \Zend\Mail\Storage\Folder|string              $globalName global name of folder or instance for subfolder
      * @throws \Zend\Mail\Storage\Exception\RuntimeException
      */
     public function selectFolder($globalName)
@@ -185,7 +186,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
         $folder = $this->getFolders($this->currentFolder);
 
         try {
-            $this->_openMaildir($this->rootdir . '.' . $folder->getGlobalName());
+            $this->_openMaildir($this->rootdir.'.'.$folder->getGlobalName());
         } catch (Exception\ExceptionInterface $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {

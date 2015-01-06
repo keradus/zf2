@@ -41,10 +41,10 @@ class FormDateTimeSelect extends FormDateSelectHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param ElementInterface $element
-     * @param int              $dateType
-     * @param int|null|string  $timeType
-     * @param null|string      $locale
+     * @param  ElementInterface $element
+     * @param  int              $dateType
+     * @param  int|null|string  $timeType
+     * @param  null|string      $locale
      * @return string
      */
     public function __invoke(
@@ -70,7 +70,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
     /**
      * Render a date element that is composed of six selects
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface                              $element
      * @return string
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @throws \Zend\Form\Exception\DomainException
@@ -149,7 +149,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
     }
 
     /**
-     * @param  int $timeType
+     * @param  int                $timeType
      * @return FormDateTimeSelect
      */
     public function setTimeType($timeType)
@@ -192,7 +192,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
     /**
      * Parse the pattern
      *
-     * @param  bool $renderDelimiters
+     * @param  bool  $renderDelimiters
      * @return array
      */
     protected function parsePattern($renderDelimiters = true)

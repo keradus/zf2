@@ -23,10 +23,11 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_originalMaildir = __DIR__ . '/../_files/test.maildir/';
+        $this->_originalMaildir = __DIR__.'/../_files/test.maildir/';
         if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 . 'directory before enabling the maildir tests');
+                                 .'directory before enabling the maildir tests');
+
             return;
         }
 
@@ -34,7 +35,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/../_files/test.tmp/';
+                $this->_tmpdir = __DIR__.'/../_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);
@@ -47,6 +48,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
             closedir($dh);
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
@@ -54,14 +56,14 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
         $this->_maildir = $this->_tmpdir;
 
         foreach (array('cur', 'new') as $dir) {
-            mkdir($this->_tmpdir . $dir);
-            $dh = opendir($this->_originalMaildir . $dir);
+            mkdir($this->_tmpdir.$dir);
+            $dh = opendir($this->_originalMaildir.$dir);
             while (($entry = readdir($dh)) !== false) {
-                $entry = $dir . '/' . $entry;
-                if (!is_file($this->_originalMaildir . $entry)) {
+                $entry = $dir.'/'.$entry;
+                if (!is_file($this->_originalMaildir.$entry)) {
                     continue;
                 }
-                copy($this->_originalMaildir . $entry, $this->_tmpdir . $entry);
+                copy($this->_originalMaildir.$entry, $this->_tmpdir.$entry);
             }
             closedir($dh);
         }
@@ -70,19 +72,19 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         foreach (array('cur', 'new') as $dir) {
-            if (!is_dir($this->_tmpdir . $dir)) {
+            if (!is_dir($this->_tmpdir.$dir)) {
                 continue;
             }
-            $dh = opendir($this->_tmpdir . $dir);
+            $dh = opendir($this->_tmpdir.$dir);
             while (($entry = readdir($dh)) !== false) {
-                $entry = $this->_tmpdir . $dir . '/' . $entry;
+                $entry = $this->_tmpdir.$dir.'/'.$entry;
                 if (!is_file($entry)) {
                     continue;
                 }
                 unlink($entry);
             }
             closedir($dh);
-            rmdir($this->_tmpdir . $dir);
+            rmdir($this->_tmpdir.$dir);
         }
     }
 
@@ -148,7 +150,6 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
         $shouldSizes = array(1 => 397, 89, 694, 452, 497);
-
 
         $sizes = $mail->getSize();
         $this->assertEquals($shouldSizes, $sizes);
@@ -248,7 +249,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
         $ids = $mail->getUniqueId();
         $should_ids = array(1 => '1000000000.P1.example.org', '1000000001.P1.example.org', '1000000002.P1.example.org',
-                            '1000000003.P1.example.org', '1000000004.P1.example.org');
+                            '1000000003.P1.example.org', '1000000004.P1.example.org', );
         foreach ($ids as $num => $id) {
             $this->assertEquals($id, $should_ids[$num]);
 
@@ -268,10 +269,10 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
     public function isFileTest($dir)
     {
-        if (file_exists($this->_maildir . '/' . $dir)) {
-            rename($this->_maildir . '/' . $dir, $this->_maildir . '/' . $dir . 'bak');
+        if (file_exists($this->_maildir.'/'.$dir)) {
+            rename($this->_maildir.'/'.$dir, $this->_maildir.'/'.$dir.'bak');
         }
-        touch($this->_maildir . '/' . $dir);
+        touch($this->_maildir.'/'.$dir);
 
         $check = false;
         try {
@@ -281,13 +282,13 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
             // test ok
         }
 
-        unlink($this->_maildir . '/' . $dir);
-        if (file_exists($this->_maildir . '/' . $dir . 'bak')) {
-            rename($this->_maildir . '/' . $dir . 'bak', $this->_maildir . '/' . $dir);
+        unlink($this->_maildir.'/'.$dir);
+        if (file_exists($this->_maildir.'/'.$dir.'bak')) {
+            rename($this->_maildir.'/'.$dir.'bak', $this->_maildir.'/'.$dir);
         }
 
         if (!$check) {
-            $this->fail('no exception while loading invalid dir with ' . $dir . ' as file');
+            $this->fail('no exception while loading invalid dir with '.$dir.' as file');
         }
     }
 
@@ -308,8 +309,8 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
     public function notReadableTest($dir)
     {
-        $stat = stat($this->_maildir . '/' . $dir);
-        chmod($this->_maildir . '/' . $dir, 0);
+        $stat = stat($this->_maildir.'/'.$dir);
+        chmod($this->_maildir.'/'.$dir, 0);
 
         $check = false;
         try {
@@ -319,10 +320,10 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
             // test ok
         }
 
-        chmod($this->_maildir . '/' . $dir, $stat['mode']);
+        chmod($this->_maildir.'/'.$dir, $stat['mode']);
 
         if (!$check) {
-            $this->fail('no exception while loading invalid dir with ' . $dir . ' not readable');
+            $this->fail('no exception while loading invalid dir with '.$dir.' not readable');
         }
     }
 
@@ -361,11 +362,10 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
     public function testSizePlusPlus()
     {
-        rename($this->_maildir . '/cur/1000000000.P1.example.org:2,S', $this->_maildir . '/cur/1000000000.P1.example.org,S=123:2,S');
-        rename($this->_maildir . '/cur/1000000001.P1.example.org:2,FS', $this->_maildir . '/cur/1000000001.P1.example.org,S=456:2,FS');
+        rename($this->_maildir.'/cur/1000000000.P1.example.org:2,S', $this->_maildir.'/cur/1000000000.P1.example.org,S=123:2,S');
+        rename($this->_maildir.'/cur/1000000001.P1.example.org:2,FS', $this->_maildir.'/cur/1000000001.P1.example.org,S=456:2,FS');
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
         $shouldSizes = array(1 => 123, 456, 694, 452, 497);
-
 
         $sizes = $mail->getSize();
         $this->assertEquals($shouldSizes, $sizes);
@@ -373,7 +373,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
     public function testSingleSizePlusPlus()
     {
-        rename($this->_maildir . '/cur/1000000001.P1.example.org:2,FS', $this->_maildir . '/cur/1000000001.P1.example.org,S=456:2,FS');
+        rename($this->_maildir.'/cur/1000000001.P1.example.org:2,FS', $this->_maildir.'/cur/1000000001.P1.example.org,S=456:2,FS');
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
         $size = $mail->getSize(2);

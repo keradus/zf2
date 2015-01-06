@@ -61,7 +61,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     protected $bufferResults = false;
 
     /**
-     * @param  bool $bufferResults
+     * @param bool $bufferResults
      */
     public function __construct($bufferResults = false)
     {
@@ -71,22 +71,24 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Set driver
      *
-     * @param  Mysqli $driver
+     * @param  Mysqli    $driver
      * @return Statement
      */
     public function setDriver(Mysqli $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return Statement
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -101,36 +103,39 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Initialize
      *
-     * @param  \mysqli $mysqli
+     * @param  \mysqli   $mysqli
      * @return Statement
      */
     public function initialize(\mysqli $mysqli)
     {
         $this->mysqli = $mysqli;
+
         return $this;
     }
 
     /**
      * Set sql
      *
-     * @param  string $sql
+     * @param  string    $sql
      * @return Statement
      */
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
     /**
      * Set Parameter container
      *
-     * @param ParameterContainer $parameterContainer
+     * @param  ParameterContainer $parameterContainer
      * @return Statement
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -154,6 +159,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     {
         $this->resource = $mysqliStatement;
         $this->isPrepared = true;
+
         return $this;
     }
 
@@ -190,7 +196,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Prepare
      *
-     * @param string $sql
+     * @param  string                          $sql
      * @throws Exception\InvalidQueryException
      * @throws Exception\RuntimeException
      * @return Statement
@@ -206,20 +212,21 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         $this->resource = $this->mysqli->prepare($sql);
         if (!$this->resource instanceof \mysqli_stmt) {
             throw new Exception\InvalidQueryException(
-                'Statement couldn\'t be produced with sql: ' . $sql,
+                'Statement couldn\'t be produced with sql: '.$sql,
                 null,
                 new Exception\ErrorException($this->mysqli->error, $this->mysqli->errno)
             );
         }
 
         $this->isPrepared = true;
+
         return $this;
     }
 
     /**
      * Execute
      *
-     * @param null|array|ParameterContainer $parameters
+     * @param  null|array|ParameterContainer $parameters
      * @throws Exception\RuntimeException
      * @return mixed
      */
@@ -247,7 +254,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->bindParametersFromContainer();
         }
         /** END Standard ParameterContainer Merging Block */
-
         if ($this->profiler) {
             $this->profiler->profilerStart($this);
         }
@@ -271,6 +277,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource, $buffered);
+
         return $result;
     }
 

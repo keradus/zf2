@@ -72,7 +72,7 @@ class Request
      * Create a new XML-RPC request
      *
      * @param string $method (optional)
-     * @param array $params  (optional)
+     * @param array  $params (optional)
      */
     public function __construct($method = null, $params = null)
     {
@@ -88,13 +88,14 @@ class Request
     /**
      * Set encoding to use in request
      *
-     * @param string $encoding
+     * @param  string               $encoding
      * @return \Zend\XmlRpc\Request
      */
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         AbstractValue::setEncoding($encoding);
+
         return $this;
     }
 
@@ -111,18 +112,20 @@ class Request
     /**
      * Set method to call
      *
-     * @param string $method
-     * @return bool Returns true on success, false if method name is invalid
+     * @param  string $method
+     * @return bool   Returns true on success, false if method name is invalid
      */
     public function setMethod($method)
     {
         if (!is_string($method) || !preg_match('/^[a-z0-9_.:\\\\\/]+$/i', $method)) {
-            $this->fault = new Fault(634, 'Invalid method name ("' . $method . '")');
+            $this->fault = new Fault(634, 'Invalid method name ("'.$method.'")');
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
         $this->method = $method;
+
         return true;
     }
 
@@ -142,8 +145,8 @@ class Request
      * Adds a parameter to the parameter stack, associating it with the type
      * $type if provided
      *
-     * @param mixed $value
-     * @param string $type Optional; type hinting
+     * @param  mixed  $value
+     * @param  string $type  Optional; type hinting
      * @return void
      */
     public function addParam($value, $type = null)
@@ -228,6 +231,7 @@ class Request
                 }
                 $this->xmlRpcParams = $xmlRpcParams;
             }
+
             return;
         }
 
@@ -270,15 +274,16 @@ class Request
     /**
      * Load XML and parse into request components
      *
-     * @param string $request
+     * @param  string                   $request
      * @throws Exception\ValueException if invalid XML
-     * @return bool True on success, false if an error occurred.
+     * @return bool                     True on success, false if an error occurred.
      */
     public function loadXml($request)
     {
         if (!is_string($request)) {
             $this->fault = new Fault(635);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
@@ -286,7 +291,7 @@ class Request
         $loadEntities  = libxml_disable_entity_loader(true);
         $xmlErrorsFlag = libxml_use_internal_errors(true);
         try {
-            $dom = new DOMDocument;
+            $dom = new DOMDocument();
             $dom->loadXML($request);
             foreach ($dom->childNodes as $child) {
                 if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
@@ -306,6 +311,7 @@ class Request
             $this->fault->setEncoding($this->getEncoding());
             libxml_disable_entity_loader($loadEntities);
             libxml_use_internal_errors($xmlErrorsFlag);
+
             return false;
         }
         if (!$xml instanceof SimpleXMLElement || $error) {
@@ -313,6 +319,7 @@ class Request
             $this->fault = new Fault(631);
             $this->fault->setEncoding($this->getEncoding());
             libxml_use_internal_errors($xmlErrorsFlag);
+
             return false;
         }
 
@@ -321,6 +328,7 @@ class Request
             // Missing method name
             $this->fault = new Fault(632);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
@@ -334,6 +342,7 @@ class Request
                 if (!isset($param->value)) {
                     $this->fault = new Fault(633);
                     $this->fault->setEncoding($this->getEncoding());
+
                     return false;
                 }
 
@@ -344,6 +353,7 @@ class Request
                 } catch (\Exception $e) {
                     $this->fault = new Fault(636);
                     $this->fault->setEncoding($this->getEncoding());
+
                     return false;
                 }
             }

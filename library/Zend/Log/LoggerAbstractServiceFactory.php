@@ -59,6 +59,7 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
         $config  = $this->getConfig($services);
         $config  = $config[$requestedName];
         $this->processConfig($config, $services);
+
         return new Logger($config);
     }
 
@@ -76,16 +77,19 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
 
         if (!$services->has('Config')) {
             $this->config = array();
+
             return $this->config;
         }
 
         $config = $services->get('Config');
         if (!isset($config[$this->configKey])) {
             $this->config = array();
+
             return $this->config;
         }
 
         $this->config = $config[$this->configKey];
+
         return $this->config;
     }
 

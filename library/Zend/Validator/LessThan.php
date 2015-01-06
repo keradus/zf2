@@ -24,7 +24,7 @@ class LessThan extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::NOT_LESS           => "The input is not less than '%max%'",
-        self::NOT_LESS_INCLUSIVE => "The input is not less or equal than '%max%'"
+        self::NOT_LESS_INCLUSIVE => "The input is not less or equal than '%max%'",
     );
 
     /**
@@ -33,7 +33,7 @@ class LessThan extends AbstractValidator
      * @var array
      */
     protected $messageVariables = array(
-        'max' => 'max'
+        'max' => 'max',
     );
 
     /**
@@ -56,7 +56,7 @@ class LessThan extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
@@ -102,12 +102,13 @@ class LessThan extends AbstractValidator
     /**
      * Sets the max option
      *
-     * @param  mixed $max
+     * @param  mixed    $max
      * @return LessThan Provides a fluent interface
      */
     public function setMax($max)
     {
         $this->max = $max;
+
         return $this;
     }
 
@@ -124,12 +125,13 @@ class LessThan extends AbstractValidator
     /**
      * Sets the inclusive option
      *
-     * @param  bool $inclusive
+     * @param  bool     $inclusive
      * @return LessThan Provides a fluent interface
      */
     public function setInclusive($inclusive)
     {
         $this->inclusive = $inclusive;
+
         return $this;
     }
 
@@ -147,11 +149,13 @@ class LessThan extends AbstractValidator
         if ($this->inclusive) {
             if ($value > $this->max) {
                 $this->error(self::NOT_LESS_INCLUSIVE);
+
                 return false;
             }
         } else {
             if ($value >= $this->max) {
                 $this->error(self::NOT_LESS);
+
                 return false;
             }
         }

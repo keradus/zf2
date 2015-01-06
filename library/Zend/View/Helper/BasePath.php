@@ -28,7 +28,7 @@ class BasePath extends AbstractHelper
      *
      * $file is appended to the base path for simplicity.
      *
-     * @param  string|null $file
+     * @param  string|null                $file
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -39,10 +39,10 @@ class BasePath extends AbstractHelper
         }
 
         if (null !== $file) {
-            $file = '/' . ltrim($file, '/');
+            $file = '/'.ltrim($file, '/');
         }
 
-        return $this->basePath . $file;
+        return $this->basePath.$file;
     }
 
     /**
@@ -54,6 +54,7 @@ class BasePath extends AbstractHelper
     public function setBasePath($basePath)
     {
         $this->basePath = rtrim($basePath, '/');
+
         return $this;
     }
 }

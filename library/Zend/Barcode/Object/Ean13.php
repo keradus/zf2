@@ -23,16 +23,16 @@ class Ean13 extends AbstractObject
     protected $codingMap = array(
         'A' => array(
             0 => "0001101", 1 => "0011001", 2 => "0010011", 3 => "0111101", 4 => "0100011",
-            5 => "0110001", 6 => "0101111", 7 => "0111011", 8 => "0110111", 9 => "0001011"
+            5 => "0110001", 6 => "0101111", 7 => "0111011", 8 => "0110111", 9 => "0001011",
         ),
         'B' => array(
             0 => "0100111", 1 => "0110011", 2 => "0011011", 3 => "0100001", 4 => "0011101",
-            5 => "0111001", 6 => "0000101", 7 => "0010001", 8 => "0001001", 9 => "0010111"
+            5 => "0111001", 6 => "0000101", 7 => "0010001", 8 => "0001001", 9 => "0010111",
         ),
         'C' => array(
             0 => "1110010", 1 => "1100110", 2 => "1101100", 3 => "1000010", 4 => "1011100",
-            5 => "1001110", 6 => "1010000", 7 => "1000100", 8 => "1001000", 9 => "1110100"
-        ));
+            5 => "1001110", 6 => "1010000", 7 => "1000100", 8 => "1001000", 9 => "1110100",
+        ), );
 
     protected $parities = array(
         0 => array('A','A','A','A','A','A'),
@@ -44,7 +44,7 @@ class Ean13 extends AbstractObject
         6 => array('A','B','B','B','A','A'),
         7 => array('A','B','A','B','A','B'),
         8 => array('A','B','A','B','B','A'),
-        9 => array('A','B','B','A','B','A')
+        9 => array('A','B','B','A','B','A'),
     );
 
     /**
@@ -69,6 +69,7 @@ class Ean13 extends AbstractObject
         $middleCharacter = (5 * $this->barThinWidth) * $this->factor;
         $stopCharacter   = (3 * $this->barThinWidth) * $this->factor;
         $encodedData     = (7 * $this->barThinWidth) * $this->factor * 12;
+
         return $quietZone + $startCharacter + $middleCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -124,6 +125,7 @@ class Ean13 extends AbstractObject
         $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
         $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
         $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+
         return $barcodeTable;
     }
 

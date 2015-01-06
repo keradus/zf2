@@ -17,7 +17,7 @@ class PropertyScannerTest extends TestCase
 {
     public function testPropertyScannerHasPropertyInformation()
     {
-        $file = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $file = new FileScanner(__DIR__.'/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
 
         $property = $class->getProperty('bar');

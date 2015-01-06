@@ -18,12 +18,12 @@ class Callback extends AbstractFilter
      */
     protected $options = array(
         'callback'        => null,
-        'callback_params' => array()
+        'callback_params' => array(),
     );
 
     /**
      * @param callable|array|Traversable $callbackOrOptions
-     * @param array $callbackParams
+     * @param array                      $callbackParams
      */
     public function __construct($callbackOrOptions, $callbackParams = array())
     {
@@ -38,7 +38,7 @@ class Callback extends AbstractFilter
     /**
      * Sets a new callback for this filter
      *
-     * @param  callable $callback
+     * @param  callable                           $callback
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -51,6 +51,7 @@ class Callback extends AbstractFilter
         }
 
         $this->options['callback'] = $callback;
+
         return $this;
     }
 
@@ -73,6 +74,7 @@ class Callback extends AbstractFilter
     public function setCallbackParams($params)
     {
         $this->options['callback_params'] = (array) $params;
+
         return $this;
     }
 

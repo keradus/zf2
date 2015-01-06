@@ -31,8 +31,8 @@ class PhpMemoryArray implements RemoteLoaderInterface
     /**
      * Load translations from a remote source.
      *
-     * @param  string $locale
-     * @param  string $textDomain
+     * @param string $locale
+     * @param string $textDomain
      *
      * @throws \Zend\I18n\Exception\InvalidArgumentException
      * @return \Zend\I18n\Translator\TextDomain|null

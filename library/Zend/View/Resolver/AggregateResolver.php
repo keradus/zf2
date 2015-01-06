@@ -70,20 +70,21 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
     /**
      * Attach a resolver
      *
-     * @param  Resolver $resolver
-     * @param  int $priority
+     * @param  Resolver          $resolver
+     * @param  int               $priority
      * @return AggregateResolver
      */
     public function attach(Resolver $resolver, $priority = 1)
     {
         $this->queue->insert($resolver, $priority);
+
         return $this;
     }
 
     /**
      * Resolve a template/pattern name to a resource the renderer can consume
      *
-     * @param  string $name
+     * @param  string        $name
      * @param  null|Renderer $renderer
      * @return false|string
      */
@@ -94,6 +95,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
         if (0 === count($this->queue)) {
             $this->lastLookupFailure = static::FAILURE_NO_RESOLVERS;
+
             return false;
         }
 
@@ -102,11 +104,13 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
             if ($resource) {
                 // Resource found; return it
                 $this->lastSuccessfulResolver = $resolver;
+
                 return $resource;
             }
         }
 
         $this->lastLookupFailure = static::FAILURE_NOT_FOUND;
+
         return false;
     }
 

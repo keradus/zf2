@@ -33,7 +33,7 @@ class FigletTest extends CommonWordTest
         }
 
         $this->captcha = new FigletCaptcha(array(
-            'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer'
+            'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
     }
 

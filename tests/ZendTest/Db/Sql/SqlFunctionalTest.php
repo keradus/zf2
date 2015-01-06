@@ -102,27 +102,27 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
             'Select::processJoin()' => array(
-                'sqlObject' => $this->select('a')->join(array('b'=>$this->select('c')->where(array('cc'=>10))), 'd=e')->where(array('x'=>20)),
+                'sqlObject' => $this->select('a')->join(array('b' => $this->select('c')->where(array('cc' => 10))), 'd=e')->where(array('x' => 20)),
                 'expected'  => array(
                     'sql92' => array(
                         'string'     => 'SELECT "a".*, "b".* FROM "a" INNER JOIN (SELECT "c".* FROM "c" WHERE "cc" = \'10\') AS "b" ON "d"="e" WHERE "x" = \'20\'',
                         'prepare'    => 'SELECT "a".*, "b".* FROM "a" INNER JOIN (SELECT "c".* FROM "c" WHERE "cc" = ?) AS "b" ON "d"="e" WHERE "x" = ?',
-                        'parameters' => array('subselect1where1'=>10, 'where1'=>20),
+                        'parameters' => array('subselect1where1' => 10, 'where1' => 20),
                     ),
                     'MySql' => array(
                         'string'     => 'SELECT `a`.*, `b`.* FROM `a` INNER JOIN (SELECT `c`.* FROM `c` WHERE `cc` = \'10\') AS `b` ON `d`=`e` WHERE `x` = \'20\'',
                         'prepare'    => 'SELECT `a`.*, `b`.* FROM `a` INNER JOIN (SELECT `c`.* FROM `c` WHERE `cc` = ?) AS `b` ON `d`=`e` WHERE `x` = ?',
-                        'parameters' => array('subselect2where1'=>10, 'where2'=>20),
+                        'parameters' => array('subselect2where1' => 10, 'where2' => 20),
                     ),
                     'Oracle' => array(
                         'string'     => 'SELECT "a".*, "b".* FROM "a" INNER JOIN (SELECT "c".* FROM "c" WHERE "cc" = \'10\') "b" ON "d"="e" WHERE "x" = \'20\'',
                         'prepare'    => 'SELECT "a".*, "b".* FROM "a" INNER JOIN (SELECT "c".* FROM "c" WHERE "cc" = ?) "b" ON "d"="e" WHERE "x" = ?',
-                        'parameters' => array('subselect2where1'=>10, 'where2'=>20),
+                        'parameters' => array('subselect2where1' => 10, 'where2' => 20),
                     ),
                     'SqlServer' => array(
                         'string'     => 'SELECT [a].*, [b].* FROM [a] INNER JOIN (SELECT [c].* FROM [c] WHERE [cc] = \'10\') AS [b] ON [d]=[e] WHERE [x] = \'20\'',
                         'prepare'    => 'SELECT [a].*, [b].* FROM [a] INNER JOIN (SELECT [c].* FROM [c] WHERE [cc] = ?) AS [b] ON [d]=[e] WHERE [x] = ?',
-                        'parameters' => array('subselect2where1'=>10, 'where2'=>20),
+                        'parameters' => array('subselect2where1' => 10, 'where2' => 20),
                     ),
                 ),
             ),
@@ -147,7 +147,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
             'Select::processSubSelect()' => array(
-                'sqlObject' => $this->select(array('a' => $this->select(array('b' => $this->select('c')->where(array('cc'=>'CC'))))->where(array('bb'=>'BB'))))->where(array('aa'=>'AA')),
+                'sqlObject' => $this->select(array('a' => $this->select(array('b' => $this->select('c')->where(array('cc' => 'CC'))))->where(array('bb' => 'BB'))))->where(array('aa' => 'AA')),
                 'expected'  => array(
                     'sql92' => array(
                         'string'     => 'SELECT "a".* FROM (SELECT "b".* FROM (SELECT "c".* FROM "c" WHERE "cc" = \'CC\') AS "b" WHERE "bb" = \'BB\') AS "a" WHERE "aa" = \'AA\'',
@@ -172,7 +172,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
             'Delete::processSubSelect()' => array(
-                'sqlObject' => $this->delete('foo')->where(array('x'=>$this->select('foo')->where(array('x'=>'y')))),
+                'sqlObject' => $this->delete('foo')->where(array('x' => $this->select('foo')->where(array('x' => 'y')))),
                 'expected'  => array(
                     'sql92'     => array(
                         'string'     => 'DELETE FROM "foo" WHERE "x" = (SELECT "foo".* FROM "foo" WHERE "x" = \'y\')',
@@ -197,7 +197,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
             'Update::processSubSelect()' => array(
-                'sqlObject' => $this->update('foo')->set(array('x'=>$this->select('foo'))),
+                'sqlObject' => $this->update('foo')->set(array('x' => $this->select('foo'))),
                 'expected'  => array(
                     'sql92'     => 'UPDATE "foo" SET "x" = (SELECT "foo".* FROM "foo")',
                     'MySql'     => 'UPDATE `foo` SET `x` = (SELECT `foo`.* FROM `foo`)',
@@ -206,7 +206,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
             'Insert::processSubSelect()' => array(
-                'sqlObject' => $this->insert('foo')->select($this->select('foo')->where(array('x'=>'y'))),
+                'sqlObject' => $this->insert('foo')->select($this->select('foo')->where(array('x' => 'y'))),
                 'expected'  => array(
                     'sql92'     => array(
                         'string'     => 'INSERT INTO "foo"  SELECT "foo".* FROM "foo" WHERE "x" = \'y\'',
@@ -231,7 +231,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
             'Update::processExpression()' => array(
-                'sqlObject' => $this->update('foo')->set(array('x'=>new Sql\Expression('?', array($this->select('foo')->where(array('x'=>'y')))))),
+                'sqlObject' => $this->update('foo')->set(array('x' => new Sql\Expression('?', array($this->select('foo')->where(array('x' => 'y')))))),
                 'expected'  => array(
                     'sql92'     => array(
                         'string'     => 'UPDATE "foo" SET "x" = (SELECT "foo".* FROM "foo" WHERE "x" = \'y\')',
@@ -262,29 +262,29 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             'RootDecorators::Select' => array(
-                'sqlObject' => $this->select('foo')->where(array('x'=>$this->select('bar'))),
+                'sqlObject' => $this->select('foo')->where(array('x' => $this->select('bar'))),
                 'expected'  => array(
                     'sql92'     => array(
                         'decorators' => array(
-                            'Zend\Db\Sql\Select' => new TestAsset\SelectDecorator,
+                            'Zend\Db\Sql\Select' => new TestAsset\SelectDecorator(),
                         ),
                         'string' => 'SELECT "foo".* FROM "foo" WHERE "x" = (SELECT "bar".* FROM "bar")',
                     ),
                     'MySql'     => array(
                         'decorators' => array(
-                            'Zend\Db\Sql\Select' => new TestAsset\SelectDecorator,
+                            'Zend\Db\Sql\Select' => new TestAsset\SelectDecorator(),
                         ),
                         'string' => 'SELECT `foo`.* FROM `foo` WHERE `x` = (SELECT `bar`.* FROM `bar`)',
                     ),
                     'Oracle'    => array(
                         'decorators' => array(
-                            'Zend\Db\Sql\Select' => new TestAsset\SelectDecorator,
+                            'Zend\Db\Sql\Select' => new TestAsset\SelectDecorator(),
                         ),
                         'string' => 'SELECT "foo".* FROM "foo" WHERE "x" = (SELECT "bar".* FROM "bar")',
                     ),
                     'SqlServer' => array(
                         'decorators' => array(
-                            'Zend\Db\Sql\Select' => new TestAsset\SelectDecorator,
+                            'Zend\Db\Sql\Select' => new TestAsset\SelectDecorator(),
                         ),
                         'string' => 'SELECT [foo].* FROM [foo] WHERE [x] = (SELECT [bar].* FROM [bar])',
                     ),
@@ -436,13 +436,14 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
         $res = array();
         foreach ($data as $index => $test) {
             foreach ($test['expected'] as $platform => $expected) {
-                $res[$index . '->' . $platform] = array(
+                $res[$index.'->'.$platform] = array(
                     'sqlObject' => $test['sqlObject'],
                     'platform'  => $platform,
                     'expected'  => $expected,
                 );
             }
         }
+
         return $res;
     }
 
@@ -457,7 +458,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
         $sql = new Sql\Sql($this->resolveAdapter($platform));
 
         if (is_array($expected) && isset($expected['decorators'])) {
-            foreach ($expected['decorators'] as $type=>$decorator) {
+            foreach ($expected['decorators'] as $type => $decorator) {
                 $sql->getSqlPlatform()->setTypeDecorator($type, $this->resolveDecorator($decorator));
             }
         }
@@ -482,11 +483,13 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
         if (is_array($decorator)) {
             $decoratorMock = $this->getMock($decorator[0], array('buildSqlString'), array(null));
             $decoratorMock->expects($this->any())->method('buildSqlString')->will($this->returnValue($decorator[1]));
+
             return $decoratorMock;
         }
         if ($decorator instanceof Sql\Platform\PlatformDecoratorInterface) {
             return $decorator;
         }
+
         return;
     }
 
@@ -502,7 +505,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnCallback(function () {return new Adapter\StatementContainer;}));
+        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnCallback(function () {return new Adapter\StatementContainer();}));
 
         return new Adapter\Adapter($mockDriver, $platform);
     }

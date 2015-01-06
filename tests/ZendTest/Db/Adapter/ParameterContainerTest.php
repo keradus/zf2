@@ -107,7 +107,6 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
         $this->parameterContainer->offsetSet('boo', 'baz');
         $this->assertTrue($this->parameterContainer->offsetExists('boo'));
 
-
         $this->parameterContainer->offsetUnset('boo');
         $this->assertFalse($this->parameterContainer->offsetExists('boo'));
     }

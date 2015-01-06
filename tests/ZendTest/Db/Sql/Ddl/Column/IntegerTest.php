@@ -40,7 +40,7 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
             array(
                 array('%s %s NOT NULL', array('foo', 'INTEGER'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL)),
                 ' ',
-                array('PRIMARY KEY', array(), array())
+                array('PRIMARY KEY', array(), array()),
             ),
             $column->getExpressionData()
         );

@@ -33,7 +33,7 @@ class Bz2 extends AbstractCompressionAlgorithm
     /**
      * Class constructor
      *
-     * @param null|array|\Traversable $options (Optional) Options to set
+     * @param  null|array|\Traversable               $options (Optional) Options to set
      * @throws Exception\ExtensionNotLoadedException if bz2 extension not loaded
      */
     public function __construct($options = null)
@@ -57,7 +57,7 @@ class Bz2 extends AbstractCompressionAlgorithm
     /**
      * Sets a new blocksize
      *
-     * @param  int $blocksize
+     * @param  int                                $blocksize
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -68,6 +68,7 @@ class Bz2 extends AbstractCompressionAlgorithm
         }
 
         $this->options['blocksize'] = (int) $blocksize;
+
         return $this;
     }
 
@@ -90,13 +91,14 @@ class Bz2 extends AbstractCompressionAlgorithm
     public function setArchive($archive)
     {
         $this->options['archive'] = (string) $archive;
+
         return $this;
     }
 
     /**
      * Compresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -106,7 +108,7 @@ class Bz2 extends AbstractCompressionAlgorithm
         if (!empty($archive)) {
             $file = bzopen($archive, 'w');
             if (!$file) {
-                throw new Exception\RuntimeException("Error opening the archive '" . $archive . "'");
+                throw new Exception\RuntimeException("Error opening the archive '".$archive."'");
             }
 
             bzwrite($file, $content);
@@ -126,7 +128,7 @@ class Bz2 extends AbstractCompressionAlgorithm
     /**
      * Decompresses the given content
      *
-     * @param  string $content
+     * @param  string                     $content
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -142,7 +144,7 @@ class Bz2 extends AbstractCompressionAlgorithm
         if (file_exists($archive)) {
             $file = bzopen($archive, 'r');
             if (!$file) {
-                throw new Exception\RuntimeException("Error opening the archive '" . $content . "'");
+                throw new Exception\RuntimeException("Error opening the archive '".$content."'");
             }
 
             $compressed = bzread($file);

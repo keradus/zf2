@@ -55,10 +55,10 @@ class Column
     /**
      * Create a column for a Zend\Text\Table\Row object.
      *
-     * @param string  $content  The content of the column
-     * @param string  $align    The align of the content
-     * @param int $colSpan  The colspan of the column
-     * @param string  $charset  The encoding of the content
+     * @param string $content The content of the column
+     * @param string $align   The align of the content
+     * @param int    $colSpan The colspan of the column
+     * @param string $charset The encoding of the content
      */
     public function __construct($content = null, $align = null, $colSpan = null, $charset = null)
     {
@@ -82,8 +82,8 @@ class Column
      * the charset defined via Zend\Text\Table::setInputCharset() (defaults
      * to utf-8).
      *
-     * @param  string $content  Content of the column
-     * @param  string $charset  The charset of the content
+     * @param  string                             $content Content of the column
+     * @param  string                             $charset The charset of the content
      * @throws Exception\InvalidArgumentException When $content is not a string
      * @return Column
      */
@@ -117,7 +117,7 @@ class Column
     /**
      * Set the align
      *
-     * @param  string $align Align of the column
+     * @param  string                         $align Align of the column
      * @throws Exception\OutOfBoundsException When supplied align is invalid
      * @return Column
      */
@@ -135,7 +135,7 @@ class Column
     /**
      * Set the colspan
      *
-     * @param  int $colSpan
+     * @param  int                                $colSpan
      * @throws Exception\InvalidArgumentException When $colSpan is smaller than 1
      * @return Column
      */
@@ -163,10 +163,10 @@ class Column
     /**
      * Render the column width the given column width
      *
-     * @param  int $columnWidth The width of the column
-     * @param  int $padding     The padding for the column
+     * @param  int                                $columnWidth The width of the column
+     * @param  int                                $padding     The padding for the column
      * @throws Exception\InvalidArgumentException When $columnWidth is lower than 1
-     * @throws Exception\OutOfBoundsException When padding is greater than columnWidth
+     * @throws Exception\OutOfBoundsException     When padding is greater than columnWidth
      * @return string
      */
     public function render($columnWidth, $padding = 0)
@@ -178,7 +178,7 @@ class Column
         $columnWidth -= ($padding * 2);
 
         if ($columnWidth < 1) {
-            throw new Exception\OutOfBoundsException('Padding (' . $padding . ') is greater than column width');
+            throw new Exception\OutOfBoundsException('Padding ('.$padding.') is greater than column width');
         }
 
         switch ($this->align) {
@@ -206,8 +206,8 @@ class Column
 
         foreach ($lines as $line) {
             $paddedLines[] = str_repeat(' ', $padding)
-                           . $strWrapper->strPad($line, $columnWidth, ' ', $padMode)
-                           . str_repeat(' ', $padding);
+                           .$strWrapper->strPad($line, $columnWidth, ' ', $padMode)
+                           .str_repeat(' ', $padding);
         }
 
         $result = implode("\n", $paddedLines);

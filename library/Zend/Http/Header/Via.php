@@ -24,7 +24,7 @@ class Via implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'via') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Via string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Via string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class Via implements HeaderInterface
 
     public function toString()
     {
-        return 'Via: ' . $this->getFieldValue();
+        return 'Via: '.$this->getFieldValue();
     }
 }

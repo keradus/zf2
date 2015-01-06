@@ -37,6 +37,7 @@ class Ini extends AbstractWriter
     public function setNestSeparator($separator)
     {
         $this->nestSeparator = $separator;
+
         return $this;
     }
 
@@ -62,6 +63,7 @@ class Ini extends AbstractWriter
     public function setRenderWithoutSectionsFlags($withoutSections)
     {
         $this->renderWithoutSections = (bool) $withoutSections;
+
         return $this;
     }
 
@@ -78,7 +80,7 @@ class Ini extends AbstractWriter
     /**
      * processConfig(): defined by AbstractWriter.
      *
-     * @param  array $config
+     * @param  array  $config
      * @return string
      */
     public function processConfig(array $config)
@@ -93,13 +95,13 @@ class Ini extends AbstractWriter
             foreach ($config as $sectionName => $data) {
                 if (!is_array($data)) {
                     $iniString .= $sectionName
-                               .  ' = '
-                               .  $this->prepareValue($data)
-                               .  "\n";
+                               .' = '
+                               .$this->prepareValue($data)
+                               ."\n";
                 } else {
-                    $iniString .= '[' . $sectionName . ']' . "\n"
-                               .  $this->addBranch($data)
-                               .  "\n";
+                    $iniString .= '['.$sectionName.']'."\n"
+                               .$this->addBranch($data)
+                               ."\n";
                 }
             }
         }
@@ -110,8 +112,8 @@ class Ini extends AbstractWriter
     /**
      * Add a branch to an INI string recursively.
      *
-     * @param  array $config
-     * @param  array $parents
+     * @param  array  $config
+     * @param  array  $parents
      * @return string
      */
     protected function addBranch(array $config, $parents = array())
@@ -125,9 +127,9 @@ class Ini extends AbstractWriter
                 $iniString .= $this->addBranch($value, $group);
             } else {
                 $iniString .= implode($this->nestSeparator, $group)
-                           .  ' = '
-                           .  $this->prepareValue($value)
-                           .  "\n";
+                           .' = '
+                           .$this->prepareValue($value)
+                           ."\n";
             }
         }
 
@@ -137,7 +139,7 @@ class Ini extends AbstractWriter
     /**
      * Prepare a value for INI.
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -148,7 +150,7 @@ class Ini extends AbstractWriter
         } elseif (is_bool($value)) {
             return ($value ? 'true' : 'false');
         } elseif (false === strpos($value, '"')) {
-            return '"' . $value .  '"';
+            return '"'.$value.'"';
         } else {
             throw new Exception\RuntimeException('Value can not contain double quotes');
         }

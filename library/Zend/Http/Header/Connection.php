@@ -39,7 +39,7 @@ class Connection implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'connection') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Connection string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Connection string: "'.$name.'"');
         }
 
         $header->setValue(trim($value));
@@ -50,7 +50,7 @@ class Connection implements HeaderInterface
     /**
      * Set Connection header to define persistent connection
      *
-     * @param  bool $flag
+     * @param  bool       $flag
      * @return Connection
      */
     public function setPersistent($flag)
@@ -60,6 +60,7 @@ class Connection implements HeaderInterface
         } else {
             $this->value = self::CONNECTION_CLOSE;
         }
+
         return $this;
     }
 
@@ -77,12 +78,13 @@ class Connection implements HeaderInterface
      * Set arbitrary header value
      * RFC allows any token as value, 'close' and 'keep-alive' are commonly used
      *
-     * @param string $value
+     * @param  string     $value
      * @return Connection
      */
     public function setValue($value)
     {
         $this->value = strtolower($value);
+
         return $this;
     }
 
@@ -113,6 +115,6 @@ class Connection implements HeaderInterface
      */
     public function toString()
     {
-        return 'Connection: ' . $this->getFieldValue();
+        return 'Connection: '.$this->getFieldValue();
     }
 }

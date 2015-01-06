@@ -23,7 +23,7 @@ class FirePhpBridge implements FirePhpInterface
     /**
      * Constructor
      *
-     * @param  FirePHP $firephp
+     * @param FirePHP $firephp
      */
     public function __construct(FirePHP $firephp)
     {

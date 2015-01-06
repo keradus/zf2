@@ -72,7 +72,7 @@ class In extends AbstractExpression implements PredicateInterface
     {
         if (!is_array($valueSet) && !$valueSet instanceof Select) {
             throw new Exception\InvalidArgumentException(
-                '$valueSet must be either an array or a Zend\Db\Sql\Select object, ' . gettype($valueSet) . ' given'
+                '$valueSet must be either an array or a Zend\Db\Sql\Select object, '.gettype($valueSet).' given'
             );
         }
         $this->valueSet = $valueSet;
@@ -102,7 +102,7 @@ class In extends AbstractExpression implements PredicateInterface
         $replacements = array();
 
         if (is_array($identifier)) {
-            $identifierSpecFragment = '(' . implode(', ', array_fill(0, count($identifier), '%s')) . ')';
+            $identifierSpecFragment = '('.implode(', ', array_fill(0, count($identifier), '%s')).')';
             $types = array_fill(0, count($identifier), self::TYPE_IDENTIFIER);
             $replacements = $identifier;
         } else {
@@ -124,7 +124,7 @@ class In extends AbstractExpression implements PredicateInterface
             }
             $specification = vsprintf(
                 $this->specification,
-                array($identifierSpecFragment, '(' . implode(', ', array_fill(0, count($values), '%s')) . ')')
+                array($identifierSpecFragment, '('.implode(', ', array_fill(0, count($values), '%s')).')')
             );
         }
 

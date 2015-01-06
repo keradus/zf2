@@ -24,12 +24,13 @@ class ViewObject extends AbstractTableObject
     }
 
     /**
-     * @param string $viewDefinition to set
+     * @param  string     $viewDefinition to set
      * @return ViewObject
      */
     public function setViewDefinition($viewDefinition)
     {
         $this->viewDefinition = $viewDefinition;
+
         return $this;
     }
 
@@ -42,12 +43,13 @@ class ViewObject extends AbstractTableObject
     }
 
     /**
-     * @param string $checkOption to set
+     * @param  string     $checkOption to set
      * @return ViewObject
      */
     public function setCheckOption($checkOption)
     {
         $this->checkOption = $checkOption;
+
         return $this;
     }
 
@@ -60,12 +62,13 @@ class ViewObject extends AbstractTableObject
     }
 
     /**
-     * @param bool $isUpdatable to set
+     * @param  bool       $isUpdatable to set
      * @return ViewObject
      */
     public function setIsUpdatable($isUpdatable)
     {
         $this->isUpdatable = $isUpdatable;
+
         return $this;
     }
 

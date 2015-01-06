@@ -26,7 +26,7 @@ class SqliteRowCounter extends AbstractFeature
     }
 
     /**
-     * @param \Zend\Db\Adapter\Driver\Pdo\Statement $statement
+     * @param  \Zend\Db\Adapter\Driver\Pdo\Statement $statement
      * @return int
      */
     public function getCountForStatement(Pdo\Statement $statement)
@@ -36,11 +36,12 @@ class SqliteRowCounter extends AbstractFeature
         if ($sql == '' || stripos($sql, 'select') === false) {
             return;
         }
-        $countSql = 'SELECT COUNT(*) as "count" FROM (' . $sql . ')';
+        $countSql = 'SELECT COUNT(*) as "count" FROM ('.$sql.')';
         $countStmt->prepare($countSql);
         $result = $countStmt->execute();
         $countRow = $result->getResource()->fetch(\PDO::FETCH_ASSOC);
         unset($statement, $result);
+
         return $countRow['count'];
     }
 
@@ -53,11 +54,12 @@ class SqliteRowCounter extends AbstractFeature
         if (stripos($sql, 'select') === false) {
             return;
         }
-        $countSql = 'SELECT COUNT(*) as count FROM (' . $sql . ')';
+        $countSql = 'SELECT COUNT(*) as count FROM ('.$sql.')';
         /** @var $pdo \PDO */
         $pdo = $this->driver->getConnection()->getResource();
         $result = $pdo->query($countSql);
         $countRow = $result->fetch(\PDO::FETCH_ASSOC);
+
         return $countRow['count'];
     }
 
@@ -68,6 +70,7 @@ class SqliteRowCounter extends AbstractFeature
     public function getRowCountClosure($context)
     {
         $sqliteRowCounter = $this;
+
         return function () use ($sqliteRowCounter, $context) {
             /** @var $sqliteRowCounter SqliteRowCounter */
             return ($context instanceof Pdo\Statement)

@@ -82,15 +82,15 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
      */
     public function offsetSetReference($name, $from)
     {
-        $this->data[$name] =& $this->data[$from];
+        $this->data[$name] = & $this->data[$from];
     }
 
     /**
      * Offset set
      *
      * @param string|int $name
-     * @param mixed $value
-     * @param mixed $errata
+     * @param mixed      $value
+     * @param mixed      $errata
      */
     public function offsetSet($name, $value, $errata = null)
     {
@@ -127,7 +127,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
     /**
      * Offset unset
      *
-     * @param  string $name
+     * @param  string             $name
      * @return ParameterContainer
      */
     public function offsetUnset($name)
@@ -136,13 +136,14 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
             $name = $this->positions[$name];
         }
         unset($this->data[$name]);
+
         return $this;
     }
 
     /**
      * Set from array
      *
-     * @param  array $data
+     * @param  array              $data
      * @return ParameterContainer
      */
     public function setFromArray(Array $data)
@@ -150,6 +151,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
         foreach ($data as $n => $v) {
             $this->offsetSet($n, $v);
         }
+
         return $this;
     }
 
@@ -157,7 +159,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
      * Offset set errata
      *
      * @param string|int $name
-     * @param mixed $errata
+     * @param mixed      $errata
      */
     public function offsetSetErrata($name, $errata)
     {
@@ -170,7 +172,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
     /**
      * Offset get errata
      *
-     * @param  string|int $name
+     * @param  string|int                         $name
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
@@ -182,6 +184,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
         if (!array_key_exists($name, $this->data)) {
             throw new Exception\InvalidArgumentException('Data does not exist for this name/position');
         }
+
         return $this->errata[$name];
     }
 
@@ -196,13 +199,14 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
         if (is_int($name)) {
             $name = $this->positions[$name];
         }
+
         return (isset($this->errata[$name]));
     }
 
     /**
      * Offset unset errata
      *
-     * @param string|int $name
+     * @param  string|int                         $name
      * @throws Exception\InvalidArgumentException
      */
     public function offsetUnsetErrata($name)
@@ -305,7 +309,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
     }
 
     /**
-     * @param array|ParameterContainer $parameters
+     * @param  array|ParameterContainer           $parameters
      * @throws Exception\InvalidArgumentException
      * @return ParameterContainer
      */
@@ -329,6 +333,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
             }
             $this->offsetSet($key, $value);
         }
+
         return $this;
     }
 }

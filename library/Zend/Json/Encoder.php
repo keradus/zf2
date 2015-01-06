@@ -45,8 +45,8 @@ class Encoder
     /**
      * Constructor
      *
-     * @param  bool $cycleCheck Whether or not to check for recursion when encoding
-     * @param array $options Additional options used during encoding
+     * @param  bool    $cycleCheck Whether or not to check for recursion when encoding
+     * @param  array   $options    Additional options used during encoding
      * @return Encoder
      */
     protected function __construct($cycleCheck = false, $options = array())
@@ -58,10 +58,10 @@ class Encoder
     /**
      * Use the JSON encoding scheme for the value specified
      *
-     * @param mixed $value The value to be encoded
-     * @param  bool $cycleCheck Whether or not to check for possible object recursion when encoding
-     * @param array $options Additional options used during encoding
-     * @return string  The encoded value
+     * @param  mixed  $value      The value to be encoded
+     * @param  bool   $cycleCheck Whether or not to check for possible object recursion when encoding
+     * @param  array  $options    Additional options used during encoding
+     * @return string The encoded value
      */
     public static function encode($value, $cycleCheck = false, $options = array())
     {
@@ -112,12 +112,12 @@ class Encoder
         if ($this->cycleCheck) {
             if ($this->_wasVisited($value)) {
                 if (isset($this->options['silenceCyclicalExceptions'])
-                    && $this->options['silenceCyclicalExceptions']===true) {
-                    return '"* RECURSION (' . str_replace('\\', '\\\\', get_class($value)) . ') *"';
+                    && $this->options['silenceCyclicalExceptions'] === true) {
+                    return '"* RECURSION ('.str_replace('\\', '\\\\', get_class($value)).') *"';
                 } else {
                     throw new RecursionException(
                         'Cycles not supported in JSON encoding, cycle introduced by '
-                        . 'class "' . get_class($value) . '"'
+                        .'class "'.get_class($value).'"'
                     );
                 }
             }
@@ -128,7 +128,7 @@ class Encoder
         $props = '';
 
         if (method_exists($value, 'toJson')) {
-            $props = ',' . preg_replace("/^\{(.*)\}$/", "\\1", $value->toJson());
+            $props = ','.preg_replace("/^\{(.*)\}$/", "\\1", $value->toJson());
         } else {
             if ($value instanceof IteratorAggregate) {
                 $propCollection = $value->getIterator();
@@ -141,23 +141,24 @@ class Encoder
             foreach ($propCollection as $name => $propValue) {
                 if (isset($propValue)) {
                     $props .= ','
-                            . $this->_encodeValue($name)
-                            . ':'
-                            . $this->_encodeValue($propValue);
+                            .$this->_encodeValue($name)
+                            .':'
+                            .$this->_encodeValue($propValue);
                 }
             }
         }
 
         $className = get_class($value);
+
         return '{"__className":'
-            . $this->_encodeString($className)
-            . $props . '}';
+            .$this->_encodeString($className)
+            .$props.'}';
     }
 
     /**
      * Determine if an object has been serialized already
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return bool
      */
     protected function _wasVisited(&$value)
@@ -193,8 +194,8 @@ class Encoder
             foreach ($array as $key => $value) {
                 $key = (string) $key;
                 $tmpArray[] = $this->_encodeString($key)
-                            . ':'
-                            . $this->_encodeValue($value);
+                            .':'
+                            .$this->_encodeValue($value);
             }
             $result .= implode(',', $tmpArray);
             $result .= '}';
@@ -218,7 +219,7 @@ class Encoder
      * If value type is not a string, number, boolean, or null, the string
      * 'null' is returned.
      *
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return string
      */
     protected function _encodeDatum(&$value)
@@ -240,7 +241,7 @@ class Encoder
     /**
      * JSON encode a string value by escaping characters as necessary
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     protected function _encodeString(&$string)
@@ -257,15 +258,15 @@ class Encoder
         $string = str_replace(array(chr(0x08), chr(0x0C)), array('\b', '\f'), $string);
         $string = self::encodeUnicodeString($string);
 
-        return '"' . $string . '"';
+        return '"'.$string.'"';
     }
 
     /**
      * Encode the constants associated with the ReflectionClass
      * parameter. The encoding format is based on the class2 format
      *
-     * @param ReflectionClass $cls
-     * @return string Encoded constant block in class2 format
+     * @param  ReflectionClass $cls
+     * @return string          Encoded constant block in class2 format
      */
     private static function _encodeConstants(ReflectionClass $cls)
     {
@@ -275,21 +276,21 @@ class Encoder
         $tmpArray = array();
         if (!empty($constants)) {
             foreach ($constants as $key => $value) {
-                $tmpArray[] = "$key: " . self::encode($value);
+                $tmpArray[] = "$key: ".self::encode($value);
             }
 
             $result .= implode(', ', $tmpArray);
         }
 
-        return $result . "}";
+        return $result."}";
     }
 
     /**
      * Encode the public methods of the ReflectionClass in the
      * class2 format
      *
-     * @param ReflectionClass $cls
-     * @return string Encoded method fragment
+     * @param  ReflectionClass $cls
+     * @return string          Encoded method fragment
      *
      */
     private static function _encodeMethods(ReflectionClass $cls)
@@ -308,7 +309,7 @@ class Encoder
             }
             $started = true;
 
-            $result .= '' . $method->getName(). ':function(';
+            $result .= ''.$method->getName().':function(';
 
             if ('__construct' != $method->getName()) {
                 $parameters  = $method->getParameters();
@@ -326,32 +327,32 @@ class Encoder
                         $argNames .= ',';
                     }
 
-                    $argNames .= '"' . $param->getName() . '"';
+                    $argNames .= '"'.$param->getName().'"';
 
                     $argsStarted = true;
                 }
                 $argNames .= "];";
 
                 $result .= "){"
-                         . $argNames
-                         . 'var result = ZAjaxEngine.invokeRemoteMethod('
-                         . "this, '" . $method->getName()
-                         . "',argNames,arguments);"
-                         . 'return(result);}';
+                         .$argNames
+                         .'var result = ZAjaxEngine.invokeRemoteMethod('
+                         ."this, '".$method->getName()
+                         ."',argNames,arguments);"
+                         .'return(result);}';
             } else {
                 $result .= "){}";
             }
         }
 
-        return $result . "}";
+        return $result."}";
     }
 
     /**
      * Encode the public properties of the ReflectionClass in the class2
      * format.
      *
-     * @param ReflectionClass $cls
-     * @return string Encode properties list
+     * @param  ReflectionClass $cls
+     * @return string          Encode properties list
      *
      */
     private static function _encodeVariables(ReflectionClass $cls)
@@ -367,12 +368,12 @@ class Encoder
             }
 
             $tmpArray[] = $prop->getName()
-                        . ':'
-                        . self::encode($propValues[$prop->getName()]);
+                        .':'
+                        .self::encode($propValues[$prop->getName()]);
         }
         $result .= implode(',', $tmpArray);
 
-        return $result . "}";
+        return $result."}";
     }
 
     /**
@@ -385,7 +386,7 @@ class Encoder
      * instantiable using a null constructor
      * @param $package string Optional package name appended to JavaScript
      * proxy class name
-     * @return string The class2 (JavaScript) encoding of the class
+     * @return string                   The class2 (JavaScript) encoding of the class
      * @throws InvalidArgumentException
      */
     public static function encodeClass($className, $package = '')
@@ -396,9 +397,9 @@ class Encoder
         }
 
         return "Class.create('$package$className',{"
-                . self::_encodeConstants($cls)    .","
-                . self::_encodeMethods($cls)      .","
-                . self::_encodeVariables($cls)    .'});';
+                .self::_encodeConstants($cls).","
+                .self::_encodeMethods($cls).","
+                .self::_encodeVariables($cls).'});';
     }
 
     /**
@@ -406,8 +407,8 @@ class Encoder
      *
      * Returns JSON encoded classes, using {@link encodeClass()}.
      *
-     * @param array $classNames
-     * @param string $package
+     * @param  array  $classNames
+     * @param  string $package
      * @return string
      */
     public static function encodeClasses(array $classNames, $package = '')
@@ -535,7 +536,7 @@ class Encoder
      * This method is from the Solar Framework by Paul M. Jones
      *
      * @link   http://solarphp.com
-     * @param string $utf8 UTF-8 character
+     * @param  string $utf8 UTF-8 character
      * @return string UTF-16 character
      */
     protected static function _utf82utf16($utf8)
@@ -554,12 +555,12 @@ class Encoder
             case 2:
                 // return a UTF-16 character from a 2-byte UTF-8 char
                 // see: http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
-                return chr(0x07 & (ord($utf8{0}) >> 2)) . chr((0xC0 & (ord($utf8{0}) << 6)) | (0x3F & ord($utf8{1})));
+                return chr(0x07 & (ord($utf8{0}) >> 2)).chr((0xC0 & (ord($utf8{0}) << 6)) | (0x3F & ord($utf8{1})));
 
             case 3:
                 // return a UTF-16 character from a 3-byte UTF-8 char
                 // see: http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
-                return chr((0xF0 & (ord($utf8{0}) << 4)) | (0x0F & (ord($utf8{1}) >> 2))) . chr((0xC0 & (ord($utf8{1}) << 6)) | (0x7F & ord($utf8{2})));
+                return chr((0xF0 & (ord($utf8{0}) << 4)) | (0x0F & (ord($utf8{1}) >> 2))).chr((0xC0 & (ord($utf8{1}) << 6)) | (0x7F & ord($utf8{2})));
         }
 
         // ignoring UTF-32 for now, sorry

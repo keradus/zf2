@@ -30,7 +30,7 @@ class Definition implements Countable, Iterator
     /**
      * Constructor
      *
-     * @param  null|array $methods
+     * @param null|array $methods
      */
     public function __construct($methods = null)
     {
@@ -42,20 +42,21 @@ class Definition implements Countable, Iterator
     /**
      * Set flag indicating whether or not overwriting existing methods is allowed
      *
-     * @param mixed $flag
+     * @param  mixed                   $flag
      * @return \Zend\Server\Definition
      */
     public function setOverwriteExistingMethods($flag)
     {
         $this->overwriteExistingMethods = (bool) $flag;
+
         return $this;
     }
 
     /**
      * Add method to definition
      *
-     * @param  array|\Zend\Server\Method\Definition $method
-     * @param  null|string $name
+     * @param  array|\Zend\Server\Method\Definition            $method
+     * @param  null|string                                     $name
      * @return \Zend\Server\Definition
      * @throws \Zend\Server\Exception\InvalidArgumentException if duplicate or invalid method provided
      */
@@ -83,13 +84,14 @@ class Definition implements Countable, Iterator
             throw new Exception\InvalidArgumentException(sprintf('Method by name of "%s" already exists', $name));
         }
         $this->methods[$name] = $method;
+
         return $this;
     }
 
     /**
      * Add multiple methods
      *
-     * @param  array $methods Array of \Zend\Server\Method\Definition objects or arrays
+     * @param  array                   $methods Array of \Zend\Server\Method\Definition objects or arrays
      * @return \Zend\Server\Definition
      */
     public function addMethods(array $methods)
@@ -97,19 +99,21 @@ class Definition implements Countable, Iterator
         foreach ($methods as $key => $method) {
             $this->addMethod($method, $key);
         }
+
         return $this;
     }
 
     /**
      * Set all methods at once (overwrite)
      *
-     * @param  array $methods Array of \Zend\Server\Method\Definition objects or arrays
+     * @param  array                   $methods Array of \Zend\Server\Method\Definition objects or arrays
      * @return \Zend\Server\Definition
      */
     public function setMethods(array $methods)
     {
         $this->clearMethods();
         $this->addMethods($methods);
+
         return $this;
     }
 
@@ -127,7 +131,7 @@ class Definition implements Countable, Iterator
     /**
      * Get a given method definition
      *
-     * @param  string $method
+     * @param  string                              $method
      * @return null|\Zend\Server\Method\Definition
      */
     public function getMethod($method)
@@ -135,6 +139,7 @@ class Definition implements Countable, Iterator
         if ($this->hasMethod($method)) {
             return $this->methods[$method];
         }
+
         return false;
     }
 
@@ -151,7 +156,7 @@ class Definition implements Countable, Iterator
     /**
      * Remove a method definition
      *
-     * @param  string $method
+     * @param  string                  $method
      * @return \Zend\Server\Definition
      */
     public function removeMethod($method)
@@ -159,6 +164,7 @@ class Definition implements Countable, Iterator
         if ($this->hasMethod($method)) {
             unset($this->methods[$method]);
         }
+
         return $this;
     }
 
@@ -170,6 +176,7 @@ class Definition implements Countable, Iterator
     public function clearMethods()
     {
         $this->methods = array();
+
         return $this;
     }
 
@@ -184,6 +191,7 @@ class Definition implements Countable, Iterator
         foreach ($this->getMethods() as $key => $method) {
             $methods[$key] = $method->toArray();
         }
+
         return $methods;
     }
 

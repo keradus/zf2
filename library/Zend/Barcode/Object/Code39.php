@@ -83,17 +83,19 @@ class Code39 extends AbstractObject
         $quietZone       = $this->getQuietZone();
         $characterLength = (6 * $this->barThinWidth + 3 * $this->barThickWidth + 1) * $this->factor;
         $encodedData     = strlen($this->getText()) * $characterLength - $this->factor;
+
         return $quietZone + $encodedData + $quietZone;
     }
 
     /**
      * Set text to encode
-     * @param string $value
+     * @param  string $value
      * @return Code39
      */
     public function setText($value)
     {
         $this->text = $value;
+
         return $this;
     }
 
@@ -103,7 +105,7 @@ class Code39 extends AbstractObject
      */
     public function getText()
     {
-        return '*' . parent::getText() . '*';
+        return '*'.parent::getText().'*';
     }
 
     /**
@@ -114,7 +116,7 @@ class Code39 extends AbstractObject
     {
         $text = parent::getTextToDisplay();
         if (substr($text, 0, 1) != '*' && substr($text, -1) != '*') {
-            return '*' . $text . '*';
+            return '*'.$text.'*';
         }
 
         return $text;
@@ -139,6 +141,7 @@ class Code39 extends AbstractObject
             }
             $barcodeTable[] = array(0, $this->barThinWidth);
         }
+
         return $barcodeTable;
     }
 
@@ -157,6 +160,7 @@ class Code39 extends AbstractObject
         foreach ($text as $character) {
             $checksum += $charset[$character];
         }
+
         return array_search(($checksum % 43), $charset);
     }
 }

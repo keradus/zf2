@@ -52,7 +52,7 @@ class Parameter
     /**
      * Constructor
      *
-     * @param  null|array $options
+     * @param null|array $options
      */
     public function __construct($options = null)
     {
@@ -64,29 +64,31 @@ class Parameter
     /**
      * Set object state from array of options
      *
-     * @param  array $options
+     * @param  array                         $options
      * @return \Zend\Server\Method\Parameter
      */
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
     /**
      * Set default value
      *
-     * @param  mixed $defaultValue
+     * @param  mixed                         $defaultValue
      * @return \Zend\Server\Method\Parameter
      */
     public function setDefaultValue($defaultValue)
     {
         $this->defaultValue = $defaultValue;
+
         return $this;
     }
 
@@ -103,12 +105,13 @@ class Parameter
     /**
      * Set description
      *
-     * @param  string $description
+     * @param  string                        $description
      * @return \Zend\Server\Method\Parameter
      */
     public function setDescription($description)
     {
         $this->description = (string) $description;
+
         return $this;
     }
 
@@ -125,12 +128,13 @@ class Parameter
     /**
      * Set name
      *
-     * @param  string $name
+     * @param  string                        $name
      * @return \Zend\Server\Method\Parameter
      */
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
@@ -147,12 +151,13 @@ class Parameter
     /**
      * Set optional flag
      *
-     * @param  bool $flag
+     * @param  bool                          $flag
      * @return \Zend\Server\Method\Parameter
      */
     public function setOptional($flag)
     {
         $this->optional = (bool) $flag;
+
         return $this;
     }
 
@@ -169,12 +174,13 @@ class Parameter
     /**
      * Set parameter type
      *
-     * @param  string $type
+     * @param  string                        $type
      * @return \Zend\Server\Method\Parameter
      */
     public function setType($type)
     {
         $this->type = (string) $type;
+
         return $this;
     }
 

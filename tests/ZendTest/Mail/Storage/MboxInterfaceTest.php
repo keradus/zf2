@@ -22,7 +22,7 @@ class MboxInterfaceTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_mboxFile = __DIR__ . '/../_files/test.mbox/INBOX';
+        $this->_mboxFile = __DIR__.'/../_files/test.mbox/INBOX';
     }
 
     public function testCount()

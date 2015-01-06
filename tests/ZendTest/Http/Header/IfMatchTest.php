@@ -44,5 +44,5 @@ class IfMatchTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('If-Match: xxx', $ifMatchHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

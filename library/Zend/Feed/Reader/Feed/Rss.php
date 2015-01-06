@@ -16,14 +16,14 @@ use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Exception;
 
 /**
-*/
+ */
 class Rss extends AbstractFeed
 {
     /**
      * Constructor
      *
-     * @param  DOMDocument $dom
-     * @param  string $type
+     * @param DOMDocument $dom
+     * @param string      $type
      */
     public function __construct(DOMDocument $dom, $type = null)
     {
@@ -58,7 +58,7 @@ class Rss extends AbstractFeed
     /**
      * Get a single author
      *
-     * @param  int $index
+     * @param  int         $index
      * @return string|null
      */
     public function getAuthor($index = 0)
@@ -88,7 +88,7 @@ class Rss extends AbstractFeed
         if (!empty($authorsDc)) {
             foreach ($authorsDc as $author) {
                 $authors[] = array(
-                    'name' => $author['name']
+                    'name' => $author['name'],
                 );
             }
         }
@@ -203,10 +203,10 @@ class Rss extends AbstractFeed
             if ($dateModified) {
                 $dateModifiedParsed = strtotime($dateModified);
                 if ($dateModifiedParsed) {
-                    $date = new DateTime('@' . $dateModifiedParsed);
+                    $date = new DateTime('@'.$dateModifiedParsed);
                 } else {
                     $dateStandards = array(DateTime::RSS, DateTime::RFC822,
-                                           DateTime::RFC2822, null);
+                                           DateTime::RFC2822, null, );
                     foreach ($dateStandards as $standard) {
                         try {
                             $date = DateTime::createFromFormat($standard, $dateModified);
@@ -216,7 +216,7 @@ class Rss extends AbstractFeed
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
-                                    . $e->getMessage(),
+                                    .$e->getMessage(),
                                     0, $e
                                 );
                             }
@@ -263,10 +263,10 @@ class Rss extends AbstractFeed
             if ($lastBuildDate) {
                 $lastBuildDateParsed = strtotime($lastBuildDate);
                 if ($lastBuildDateParsed) {
-                    $date = new DateTime('@' . $lastBuildDateParsed);
+                    $date = new DateTime('@'.$lastBuildDateParsed);
                 } else {
                     $dateStandards = array(DateTime::RSS, DateTime::RFC822,
-                                           DateTime::RFC2822, null);
+                                           DateTime::RFC2822, null, );
                     foreach ($dateStandards as $standard) {
                         try {
                             $date = DateTime::createFromFormat($standard, $lastBuildDateParsed);
@@ -276,7 +276,7 @@ class Rss extends AbstractFeed
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
-                                    . $e->getMessage(),
+                                    .$e->getMessage(),
                                     0, $e
                                 );
                             }
@@ -392,27 +392,27 @@ class Rss extends AbstractFeed
         }
         if ($list->length > 0) {
             $image = array();
-            $value = $this->xpath->evaluate('string(' . $prefix . '/url)');
+            $value = $this->xpath->evaluate('string('.$prefix.'/url)');
             if ($value) {
                 $image['uri'] = $value;
             }
-            $value = $this->xpath->evaluate('string(' . $prefix . '/link)');
+            $value = $this->xpath->evaluate('string('.$prefix.'/link)');
             if ($value) {
                 $image['link'] = $value;
             }
-            $value = $this->xpath->evaluate('string(' . $prefix . '/title)');
+            $value = $this->xpath->evaluate('string('.$prefix.'/title)');
             if ($value) {
                 $image['title'] = $value;
             }
-            $value = $this->xpath->evaluate('string(' . $prefix . '/height)');
+            $value = $this->xpath->evaluate('string('.$prefix.'/height)');
             if ($value) {
                 $image['height'] = $value;
             }
-            $value = $this->xpath->evaluate('string(' . $prefix . '/width)');
+            $value = $this->xpath->evaluate('string('.$prefix.'/width)');
             if ($value) {
                 $image['width'] = $value;
             }
-            $value = $this->xpath->evaluate('string(' . $prefix . '/description)');
+            $value = $this->xpath->evaluate('string('.$prefix.'/description)');
             if ($value) {
                 $image['description'] = $value;
             }
@@ -635,7 +635,7 @@ class Rss extends AbstractFeed
         }
 
         if ($list->length) {
-            $categoryCollection = new Collection\Category;
+            $categoryCollection = new Collection\Category();
             foreach ($list as $category) {
                 $categoryCollection[] = array(
                     'term' => $category->nodeValue,

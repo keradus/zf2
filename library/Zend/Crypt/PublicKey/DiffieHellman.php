@@ -131,7 +131,7 @@ class DiffieHellman
         if (function_exists('openssl_dh_compute_key') && static::$useOpenssl !== false) {
             $details = array(
                 'p' => $this->convert($this->getPrime(), self::FORMAT_NUMBER, self::FORMAT_BINARY),
-                'g' => $this->convert($this->getGenerator(), self::FORMAT_NUMBER, self::FORMAT_BINARY)
+                'g' => $this->convert($this->getGenerator(), self::FORMAT_NUMBER, self::FORMAT_BINARY),
             );
             if ($this->hasPrivateKey()) {
                 $details['priv_key'] = $this->convert(
@@ -144,13 +144,13 @@ class DiffieHellman
                 $opensslKeyResource = openssl_pkey_new(array(
                     'dh'               => $details,
                     'private_key_bits' => self::DEFAULT_KEY_SIZE,
-                    'private_key_type' => OPENSSL_KEYTYPE_DH
+                    'private_key_type' => OPENSSL_KEYTYPE_DH,
                 ));
             }
 
             if (false === $opensslKeyResource) {
                 throw new Exception\RuntimeException(
-                    'Can not generate new key; openssl ' . openssl_error_string()
+                    'Can not generate new key; openssl '.openssl_error_string()
                 );
             }
 
@@ -172,8 +172,8 @@ class DiffieHellman
     /**
      * Setter for the value of the public number
      *
-     * @param string $number
-     * @param string $format
+     * @param  string                                         $number
+     * @param  string                                         $format
      * @return DiffieHellman
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      */
@@ -191,7 +191,7 @@ class DiffieHellman
     /**
      * Returns own public key for communication to the second party to this transaction
      *
-     * @param string $format
+     * @param  string                                         $format
      * @return string
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      */
@@ -217,9 +217,9 @@ class DiffieHellman
      * If you need the binary form of the shared secret key, call
      * getSharedSecretKey() with the optional parameter for Binary output.
      *
-     * @param string $publicKey
-     * @param string $publicKeyFormat
-     * @param string $secretKeyFormat
+     * @param  string                                         $publicKey
+     * @param  string                                         $publicKeyFormat
+     * @param  string                                         $secretKeyFormat
      * @return string
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      * @throws \Zend\Crypt\Exception\RuntimeException
@@ -234,7 +234,7 @@ class DiffieHellman
             $secretKey = openssl_dh_compute_key($publicKey, $this->opensslKeyResource);
             if (false === $secretKey) {
                 throw new Exception\RuntimeException(
-                    'Can not compute key; openssl ' . openssl_error_string()
+                    'Can not compute key; openssl '.openssl_error_string()
                 );
             }
             $this->secretKey = $this->convert($secretKey, self::FORMAT_BINARY, self::FORMAT_NUMBER);
@@ -254,7 +254,7 @@ class DiffieHellman
     /**
      * Return the computed shared secret key from the DiffieHellman transaction
      *
-     * @param string $format
+     * @param  string                                         $format
      * @return string
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      */
@@ -272,7 +272,7 @@ class DiffieHellman
     /**
      * Setter for the value of the prime number
      *
-     * @param string $number
+     * @param  string                                         $number
      * @return DiffieHellman
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      */
@@ -280,7 +280,7 @@ class DiffieHellman
     {
         if (!preg_match('/^\d+$/', $number) || $number < 11) {
             throw new Exception\InvalidArgumentException(
-                'Invalid parameter; not a positive natural number or too small: ' .
+                'Invalid parameter; not a positive natural number or too small: '.
                 'should be a large natural number prime'
             );
         }
@@ -292,7 +292,7 @@ class DiffieHellman
     /**
      * Getter for the value of the prime number
      *
-     * @param string $format
+     * @param  string                                         $format
      * @return string
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      */
@@ -308,7 +308,7 @@ class DiffieHellman
     /**
      * Setter for the value of the generator number
      *
-     * @param string $number
+     * @param  string                                         $number
      * @return DiffieHellman
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      */
@@ -327,7 +327,7 @@ class DiffieHellman
     /**
      * Getter for the value of the generator number
      *
-     * @param string $format
+     * @param  string                                         $format
      * @return string
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      */
@@ -343,8 +343,8 @@ class DiffieHellman
     /**
      * Setter for the value of the private number
      *
-     * @param string $number
-     * @param string $format
+     * @param  string                                         $number
+     * @param  string                                         $format
      * @return DiffieHellman
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
      */
@@ -362,7 +362,7 @@ class DiffieHellman
     /**
      * Getter for the value of the private number
      *
-     * @param string $format
+     * @param  string $format
      * @return string
      */
     public function getPrivateKey($format = self::FORMAT_NUMBER)
@@ -387,9 +387,9 @@ class DiffieHellman
     /**
      * Convert number between formats
      *
-     * @param string $number
-     * @param string $inputFormat
-     * @param string $outputFormat
+     * @param  string $number
+     * @param  string $inputFormat
+     * @param  string $outputFormat
      * @return string
      */
     protected function convert($number, $inputFormat = self::FORMAT_NUMBER, $outputFormat = self::FORMAT_BINARY)

@@ -75,6 +75,7 @@ class ForwardTest extends TestCase
         $controllers->setFactory('forward', function () use ($plugins) {
             $controller = new ForwardController();
             $controller->setPluginManager($plugins);
+
             return $controller;
         });
         $controllers->setServiceLocator($services);
@@ -129,7 +130,7 @@ class ForwardTest extends TestCase
     {
         $locator = $this->controller->getServiceLocator();
         $locator->add('bogus', function () {
-            return new stdClass;
+            return new stdClass();
         });
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->plugin->dispatch('bogus');
@@ -159,7 +160,7 @@ class ForwardTest extends TestCase
         $events   = $services->get('EventManager');
         $sharedEvents = $this->getMock('Zend\EventManager\SharedEventManagerInterface');
         $sharedEvents->expects($this->any())->method('getListeners')->will($this->returnValue(array(
-            new CallbackHandler(function ($e) {})
+            new CallbackHandler(function ($e) {}),
         )));
         $events = $this->getMock('Zend\EventManager\EventManagerInterface');
         $events->expects($this->any())->method('getSharedManager')->will($this->returnValue($sharedEvents));

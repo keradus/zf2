@@ -38,7 +38,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         $chain = new FilterChain();
         $chain->attach(new StripUpperCase())
-              ->attach(new LowerCase, 100);
+              ->attach(new LowerCase(), 100);
         $value = 'AbC';
         $valueExpected = 'b';
         $this->assertEquals($valueExpected, $chain->filter($value));
@@ -113,7 +113,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             'callbacks' => array(
-                array('callback' => __CLASS__ . '::staticUcaseFilter'),
+                array('callback' => __CLASS__.'::staticUcaseFilter'),
                 array('priority' => 10000, 'callback' => function ($value) {
                     return trim($value);
                 }),
@@ -213,7 +213,6 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-
 class LowerCase extends AbstractFilter
 {
     public function filter($value)
@@ -221,7 +220,6 @@ class LowerCase extends AbstractFilter
         return strtolower($value);
     }
 }
-
 
 class StripUpperCase extends AbstractFilter
 {

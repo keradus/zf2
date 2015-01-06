@@ -16,7 +16,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get the entry license
      *
-     * @param int $index
+     * @param  int         $index
      * @return string|null
      */
     public function getLicense($index = 0)
@@ -43,7 +43,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         $licenses = array();
-        $list = $this->xpath->evaluate($this->getXpathPrefix() . '//cc:license');
+        $list = $this->xpath->evaluate($this->getXpathPrefix().'//cc:license');
 
         if ($list->length) {
             foreach ($list as $license) {

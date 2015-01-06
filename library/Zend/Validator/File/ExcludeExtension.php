@@ -61,6 +61,7 @@ class ExcludeExtension extends Extension
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
+
             return false;
         }
 
@@ -73,6 +74,7 @@ class ExcludeExtension extends Extension
             foreach ($extensions as $ext) {
                 if (strtolower($ext) == strtolower($extension)) {
                     $this->error(self::FALSE_EXTENSION);
+
                     return false;
                 }
             }
@@ -81,6 +83,7 @@ class ExcludeExtension extends Extension
         }
 
         $this->error(self::FALSE_EXTENSION);
+
         return false;
     }
 }

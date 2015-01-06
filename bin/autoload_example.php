@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../library/Zend/Loader/ClassMapAutoloader.php';
+require_once __DIR__.'/../library/Zend/Loader/ClassMapAutoloader.php';
 $loader = new Zend\Loader\ClassMapAutoloader();
-$loader->registerAutoloadMap(__DIR__ . '/../library/Zend/.classmap.php');
+$loader->registerAutoloadMap(__DIR__.'/../library/Zend/.classmap.php');
 $loader->register();
 
 if (!class_exists('Zend\Controller\Action')) {

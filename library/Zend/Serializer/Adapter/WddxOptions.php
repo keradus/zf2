@@ -21,12 +21,13 @@ class WddxOptions extends AdapterOptions
     /**
      * Set WDDX header comment
      *
-     * @param  string $comment
+     * @param  string      $comment
      * @return WddxOptions
      */
     public function setComment($comment)
     {
         $this->comment = (string) $comment;
+
         return $this;
     }
 

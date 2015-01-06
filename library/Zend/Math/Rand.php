@@ -26,8 +26,8 @@ abstract class Rand
     /**
      * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
      *
-     * @param  int $length
-     * @param  bool $strong true if you need a strong random generator (cryptography)
+     * @param  int                        $length
+     * @param  bool                       $strong true if you need a strong random generator (cryptography)
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -55,11 +55,12 @@ abstract class Rand
             || class_exists('\\COM', false);
         if (true === $strong && false === $checkAlternatives) {
             throw new Exception\RuntimeException(
-                'This PHP environment doesn\'t support secure random number generation. ' .
+                'This PHP environment doesn\'t support secure random number generation. '.
                 'Please consider installing the OpenSSL and/or Mcrypt extensions'
             );
         }
         $generator = self::getAlternativeGenerator();
+
         return $generator->generate($length);
     }
 
@@ -76,16 +77,17 @@ abstract class Rand
         if (!class_exists('RandomLib\\Factory')) {
             throw new Exception\RuntimeException(
                 'The RandomLib fallback pseudorandom number generator (PRNG) '
-                . ' must be installed in the absence of the OpenSSL and '
-                . 'Mcrypt extensions'
+                .' must be installed in the absence of the OpenSSL and '
+                .'Mcrypt extensions'
             );
         }
-        $factory = new RandomLib\Factory;
+        $factory = new RandomLib\Factory();
         $factory->registerSource(
             'HashTiming',
             'Zend\Math\Source\HashTiming'
         );
         static::$generator = $factory->getMediumStrengthGenerator();
+
         return static::$generator;
     }
 
@@ -98,15 +100,16 @@ abstract class Rand
     public static function getBoolean($strong = false)
     {
         $byte = static::getBytes(1, $strong);
+
         return (bool) (ord($byte) % 2);
     }
 
     /**
      * Generate a random integer between $min and $max
      *
-     * @param  int $min
-     * @param  int $max
-     * @param  bool $strong true if you need a strong random generator (cryptography)
+     * @param  int                       $min
+     * @param  int                       $max
+     * @param  bool                      $strong true if you need a strong random generator (cryptography)
      * @return int
      * @throws Exception\DomainException
      */
@@ -155,7 +158,7 @@ abstract class Rand
      * and we fix the exponent to the bias (1023). In this way we generate
      * a float of 1.mantissa.
      *
-     * @param  bool $strong  true if you need a strong random generator (cryptography)
+     * @param  bool  $strong true if you need a strong random generator (cryptography)
      * @return float
      */
     public static function getFloat($strong = false)
@@ -174,9 +177,9 @@ abstract class Rand
      * Uses supplied character list for generating the new string.
      * If no character list provided - uses Base 64 character set.
      *
-     * @param  int $length
-     * @param  string|null $charlist
-     * @param  bool $strong  true if you need a strong random generator (cryptography)
+     * @param  int                       $length
+     * @param  string|null               $charlist
+     * @param  bool                      $strong   true if you need a strong random generator (cryptography)
      * @return string
      * @throws Exception\DomainException
      */
@@ -190,6 +193,7 @@ abstract class Rand
         if (empty($charlist)) {
             $numBytes = ceil($length * 0.75);
             $bytes    = static::getBytes($numBytes, $strong);
+
             return substr(rtrim(base64_encode($bytes), '='), 0, $length);
         }
 

@@ -32,7 +32,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         foreach ($this->variables as $name => $value) {
             if (!isset($GLOBALS[$value])) {
-                $this->fail('Missing required variable ' . $value . ' from phpunit.xml for this integration test');
+                $this->fail('Missing required variable '.$value.' from phpunit.xml for this integration test');
             }
             $this->variables[$name] = $GLOBALS[$value];
         }
@@ -49,7 +49,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $ociResource = oci_connect($this->variables['username'], $this->variables['password'], $this->variables['hostname']);
 
-        $statement = new Statement;
+        $statement = new Statement();
         $this->assertSame($statement, $statement->initialize($ociResource));
         unset($stmtResource, $ociResource);
     }
@@ -61,7 +61,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $ociResource = oci_connect($this->variables['username'], $this->variables['password'], $this->variables['hostname']);
 
-        $statement = new Statement;
+        $statement = new Statement();
         $statement->initialize($ociResource);
         $statement->prepare('SELECT * FROM DUAL');
         $resource = $statement->getResource();
@@ -77,7 +77,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
     {
         $ociResource = oci_connect($this->variables['username'], $this->variables['password'], $this->variables['hostname']);
 
-        $statement = new Statement;
+        $statement = new Statement();
         $statement->initialize($ociResource);
         $this->assertFalse($statement->isPrepared());
         $this->assertSame($statement, $statement->prepare('SELECT * FROM DUAL'));

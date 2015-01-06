@@ -33,7 +33,7 @@ class RestfulControllerTest extends TestCase
         $this->request         = new TestAsset\Request();
         $this->response        = new Response();
         $this->routeMatch      = new RouteMatch(array('controller' => 'controller-restful'));
-        $this->event           = new MvcEvent;
+        $this->event           = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
         $this->emptyController->setEvent($this->event);
@@ -42,9 +42,9 @@ class RestfulControllerTest extends TestCase
     public function testDispatchInvokesListWhenNoActionPresentAndNoIdentifierOnGet()
     {
         $entities = array(
-            new stdClass,
-            new stdClass,
-            new stdClass,
+            new stdClass(),
+            new stdClass(),
+            new stdClass(),
         );
         $this->controller->entities = $entities;
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -55,7 +55,7 @@ class RestfulControllerTest extends TestCase
 
     public function testDispatchInvokesGetMethodWhenNoActionPresentAndIdentifierPresentOnGet()
     {
-        $entity = new stdClass;
+        $entity = new stdClass();
         $this->controller->entity = $entity;
         $this->routeMatch->setParam('id', 1);
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -163,7 +163,7 @@ class RestfulControllerTest extends TestCase
 
     public function testDispatchInvokesPatchMethodWhenNoActionPresentAndPatchInvokedWithIdentifier()
     {
-        $entity = new stdClass;
+        $entity = new stdClass();
         $entity->name = 'foo';
         $entity->type = 'standard';
         $this->controller->entity = $entity;
@@ -205,9 +205,9 @@ class RestfulControllerTest extends TestCase
     public function testDispatchInvokesHeadMethodWhenNoActionPresentAndHeadInvokedWithoutIdentifier()
     {
         $entities = array(
-            new stdClass,
-            new stdClass,
-            new stdClass,
+            new stdClass(),
+            new stdClass(),
+            new stdClass(),
         );
         $this->controller->entities = $entities;
         $this->request->setMethod('HEAD');
@@ -220,7 +220,7 @@ class RestfulControllerTest extends TestCase
 
     public function testDispatchInvokesHeadMethodWhenNoActionPresentAndHeadInvokedWithIdentifier()
     {
-        $entity = new stdClass;
+        $entity = new stdClass();
         $this->controller->entity = $entity;
         $this->routeMatch->setParam('id', 1);
         $this->request->setMethod('HEAD');
@@ -418,7 +418,7 @@ class RestfulControllerTest extends TestCase
 
     public function testDispatchInvokesGetMethodWhenNoActionPresentAndZeroIdentifierPresentOnGet()
     {
-        $entity = new stdClass;
+        $entity = new stdClass();
         $this->controller->entity = $entity;
         $this->routeMatch->setParam('id', 0);
         $result = $this->controller->dispatch($this->request, $this->response);

@@ -28,7 +28,7 @@ class Cycle extends AbstractHelper implements Iterator
      *
      * @var array
      */
-    protected $data = array(self::DEFAULT_NAME=>array());
+    protected $data = array(self::DEFAULT_NAME => array());
 
     /**
      * Actual name of cycle
@@ -42,12 +42,12 @@ class Cycle extends AbstractHelper implements Iterator
      *
      * @var array
      */
-    protected $pointers = array(self::DEFAULT_NAME =>-1);
+    protected $pointers = array(self::DEFAULT_NAME => -1);
 
     /**
      * Add elements to alternate
      *
-     * @param  array $data
+     * @param  array  $data
      * @param  string $name
      * @return Cycle
      */
@@ -58,6 +58,7 @@ class Cycle extends AbstractHelper implements Iterator
         }
 
         $this->setName($name);
+
         return $this;
     }
 
@@ -84,7 +85,7 @@ class Cycle extends AbstractHelper implements Iterator
     /**
      * Add elements to alternate
      *
-     * @param  array $data
+     * @param  array  $data
      * @param  string $name
      * @return Cycle
      */
@@ -93,6 +94,7 @@ class Cycle extends AbstractHelper implements Iterator
         $this->setName($name);
         $this->data[$name] = $data;
         $this->rewind();
+
         return $this;
     }
 
@@ -195,6 +197,7 @@ class Cycle extends AbstractHelper implements Iterator
     public function rewind()
     {
         $this->pointers[$this->name] = -1;
+
         return $this;
     }
 

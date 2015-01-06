@@ -66,7 +66,7 @@ abstract class AbstractDate implements HeaderInterface
     /**
      * Create date-based header from string
      *
-     * @param string $headerLine
+     * @param  string                             $headerLine
      * @return AbstractDate
      * @throws Exception\InvalidArgumentException
      */
@@ -79,7 +79,7 @@ abstract class AbstractDate implements HeaderInterface
         // check to ensure proper header type for this factory
         if (strtolower($name) !== strtolower($dateHeader->getFieldName())) {
             throw new Exception\InvalidArgumentException(
-                'Invalid header line for "' . $dateHeader->getFieldName() . '" header string'
+                'Invalid header line for "'.$dateHeader->getFieldName().'" header string'
             );
         }
 
@@ -117,11 +117,11 @@ abstract class AbstractDate implements HeaderInterface
 
         if (! $time || ! is_numeric($time)) {
             throw new Exception\InvalidArgumentException(
-                'Invalid time for "' . $dateHeader->getFieldName() . '" header string'
+                'Invalid time for "'.$dateHeader->getFieldName().'" header string'
             );
         }
 
-        $dateHeader->setDate(new DateTime('@' . $time));
+        $dateHeader->setDate(new DateTime('@'.$time));
 
         return $dateHeader;
     }
@@ -129,7 +129,7 @@ abstract class AbstractDate implements HeaderInterface
     /**
      * Set date output format
      *
-     * @param int $format
+     * @param  int                                $format
      * @throws Exception\InvalidArgumentException
      */
     public static function setDateFormat($format)
@@ -156,7 +156,7 @@ abstract class AbstractDate implements HeaderInterface
     /**
      * Set the date for this header, this can be a string or an instance of \DateTime
      *
-     * @param string|DateTime $date
+     * @param  string|DateTime                    $date
      * @return AbstractDate
      * @throws Exception\InvalidArgumentException
      */
@@ -202,6 +202,7 @@ abstract class AbstractDate implements HeaderInterface
         if ($this->date === null) {
             $this->date = new DateTime(null, new DateTimeZone('GMT'));
         }
+
         return $this->date;
     }
 
@@ -210,7 +211,7 @@ abstract class AbstractDate implements HeaderInterface
      * Returns < 0 if date in header is less than $date; > 0 if it's greater, and 0 if they are equal.
      * @see \strcmp()
      *
-     * @param string|DateTime $date
+     * @param  string|DateTime                    $date
      * @return int
      * @throws Exception\InvalidArgumentException
      */
@@ -253,7 +254,7 @@ abstract class AbstractDate implements HeaderInterface
      */
     public function toString()
     {
-        return $this->getFieldName() . ': ' . $this->getDate();
+        return $this->getFieldName().': '.$this->getDate();
     }
 
     /**

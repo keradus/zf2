@@ -28,7 +28,7 @@ class Mock extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return void
      */
     public function doWrite(array $event)

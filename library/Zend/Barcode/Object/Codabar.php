@@ -27,7 +27,7 @@ class Codabar extends AbstractObject
         '9' => "110100101",     '-' => "101001101",     '$' => "101100101",
         ':' => "1101011011",    '/' => "1101101011",    '.' => "1101101101",
         '+' => "1011011011",    'A' => "1011001001",    'B' => "1010010011",
-        'C' => "1001001011",    'D' => "1010011001"
+        'C' => "1001001011",    'D' => "1010011001",
     );
 
     /**
@@ -45,6 +45,7 @@ class Codabar extends AbstractObject
             }
         }
         $encodedData -= (1 * $this->barThinWidth * $this->factor);
+
         return $quietZone + $encodedData + $quietZone;
     }
 
@@ -72,6 +73,7 @@ class Codabar extends AbstractObject
             }
             $barcodeTable[] = array(0, $this->barThinWidth);
         }
+
         return $barcodeTable;
     }
 }

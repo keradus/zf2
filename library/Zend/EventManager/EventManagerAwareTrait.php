@@ -57,6 +57,7 @@ trait EventManagerAwareTrait
         if (method_exists($this, 'attachDefaultListeners')) {
             $this->attachDefaultListeners();
         }
+
         return $this;
     }
 
@@ -72,6 +73,7 @@ trait EventManagerAwareTrait
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->events;
     }
 }

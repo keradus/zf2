@@ -101,6 +101,7 @@ class Inflector extends AbstractFilter
     public function setPluginManager(FilterPluginManager $manager)
     {
         $this->pluginManager = $manager;
+
         return $this;
     }
 
@@ -119,7 +120,7 @@ class Inflector extends AbstractFilter
         // Set plugin manager
         if (array_key_exists('pluginManager', $options)) {
             if (is_scalar($options['pluginManager']) && class_exists($options['pluginManager'])) {
-                $options['pluginManager'] = new $options['pluginManager'];
+                $options['pluginManager'] = new $options['pluginManager']();
             }
             $this->setPluginManager($options['pluginManager']);
         }
@@ -153,6 +154,7 @@ class Inflector extends AbstractFilter
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
     {
         $this->throwTargetExceptionsOn = ($throwTargetExceptionsOn == true) ? true : false;
+
         return $this;
     }
 
@@ -201,6 +203,7 @@ class Inflector extends AbstractFilter
     public function setTarget($target)
     {
         $this->target = (string) $target;
+
         return $this;
     }
 
@@ -222,7 +225,8 @@ class Inflector extends AbstractFilter
      */
     public function setTargetReference(&$target)
     {
-        $this->target =& $target;
+        $this->target = & $target;
+
         return $this;
     }
 
@@ -237,6 +241,7 @@ class Inflector extends AbstractFilter
     {
         $this->clearRules();
         $this->addRules($rules);
+
         return $this;
     }
 
@@ -276,7 +281,7 @@ class Inflector extends AbstractFilter
      * By default, returns all rules. If a $spec is provided, will return those
      * rules if found, false otherwise.
      *
-     * @param  string $spec
+     * @param  string      $spec
      * @return array|false
      */
     public function getRules($spec = null)
@@ -286,6 +291,7 @@ class Inflector extends AbstractFilter
             if (isset($this->rules[$spec])) {
                 return $this->rules[$spec];
             }
+
             return false;
         }
 
@@ -295,8 +301,8 @@ class Inflector extends AbstractFilter
     /**
      * Returns a rule set by setFilterRule(), a numeric index must be provided
      *
-     * @param  string $spec
-     * @param  int $index
+     * @param  string                $spec
+     * @param  int                   $index
      * @return FilterInterface|false
      */
     public function getRule($spec, $index)
@@ -307,6 +313,7 @@ class Inflector extends AbstractFilter
                 return $this->rules[$spec][$index];
             }
         }
+
         return false;
     }
 
@@ -318,6 +325,7 @@ class Inflector extends AbstractFilter
     public function clearRules()
     {
         $this->rules = array();
+
         return $this;
     }
 
@@ -325,7 +333,7 @@ class Inflector extends AbstractFilter
      * Set a filtering rule for a spec.  $ruleSet can be a string, Filter object
      * or an array of strings or filter objects.
      *
-     * @param  string $spec
+     * @param  string                                    $spec
      * @param  array|string|\Zend\Filter\FilterInterface $ruleSet
      * @return self
      */
@@ -333,6 +341,7 @@ class Inflector extends AbstractFilter
     {
         $spec = $this->_normalizeSpec($spec);
         $this->rules[$spec] = array();
+
         return $this->addFilterRule($spec, $ruleSet);
     }
 
@@ -378,6 +387,7 @@ class Inflector extends AbstractFilter
     {
         $name = $this->_normalizeSpec($name);
         $this->rules[$name] = (string) $value;
+
         return $this;
     }
 
@@ -389,20 +399,21 @@ class Inflector extends AbstractFilter
      * target.
      *
      * @param  string $name
-     * @param  mixed $reference
+     * @param  mixed  $reference
      * @return self
      */
     public function setStaticRuleReference($name, &$reference)
     {
         $name = $this->_normalizeSpec($name);
-        $this->rules[$name] =& $reference;
+        $this->rules[$name] = & $reference;
+
         return $this;
     }
 
     /**
      * Inflect
      *
-     * @param  string|array $source
+     * @param  string|array               $source
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -420,24 +431,24 @@ class Inflector extends AbstractFilter
             if (isset($source[$ruleName])) {
                 if (is_string($ruleValue)) {
                     // overriding the set rule
-                    $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $source[$ruleName]);
+                    $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $source[$ruleName]);
                 } elseif (is_array($ruleValue)) {
                     $processedPart = $source[$ruleName];
                     foreach ($ruleValue as $ruleFilter) {
                         $processedPart = $ruleFilter($processedPart);
                     }
-                    $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $processedPart);
+                    $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $processedPart);
                 }
             } elseif (is_string($ruleValue)) {
-                $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $ruleValue);
+                $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $ruleValue);
             }
         }
 
         // all of the values of processedParts would have been str_replace('\\', '\\\\', ..)'d to disable preg_replace backreferences
         $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->target);
 
-        if ($this->throwTargetExceptionsOn && (preg_match('#(?=' . $pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
-            throw new Exception\RuntimeException('A replacement identifier ' . $this->targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
+        if ($this->throwTargetExceptionsOn && (preg_match('#(?='.$pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
+            throw new Exception\RuntimeException('A replacement identifier '.$this->targetReplacementIdentifier.' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: '.$inflectedTarget);
         }
 
         return $inflectedTarget;
@@ -457,7 +468,7 @@ class Inflector extends AbstractFilter
     /**
      * Resolve named filters and convert them to filter objects.
      *
-     * @param  string $rule
+     * @param  string          $rule
      * @return FilterInterface
      */
     protected function _getRule($rule)
@@ -467,6 +478,7 @@ class Inflector extends AbstractFilter
         }
 
         $rule = (string) $rule;
+
         return $this->getPluginManager()->get($rule);
     }
 }

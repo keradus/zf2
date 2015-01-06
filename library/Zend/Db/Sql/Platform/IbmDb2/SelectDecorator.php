@@ -20,7 +20,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     /**
      * @var bool
      */
-    protected $isSelectContainDistinct= false;
+    protected $isSelectContainDistinct = false;
 
     /**
      * @var Select
@@ -56,7 +56,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
      */
     protected function renderTable($table, $alias = null)
     {
-        return $table . ' ' . $alias;
+        return $table.' '.$alias;
     }
 
     protected function localizeVariables()
@@ -70,11 +70,11 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     }
 
     /**
-     * @param  PlatformInterface  $platform
-     * @param  DriverInterface    $driver
-     * @param  ParameterContainer $parameterContainer
-     * @param  array              $sqls
-     * @param  array              $parameters
+     * @param PlatformInterface  $platform
+     * @param DriverInterface    $driver
+     * @param ParameterContainer $parameterContainer
+     * @param array              $sqls
+     * @param array              $parameters
      */
     protected function processLimitOffset(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, &$sqls, &$parameters)
     {
@@ -84,7 +84,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
         $selectParameters = $parameters[self::SELECT];
 
-        $starSuffix = $platform->getIdentifierSeparator() . self::SQL_STAR;
+        $starSuffix = $platform->getIdentifierSeparator().self::SQL_STAR;
         foreach ($selectParameters[0] as $i => $columnParameters) {
             if ($columnParameters[0] == self::SQL_STAR
                 || (isset($columnParameters[1]) && $columnParameters[1] == self::SQL_STAR)
@@ -151,9 +151,9 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
         // add a column for row_number() using the order specification //dense_rank()
         if ($this->getIsSelectContainDistinct()) {
-            $parameters[self::SELECT][0][] = array('DENSE_RANK() OVER (' . $orderBy . ')', 'ZEND_DB_ROWNUM');
+            $parameters[self::SELECT][0][] = array('DENSE_RANK() OVER ('.$orderBy.')', 'ZEND_DB_ROWNUM');
         } else {
-            $parameters[self::SELECT][0][] = array('ROW_NUMBER() OVER (' . $orderBy . ')', 'ZEND_DB_ROWNUM');
+            $parameters[self::SELECT][0][] = array('ROW_NUMBER() OVER ('.$orderBy.')', 'ZEND_DB_ROWNUM');
         }
 
         $sqls[self::SELECT] = $this->createSqlFromSpecificationAndParameters(

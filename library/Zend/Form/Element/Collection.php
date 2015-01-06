@@ -104,7 +104,7 @@ class Collection extends Fieldset
      * - should_create_template: if set to true, a template is generated (inside a <span>)
      * - template_placeholder: placeholder used in the data template
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable $options
      * @return Collection
      */
     public function setOptions($options)
@@ -145,7 +145,7 @@ class Collection extends Fieldset
     /**
      * Checks if the object can be set in this fieldset
      *
-     * @param object $object
+     * @param  object $object
      * @return bool
      */
     public function allowObjectBinding($object)
@@ -157,7 +157,7 @@ class Collection extends Fieldset
      * Set the object used by the hydrator
      * In this case the "object" is a collection of objects
      *
-     * @param  array|Traversable $object
+     * @param  array|Traversable                  $object
      * @return Fieldset|FieldsetInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -180,7 +180,7 @@ class Collection extends Fieldset
     /**
      * Populate values
      *
-     * @param array|Traversable $data
+     * @param  array|Traversable                             $data
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @throws \Zend\Form\Exception\DomainException
      * @return void
@@ -203,7 +203,7 @@ class Collection extends Fieldset
         if (!$this->allowRemove && count($data) < $this->count) {
             throw new Exception\DomainException(sprintf(
                 'There are fewer elements than specified in the collection (%s). Either set the allow_remove option '
-                . 'to true, or re-submit the form.',
+                .'to true, or re-submit the form.',
                 get_class($this)
             ));
         }
@@ -260,7 +260,7 @@ class Collection extends Fieldset
     /**
      * Bind values to the object
      *
-     * @param array $values
+     * @param  array            $values
      * @return array|mixed|void
      */
     public function bindValues(array $values = array())
@@ -288,6 +288,7 @@ class Collection extends Fieldset
     public function setCount($count)
     {
         $this->count = $count > 0 ? $count : 0;
+
         return $this;
     }
 
@@ -304,7 +305,7 @@ class Collection extends Fieldset
     /**
      * Set the target element
      *
-     * @param ElementInterface|array|Traversable $elementOrFieldset
+     * @param  ElementInterface|array|Traversable            $elementOrFieldset
      * @return Collection
      * @throws \Zend\Form\Exception\InvalidArgumentException
      */
@@ -321,7 +322,7 @@ class Collection extends Fieldset
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s requires that $elementOrFieldset be an object implementing %s; received "%s"',
                 __METHOD__,
-                __NAMESPACE__ . '\ElementInterface',
+                __NAMESPACE__.'\ElementInterface',
                 (is_object($elementOrFieldset) ? get_class($elementOrFieldset) : gettype($elementOrFieldset))
             ));
         }
@@ -344,12 +345,13 @@ class Collection extends Fieldset
     /**
      * Get allow add
      *
-     * @param bool $allowAdd
+     * @param  bool       $allowAdd
      * @return Collection
      */
     public function setAllowAdd($allowAdd)
     {
         $this->allowAdd = (bool) $allowAdd;
+
         return $this;
     }
 
@@ -364,12 +366,13 @@ class Collection extends Fieldset
     }
 
     /**
-     * @param bool $allowRemove
+     * @param  bool       $allowRemove
      * @return Collection
      */
     public function setAllowRemove($allowRemove)
     {
         $this->allowRemove = (bool) $allowRemove;
+
         return $this;
     }
 
@@ -384,7 +387,7 @@ class Collection extends Fieldset
     /**
      * If set to true, a template prototype is automatically added to the form to ease the creation of dynamic elements through JavaScript
      *
-     * @param bool $shouldCreateTemplate
+     * @param  bool       $shouldCreateTemplate
      * @return Collection
      */
     public function setShouldCreateTemplate($shouldCreateTemplate)
@@ -407,7 +410,7 @@ class Collection extends Fieldset
     /**
      * Set the placeholder used in the template generated to help create new elements in JavaScript
      *
-     * @param string $templatePlaceholder
+     * @param  string     $templatePlaceholder
      * @return Collection
      */
     public function setTemplatePlaceholder($templatePlaceholder)
@@ -430,12 +433,13 @@ class Collection extends Fieldset
     }
 
     /**
-     * @param bool $createNewObjects
+     * @param  bool       $createNewObjects
      * @return Collection
      */
     public function setCreateNewObjects($createNewObjects)
     {
         $this->createNewObjects = (bool) $createNewObjects;
+
         return $this;
     }
 
@@ -558,7 +562,7 @@ class Collection extends Fieldset
     /**
      * Add a new instance of the target element
      *
-     * @param string $name
+     * @param  string                    $name
      * @return ElementInterface
      * @throws Exception\DomainException
      */
@@ -573,7 +577,7 @@ class Collection extends Fieldset
 
         if (!$this->allowAdd && $this->count() > $this->count) {
             throw new Exception\DomainException(sprintf(
-                'There are more elements than specified in the collection (%s). Either set the allow_add option ' .
+                'There are more elements than specified in the collection (%s). Either set the allow_add option '.
                 'to true, or re-submit the form.',
                 get_class($this)
             ));

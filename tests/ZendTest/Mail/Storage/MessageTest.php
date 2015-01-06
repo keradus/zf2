@@ -25,7 +25,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_file = __DIR__ . '/../_files/mail.txt';
+        $this->_file = __DIR__.'/../_files/mail.txt';
     }
 
     public function testInvalidFile()
@@ -90,7 +90,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(substr($message->getPart(1)->getContent(), 0, 14), 'The first part');
     }
 
-
     public function testGetWrongPart()
     {
         $message = new Message(array('file' => $this->_file));
@@ -111,7 +110,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(substr($message->getContent(), 0, 5), '<?php');
 
         $raw = file_get_contents(__FILE__);
-        $raw = "\t" . $raw;
+        $raw = "\t".$raw;
         $message = new Message(array('raw' => $raw));
 
         $this->assertEquals(substr($message->getContent(), 0, 6), "\t<?php");
@@ -120,10 +119,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testMultipleHeader()
     {
         $raw = file_get_contents($this->_file);
-        $raw = "sUBject: test\nSubJect: test2\n" . $raw;
+        $raw = "sUBject: test\nSubJect: test2\n".$raw;
         $message = new Message(array('raw' => $raw));
 
-        $this->assertEquals('test' . Mime\Mime::LINEEND . 'test2' . Mime\Mime::LINEEND . 'multipart',
+        $this->assertEquals('test'.Mime\Mime::LINEEND.'test2'.Mime\Mime::LINEEND.'multipart',
                             $message->getHeader('subject', 'string'));
 
         $this->assertEquals(array('test', 'test2', 'multipart'),
@@ -167,7 +166,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function testMissingId()
     {
-        $mail = new Storage\Mbox(array('filename' => __DIR__ . '/../_files/test.mbox/INBOX'));
+        $mail = new Storage\Mbox(array('filename' => __DIR__.'/../_files/test.mbox/INBOX'));
 
         try {
             $message = new Message(array('handler' => $mail));
@@ -229,7 +228,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         foreach ($newlines as $contentEOL) {
             foreach ($newlines as $decodeEOL) {
-                $content = $header . $contentEOL . $contentEOL . $body;
+                $content = $header.$contentEOL.$contentEOL.$body;
                 Mime\Decode::splitMessage($content, $decoded_headers, $decoded_body, $decodeEOL);
                 $this->assertEquals(array('Test' => 'test'), $decoded_headers->toArray());
                 $this->assertEquals($body, $decoded_body);
@@ -313,7 +312,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function testLateFetch()
     {
-        $mail = new Storage\Mbox(array('filename' => __DIR__ . '/../_files/test.mbox/INBOX'));
+        $mail = new Storage\Mbox(array('filename' => __DIR__.'/../_files/test.mbox/INBOX'));
 
         $message = new Message(array('handler' => $mail, 'id' => 5));
         $this->assertEquals($message->countParts(), 2);
@@ -352,7 +351,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $origFlags = array(
             'foo' => 'bar',
-            'baz' => 'bat'
+            'baz' => 'bat',
         );
         $message = new Message(array('flags' => $origFlags));
 
@@ -425,7 +424,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\\Mail\\Exception\\RuntimeException');
 
         $raw = file_get_contents($this->_file);
-        $raw = "From foo@example.com  Sun Jan 01 00:00:00 2000\n" . $raw;
+        $raw = "From foo@example.com  Sun Jan 01 00:00:00 2000\n".$raw;
         $message = new Message(array('raw' => $raw, 'strict' => true));
     }
 }

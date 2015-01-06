@@ -39,7 +39,6 @@ class ContentLocationTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implementation specific tests  */
-
     public function testContentLocationCanSetAndAccessAbsoluteUri()
     {
         $contentLocationHeader = ContentLocation::fromString('Content-Location: http://www.example.com/path');

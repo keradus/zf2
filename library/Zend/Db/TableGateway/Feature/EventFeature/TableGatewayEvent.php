@@ -63,7 +63,7 @@ class TableGatewayEvent implements EventInterface
      * Get a single parameter by name
      *
      * @param  string $name
-     * @param  mixed $default Default value to return if parameter does not exist
+     * @param  mixed  $default Default value to return if parameter does not exist
      * @return mixed
      */
     public function getParam($name, $default = null)
@@ -108,7 +108,7 @@ class TableGatewayEvent implements EventInterface
      * Set a single parameter by key
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function setParam($name, $value)

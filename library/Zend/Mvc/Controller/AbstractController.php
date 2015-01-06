@@ -96,8 +96,8 @@ abstract class AbstractController implements
      * Dispatch a request
      *
      * @events dispatch.pre, dispatch.post
-     * @param  Request $request
-     * @param  null|Response $response
+     * @param  Request        $request
+     * @param  null|Response  $response
      * @return Response|mixed
      */
     public function dispatch(Request $request, Response $response = null)
@@ -166,7 +166,7 @@ abstract class AbstractController implements
             array(
                 __CLASS__,
                 $className,
-                substr($className, 0, strpos($className, '\\'))
+                substr($className, 0, strpos($className, '\\')),
             ),
             array_values(class_implements($className)),
             (array) $this->eventIdentifier
@@ -262,13 +262,14 @@ abstract class AbstractController implements
         }
 
         $this->plugins->setController($this);
+
         return $this->plugins;
     }
 
     /**
      * Set plugin manager
      *
-     * @param  PluginManager $plugins
+     * @param  PluginManager      $plugins
      * @return AbstractController
      */
     public function setPluginManager(PluginManager $plugins)

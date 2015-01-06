@@ -32,7 +32,7 @@ class Regex extends AbstractValidator
      * @var array
      */
     protected $messageVariables = array(
-        'pattern' => 'pattern'
+        'pattern' => 'pattern',
     );
 
     /**
@@ -45,7 +45,7 @@ class Regex extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|Traversable $pattern
+     * @param  string|Traversable                 $pattern
      * @throws Exception\InvalidArgumentException On missing 'pattern' parameter
      */
     public function __construct($pattern)
@@ -53,6 +53,7 @@ class Regex extends AbstractValidator
         if (is_string($pattern)) {
             $this->setPattern($pattern);
             parent::__construct(array());
+
             return;
         }
 
@@ -86,9 +87,9 @@ class Regex extends AbstractValidator
     /**
      * Sets the pattern option
      *
-     * @param  string $pattern
+     * @param  string                             $pattern
      * @throws Exception\InvalidArgumentException if there is a fatal error in pattern matching
-     * @return Regex Provides a fluent interface
+     * @return Regex                              Provides a fluent interface
      */
     public function setPattern($pattern)
     {
@@ -118,6 +119,7 @@ class Regex extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -128,11 +130,13 @@ class Regex extends AbstractValidator
         ErrorHandler::stop();
         if (false === $status) {
             $this->error(self::ERROROUS);
+
             return false;
         }
 
         if (!$status) {
             $this->error(self::NOT_MATCH);
+
             return false;
         }
 

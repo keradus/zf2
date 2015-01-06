@@ -60,12 +60,13 @@ class FeedModel extends ViewModel
     /**
      * Set the feed object
      *
-     * @param  Feed $feed
+     * @param  Feed      $feed
      * @return FeedModel
      */
     public function setFeed(Feed $feed)
     {
         $this->feed = $feed;
+
         return $this;
     }
 
@@ -84,6 +85,7 @@ class FeedModel extends ViewModel
         if (isset($options['feed_type'])) {
             $this->type = $options['feed_type'];
         }
+
         return $this->type;
     }
 }

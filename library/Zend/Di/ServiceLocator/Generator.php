@@ -139,7 +139,7 @@ class Generator
                 }
             } else {
                 // Normal instantiation
-                $className = '\\' . ltrim($name, '\\');
+                $className = '\\'.ltrim($name, '\\');
                 $creation = sprintf('$object = new %s(%s);', $className, implode(', ', $params));
             }
 
@@ -335,7 +335,7 @@ class Generator
     protected function normalizeAlias($alias)
     {
         $normalized = preg_replace('/[^a-zA-Z0-9]/', ' ', $alias);
-        $normalized = 'get' . str_replace(' ', '', ucwords($normalized));
+        $normalized = 'get'.str_replace(' ', '', ucwords($normalized));
 
         return $normalized;
     }

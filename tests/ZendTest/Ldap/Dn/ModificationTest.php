@@ -25,7 +25,7 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(array('cn' => 'Baker, Alice'), $dn->get(0));
         $this->assertEquals(array('cn' => 'Users',
-                                 'ou'  => 'Lab'), $dn->get(1)
+                                 'ou'  => 'Lab', ), $dn->get(1)
         );
         $this->assertEquals(array('dc' => 'example'), $dn->get(2));
         $this->assertEquals(array('dc' => 'com'), $dn->get(3));
@@ -51,67 +51,67 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(
                                  array('cn' => 'Baker, Alice'),
                                  array('cn' => 'Users',
-                                       'ou' => 'Lab')
+                                       'ou' => 'Lab', ),
                             ), $dn->get(0, 2)
         );
         $this->assertEquals(array(
                                  array('cn' => 'Baker, Alice'),
                                  array('cn' => 'Users',
-                                       'ou' => 'Lab'),
-                                 array('dc' => 'example')
+                                       'ou' => 'Lab', ),
+                                 array('dc' => 'example'),
                             ), $dn->get(0, 3)
         );
         $this->assertEquals(array(
                                  array('cn' => 'Baker, Alice'),
                                  array('cn' => 'Users',
-                                       'ou' => 'Lab'),
+                                       'ou' => 'Lab', ),
                                  array('dc' => 'example'),
-                                 array('dc' => 'com')
+                                 array('dc' => 'com'),
                             ), $dn->get(0, 4)
         );
         $this->assertEquals(array(
                                  array('cn' => 'Baker, Alice'),
                                  array('cn' => 'Users',
-                                       'ou' => 'Lab'),
+                                       'ou' => 'Lab', ),
                                  array('dc' => 'example'),
-                                 array('dc' => 'com')
+                                 array('dc' => 'com'),
                             ), $dn->get(0, 5)
         );
 
         $this->assertEquals(array(
                                  array('cn' => 'Users',
-                                       'ou' => 'Lab'),
-                                 array('dc' => 'example')
+                                       'ou' => 'Lab', ),
+                                 array('dc' => 'example'),
                             ), $dn->get(1, 2)
         );
         $this->assertEquals(array(
                                  array('cn' => 'Users',
-                                       'ou' => 'Lab'),
+                                       'ou' => 'Lab', ),
                                  array('dc' => 'example'),
-                                 array('dc' => 'com')
+                                 array('dc' => 'com'),
                             ), $dn->get(1, 3)
         );
         $this->assertEquals(array(
                                  array('cn' => 'Users',
-                                       'ou' => 'Lab'),
+                                       'ou' => 'Lab', ),
                                  array('dc' => 'example'),
-                                 array('dc' => 'com')
+                                 array('dc' => 'com'),
                             ), $dn->get(1, 4)
         );
 
         $this->assertEquals(array(
                                  array('dc' => 'example'),
-                                 array('dc' => 'com')
+                                 array('dc' => 'com'),
                             ), $dn->get(2, 2)
         );
         $this->assertEquals(array(
                                  array('dc' => 'example'),
-                                 array('dc' => 'com')
+                                 array('dc' => 'com'),
                             ), $dn->get(2, 3)
         );
 
         $this->assertEquals(array(
-                                 array('dc' => 'com')
+                                 array('dc' => 'com'),
                             ), $dn->get(3, 2)
         );
     }
@@ -129,7 +129,7 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals('uid=abaker,ou=Lab,dc=example+ou=Test,dc=com',
             $dn->set(2, array('dc' => 'example',
-                             'ou'  => 'Test')
+                             'ou'  => 'Test', )
             )->toString()
         );
         $this->assertEquals('uid=abaker,ou=Lab,dc=example+ou=Test,dc=de\+fr',
@@ -302,7 +302,7 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
 
         $dn    = Ldap\Dn::fromString($dnString);
         $dn[2] = array('dc' => 'example',
-                       'ou' => 'Test');
+                       'ou' => 'Test', );
         $this->assertEquals('cn=Baker\\, Alice,cn=Users,dc=example+ou=Test,dc=com', $dn->toString());
 
         $dn    = Ldap\Dn::fromString($dnString);

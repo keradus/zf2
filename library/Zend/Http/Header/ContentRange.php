@@ -24,7 +24,7 @@ class ContentRange implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-range') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Range string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Range string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class ContentRange implements HeaderInterface
 
     public function toString()
     {
-        return 'Content-Range: ' . $this->getFieldValue();
+        return 'Content-Range: '.$this->getFieldValue();
     }
 }

@@ -49,7 +49,7 @@ class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testCanPassTagsToConstructor()
     {
         $docBlockGenerator = new DocBlockGenerator(null, null, array(
-            array('name' => 'foo')
+            array('name' => 'foo'),
         ));
 
         $tags = $docBlockGenerator->getTags();
@@ -99,8 +99,8 @@ EOS;
     {
         $this->docBlockGenerator->setShortDescription('@var Foo this is foo bar');
 
-        $expected = '/**' . DocBlockGenerator::LINE_FEED . ' * @var Foo this is foo bar'
-            . DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
+        $expected = '/**'.DocBlockGenerator::LINE_FEED.' * @var Foo this is foo bar'
+            .DocBlockGenerator::LINE_FEED.' */'.DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
     }
 
@@ -113,7 +113,7 @@ EOS;
                 array(
                     'name'        => 'foo',
                     'description' => 'bar',
-                )
+                ),
             ),
         ));
 
@@ -130,10 +130,10 @@ EOS;
         $largeStr = '@var This is a very large string that will be wrapped if it contains more than 80 characters';
         $this->docBlockGenerator->setLongDescription($largeStr);
 
-        $expected = '/**' . DocBlockGenerator::LINE_FEED
-            . ' * @var This is a very large string that will be wrapped if it contains more than'
-            . DocBlockGenerator::LINE_FEED.' * 80 characters'. DocBlockGenerator::LINE_FEED
-            . ' */' . DocBlockGenerator::LINE_FEED;
+        $expected = '/**'.DocBlockGenerator::LINE_FEED
+            .' * @var This is a very large string that will be wrapped if it contains more than'
+            .DocBlockGenerator::LINE_FEED.' * 80 characters'.DocBlockGenerator::LINE_FEED
+            .' */'.DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
     }
 
@@ -146,9 +146,9 @@ EOS;
         $this->docBlockGenerator->setLongDescription($largeStr);
         $this->docBlockGenerator->setWordWrap(false);
 
-        $expected = '/**' . DocBlockGenerator::LINE_FEED
-            . ' * @var This is a very large string that will not be wrapped if it contains more than'
-            . ' 80 characters'. DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
+        $expected = '/**'.DocBlockGenerator::LINE_FEED
+            .' * @var This is a very large string that will not be wrapped if it contains more than'
+            .' 80 characters'.DocBlockGenerator::LINE_FEED.' */'.DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
     }
 

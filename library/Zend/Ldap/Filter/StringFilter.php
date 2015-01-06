@@ -38,6 +38,6 @@ class StringFilter extends AbstractFilter
      */
     public function toString()
     {
-        return '(' . $this->filter . ')';
+        return '('.$this->filter.')';
     }
 }

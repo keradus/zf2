@@ -46,7 +46,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
             'aBcDeF'  => true,
             ''        => false,
             ' '       => false,
-            "\n"      => false
+            "\n"      => false,
             );
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->validator->isValid($input));
@@ -83,13 +83,13 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
             ' '       => true,
             "\n"      => true,
             " \t "    => true,
-            "a\tb c"  => true
+            "a\tb c"  => true,
         );
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(
                 $result,
                 $this->validator->isValid($input),
-                "Expected '$input' to be considered " . ($result ? '' : 'in') . "valid"
+                "Expected '$input' to be considered ".($result ? '' : 'in')."valid"
             );
         }
     }

@@ -49,8 +49,8 @@ class DateTimeSelect extends DateSelect
     /**
      * Constructor. Add the hour, minute and second select elements
      *
-     * @param  null|int|string  $name    Optional name for the element
-     * @param  array            $options Optional options for the element
+     * @param null|int|string $name    Optional name for the element
+     * @param array           $options Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -68,7 +68,7 @@ class DateTimeSelect extends DateSelect
      * - second_attributes: HTML attributes to be rendered with the second element
      * - should_show_seconds: if set to true, the seconds select is shown
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable $options
      * @return DateSelect
      */
     public function setOptions($options)
@@ -121,12 +121,13 @@ class DateTimeSelect extends DateSelect
     /**
      * Set the hour attributes
      *
-     * @param  array $hourAttributes
+     * @param  array      $hourAttributes
      * @return DateSelect
      */
     public function setHourAttributes(array $hourAttributes)
     {
         $this->hourElement->setAttributes($hourAttributes);
+
         return $this;
     }
 
@@ -143,12 +144,13 @@ class DateTimeSelect extends DateSelect
     /**
      * Set the minute attributes
      *
-     * @param  array $minuteAttributes
+     * @param  array      $minuteAttributes
      * @return DateSelect
      */
     public function setMinuteAttributes(array $minuteAttributes)
     {
         $this->minuteElement->setAttributes($minuteAttributes);
+
         return $this;
     }
 
@@ -165,12 +167,13 @@ class DateTimeSelect extends DateSelect
     /**
      * Set the second attributes
      *
-     * @param  array $secondAttributes
+     * @param  array      $secondAttributes
      * @return DateSelect
      */
     public function setSecondAttributes(array $secondAttributes)
     {
         $this->secondElement->setAttributes($secondAttributes);
+
         return $this;
     }
 
@@ -188,12 +191,13 @@ class DateTimeSelect extends DateSelect
      * If set to true, this indicate that the second select is shown. If set to true, the seconds will be
      * assumed to always be 00
      *
-     * @param  bool $shouldShowSeconds
+     * @param  bool           $shouldShowSeconds
      * @return DateTimeSelect
      */
     public function setShouldShowSeconds($shouldShowSeconds)
     {
         $this->shouldShowSeconds = (bool) $shouldShowSeconds;
+
         return $this;
     }
 
@@ -206,7 +210,7 @@ class DateTimeSelect extends DateSelect
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed                                         $value
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @return void|\Zend\Form\Element
      */
@@ -231,7 +235,7 @@ class DateTimeSelect extends DateSelect
                 'day'    => $value->format('d'),
                 'hour'   => $value->format('H'),
                 'minute' => $value->format('i'),
-                'second' => $value->format('s')
+                'second' => $value->format('s'),
             );
         }
 
@@ -274,9 +278,9 @@ class DateTimeSelect extends DateSelect
         parent::prepareElement($form);
 
         $name = $this->getName();
-        $this->hourElement->setName($name . '[hour]');
-        $this->minuteElement->setName($name . '[minute]');
-        $this->secondElement->setName($name . '[second]');
+        $this->hourElement->setName($name.'[hour]');
+        $this->minuteElement->setName($name.'[minute]');
+        $this->secondElement->setName($name.'[second]');
     }
 
     /**
@@ -326,13 +330,13 @@ class DateTimeSelect extends DateSelect
                             }
 
                             return $date;
-                        }
-                    )
-                )
+                        },
+                    ),
+                ),
             ),
             'validators' => array(
                 $this->getValidator(),
-            )
+            ),
         );
     }
 

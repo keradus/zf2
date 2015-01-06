@@ -34,7 +34,7 @@ class DerivedClassScanner extends ClassScanner
     protected $interfaceClassScanners = array();
 
     /**
-     * @param ClassScanner $classScanner
+     * @param ClassScanner     $classScanner
      * @param DirectoryScanner $directoryScanner
      */
     public function __construct(ClassScanner $classScanner, DirectoryScanner $directoryScanner)
@@ -135,7 +135,7 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
-     * @param  bool $returnClassScanners
+     * @param  bool  $returnClassScanners
      * @return array
      */
     public function getInterfaces($returnClassScanners = false)
@@ -170,13 +170,14 @@ class DerivedClassScanner extends ClassScanner
     /**
      * Return a list of constants
      *
-     * @param  bool $namesOnly Set false to return instances of ConstantScanner
+     * @param  bool                    $namesOnly Set false to return instances of ConstantScanner
      * @return array|ConstantScanner[]
      */
     public function getConstants($namesOnly = true)
     {
         if (true === $namesOnly) {
             trigger_error('Use method getConstantNames() instead', E_USER_DEPRECATED);
+
             return $this->getConstantNames();
         }
 
@@ -191,7 +192,7 @@ class DerivedClassScanner extends ClassScanner
     /**
      * Return a single constant by given name or index of info
      *
-     * @param  string|int $constantNameOrInfoIndex
+     * @param  string|int                         $constantNameOrInfoIndex
      * @throws Exception\InvalidArgumentException
      * @return bool|ConstantScanner
      */
@@ -250,7 +251,7 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
-     * @param  bool $returnScannerProperty
+     * @param  bool  $returnScannerProperty
      * @return array
      */
     public function getProperties($returnScannerProperty = false)
@@ -266,7 +267,7 @@ class DerivedClassScanner extends ClassScanner
     /**
      * Return a single property by given name or index of info
      *
-     * @param  string|int $propertyNameOrInfoIndex
+     * @param  string|int                         $propertyNameOrInfoIndex
      * @throws Exception\InvalidArgumentException
      * @return bool|PropertyScanner
      */
@@ -336,7 +337,7 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
-     * @param  int|string $methodNameOrInfoIndex
+     * @param  int|string                         $methodNameOrInfoIndex
      * @return MethodScanner
      * @throws Exception\InvalidArgumentException
      */

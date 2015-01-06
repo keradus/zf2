@@ -71,7 +71,7 @@ class LoaderPluginManager extends AbstractPluginManager
      * Checks that the filter loaded is an instance of
      * Loader\FileLoaderInterface or Loader\RemoteLoaderInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                      $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
      */

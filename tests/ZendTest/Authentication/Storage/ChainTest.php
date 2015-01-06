@@ -15,7 +15,7 @@ use Zend\Authentication\Storage\NonPersistent;
 use PHPUnit_Framework_TestCase as TestCase;
 
 /**
-  * @group      Zend_Auth
+ * @group      Zend_Auth
  */
 class ChainTest extends TestCase
 {
@@ -26,7 +26,7 @@ class ChainTest extends TestCase
      */
     public function testEmptyChain()
     {
-        $chain = new Chain;
+        $chain = new Chain();
 
         $this->assertTrue($chain->isEmpty());
     }
@@ -36,7 +36,7 @@ class ChainTest extends TestCase
      */
     public function testSingularChainEmpty()
     {
-        $chain = new Chain;
+        $chain = new Chain();
         $chain->add($this->storageFactory());
 
         $this->assertTrue($chain->isEmpty());
@@ -47,7 +47,7 @@ class ChainTest extends TestCase
      */
     public function testSingularChainNonEmpty()
     {
-        $chain = new Chain;
+        $chain = new Chain();
         $chain->add($this->storageFactory(self::ID));
 
         $this->assertFalse($chain->isEmpty());
@@ -62,7 +62,7 @@ class ChainTest extends TestCase
         $storageA = $this->storageFactory();
         $storageB = $this->storageFactory(self::ID);
 
-        $chain = new Chain;
+        $chain = new Chain();
         $chain->add($storageA); // Defaults to 1
         $chain->add($storageB, 10);
         $chain->isEmpty();
@@ -81,7 +81,7 @@ class ChainTest extends TestCase
         $emptyStorageA = $this->storageFactory();
         $emptyStorageB = $this->storageFactory();
 
-        $chain = new Chain;
+        $chain = new Chain();
         $chain->add($emptyStorageA);
         $chain->add($emptyStorageB);
 
@@ -106,7 +106,7 @@ class ChainTest extends TestCase
         $storageC = $this->storageFactory(self::ID);
         $emptyStorageD = $this->storageFactory();
 
-        $chain = new Chain;
+        $chain = new Chain();
         $chain->add($emptyStorageA);
         $chain->add($emptyStorageB);
         $chain->add($storageC);

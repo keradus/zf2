@@ -174,9 +174,9 @@ EOS;
     {
         $className = uniqid('ClassReflectionTestGenerated');
 
-        eval('name' . 'space ' . __NAMESPACE__ . '; cla' . 'ss ' . $className . '{}');
+        eval('name'.'space '.__NAMESPACE__.'; cla'.'ss '.$className.'{}');
 
-        $reflectionClass = new ClassReflection(__NAMESPACE__ . '\\' . $className);
+        $reflectionClass = new ClassReflection(__NAMESPACE__.'\\'.$className);
 
         $this->assertSame('', $reflectionClass->getContents());
     }

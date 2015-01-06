@@ -77,7 +77,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
                 'abc123'        => 'abc',
                 'abc 123'       => 'abc',
                 'abcxyz'        => 'abcxyz',
-                ''              => ''
+                ''              => '',
             );
         } elseif (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
@@ -94,7 +94,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
                 'z Ｙ　x'       => 'zx',
                 'Ｗ1v３Ｕ4t'    => 'vt',
                 '，sй.rλ:qν＿p' => 'srqp',
-                'onml'          => 'onml'
+                'onml'          => 'onml',
             );
         } else {
             //The Alphabet means each language's alphabet.
@@ -106,7 +106,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
                 'لعربية'        => 'لعربية',
                 'grzegżółka'    => 'grzegżółka',
                 'België'        => 'België',
-                ''              => ''
+                ''              => '',
             );
         }
 
@@ -133,14 +133,14 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
                 'abcxyz'   => 'abcxyz',
                 ''         => '',
                 "\n"       => "\n",
-                " \t "     => " \t "
+                " \t "     => " \t ",
             );
         }
         if (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
                 'a B'    => 'a B',
-                'zＹ　x' => 'zx'
+                'zＹ　x' => 'zx',
             );
         } else {
             //The Alphabet means each language's alphabet.
@@ -154,7 +154,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
                 'België'        => 'België',
                 ''              => '',
                 "\n"            => "\n",
-                " \t "          => " \t "
+                " \t "          => " \t ",
                 );
         }
 
@@ -172,7 +172,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
             'abc123'        => 'abc',
             'abc 123'       => 'abc',
             'abcxyz'        => 'abcxyz',
-            ''              => ''
+            ''              => '',
         );
 
         $actual = $filter->filter(array_keys($values));
@@ -184,7 +184,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
-            array(new \stdClass())
+            array(new \stdClass()),
         );
     }
 

@@ -40,7 +40,7 @@ class ElementTest extends TestCase
             'type'     => 'text',
             'class'    => 'text-element',
             'data-foo' => 'bar',
-            'x-autocompletetype' => 'email'
+            'x-autocompletetype' => 'email',
         );
         $element->setAttributes($attributes);
         $this->assertEquals($attributes, $element->getAttributes());
@@ -127,7 +127,7 @@ class ElementTest extends TestCase
     public function testCanSetCustomOptionFromConstructor()
     {
         $element = new Element('foo', array(
-            'custom' => 'option'
+            'custom' => 'option',
         ));
         $options = $element->getOptions();
         $this->assertArrayHasKey('custom', $options);
@@ -138,7 +138,7 @@ class ElementTest extends TestCase
     {
         $element = new Element('foo');
         $element->setOptions(array(
-            'custom' => 'option'
+            'custom' => 'option',
         ));
 
         $options = $element->getOptions();
@@ -150,7 +150,7 @@ class ElementTest extends TestCase
     {
         $element = new Element('foo');
         $element->setOptions(array(
-            'custom' => 'option'
+            'custom' => 'option',
         ));
         $option = $element->getOption('custom');
         $this->assertEquals('option', $option);
@@ -161,7 +161,7 @@ class ElementTest extends TestCase
         $element = new Element('foo');
         $element->setOptions(array(
             'label' => 'foo',
-            'label_attributes' => array('bar' => 'baz')
+            'label_attributes' => array('bar' => 'baz'),
         ));
         $option = $element->getOption('label_attributes');
         $this->assertEquals(array('bar' => 'baz'), $option);
@@ -171,7 +171,7 @@ class ElementTest extends TestCase
     {
         $element = new Element('foo');
         $element->setOptions(array(
-            'label_options' => array('moar' => 'foo')
+            'label_options' => array('moar' => 'foo'),
         ));
 
         $labelOptions = $element->getLabelOptions();
@@ -234,7 +234,7 @@ class ElementTest extends TestCase
     {
         $element = new Element('foo');
         $element->setOptions(array(
-            'label_options' => array('moar' => 'foo')
+            'label_options' => array('moar' => 'foo'),
         ));
 
         $this->assertEquals('foo', $element->getLabelOption('moar'));
@@ -252,7 +252,7 @@ class ElementTest extends TestCase
         $element = new Element();
         $options = array(
             'foo'     => 'bar',
-            'foo2'    => 'baz'
+            'foo2'    => 'baz',
         );
         $element->setLabelOptions($options);
 
@@ -276,11 +276,11 @@ class ElementTest extends TestCase
         $element = new Element();
         $options = array(
             'foo'     => 'bar',
-            'foo2'    => 'baz'
+            'foo2'    => 'baz',
         );
         $optionsExtra = array(
             'foo3'    => 'bar2',
-            'foo2'    => 'baz2'
+            'foo2'    => 'baz2',
         );
         $element->setLabelOptions($options);
         $element->setLabelOptions($optionsExtra);
@@ -297,7 +297,7 @@ class ElementTest extends TestCase
         $element = new Element();
         $options = array(
             'foo'     => 'bar',
-            'foo2'    => 'baz'
+            'foo2'    => 'baz',
         );
         $element->setLabelOptions($options);
         $element->clearLabelOptions();
@@ -309,7 +309,7 @@ class ElementTest extends TestCase
         $element = new Element();
         $options = array(
             'foo'     => 'bar',
-            'foo2'    => 'baz'
+            'foo2'    => 'baz',
         );
         $element->setLabelOptions($options);
         $element->removeLabelOption('foo2');
@@ -322,7 +322,7 @@ class ElementTest extends TestCase
         $options = array(
             'foo'     => 'bar',
             'foo2'    => 'baz',
-            'foo3'    => 'bar2'
+            'foo3'    => 'bar2',
         );
         $element->setLabelOptions($options);
         $element->removeLabelOptions(array('foo', 'foo2'));

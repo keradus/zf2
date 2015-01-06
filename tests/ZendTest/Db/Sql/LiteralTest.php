@@ -37,7 +37,7 @@ class LiteralTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(array(
                 'X LIKE "foo%%"',
                 array(),
-                array()
+                array(),
             )),
             $expression->getExpressionData()
         );

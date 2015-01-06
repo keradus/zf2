@@ -26,8 +26,8 @@ class CachingFileScanner extends FileScanner
     protected $fileScanner = null;
 
     /**
-     * @param  string $file
-     * @param  AnnotationManager $annotationManager
+     * @param  string                             $file
+     * @param  AnnotationManager                  $annotationManager
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($file, AnnotationManager $annotationManager = null)
@@ -41,7 +41,7 @@ class CachingFileScanner extends FileScanner
 
         $file = realpath($file);
 
-        $cacheId = md5($file) . '/' . ((isset($annotationManager) ? spl_object_hash($annotationManager) : 'no-annotation'));
+        $cacheId = md5($file).'/'.((isset($annotationManager) ? spl_object_hash($annotationManager) : 'no-annotation'));
 
         if (isset(static::$cache[$cacheId])) {
             $this->fileScanner = static::$cache[$cacheId];
@@ -125,7 +125,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * @param  int|string $className
+     * @param  int|string   $className
      * @return ClassScanner
      */
     public function getClass($className)
@@ -134,7 +134,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * @param  string $className
+     * @param  string                    $className
      * @return bool|null|NameInformation
      */
     public function getClassNameInformation($className)

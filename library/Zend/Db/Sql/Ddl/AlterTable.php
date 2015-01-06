@@ -54,29 +54,29 @@ class AlterTable extends AbstractSql implements SqlInterface
         self::TABLE => "ALTER TABLE %1\$s\n",
         self::ADD_COLUMNS  => array(
             "%1\$s" => array(
-                array(1 => "ADD COLUMN %1\$s,\n", 'combinedby' => "")
-            )
+                array(1 => "ADD COLUMN %1\$s,\n", 'combinedby' => ""),
+            ),
         ),
         self::CHANGE_COLUMNS  => array(
             "%1\$s" => array(
                 array(2 => "CHANGE COLUMN %1\$s %2\$s,\n", 'combinedby' => ""),
-            )
+            ),
         ),
         self::DROP_COLUMNS  => array(
             "%1\$s" => array(
                 array(1 => "DROP COLUMN %1\$s,\n", 'combinedby' => ""),
-            )
+            ),
         ),
         self::ADD_CONSTRAINTS  => array(
             "%1\$s" => array(
                 array(1 => "ADD %1\$s,\n", 'combinedby' => ""),
-            )
+            ),
         ),
         self::DROP_CONSTRAINTS  => array(
             "%1\$s" => array(
                 array(1 => "DROP CONSTRAINT %1\$s,\n", 'combinedby' => ""),
-            )
-        )
+            ),
+        ),
     );
 
     /**
@@ -115,7 +115,7 @@ class AlterTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param  string $name
+     * @param  string                 $name
      * @param  Column\ColumnInterface $column
      * @return self
      */
@@ -198,7 +198,7 @@ class AlterTable extends AbstractSql implements SqlInterface
         foreach ($this->changeColumns as $name => $column) {
             $sqls[] = array(
                 $adapterPlatform->quoteIdentifier($name),
-                $this->processExpression($column, $adapterPlatform)
+                $this->processExpression($column, $adapterPlatform),
             );
         }
 

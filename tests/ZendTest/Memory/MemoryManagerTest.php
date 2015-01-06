@@ -14,7 +14,6 @@ use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 use Zend\Memory;
 use Zend\Memory\Container;
 
-
 /**
  * @group      Zend_Memory
  */
@@ -101,12 +100,12 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
 
         $memObjects = array();
         for ($count = 0; $count < 64; $count++) {
-            $memObject = $memoryManager->create(str_repeat((string)($count % 10), 1024) /* 1K */);
+            $memObject = $memoryManager->create(str_repeat((string) ($count % 10), 1024) /* 1K */);
             $memObjects[] = $memObject;
         }
 
         for ($count = 0; $count < 64; $count += 2) {
-            $this->assertEquals($memObjects[$count]->value[16], (string)($count % 10));
+            $this->assertEquals($memObjects[$count]->value[16], (string) ($count % 10));
         }
 
         for ($count = 63; $count > 0; $count -= 2) {
@@ -127,7 +126,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
 
         $memObjects = array();
         for ($count = 0; $count < 8; $count++) {
-            $memObject = $memoryManager->create(str_repeat((string)($count % 10), 128) /* 1K */);
+            $memObject = $memoryManager->create(str_repeat((string) ($count % 10), 128) /* 1K */);
             $memObjects[] = $memObject;
         }
 

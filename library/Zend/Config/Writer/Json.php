@@ -16,7 +16,7 @@ class Json extends AbstractWriter
     /**
      * processConfig(): defined by AbstractWriter.
      *
-     * @param  array $config
+     * @param  array  $config
      * @return string
      */
     public function processConfig(array $config)

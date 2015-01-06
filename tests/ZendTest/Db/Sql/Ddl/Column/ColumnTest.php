@@ -20,6 +20,7 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Column();
         $this->assertSame($column, $column->setName('foo'));
+
         return $column;
     }
 
@@ -37,8 +38,9 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetNullable()
     {
-        $column = new Column;
+        $column = new Column();
         $this->assertSame($column, $column->setNullable(true));
+
         return $column;
     }
 
@@ -58,8 +60,9 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDefault()
     {
-        $column = new Column;
+        $column = new Column();
         $this->assertSame($column, $column->setDefault('foo bar'));
+
         return $column;
     }
 
@@ -77,8 +80,9 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOptions()
     {
-        $column = new Column;
+        $column = new Column();
         $this->assertSame($column, $column->setOptions(array('autoincrement' => true)));
+
         return $column;
     }
 
@@ -87,7 +91,7 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOption()
     {
-        $column = new Column;
+        $column = new Column();
         $this->assertSame($column, $column->setOption('primary', true));
     }
 
@@ -105,7 +109,7 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExpressionData()
     {
-        $column = new Column;
+        $column = new Column();
         $column->setName('foo');
         $this->assertEquals(
             array(array('%s %s NOT NULL', array('foo', 'INTEGER'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),

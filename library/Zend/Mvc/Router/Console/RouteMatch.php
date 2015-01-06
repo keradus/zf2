@@ -10,6 +10,7 @@
 /**
  * @namespace
  */
+
 namespace Zend\Mvc\Router\Console;
 
 use Zend\Mvc\Router\RouteMatch as BaseRouteMatch;
@@ -32,8 +33,8 @@ class RouteMatch extends BaseRouteMatch
     /**
      * Create a part RouteMatch with given parameters and length.
      *
-     * @param  array   $params
-     * @param  int $length
+     * @param array $params
+     * @param int   $length
      */
     public function __construct(array $params, $length = 0)
     {
@@ -54,7 +55,7 @@ class RouteMatch extends BaseRouteMatch
         if ($this->matchedRouteName === null) {
             $this->matchedRouteName = $name;
         } else {
-            $this->matchedRouteName = $name . '/' . $this->matchedRouteName;
+            $this->matchedRouteName = $name.'/'.$this->matchedRouteName;
         }
 
         return $this;

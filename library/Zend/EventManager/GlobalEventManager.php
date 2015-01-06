@@ -46,16 +46,17 @@ class GlobalEventManager
         if (null === static::$events) {
             static::setEventCollection(new EventManager());
         }
+
         return static::$events;
     }
 
     /**
      * Trigger an event
      *
-     * @param  string        $event
-     * @param  object|string $context
-     * @param  array|object  $argv
-     * @param  null|callable $callback
+     * @param  string             $event
+     * @param  object|string      $context
+     * @param  array|object       $argv
+     * @param  null|callable      $callback
      * @return ResponseCollection
      */
     public static function trigger($event, $context, $argv = array(), $callback = null)
@@ -67,10 +68,10 @@ class GlobalEventManager
      * Trigger listeners until return value of one causes a callback to evaluate
      * to true.
      *
-     * @param  string $event
-     * @param  string|object $context
-     * @param  array|object $argv
-     * @param  callable $callback
+     * @param  string             $event
+     * @param  string|object      $context
+     * @param  array|object       $argv
+     * @param  callable           $callback
      * @return ResponseCollection
      * @deprecated Please use trigger()
      */
@@ -80,15 +81,16 @@ class GlobalEventManager
             'This method is deprecated and will be removed in the future. Please use trigger() instead.',
             E_USER_DEPRECATED
         );
+
         return static::trigger($event, $context, $argv, $callback);
     }
 
     /**
      * Attach a listener to an event
      *
-     * @param  string $event
-     * @param  callable $callback
-     * @param  int $priority
+     * @param  string          $event
+     * @param  callable        $callback
+     * @param  int             $priority
      * @return CallbackHandler
      */
     public static function attach($event, $callback, $priority = 1)
@@ -120,7 +122,7 @@ class GlobalEventManager
     /**
      * Retrieve all listeners for a given event
      *
-     * @param  string $event
+     * @param  string              $event
      * @return PriorityQueue|array
      */
     public static function getListeners($event)

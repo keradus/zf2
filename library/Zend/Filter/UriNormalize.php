@@ -53,6 +53,7 @@ class UriNormalize extends AbstractFilter
     public function setDefaultScheme($defaultScheme)
     {
         $this->defaultScheme = $defaultScheme;
+
         return $this;
     }
 
@@ -73,6 +74,7 @@ class UriNormalize extends AbstractFilter
     public function setEnforcedScheme($enforcedScheme)
     {
         $this->enforcedScheme = $enforcedScheme;
+
         return $this;
     }
 
@@ -128,7 +130,7 @@ class UriNormalize extends AbstractFilter
         $path = $uri->getPath();
         if (strpos($path, '/') !== false) {
             list($host, $path) = explode('/', $path, 2);
-            $path = '/' . $path;
+            $path = '/'.$path;
         } else {
             $host = $path;
             $path = '';

@@ -40,15 +40,15 @@ class Accept extends AbstractAccept
      */
     public function toString()
     {
-        return 'Accept: ' . $this->getFieldValue();
+        return 'Accept: '.$this->getFieldValue();
     }
 
     /**
      * Add a media type, with the given priority
      *
-     * @param  string $type
+     * @param  string    $type
      * @param  int|float $priority
-     * @param  array $params
+     * @param  array     $params
      * @return Accept
      */
     public function addMediaType($type, $priority = 1, array $params = array())
@@ -70,7 +70,7 @@ class Accept extends AbstractAccept
     /**
      * Parse the keys contained in the header line
      *
-     * @param  string $fieldValuePart
+     * @param  string                              $fieldValuePart
      * @return FieldValuePart\AcceptFieldValuePart
      * @see    \Zend\Http\Header\AbstractAccept::parseFieldValuePart()
      */

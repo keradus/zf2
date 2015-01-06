@@ -71,8 +71,8 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     /**
      * Constructor. Add two selects elements
      *
-     * @param  null|int|string  $name    Optional name for the element
-     * @param  array            $options Optional options for the element
+     * @param null|int|string $name    Optional name for the element
+     * @param array           $options Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -92,7 +92,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      * - min_year: min year to use in the year select
      * - max_year: max year to use in the year select
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable $options
      * @return MonthSelect
      */
     public function setOptions($options)
@@ -155,12 +155,13 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     /**
      * Set the month attributes
      *
-     * @param  array $monthAttributes
+     * @param  array       $monthAttributes
      * @return MonthSelect
      */
     public function setMonthAttributes(array $monthAttributes)
     {
         $this->monthElement->setAttributes($monthAttributes);
+
         return $this;
     }
 
@@ -177,12 +178,13 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     /**
      * Set the year attributes
      *
-     * @param  array $yearAttributes
+     * @param  array       $yearAttributes
      * @return MonthSelect
      */
     public function setYearAttributes(array $yearAttributes)
     {
         $this->yearElement->setAttributes($yearAttributes);
+
         return $this;
     }
 
@@ -197,12 +199,13 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     }
 
     /**
-     * @param  int $minYear
+     * @param  int         $minYear
      * @return MonthSelect
      */
     public function setMinYear($minYear)
     {
         $this->minYear = $minYear;
+
         return $this;
     }
 
@@ -215,12 +218,13 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     }
 
     /**
-     * @param  int $maxYear
+     * @param  int         $maxYear
      * @return MonthSelect
      */
     public function setMaxYear($maxYear)
     {
         $this->maxYear = $maxYear;
+
         return $this;
     }
 
@@ -233,12 +237,13 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     }
 
     /**
-     * @param  bool $createEmptyOption
+     * @param  bool        $createEmptyOption
      * @return MonthSelect
      */
     public function setShouldCreateEmptyOption($createEmptyOption)
     {
         $this->createEmptyOption = (bool) $createEmptyOption;
+
         return $this;
     }
 
@@ -251,12 +256,13 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     }
 
     /**
-     * @param  bool $renderDelimiters
+     * @param  bool        $renderDelimiters
      * @return MonthSelect
      */
     public function setShouldRenderDelimiters($renderDelimiters)
     {
         $this->renderDelimiters = (bool) $renderDelimiters;
+
         return $this;
     }
 
@@ -269,7 +275,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed                   $value
      * @return void|\Zend\Form\Element
      */
     public function setValue($value)
@@ -277,7 +283,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
         if ($value instanceof PhpDateTime) {
             $value = array(
                 'year'  => $value->format('Y'),
-                'month' => $value->format('m')
+                'month' => $value->format('m'),
             );
         }
 
@@ -306,8 +312,8 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     public function prepareElement(FormInterface $form)
     {
         $name = $this->getName();
-        $this->monthElement->setName($name . '[month]');
-        $this->yearElement->setName($name . '[year]');
+        $this->monthElement->setName($name.'[month]');
+        $this->yearElement->setName($name.'[year]');
     }
 
     /**
@@ -338,17 +344,17 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
                         'callback' => function ($date) {
                             // Convert the date to a specific format
                             if (is_array($date)) {
-                                $date = $date['year'] . '-' . $date['month'];
+                                $date = $date['year'].'-'.$date['month'];
                             }
 
                             return $date;
-                        }
-                    )
-                )
+                        },
+                    ),
+                ),
             ),
             'validators' => array(
                 $this->getValidator(),
-            )
+            ),
         );
     }
 

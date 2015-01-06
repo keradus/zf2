@@ -44,5 +44,5 @@ class RefreshTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Refresh: xxx', $refreshHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

@@ -32,7 +32,7 @@ class Alpha extends Alnum
     protected $messageTemplates = array(
         self::INVALID      => "Invalid type given. String expected",
         self::NOT_ALPHA    => "The input contains non alphabetic characters",
-        self::STRING_EMPTY => "The input is an empty string"
+        self::STRING_EMPTY => "The input is an empty string",
     );
 
     /**
@@ -54,6 +54,7 @@ class Alpha extends Alnum
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -61,6 +62,7 @@ class Alpha extends Alnum
 
         if ('' === $value) {
             $this->error(self::STRING_EMPTY);
+
             return false;
         }
 
@@ -73,6 +75,7 @@ class Alpha extends Alnum
 
         if ($value !== static::$filter->filter($value)) {
             $this->error(self::NOT_ALPHA);
+
             return false;
         }
 

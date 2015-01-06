@@ -33,7 +33,7 @@ interface SymmetricInterface
     public function getAlgorithm();
 
     /**
-     * @param  string $algo
+     * @param string $algo
      */
     public function setAlgorithm($algo);
 

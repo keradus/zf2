@@ -21,7 +21,7 @@ class ArrayDefinitionTest extends TestCase
 
     public function setup()
     {
-        $this->definition = new ArrayDefinition(include __DIR__ . '/../_files/definition-array.php');
+        $this->definition = new ArrayDefinition(include __DIR__.'/../_files/definition-array.php');
     }
 
     public function testArrayDefinitionHasClasses()
@@ -51,7 +51,7 @@ class ArrayDefinitionTest extends TestCase
             'My\EntityA',
             'My\Mapper',
             'My\RepositoryA',
-            'My\RepositoryB'
+            'My\RepositoryB',
         );
 
         $classes = $this->definition->getClasses();

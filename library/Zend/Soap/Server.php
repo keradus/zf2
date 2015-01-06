@@ -155,8 +155,8 @@ class Server implements ZendServerServer
      * If $wsdl is provided, it is passed on to {@link setWSDL()}; if any
      * options are specified, they are passed on to {@link setOptions()}.
      *
-     * @param  string $wsdl
-     * @param  array $options
+     * @param  string                                $wsdl
+     * @param  array                                 $options
      * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($wsdl = null, array $options = null)
@@ -283,7 +283,7 @@ class Server implements ZendServerServer
     /**
      * Set encoding
      *
-     * @param  string $encoding
+     * @param  string                             $encoding
      * @return self
      * @throws Exception\InvalidArgumentException with invalid encoding argument
      */
@@ -294,6 +294,7 @@ class Server implements ZendServerServer
         }
 
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -310,7 +311,7 @@ class Server implements ZendServerServer
     /**
      * Set SOAP version
      *
-     * @param  int $version One of the SOAP_1_1 or SOAP_1_2 constants
+     * @param  int                                $version One of the SOAP_1_1 or SOAP_1_2 constants
      * @return self
      * @throws Exception\InvalidArgumentException with invalid soap version argument
      */
@@ -321,6 +322,7 @@ class Server implements ZendServerServer
         }
 
         $this->soapVersion = $version;
+
         return $this;
     }
 
@@ -337,7 +339,7 @@ class Server implements ZendServerServer
     /**
      * Check for valid URN
      *
-     * @param  string $urn
+     * @param  string                             $urn
      * @return true
      * @throws Exception\InvalidArgumentException on invalid URN
      */
@@ -363,6 +365,7 @@ class Server implements ZendServerServer
     {
         $this->validateUrn($actor);
         $this->actor = $actor;
+
         return $this;
     }
 
@@ -388,6 +391,7 @@ class Server implements ZendServerServer
     {
         $this->validateUrn($uri);
         $this->uri = $uri;
+
         return $this;
     }
 
@@ -404,7 +408,7 @@ class Server implements ZendServerServer
     /**
      * Set classmap
      *
-     * @param  array $classmap
+     * @param  array                              $classmap
      * @return self
      * @throws Exception\InvalidArgumentException for any invalid class in the class map
      */
@@ -420,6 +424,7 @@ class Server implements ZendServerServer
         }
 
         $this->classmap = $classmap;
+
         return $this;
     }
 
@@ -436,7 +441,7 @@ class Server implements ZendServerServer
     /**
      * Set typemap with xml to php type mappings with appropriate validation.
      *
-     * @param  array $typeMap
+     * @param  array                              $typeMap
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -448,14 +453,15 @@ class Server implements ZendServerServer
 
         foreach ($typeMap as $type) {
             if (!is_callable($type['from_xml'])) {
-                throw new Exception\InvalidArgumentException('Invalid from_xml callback for type: ' . $type['type_name']);
+                throw new Exception\InvalidArgumentException('Invalid from_xml callback for type: '.$type['type_name']);
             }
             if (!is_callable($type['to_xml'])) {
-                throw new Exception\InvalidArgumentException('Invalid to_xml callback for type: ' . $type['type_name']);
+                throw new Exception\InvalidArgumentException('Invalid to_xml callback for type: '.$type['type_name']);
             }
         }
 
         $this->typemap   = $typeMap;
+
         return $this;
     }
 
@@ -472,12 +478,13 @@ class Server implements ZendServerServer
     /**
      * Set wsdl
      *
-     * @param  string $wsdl  URI or path to a WSDL
+     * @param  string $wsdl URI or path to a WSDL
      * @return self
      */
     public function setWSDL($wsdl)
     {
         $this->wsdl = $wsdl;
+
         return $this;
     }
 
@@ -500,6 +507,7 @@ class Server implements ZendServerServer
     public function setSoapFeatures($feature)
     {
         $this->features = $feature;
+
         return $this;
     }
 
@@ -522,6 +530,7 @@ class Server implements ZendServerServer
     public function setWSDLCache($options)
     {
         $this->wsdlCache = $options;
+
         return $this;
     }
 
@@ -536,9 +545,9 @@ class Server implements ZendServerServer
     /**
      * Attach a function as a server method
      *
-     * @param  array|string $function Function name, array of function names to attach,
-     *             or SOAP_FUNCTIONS_ALL to attach all functions
-     * @param  string $namespace Ignored
+     * @param  array|string                       $function  Function name, array of function names to attach,
+     *                                                       or SOAP_FUNCTIONS_ALL to attach all functions
+     * @param  string                             $namespace Ignored
      * @return self
      * @throws Exception\InvalidArgumentException on invalid functions
      */
@@ -580,10 +589,10 @@ class Server implements ZendServerServer
      *
      * See {@link setObject()} to set pre-configured object instances as request handlers.
      *
-     * @param  string|object $class Class name or object instance which executes
-     *             SOAP Requests at endpoint.
-     * @param  string $namespace
-     * @param  null|array $argv
+     * @param  string|object                      $class     Class name or object instance which executes
+     *                                                       SOAP Requests at endpoint.
+     * @param  string                             $namespace
+     * @param  null|array                         $argv
      * @return self
      * @throws Exception\InvalidArgumentException if called more than once, or if class does not exist
      */
@@ -625,7 +634,7 @@ class Server implements ZendServerServer
      *
      * Accepts an instantiated object to use when handling requests.
      *
-     * @param  object $object
+     * @param  object                             $object
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -645,6 +654,7 @@ class Server implements ZendServerServer
         }
 
         $this->object = $object;
+
         return $this;
     }
 
@@ -672,7 +682,7 @@ class Server implements ZendServerServer
     /**
      * Unimplemented: Load server definition
      *
-     * @param  array $definition
+     * @param  array                      $definition
      * @throws Exception\RuntimeException Unimplemented
      */
     public function loadFunctions($definition)
@@ -683,7 +693,7 @@ class Server implements ZendServerServer
     /**
      * Set server persistence
      *
-     * @param  int $mode SOAP_PERSISTENCE_SESSION or SOAP_PERSISTENCE_REQUEST constants
+     * @param  int                                $mode SOAP_PERSISTENCE_SESSION or SOAP_PERSISTENCE_REQUEST constants
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -694,6 +704,7 @@ class Server implements ZendServerServer
         }
 
         $this->persistence = $mode;
+
         return $this;
     }
 
@@ -759,6 +770,7 @@ class Server implements ZendServerServer
         }
 
         $this->request = $xml;
+
         return $this;
     }
 
@@ -786,6 +798,7 @@ class Server implements ZendServerServer
     public function setReturnResponse($flag = true)
     {
         $this->returnResponse = ($flag) ? true : false;
+
         return $this;
     }
 
@@ -846,6 +859,7 @@ class Server implements ZendServerServer
         }
 
         $this->server = $server;
+
         return $this->server;
     }
 
@@ -853,10 +867,10 @@ class Server implements ZendServerServer
      * Proxy for _getSoap method
      * @see _getSoap
      * @return SoapServer the soapServer instance
-    public function getSoap()
-    {
-        return $this->_getSoap();
-    }
+     public function getSoap()
+     {
+     return $this->_getSoap();
+     }
      */
 
     /**
@@ -949,6 +963,7 @@ class Server implements ZendServerServer
         $displayErrorsOriginalState = ini_get('display_errors');
         ini_set('display_errors', false);
         set_error_handler(array($this, 'handlePhpErrors'), E_USER_ERROR);
+
         return $displayErrorsOriginalState;
     }
 
@@ -960,13 +975,14 @@ class Server implements ZendServerServer
     public function setDebugMode($debug)
     {
         $this->debug = $debug;
+
         return $this;
     }
 
     /**
      * Validate and register fault exception
      *
-     * @param  string|array $class Exception class or array of exception classes
+     * @param  string|array                       $class Exception class or array of exception classes
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -993,7 +1009,7 @@ class Server implements ZendServerServer
     /**
      * Checks if provided fault name is registered as valid in this server.
      *
-     * @param string $fault Name of a fault class
+     * @param  string $fault Name of a fault class
      * @return bool
      */
     public function isRegisteredAsFaultException($fault)
@@ -1004,6 +1020,7 @@ class Server implements ZendServerServer
 
         $ref        = new ReflectionClass($fault);
         $classNames = $ref->getName();
+
         return in_array($classNames, $this->faultExceptions);
     }
 
@@ -1018,6 +1035,7 @@ class Server implements ZendServerServer
         if (in_array($class, $this->faultExceptions, true)) {
             $index = array_search($class, $this->faultExceptions);
             unset($this->faultExceptions[$index]);
+
             return true;
         }
 
@@ -1054,7 +1072,7 @@ class Server implements ZendServerServer
      *
      * @link   http://www.w3.org/TR/soap12-part1/#faultcodes
      * @param  string|\Exception $fault
-     * @param  string $code SOAP Fault Codes
+     * @param  string            $code  SOAP Fault Codes
      * @return SoapFault
      */
     public function fault($fault = null, $code = 'Receiver')
@@ -1086,11 +1104,11 @@ class Server implements ZendServerServer
     /**
      * Throw PHP errors as SoapFaults
      *
-     * @param  int $errno
-     * @param  string $errstr
-     * @param  string $errfile
-     * @param  int $errline
-     * @param  array $errcontext
+     * @param  int       $errno
+     * @param  string    $errstr
+     * @param  string    $errfile
+     * @param  int       $errline
+     * @param  array     $errcontext
      * @throws SoapFault
      */
     public function handlePhpErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)

@@ -73,8 +73,8 @@ class FormMultiCheckbox extends FormInput
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface|null $element
-     * @param  null|string           $labelPosition
+     * @param  ElementInterface|null    $element
+     * @param  null|string              $labelPosition
      * @return string|FormMultiCheckbox
      */
     public function __invoke(ElementInterface $element = null, $labelPosition = null)
@@ -93,7 +93,7 @@ class FormMultiCheckbox extends FormInput
     /**
      * Render a form <input> element from the provided $element
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface                   $element
      * @throws Exception\InvalidArgumentException
      * @return string
      */
@@ -123,7 +123,7 @@ class FormMultiCheckbox extends FormInput
             : $this->useHiddenElement;
 
         if ($useHiddenElement) {
-            $rendered = $this->renderHiddenElement($element, $attributes) . $rendered;
+            $rendered = $this->renderHiddenElement($element, $attributes).$rendered;
         }
 
         return $rendered;
@@ -174,7 +174,7 @@ class FormMultiCheckbox extends FormInput
             if (is_scalar($optionSpec)) {
                 $optionSpec = array(
                     'label' => $optionSpec,
-                    'value' => $key
+                    'value' => $key,
                 );
             }
 
@@ -225,7 +225,7 @@ class FormMultiCheckbox extends FormInput
             }
 
             $labelOpen = $labelHelper->openTag($labelAttributes);
-            $template  = $labelOpen . '%s%s' . $labelClose;
+            $template  = $labelOpen.'%s%s'.$labelClose;
             switch ($labelPosition) {
                 case self::LABEL_PREPEND:
                     $markup = sprintf($template, $label, $input);
@@ -272,12 +272,13 @@ class FormMultiCheckbox extends FormInput
     /**
      * Sets the attributes applied to option label.
      *
-     * @param  array|null $attributes
+     * @param  array|null        $attributes
      * @return FormMultiCheckbox
      */
     public function setLabelAttributes($attributes)
     {
         $this->labelAttributes = $attributes;
+
         return $this;
     }
 
@@ -294,7 +295,7 @@ class FormMultiCheckbox extends FormInput
     /**
      * Set value for labelPosition
      *
-     * @param  mixed $labelPosition
+     * @param  mixed                              $labelPosition
      * @throws Exception\InvalidArgumentException
      * @return FormMultiCheckbox
      */
@@ -328,12 +329,13 @@ class FormMultiCheckbox extends FormInput
     /**
      * Set separator string for checkbox elements
      *
-     * @param  string $separator
+     * @param  string            $separator
      * @return FormMultiCheckbox
      */
     public function setSeparator($separator)
     {
         $this->separator = (string) $separator;
+
         return $this;
     }
 
@@ -351,12 +353,13 @@ class FormMultiCheckbox extends FormInput
      * Sets the option for prefixing the element with a hidden element
      * for the unset value.
      *
-     * @param  bool $useHiddenElement
+     * @param  bool              $useHiddenElement
      * @return FormMultiCheckbox
      */
     public function setUseHiddenElement($useHiddenElement)
     {
         $this->useHiddenElement = (bool) $useHiddenElement;
+
         return $this;
     }
 
@@ -374,12 +377,13 @@ class FormMultiCheckbox extends FormInput
     /**
      * Sets the unchecked value used when "UseHiddenElement" is turned on.
      *
-     * @param  bool $value
+     * @param  bool              $value
      * @return FormMultiCheckbox
      */
     public function setUncheckedValue($value)
     {
         $this->uncheckedValue = $value;
+
         return $this;
     }
 
@@ -406,7 +410,7 @@ class FormMultiCheckbox extends FormInput
     /**
      * Get element name
      *
-     * @param  ElementInterface $element
+     * @param  ElementInterface          $element
      * @throws Exception\DomainException
      * @return string
      */
@@ -419,7 +423,8 @@ class FormMultiCheckbox extends FormInput
                 __METHOD__
             ));
         }
-        return $name . '[]';
+
+        return $name.'[]';
     }
 
     /**

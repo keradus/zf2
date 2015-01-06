@@ -39,9 +39,9 @@ class Pop3
     /**
      * Public constructor
      *
-     * @param  string      $host  hostname or IP address of POP3 server, if given connect() is called
-     * @param  int|null    $port  port of POP3 server, null for default (110 or 995 for ssl)
-     * @param  bool|string $ssl   use ssl? 'SSL', 'TLS' or false
+     * @param string      $host hostname or IP address of POP3 server, if given connect() is called
+     * @param int|null    $port port of POP3 server, null for default (110 or 995 for ssl)
+     * @param bool|string $ssl  use ssl? 'SSL', 'TLS' or false
      */
     public function __construct($host = '', $port = null, $ssl = false)
     {
@@ -61,11 +61,11 @@ class Pop3
     /**
      * Open connection to POP3 server
      *
-     * @param  string      $host  hostname or IP address of POP3 server
-     * @param  int|null    $port  of POP3 server, default is 110 (995 for ssl)
-     * @param  string|bool $ssl   use 'SSL', 'TLS' or false
+     * @param  string                     $host hostname or IP address of POP3 server
+     * @param  int|null                   $port of POP3 server, default is 110 (995 for ssl)
+     * @param  string|bool                $ssl  use 'SSL', 'TLS' or false
      * @throws Exception\RuntimeException
-     * @return string welcome message
+     * @return string                     welcome message
      */
     public function connect($host, $port = null, $ssl = false)
     {
@@ -77,7 +77,7 @@ class Pop3
 
         switch ($ssl) {
             case 'ssl':
-                $host = 'ssl://' . $host;
+                $host = 'ssl://'.$host;
                 if (!$port) {
                     $port = 995;
                 }
@@ -108,7 +108,7 @@ class Pop3
         if (!strpos($this->timestamp, '@')) {
             $this->timestamp = null;
         } else {
-            $this->timestamp = '<' . $this->timestamp . '>';
+            $this->timestamp = '<'.$this->timestamp.'>';
         }
 
         if ($isTls) {
@@ -125,13 +125,13 @@ class Pop3
     /**
      * Send a request
      *
-     * @param string $request your request without newline
+     * @param  string                     $request your request without newline
      * @throws Exception\RuntimeException
      */
     public function sendRequest($request)
     {
         ErrorHandler::start();
-        $result = fputs($this->socket, $request . "\r\n");
+        $result = fputs($this->socket, $request."\r\n");
         $error  = ErrorHandler::stop();
         if (!$result) {
             throw new Exception\RuntimeException('send failed - connection closed?', 0, $error);
@@ -141,9 +141,9 @@ class Pop3
     /**
      * read a response
      *
-     * @param  bool $multiline response has multiple lines and should be read until "<nl>.<nl>"
+     * @param  bool                       $multiline response has multiple lines and should be read until "<nl>.<nl>"
      * @throws Exception\RuntimeException
-     * @return string response
+     * @return string                     response
      */
     public function readResponse($multiline = false)
     {
@@ -186,13 +186,14 @@ class Pop3
      *
      * @see sendRequest()
      * @see readResponse()
-     * @param  string $request    request
-     * @param  bool   $multiline  multiline response?
-     * @return string             result from readResponse()
+     * @param  string $request   request
+     * @param  bool   $multiline multiline response?
+     * @return string result from readResponse()
      */
     public function request($request, $multiline = false)
     {
         $this->sendRequest($request);
+
         return $this->readResponse($multiline);
     }
 
@@ -213,7 +214,6 @@ class Pop3
         }
     }
 
-
     /**
      * Get capabilities from POP3 server
      *
@@ -222,22 +222,23 @@ class Pop3
     public function capa()
     {
         $result = $this->request('CAPA', true);
+
         return explode("\n", $result);
     }
-
 
     /**
      * Login to POP3 server. Can use APOP
      *
-     * @param  string $user     username
-     * @param  string $password password
-     * @param  bool   $tryApop  should APOP be tried?
+     * @param string $user     username
+     * @param string $password password
+     * @param bool   $tryApop  should APOP be tried?
      */
     public function login($user, $password, $tryApop = true)
     {
         if ($tryApop && $this->timestamp) {
             try {
-                $this->request("APOP $user " . md5($this->timestamp . $password));
+                $this->request("APOP $user ".md5($this->timestamp.$password));
+
                 return;
             } catch (Exception\ExceptionInterface $e) {
                 // ignore
@@ -248,12 +249,11 @@ class Pop3
         $this->request("PASS $password");
     }
 
-
     /**
      * Make STAT call for message count and size sum
      *
-     * @param  int $messages  out parameter with count of messages
-     * @param  int $octets    out parameter with size in octets of messages
+     * @param int $messages out parameter with count of messages
+     * @param int $octets   out parameter with size in octets of messages
      */
     public function status(&$messages, &$octets)
     {
@@ -264,11 +264,10 @@ class Pop3
         list($messages, $octets) = explode(' ', $result);
     }
 
-
     /**
      * Make LIST call for size of message(s)
      *
-     * @param  int|null $msgno number of message, null for all
+     * @param  int|null  $msgno number of message, null for all
      * @return int|array size of given message or list with array(num => size)
      */
     public function getList($msgno = null)
@@ -277,6 +276,7 @@ class Pop3
             $result = $this->request("LIST $msgno");
 
             list(, $result) = explode(' ', $result);
+
             return (int) $result;
         }
 
@@ -292,11 +292,10 @@ class Pop3
         return $messages;
     }
 
-
     /**
      * Make UIDL call for getting a uniqueid
      *
-     * @param  int|null $msgno number of message, null for all
+     * @param  int|null     $msgno number of message, null for all
      * @return string|array uniqueid of message or list with array(num => uniqueid)
      */
     public function uniqueid($msgno = null)
@@ -305,6 +304,7 @@ class Pop3
             $result = $this->request("UIDL $msgno");
 
             list(, $result) = explode(' ', $result);
+
             return $result;
         }
 
@@ -323,7 +323,6 @@ class Pop3
         return $messages;
     }
 
-
     /**
      * Make TOP call for getting headers and maybe some body lines
      * This method also sets hasTop - before it it's not known if top is supported
@@ -331,12 +330,12 @@ class Pop3
      * The fallback makes normal RETR call, which retrieves the whole message. Additional
      * lines are not removed.
      *
-     * @param  int  $msgno    number of message
-     * @param  int  $lines    number of wanted body lines (empty line is inserted after header lines)
-     * @param  bool $fallback fallback with full retrieve if top is not supported
+     * @param  int                          $msgno    number of message
+     * @param  int                          $lines    number of wanted body lines (empty line is inserted after header lines)
+     * @param  bool                         $fallback fallback with full retrieve if top is not supported
      * @throws Exception\RuntimeException
      * @throws Exception\ExceptionInterface
-     * @return string message headers with wanted body lines
+     * @return string                       message headers with wanted body lines
      */
     public function top($msgno, $lines = 0, $fallback = false)
     {
@@ -368,12 +367,13 @@ class Pop3
     /**
      * Make a RETR call for retrieving a full message with headers and body
      *
-     * @param  int $msgno  message number
+     * @param  int    $msgno message number
      * @return string message
      */
     public function retrieve($msgno)
     {
         $result = $this->request("RETR $msgno", true);
+
         return $result;
     }
 

@@ -58,9 +58,9 @@ class ServerIntrospection
      * This is a boxcar feature of XML-RPC and is found on fewer servers.  However,
      * can significantly improve performance if present.
      *
-     * @param  array $methods
+     * @param  array                         $methods
      * @throws Exception\IntrospectException
-     * @return array array(array(return, param, param, param...))
+     * @return array                         array(array(return, param, param, param...))
      */
     public function getSignatureForEachMethodByMulticall($methods = null)
     {
@@ -71,7 +71,7 @@ class ServerIntrospection
         $multicallParams = array();
         foreach ($methods as $method) {
             $multicallParams[] = array('methodName' => 'system.methodSignature',
-                                       'params'     => array($method));
+                                       'params'     => array($method), );
         }
 
         $serverSignatures = $this->system->multicall($multicallParams);
@@ -100,7 +100,7 @@ class ServerIntrospection
      * Get the method signatures for every method by
      * successively calling system.methodSignature
      *
-     * @param array $methods
+     * @param  array $methods
      * @return array
      */
     public function getSignatureForEachMethodByLooping($methods = null)
@@ -120,24 +120,25 @@ class ServerIntrospection
     /**
      * Call system.methodSignature() for the given method
      *
-     * @param  array  $method
+     * @param  array                         $method
      * @throws Exception\IntrospectException
-     * @return array  array(array(return, param, param, param...))
+     * @return array                         array(array(return, param, param, param...))
      */
     public function getMethodSignature($method)
     {
         $signature = $this->system->methodSignature($method);
         if (!is_array($signature)) {
-            $error = 'Invalid signature for method "' . $method . '"';
+            $error = 'Invalid signature for method "'.$method.'"';
             throw new Exception\IntrospectException($error);
         }
+
         return $signature;
     }
 
     /**
      * Call system.listMethods()
      *
-     * @return array  array(method, method, method...)
+     * @return array array(method, method, method...)
      */
     public function listMethods()
     {

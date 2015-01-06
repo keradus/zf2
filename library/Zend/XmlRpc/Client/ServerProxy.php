@@ -37,7 +37,7 @@ class ServerProxy
      * Class constructor
      *
      * @param \Zend\XmlRpc\Client $client
-     * @param string             $namespace
+     * @param string              $namespace
      */
     public function __construct(XMLRPCClient $client, $namespace = '')
     {
@@ -48,7 +48,7 @@ class ServerProxy
     /**
      * Get the next successive namespace
      *
-     * @param string $namespace
+     * @param  string                          $namespace
      * @return \Zend\XmlRpc\Client\ServerProxy
      */
     public function __get($namespace)
@@ -57,6 +57,7 @@ class ServerProxy
         if (!isset($this->cache[$namespace])) {
             $this->cache[$namespace] = new $this($this->client, $namespace);
         }
+
         return $this->cache[$namespace];
     }
 
@@ -64,12 +65,13 @@ class ServerProxy
      * Call a method in this namespace.
      *
      * @param  string $method
-     * @param  array $args
+     * @param  array  $args
      * @return mixed
      */
     public function __call($method, $args)
     {
         $method = ltrim("{$this->namespace}.{$method}", '.');
+
         return $this->client->call($method, $args);
     }
 }

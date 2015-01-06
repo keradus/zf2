@@ -30,7 +30,7 @@ class WriterPluginManager extends AbstractPluginManager
         $type = is_object($plugin) ? get_class($plugin) : gettype($plugin);
 
         throw new Exception\InvalidArgumentException(
-            "Plugin of type {$type} is invalid. Plugin must extend ".  __NAMESPACE__ . '\Writer\AbstractWriter'
+            "Plugin of type {$type} is invalid. Plugin must extend ".__NAMESPACE__.'\Writer\AbstractWriter'
         );
     }
 }

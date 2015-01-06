@@ -42,7 +42,7 @@ class Changefreq extends AbstractValidator
      */
     protected $changeFreqs = array(
         'always',  'hourly', 'daily', 'weekly',
-        'monthly', 'yearly', 'never'
+        'monthly', 'yearly', 'never',
     );
 
     /**
@@ -50,13 +50,14 @@ class Changefreq extends AbstractValidator
      *
      * @link http://www.sitemaps.org/protocol.php#changefreqdef <changefreq>
      *
-     * @param  string  $value  value to validate
+     * @param  string $value value to validate
      * @return bool
      */
     public function isValid($value)
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -67,6 +68,7 @@ class Changefreq extends AbstractValidator
 
         if (!in_array($value, $this->changeFreqs, true)) {
             $this->error(self::NOT_VALID);
+
             return false;
         }
 

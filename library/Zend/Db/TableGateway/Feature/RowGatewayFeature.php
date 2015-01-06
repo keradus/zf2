@@ -38,7 +38,7 @@ class RowGatewayFeature extends AbstractFeature
 
         if (!$this->tableGateway->resultSetPrototype instanceof ResultSet) {
             throw new Exception\RuntimeException(
-                'This feature ' . __CLASS__ . ' expects the ResultSet to be an instance of Zend\Db\ResultSet\ResultSet'
+                'This feature '.__CLASS__.' expects the ResultSet to be an instance of Zend\Db\ResultSet\ResultSet'
             );
         }
 

@@ -16,7 +16,7 @@ class ConsoleResponseSender implements ResponseSenderInterface
     /**
      * Send content
      *
-     * @param  SendResponseEvent $event
+     * @param  SendResponseEvent     $event
      * @return ConsoleResponseSender
      */
     public function sendContent(SendResponseEvent $event)
@@ -27,13 +27,14 @@ class ConsoleResponseSender implements ResponseSenderInterface
         $response = $event->getResponse();
         echo $response->getContent();
         $event->setContentSent();
+
         return $this;
     }
 
     /**
      * Send the response
      *
-     * @param  SendResponseEvent $event
+     * @param SendResponseEvent $event
      */
     public function __invoke(SendResponseEvent $event)
     {

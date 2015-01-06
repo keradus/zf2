@@ -36,13 +36,13 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $arr = array(
             'Zend\View\Model\JsonModel' => array(
                 'application/json',
-                'application/javascript'
+                'application/javascript',
             ),
             'Zend\View\Model\FeedModel' => array(
                 'application/rss+xml',
-                'application/atom+xml'
+                'application/atom+xml',
             ),
-            'Zend\View\Model\ViewModel' => '*/*'
+            'Zend\View\Model\ViewModel' => '*/*',
         );
 
         $header   = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
@@ -61,11 +61,11 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $arr = array(
             'Zend\View\Model\JsonModel' => array(
                 'application/json',
-                'application/javascript'
+                'application/javascript',
             ),
             'Zend\View\Model\FeedModel' => array(
                 'application/rss+xml',
-                'application/atom+xml'
+                'application/atom+xml',
             ),
         );
 
@@ -86,13 +86,13 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $arr = array(
                 'Zend\View\Model\JsonModel' => array(
                         'application/json',
-                        'application/javascript'
+                        'application/javascript',
                 ),
                 'Zend\View\Model\FeedModel' => array(
                         'application/rss+xml',
-                        'application/atom+xml'
+                        'application/atom+xml',
                 ),
-                'Zend\View\Model\ViewModel' => '*/*'
+                'Zend\View\Model\ViewModel' => '*/*',
         );
 
         $plugin   = $this->plugin;
@@ -103,17 +103,16 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\View\Model\FeedModel', $result);
     }
 
-
     public function testInvokeWithoutDefaultsReturnsNullWhenNoMatchesOccur()
     {
         $arr = array(
                 'Zend\View\Model\JsonModel' => array(
                         'application/json',
-                        'application/javascript'
+                        'application/javascript',
                 ),
                 'Zend\View\Model\FeedModel' => array(
                         'application/rss+xml',
-                        'application/atom+xml'
+                        'application/atom+xml',
                 ),
         );
 
@@ -144,11 +143,11 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
         $arr = array(
                 'Zend\View\Model\JsonModel' => array(
                         'application/json',
-                        'application/javascript'
+                        'application/javascript',
                 ),
                 'Zend\View\Model\FeedModel' => array(
                         'application/rss+xml',
-                        'application/atom+xml'
+                        'application/atom+xml',
                 ),
         );
 

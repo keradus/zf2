@@ -77,18 +77,20 @@ class InArray extends AbstractValidator
         if ($this->haystack === null) {
             throw new Exception\RuntimeException('haystack option is mandatory');
         }
+
         return $this->haystack;
     }
 
     /**
      * Sets the haystack option
      *
-     * @param  mixed $haystack
+     * @param  mixed   $haystack
      * @return InArray Provides a fluent interface
      */
     public function setHaystack(array $haystack)
     {
         $this->haystack = $haystack;
+
         return $this;
     }
 
@@ -105,6 +107,7 @@ class InArray extends AbstractValidator
         ) {
             return (bool) $this->strict;
         }
+
         return $this->strict;
     }
 
@@ -112,8 +115,8 @@ class InArray extends AbstractValidator
      * Sets the strict option mode
      * InArray::CHECK_STRICT | InArray::CHECK_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY | InArray::CHECK_NOT_STRICT
      *
-     * @param  int $strict
-     * @return InArray Provides a fluent interface
+     * @param  int                                $strict
+     * @return InArray                            Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function setStrict($strict)
@@ -121,7 +124,7 @@ class InArray extends AbstractValidator
         $checkTypes = array(
             self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY,    // 0
             self::COMPARE_STRICT,                                             // 1
-            self::COMPARE_NOT_STRICT                                          // -1
+            self::COMPARE_NOT_STRICT,                                          // -1
         );
 
         // validate strict value
@@ -130,6 +133,7 @@ class InArray extends AbstractValidator
         }
 
         $this->strict = $strict;
+
         return $this;
     }
 
@@ -146,12 +150,13 @@ class InArray extends AbstractValidator
     /**
      * Sets the recursive option
      *
-     * @param  bool $recursive
+     * @param  bool    $recursive
      * @return InArray Provides a fluent interface
      */
     public function setRecursive($recursive)
     {
         $this->recursive = (bool) $recursive;
+
         return $this;
     }
 
@@ -159,8 +164,8 @@ class InArray extends AbstractValidator
      * Returns true if and only if $value is contained in the haystack option. If the strict
      * option is true, then the type of $value is also checked.
      *
-     * @param mixed $value
-     * See {@link http://php.net/manual/function.in-array.php#104501}
+     * @param  mixed $value
+     *                      See {@link http://php.net/manual/function.in-array.php#104501}
      * @return bool
      */
     public function isValid($value)
@@ -223,6 +228,7 @@ class InArray extends AbstractValidator
         }
 
         $this->error(self::NOT_IN_ARRAY);
+
         return false;
     }
 }

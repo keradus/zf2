@@ -40,8 +40,8 @@ class LastModifiedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Last-Modified: Sun, 06 Nov 1994 08:49:37 GMT', $lastModifiedHeader->toString());
     }
 
-    /**
-     * Implementation specific tests are covered by DateTest
-     * @see ZendTest\Http\Header\DateTest
-     */
+/**
+ * Implementation specific tests are covered by DateTest
+ * @see ZendTest\Http\Header\DateTest
+ */
 }

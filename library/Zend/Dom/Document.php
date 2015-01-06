@@ -63,9 +63,9 @@ class Document
     /**
      * Constructor
      *
-     * @param string|null  $document  String containing the document
-     * @param string|null  $type      Force the document to be of a certain type, bypassing setStringDocument's detection
-     * @param string|null  $encoding  Encoding for the document (used for DOMDocument generation)
+     * @param string|null $document String containing the document
+     * @param string|null $type     Force the document to be of a certain type, bypassing setStringDocument's detection
+     * @param string|null $encoding Encoding for the document (used for DOMDocument generation)
      */
     public function __construct($document = null, $type = null, $encoding = null)
     {
@@ -85,9 +85,9 @@ class Document
     /**
      * Set raw document
      *
-     * @param string|null  $document
-     * @param string|null  $forcedType      Type for the provided document (see constants)
-     * @param string|null  $forcedEncoding  Encoding for the provided document
+     * @param  string|null $document
+     * @param  string|null $forcedType     Type for the provided document (see constants)
+     * @param  string|null $forcedEncoding Encoding for the provided document
      * @return self
      */
     protected function setStringDocument($document, $forcedType = null, $forcedEncoding = null)
@@ -98,7 +98,7 @@ class Document
         }
 
         // Breaking XML declaration to make syntax highlighting work
-        if ('<' . '?xml' == substr(trim($document), 0, 5)) {
+        if ('<'.'?xml' == substr(trim($document), 0, 5)) {
             $type = static::DOC_XML;
             if (preg_match('/<html[^>]*xmlns="([^"]+)"[^>]*>/i', $document, $matches)) {
                 $this->xpathNamespaces[] = $matches[1];
@@ -130,7 +130,7 @@ class Document
     /**
      * Set raw document type
      *
-     * @param  string    $type
+     * @param  string $type
      * @return self
      */
     protected function setType($type)

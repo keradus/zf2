@@ -10,7 +10,7 @@
 namespace Zend\Loader;
 
 // Grab SplAutoloader interface
-require_once __DIR__ . '/SplAutoloader.php';
+require_once __DIR__.'/SplAutoloader.php';
 
 /**
  * PSR-0 compliant autoloader
@@ -46,7 +46,7 @@ class StandardAutoloader implements SplAutoloader
     /**
      * Constructor
      *
-     * @param  null|array|\Traversable $options
+     * @param null|array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -73,14 +73,14 @@ class StandardAutoloader implements SplAutoloader
      * )
      * </code>
      *
-     * @param  array|\Traversable $options
+     * @param  array|\Traversable                 $options
      * @throws Exception\InvalidArgumentException
      * @return StandardAutoloader
      */
     public function setOptions($options)
     {
         if (!is_array($options) && !($options instanceof \Traversable)) {
-            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            require_once __DIR__.'/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Options must be either an array or Traversable');
         }
 
@@ -89,7 +89,7 @@ class StandardAutoloader implements SplAutoloader
                 case self::AUTOREGISTER_ZF:
                     if ($pairs) {
                         $this->registerNamespace('Zend', dirname(__DIR__));
-                        $this->registerNamespace('ZendXml', dirname(dirname((__DIR__))) . DIRECTORY_SEPARATOR .  'ZendXml');
+                        $this->registerNamespace('ZendXml', dirname(dirname((__DIR__))).DIRECTORY_SEPARATOR.'ZendXml');
                     }
                     break;
                 case self::LOAD_NS:
@@ -109,18 +109,20 @@ class StandardAutoloader implements SplAutoloader
                     // ignore
             }
         }
+
         return $this;
     }
 
     /**
      * Set flag indicating fallback autoloader status
      *
-     * @param  bool $flag
+     * @param  bool               $flag
      * @return StandardAutoloader
      */
     public function setFallbackAutoloader($flag)
     {
         $this->fallbackAutoloaderFlag = (bool) $flag;
+
         return $this;
     }
 
@@ -137,75 +139,79 @@ class StandardAutoloader implements SplAutoloader
     /**
      * Register a namespace/directory pair
      *
-     * @param  string $namespace
-     * @param  string $directory
+     * @param  string             $namespace
+     * @param  string             $directory
      * @return StandardAutoloader
      */
     public function registerNamespace($namespace, $directory)
     {
-        $namespace = rtrim($namespace, self::NS_SEPARATOR) . self::NS_SEPARATOR;
+        $namespace = rtrim($namespace, self::NS_SEPARATOR).self::NS_SEPARATOR;
         $this->namespaces[$namespace] = $this->normalizeDirectory($directory);
+
         return $this;
     }
 
     /**
      * Register many namespace/directory pairs at once
      *
-     * @param  array $namespaces
+     * @param  array                              $namespaces
      * @throws Exception\InvalidArgumentException
      * @return StandardAutoloader
      */
     public function registerNamespaces($namespaces)
     {
         if (!is_array($namespaces) && !$namespaces instanceof \Traversable) {
-            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            require_once __DIR__.'/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Namespace pairs must be either an array or Traversable');
         }
 
         foreach ($namespaces as $namespace => $directory) {
             $this->registerNamespace($namespace, $directory);
         }
+
         return $this;
     }
 
     /**
      * Register a prefix/directory pair
      *
-     * @param  string $prefix
-     * @param  string $directory
+     * @param  string             $prefix
+     * @param  string             $directory
      * @return StandardAutoloader
      */
     public function registerPrefix($prefix, $directory)
     {
-        $prefix = rtrim($prefix, self::PREFIX_SEPARATOR). self::PREFIX_SEPARATOR;
+        $prefix = rtrim($prefix, self::PREFIX_SEPARATOR).self::PREFIX_SEPARATOR;
         $this->prefixes[$prefix] = $this->normalizeDirectory($directory);
+
         return $this;
     }
 
     /**
      * Register many namespace/directory pairs at once
      *
-     * @param  array $prefixes
+     * @param  array                              $prefixes
      * @throws Exception\InvalidArgumentException
      * @return StandardAutoloader
      */
     public function registerPrefixes($prefixes)
     {
         if (!is_array($prefixes) && !$prefixes instanceof \Traversable) {
-            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            require_once __DIR__.'/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Prefix pairs must be either an array or Traversable');
         }
 
         foreach ($prefixes as $prefix => $directory) {
             $this->registerPrefix($prefix, $directory);
         }
+
         return $this;
     }
 
     /**
      * Defined by Autoloadable; autoload a class
      *
-     * @param  string $class
+     * @param  string       $class
      * @return false|string
      */
     public function autoload($class)
@@ -217,6 +223,7 @@ class StandardAutoloader implements SplAutoloader
             } elseif ($isFallback) {
                 return $this->loadClass($class, self::ACT_AS_FALLBACK);
             }
+
             return false;
         }
         if (false !== strpos($class, self::PREFIX_SEPARATOR)) {
@@ -225,11 +232,13 @@ class StandardAutoloader implements SplAutoloader
             } elseif ($isFallback) {
                 return $this->loadClass($class, self::ACT_AS_FALLBACK);
             }
+
             return false;
         }
         if ($isFallback) {
             return $this->loadClass($class, self::ACT_AS_FALLBACK);
         }
+
         return false;
     }
 
@@ -261,23 +270,23 @@ class StandardAutoloader implements SplAutoloader
         $namespace = (isset($matches['namespace'])) ? $matches['namespace'] : '';
 
         return $directory
-             . str_replace(self::NS_SEPARATOR, '/', $namespace)
-             . str_replace(self::PREFIX_SEPARATOR, '/', $class)
-             . '.php';
+             .str_replace(self::NS_SEPARATOR, '/', $namespace)
+             .str_replace(self::PREFIX_SEPARATOR, '/', $class)
+             .'.php';
     }
 
     /**
      * Load a class, based on its type (namespaced or prefixed)
      *
-     * @param  string $class
-     * @param  string $type
+     * @param  string                             $class
+     * @param  string                             $type
      * @return bool|string
      * @throws Exception\InvalidArgumentException
      */
     protected function loadClass($class, $type)
     {
         if (!in_array($type, array(self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK))) {
-            require_once __DIR__ . '/Exception/InvalidArgumentException.php';
+            require_once __DIR__.'/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException();
         }
 
@@ -289,6 +298,7 @@ class StandardAutoloader implements SplAutoloader
             if ($resolvedName !== false) {
                 return include $resolvedName;
             }
+
             return false;
         }
 
@@ -305,6 +315,7 @@ class StandardAutoloader implements SplAutoloader
                 }
             }
         }
+
         return false;
     }
 
@@ -319,9 +330,11 @@ class StandardAutoloader implements SplAutoloader
         $last = $directory[strlen($directory) - 1];
         if (in_array($last, array('/', '\\'))) {
             $directory[strlen($directory) - 1] = DIRECTORY_SEPARATOR;
+
             return $directory;
         }
         $directory .= DIRECTORY_SEPARATOR;
+
         return $directory;
     }
 }

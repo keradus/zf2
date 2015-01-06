@@ -166,7 +166,7 @@ class ViewManager extends AbstractListenerAggregate
             return $this->renderer;
         }
 
-        $this->renderer = new ViewPhpRenderer;
+        $this->renderer = new ViewPhpRenderer();
         $this->renderer->setHelperPluginManager($this->getHelperManager());
         $this->renderer->setResolver($this->getResolver());
 
@@ -361,7 +361,7 @@ class ViewManager extends AbstractListenerAggregate
      * latter allows each to trigger before the default mvc rendering strategy,
      * and for them to trigger in the order they are registered.
      *
-     * @param EventManagerInterface $events
+     * @param  EventManagerInterface $events
      * @return void
      */
     protected function registerMvcRenderingStrategies(EventManagerInterface $events)

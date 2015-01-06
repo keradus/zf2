@@ -32,13 +32,13 @@ class Alpha extends Alnum
 
         if (!static::hasPcreUnicodeSupport()) {
             // POSIX named classes are not supported, use alternative [a-zA-Z] match
-            $pattern = '/[^a-zA-Z' . $whiteSpace . ']/';
+            $pattern = '/[^a-zA-Z'.$whiteSpace.']/';
         } elseif ($language == 'ja' || $language == 'ko' || $language == 'zh') {
             // Use english alphabet
-            $pattern = '/[^a-zA-Z'  . $whiteSpace . ']/u';
+            $pattern = '/[^a-zA-Z'.$whiteSpace.']/u';
         } else {
             // Use native language alphabet
-            $pattern = '/[^\p{L}' . $whiteSpace . ']/u';
+            $pattern = '/[^\p{L}'.$whiteSpace.']/u';
         }
 
         return preg_replace($pattern, '', $value);

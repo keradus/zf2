@@ -144,7 +144,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         $params = new \ArrayObject(array(
             'key'   => 'key1',
-            'value' => 'value1'
+            'value' => 'value1',
         ));
 
         // call protected method
@@ -173,7 +173,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         $params = new \ArrayObject(array(
             'key'   => 'key1',
-            'value' => 'value1'
+            'value' => 'value1',
         ));
         $result = true;
 
@@ -207,7 +207,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $result = null;
         $params = new \ArrayObject(array(
             'key'   => 'key1',
-            'value' => 'value1'
+            'value' => 'value1',
         ));
 
         // call protected method
@@ -256,7 +256,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped(
             "This test doesn't work because of an issue with PHPUnit: "
-            . 'https://github.com/sebastianbergmann/phpunit-mock-objects/issues/81'
+            .'https://github.com/sebastianbergmann/phpunit-mock-objects/issues/81'
         );
 
         $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
@@ -276,9 +276,11 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnCallback(function ($k, & $success, & $casToken) use ($items) {
                     if ($items[$k]) {
                         $success = true;
+
                         return $items[$k];
                     } else {
                         $success = false;
+
                         return;
                     }
                 }));
@@ -430,9 +432,9 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $eventHandler = function ($event) use (&$eventList) {
             $eventList[] = $event->getName();
         };
-        $this->_storage->getEventManager()->attach($methodName . '.pre', $eventHandler);
-        $this->_storage->getEventManager()->attach($methodName . '.post', $eventHandler);
-        $this->_storage->getEventManager()->attach($methodName . '.exception', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName.'.pre', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName.'.post', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName.'.exception', $eventHandler);
 
         $mock = $this->_storage
             ->expects($this->once())
@@ -443,8 +445,8 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         call_user_func_array(array($this->_storage, $methodName), $methodArgs);
 
         $expectedEventList = array(
-            $methodName . '.pre',
-            $methodName . '.post'
+            $methodName.'.pre',
+            $methodName.'.post',
         );
         $this->assertSame($expectedEventList, $eventList);
     }
@@ -460,12 +462,13 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $eventHandler = function ($event) use (&$eventList) {
             $eventList[] = $event->getName();
         };
-        $this->_storage->getEventManager()->attach($methodName . '.pre', $eventHandler);
-        $this->_storage->getEventManager()->attach($methodName . '.post', $eventHandler);
-        $this->_storage->getEventManager()->attach($methodName . '.exception', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName.'.pre', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName.'.post', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName.'.exception', $eventHandler);
 
-        $this->_storage->getEventManager()->attach($methodName . '.pre', function ($event) use ($retVal) {
+        $this->_storage->getEventManager()->attach($methodName.'.pre', function ($event) use ($retVal) {
             $event->stopPropagation();
+
             return $retVal;
         });
 
@@ -478,8 +481,8 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // after the triggered pre-event the post-event should be triggered as well
         $expectedEventList = array(
-            $methodName . '.pre',
-            $methodName . '.post',
+            $methodName.'.pre',
+            $methodName.'.post',
         );
         $this->assertSame($expectedEventList, $eventList);
     }
@@ -677,20 +680,20 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         // getItem(s)
         $this->checkPreEventCanChangeArguments('getItem', array(
-            'key' => 'key'
+            'key' => 'key',
         ), array(
             'key' => 'changedKey',
         ));
 
         $this->checkPreEventCanChangeArguments('getItems', array(
-            'keys' => array('key')
+            'keys' => array('key'),
         ), array(
             'keys' => array('changedKey'),
         ));
 
         // hasItem(s)
         $this->checkPreEventCanChangeArguments('hasItem', array(
-            'key' => 'key'
+            'key' => 'key',
         ), array(
             'key' => 'changedKey',
         ));
@@ -703,7 +706,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // getMetadata(s)
         $this->checkPreEventCanChangeArguments('getMetadata', array(
-            'key' => 'key'
+            'key' => 'key',
         ), array(
             'key' => 'changedKey',
         ));
@@ -799,7 +802,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         // incrementItem(s)
         $this->checkPreEventCanChangeArguments('incrementItem', array(
             'key'   => 'key',
-            'value' => 1
+            'value' => 1,
         ), array(
             'key'   => 'changedKey',
             'value' => 2,
@@ -814,7 +817,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         // decrementItem(s)
         $this->checkPreEventCanChangeArguments('decrementItem', array(
             'key'   => 'key',
-            'value' => 1
+            'value' => 1,
         ), array(
             'key'   => 'changedKey',
             'value' => 2,
@@ -829,8 +832,8 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     protected function checkPreEventCanChangeArguments($method, array $args, array $expectedArgs)
     {
-        $internalMethod = 'internal' . ucfirst($method);
-        $eventName      = $method . '.pre';
+        $internalMethod = 'internal'.ucfirst($method);
+        $eventName      = $method.'.pre';
 
         // init mock
         $this->_storage = $this->getMockForAbstractAdapter(array($internalMethod));
@@ -857,7 +860,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      * Generates a mock of the abstract storage adapter by mocking all abstract and the given methods
      * Also sets the adapter options
      *
-     * @param array $methods
+     * @param  array                                       $methods
      * @return \Zend\Cache\Storage\Adapter\AbstractAdapter
      */
     protected function getMockForAbstractAdapter(array $methods = array())
@@ -877,6 +880,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         }
 
         $adapter->setOptions($this->_options);
+
         return $adapter;
     }
 }

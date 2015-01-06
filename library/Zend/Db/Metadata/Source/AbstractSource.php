@@ -60,8 +60,8 @@ abstract class AbstractSource implements MetadataInterface
     /**
      * Get table names
      *
-     * @param  string $schema
-     * @param  bool   $includeViews
+     * @param  string   $schema
+     * @param  bool     $includeViews
      * @return string[]
      */
     public function getTableNames($schema = null, $includeViews = false)
@@ -82,14 +82,15 @@ abstract class AbstractSource implements MetadataInterface
                 $tableNames[] = $tableName;
             }
         }
+
         return $tableNames;
     }
 
     /**
      * Get tables
      *
-     * @param  string $schema
-     * @param  bool   $includeViews
+     * @param  string               $schema
+     * @param  bool                 $includeViews
      * @return Object\TableObject[]
      */
     public function getTables($schema = null, $includeViews = false)
@@ -102,14 +103,15 @@ abstract class AbstractSource implements MetadataInterface
         foreach ($this->getTableNames($schema, $includeViews) as $tableName) {
             $tables[] = $this->getTable($tableName, $schema);
         }
+
         return $tables;
     }
 
     /**
      * Get table
      *
-     * @param  string $tableName
-     * @param  string $schema
+     * @param  string             $tableName
+     * @param  string             $schema
      * @return Object\TableObject
      */
     public function getTable($tableName, $schema = null)
@@ -121,7 +123,7 @@ abstract class AbstractSource implements MetadataInterface
         $this->loadTableNameData($schema);
 
         if (!isset($this->data['table_names'][$schema][$tableName])) {
-            throw new \Exception('Table "' . $tableName . '" does not exist');
+            throw new \Exception('Table "'.$tableName.'" does not exist');
         }
 
         $data = $this->data['table_names'][$schema][$tableName];
@@ -136,17 +138,18 @@ abstract class AbstractSource implements MetadataInterface
                 $table->setIsUpdatable($data['is_updatable']);
                 break;
             default:
-                throw new \Exception('Table "' . $tableName . '" is of an unsupported type "' . $data['table_type'] . '"');
+                throw new \Exception('Table "'.$tableName.'" is of an unsupported type "'.$data['table_type'].'"');
         }
         $table->setColumns($this->getColumns($tableName, $schema));
         $table->setConstraints($this->getConstraints($tableName, $schema));
+
         return $table;
     }
 
     /**
      * Get view names
      *
-     * @param string $schema
+     * @param  string $schema
      * @return array
      */
     public function getViewNames($schema = null)
@@ -163,13 +166,14 @@ abstract class AbstractSource implements MetadataInterface
                 $viewNames[] = $tableName;
             }
         }
+
         return $viewNames;
     }
 
     /**
      * Get views
      *
-     * @param string $schema
+     * @param  string $schema
      * @return array
      */
     public function getViews($schema = null)
@@ -182,14 +186,15 @@ abstract class AbstractSource implements MetadataInterface
         foreach ($this->getViewNames($schema) as $tableName) {
             $views[] = $this->getTable($tableName, $schema);
         }
+
         return $views;
     }
 
     /**
      * Get view
      *
-     * @param string $viewName
-     * @param string $schema
+     * @param  string                               $viewName
+     * @param  string                               $schema
      * @return \Zend\Db\Metadata\Object\TableObject
      */
     public function getView($viewName, $schema = null)
@@ -204,7 +209,7 @@ abstract class AbstractSource implements MetadataInterface
         if (isset($tableNames[$viewName]) && 'VIEW' == $tableNames[$viewName]['table_type']) {
             return $this->getTable($viewName, $schema);
         }
-        throw new \Exception('View "' . $viewName . '" does not exist');
+        throw new \Exception('View "'.$viewName.'" does not exist');
     }
 
     /**
@@ -223,7 +228,7 @@ abstract class AbstractSource implements MetadataInterface
         $this->loadColumnData($table, $schema);
 
         if (!isset($this->data['columns'][$schema][$table])) {
-            throw new \Exception('"' . $table . '" does not exist');
+            throw new \Exception('"'.$table.'" does not exist');
         }
 
         return array_keys($this->data['columns'][$schema][$table]);
@@ -248,15 +253,16 @@ abstract class AbstractSource implements MetadataInterface
         foreach ($this->getColumnNames($table, $schema) as $columnName) {
             $columns[] = $this->getColumn($columnName, $table, $schema);
         }
+
         return $columns;
     }
 
     /**
      * Get column
      *
-     * @param  string $columnName
-     * @param  string $table
-     * @param  string $schema
+     * @param  string              $columnName
+     * @param  string              $table
+     * @param  string              $schema
      * @return Object\ColumnObject
      */
     public function getColumn($columnName, $table, $schema = null)
@@ -278,11 +284,11 @@ abstract class AbstractSource implements MetadataInterface
             'ordinal_position', 'column_default', 'is_nullable',
             'data_type', 'character_maximum_length', 'character_octet_length',
             'numeric_precision', 'numeric_scale', 'numeric_unsigned',
-            'erratas'
+            'erratas',
         );
         foreach ($props as $prop) {
             if (isset($info[$prop])) {
-                $column->{'set' . str_replace('_', '', $prop)}($info[$prop]);
+                $column->{'set'.str_replace('_', '', $prop)}($info[$prop]);
             }
         }
 
@@ -326,9 +332,9 @@ abstract class AbstractSource implements MetadataInterface
     /**
      * Get constraint
      *
-     * @param  string $constraintName
-     * @param  string $table
-     * @param  string $schema
+     * @param  string                  $constraintName
+     * @param  string                  $table
+     * @param  string                  $schema
      * @return Object\ConstraintObject
      */
     public function getConstraint($constraintName, $table, $schema = null)
@@ -413,7 +419,7 @@ abstract class AbstractSource implements MetadataInterface
     /**
      * Get trigger names
      *
-     * @param string $schema
+     * @param  string $schema
      * @return array
      */
     public function getTriggerNames($schema = null)
@@ -430,7 +436,7 @@ abstract class AbstractSource implements MetadataInterface
     /**
      * Get triggers
      *
-     * @param string $schema
+     * @param  string $schema
      * @return array
      */
     public function getTriggers($schema = null)
@@ -443,14 +449,15 @@ abstract class AbstractSource implements MetadataInterface
         foreach ($this->getTriggerNames($schema) as $triggerName) {
             $triggers[] = $this->getTrigger($triggerName, $schema);
         }
+
         return $triggers;
     }
 
     /**
      * Get trigger
      *
-     * @param string $triggerName
-     * @param string $schema
+     * @param  string               $triggerName
+     * @param  string               $schema
      * @return Object\TriggerObject
      */
     public function getTrigger($triggerName, $schema = null)
@@ -462,7 +469,7 @@ abstract class AbstractSource implements MetadataInterface
         $this->loadTriggerData($schema);
 
         if (!isset($this->data['triggers'][$schema][$triggerName])) {
-            throw new \Exception('Trigger "' . $triggerName . '" does not exist');
+            throw new \Exception('Trigger "'.$triggerName.'" does not exist');
         }
 
         $info = $this->data['triggers'][$schema][$triggerName];
@@ -492,7 +499,7 @@ abstract class AbstractSource implements MetadataInterface
      * Prepare data hierarchy
      *
      * @param string $type
-     * @param string $key ...
+     * @param string $key  ...
      */
     protected function prepareDataHierarchy($type)
     {

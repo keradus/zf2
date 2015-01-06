@@ -30,7 +30,7 @@ class FormRange extends FormInput
         'step'           => true,
         'required'       => true,
         'type'           => true,
-        'value'          => true
+        'value'          => true,
     );
 
     /**

@@ -55,7 +55,7 @@ class DocBlockScanner implements ScannerInterface
     protected $annotations = array();
 
     /**
-     * @param  string $docComment
+     * @param string               $docComment
      * @param null|NameInformation $nameInformation
      */
     public function __construct($docComment, NameInformation $nameInformation = null)
@@ -135,7 +135,7 @@ class DocBlockScanner implements ScannerInterface
             case 'DOCBLOCK_WHITESPACE':
             case 'DOCBLOCK_TEXT':
                 if ($tagIndex !== null) {
-                    $this->tags[$tagIndex]['value'] .= ($this->tags[$tagIndex]['value'] == '') ? $token[1] : ' ' . $token[1];
+                    $this->tags[$tagIndex]['value'] .= ($this->tags[$tagIndex]['value'] == '') ? $token[1] : ' '.$token[1];
                     goto SCANNER_CONTINUE;
                 } elseif ($mode <= 2) {
                     if ($mode == 1) {
@@ -148,7 +148,7 @@ class DocBlockScanner implements ScannerInterface
                 //gotos no break needed
             case 'DOCBLOCK_TAG':
                 array_push($this->tags, array('name'  => $token[1],
-                                              'value' => ''));
+                                              'value' => '', ));
                 end($this->tags);
                 $tagIndex = key($this->tags);
                 $mode     = 3;

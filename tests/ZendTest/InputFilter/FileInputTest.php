@@ -128,7 +128,7 @@ class FileInputTest extends InputTest
     public function testValidationOperatesBeforeFiltering()
     {
         $badValue = array(
-            'tmp_name' => ' ' . __FILE__ . ' ',
+            'tmp_name' => ' '.__FILE__.' ',
             'name'     => 'foo',
             'size'     => 1,
             'error'    => 0,

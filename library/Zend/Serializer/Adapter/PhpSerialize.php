@@ -38,7 +38,7 @@ class PhpSerialize extends AbstractAdapter
     /**
      * Serialize using serialize()
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @return string
      * @throws Exception\RuntimeException On serialize error
      */
@@ -58,7 +58,7 @@ class PhpSerialize extends AbstractAdapter
      * Unserialize
      *
      * @todo   Allow integration with unserialize_callback_func
-     * @param  string $serialized
+     * @param  string                     $serialized
      * @return mixed
      * @throws Exception\RuntimeException on unserialize error
      */

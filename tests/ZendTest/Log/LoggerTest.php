@@ -34,7 +34,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->logger = new Logger;
+        $this->logger = new Logger();
     }
 
     public function testUsesWriterPluginManagerByDefault()
@@ -142,7 +142,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testLogging()
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, 'tottakai');
 
@@ -152,7 +152,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testLoggingArray()
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, array('test'));
 
@@ -162,8 +162,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testAddFilter()
     {
-        $writer = new MockWriter;
-        $filter = new MockFilter;
+        $writer = new MockWriter();
+        $filter = new MockFilter();
         $writer->addFilter($filter);
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, array('test'));
@@ -174,7 +174,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testAddFilterByName()
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $writer->addFilter('mock');
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, array('test'));
@@ -191,7 +191,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         return array(
             array('priority', array('priority' => Logger::INFO)),
             array('regex', array( 'regex' => '/[0-9]+/' )),
-            array('validator', array('validator' => new DigitsFilter)),
+            array('validator', array('validator' => new DigitsFilter())),
         );
     }
 
@@ -200,7 +200,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFilterByNameWithParams($filter, $options)
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $writer->addFilter($filter, $options);
         $this->logger->addWriter($writer);
 
@@ -223,7 +223,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoggingCustomAttributesForUserContext($extra)
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::ERR, 'tottakai', $extra);
 
@@ -255,7 +255,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterErrorHandler()
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
 
         $previous = Logger::registerErrorHandler($this->logger);
@@ -278,7 +278,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $options = array('writers' => array(
                              'first_writer' => array(
                                  'name'     => 'mock',
-                             )
+                             ),
                         ));
         $logger = new Logger($options);
 
@@ -294,9 +294,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
                                  'name'     => 'stream',
                                  'options'  => array(
                                      'stream' => 'php://output',
-                                     'log_separator' => 'foo'
+                                     'log_separator' => 'foo',
                                  ),
-                              )
+                              ),
                          ));
         $logger = new Logger($options);
 
@@ -318,7 +318,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
                 'first_processor' => array(
                     'name' => 'requestid',
                 ),
-            )
+            ),
         );
         $logger = new Logger($options);
         $processors = $logger->getProcessors()->toArray();
@@ -342,7 +342,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $processors = $this->logger->getProcessors()->toArray();
         $this->assertInstanceOf('Zend\Log\Processor\Backtrace', $processors[0]);
 
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::ERR, 'foo');
     }
@@ -351,7 +351,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $processor = new Backtrace();
         $this->logger->addProcessor($processor);
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
 
         $this->logger->log(Logger::ERR, 'foo');
@@ -360,7 +360,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testExceptionHandler()
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
 
         $this->assertTrue(Logger::registerExceptionHandler($this->logger));
@@ -403,7 +403,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
                 array(
                     'name'     => 'stream',
                     'options'  => array(
-                        'stream' => $stream
+                        'stream' => $stream,
                     ),
                 ),
             ),
@@ -443,7 +443,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterFatalShutdownFunction()
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
 
         $result = Logger::registerFatalErrorShutdownFunction($this->logger);
@@ -464,7 +464,6 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         @$this->callToNonExistingMethod();
     }
 
-
     /**
      * @runInSeparateProcess
      *
@@ -472,7 +471,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterFatalErrorShutdownFunctionHandlesCompileTimeErrors()
     {
-        $writer = new MockWriter;
+        $writer = new MockWriter();
         $this->logger->addWriter($writer);
 
         $result = Logger::registerFatalErrorShutdownFunction($this->logger);

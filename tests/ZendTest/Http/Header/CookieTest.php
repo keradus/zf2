@@ -39,7 +39,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
     {
         $setCookies = array(
             new SetCookie('foo', 'bar'),
-            new SetCookie('name', 'value')
+            new SetCookie('name', 'value'),
         );
 
         $cookie = Cookie::fromSetCookieArray($setCookies);

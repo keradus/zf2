@@ -78,7 +78,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
                 $controllerSubNs = $this->deriveControllerSubNamespace($namespace);
                 if (!empty($controllerSubNs)) {
                     if (!empty($module)) {
-                        $module .= '/' . $controllerSubNs;
+                        $module .= '/'.$controllerSubNs;
                     } else {
                         $module = $controllerSubNs;
                     }
@@ -96,7 +96,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
 
         $action     = $routeMatch->getParam('action');
         if (null !== $action) {
-            $template .= '/' . $this->inflectName($action);
+            $template .= '/'.$this->inflectName($action);
         }
         $model->setTemplate($template);
     }
@@ -111,13 +111,14 @@ class InjectTemplateListener extends AbstractListenerAggregate
     {
         krsort($map);
         $this->controllerMap = $map;
+
         return $this;
     }
 
     /**
      * Maps controller to template if controller namespace is whitelisted or mapped
      *
-     * @param string $controller controller FQCN
+     * @param  string       $controller controller FQCN
      * @return string|false template name or false if controller was not matched
      */
     public function mapController($controller)
@@ -128,7 +129,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
                 // merging have no feature to remove entries
                 false == $replacement
                 // Match full class or full namespace
-                || !($controller === $namespace || strpos($controller, $namespace . '\\') === 0)
+                || !($controller === $namespace || strpos($controller, $namespace.'\\') === 0)
             ) {
                 continue;
             }
@@ -136,7 +137,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
             $map = '';
             // Map namespace to $replacement if its value is string
             if (is_string($replacement)) {
-                $map = rtrim($replacement, '/') . '/';
+                $map = rtrim($replacement, '/').'/';
                 $controller = substr($controller, strlen($namespace) + 1);
             }
 
@@ -148,11 +149,12 @@ class InjectTemplateListener extends AbstractListenerAggregate
             $parts[] = $this->deriveControllerClass($controller);
             $controller = implode('/', $parts);
 
-            $template = trim($map . $controller, '/');
+            $template = trim($map.$controller, '/');
 
             //inflect CamelCase to dash
             return $this->inflectName($template);
         }
+
         return false;
     }
 
@@ -168,6 +170,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
             $this->inflector = new CamelCaseToDashFilter();
         }
         $name = $this->inflector->filter($name);
+
         return strtolower($name);
     }
 
@@ -183,6 +186,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
             return '';
         }
         $module = substr($controller, 0, strpos($controller, '\\'));
+
         return $module;
     }
 
@@ -202,6 +206,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
         if (empty($subNsArray)) {
             return '';
         }
+
         return implode('/', $subNsArray);
     }
 

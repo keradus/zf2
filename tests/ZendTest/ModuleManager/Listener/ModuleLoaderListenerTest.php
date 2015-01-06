@@ -20,16 +20,16 @@ class ModuleLoaderListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'zend_module_cache_dir';
+        $this->tmpdir = sys_get_temp_dir().DIRECTORY_SEPARATOR.'zend_module_cache_dir';
         @mkdir($this->tmpdir);
 
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener(), 1000);
     }
 
     public function tearDown()
     {
-        $file = glob($this->tmpdir . DIRECTORY_SEPARATOR . '*');
+        $file = glob($this->tmpdir.DIRECTORY_SEPARATOR.'*');
         @unlink($file[0]); // change this if there's ever > 1 file
         @rmdir($this->tmpdir);
     }

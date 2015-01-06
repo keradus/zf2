@@ -47,9 +47,9 @@ class Schema extends AbstractNode
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn   $dn
-     * @param  array           $data
-     * @param  \Zend\Ldap\Ldap $ldap
+     * @param \Zend\Ldap\Dn   $dn
+     * @param array           $data
+     * @param \Zend\Ldap\Ldap $ldap
      */
     protected function __construct(Ldap\Dn $dn, array $data, Ldap\Ldap $ldap)
     {
@@ -62,7 +62,7 @@ class Schema extends AbstractNode
      *
      * @param  \Zend\Ldap\Dn   $dn
      * @param  \Zend\Ldap\Ldap $ldap
-     * @return Schema Provides a fluid interface
+     * @return Schema          Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {

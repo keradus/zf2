@@ -27,7 +27,7 @@ class SerializableStrategy implements StrategyInterface
 
     /**
      *
-     * @param mixed $serializer string or SerializerAdapter
+     * @param mixed $serializer        string or SerializerAdapter
      * @param mixed $serializerOptions
      */
     public function __construct($serializer, $serializerOptions = null)
@@ -41,24 +41,26 @@ class SerializableStrategy implements StrategyInterface
     /**
      * Serialize the given value so that it can be extracted by the hydrator.
      *
-     * @param mixed $value The original value.
+     * @param  mixed $value The original value.
      * @return mixed Returns the value that should be extracted.
      */
     public function extract($value)
     {
         $serializer = $this->getSerializer();
+
         return $serializer->serialize($value);
     }
 
     /**
      * Unserialize the given value so that it can be hydrated by the hydrator.
      *
-     * @param mixed $value The original value.
+     * @param  mixed $value The original value.
      * @return mixed Returns the value that should be hydrated.
      */
     public function hydrate($value)
     {
         $serializer = $this->getSerializer();
+
         return $serializer->unserialize($value);
     }
 
@@ -73,12 +75,13 @@ class SerializableStrategy implements StrategyInterface
         if (!is_string($serializer) && !$serializer instanceof SerializerAdapter) {
             throw new InvalidArgumentException(sprintf(
                 '%s expects either a string serializer name or Zend\Serializer\Adapter\AdapterInterface instance; '
-                . 'received "%s"',
+                .'received "%s"',
                 __METHOD__,
                 (is_object($serializer) ? get_class($serializer) : gettype($serializer))
             ));
         }
         $this->serializer = $serializer;
+
         return $this;
     }
 
@@ -102,12 +105,13 @@ class SerializableStrategy implements StrategyInterface
     /**
      * Set configuration options for instantiating a serializer adapter
      *
-     * @param  mixed $serializerOptions
+     * @param  mixed                $serializerOptions
      * @return SerializableStrategy
      */
     public function setSerializerOptions($serializerOptions)
     {
         $this->serializerOptions = $serializerOptions;
+
         return $this;
     }
 

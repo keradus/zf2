@@ -36,7 +36,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
     );
 
     /**
-     * @param AlterTable $subject
+     * @param  AlterTable                                       $subject
      * @return \Zend\Db\Sql\Platform\PlatformDecoratorInterface
      */
     public function setSubject($subject)
@@ -47,7 +47,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
     }
 
     /**
-     * @param string $sql
+     * @param  string $sql
      * @return array
      */
     protected function getSqlInsertOffsets($sql)
@@ -56,7 +56,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
         $insertStart = array();
 
         foreach (array('NOT NULL', 'NULL', 'DEFAULT', 'UNIQUE', 'PRIMARY', 'REFERENCES') as $needle) {
-            $insertPos = strpos($sql, ' ' . $needle);
+            $insertPos = strpos($sql, ' '.$needle);
 
             if ($insertPos !== false) {
                 switch ($needle) {
@@ -81,7 +81,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
+     * @param  PlatformInterface $adapterPlatform
      * @return array
      */
     protected function processAddColumns(PlatformInterface $adapterPlatform = null)
@@ -118,16 +118,16 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
                         $j = 1;
                         break;
                     case 'comment':
-                        $insert = ' COMMENT ' . $adapterPlatform->quoteValue($coValue);
+                        $insert = ' COMMENT '.$adapterPlatform->quoteValue($coValue);
                         $j = 2;
                         break;
                     case 'columnformat':
                     case 'format':
-                        $insert = ' COLUMN_FORMAT ' . strtoupper($coValue);
+                        $insert = ' COLUMN_FORMAT '.strtoupper($coValue);
                         $j = 2;
                         break;
                     case 'storage':
-                        $insert = ' STORAGE ' . strtoupper($coValue);
+                        $insert = ' STORAGE '.strtoupper($coValue);
                         $j = 2;
                         break;
                 }
@@ -142,11 +142,12 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
             }
             $sqls[$i] = $sql;
         }
+
         return array($sqls);
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
+     * @param  PlatformInterface $adapterPlatform
      * @return array
      */
     protected function processChangeColumns(PlatformInterface $adapterPlatform = null)
@@ -182,16 +183,16 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
                         $j = 1;
                         break;
                     case 'comment':
-                        $insert = ' COMMENT ' . $adapterPlatform->quoteValue($coValue);
+                        $insert = ' COMMENT '.$adapterPlatform->quoteValue($coValue);
                         $j = 2;
                         break;
                     case 'columnformat':
                     case 'format':
-                        $insert = ' COLUMN_FORMAT ' . strtoupper($coValue);
+                        $insert = ' COLUMN_FORMAT '.strtoupper($coValue);
                         $j = 2;
                         break;
                     case 'storage':
-                        $insert = ' STORAGE ' . strtoupper($coValue);
+                        $insert = ' STORAGE '.strtoupper($coValue);
                         $j = 2;
                         break;
                 }
@@ -206,7 +207,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
             }
             $sqls[] = array(
                 $adapterPlatform->quoteIdentifier($name),
-                $sql
+                $sql,
             );
         }
 

@@ -82,7 +82,7 @@ class ImageTest extends TestCommon
     public function testAllowedImageType()
     {
         $types = array('gif' => 'gif' , 'jpg' => 'jpeg' , 'jpeg' => 'jpeg' ,
-                       'png' => 'png');
+                       'png' => 'png', );
         foreach ($types as $type => $expectedType) {
             $this->renderer->setImageType($type);
             $this->assertSame($expectedType,

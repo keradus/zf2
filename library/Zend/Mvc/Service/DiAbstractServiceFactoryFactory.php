@@ -19,7 +19,7 @@ class DiAbstractServiceFactoryFactory implements FactoryInterface
     /**
      * Class responsible for instantiating a DiAbstractServiceFactory
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface  $serviceLocator
      * @return DiAbstractServiceFactory
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

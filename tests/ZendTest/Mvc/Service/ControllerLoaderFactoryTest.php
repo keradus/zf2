@@ -142,7 +142,7 @@ class ControllerLoaderFactoryTest extends TestCase
 
     public function testWillFetchDiDependenciesFromControllerLoaderServiceManager()
     {
-        $controllerName = __NAMESPACE__ . '\TestAsset\ControllerWithDependencies';
+        $controllerName = __NAMESPACE__.'\TestAsset\ControllerWithDependencies';
         // rewriting since controller loader does not have the correct config, but is already fetched
         $config = new ArrayObject(array(
             'di' => array(
@@ -174,7 +174,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $controllerpluginManager = $this->services->get('ControllerPluginManager');
         $controllerpluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
 
-        $controller    = new \ZendTest\Mvc\Controller\TestAsset\SampleController;
+        $controller    = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
         $controllerpluginManager->setController($controller);
 
         $plugin = $controllerpluginManager->get('samplePlugin');

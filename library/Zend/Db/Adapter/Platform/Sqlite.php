@@ -41,7 +41,7 @@ class Sqlite extends AbstractPlatform
     }
 
     /**
-     * @param \Zend\Db\Adapter\Driver\Pdo\Pdo|\PDO $driver
+     * @param  \Zend\Db\Adapter\Driver\Pdo\Pdo|\PDO                $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      *
      * @return self
@@ -52,6 +52,7 @@ class Sqlite extends AbstractPlatform
             || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Sqlite')
         ) {
             $this->resource = $driver;
+
             return $this;
         }
 
@@ -71,7 +72,7 @@ class Sqlite extends AbstractPlatform
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        return '"' . implode('"."', (array) str_replace('"', '\\"', $identifierChain)) . '"';
+        return '"'.implode('"."', (array) str_replace('"', '\\"', $identifierChain)).'"';
     }
 
     /**
@@ -98,10 +99,11 @@ class Sqlite extends AbstractPlatform
         }
 
         trigger_error(
-            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-                . 'can introduce security vulnerabilities in a production environment.'
+            'Attempting to quote a value in '.__CLASS__.' without extension/driver support '
+                .'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+
+        return '\''.addcslashes($value, "\x00\n\r\\'\"\x1a").'\'';
     }
 
     /**
@@ -119,7 +121,7 @@ class Sqlite extends AbstractPlatform
             return $resource->quote($value);
         }
 
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return '\''.addcslashes($value, "\x00\n\r\\'\"\x1a").'\'';
     }
 
     /**

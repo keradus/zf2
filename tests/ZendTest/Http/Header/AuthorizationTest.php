@@ -44,5 +44,5 @@ class AuthorizationTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Authorization: xxx', $authorizationHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

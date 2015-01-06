@@ -12,9 +12,9 @@ namespace ZendTest\Feed\Reader\Integration;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -22,13 +22,12 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/wordpress-rss2-dc-atom.xml';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/wordpress-rss2-dc-atom.xml';
     }
 
     /**
      * Feed level testing
      */
-
     public function testGetsTitle()
     {
         $feed = Reader\Reader::importString(
@@ -43,7 +42,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(array(
-            array('name'=>'norm2782')
+            array('name' => 'norm2782'),
         ), (array) $feed->getAuthors());
     }
 
@@ -52,7 +51,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(array('name'=>'norm2782'), $feed->getAuthor());
+        $this->assertEquals(array('name' => 'norm2782'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -106,7 +105,6 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
     /**
      * Entry level testing
      */
-
     public function testGetsEntryId()
     {
         $feed = Reader\Reader::importString(
@@ -135,7 +133,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array(array('name'=>'norm2782')), (array) $entry->getAuthors());
+        $this->assertEquals(array(array('name' => 'norm2782')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -144,7 +142,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array('name'=>'norm2782'), $entry->getAuthor());
+        $this->assertEquals(array('name' => 'norm2782'), $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()

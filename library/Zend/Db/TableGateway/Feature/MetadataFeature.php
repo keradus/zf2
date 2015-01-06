@@ -33,7 +33,7 @@ class MetadataFeature extends AbstractFeature
         }
         $this->sharedData['metadata'] = array(
             'primaryKey' => null,
-            'columns' => array()
+            'columns' => array(),
         );
     }
 

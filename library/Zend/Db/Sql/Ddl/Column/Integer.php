@@ -20,7 +20,7 @@ class Integer extends Column
         $options = $this->getOptions();
 
         if (isset($options['length'])) {
-            $data[0][1][1] .= '(' . $options['length'] . ')';
+            $data[0][1][1] .= '('.$options['length'].')';
         }
 
         return $data;

@@ -56,7 +56,7 @@ class BaseInputFilter implements
      * Add an input to the input filter
      *
      * @param  InputInterface|InputFilterInterface $input
-     * @param  null|string                         $name Name used to retrieve this input
+     * @param  null|string                         $name  Name used to retrieve this input
      * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
@@ -81,10 +81,12 @@ class BaseInputFilter implements
             // that this merges the new input into the original.
             $original = $this->inputs[$name];
             $original->merge($input);
+
             return $this;
         }
 
         $this->inputs[$name] = $input;
+
         return $this;
     }
 
@@ -92,7 +94,7 @@ class BaseInputFilter implements
      * Replace a named input
      *
      * @param  InputInterface|InputFilterInterface $input
-     * @param  string                              $name Name of the input to replace
+     * @param  string                              $name  Name of the input to replace
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -117,13 +119,14 @@ class BaseInputFilter implements
         }
 
         $this->inputs[$name] = $input;
+
         return $this;
     }
 
     /**
      * Retrieve a named input
      *
-     * @param  string $name
+     * @param  string                              $name
      * @throws Exception\InvalidArgumentException
      * @return InputInterface|InputFilterInterface
      */
@@ -136,6 +139,7 @@ class BaseInputFilter implements
                 $name
             ));
         }
+
         return $this->inputs[$name];
     }
 
@@ -153,19 +157,20 @@ class BaseInputFilter implements
     /**
      * Remove a named input
      *
-     * @param  string $name
+     * @param  string               $name
      * @return InputFilterInterface
      */
     public function remove($name)
     {
         unset($this->inputs[$name]);
+
         return $this;
     }
 
     /**
      * Set data to use when validating and filtering
      *
-     * @param  array|Traversable $data
+     * @param  array|Traversable                  $data
      * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
@@ -183,13 +188,14 @@ class BaseInputFilter implements
         }
         $this->data = $data;
         $this->populate();
+
         return $this;
     }
 
     /**
      * Is the data set valid?
      *
-     * @param  mixed|null $context
+     * @param  mixed|null                 $context
      * @throws Exception\RuntimeException
      * @return bool
      */
@@ -204,6 +210,7 @@ class BaseInputFilter implements
         }
 
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
+
         return $this->validateInputs($inputs, $data, $context);
     }
 
@@ -372,7 +379,7 @@ class BaseInputFilter implements
      * Implementations should allow passing a single array value, or multiple arguments,
      * each specifying a single input.
      *
-     * @param  mixed $name
+     * @param  mixed                              $name
      * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
@@ -385,6 +392,7 @@ class BaseInputFilter implements
                     $input->setValidationGroup(self::VALIDATE_ALL);
                 }
             }
+
             return $this;
         }
 
@@ -453,7 +461,7 @@ class BaseInputFilter implements
     /**
      * Retrieve a value from a named input
      *
-     * @param  string $name
+     * @param  string                             $name
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
@@ -496,13 +504,14 @@ class BaseInputFilter implements
             }
             $values[$name] = $input->getValue();
         }
+
         return $values;
     }
 
     /**
      * Retrieve a raw (unfiltered) value from a named input
      *
-     * @param  string $name
+     * @param  string                             $name
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
@@ -516,6 +525,7 @@ class BaseInputFilter implements
             ));
         }
         $input = $this->inputs[$name];
+
         return $input->getRawValue();
     }
 
@@ -538,6 +548,7 @@ class BaseInputFilter implements
 
             $values[$name] = $input->getRawValue();
         }
+
         return $values;
     }
 
@@ -562,7 +573,7 @@ class BaseInputFilter implements
     /**
      * Ensure all names of a validation group exist as input in the filter
      *
-     * @param  array $inputs
+     * @param  array                              $inputs
      * @return void
      * @throws Exception\InvalidArgumentException
      */

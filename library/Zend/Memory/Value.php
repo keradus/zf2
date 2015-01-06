@@ -41,11 +41,10 @@ class Value implements ArrayAccess, Countable
      */
     private $trace;
 
-
     /**
      * Object constructor
      *
-     * @param string $value
+     * @param string                         $value
      * @param \Zend\Memory\Container\Movable $container
      */
     public function __construct($value, Container\Movable $container)
@@ -79,7 +78,7 @@ class Value implements ArrayAccess, Countable
      * ArrayAccess interface method
      * returns true if string offset exists
      *
-     * @param int $offset
+     * @param  int  $offset
      * @return bool
      */
     public function offsetExists($offset)
@@ -91,7 +90,7 @@ class Value implements ArrayAccess, Countable
      * ArrayAccess interface method
      * Get character at $offset position
      *
-     * @param int $offset
+     * @param  int    $offset
      * @return string
      */
     public function offsetGet($offset)
@@ -103,7 +102,7 @@ class Value implements ArrayAccess, Countable
      * ArrayAccess interface method
      * Set character at $offset position
      *
-     * @param int $offset
+     * @param int    $offset
      * @param string $char
      */
     public function offsetSet($offset, $char)

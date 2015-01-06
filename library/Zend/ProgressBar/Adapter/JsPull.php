@@ -27,7 +27,7 @@ class JsPull extends AbstractAdapter
     /**
      * Set whether to exit after json data send or not
      *
-     * @param  bool $exitAfterSend
+     * @param  bool                             $exitAfterSend
      * @return \Zend\ProgressBar\Adapter\JsPull
      */
     public function setExitAfterSend($exitAfterSend)
@@ -38,12 +38,12 @@ class JsPull extends AbstractAdapter
     /**
      * Defined by Zend\ProgressBar\Adapter\AbstractAdapter
      *
-     * @param  float   $current       Current progress value
-     * @param  float   $max           Max progress value
-     * @param  float   $percent       Current percent value
-     * @param  int $timeTaken     Taken time in seconds
-     * @param  int $timeRemaining Remaining time in seconds
-     * @param  string  $text          Status text
+     * @param  float  $current       Current progress value
+     * @param  float  $max           Max progress value
+     * @param  float  $percent       Current percent value
+     * @param  int    $timeTaken     Taken time in seconds
+     * @param  int    $timeRemaining Remaining time in seconds
+     * @param  string $text          Status text
      * @return void
      */
     public function notify($current, $max, $percent, $timeTaken, $timeRemaining, $text)
@@ -55,7 +55,7 @@ class JsPull extends AbstractAdapter
             'timeTaken'     => $timeTaken,
             'timeRemaining' => $timeRemaining,
             'text'          => $text,
-            'finished'      => false
+            'finished'      => false,
         );
 
         $data = Json::encode($arguments);

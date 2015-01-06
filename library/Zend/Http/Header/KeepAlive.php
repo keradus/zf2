@@ -24,7 +24,7 @@ class KeepAlive implements HeaderInterface
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'keep-alive') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Keep-Alive string: "' . $name . '"');
+            throw new Exception\InvalidArgumentException('Invalid header line for Keep-Alive string: "'.$name.'"');
         }
 
         // @todo implementation details
@@ -50,6 +50,6 @@ class KeepAlive implements HeaderInterface
 
     public function toString()
     {
-        return 'Keep-Alive: ' . $this->getFieldValue();
+        return 'Keep-Alive: '.$this->getFieldValue();
     }
 }

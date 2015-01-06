@@ -18,7 +18,7 @@ use Zend\ModuleManager\ModuleEvent;
 class InitTrigger extends AbstractListener
 {
     /**
-     * @param ModuleEvent $e
+     * @param  ModuleEvent $e
      * @return void
      */
     public function __invoke(ModuleEvent $e)

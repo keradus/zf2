@@ -18,13 +18,13 @@ use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer\Version;
 
 /**
-*/
+ */
 class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
      *
-     * @param  Writer\Feed $container
+     * @param Writer\Feed $container
      */
     public function __construct(Writer\Feed $container)
     {
@@ -88,14 +88,15 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $imported = $this->dom->importNode($element, true);
             $channel->appendChild($imported);
         }
+
         return $this;
     }
 
     /**
      * Set feed language
      *
-     * @param DOMDocument $dom
-     * @param DOMElement $root
+     * @param  DOMDocument $dom
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setLanguage(DOMDocument $dom, DOMElement $root)
@@ -112,8 +113,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Set feed title
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                               $dom
+     * @param  DOMElement                                $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -121,12 +122,13 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     {
         if (!$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
-            . ' title element but a title has not been set';
+            .' title element but a title has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -140,8 +142,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Set feed description
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                               $dom
+     * @param  DOMElement                                $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -149,12 +151,13 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     {
         if (!$this->getDataContainer()->getDescription()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
-            . ' description element but one has not been set';
+            .' description element but one has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -168,7 +171,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set date feed was last modified
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
@@ -189,7 +192,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set feed generator string
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
@@ -204,10 +207,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $root->appendChild($generator);
         $name = $gdata['name'];
         if (array_key_exists('version', $gdata)) {
-            $name .= ' ' . $gdata['version'];
+            $name .= ' '.$gdata['version'];
         }
         if (array_key_exists('uri', $gdata)) {
-            $name .= ' (' . $gdata['uri'] . ')';
+            $name .= ' ('.$gdata['uri'].')';
         }
         $text = $dom->createTextNode($name);
         $generator->appendChild($text);
@@ -216,8 +219,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Set link to feed
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                               $dom
+     * @param  DOMElement                                $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -226,12 +229,13 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $value = $this->getDataContainer()->getLink();
         if (!$value) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
-            . ' link element but one has not been set';
+            .' link element but one has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -248,7 +252,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set feed authors
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
@@ -261,7 +265,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $author = $this->dom->createElement('author');
             $name = $data['name'];
             if (array_key_exists('email', $data)) {
-                $name = $data['email'] . ' (' . $data['name'] . ')';
+                $name = $data['email'].' ('.$data['name'].')';
             }
             $text = $dom->createTextNode($name);
             $author->appendChild($text);
@@ -273,7 +277,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set feed copyright
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCopyright(DOMDocument $dom, DOMElement $root)
@@ -291,8 +295,8 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     /**
      * Set feed channel image
      *
-     * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMDocument                               $dom
+     * @param  DOMElement                                $root
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
@@ -312,6 +316,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -320,12 +325,13 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             || !Uri::factory($image['link'])->isValid()
         ) {
             $message = 'Invalid parameter: parameter \'link\''
-            . ' must be a non-empty string and valid URI/IRI';
+            .' must be a non-empty string and valid URI/IRI';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
+
                 return;
             }
         }
@@ -352,12 +358,13 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         if (isset($image['height'])) {
             if (!ctype_digit((string) $image['height']) || $image['height'] > 400) {
                 $message = 'Invalid parameter: parameter \'height\''
-                         . ' must be an integer not exceeding 400';
+                         .' must be an integer not exceeding 400';
                 $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->ignoreExceptions) {
                     throw $exception;
                 } else {
                     $this->exceptions[] = $exception;
+
                     return;
                 }
             }
@@ -369,12 +376,13 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         if (isset($image['width'])) {
             if (!ctype_digit((string) $image['width']) || $image['width'] > 144) {
                 $message = 'Invalid parameter: parameter \'width\''
-                         . ' must be an integer not exceeding 144';
+                         .' must be an integer not exceeding 144';
                 $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->ignoreExceptions) {
                     throw $exception;
                 } else {
                     $this->exceptions[] = $exception;
+
                     return;
                 }
             }
@@ -386,12 +394,13 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         if (isset($image['description'])) {
             if (empty($image['description']) || !is_string($image['description'])) {
                 $message = 'Invalid parameter: parameter \'description\''
-                         . ' must be a non-empty string';
+                         .' must be a non-empty string';
                 $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->ignoreExceptions) {
                     throw $exception;
                 } else {
                     $this->exceptions[] = $exception;
+
                     return;
                 }
             }
@@ -406,7 +415,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set date feed was created
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
@@ -425,7 +434,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set date feed last build date
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setLastBuildDate(DOMDocument $dom, DOMElement $root)
@@ -446,7 +455,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set base URL to feed links
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setBaseUrl(DOMDocument $dom, DOMElement $root)
@@ -462,7 +471,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * Set feed categories
      *
      * @param  DOMDocument $dom
-     * @param  DOMElement $root
+     * @param  DOMElement  $root
      * @return void
      */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)

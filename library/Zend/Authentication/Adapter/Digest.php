@@ -32,10 +32,10 @@ class Digest extends AbstractAdapter
     /**
      * Sets adapter options
      *
-     * @param  mixed $filename
-     * @param  mixed $realm
-     * @param  mixed $identity
-     * @param  mixed $credential
+     * @param mixed $filename
+     * @param mixed $realm
+     * @param mixed $identity
+     * @param mixed $credential
      */
     public function __construct($filename = null, $realm = null, $identity = null, $credential = null)
     {
@@ -66,12 +66,13 @@ class Digest extends AbstractAdapter
     /**
      * Sets the filename option value
      *
-     * @param  mixed $filename
+     * @param  mixed  $filename
      * @return Digest Provides a fluent interface
      */
     public function setFilename($filename)
     {
         $this->filename = (string) $filename;
+
         return $this;
     }
 
@@ -88,12 +89,13 @@ class Digest extends AbstractAdapter
     /**
      * Sets the realm option value
      *
-     * @param  mixed $realm
+     * @param  mixed  $realm
      * @return Digest Provides a fluent interface
      */
     public function setRealm($realm)
     {
         $this->realm = (string) $realm;
+
         return $this;
     }
 
@@ -110,7 +112,7 @@ class Digest extends AbstractAdapter
     /**
      * Sets the username option value
      *
-     * @param  mixed $username
+     * @param  mixed  $username
      * @return Digest Provides a fluent interface
      */
     public function setUsername($username)
@@ -131,7 +133,7 @@ class Digest extends AbstractAdapter
     /**
      * Sets the password option value
      *
-     * @param  mixed $password
+     * @param  mixed  $password
      * @return Digest Provides a fluent interface
      */
     public function setPassword($password)
@@ -170,7 +172,7 @@ class Digest extends AbstractAdapter
                 'realm'    => $this->realm,
                 'username' => $this->identity,
             ),
-            'messages' => array()
+            'messages' => array(),
         );
 
         while (($line = fgets($fileHandle)) !== false) {
@@ -183,11 +185,13 @@ class Digest extends AbstractAdapter
                     return new AuthenticationResult(AuthenticationResult::SUCCESS, $result['identity'], $result['messages']);
                 }
                 $result['messages'][] = 'Password incorrect';
+
                 return new AuthenticationResult(AuthenticationResult::FAILURE_CREDENTIAL_INVALID, $result['identity'], $result['messages']);
             }
         }
 
         $result['messages'][] = "Username '$this->identity' and realm '$this->realm' combination not found";
+
         return new AuthenticationResult(AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND, $result['identity'], $result['messages']);
     }
 }

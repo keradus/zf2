@@ -70,7 +70,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($uri->__toString(), $uristr, 'Returned Uri object does not hold the expected URI');
 
         $uri = $this->_client->getUri()->toString();
-        $this->assertTrue(is_string($uri), 'Returned value expected to be a string, ' . gettype($uri) . ' returned');
+        $this->assertTrue(is_string($uri), 'Returned value expected to be a string, '.gettype($uri).' returned');
         $this->assertEquals($uri, $uristr, 'Returned string is not the expected URI');
     }
 
@@ -98,7 +98,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     {
         $qstr = 'foo=bar&foo=baz';
 
-        $this->_client->setUri('http://example.com/test/?' . $qstr);
+        $this->_client->setUri('http://example.com/test/?'.$qstr);
         $this->_client->setAdapter('\\Zend\\Http\\Client\\Adapter\\Test');
         $this->_client->setMethod('GET');
         $res = $this->_client->send();
@@ -206,7 +206,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     {
         $config = array(
             'timeout'    => 500,
-            'someoption' => 'hasvalue'
+            'someoption' => 'hasvalue',
         );
 
         $this->_client->setOptions($config);
@@ -229,7 +229,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'timeout'  => 400,
             'nested'   => array(
                 'item' => 'value',
-            )
+            ),
         ));
 
         $this->_client->setOptions($config);
@@ -395,14 +395,14 @@ class StaticTest extends \PHPUnit_Framework_TestCase
                         'k1' => 'v1.0',
                         'k2' => array(
                             'v2.1',
-                            'k2.1' => 'v2.1.0'
-                         ))
+                            'k2.1' => 'v2.1.0',
+                         ), ),
         ));
 
         $this->_client->setMethod('POST');
         $this->_client->send();
 
-        $expectedLines = file(__DIR__ . '/_files/ZF7038-multipartarrayrequest.txt');
+        $expectedLines = file(__DIR__.'/_files/ZF7038-multipartarrayrequest.txt');
 
         $gotLines = explode("\n", $this->_client->getLastRawRequest());
 
@@ -433,7 +433,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setAdapter('Zend\Http\Client\Adapter\Test');
         $this->_client->setUri('http://example.com');
 
-        $bodyFile = __DIR__ . '/_files/ZF2098-multibytepostdata.txt';
+        $bodyFile = __DIR__.'/_files/ZF2098-multibytepostdata.txt';
 
         $this->_client->setRawBody(file_get_contents($bodyFile));
         $this->_client->setEncType('text/plain');
@@ -460,7 +460,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         }
         $url = 'http://www.example.com/';
         $config = array(
-            'outputstream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
+            'outputstream' => realpath(__DIR__.'/_files/zend_http_client_stream.file'),
         );
         $client = new HTTPClient($url, $config);
 
@@ -546,7 +546,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             array('DOSOMETHING'),
             array('PROPFIND'),
             array('Some_Characters'),
-            array('X-MS-ENUMATTS')
+            array('X-MS-ENUMATTS'),
         );
     }
 
@@ -561,7 +561,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             array('N@5TYM3T#0D'),
             array('TWO WORDS'),
             array('GET http://foo.com/?'),
-            array("Injected\nnewline")
+            array("Injected\nnewline"),
         );
     }
 
@@ -576,8 +576,8 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             array(false),
             array('foo => bar'),
             array(null),
-            array(new \stdClass),
-            array(55)
+            array(new \stdClass()),
+            array(55),
         );
     }
 }

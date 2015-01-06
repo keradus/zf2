@@ -19,7 +19,7 @@ trait LoggerAwareTrait
     /**
      * Set logger object
      *
-     * @param LoggerInterface $logger
+     * @param  LoggerInterface $logger
      * @return mixed
      */
     public function setLogger(LoggerInterface $logger)

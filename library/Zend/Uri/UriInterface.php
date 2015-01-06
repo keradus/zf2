@@ -17,7 +17,7 @@ interface UriInterface
     /**
      * Create a new URI object
      *
-     * @param  Uri|string|null $uri
+     * @param  Uri|string|null                    $uri
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($uri = null);
@@ -160,7 +160,7 @@ interface UriInterface
      * You can check if a scheme is valid before setting it using the
      * validateScheme() method.
      *
-     * @param  string $scheme
+     * @param  string                            $scheme
      * @throws Exception\InvalidUriPartException
      * @return Uri
      */
@@ -169,10 +169,10 @@ interface UriInterface
     /**
      * Set the URI User-info part (usually user:password)
      *
-     * @param  string $userInfo
+     * @param  string                            $userInfo
      * @return Uri
      * @throws Exception\InvalidUriPartException If the schema definition
-     * does not have this part
+     *                                                    does not have this part
      */
     public function setUserInfo($userInfo);
 
@@ -190,7 +190,7 @@ interface UriInterface
      * example the HTTP RFC clearly states that only IPv4 and valid DNS names
      * are allowed in HTTP URIs.
      *
-     * @param  string $host
+     * @param  string                            $host
      * @throws Exception\InvalidUriPartException
      * @return Uri
      */
@@ -227,10 +227,10 @@ interface UriInterface
     /**
      * Set the URI fragment part
      *
-     * @param  string $fragment
+     * @param  string                            $fragment
      * @return Uri
      * @throws Exception\InvalidUriPartException If the schema definition
-     * does not have this part
+     *                                                    does not have this part
      */
     public function setFragment($fragment);
 

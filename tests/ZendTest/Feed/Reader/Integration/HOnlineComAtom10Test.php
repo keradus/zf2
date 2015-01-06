@@ -12,9 +12,9 @@ namespace ZendTest\Feed\Reader\Integration;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -22,7 +22,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/h-online.com-atom10.xml';
+        $this->feedSamplePath = dirname(__FILE__).'/_files/h-online.com-atom10.xml';
     }
 
     public function testGetsTitle()
@@ -38,7 +38,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(array(array('name'=>'The H')), (array) $feed->getAuthors());
+        $this->assertEquals(array(array('name' => 'The H')), (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -46,7 +46,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(array('name'=>'The H'), $feed->getAuthor());
+        $this->assertEquals(array('name' => 'The H'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -100,7 +100,6 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     /**
      * Entry level testing
      */
-
     public function testGetsEntryId()
     {
         $feed = Reader\Reader::importString(
@@ -125,7 +124,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array(array('name'=>'The H')), (array) $entry->getAuthors());
+        $this->assertEquals(array(array('name' => 'The H')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -134,7 +133,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array('name'=>'The H'), $entry->getAuthor());
+        $this->assertEquals(array('name' => 'The H'), $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()

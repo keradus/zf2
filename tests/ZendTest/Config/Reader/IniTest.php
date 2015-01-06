@@ -29,7 +29,7 @@ class IniTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/Ini/' . $name . '.ini';
+        return __DIR__.'/TestAssets/Ini/'.$name.'.ini';
     }
 
     public function testInvalidIniFile()

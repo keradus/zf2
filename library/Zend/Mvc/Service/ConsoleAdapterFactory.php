@@ -35,7 +35,7 @@ class ConsoleAdapterFactory implements FactoryInterface
      *          )
      *      )
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface   $serviceLocator
      * @return AdapterInterface|stdClass
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

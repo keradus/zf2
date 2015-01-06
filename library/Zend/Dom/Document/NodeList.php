@@ -35,7 +35,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * Constructor
      *
-     * @param DOMNodeList  $list
+     * @param DOMNodeList $list
      */
     public function __construct(DOMNodeList $list)
     {
@@ -113,7 +113,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * ArrayAccess: offset exists
      *
-     * @param int $key
+     * @param  int  $key
      * @return bool
      */
     public function offsetExists($key)
@@ -121,13 +121,14 @@ class NodeList implements Iterator, Countable, ArrayAccess
         if (in_array($key, range(0, $this->list->length - 1)) && $this->list->length > 0) {
             return true;
         }
+
         return false;
     }
 
     /**
      * ArrayAccess: get offset
      *
-     * @param int $key
+     * @param  int   $key
      * @return mixed
      */
     public function offsetGet($key)
@@ -138,8 +139,8 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * ArrayAccess: set offset
      *
-     * @param  mixed $key
-     * @param  mixed $value
+     * @param  mixed                            $key
+     * @param  mixed                            $value
      * @throws Exception\BadMethodCallException when attempting to write to a read-only item
      */
     public function offsetSet($key, $value)
@@ -150,7 +151,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * ArrayAccess: unset offset
      *
-     * @param  mixed $key
+     * @param  mixed                            $key
      * @throws Exception\BadMethodCallException when attempting to unset a read-only item
      */
     public function offsetUnset($key)

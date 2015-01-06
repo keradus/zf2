@@ -39,7 +39,7 @@ class RedisOptions extends AdapterOptions
      * The option Redis::OPT_PREFIX will be used as the namespace.
      * It can't be longer than 128 characters.
      *
-     * @param string $namespace Prefix for each key stored in redis
+     * @param  string                                   $namespace Prefix for each key stored in redis
      * @return \Zend\Cache\Storage\Adapter\RedisOptions
      *
      * @see AdapterOptions::setNamespace()
@@ -62,7 +62,7 @@ class RedisOptions extends AdapterOptions
     /**
      * Set namespace separator
      *
-     * @param  string $namespaceSeparator
+     * @param  string       $namespaceSeparator
      * @return RedisOptions
      */
     public function setNamespaceSeparator($namespaceSeparator)
@@ -72,6 +72,7 @@ class RedisOptions extends AdapterOptions
             $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
             $this->namespaceSeparator = $namespaceSeparator;
         }
+
         return $this;
     }
 
@@ -88,7 +89,7 @@ class RedisOptions extends AdapterOptions
     /**
      * Set the redis resource manager to use
      *
-     * @param null|RedisResourceManager $resourceManager
+     * @param  null|RedisResourceManager $resourceManager
      * @return RedisOptions
      */
     public function setResourceManager(RedisResourceManager $resourceManager = null)
@@ -97,6 +98,7 @@ class RedisOptions extends AdapterOptions
             $this->triggerOptionEvent('resource_manager', $resourceManager);
             $this->resourceManager = $resourceManager;
         }
+
         return $this;
     }
 
@@ -110,6 +112,7 @@ class RedisOptions extends AdapterOptions
         if (!$this->resourceManager) {
             $this->resourceManager = new RedisResourceManager();
         }
+
         return $this->resourceManager;
     }
 
@@ -126,7 +129,7 @@ class RedisOptions extends AdapterOptions
     /**
      * Set the redis resource id
      *
-     * @param string $resourceId
+     * @param  string       $resourceId
      * @return RedisOptions
      */
     public function setResourceId($resourceId)
@@ -136,6 +139,7 @@ class RedisOptions extends AdapterOptions
             $this->triggerOptionEvent('resource_id', $resourceId);
             $this->resourceId = $resourceId;
         }
+
         return $this;
     }
 
@@ -152,27 +156,29 @@ class RedisOptions extends AdapterOptions
     /**
      * Set the persistent id
      *
-     * @param string $persistentId
+     * @param  string       $persistentId
      * @return RedisOptions
      */
     public function setPersistentId($persistentId)
     {
         $this->triggerOptionEvent('persistent_id', $persistentId);
         $this->getResourceManager()->setPersistentId($this->getResourceId(), $persistentId);
+
         return $this;
     }
 
-     /**
-    * Set redis options
-    *
-    * @param array $libOptions
-    * @return RedisOptions
-    * @link http://github.com/nicolasff/phpredis#setoption
-    */
+    /**
+     * Set redis options
+     *
+     * @param  array        $libOptions
+     * @return RedisOptions
+     * @link http://github.com/nicolasff/phpredis#setoption
+     */
     public function setLibOptions(array $libOptions)
     {
         $this->triggerOptionEvent('lib_option', $libOptions);
         $this->getResourceManager()->setLibOptions($this->getResourceId(), $libOptions);
+
         return $this;
     }
 
@@ -202,6 +208,7 @@ class RedisOptions extends AdapterOptions
     public function setServer($server)
     {
         $this->getResourceManager()->setServer($this->getResourceId(), $server);
+
         return $this;
     }
 
@@ -225,6 +232,7 @@ class RedisOptions extends AdapterOptions
     public function setDatabase($database)
     {
         $this->getResourceManager()->setDatabase($this->getResourceId(), $database);
+
         return $this;
     }
 
@@ -248,6 +256,7 @@ class RedisOptions extends AdapterOptions
     public function setPassword($password)
     {
         $this->getResourceManager()->setPassword($this->getResourceId(), $password);
+
         return $this;
     }
 

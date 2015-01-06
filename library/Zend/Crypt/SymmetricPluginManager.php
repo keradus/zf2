@@ -42,7 +42,7 @@ class SymmetricPluginManager extends AbstractPluginManager
      * Checks that the adapter loaded is an instance
      * of Symmetric\SymmetricInterface.
      *
-     * @param  mixed $plugin
+     * @param  mixed                              $plugin
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */

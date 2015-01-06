@@ -34,7 +34,7 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
     /**
      * Set view
      *
-     * @param  View $view
+     * @param  View                     $view
      * @return DefaultRenderingStrategy
      */
     public function __construct(View $view)
@@ -54,12 +54,13 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
     /**
      * Set layout template value
      *
-     * @param  string $layoutTemplate
+     * @param  string                   $layoutTemplate
      * @return DefaultRenderingStrategy
      */
     public function setLayoutTemplate($layoutTemplate)
     {
         $this->layoutTemplate = (string) $layoutTemplate;
+
         return $this;
     }
 
@@ -76,7 +77,7 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
     /**
      * Render the view
      *
-     * @param  MvcEvent $e
+     * @param  MvcEvent      $e
      * @return Response|null
      * @throws \Exception
      */

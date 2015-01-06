@@ -33,7 +33,7 @@ class PluginClassLoader implements PluginClassLocator
     /**
      * Constructor
      *
-     * @param  null|array|Traversable $map If provided, seeds the loader with a map
+     * @param null|array|Traversable $map If provided, seeds the loader with a map
      */
     public function __construct($map = null)
     {
@@ -53,7 +53,7 @@ class PluginClassLoader implements PluginClassLocator
      *
      * A null value will clear the static map.
      *
-     * @param  null|array|Traversable $map
+     * @param  null|array|Traversable             $map
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -61,6 +61,7 @@ class PluginClassLoader implements PluginClassLocator
     {
         if (null === $map) {
             static::$staticMap = array();
+
             return;
         }
 
@@ -75,13 +76,14 @@ class PluginClassLoader implements PluginClassLocator
     /**
      * Register a class to a given short name
      *
-     * @param  string $shortName
-     * @param  string $className
+     * @param  string            $shortName
+     * @param  string            $className
      * @return PluginClassLoader
      */
     public function registerPlugin($shortName, $className)
     {
         $this->plugins[strtolower($shortName)] = $className;
+
         return $this;
     }
 
@@ -98,7 +100,7 @@ class PluginClassLoader implements PluginClassLocator
      * For all other arguments, or if the string $map is not a class or not a
      * Traversable class, an exception will be raised.
      *
-     * @param  string|array|Traversable $map
+     * @param  string|array|Traversable           $map
      * @return PluginClassLoader
      * @throws Exception\InvalidArgumentException
      */
@@ -108,7 +110,7 @@ class PluginClassLoader implements PluginClassLocator
             if (!class_exists($map)) {
                 throw new Exception\InvalidArgumentException('Map class provided is invalid');
             }
-            $map = new $map;
+            $map = new $map();
         }
         if (is_array($map)) {
             $map = new ArrayIterator($map);
@@ -143,7 +145,7 @@ class PluginClassLoader implements PluginClassLocator
     /**
      * Unregister a short name lookup
      *
-     * @param  mixed $shortName
+     * @param  mixed             $shortName
      * @return PluginClassLoader
      */
     public function unregisterPlugin($shortName)
@@ -152,6 +154,7 @@ class PluginClassLoader implements PluginClassLocator
         if (array_key_exists($lookup, $this->plugins)) {
             unset($this->plugins[$lookup]);
         }
+
         return $this;
     }
 
@@ -174,13 +177,14 @@ class PluginClassLoader implements PluginClassLocator
     public function isLoaded($name)
     {
         $lookup = strtolower($name);
+
         return isset($this->plugins[$lookup]);
     }
 
     /**
      * Return full class name for a named helper
      *
-     * @param  string $name
+     * @param  string       $name
      * @return string|false
      */
     public function getClassName($name)
@@ -191,7 +195,7 @@ class PluginClassLoader implements PluginClassLocator
     /**
      * Load a helper via the name provided
      *
-     * @param  string $name
+     * @param  string       $name
      * @return string|false
      */
     public function load($name)
@@ -199,6 +203,7 @@ class PluginClassLoader implements PluginClassLocator
         if (!$this->isLoaded($name)) {
             return false;
         }
+
         return $this->plugins[strtolower($name)];
     }
 

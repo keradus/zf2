@@ -12,7 +12,7 @@ namespace Zend\Feed\Reader\Extension\Slash;
 use Zend\Feed\Reader\Extension;
 
 /**
-*/
+ */
 class Entry extends Extension\AbstractEntry
 {
     /**
@@ -60,6 +60,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         $this->data[$name] = $hitParade;
+
         return $hitParade;
     }
 
@@ -80,6 +81,7 @@ class Entry extends Extension\AbstractEntry
 
         if (!$comments) {
             $this->data[$name] = null;
+
             return $this->data[$name];
         }
 
@@ -99,7 +101,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data[$name];
         }
 
-        $data = $this->xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/slash10:' . $name . ')');
+        $data = $this->xpath->evaluate($type.'('.$this->getXpathPrefix().'/slash10:'.$name.')');
 
         if (!$data) {
             $data = null;

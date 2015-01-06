@@ -68,7 +68,7 @@ class Null extends AbstractFilter
     /**
      * Set boolean types
      *
-     * @param  int|array $type
+     * @param  int|array                          $type
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -98,6 +98,7 @@ class Null extends AbstractFilter
         }
 
         $this->options['type'] = $type;
+
         return $this;
     }
 

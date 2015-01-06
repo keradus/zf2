@@ -40,12 +40,13 @@ class GenericTag extends AbstractGenerator implements TagInterface, PrototypeGen
     }
 
     /**
-     * @param  string $name
+     * @param  string     $name
      * @return GenericTag
      */
     public function setName($name)
     {
         $this->name = ltrim($name, '@');
+
         return $this;
     }
 
@@ -58,12 +59,13 @@ class GenericTag extends AbstractGenerator implements TagInterface, PrototypeGen
     }
 
     /**
-     * @param string $content
+     * @param  string     $content
      * @return GenericTag
      */
     public function setContent($content)
     {
         $this->content = $content;
+
         return $this;
     }
 
@@ -80,8 +82,8 @@ class GenericTag extends AbstractGenerator implements TagInterface, PrototypeGen
      */
     public function generate()
     {
-        $output = '@' . $this->name
-            . ((!empty($this->content)) ? ' ' . $this->content : '');
+        $output = '@'.$this->name
+            .((!empty($this->content)) ? ' '.$this->content : '');
 
         return $output;
     }

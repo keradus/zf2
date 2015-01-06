@@ -44,5 +44,5 @@ class ContentRangeTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Content-Range: xxx', $contentRangeHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

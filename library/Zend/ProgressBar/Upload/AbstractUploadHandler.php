@@ -31,7 +31,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     protected $progressAdapter;
 
     /**
-     * @param  array|Traversable $options Optional options
+     * @param  array|Traversable                  $options Optional options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
@@ -46,7 +46,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
      * - session_namespace: session namespace for upload progress
      * - progress_adapter: progressbar adapter to use for updating progress
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable                  $options
      * @return AbstractUploadHandler
      * @throws Exception\InvalidArgumentException
      */
@@ -71,12 +71,13 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     }
 
     /**
-     * @param  string $sessionNamespace
+     * @param  string                                       $sessionNamespace
      * @return AbstractUploadHandler|UploadHandlerInterface
      */
     public function setSessionNamespace($sessionNamespace)
     {
         $this->sessionNamespace = $sessionNamespace;
+
         return $this;
     }
 
@@ -89,12 +90,13 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     }
 
     /**
-     * @param  AbstractProgressAdapter|ProgressBar $progressAdapter
+     * @param  AbstractProgressAdapter|ProgressBar          $progressAdapter
      * @return AbstractUploadHandler|UploadHandlerInterface
      */
     public function setProgressAdapter($progressAdapter)
     {
         $this->progressAdapter = $progressAdapter;
+
         return $this;
     }
 
@@ -117,7 +119,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
             'current'  => 0,
             'rate'     => 0,
             'message'  => 'No upload in progress',
-            'done'     => true
+            'done'     => true,
         );
         if (empty($id)) {
             return $status;
@@ -129,8 +131,8 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
         }
         $status = $newStatus;
         if ('' === $status['message']) {
-            $status['message'] = $this->toByteString($status['current']) .
-                " - " . $this->toByteString($status['total']);
+            $status['message'] = $this->toByteString($status['current']).
+                " - ".$this->toByteString($status['total']);
         }
         $status['id'] = $id;
 
@@ -156,7 +158,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     }
 
     /**
-     * @param  string $id
+     * @param  string     $id
      * @return array|bool
      */
     abstract protected function getUploadProgress($id);
@@ -164,16 +166,16 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     /**
      * Returns the formatted size
      *
-     * @param  int $size
+     * @param  int    $size
      * @return string
      */
     protected function toByteString($size)
     {
         $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-        for ($i=0; $size >= 1024 && $i < 9; $i++) {
+        for ($i = 0; $size >= 1024 && $i < 9; $i++) {
             $size /= 1024;
         }
 
-        return round($size, 2) . $sizes[$i];
+        return round($size, 2).$sizes[$i];
     }
 }

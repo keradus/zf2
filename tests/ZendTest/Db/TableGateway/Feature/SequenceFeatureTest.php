@@ -68,7 +68,7 @@ class SequenceFeatureTest extends PHPUnit_Framework_TestCase
 
     public function nextSequenceIdProvider()
     {
-        return array(array('PostgreSQL', 'SELECT NEXTVAL(\'"' . $this->sequenceName . '"\')'),
-            array('Oracle', 'SELECT ' . $this->sequenceName . '.NEXTVAL as "nextval" FROM dual'));
+        return array(array('PostgreSQL', 'SELECT NEXTVAL(\'"'.$this->sequenceName.'"\')'),
+            array('Oracle', 'SELECT '.$this->sequenceName.'.NEXTVAL as "nextval" FROM dual'), );
     }
 }

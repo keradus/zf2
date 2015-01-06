@@ -44,5 +44,5 @@ class ContentMD5Test extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Content-MD5: xxx', $contentMD5Header->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

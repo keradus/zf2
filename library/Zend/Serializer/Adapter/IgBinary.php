@@ -42,7 +42,7 @@ class IgBinary extends AbstractAdapter
     /**
      * Serialize PHP value to igbinary
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @return string
      * @throws Exception\RuntimeException on igbinary error
      */
@@ -62,7 +62,7 @@ class IgBinary extends AbstractAdapter
     /**
      * Deserialize igbinary string to PHP value
      *
-     * @param  string $serialized
+     * @param  string                     $serialized
      * @return mixed
      * @throws Exception\RuntimeException on igbinary error
      */

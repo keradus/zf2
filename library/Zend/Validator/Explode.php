@@ -48,12 +48,13 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
     /**
      * Sets the delimiter string that the values will be split upon
      *
-     * @param string $delimiter
+     * @param  string  $delimiter
      * @return Explode
      */
     public function setValueDelimiter($delimiter)
     {
         $this->valueDelimiter = $delimiter;
+
         return $this;
     }
 
@@ -94,7 +95,7 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
     /**
      * Sets the Validator for validating each value
      *
-     * @param ValidatorInterface|array $validator
+     * @param  ValidatorInterface|array   $validator
      * @throws Exception\RuntimeException
      * @return Explode
      */
@@ -118,6 +119,7 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
         }
 
         $this->validator = $validator;
+
         return $this;
     }
 
@@ -134,12 +136,13 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
     /**
      * Set break on first failure setting
      *
-     * @param  bool $break
+     * @param  bool    $break
      * @return Explode
      */
     public function setBreakOnFirstFailure($break)
     {
         $this->breakOnFirstFailure = (bool) $break;
+
         return $this;
     }
 
@@ -158,7 +161,7 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
      *
      * Returns true if all values validate true
      *
-     * @param  mixed $value
+     * @param  mixed                      $value
      * @return bool
      * @throws Exception\RuntimeException
      */

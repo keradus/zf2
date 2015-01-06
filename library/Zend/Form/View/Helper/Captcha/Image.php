@@ -39,11 +39,11 @@ class Image extends AbstractWord
             'width'  => $captcha->getWidth(),
             'height' => $captcha->getHeight(),
             'alt'    => $captcha->getImgAlt(),
-            'src'    => $captcha->getImgUrl() . $captcha->getId() . $captcha->getSuffix(),
+            'src'    => $captcha->getImgUrl().$captcha->getId().$captcha->getSuffix(),
         );
 
         if ($element->hasAttribute('id')) {
-            $imgAttributes['id'] = $element->getAttribute('id') . '-image';
+            $imgAttributes['id'] = $element->getAttribute('id').'-image';
         }
 
         $closingBracket = $this->getInlineClosingBracket();

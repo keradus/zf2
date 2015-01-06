@@ -88,7 +88,7 @@ class ServiceManagerConfig extends Config
      *
      * Merges internal arrays with those passed via configuration
      *
-     * @param  array $configuration
+     * @param array $configuration
      */
     public function __construct(array $configuration = array())
     {

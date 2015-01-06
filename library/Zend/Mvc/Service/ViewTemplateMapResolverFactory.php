@@ -21,7 +21,7 @@ class ViewTemplateMapResolverFactory implements FactoryInterface
      * Creates a Zend\View\Resolver\AggregateResolver and populates it with the
      * ['view_manager']['template_map']
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface          $serviceLocator
      * @return ViewResolver\TemplateMapResolver
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -34,6 +34,7 @@ class ViewTemplateMapResolverFactory implements FactoryInterface
                 $map = $config['template_map'];
             }
         }
+
         return new ViewResolver\TemplateMapResolver($map);
     }
 }

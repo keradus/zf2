@@ -55,7 +55,7 @@ class CallbackCheckAdapter extends AbstractAdapter
      * setCredentialValidationCallback() - allows the developer to use a callback as a way of checking the
      * credential.
      *
-     * @param callable $validationCallback
+     * @param  callable                           $validationCallback
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -65,6 +65,7 @@ class CallbackCheckAdapter extends AbstractAdapter
             throw new Exception\InvalidArgumentException('Invalid callback provided');
         }
         $this->credentialValidationCallback = $validationCallback;
+
         return $this;
     }
 
@@ -90,7 +91,7 @@ class CallbackCheckAdapter extends AbstractAdapter
      * the record in the resultset is indeed a record that matched the
      * identity provided to this adapter.
      *
-     * @param  array $resultIdentity
+     * @param  array                $resultIdentity
      * @return AuthenticationResult
      */
     protected function authenticateValidateResult($resultIdentity)
@@ -100,11 +101,13 @@ class CallbackCheckAdapter extends AbstractAdapter
         } catch (\Exception $e) {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_UNCATEGORIZED;
             $this->authenticateResultInfo['messages'][] = $e->getMessage();
+
             return $this->authenticateCreateAuthResult();
         }
         if ($callbackResult !== true) {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
             $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
+
             return $this->authenticateCreateAuthResult();
         }
 
@@ -112,6 +115,7 @@ class CallbackCheckAdapter extends AbstractAdapter
 
         $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;
         $this->authenticateResultInfo['messages'][] = 'Authentication successful.';
+
         return $this->authenticateCreateAuthResult();
     }
 }

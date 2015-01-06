@@ -38,7 +38,7 @@ interface StatementInterface extends StatementContainerInterface
     /**
      * Execute
      *
-     * @param null|array|ParameterContainer $parameters
+     * @param  null|array|ParameterContainer $parameters
      * @return ResultInterface
      */
     public function execute($parameters = null);

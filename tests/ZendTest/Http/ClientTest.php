@@ -20,14 +20,13 @@ use Zend\Http\Response;
 use Zend\Http\Client\Adapter\Test;
 use ZendTest\Http\TestAsset\ExtendedClient;
 
-
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testIfCookiesAreSticky()
     {
         $initialCookies = array(
             new SetCookie('foo', 'far', null, '/', 'www.domain.com'),
-            new SetCookie('bar', 'biz', null, '/', 'www.domain.com')
+            new SetCookie('bar', 'biz', null, '/', 'www.domain.com'),
         );
 
         $requestString = "GET http://www.domain.com/index.php HTTP/1.1\r\nHost: domain.com\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:16.0) Gecko/20100101 Firefox/16.0\r\nAccept: */*\r\nAccept-Language: en-US,en;q=0.5\r\nAccept-Encoding: gzip, deflate\r\nConnection: keep-alive\r\n";
@@ -51,7 +50,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testClientRetrievesUppercaseHttpMethodFromRequestObject()
     {
-        $client = new Client;
+        $client = new Client();
         $client->setMethod('post');
         $this->assertEquals(Client::ENC_URLENCODED, $client->getEncType());
     }
@@ -87,8 +86,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @expectedException Zend\Http\Exception\InvalidArgumentException
-    */
+     * @expectedException Zend\Http\Exception\InvalidArgumentException
+     */
     public function testIfNullValueCookiesThrowsException()
     {
         $client = new Client();
@@ -110,7 +109,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $headers = array(
             new SetCookie('foo'),
-            new SetCookie('bar')
+            new SetCookie('bar'),
         );
 
         $client = new Client();
@@ -124,7 +123,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $headers = new \ArrayIterator(array(
             new SetCookie('foo'),
-            new SetCookie('bar')
+            new SetCookie('bar'),
         ));
 
         $client = new Client();
@@ -181,7 +180,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testEncodeAuthHeaderWorksAsExpected()
     {
         $encoded = Client::encodeAuthHeader('test', 'test');
-        $this->assertEquals('Basic ' . base64_encode('test:test'), $encoded);
+        $this->assertEquals('Basic '.base64_encode('test:test'), $encoded);
     }
 
     /**
@@ -206,26 +205,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // first response, contains a redirect
         $testAdapter->setResponse(
             "HTTP/1.1 303 See Other\r\n"
-            . "Location: http://www.example.org/part2\r\n\r\n"
-            . "Page #1"
+            ."Location: http://www.example.org/part2\r\n\r\n"
+            ."Page #1"
         );
         // seconds response, contains a redirect
         $testAdapter->addResponse(
             "HTTP/1.1 303 See Other\r\n"
-            . "Location: http://www.example.org/part3\r\n\r\n"
-            . "Page #2"
+            ."Location: http://www.example.org/part3\r\n\r\n"
+            ."Page #2"
         );
         // third response
         $testAdapter->addResponse(
             "HTTP/1.1 303 See Other\r\n\r\n"
-            . "Page #3"
+            ."Page #3"
         );
 
         // create a client which allows one redirect at most!
         $client = new Client('http://www.example.org/part1', array(
             'adapter' => $testAdapter,
             'maxredirects' => 1,
-            'storeresponse' => true
+            'storeresponse' => true,
         ));
 
         // do the request
@@ -247,18 +246,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $testAdapter = new Test();
         $testAdapter->setResponse(
             "HTTP/1.1 303 See Other\r\n"
-            . "Location: http://www.example.org/part2\r\n\r\n"
-            . "The URL of this page has changed."
+            ."Location: http://www.example.org/part2\r\n\r\n"
+            ."The URL of this page has changed."
         );
         $testAdapter->addResponse(
             "HTTP/1.1 200 OK\r\n\r\n"
-            . "Welcome to this Website."
+            ."Welcome to this Website."
         );
 
         // create client with HTTP basic authentication
         $client = new Client('http://www.example.org/part1', array(
             'adapter' => $testAdapter,
-            'maxredirects' => 1
+            'maxredirects' => 1,
         ));
         $client->setAuth($user, $password, Client::AUTH_BASIC);
 
@@ -282,12 +281,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // set up two responses that simulate a redirection from example.org to example.com
         $testAdapter->setResponse(
             "HTTP/1.1 303 See Other\r\n"
-            . "Location: http://example.com/part2\r\n\r\n"
-            . "The URL of this page has changed."
+            ."Location: http://example.com/part2\r\n\r\n"
+            ."The URL of this page has changed."
         );
         $testAdapter->addResponse(
             "HTTP/1.1 200 OK\r\n\r\n"
-            . "Welcome to this Website."
+            ."Welcome to this Website."
         );
 
         // set auth and do request
@@ -302,12 +301,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // set up two responses that simulate a rediration from example.org to sub.example.org
         $testAdapter->setResponse(
             "HTTP/1.1 303 See Other\r\n"
-            . "Location: http://sub.example.org/part2\r\n\r\n"
-            . "The URL of this page has changed."
+            ."Location: http://sub.example.org/part2\r\n\r\n"
+            ."The URL of this page has changed."
         );
         $testAdapter->addResponse(
             "HTTP/1.1 200 OK\r\n\r\n"
-            . "Welcome to this Website."
+            ."Welcome to this Website."
         );
 
         // set auth and do request
@@ -322,12 +321,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // set up two responses that simulate a rediration from sub.example.org to example.org
         $testAdapter->setResponse(
             "HTTP/1.1 303 See Other\r\n"
-            . "Location: http://example.org/part2\r\n\r\n"
-            . "The URL of this page has changed."
+            ."Location: http://example.org/part2\r\n\r\n"
+            ."The URL of this page has changed."
         );
         $testAdapter->addResponse(
             "HTTP/1.1 200 OK\r\n\r\n"
-            . "Welcome to this Website."
+            ."Welcome to this Website."
         );
 
         // set auth and do request
@@ -352,13 +351,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testPrepareHeadersCreateRightHttpField()
     {
-        $body = json_encode(array('foofoo'=>'barbar'));
+        $body = json_encode(array('foofoo' => 'barbar'));
 
         $client = new Client();
         $prepareHeadersReflection = new \ReflectionMethod($client, 'prepareHeaders');
         $prepareHeadersReflection->setAccessible(true);
 
-        $request= new Request();
+        $request = new Request();
         $request->getHeaders()->addHeaderLine('content-type', 'application/json');
         $request->getHeaders()->addHeaderLine('content-length', strlen($body));
         $client->setRequest($request);
@@ -433,11 +432,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testClientRequestMethod()
     {
-        $request = new Request;
+        $request = new Request();
         $request->setMethod(Request::METHOD_POST);
         $request->getPost()->set('data', 'random');
 
-        $client = new Client;
+        $client = new Client();
         $client->setAdapter('Zend\Http\Client\Adapter\Test');
         $client->send($request);
 

@@ -73,7 +73,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                ''
+                '',
             ),
             array(
                 array(
@@ -84,7 +84,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/public/index.php',
                 ),
                 '/public/index.php',
-                '/public'
+                '/public',
             ),
             array(
                 array(
@@ -94,7 +94,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                ''
+                '',
             ),
             array(
                 array(
@@ -105,7 +105,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME'  => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                ''
+                '',
             ),
             array(
                 array(
@@ -114,7 +114,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                ''
+                '',
             ),
             array(
                 array(
@@ -123,7 +123,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME'    => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                ''
+                '',
             ),
             array(
                 array(
@@ -133,7 +133,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
-                ''
+                '',
             ),
             array(
                 array(
@@ -142,7 +142,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/www/zftests/index.php',
                 ),
                 '',
-                ''
+                '',
             ),
             array(
                 array(
@@ -151,7 +151,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
-                '/html'
+                '/html',
             ),
             array(
                 array(
@@ -160,7 +160,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/dir/index.php',
                 ),
                 '/dir',
-                '/dir'
+                '/dir',
             ),
             array(
                 array(
@@ -168,10 +168,10 @@ class RequestTest extends TestCase
                     'REQUEST_URI'     => '/~username/public/',
                     'PHP_SELF'        => '/~username/public/index.php',
                     'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
-                    'ORIG_SCRIPT_NAME'=> null
+                    'ORIG_SCRIPT_NAME' => null,
                 ),
                 '/~username/public',
-                '/~username/public'
+                '/~username/public',
             ),
             // ZF2-206
             array(
@@ -180,10 +180,10 @@ class RequestTest extends TestCase
                     'REQUEST_URI'     => '/zf2tut/',
                     'PHP_SELF'        => '/zf2tut/index.php',
                     'SCRIPT_FILENAME' => 'c:/ZF2Tutorial/public/index.php',
-                    'ORIG_SCRIPT_NAME'=> null
+                    'ORIG_SCRIPT_NAME' => null,
                 ),
                 '/zf2tut',
-                '/zf2tut'
+                '/zf2tut',
             ),
             array(
                 array(
@@ -192,7 +192,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
-                '/html'
+                '/html',
             ),
             array(
                 array(
@@ -201,7 +201,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
-                '/html'
+                '/html',
             ),
 
             //Test when url quert contains a full http url
@@ -212,7 +212,7 @@ class RequestTest extends TestCase
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
-                '/html'
+                '/html',
             ),
         );
     }
@@ -243,49 +243,49 @@ class RequestTest extends TestCase
                     'HTTP_USER_AGENT'     => 'Dummy',
                 ),
                 'User-Agent',
-                'Dummy'
+                'Dummy',
             ),
             array(
                 array(
                     'HTTP_CUSTOM_COUNT'     => '0',
                 ),
                 'Custom-Count',
-                '0'
+                '0',
             ),
             array(
                 array(
                     'CONTENT_TYPE'     => 'text/html',
                 ),
                 'Content-Type',
-                'text/html'
+                'text/html',
             ),
             array(
                 array(
                     'CONTENT_LENGTH'     => 0,
                 ),
                 'Content-Length',
-                0
+                0,
             ),
             array(
                 array(
                     'CONTENT_LENGTH'     => 0,
                 ),
                 'Content-Length',
-                0
+                0,
             ),
             array(
                 array(
                     'CONTENT_LENGTH'     => 12,
                 ),
                 'Content-Length',
-                12
+                12,
             ),
             array(
                 array(
                     'CONTENT_MD5'     => md5('a'),
                 ),
                 'Content-MD5',
-                md5('a')
+                md5('a'),
             ),
         );
     }
@@ -646,7 +646,7 @@ class RequestTest extends TestCase
                                 ),
                             ),
                         ),
-                    )
+                    ),
                 ),
                 array(
                     'file' => array(
@@ -677,7 +677,7 @@ class RequestTest extends TestCase
                                 ),
                             ),
                         ),
-                    )
+                    ),
                 ),
             ),
         );
@@ -699,7 +699,7 @@ class RequestTest extends TestCase
     {
         $request = new Request();
         $p = new \Zend\Stdlib\Parameters(array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         ));
         $request->setQuery($p);
         $request->setPost($p);
@@ -721,7 +721,7 @@ class RequestTest extends TestCase
     {
         $request = new Request();
         $p = new \Zend\Stdlib\Parameters(array(
-            'foo' => 'bar'
+            'foo' => 'bar',
         ));
         $request->setQuery($p);
         $request->setPost($p);

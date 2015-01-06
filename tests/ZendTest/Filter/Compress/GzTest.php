@@ -25,8 +25,8 @@ class GzTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        if (file_exists(__DIR__ . '/../_files/compressed.gz')) {
-            unlink(__DIR__ . '/../_files/compressed.gz');
+        if (file_exists(__DIR__.'/../_files/compressed.gz')) {
+            unlink(__DIR__.'/../_files/compressed.gz');
         }
     }
 
@@ -79,7 +79,7 @@ class GzTest extends \PHPUnit_Framework_TestCase
      */
     public function testGzGetSetOptionsInConstructor()
     {
-        $filter2= new GzCompression(array('level' => 8));
+        $filter2 = new GzCompression(array('level' => 8));
         $this->assertEquals(array('mode' => 'compress', 'level' => 8, 'archive' => null), $filter2->getOptions());
     }
 
@@ -137,7 +137,7 @@ class GzTest extends \PHPUnit_Framework_TestCase
     public function testGzCompressToFile()
     {
         $filter   = new GzCompression();
-        $archive = __DIR__ . '/../_files/compressed.gz';
+        $archive = __DIR__.'/../_files/compressed.gz';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');

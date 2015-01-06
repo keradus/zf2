@@ -38,7 +38,7 @@ class SqliteMetadataTest extends \PHPUnit_Framework_TestCase
         }
         $this->adapter = new Adapter(array(
             'driver' => 'Pdo',
-            'dsn' => 'sqlite::memory:'
+            'dsn' => 'sqlite::memory:',
         ));
         $this->metadata = new SqliteMetadata($this->adapter);
     }

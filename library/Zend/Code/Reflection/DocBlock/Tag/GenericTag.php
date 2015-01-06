@@ -34,7 +34,7 @@ class GenericTag implements TagInterface, PrototypeGenericInterface
     protected $values = array();
 
     /**
-     * @param  string $contentSplitCharacter
+     * @param string $contentSplitCharacter
      */
     public function __construct($contentSplitCharacter = ' ')
     {
@@ -61,7 +61,7 @@ class GenericTag implements TagInterface, PrototypeGenericInterface
     }
 
     /**
-     * @param  string $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -77,7 +77,7 @@ class GenericTag implements TagInterface, PrototypeGenericInterface
     }
 
     /**
-     * @param  int $position
+     * @param  int    $position
      * @return string
      */
     public function returnValue($position)
@@ -95,11 +95,11 @@ class GenericTag implements TagInterface, PrototypeGenericInterface
      */
     public function __toString()
     {
-        return 'DocBlock Tag [ * @' . $this->name . ' ]' . PHP_EOL;
+        return 'DocBlock Tag [ * @'.$this->name.' ]'.PHP_EOL;
     }
 
     /**
-     * @param  string $docBlockLine
+     * @param string $docBlockLine
      */
     protected function parse($docBlockLine)
     {

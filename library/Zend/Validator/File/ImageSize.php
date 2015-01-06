@@ -49,7 +49,7 @@ class ImageSize extends AbstractValidator
         'minheight' => array('options' => 'minHeight'),
         'maxheight' => array('options' => 'maxHeight'),
         'width'     => 'width',
-        'height'    => 'height'
+        'height'    => 'height',
     );
 
     /**
@@ -87,7 +87,7 @@ class ImageSize extends AbstractValidator
      * - maxheight
      * - maxwidth
      *
-     * @param  array|\Traversable $options
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -123,8 +123,8 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the minimum allowed width
      *
-     * @param  int $minWidth
-     * @return ImageSize Provides a fluid interface
+     * @param  int                                $minWidth
+     * @return ImageSize                          Provides a fluid interface
      * @throws Exception\InvalidArgumentException When minwidth is greater than maxwidth
      */
     public function setMinWidth($minWidth)
@@ -132,11 +132,12 @@ class ImageSize extends AbstractValidator
         if (($this->getMaxWidth() !== null) && ($minWidth > $this->getMaxWidth())) {
             throw new Exception\InvalidArgumentException(
                 "The minimum image width must be less than or equal to the "
-                . " maximum image width, but {$minWidth} > {$this->getMaxWidth()}"
+                ." maximum image width, but {$minWidth} > {$this->getMaxWidth()}"
             );
         }
 
         $this->options['minWidth']  = (int) $minWidth;
+
         return $this;
     }
 
@@ -153,8 +154,8 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the maximum allowed width
      *
-     * @param  int $maxWidth
-     * @return ImageSize Provides a fluid interface
+     * @param  int                                $maxWidth
+     * @return ImageSize                          Provides a fluid interface
      * @throws Exception\InvalidArgumentException When maxwidth is less than minwidth
      */
     public function setMaxWidth($maxWidth)
@@ -162,11 +163,12 @@ class ImageSize extends AbstractValidator
         if (($this->getMinWidth() !== null) && ($maxWidth < $this->getMinWidth())) {
             throw new Exception\InvalidArgumentException(
                 "The maximum image width must be greater than or equal to the "
-                . "minimum image width, but {$maxWidth} < {$this->getMinWidth()}"
+                ."minimum image width, but {$maxWidth} < {$this->getMinWidth()}"
             );
         }
 
         $this->options['maxWidth']  = (int) $maxWidth;
+
         return $this;
     }
 
@@ -183,8 +185,8 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the minimum allowed height
      *
-     * @param  int $minHeight
-     * @return ImageSize Provides a fluid interface
+     * @param  int                                $minHeight
+     * @return ImageSize                          Provides a fluid interface
      * @throws Exception\InvalidArgumentException When minheight is greater than maxheight
      */
     public function setMinHeight($minHeight)
@@ -192,11 +194,12 @@ class ImageSize extends AbstractValidator
         if (($this->getMaxHeight() !== null) && ($minHeight > $this->getMaxHeight())) {
             throw new Exception\InvalidArgumentException(
                 "The minimum image height must be less than or equal to the "
-                . " maximum image height, but {$minHeight} > {$this->getMaxHeight()}"
+                ." maximum image height, but {$minHeight} > {$this->getMaxHeight()}"
             );
         }
 
         $this->options['minHeight']  = (int) $minHeight;
+
         return $this;
     }
 
@@ -213,8 +216,8 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the maximum allowed height
      *
-     * @param  int $maxHeight
-     * @return ImageSize Provides a fluid interface
+     * @param  int                                $maxHeight
+     * @return ImageSize                          Provides a fluid interface
      * @throws Exception\InvalidArgumentException When maxheight is less than minheight
      */
     public function setMaxHeight($maxHeight)
@@ -222,11 +225,12 @@ class ImageSize extends AbstractValidator
         if (($this->getMinHeight() !== null) && ($maxHeight < $this->getMinHeight())) {
             throw new Exception\InvalidArgumentException(
                 "The maximum image height must be greater than or equal to the "
-                . "minimum image height, but {$maxHeight} < {$this->getMinHeight()}"
+                ."minimum image height, but {$maxHeight} < {$this->getMinHeight()}"
             );
         }
 
         $this->options['maxHeight']  = (int) $maxHeight;
+
         return $this;
     }
 
@@ -273,12 +277,13 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the minimum image size
      *
-     * @param  array $options                 The minimum image dimensions
+     * @param  array     $options The minimum image dimensions
      * @return ImageSize Provides a fluent interface
      */
     public function setImageMin($options)
     {
         $this->setOptions($options);
+
         return $this;
     }
 
@@ -286,18 +291,19 @@ class ImageSize extends AbstractValidator
      * Sets the maximum image size
      *
      * @param  array|\Traversable $options The maximum image dimensions
-     * @return ImageSize Provides a fluent interface
+     * @return ImageSize          Provides a fluent interface
      */
     public function setImageMax($options)
     {
         $this->setOptions($options);
+
         return $this;
     }
 
     /**
      * Sets the minimum and maximum image width
      *
-     * @param  array $options               The image width dimensions
+     * @param  array     $options The image width dimensions
      * @return ImageSize Provides a fluent interface
      */
     public function setImageWidth($options)
@@ -311,7 +317,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the minimum and maximum image height
      *
-     * @param  array $options               The image height dimensions
+     * @param  array     $options The image height dimensions
      * @return ImageSize Provides a fluent interface
      */
     public function setImageHeight($options)
@@ -353,6 +359,7 @@ class ImageSize extends AbstractValidator
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_READABLE);
+
             return false;
         }
 
@@ -362,6 +369,7 @@ class ImageSize extends AbstractValidator
 
         if (empty($size) || ($size[0] === 0) || ($size[1] === 0)) {
             $this->error(self::NOT_DETECTED);
+
             return false;
         }
 

@@ -47,7 +47,7 @@ class DashToSeparatorTest extends \PHPUnit_Framework_TestCase
 
         $input = array(
             'dash-separated-words',
-            'something-different'
+            'something-different',
         );
 
         $filtered = $filter($input);
@@ -56,12 +56,11 @@ class DashToSeparatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('dash separated words', 'something different'), $filtered);
     }
 
-
     public function returnUnfilteredDataProvider()
     {
         return array(
             array(null),
-            array(new \stdClass())
+            array(new \stdClass()),
         );
     }
 

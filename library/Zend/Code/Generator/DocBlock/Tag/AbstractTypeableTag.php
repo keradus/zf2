@@ -29,7 +29,7 @@ abstract class AbstractTypeableTag extends AbstractGenerator
     protected $types = array();
 
     /**
-     * @param array $types
+     * @param array  $types
      * @param string $description
      */
     public function __construct($types = array(), $description = null)
@@ -44,12 +44,13 @@ abstract class AbstractTypeableTag extends AbstractGenerator
     }
 
     /**
-     * @param string $description
+     * @param  string    $description
      * @return ReturnTag
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -65,7 +66,7 @@ abstract class AbstractTypeableTag extends AbstractGenerator
      * Array of types or string with types delimited by pipe (|)
      * e.g. array('int', 'null') or "int|null"
      *
-     * @param array|string $types
+     * @param  array|string $types
      * @return ReturnTag
      */
     public function setTypes($types)
@@ -74,6 +75,7 @@ abstract class AbstractTypeableTag extends AbstractGenerator
             $types = explode('|', $types);
         }
         $this->types = $types;
+
         return $this;
     }
 
@@ -86,7 +88,7 @@ abstract class AbstractTypeableTag extends AbstractGenerator
     }
 
     /**
-     * @param string $delimiter
+     * @param  string $delimiter
      * @return string
      */
     public function getTypesAsString($delimiter = '|')

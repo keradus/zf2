@@ -71,7 +71,7 @@ class ParamTagTest extends \PHPUnit_Framework_TestCase
         $this->tag->setOptions(array(
             'variableName' => 'foo',
             'types' => array('string'),
-            'description' => 'description'
+            'description' => 'description',
         ));
         $tagWithOptionsFromConstructor = new ParamTag('foo', array('string'), 'description');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());

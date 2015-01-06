@@ -27,7 +27,7 @@ class FileOptions extends AbstractOptions
     /**
      * Set path to stored mail files
      *
-     * @param  string $path
+     * @param  string                                        $path
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return FileOptions
      */
@@ -41,6 +41,7 @@ class FileOptions extends AbstractOptions
             ));
         }
         $this->path = $path;
+
         return $this;
     }
 
@@ -56,13 +57,14 @@ class FileOptions extends AbstractOptions
         if (null === $this->path) {
             $this->setPath(sys_get_temp_dir());
         }
+
         return $this->path;
     }
 
     /**
      * Set callback used to generate a file name
      *
-     * @param  callable $callback
+     * @param  callable                                      $callback
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return FileOptions
      */
@@ -76,6 +78,7 @@ class FileOptions extends AbstractOptions
             ));
         }
         $this->callback = $callback;
+
         return $this;
     }
 
@@ -88,9 +91,10 @@ class FileOptions extends AbstractOptions
     {
         if (null === $this->callback) {
             $this->setCallback(function () {
-                return 'ZendMail_' . time() . '_' . mt_rand() . '.eml';
+                return 'ZendMail_'.time().'_'.mt_rand().'.eml';
             });
         }
+
         return $this->callback;
     }
 }

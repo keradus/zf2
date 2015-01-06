@@ -38,7 +38,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
                                           '\Seen'     => Mail\Storage::FLAG_SEEN,
                                           '\Deleted'  => Mail\Storage::FLAG_DELETED,
                                           '\Draft'    => Mail\Storage::FLAG_DRAFT,
-                                          '\Flagged'  => Mail\Storage::FLAG_FLAGGED);
+                                          '\Flagged'  => Mail\Storage::FLAG_FLAGGED, );
 
     /**
      * IMAP flags to search criteria
@@ -49,15 +49,15 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
                                            '\Seen'     => 'SEEN',
                                            '\Deleted'  => 'DELETED',
                                            '\Draft'    => 'DRAFT',
-                                           '\Flagged'  => 'FLAGGED');
+                                           '\Flagged'  => 'FLAGGED', );
 
     /**
      * Count messages all messages in current box
      *
-     * @param null $flags
+     * @param  null                                           $flags
      * @throws Exception\RuntimeException
      * @throws \Zend\Mail\Protocol\Exception\RuntimeException
-     * @return int number of messages
+     * @return int                                            number of messages
      */
     public function countMessages($flags = null)
     {
@@ -78,14 +78,15 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
                 $params[] = $this->protocol->escapeString($flag);
             }
         }
+
         return count($this->protocol->search($params));
     }
 
     /**
      * get a list of messages with number and size
      *
-     * @param int $id number of message
-     * @return int|array size of given message of list with all messages as array(num => size)
+     * @param  int                                            $id number of message
+     * @return int|array                                      size of given message of list with all messages as array(num => size)
      * @throws \Zend\Mail\Protocol\Exception\RuntimeException
      */
     public function getSize($id = 0)
@@ -93,13 +94,14 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         if ($id) {
             return $this->protocol->fetch('RFC822.SIZE', $id);
         }
+
         return $this->protocol->fetch('RFC822.SIZE', 1, INF);
     }
 
     /**
      * Fetch a message
      *
-     * @param int $id number of message
+     * @param  int                                            $id number of message
      * @return \Zend\Mail\Storage\Message
      * @throws \Zend\Mail\Protocol\Exception\RuntimeException
      */
@@ -167,7 +169,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      *   - ssl 'SSL' or 'TLS' for secure sockets
      *   - folder select this folder [optional, default = 'INBOX']
      *
-     * @param  array $params mail reader specific parameters
+     * @param  array                                          $params mail reader specific parameters
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      * @throws \Zend\Mail\Protocol\Exception\RuntimeException
@@ -187,6 +189,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             } catch (Exception\ExceptionInterface $e) {
                 throw new Exception\RuntimeException('cannot select INBOX, is this a valid transport?', 0, $e);
             }
+
             return;
         }
 
@@ -234,7 +237,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      * you should be careful and use a uniqueid as parameter if possible to
      * identify the message.
      *
-     * @param  int $id number of message
+     * @param  int                        $id number of message
      * @throws Exception\RuntimeException
      */
     public function removeMessage($id)
@@ -253,8 +256,8 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      *
      * if storage does not support unique ids it's the same as the message number
      *
-     * @param int|null $id message number
-     * @return array|string message number for given message or all messages as array
+     * @param  int|null                                       $id message number
+     * @return array|string                                   message number for given message or all messages as array
      * @throws \Zend\Mail\Protocol\Exception\RuntimeException
      */
     public function getUniqueId($id = null)
@@ -272,9 +275,9 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      * I.e. if you have a webmailer that supports deleting messages you should use unique ids
      * as parameter and use this method to translate it to message number right before calling removeMessage()
      *
-     * @param string $id unique id
+     * @param  string                             $id unique id
      * @throws Exception\InvalidArgumentException
-     * @return int message number
+     * @return int                                message number
      */
     public function getNumberByUniqueId($id)
     {
@@ -292,11 +295,11 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
     /**
      * get root folder or given folder
      *
-     * @param  string $rootFolder get folder structure for given folder, else root
+     * @param  string                                         $rootFolder get folder structure for given folder, else root
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      * @throws \Zend\Mail\Protocol\Exception\RuntimeException
-     * @return \Zend\Mail\Storage\Folder root or wanted folder
+     * @return \Zend\Mail\Storage\Folder                      root or wanted folder
      */
     public function getFolders($rootFolder = null)
     {
@@ -324,7 +327,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
                     $selectable = !$data['flags'] || !in_array('\\Noselect', $data['flags']);
 
                     array_push($stack, $parent);
-                    $parent = $globalName . $data['delim'];
+                    $parent = $globalName.$data['delim'];
                     $folder = new Folder($localName, $globalName, $selectable);
                     $parentFolder->$localName = $folder;
                     array_push($folderStack, $parentFolder);
@@ -348,7 +351,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      *
      * folder must be selectable!
      *
-     * @param  \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
+     * @param  \Zend\Mail\Storage\Folder|string               $globalName global name of folder or instance for subfolder
      * @throws Exception\RuntimeException
      * @throws \Zend\Mail\Protocol\Exception\RuntimeException
      */
@@ -385,9 +388,9 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
     {
         // TODO: we assume / as the hierarchy delim - need to get that from the folder class!
         if ($parentFolder instanceof Folder) {
-            $folder = $parentFolder->getGlobalName() . '/' . $name;
+            $folder = $parentFolder->getGlobalName().'/'.$name;
         } elseif ($parentFolder != null) {
-            $folder = $parentFolder . '/' . $name;
+            $folder = $parentFolder.'/'.$name;
         } else {
             $folder = $name;
         }
@@ -492,8 +495,8 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      *
      * NOTE: this method can't set the recent flag.
      *
-     * @param  int   $id    number of message
-     * @param  array $flags new flags for message
+     * @param  int                        $id    number of message
+     * @param  array                      $flags new flags for message
      * @throws Exception\RuntimeException
      */
     public function setFlags($id, $flags)

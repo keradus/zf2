@@ -58,8 +58,8 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $table = new TableGateway(
             'foo',
             $this->mockAdapter,
-            $featureSet = new Feature\FeatureSet,
-            $resultSet = new ResultSet,
+            $featureSet = new Feature\FeatureSet(),
+            $resultSet = new ResultSet(),
             $sql = new Sql($this->mockAdapter, 'foo')
         );
 

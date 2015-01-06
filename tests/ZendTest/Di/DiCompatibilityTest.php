@@ -23,7 +23,7 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
     {
         $di = new Di();
 
-        $bareObject = new $class;
+        $bareObject = new $class();
 
         $diObject = $di->get($class);
 
@@ -58,7 +58,7 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
      */
     public function testRaiseErrorMissingConstructorRequiredParameter($class)
     {
-        $bareObject = new $class;
+        $bareObject = new $class();
         $this->assertInstanceOf($class, $bareObject, 'Test instantiate simple');
     }
 
@@ -100,10 +100,10 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
 
     public function providesClassWithConstructionParameters()
     {
-        $serviceManager = new \Zend\ServiceManager\ServiceManager;
-        $serviceManager->setService('EventManager', new \Zend\EventManager\EventManager);
-        $serviceManager->setService('Request', new \stdClass);
-        $serviceManager->setService('Response', new \stdClass);
+        $serviceManager = new \Zend\ServiceManager\ServiceManager();
+        $serviceManager->setService('EventManager', new \Zend\EventManager\EventManager());
+        $serviceManager->setService('Request', new \stdClass());
+        $serviceManager->setService('Response', new \stdClass());
 
         return array(
             array('Zend\Config\Config', array('array' => array())),

@@ -49,6 +49,7 @@ class Like extends AbstractExpression implements PredicateInterface
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
@@ -67,6 +68,7 @@ class Like extends AbstractExpression implements PredicateInterface
     public function setLike($like)
     {
         $this->like = $like;
+
         return $this;
     }
 
@@ -85,6 +87,7 @@ class Like extends AbstractExpression implements PredicateInterface
     public function setSpecification($specification)
     {
         $this->specification = $specification;
+
         return $this;
     }
 
@@ -103,12 +106,13 @@ class Like extends AbstractExpression implements PredicateInterface
     {
         list($values[], $types[]) = $this->normalizeArgument($this->identifier, self::TYPE_IDENTIFIER);
         list($values[], $types[]) = $this->normalizeArgument($this->like, self::TYPE_VALUE);
+
         return array(
             array(
                 $this->specification,
                 $values,
                 $types,
-            )
+            ),
         );
     }
 }

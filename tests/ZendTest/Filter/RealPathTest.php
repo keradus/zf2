@@ -37,7 +37,7 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filesPath = __DIR__ . DIRECTORY_SEPARATOR . '_files';
+        $this->_filesPath = __DIR__.DIRECTORY_SEPARATOR.'_files';
         $this->_filter    = new RealPathFilter();
     }
 
@@ -50,7 +50,7 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
     {
         $filter   = $this->_filter;
         $filename = 'file.1';
-        $this->assertContains($filename, $filter($this->_filesPath . DIRECTORY_SEPARATOR . $filename));
+        $this->assertContains($filename, $filter($this->_filesPath.DIRECTORY_SEPARATOR.$filename));
     }
 
     /**
@@ -90,16 +90,16 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
         $filter = $this->_filter;
         $filter->setExists(false);
 
-        $path = __DIR__ . DIRECTORY_SEPARATOR . '_files';
+        $path = __DIR__.DIRECTORY_SEPARATOR.'_files';
         $this->assertEquals($path, $filter($path));
 
-        $path2 = __DIR__ . DIRECTORY_SEPARATOR . '_files'
-               . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files';
+        $path2 = __DIR__.DIRECTORY_SEPARATOR.'_files'
+               .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'_files';
         $this->assertEquals($path, $filter($path2));
 
-        $path3 = __DIR__ . DIRECTORY_SEPARATOR . '_files'
-               . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.'
-               . DIRECTORY_SEPARATOR . '_files';
+        $path3 = __DIR__.DIRECTORY_SEPARATOR.'_files'
+               .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'.'
+               .DIRECTORY_SEPARATOR.'_files';
         $this->assertEquals($path, $filter($path3));
     }
 
@@ -110,10 +110,10 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(
                 array(
-                    $this->_filesPath . DIRECTORY_SEPARATOR . 'file.1',
-                    $this->_filesPath . DIRECTORY_SEPARATOR . 'file.2'
-                )
-            )
+                    $this->_filesPath.DIRECTORY_SEPARATOR.'file.1',
+                    $this->_filesPath.DIRECTORY_SEPARATOR.'file.2',
+                ),
+            ),
         );
     }
 

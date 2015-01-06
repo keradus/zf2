@@ -51,8 +51,8 @@ class Plural extends AbstractHelper
      * Given an array of strings, a number and, if wanted, an optional locale (the default one is used
      * otherwise), this picks the right string according to plural rules of the locale
      *
-     * @param  array|string $strings
-     * @param  int          $number
+     * @param  array|string                       $strings
+     * @param  int                                $number
      * @throws Exception\InvalidArgumentException
      * @return string
      */

@@ -34,8 +34,8 @@ abstract class AbstractLogicalFilter extends AbstractFilter
     /**
      * Creates a new grouping filter.
      *
-     * @param array  $subfilters
-     * @param string $symbol
+     * @param  array                     $subfilters
+     * @param  string                    $symbol
      * @throws Exception\FilterException
      */
     protected function __construct(array $subfilters, $symbol)
@@ -54,13 +54,14 @@ abstract class AbstractLogicalFilter extends AbstractFilter
     /**
      * Adds a filter to this grouping filter.
      *
-     * @param  AbstractFilter $filter
+     * @param  AbstractFilter        $filter
      * @return AbstractLogicalFilter
      */
     public function addFilter(AbstractFilter $filter)
     {
         $new               = clone $this;
         $new->subfilters[] = $filter;
+
         return $new;
     }
 
@@ -71,11 +72,12 @@ abstract class AbstractLogicalFilter extends AbstractFilter
      */
     public function toString()
     {
-        $return = '(' . $this->symbol;
+        $return = '('.$this->symbol;
         foreach ($this->subfilters as $sub) {
             $return .= $sub->toString();
         }
         $return .= ')';
+
         return $return;
     }
 }

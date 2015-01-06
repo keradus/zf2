@@ -26,7 +26,7 @@ class Message extends Part implements Message\MessageInterface
      * - file  filename or file handle of a file with raw message content
      * - flags array with flags for message, keys are ignored, use constants defined in \Zend\Mail\Storage
      *
-     * @param array $params
+     * @param  array                      $params
      * @throws Exception\RuntimeException
      */
     public function __construct(array $params)
@@ -65,8 +65,8 @@ class Message extends Part implements Message\MessageInterface
     /**
      * check if flag is set
      *
-     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage
-     * @return bool true if set, otherwise false
+     * @param  mixed $flag a flag name, use constants defined in \Zend\Mail\Storage
+     * @return bool  true if set, otherwise false
      */
     public function hasFlag($flag)
     {

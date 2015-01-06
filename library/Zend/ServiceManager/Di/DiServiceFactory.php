@@ -53,10 +53,10 @@ class DiServiceFactory extends Di implements FactoryInterface
     /**
      * Constructor
      *
-     * @param \Zend\Di\Di $di
+     * @param \Zend\Di\Di                   $di
      * @param null|\Zend\Di\InstanceManager $name
-     * @param array $parameters
-     * @param string $useServiceLocator
+     * @param array                         $parameters
+     * @param string                        $useServiceLocator
      */
     public function __construct(Di $di, $name, array $parameters = array(), $useServiceLocator = self::USE_SL_NONE)
     {
@@ -75,20 +75,21 @@ class DiServiceFactory extends Di implements FactoryInterface
     /**
      * Create service
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return object
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
+
         return $this->get($this->name, $this->parameters);
     }
 
     /**
      * Override, as we want it to use the functionality defined in the proxy
      *
-     * @param string $name
-     * @param array $params
+     * @param  string                             $name
+     * @param  array                              $params
      * @return object
      * @throws Exception\ServiceNotFoundException
      */
@@ -101,6 +102,7 @@ class DiServiceFactory extends Di implements FactoryInterface
 
         try {
             $service = parent::get($name, $params);
+
             return $service;
         } catch (DiClassNotFoundException $e) {
             // allow this di service to get dependencies from the service locator AFTER trying di

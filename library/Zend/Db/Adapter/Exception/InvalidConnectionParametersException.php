@@ -18,7 +18,7 @@ class InvalidConnectionParametersException extends RuntimeException implements E
 
     /**
      * @param string $message
-     * @param int $parameters
+     * @param int    $parameters
      */
     public function __construct($message, $parameters)
     {

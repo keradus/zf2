@@ -32,16 +32,16 @@ class MemcacheTest extends CommonAdapterTest
         }
 
         $this->_options  = new Cache\Storage\Adapter\MemcacheOptions(array(
-            'resource_id' => __CLASS__
+            'resource_id' => __CLASS__,
         ));
 
         if (defined('TESTS_ZEND_CACHE_MEMCACHE_HOST') && defined('TESTS_ZEND_CACHE_MEMCACHE_PORT')) {
             $this->_options->getResourceManager()->addServers(__CLASS__, array(
-                array(TESTS_ZEND_CACHE_MEMCACHE_HOST, TESTS_ZEND_CACHE_MEMCACHE_PORT)
+                array(TESTS_ZEND_CACHE_MEMCACHE_HOST, TESTS_ZEND_CACHE_MEMCACHE_PORT),
             ));
         } elseif (defined('TESTS_ZEND_CACHE_MEMCACHE_HOST')) {
             $this->_options->getResourceManager()->addServers(__CLASS__, array(
-                array(TESTS_ZEND_CACHE_MEMCACHE_HOST)
+                array(TESTS_ZEND_CACHE_MEMCACHE_HOST),
             ));
         }
 

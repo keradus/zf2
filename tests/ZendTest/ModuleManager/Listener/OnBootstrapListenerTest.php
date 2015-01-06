@@ -36,17 +36,17 @@ class OnBootstrapListenerTest extends TestCase
         $this->includePath = get_include_path();
 
         $autoloader = new ModuleAutoloader(array(
-            dirname(__DIR__) . '/TestAsset',
+            dirname(__DIR__).'/TestAsset',
         ));
         $autoloader->register();
 
         $sharedEvents = new SharedEventManager();
         $this->moduleManager = new ModuleManager(array());
         $this->moduleManager->getEventManager()->setSharedManager($sharedEvents);
-        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
-        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener(), 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener(), 1000);
 
-        $this->application = new MockApplication;
+        $this->application = new MockApplication();
         $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
         $events->setSharedManager($sharedEvents);
         $this->application->setEventManager($events);

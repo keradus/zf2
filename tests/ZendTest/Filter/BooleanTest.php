@@ -58,7 +58,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param int $type
+     * @param int   $type
      * @param array $testData
      * @dataProvider typeTestProvider
      */
@@ -112,7 +112,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                 'n'   => false,
                 'yay' => true,
                 'nay' => false,
-            )
+            ),
         ));
 
         $this->assertTrue($filter->filter('yes'));
@@ -204,7 +204,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_INTEGER,
@@ -226,7 +226,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_FLOAT,
@@ -248,7 +248,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_STRING,
@@ -270,7 +270,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_ZERO_STRING,
@@ -292,7 +292,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_EMPTY_ARRAY,
@@ -314,7 +314,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_NULL,
@@ -336,7 +336,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_PHP,
@@ -358,7 +358,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_FALSE_STRING,
@@ -380,7 +380,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             // default behaviour with no translations provided
             // all values filtered as true
@@ -404,7 +404,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
             array(
                 BooleanFilter::TYPE_ALL,
@@ -426,7 +426,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
+                ),
             ),
         );
     }
@@ -467,8 +467,8 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
                     array('true', true),
                     array('no', true),
                     array('yes', true),
-                )
-            )
+                ),
+            ),
         );
     }
 }

@@ -43,7 +43,7 @@ class Expr
     /**
      * Constructor
      *
-     * @param  string $expression the expression to hold.
+     * @param string $expression the expression to hold.
      */
     public function __construct($expression)
     {

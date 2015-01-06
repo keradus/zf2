@@ -44,5 +44,5 @@ class WarningTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty('Warning: xxx', $warningHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+/** Implmentation specific tests here */
 }

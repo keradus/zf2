@@ -16,7 +16,6 @@ use Zend\Ldap\Node;
 /**
  * @group      Zend_Ldap
  */
-
 class ChangePasswordTest extends AbstractOnlineTestCase
 {
     public function testAddNewUserWithPasswordOpenLDAP()

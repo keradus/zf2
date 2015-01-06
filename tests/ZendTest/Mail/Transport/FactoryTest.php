@@ -101,7 +101,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     public function testCanUseTraversableAsSpec()
     {
         $spec = new ArrayObject(array(
-            'type' => 'null'
+            'type' => 'null',
         ));
 
         $transport = Factory::create($spec);
@@ -117,7 +117,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     public function testInvalidClassThrowsDomainException($class)
     {
         Factory::create(array(
-            'type' => $class
+            'type' => $class,
         ));
     }
 
@@ -138,7 +138,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
             'type' => 'smtp',
             'options' => array(
                 'host' => 'somehost',
-            )
+            ),
         ));
 
         $this->assertEquals($transport->getOptions()->getHost(), 'somehost');
@@ -153,7 +153,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
             'type' => 'file',
             'options' => array(
                 'path' => __DIR__,
-            )
+            ),
         ));
 
         $this->assertEquals($transport->getOptions()->getPath(), __DIR__);

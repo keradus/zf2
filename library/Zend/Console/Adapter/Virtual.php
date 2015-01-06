@@ -161,7 +161,7 @@ class Virtual extends AbstractAdapter
      */
     public function getDefaultCharset()
     {
-        return new Charset\AsciiExtended;
+        return new Charset\AsciiExtended();
     }
 
     /**

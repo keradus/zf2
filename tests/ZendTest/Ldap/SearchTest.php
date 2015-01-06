@@ -325,7 +325,7 @@ class SearchTest extends AbstractOnlineTestCase
             ->search(array(
                           'filter' => '(objectClass=organizationalUnit)',
                           'baseDn' => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
-                          'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB
+                          'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB,
                      )
         );
         $this->assertEquals(9, $items->count());
@@ -341,7 +341,7 @@ class SearchTest extends AbstractOnlineTestCase
             ->searchEntries(array(
                                  'filter' => '(objectClass=organizationalUnit)',
                                  'baseDn' => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
-                                 'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB
+                                 'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB,
                             )
         );
         $this->assertEquals(9, count($items));
@@ -375,7 +375,7 @@ class SearchTest extends AbstractOnlineTestCase
                                  'baseDn'      => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
                                  'scope'       => Ldap\Ldap::SEARCH_SCOPE_SUB,
                                  'sort'        => 'l',
-                                 'reverseSort' => true
+                                 'reverseSort' => true,
                             )
         );
         foreach ($items as $key => $item) {
@@ -577,7 +577,7 @@ class SearchTest extends AbstractOnlineTestCase
     {
         $dn   = $this->createDn('ou=Node,');
         $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
-        $list->getInnerIterator()->setAttributeNameTreatment(array(__NAMESPACE__ . '\CustomNaming', 'name1'));
+        $list->getInnerIterator()->setAttributeNameTreatment(array(__NAMESPACE__.'\CustomNaming', 'name1'));
         $this->assertArrayHasKey('edoclatsop', $list->current());
     }
 

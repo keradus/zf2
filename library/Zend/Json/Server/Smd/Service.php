@@ -134,7 +134,7 @@ class Service
             if ('options' == strtolower($key)) {
                 continue;
             }
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
             if (in_array($method, $methods)) {
                 $this->$method($value);
             }
@@ -183,7 +183,7 @@ class Service
     public function setTransport($transport)
     {
         if (!in_array($transport, $this->transportTypes)) {
-            throw new InvalidArgumentException("Invalid transport '{$transport}'; please select one of (" . implode(', ', $this->transportTypes) . ')');
+            throw new InvalidArgumentException("Invalid transport '{$transport}'; please select one of (".implode(', ', $this->transportTypes).')');
         }
 
         $this->transport = $transport;
@@ -234,7 +234,7 @@ class Service
     public function setEnvelope($envelopeType)
     {
         if (!in_array($envelopeType, $this->envelopeTypes)) {
-            throw new InvalidArgumentException("Invalid envelope type '{$envelopeType}'; please specify one of (" . implode(', ', $this->envelopeTypes) . ')');
+            throw new InvalidArgumentException("Invalid envelope type '{$envelopeType}'; please specify one of (".implode(', ', $this->envelopeTypes).')');
         }
 
         $this->envelope = $envelopeType;
@@ -377,7 +377,7 @@ class Service
                 $type[$key] = $this->_validateParamType($returnType, true);
             }
         } else {
-            throw new InvalidArgumentException("Invalid param type provided ('" . gettype($type) . "')");
+            throw new InvalidArgumentException("Invalid param type provided ('".gettype($type)."')");
         }
         $this->return = $type;
 
