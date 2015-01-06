@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Test\PHPUnit\Controller;
 
 use Zend\EventManager\StaticEventManager;
@@ -23,7 +24,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     public function setUp()
     {
         $this->setApplicationConfig(
-            include __DIR__ . '/../../_files/application.config.php'
+            include __DIR__.'/../../_files/application.config.php'
         );
         parent::setUp();
     }
@@ -598,7 +599,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     public function testAssertWithEventShared()
     {
         $this->setApplicationConfig(
-            include __DIR__ . '/../../_files/application.config.with.shared.events.php'
+            include __DIR__.'/../../_files/application.config.with.shared.events.php'
         );
         $this->dispatch('/tests');
         $this->assertNotQuery('div#content');

@@ -60,7 +60,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanFactoryPaginatorWithStringAdapterAggregate()
     {
-        $paginator = Paginator\Factory::factory(null, new TestArrayAggregate);
+        $paginator = Paginator\Factory::factory(null, new TestArrayAggregate());
         $this->assertInstanceOf('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
     }
 

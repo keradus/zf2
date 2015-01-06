@@ -11,7 +11,7 @@ namespace ZendTest\Soap\Wsdl;
 
 use ZendTest\Soap\WsdlTestHelper;
 
-require_once __DIR__ . '/../TestAsset/commontypes.php';
+require_once __DIR__.'/../TestAsset/commontypes.php';
 
 /**
  * @group      Zend_Soap
@@ -116,39 +116,39 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'string[][]',
                 'ArrayOfArrayOfString',
                 array(
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString'
-                )
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString',
+                ),
             ),
 
             array(
                 'string[][][]',
                 'ArrayOfArrayOfArrayOfString',
                 array(
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString',
-                    'ArrayOfArrayOfArrayOfString'               =>'tns:ArrayOfArrayOfString'
-                )
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString',
+                    'ArrayOfArrayOfArrayOfString'               => 'tns:ArrayOfArrayOfString',
+                ),
             ),
 
             array(
                 'string[][][][]',
                 'ArrayOfArrayOfArrayOfArrayOfString',
                 array(
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString',
-                    'ArrayOfArrayOfArrayOfString'               =>'tns:ArrayOfArrayOfString',
-                    'ArrayOfArrayOfArrayOfArrayOfString'        =>'tns:ArrayOfArrayOfArrayOfString'
-                )
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString',
+                    'ArrayOfArrayOfArrayOfString'               => 'tns:ArrayOfArrayOfString',
+                    'ArrayOfArrayOfArrayOfArrayOfString'        => 'tns:ArrayOfArrayOfArrayOfString',
+                ),
             ),
 
             array(
                 'int[][]',
                 'ArrayOfArrayOfInt',
                 array(
-                    'ArrayOfInt'                                =>'xsd:int',
-                    'ArrayOfArrayOfInt'                         =>'tns:ArrayOfInt'
-                )
+                    'ArrayOfInt'                                => 'xsd:int',
+                    'ArrayOfArrayOfInt'                         => 'tns:ArrayOfInt',
+                ),
             ),
         );
     }
@@ -176,7 +176,6 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
         $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTypeA[]');
         $this->assertEquals('tns:ArrayOfComplexTypeA', $return);
 
-
         // class a
         $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="ComplexTypeA"]');
         $this->assertEquals(1, $nodes->length, 'Missing complex type definition.');
@@ -191,7 +190,6 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
         $this->assertEquals('tns:ArrayOfComplexTypeB',      $nodes->item(0)->getAttribute('type'),
             'Wrong complex type type attribute value'
         );
-
 
         // class b
         $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="ComplexTypeB"]');
@@ -214,11 +212,10 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
             );
         }
 
-
         // array of class a and class b
         foreach (array(
             'ArrayOfComplexTypeB'       =>      'ComplexTypeB',
-            'ArrayOfComplexTypeA'       =>      'ComplexTypeA'
+            'ArrayOfComplexTypeA'       =>      'ComplexTypeA',
                 ) as $arrayTypeName => $typeName) {
             $nodes = $this->xpath->query(
                         '//wsdl:types/xsd:schema/xsd:complexType[@name="'.$arrayTypeName.'"]'

@@ -24,7 +24,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $options = new Serializer\Adapter\PythonPickleOptions(array(
-            'protocol' => 1
+            'protocol' => 1,
         ));
         $this->adapter = new Serializer\Adapter\PythonPickle($options);
     }
@@ -101,7 +101,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
     {
         $value    = 'test';
         $expected = "U\x04test"
-                  . "q\x00.";
+                  ."q\x00.";
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -110,13 +110,13 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
     public function testSerializeBinString()
     {
         $value    = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                  . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                  . "01234567890123456789012345678901234567890123456789012345";
+                  ."0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+                  ."01234567890123456789012345678901234567890123456789012345";
         $expected = "T\x00\x01\x00\x00"
-                  . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                  . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                  . "01234567890123456789012345678901234567890123456789012345"
-                  . "q\x00.";
+                  ."0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+                  ."0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+                  ."01234567890123456789012345678901234567890123456789012345"
+                  ."q\x00.";
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);

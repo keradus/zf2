@@ -11,7 +11,6 @@ namespace ZendTest\Validator;
 
 use Zend\Validator\Isbn;
 
-
 /**
  * @group      Zend_Validator
  */
@@ -91,7 +90,6 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
         $validator->setSeparator('X');
     }
 
-
     /**
      * Ensures that __construct() works as expected
      *
@@ -100,19 +98,19 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     public function testInitialization()
     {
         $options = array('type'      => Isbn::AUTO,
-                         'separator' => ' ');
+                         'separator' => ' ', );
         $validator = new Isbn($options);
         $this->assertTrue($validator->getType() == Isbn::AUTO);
         $this->assertTrue($validator->getSeparator() == ' ');
 
         $options = array('type'      => Isbn::ISBN10,
-                         'separator' => '-');
+                         'separator' => '-', );
         $validator = new Isbn($options);
         $this->assertTrue($validator->getType() == Isbn::ISBN10);
         $this->assertTrue($validator->getSeparator() == '-');
 
         $options = array('type'      => Isbn::ISBN13,
-                         'separator' => '');
+                         'separator' => '', );
         $validator = new Isbn($options);
         $this->assertTrue($validator->getType() == Isbn::ISBN13);
         $this->assertTrue($validator->getSeparator() == '');

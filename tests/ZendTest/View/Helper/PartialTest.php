@@ -40,7 +40,7 @@ class PartialTest extends TestCase
      */
     public function setUp()
     {
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->helper   = new Partial();
     }
 
@@ -61,7 +61,7 @@ class PartialTest extends TestCase
     public function testPartialRendersScript()
     {
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
         $return = $this->helper->__invoke('partialOne.phtml');
         $this->assertContains('This is the first test partial', $return);
@@ -73,7 +73,7 @@ class PartialTest extends TestCase
     public function testPartialRendersScriptWithVars()
     {
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $view->vars()->message = 'This should never be read';
         $this->helper->setView($view);
         $return = $this->helper->__invoke('partialThree.phtml', array('message' => 'This message should be read'));
@@ -98,7 +98,7 @@ class PartialTest extends TestCase
         $model->bar = 'baz';
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
         $return = $this->helper->__invoke('partialVars.phtml', $model);
 
@@ -113,7 +113,7 @@ class PartialTest extends TestCase
         $model = new Aggregate();
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
         $return = $this->helper->__invoke('partialVars.phtml', $model);
 
@@ -137,7 +137,7 @@ class PartialTest extends TestCase
         ));
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
         $return = $this->helper->__invoke('partialVars.phtml', $model);
 
@@ -156,7 +156,7 @@ class PartialTest extends TestCase
         $model->setTemplate('partialVars.phtml');
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
         $return = $this->helper->__invoke($model);
 
@@ -171,7 +171,7 @@ class Aggregate
 {
     public $vars = array(
         'foo' => 'bar',
-        'bar' => 'baz'
+        'bar' => 'baz',
     );
 
     public function toArray()

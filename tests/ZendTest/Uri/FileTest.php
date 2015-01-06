@@ -48,7 +48,7 @@ class FileTest extends TestCase
             array('mailto'),
             array('http'),
             array('g'),
-            array('file:')
+            array('file:'),
         );
     }
 
@@ -103,7 +103,7 @@ class FileTest extends TestCase
      */
     public function testValidScheme($scheme)
     {
-        $uri = new FileUri;
+        $uri = new FileUri();
         $uri->setScheme($scheme);
         $this->assertEquals($scheme, $uri->getScheme());
     }
@@ -116,7 +116,7 @@ class FileTest extends TestCase
      */
     public function testInvalidScheme($scheme)
     {
-        $uri = new FileUri;
+        $uri = new FileUri();
         $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException');
         $uri->setScheme($scheme);
     }

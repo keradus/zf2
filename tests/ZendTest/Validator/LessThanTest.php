@@ -37,7 +37,7 @@ class LessThanTest extends \PHPUnit_Framework_TestCase
             array(array('max' => 100, 'inclusive' => true), true, array(-1, 0, 0.01, 1, 99.999, 100, 100.0)),
             array(array('max' => 100, 'inclusive' => true), false, array(100.01)),
             array(array('max' => 100, 'inclusive' => false), true, array(-1, 0, 0.01, 1, 99.999)),
-            array(array('max' => 100, 'inclusive' => false), false, array(100, 100.0, 100.01))
+            array(array('max' => 100, 'inclusive' => false), false, array(100, 100.0, 100.01)),
         );
 
         foreach ($valuesExpected as $element) {

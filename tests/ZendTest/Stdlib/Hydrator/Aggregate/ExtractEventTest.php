@@ -38,7 +38,6 @@ class ExtractEventTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($data2, $event->getExtractedData());
 
-
         $event->setExtractionObject($object2);
 
         $this->assertSame($object2, $event->getExtractionObject());

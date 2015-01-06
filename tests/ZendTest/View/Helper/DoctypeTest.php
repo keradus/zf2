@@ -72,7 +72,7 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
             Helper\Doctype::XHTML1_FRAMESET,
             Helper\Doctype::XHTML1_RDFA,
             Helper\Doctype::XHTML1_RDFA11,
-            Helper\Doctype::XHTML5
+            Helper\Doctype::XHTML5,
         );
 
         foreach ($types as $type) {
@@ -119,9 +119,8 @@ class DoctypeTest extends \PHPUnit_Framework_TestCase
             Helper\Doctype::HTML4_FRAMESET,
             Helper\Doctype::XHTML1_STRICT,
             Helper\Doctype::XHTML1_TRANSITIONAL,
-            Helper\Doctype::XHTML1_FRAMESET
+            Helper\Doctype::XHTML1_FRAMESET,
         );
-
 
         foreach ($types as $type) {
             $doctype = $this->helper->__invoke($type);

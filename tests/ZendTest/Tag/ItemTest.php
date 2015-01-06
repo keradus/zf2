@@ -23,8 +23,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
             'title' => 'foo',
             'weight' => 10,
             'params' => array(
-                'bar' => 'baz'
-            )
+                'bar' => 'baz',
+            ),
         ));
 
         $this->assertEquals('foo', $tag->getTitle());
@@ -39,8 +39,8 @@ class ItemTest extends \PHPUnit_Framework_TestCase
             'title' => 'bar',
             'weight' => 10,
             'params' => array(
-                'bar' => 'baz'
-            )
+                'bar' => 'baz',
+            ),
         ));
 
         $this->assertEquals('bar', $tag->getTitle());

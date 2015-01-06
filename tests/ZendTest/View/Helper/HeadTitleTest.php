@@ -38,7 +38,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->helper = new Helper\HeadTitle();
     }
 
@@ -130,7 +130,6 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
         $this->helper->__invoke()->setAutoEscape(false);
         $this->assertFalse($this->helper->__invoke()->getAutoEscape());
 
-
         $this->assertEquals('Some Title &copyright;', $this->helper->renderTitle());
     }
 
@@ -211,7 +210,6 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
         $placeholder = $this->helper->__invoke('Bar');
         $this->assertEquals('BarFoo', $placeholder->renderTitle());
     }
-
 
     /**
      *  @group ZF-10284

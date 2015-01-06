@@ -56,7 +56,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test/method', $this->_request->getMethod());
     }
 
-
     /**
      * __construct() test
      */
@@ -72,7 +71,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($method, $r->getMethod());
         $this->assertEquals($params, $r->getParams());
     }
-
 
     /**
      * addParam()/getParams() test
@@ -119,7 +117,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $params = array(
             'string1',
             true,
-            array('one', 'two')
+            array('one', 'two'),
         );
         $this->_request->setParams($params);
         $returned = $this->_request->getParams();
@@ -127,7 +125,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $params = array(
             'string2',
-            array('two', 'one')
+            array('two', 'one'),
         );
         $this->_request->setParams($params);
         $returned = $this->_request->getParams();
@@ -163,9 +161,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $value2 = $param2->appendChild($dom->createElement('value'));
         $value2->appendChild($dom->createElement('boolean', 1));
 
-
         $xml = $dom->saveXml();
-
 
         $parsed = $this->_request->loadXml($xml);
         $this->assertTrue($parsed, $xml);
@@ -200,9 +196,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_request->loadXml(
             '<methodCall>'
-          . '<methodName>foo</methodName>'
-          . '<params><param/><param/><param><foo/></param></params>'
-          . '</methodCall>'));
+          .'<methodName>foo</methodName>'
+          .'<params><param/><param/><param><foo/></param></params>'
+          .'</methodCall>'));
         $this->assertTrue($this->_request->isFault());
         $this->assertSame(633, $this->_request->getFault()->getCode());
         $this->assertSame(
@@ -214,9 +210,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_request->loadXml(
             '<methodCall>'
-          . '<methodName>foo</methodName>'
-          . '<params><param><value><foo/></value></param></params>'
-          . '</methodCall>'));
+          .'<methodName>foo</methodName>'
+          .'<params><param><value><foo/></value></param></params>'
+          .'</methodCall>'));
         $this->assertTrue($this->_request->isFault());
         $this->assertSame(636, $this->_request->getFault()->getCode());
         $this->assertSame(
@@ -249,7 +245,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     /**
      * helper for saveXml() and __toString() tests
      *
-     * @param string $xml
+     * @param  string $xml
      * @return void
      */
     protected function _testXmlRequest($xml, $argv)
@@ -273,7 +269,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $methodName = (string) $sx->methodName;
         $params = array(
             (string) $sx->params->param[0]->value->string,
-            (bool) $sx->params->param[1]->value->boolean
+            (bool) $sx->params->param[1]->value->boolean,
         );
 
         $this->assertEquals('do.Something', $methodName);
@@ -324,8 +320,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testDoesNotAllowExternalEntities()
     {
-        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-request.xml');
-        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $payload = file_get_contents(dirname(__FILE__).'/_files/ZF12293-request.xml');
+        $payload = sprintf($payload, 'file://'.realpath(dirname(__FILE__).'/_files/ZF12293-payload.txt'));
         $this->_request->loadXml($payload);
         $method = $this->_request->getMethod();
         $this->assertTrue(empty($method));
@@ -336,8 +332,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldDisallowsDoctypeInRequestXmlAndReturnFalseOnLoading()
     {
-        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-request.xml');
-        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $payload = file_get_contents(dirname(__FILE__).'/_files/ZF12293-request.xml');
+        $payload = sprintf($payload, 'file://'.realpath(dirname(__FILE__).'/_files/ZF12293-payload.txt'));
         $this->assertFalse($this->_request->loadXml($payload));
     }
 }

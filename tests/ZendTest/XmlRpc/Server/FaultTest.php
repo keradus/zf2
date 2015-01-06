@@ -83,11 +83,10 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Unknown error', $fault->getMessage());
         $this->assertEquals(404, $fault->getCode());
 
-
         $exceptions = array(
             'ZendTest\\XmlRpc\\Server\\Exception',
             'ZendTest\\XmlRpc\\Server\\Exception2',
-            'ZendTest\\XmlRpc\\Server\\Exception3'
+            'ZendTest\\XmlRpc\\Server\\Exception3',
         );
         Server\Fault::attachFaultException($exceptions);
         foreach ($exceptions as $class) {

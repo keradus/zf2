@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Test\PHPUnit\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
@@ -18,7 +19,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
     protected function setUp()
     {
         $this->setApplicationConfig(
-            include __DIR__ . '/../../_files/application.config.php'
+            include __DIR__.'/../../_files/application.config.php'
         );
         parent::setUp();
     }

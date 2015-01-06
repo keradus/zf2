@@ -46,11 +46,11 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
     {
         $pluginManager = new FooPluginManager(new Config(array(
             'factories' => array(
-                'Foo' => 'ZendTest\ServiceManager\TestAsset\FooFactory'
+                'Foo' => 'ZendTest\ServiceManager\TestAsset\FooFactory',
             ),
             'shared' => array(
-                'Foo' => false
-            )
+                'Foo' => false,
+            ),
         )));
 
         $refl         = new ReflectionClass($pluginManager);

@@ -26,7 +26,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
         $cloud = $this->_getCloud();
         $this->assertInstanceOf('Zend\Tag\ItemList', $cloud->getItemList());
 
-        $cloud->setItemList(new ItemListDummy);
+        $cloud->setItemList(new ItemListDummy());
         $this->assertInstanceOf('ZendTest\Tag\Cloud\ItemListDummy', $cloud->getItemList());
     }
 
@@ -153,7 +153,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             array(
                 'title'  => 'bar',
                 'weight' => 2,
-            )
+            ),
         ));
 
         $this->assertEquals('foo', $list[0]->getTitle());
@@ -275,9 +275,9 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             ),
         ));
         $expected = '<ul class="zend-tag-cloud">'
-            . '<li><a href="" style="font-size: 10px;">foo</a></li> '
-            . '<li><a href="" style="font-size: 20px;">bar</a></li>'
-            . '</ul>';
+            .'<li><a href="" style="font-size: 10px;">foo</a></li> '
+            .'<li><a href="" style="font-size: 20px;">bar</a></li>'
+            .'</ul>';
         $this->assertEquals($expected, $cloud->render());
     }
 
@@ -302,10 +302,10 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             ),
         ));
         $expected = '<ul class="zend-tag-cloud">'
-            . '<li><a href="" style="font-size: 10px;">foo</a></li> '
-            . '<li><a href="" style="font-size: 20px;">bar</a></li>'
-            . '</ul>';
-        $this->assertEquals($expected, (string)$cloud);
+            .'<li><a href="" style="font-size: 10px;">foo</a></li> '
+            .'<li><a href="" style="font-size: 20px;">bar</a></li>'
+            .'</ul>';
+        $this->assertEquals($expected, (string) $cloud);
     }
 
     protected function _getCloud(

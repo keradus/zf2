@@ -32,7 +32,7 @@ class ServiceManagerTest extends TestCase
 
     public function setup()
     {
-        $this->serviceManager = new ServiceManager;
+        $this->serviceManager = new ServiceManager();
     }
 
     /**
@@ -314,7 +314,7 @@ class ServiceManagerTest extends TestCase
      */
     public function testCreateWithCallableFactory()
     {
-        $this->serviceManager->setFactory('foo', function () { return new TestAsset\Foo; });
+        $this->serviceManager->setFactory('foo', function () { return new TestAsset\Foo(); });
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
     }
 
@@ -600,7 +600,7 @@ class ServiceManagerTest extends TestCase
      */
     public function testCallingANonExistingServiceFromAnAbstractServiceDoesNotMakeTheServerExhaustTheAllowedMemoryByCallingItselfForTheGivenService()
     {
-        $abstractFactory = new TestAsset\TrollAbstractFactory;
+        $abstractFactory = new TestAsset\TrollAbstractFactory();
         $this->serviceManager->addAbstractFactory($abstractFactory);
 
         $this->assertSame($abstractFactory->inexistingServiceCheckResult, null);
@@ -615,7 +615,7 @@ class ServiceManagerTest extends TestCase
 
     public function testMultipleAbstractFactoriesWithOneLookingForANonExistingServiceDuringCanCreate()
     {
-        $abstractFactory = new TestAsset\TrollAbstractFactory;
+        $abstractFactory = new TestAsset\TrollAbstractFactory();
         $anotherAbstractFactory = $this->getMock('Zend\ServiceManager\AbstractFactoryInterface');
         $anotherAbstractFactory
             ->expects($this->exactly(2))
@@ -636,7 +636,7 @@ class ServiceManagerTest extends TestCase
 
     public function testWaitingAbstractFactory()
     {
-        $abstractFactory = new TestAsset\WaitingAbstractFactory;
+        $abstractFactory = new TestAsset\WaitingAbstractFactory();
         $this->serviceManager->addAbstractFactory($abstractFactory);
 
         $abstractFactory->waitingService = null;
@@ -656,7 +656,7 @@ class ServiceManagerTest extends TestCase
 
     public function testWaitingAbstractFactoryNestedContextCounterWhenThrowException()
     {
-        $abstractFactory = new TestAsset\WaitingAbstractFactory;
+        $abstractFactory = new TestAsset\WaitingAbstractFactory();
         $this->serviceManager->addAbstractFactory($abstractFactory);
 
         $contextCounter = new \ReflectionProperty($this->serviceManager, 'nestedContextCounter');
@@ -777,7 +777,7 @@ class ServiceManagerTest extends TestCase
     public function testWanCreateFromAbstractFactoryWillNotInstantiateAbstractFactoryOnce()
     {
         $count = FooCounterAbstractFactory::$instantiationCount;
-        $this->serviceManager->addAbstractFactory(__NAMESPACE__ . '\TestAsset\FooCounterAbstractFactory');
+        $this->serviceManager->addAbstractFactory(__NAMESPACE__.'\TestAsset\FooCounterAbstractFactory');
 
         $this->serviceManager->canCreateFromAbstractFactory('foo', 'foo');
         $this->serviceManager->canCreateFromAbstractFactory('foo', 'foo');
@@ -791,7 +791,7 @@ class ServiceManagerTest extends TestCase
      */
     public function testAbstractFactoryNotUsedIfNotAbleToCreate()
     {
-        $service = new \stdClass;
+        $service = new \stdClass();
 
         $af1 = $this->getMock('Zend\ServiceManager\AbstractFactoryInterface');
         $af1->expects($this->any())->method('canCreateServiceWithName')->will($this->returnValue(true));
@@ -960,7 +960,7 @@ class ServiceManagerTest extends TestCase
         $cyclicAliases = array(
             'fooalias' => 'bazalias',
             'baralias' => 'fooalias',
-            'bazalias' => 'baralias'
+            'bazalias' => 'baralias',
         );
 
         $reflection = new \ReflectionObject($this->serviceManager);
@@ -1028,7 +1028,7 @@ class ServiceManagerTest extends TestCase
 
     public function testInvalidDelegatorFactoryThrowsException()
     {
-        $delegatorFactory = new \stdClass;
+        $delegatorFactory = new \stdClass();
         $this->serviceManager->addDelegator('foo-service', $delegatorFactory);
 
         try {
@@ -1036,6 +1036,7 @@ class ServiceManagerTest extends TestCase
             $this->fail('Expected exception was not raised');
         } catch (Exception\ServiceNotCreatedException $expected) {
             $this->assertRegExp('/invalid factory/', $expected->getMessage());
+
             return;
         }
     }
@@ -1051,6 +1052,7 @@ class ServiceManagerTest extends TestCase
             $this->fail('Expected exception was not raised');
         } catch (Exception\ServiceNotCreatedException $expected) {
             $this->assertRegExp('/invalid factory/', $expected->getMessage());
+
             return;
         }
     }
@@ -1062,6 +1064,7 @@ class ServiceManagerTest extends TestCase
 
         $delegatorFactoryCallback = function ($serviceManager, $cName, $rName, $callback) use ($delegator) {
             $delegator->real = call_user_func($callback);
+
             return $delegator;
         };
 
@@ -1161,7 +1164,7 @@ class ServiceManagerTest extends TestCase
             array(function () {}),
             array(false),
             array(new \stdClass()),
-            array(tmpfile())
+            array(tmpfile()),
         );
     }
 

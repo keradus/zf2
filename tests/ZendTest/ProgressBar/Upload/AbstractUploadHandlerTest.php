@@ -50,7 +50,7 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
             'current'  => 0,
             'rate'     => 0,
             'message'  => 'No upload in progress',
-            'done'     => true
+            'done'     => true,
         );
         $stub = $this->getMockForAbstractClass(
             'Zend\ProgressBar\Upload\AbstractUploadHandler'
@@ -93,7 +93,7 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider progressDataProvider
-     * @param array $progressData
+     * @param  array $progressData
      * @return void
      */
     public function testProgressAdapterNotify($progressData)
@@ -128,7 +128,7 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider progressDataProvider
-     * @param array $progressData
+     * @param  array $progressData
      * @return void
      */
     public function testProgressBarUpdate($progressData)
@@ -146,7 +146,6 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
         $progressBar = new ProgressBar(
             $adapterStub, 0, $progressData['total'], 'testSession'
         );
-
 
         $stub = $this->getMockForAbstractClass(
             'Zend\ProgressBar\Upload\AbstractUploadHandler'

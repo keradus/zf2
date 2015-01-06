@@ -49,7 +49,7 @@ class ParametersTest extends \PHPUnit_Framework_TestCase
 
     public function testParametersOffsetgetReturnsNullIfNonexistentKeyIsProvided()
     {
-        $parameters = new Parameters;
+        $parameters = new Parameters();
         $this->assertNull($parameters->foo);
     }
 

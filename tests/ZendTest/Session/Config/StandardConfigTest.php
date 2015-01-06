@@ -23,7 +23,7 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->config = new StandardConfig;
+        $this->config = new StandardConfig();
     }
 
     // session.save_path
@@ -31,7 +31,7 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function testSetSavePathErrorsOnInvalidPath()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid save_path provided');
-        $this->config->setSavePath(__DIR__ . '/foobarboguspath');
+        $this->config->setSavePath(__DIR__.'/foobarboguspath');
     }
 
     public function testSavePathIsMutable()
@@ -265,7 +265,7 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function testSetEntropyFileErrorsOnInvalidPath()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_file provided');
-        $this->config->setEntropyFile(__DIR__ . '/foobarboguspath');
+        $this->config->setEntropyFile(__DIR__.'/foobarboguspath');
     }
 
     public function testEntropyFileIsMutable()
@@ -360,6 +360,7 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
         foreach ($hashFunctions as $function) {
             $provider[] = array($function);
         }
+
         return $provider;
     }
 

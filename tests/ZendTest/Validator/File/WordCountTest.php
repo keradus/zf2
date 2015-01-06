@@ -22,7 +22,7 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/wordcount.txt';
+        $testFile = __DIR__.'/_files/wordcount.txt';
         $testData = array(
             //    Options, isValid Param, Expected value
             array(15,      $testFile,     true),
@@ -35,10 +35,11 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         foreach ($testData as $data) {
             $fileUpload = array(
                 'tmp_name' => $data[1], 'name' => basename($data[1]),
-                'size' => 200, 'error' => 0, 'type' => 'text'
+                'size' => 200, 'error' => 0, 'type' => 'text',
             );
             $testData[] = array($data[0], $fileUpload, $data[2]);
         }
+
         return $testData;
     }
 
@@ -132,7 +133,7 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\WordCount(array('min' => 1, 'max' => 10000));
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileWordCountNotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }

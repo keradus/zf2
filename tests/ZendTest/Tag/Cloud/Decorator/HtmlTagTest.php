@@ -24,7 +24,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\HtmlTag();
         $expected  = array('<li><a href="http://first" style="font-size: 10px;">foo</a></li>',
                            '<li><a href="http://second" style="font-size: 13px;">bar</a></li>',
-                           '<li><a href="http://third" style="font-size: 20px;">baz</a></li>');
+                           '<li><a href="http://third" style="font-size: 20px;">baz</a></li>', );
 
         $this->assertEquals($decorator->render($this->_getTagList()), $expected);
     }
@@ -35,7 +35,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
         $decorator->setHtmlTags(array('span' => array('class' => 'tag'), 'li'));
         $expected  = array('<li><span class="tag"><a href="http://first" style="font-size: 10px;">foo</a></span></li>',
                            '<li><span class="tag"><a href="http://second" style="font-size: 13px;">bar</a></span></li>',
-                           '<li><span class="tag"><a href="http://third" style="font-size: 20px;">baz</a></span></li>');
+                           '<li><span class="tag"><a href="http://third" style="font-size: 20px;">baz</a></span></li>', );
 
         $this->assertEquals($decorator->render($this->_getTagList()), $expected);
     }
@@ -49,7 +49,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
 
         $expected  = array('<li><a href="http://first" style="font-size: 5pt;">foo</a></li>',
                            '<li><a href="http://second" style="font-size: 15pt;">bar</a></li>',
-                           '<li><a href="http://third" style="font-size: 50pt;">baz</a></li>');
+                           '<li><a href="http://third" style="font-size: 50pt;">baz</a></li>', );
 
         $this->assertEquals($decorator->render($this->_getTagList()), $expected);
     }
@@ -61,7 +61,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
 
         $expected  = array('<li><a href="http://first" class="small">foo</a></li>',
                            '<li><a href="http://second" class="medium">bar</a></li>',
-                           '<li><a href="http://third" class="large">baz</a></li>');
+                           '<li><a href="http://third" class="large">baz</a></li>', );
 
         $this->assertEquals($decorator->render($this->_getTagList()), $expected);
     }
@@ -160,6 +160,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
                 'url' => 'http://testing',
             ),
         ));
+
         return $tags;
     }
 

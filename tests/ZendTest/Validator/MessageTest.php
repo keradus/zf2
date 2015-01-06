@@ -159,7 +159,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->validator->setMessages(
             array(
                 StringLength::TOO_LONG  => 'Your value is too long',
-                StringLength::TOO_SHORT => 'Your value is too short'
+                StringLength::TOO_SHORT => 'Your value is too short',
             )
         );
 

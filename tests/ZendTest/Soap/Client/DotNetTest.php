@@ -13,7 +13,7 @@ use PHPUnit_Framework_TestCase;
 use Zend\Soap\Client\Common;
 use Zend\Soap\Client\DotNet as DotNetClient;
 
-require_once __DIR__ . '/../TestAsset/call_user_func.php';
+require_once __DIR__.'/../TestAsset/call_user_func.php';
 
 /**
  * .NET SOAP client tester.
@@ -44,7 +44,7 @@ class DotNetTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->client = new DotNetClient(null, array('location' => 'http://unithost/test',
-                                                    'uri'      => 'http://unithost/test'));
+                                                    'uri'      => 'http://unithost/test', ));
     }
 
     /**
@@ -97,29 +97,29 @@ class DotNetTest extends PHPUnit_Framework_TestCase
             function (Common $client, $request, $location, $action, $version, $oneWay = null) use ($unitTest) {
                 $unitTest->assertEquals('http://unit/test#TestMethod', $action);
                 $result = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
-                    . '<s:Body>';
+                    .'<s:Body>';
 
                 $result .= '<TestMethodResponse xmlns="http://unit/test">'
-                    . '<TestMethodResult>'
-                    . '<TestMethodResult><dummy></dummy></TestMethodResult>'
-                    . '</TestMethodResult>'
-                    . '</TestMethodResponse>';
+                    .'<TestMethodResult>'
+                    .'<TestMethodResult><dummy></dummy></TestMethodResult>'
+                    .'</TestMethodResult>'
+                    .'</TestMethodResponse>';
 
                 $result .= '</s:Body>'
-                    . '</s:Envelope>';
+                    .'</s:Envelope>';
 
                 return $result;
             },
             null,
             array(
                 'location' => 'http://unit/test',
-                'uri'      => 'http://unit/test'
+                'uri'      => 'http://unit/test',
             )
         );
         $this->assertAttributeEquals(false, 'useNtlm', $this->client);
         $this->client->setOptions(array('authentication' => 'ntlm',
             'login'          => 'username',
-            'password'       => 'testpass'));
+            'password'       => 'testpass', ));
         $this->client->setSoapClient($soapClient);
         $this->assertInstanceOf('stdClass', $this->client->TestMethod());
     }
@@ -133,9 +133,9 @@ class DotNetTest extends PHPUnit_Framework_TestCase
     public function testLastRequestHeadersCanBeFetchedCorrectly()
     {
         $expectedHeaders = "Content-Type: text/xml; charset=utf-8\r\n"
-                         . "Method: POST\r\n"
-                         . "SOAPAction: \"http://unithost/test#TestMethod\"\r\n"
-                         . "User-Agent: PHP-SOAP-CURL\r\n";
+                         ."Method: POST\r\n"
+                         ."SOAPAction: \"http://unithost/test#TestMethod\"\r\n"
+                         ."User-Agent: PHP-SOAP-CURL\r\n";
 
         $this->mockNtlmRequest();
         $this->client->TestMethod();
@@ -152,7 +152,7 @@ class DotNetTest extends PHPUnit_Framework_TestCase
     public function testLastResponseHeadersCanBeFetchedCorrectly()
     {
         $expectedHeaders = "Cache-Control: private\r\n"
-                         . "Content-Type: text/xml; charset=utf-8\r\n";
+                         ."Content-Type: text/xml; charset=utf-8\r\n";
 
         $this->mockNtlmRequest();
         $this->client->TestMethod();
@@ -182,20 +182,20 @@ class DotNetTest extends PHPUnit_Framework_TestCase
         $headers  = array('Content-Type' => 'text/xml; charset=utf-8',
                           'Method'       => 'POST',
                           'SOAPAction'   => '"http://unithost/test#TestMethod"',
-                          'User-Agent'   => 'PHP-SOAP-CURL');
+                          'User-Agent'   => 'PHP-SOAP-CURL', );
         $response = "HTTP/1.1 200 OK\n"
-                  . "Cache-Control: private\n"
-                  . "Content-Type: text/xml; charset=utf-8\n"
-                  . "\n\n"
-                  . '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
-                  . '<s:Body>'
-                  . '<TestMethodResponse xmlns="http://unit/test">'
-                  . '<TestMethodResult>'
-                  . '<TestMethodResult><dummy></dummy></TestMethodResult>'
-                  . '</TestMethodResult>'
-                  . '</TestMethodResponse>'
-                  . '</s:Body>'
-                  . '</s:Envelope>';
+                  ."Cache-Control: private\n"
+                  ."Content-Type: text/xml; charset=utf-8\n"
+                  ."\n\n"
+                  .'<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
+                  .'<s:Body>'
+                  .'<TestMethodResponse xmlns="http://unit/test">'
+                  .'<TestMethodResult>'
+                  .'<TestMethodResult><dummy></dummy></TestMethodResult>'
+                  .'</TestMethodResult>'
+                  .'</TestMethodResponse>'
+                  .'</s:Body>'
+                  .'</s:Envelope>';
 
         $this->mockCurlClient();
 
@@ -211,6 +211,6 @@ class DotNetTest extends PHPUnit_Framework_TestCase
 
         $this->client->setOptions(array('authentication' => 'ntlm',
                                         'login'          => 'username',
-                                        'password'       => 'testpass'));
+                                        'password'       => 'testpass', ));
     }
 }

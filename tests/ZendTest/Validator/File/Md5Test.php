@@ -23,34 +23,34 @@ class Md5Test extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/picture.jpg';
+        $testFile = __DIR__.'/_files/picture.jpg';
         $pictureTests = array(
             //    Options, isValid Param, Expected value, Expected message
             array(
                 'ed74c22109fe9f110579f77b053b8bc3',
-                $testFile, true, ''
+                $testFile, true, '',
             ),
             array(
                 '4d74c22109fe9f110579f77b053b8bc3',
-                $testFile, false, 'fileMd5DoesNotMatch'
+                $testFile, false, 'fileMd5DoesNotMatch',
             ),
             array(
                 array('4d74c22109fe9f110579f77b053b8bc3', 'ed74c22109fe9f110579f77b053b8bc3'),
-                $testFile, true, ''
+                $testFile, true, '',
             ),
             array(
                 array('4d74c22109fe9f110579f77b053b8bc3', '7d74c22109fe9f110579f77b053b8bc3'),
-                $testFile, false, 'fileMd5DoesNotMatch'
+                $testFile, false, 'fileMd5DoesNotMatch',
             ),
         );
 
-        $testFile = __DIR__ . '/_files/nofile.mo';
+        $testFile = __DIR__.'/_files/nofile.mo';
         $noFileTests = array(
             //    Options, isValid Param, Expected value, message
             array('ed74c22109fe9f110579f77b053b8bc3', $testFile, false, 'fileMd5NotFound'),
         );
 
-        $testFile = __DIR__ . '/_files/testsize.mo';
+        $testFile = __DIR__.'/_files/testsize.mo';
         $sizeFileTests = array(
             //    Options, isValid Param, Expected value, message
             array('ec441f84a2944405baa22873cda22370', $testFile, true,  ''),
@@ -62,10 +62,11 @@ class Md5Test extends \PHPUnit_Framework_TestCase
         foreach ($testData as $data) {
             $fileUpload = array(
                 'tmp_name' => $data[1], 'name' => basename($data[1]),
-                'size' => 200, 'error' => 0, 'type' => 'text'
+                'size' => 200, 'error' => 0, 'type' => 'text',
             );
             $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
+
         return $testData;
     }
 
@@ -195,7 +196,7 @@ class Md5Test extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\Md5('12345');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileMd5NotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }

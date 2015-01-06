@@ -378,11 +378,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container[] = 'bar';
         $this->container[] = 'baz';
         $this->container->setPrefix('<ul><li>')
-                        ->setSeparator('</li>' . PHP_EOL . '<li>')
+                        ->setSeparator('</li>'.PHP_EOL.'<li>')
                         ->setPostfix('</li></ul>')
                         ->setIndent('    ');
         $value = $this->container->toString();
-        $expectedValue = '    <ul><li>foo</li>' . PHP_EOL . '    <li>bar</li>' . PHP_EOL . '    <li>baz</li></ul>';
+        $expectedValue = '    <ul><li>foo</li>'.PHP_EOL.'    <li>bar</li>'.PHP_EOL.'    <li>baz</li></ul>';
         $this->assertEquals($expectedValue, $value);
     }
 

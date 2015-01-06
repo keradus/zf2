@@ -24,8 +24,8 @@ class NumberOfParameterFilterTest extends \PHPUnit_Framework_TestCase
     public function testArityZero()
     {
         $filter = new NumberOfParameterFilter();
-        $this->assertTrue($filter->filter(__CLASS__ . '::methodWithNoParameters'));
-        $this->assertFalse($filter->filter(__CLASS__ . '::methodWithOptionalParameters'));
+        $this->assertTrue($filter->filter(__CLASS__.'::methodWithNoParameters'));
+        $this->assertFalse($filter->filter(__CLASS__.'::methodWithOptionalParameters'));
     }
 
     /**
@@ -34,8 +34,8 @@ class NumberOfParameterFilterTest extends \PHPUnit_Framework_TestCase
     public function testArityOne()
     {
         $filter = new NumberOfParameterFilter(1);
-        $this->assertFalse($filter->filter(__CLASS__ . '::methodWithNoParameters'));
-        $this->assertTrue($filter->filter(__CLASS__ . '::methodWithOptionalParameters'));
+        $this->assertFalse($filter->filter(__CLASS__.'::methodWithNoParameters'));
+        $this->assertTrue($filter->filter(__CLASS__.'::methodWithOptionalParameters'));
     }
 
     /**

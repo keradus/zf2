@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Test\PHPUnit\Util;
 
 use PHPUnit_Framework_TestCase;
@@ -15,7 +16,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 {
     public function tearDownCacheDir()
     {
-        $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
+        $cacheDir = sys_get_temp_dir().'/zf2-module-test';
         if (is_dir($cacheDir)) {
             static::rmdir($cacheDir);
         }
@@ -43,7 +44,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testCanLoadModule()
     {
-        require_once __DIR__ . '/../../_files/Baz/Module.php';
+        require_once __DIR__.'/../../_files/Baz/Module.php';
 
         $loader = new ModuleLoader(array('Baz'));
         $baz = $loader->getModule('Baz');
@@ -58,15 +59,15 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testCanLoadModuleWithPath()
     {
-        $loader = new ModuleLoader(array('Baz' => __DIR__ . '/../../_files/Baz'));
+        $loader = new ModuleLoader(array('Baz' => __DIR__.'/../../_files/Baz'));
         $baz = $loader->getModule('Baz');
         $this->assertTrue($baz instanceof \Baz\Module);
     }
 
     public function testCanLoadModules()
     {
-        require_once __DIR__ . '/../../_files/Baz/Module.php';
-        require_once __DIR__ . '/../../_files/modules-path/with-subdir/Foo/Module.php';
+        require_once __DIR__.'/../../_files/Baz/Module.php';
+        require_once __DIR__.'/../../_files/modules-path/with-subdir/Foo/Module.php';
 
         $loader = new ModuleLoader(array('Baz', 'Foo'));
         $baz = $loader->getModule('Baz');
@@ -78,8 +79,8 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
     public function testCanLoadModulesWithPath()
     {
         $loader = new ModuleLoader(array(
-            'Baz' => __DIR__ . '/../../_files/Baz',
-            'Foo' => __DIR__ . '/../../_files/modules-path/with-subdir/Foo',
+            'Baz' => __DIR__.'/../../_files/Baz',
+            'Foo' => __DIR__.'/../../_files/modules-path/with-subdir/Foo',
         ));
 
         $fooObject = $loader->getServiceManager()->get('FooObject');
@@ -88,7 +89,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testCanLoadModulesFromConfig()
     {
-        $config = include __DIR__ . '/../../_files/application.config.php';
+        $config = include __DIR__.'/../../_files/application.config.php';
         $loader = new ModuleLoader($config);
         $baz = $loader->getModule('Baz');
         $this->assertTrue($baz instanceof \Baz\Module);
@@ -96,7 +97,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testCanGetService()
     {
-        $loader = new ModuleLoader(array('Baz' => __DIR__ . '/../../_files/Baz'));
+        $loader = new ModuleLoader(array('Baz' => __DIR__.'/../../_files/Baz'));
 
         $this->assertInstanceOf(
             'Zend\ServiceManager\ServiceLocatorInterface',

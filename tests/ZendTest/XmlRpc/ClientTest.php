@@ -164,7 +164,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $expectedMethod = 'foo.bar';
         $expectedParams = array(
             'username',
-            new Value\DateTime($time)
+            new Value\DateTime($time),
         );
         $expectedReturn = array('username', $time);
 
@@ -194,7 +194,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $params = array(
             new Value\Boolean(true),
             new Value\Integer(4),
-            new Value\String('foo')
+            new Value\String('foo'),
         );
         $expect = array(true, 4, 'foo');
 
@@ -425,7 +425,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->httpAdapter->addResponse($response);
 
         $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+                          'bar' => $barSignatures, );
 
         $i = $this->xmlrpcClient->getIntrospector();
         $this->assertEquals($expected, $i->getSignatureForEachMethodByLooping());
@@ -444,9 +444,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         // after system.listMethods(), these system.multicall() params are expected
         $multicallParams = array(array('methodName' => 'system.methodSignature',
-                                       'params'     => array('foo')),
+                                       'params'     => array('foo'), ),
                                  array('methodName' => 'system.methodSignature',
-                                       'params'     => array('bar')));
+                                       'params'     => array('bar'), ), );
 
         // system.multicall() will then return [fooSignatures, barSignatures]
         $fooSignatures = array(array('int'), array('int', 'string'));
@@ -458,7 +458,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $i = $this->xmlrpcClient->getIntrospector();
 
         $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+                          'bar' => $barSignatures, );
         $this->assertEquals($expected, $i->getSignatureForEachMethodByMulticall());
 
         $request = $this->xmlrpcClient->getLastRequest();
@@ -522,7 +522,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $i = $this->xmlrpcClient->getIntrospector();
 
         $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+                          'bar' => $barSignatures, );
         $this->assertEquals($expected, $i->getSignatureForEachMethod());
 
         $request = $this->xmlrpcClient->getLastRequest();
@@ -602,7 +602,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $signature = $introspector->getMethodSignature('add');
     }
 
-
     /**
      * @group ZF-8580
      */
@@ -616,7 +615,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
              ->with('get')
              ->will($this->returnValue(array(
                  array('parameters' => array('int')),
-                 array('parameters' => array('array'))
+                 array('parameters' => array('array')),
              )));
 
         $expectedResult = 'array';
@@ -645,7 +644,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->httpAdapter = new Adapter\Test();
         $this->httpClient = new Http\Client(null, array('adapter' => $this->httpAdapter));
 
-        $respBody = file_get_contents(dirname(__FILE__) . "/_files/ZF1897-response-chunked.txt");
+        $respBody = file_get_contents(dirname(__FILE__)."/_files/ZF1897-response-chunked.txt");
         $this->httpAdapter->setResponse($respBody);
 
         $this->xmlrpcClient = new Client($baseUri);
@@ -668,22 +667,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $xml = $response->saveXml();
 
         $response = $this->makeHttpResponseFrom($xml);
+
         return $response;
     }
 
-    public function makeHttpResponseFrom($data, $status=200, $message='OK')
+    public function makeHttpResponseFrom($data, $status = 200, $message = 'OK')
     {
         $headers = array("HTTP/1.1 $status $message",
                          "Status: $status",
                          'Content-Type: text/xml; charset=utf-8',
-                         'Content-Length: ' . strlen($data)
+                         'Content-Length: '.strlen($data),
                          );
-        return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
+
+        return implode("\r\n", $headers)."\r\n\r\n$data\r\n\r\n";
     }
 
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
+
         return HttpResponse::fromString($response);
     }
 
@@ -715,6 +717,7 @@ class PythonSimpleXMLRPCServerWithUnsupportedIntrospection extends Client\Server
         if ($method == 'methodSignature') {
             return 'signatures not supported';
         }
+
         return parent::__call($method, $args);
     }
 }
@@ -727,6 +730,7 @@ class TestClient extends Client
         if (empty($this->proxyCache[$namespace])) {
             $this->proxyCache[$namespace] = new PythonSimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
         }
+
         return parent::getProxy($namespace);
     }
 }

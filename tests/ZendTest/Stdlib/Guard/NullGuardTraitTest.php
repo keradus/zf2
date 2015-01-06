@@ -27,7 +27,7 @@ class NullGuardTraitTest extends TestCase
 
     public function testGuardAgainstNullThrowsException()
     {
-        $object = new GuardedObject;
+        $object = new GuardedObject();
         $this->setExpectedException(
             'Zend\Stdlib\Exception\InvalidArgumentException',
             'Argument cannot be null'
@@ -37,7 +37,7 @@ class NullGuardTraitTest extends TestCase
 
     public function testGuardAgainstNullAllowsNonNull()
     {
-        $object = new GuardedObject;
+        $object = new GuardedObject();
         $this->assertNull($object->setNotNull('foo'));
     }
 }

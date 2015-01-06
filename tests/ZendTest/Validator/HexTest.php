@@ -42,7 +42,7 @@ class HexTest extends \PHPUnit_Framework_TestCase
             array('ABC123', true),
             array('1234567890abcdef', true),
             array('g', false),
-            array('1.2', false)
+            array('1.2', false),
             );
         foreach ($valuesExpected as $element) {
             $this->assertEquals($element[1], $this->validator->isValid($element[0]), $element[0]);

@@ -23,7 +23,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->storage = new ArrayStorage;
+        $this->storage = new ArrayStorage();
     }
 
     public function testStorageAllowsArrayAccess()

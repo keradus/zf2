@@ -27,7 +27,7 @@ class EmptyGuardTraitTest extends TestCase
 
     public function testGuardAgainstEmptyThrowsException()
     {
-        $object = new GuardedObject;
+        $object = new GuardedObject();
         $this->setExpectedException(
             'Zend\Stdlib\Exception\InvalidArgumentException',
             'Argument cannot be empty'
@@ -37,7 +37,7 @@ class EmptyGuardTraitTest extends TestCase
 
     public function testGuardAgainstEmptyAllowsNonEmptyString()
     {
-        $object = new GuardedObject;
+        $object = new GuardedObject();
         $this->assertNull($object->setNotEmpty('foo'));
     }
 }

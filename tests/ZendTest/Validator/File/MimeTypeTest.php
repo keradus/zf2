@@ -24,11 +24,12 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/picture.jpg';
+        $testFile = __DIR__.'/_files/picture.jpg';
         $fileUpload = array(
             'tmp_name' => $testFile, 'name' => basename($testFile),
-            'size' => 200, 'error' => 0, 'type' => 'image/jpg'
+            'size' => 200, 'error' => 0, 'type' => 'image/jpg',
         );
+
         return array(
             //    Options, isValid Param, Expected value
             array(array('image/jpg', 'image/jpeg'),               $fileUpload, true),
@@ -167,7 +168,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\MimeType(array(
             'image/gif',
             'image/jpg',
-            'enableHeaderCheck' => true));
+            'enableHeaderCheck' => true, ));
 
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
@@ -181,8 +182,8 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\MimeType(array(
             'image/gif',
             'image/jpg',
-            'headerCheck' => true));
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+            'headerCheck' => true, ));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileMimeTypeNotReadable', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
@@ -213,7 +214,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $files = array(
             'name'     => 'picture.jpg',
             'size'     => 200,
-            'tmp_name' => dirname(__FILE__) . '/_files/picture.jpg',
+            'tmp_name' => dirname(__FILE__).'/_files/picture.jpg',
             'error'    => 0,
             'magicFile' => false,
         );

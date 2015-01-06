@@ -42,7 +42,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
             '0x9f'    => false,
             '123'     => true,
             '09'      => true,
-            ''        => false
+            ''        => false,
             );
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->validator->isValid($input));
@@ -67,7 +67,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
         $arrayExpected = array(
-            Digits::STRING_EMPTY => 'The input is an empty string'
+            Digits::STRING_EMPTY => 'The input is an empty string',
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
@@ -80,7 +80,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->isValid('#'));
         $messages = $this->validator->getMessages();
         $arrayExpected = array(
-            Digits::NOT_DIGITS => 'The input must contain only digits'
+            Digits::NOT_DIGITS => 'The input must contain only digits',
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }

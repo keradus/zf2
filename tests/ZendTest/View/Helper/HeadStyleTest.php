@@ -38,7 +38,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->helper = new Helper\HeadStyle();
     }
 
@@ -87,7 +87,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     {
         $string = 'a {}';
         for ($i = 0; $i < 3; ++$i) {
-            $string .= PHP_EOL . 'a {}';
+            $string .= PHP_EOL.'a {}';
             $this->helper->appendStyle($string);
             $values = $this->helper->getArrayCopy();
             $this->assertEquals($i + 1, count($values));
@@ -104,7 +104,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     {
         $string = 'a {}';
         for ($i = 0; $i < 3; ++$i) {
-            $string .= PHP_EOL . 'a {}';
+            $string .= PHP_EOL.'a {}';
             $this->helper->prependStyle($string);
             $values = $this->helper->getArrayCopy();
             $this->assertEquals($i + 1, count($values));
@@ -122,7 +122,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $string = 'a {}';
         for ($i = 0; $i < 3; ++$i) {
             $this->helper->appendStyle($string);
-            $string .= PHP_EOL . 'a {}';
+            $string .= PHP_EOL.'a {}';
         }
         $this->helper->setStyle($string);
         $values = $this->helper->getArrayCopy();
@@ -142,7 +142,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
             'title' => 'foo',
             'media' => 'projection',
             'dir'   => 'rtol',
-            'bogus' => 'unused'
+            'bogus' => 'unused',
         ));
         $value = $this->helper->getValue();
 
@@ -168,11 +168,11 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
             'title' => 'foo',
             'media' => 'screen',
             'dir'   => 'rtol',
-            'bogus' => 'unused'
+            'bogus' => 'unused',
         ));
         $value = $this->helper->toString();
-        $this->assertContains('<!--' . PHP_EOL, $value);
-        $this->assertContains(PHP_EOL . '-->', $value);
+        $this->assertContains('<!--'.PHP_EOL, $value);
+        $this->assertContains(PHP_EOL.'-->', $value);
     }
 
     public function testRenderedStyleTagsContainsDefaultMedia()
@@ -196,8 +196,8 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     public function testHeadStyleProxiesProperly()
     {
         $style1 = 'a {}';
-        $style2 = 'a {}' . PHP_EOL . 'h1 {}';
-        $style3 = 'a {}' . PHP_EOL . 'h2 {}';
+        $style2 = 'a {}'.PHP_EOL.'h1 {}';
+        $style3 = 'a {}'.PHP_EOL.'h2 {}';
 
         $this->helper->__invoke($style1, 'SET')
                      ->__invoke($style2, 'PREPEND')
@@ -212,14 +212,14 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     public function testToStyleGeneratesValidHtml()
     {
         $style1 = 'a {}';
-        $style2 = 'body {}' . PHP_EOL . 'h1 {}';
-        $style3 = 'div {}' . PHP_EOL . 'li {}';
+        $style2 = 'body {}'.PHP_EOL.'h1 {}';
+        $style3 = 'div {}'.PHP_EOL.'li {}';
 
         $this->helper->__invoke($style1, 'SET')
                      ->__invoke($style2, 'PREPEND')
                      ->__invoke($style3, 'APPEND');
         $html = $this->helper->toString();
-        $doc  = new \DOMDocument;
+        $doc  = new \DOMDocument();
         $dom  = $doc->loadHtml($html);
         $this->assertTrue(($dom !== false));
 
@@ -395,16 +395,16 @@ a {
         $this->helper->offsetSetStyle(5, $style2);
 
         $test = $this->helper->toString();
-        $expected = '<style type="text/css" media="screen">' . PHP_EOL
-                  . '<!--' . PHP_EOL
-                  . $style2 . PHP_EOL
-                  . '-->' . PHP_EOL
-                  . '</style>' . PHP_EOL
-                  . '<style type="text/css" media="screen">' . PHP_EOL
-                  . '<!--' . PHP_EOL
-                  . $style1 . PHP_EOL
-                  . '-->' . PHP_EOL
-                  . '</style>';
+        $expected = '<style type="text/css" media="screen">'.PHP_EOL
+                  .'<!--'.PHP_EOL
+                  .$style2.PHP_EOL
+                  .'-->'.PHP_EOL
+                  .'</style>'.PHP_EOL
+                  .'<style type="text/css" media="screen">'.PHP_EOL
+                  .'<!--'.PHP_EOL
+                  .$style1.PHP_EOL
+                  .'-->'.PHP_EOL
+                  .'</style>';
 
         $this->assertEquals($expected, $test);
     }
@@ -416,11 +416,11 @@ a {
     {
         $style = 'a{display:none;}';
         $this->helper->appendStyle($style, array(
-            'conditional' => 'IE 8'
+            'conditional' => 'IE 8',
         ));
         $value = $this->helper->toString();
 
-        $this->assertNotContains('<!--' . PHP_EOL, $value);
-        $this->assertNotContains(PHP_EOL . '-->', $value);
+        $this->assertNotContains('<!--'.PHP_EOL, $value);
+        $this->assertNotContains(PHP_EOL.'-->', $value);
     }
 }

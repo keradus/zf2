@@ -69,7 +69,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsetThrowsInvalidArgumentException()
     {
-        $options = new TestOptions;
+        $options = new TestOptions();
 
         $this->setExpectedException('InvalidArgumentException');
 
@@ -97,7 +97,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     public function testSetFromArrayThrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $options = new TestOptions;
+        $options = new TestOptions();
         $options->setFromArray('asd');
     }
 
@@ -120,7 +120,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(
             'Zend\Stdlib\Exception\BadMethodCallException',
             'The option "parent_private" does not have a callable "setParentPrivate" setter method '
-            . 'which must be defined'
+            .'which must be defined'
         );
 
         new TestOptionsDerived(array('parent_private' => 1));
@@ -145,7 +145,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(
             'Zend\Stdlib\Exception\BadMethodCallException',
             'The option "derived_private" does not have a callable "setDerivedPrivate" setter method '
-            . 'which must be defined'
+            .'which must be defined'
         );
 
         new TestOptionsDerived(array('derived_private' => 1));

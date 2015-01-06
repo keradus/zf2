@@ -24,9 +24,9 @@ class VersionTest extends \PHPUnit_Framework_TestCase
     public function testVersionCompare()
     {
         $expect = -1;
-        for ($i=0; $i < 2; $i++) {
-            for ($j=0; $j < 12; $j++) {
-                for ($k=0; $k < 20; $k++) {
+        for ($i = 0; $i < 2; $i++) {
+            for ($j = 0; $j < 12; $j++) {
+                for ($k = 0; $k < 20; $k++) {
                     foreach (array('dev', 'pr', 'PR', 'alpha', 'a1', 'a2', 'beta', 'b1', 'b2', 'RC', 'RC1', 'RC2', 'RC3', '', 'pl1', 'PL1') as $rel) {
                         $ver = "$i.$j.$k$rel";
                         $normalizedVersion = strtolower(Version::VERSION);
@@ -43,8 +43,8 @@ class VersionTest extends \PHPUnit_Framework_TestCase
                                 Version::compareVersion($ver),
                                 $expect,
                                 "For version '$ver' and Zend\Version\Version::VERSION = '"
-                                . Version::VERSION . "': result=" . (Version::compareVersion($ver))
-                                . ', but expected ' . $expect);
+                                .Version::VERSION."': result=".(Version::compareVersion($ver))
+                                .', but expected '.$expect);
                         }
                     }
                 }

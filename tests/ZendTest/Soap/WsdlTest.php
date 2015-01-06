@@ -151,7 +151,7 @@ class WsdlTest extends WsdlTestHelper
         foreach ($parameters as $i => $parameter) {
             $messageParts['parameter'.$i] = array(
                 'type'      => $this->wsdl->getType($parameter),
-                'name'      => 'parameter'.$i
+                'name'      => 'parameter'.$i,
             );
         }
 
@@ -302,7 +302,7 @@ class WsdlTest extends WsdlTestHelper
 
         $faultArray = array();
         if (!empty($fault) and !empty($faultEncoding) and !empty($faultName)) {
-            $faultArray = array('use' => $fault,     'encodingStyle' => $faultEncoding,     'name'=>$faultName);
+            $faultArray = array('use' => $fault,     'encodingStyle' => $faultEncoding,     'name' => $faultName);
         }
 
         $this->wsdl->addBindingOperation($binding,
@@ -331,7 +331,7 @@ class WsdlTest extends WsdlTestHelper
         foreach (array(
             '//wsdl:input/soap:body'    => $inputArray,
             '//wsdl:output/soap:body'   => $outputArray,
-            '//wsdl:fault'              => $faultArray
+            '//wsdl:fault'              => $faultArray,
                  ) as $query => $ar) {
             if (!empty($ar)) {
                 $nodes = $this->xpath->query($query);
@@ -409,7 +409,7 @@ class WsdlTest extends WsdlTestHelper
     {
         return array(
             array('http://localhost/MyService.php#myOperation'),
-            array(new Uri('http://localhost/MyService.php#myOperation'))
+            array(new Uri('http://localhost/MyService.php#myOperation')),
         );
     }
 
@@ -438,7 +438,7 @@ class WsdlTest extends WsdlTestHelper
     {
         return array(
             array('http://localhost/MyService.php'),
-            array(new Uri('http://localhost/MyService.php'))
+            array(new Uri('http://localhost/MyService.php')),
         );
     }
 
@@ -627,11 +627,11 @@ class WsdlTest extends WsdlTestHelper
 
     public function testGetComplexTypeBasedOnStrategiesStringNames()
     {
-        $this->wsdl = new Wsdl($this->defaultServiceName, 'http://localhost/MyService.php', new Wsdl\ComplexTypeStrategy\DefaultComplexType);
+        $this->wsdl = new Wsdl($this->defaultServiceName, 'http://localhost/MyService.php', new Wsdl\ComplexTypeStrategy\DefaultComplexType());
         $this->assertEquals('tns:WsdlTestClass', $this->wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
         $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof Wsdl\ComplexTypeStrategy\DefaultComplexType);
 
-        $wsdl2 = new Wsdl($this->defaultServiceName, $this->defaultServiceUri, new Wsdl\ComplexTypeStrategy\AnyType);
+        $wsdl2 = new Wsdl($this->defaultServiceName, $this->defaultServiceUri, new Wsdl\ComplexTypeStrategy\AnyType());
         $this->assertEquals('xsd:anyType', $wsdl2->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
         $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof Wsdl\ComplexTypeStrategy\AnyType);
     }
@@ -644,7 +644,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals(1, count($types));
         $this->assertEquals(
             array(
-                '\ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:SomeTypeName'
+                '\ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:SomeTypeName',
             ),
             $types
         );
@@ -657,7 +657,7 @@ class WsdlTest extends WsdlTestHelper
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(
             array(
-                'ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:WsdlTestClass'
+                'ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:WsdlTestClass',
             ),
             $this->wsdl->getTypes()
         );
@@ -665,7 +665,7 @@ class WsdlTest extends WsdlTestHelper
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(
             array(
-                'ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:WsdlTestClass'
+                'ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:WsdlTestClass',
             ),
             $this->wsdl->getTypes()
         );
@@ -720,7 +720,7 @@ class WsdlTest extends WsdlTestHelper
     public function testTranslateTypeFromClassMap()
     {
         $this->wsdl->setClassMap(array(
-            'SomeType'=>'SomeOtherType'
+            'SomeType' => 'SomeOtherType',
         ));
 
         $this->assertEquals('SomeOtherType', $this->wsdl->translateType('SomeType'));
@@ -748,7 +748,6 @@ class WsdlTest extends WsdlTestHelper
             array('\\SomeNamespace\SomeType\\SomeOtherType\\YetAnotherType','YetAnotherType'),
         );
     }
-
 
     /**
      * @group ZF-3910
@@ -789,7 +788,7 @@ class WsdlTest extends WsdlTestHelper
 
     public function testClassMap()
     {
-        $this->wsdl->setClassMap(array('foo'=>'bar'));
+        $this->wsdl->setClassMap(array('foo' => 'bar'));
 
         $this->assertArrayHasKey('foo', $this->wsdl->getClassMap());
     }
@@ -808,8 +807,8 @@ class WsdlTest extends WsdlTestHelper
             'name'      => 'MyElement',
             'sequence'  => array(
                 array('name' => 'myString', 'type' => 'string'),
-                array('name' => 'myInt',    'type' => 'int')
-            )
+                array('name' => 'myInt',    'type' => 'int'),
+            ),
         );
 
         $newElementName = $this->wsdl->addElement($element);

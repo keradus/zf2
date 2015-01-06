@@ -65,7 +65,6 @@ class IpTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->validator->isValid('0.0.0.0'));
     }
 
-
     public function testOnlyIpv4()
     {
         $this->options['allowipv4'] = true;
@@ -232,14 +231,14 @@ class IpTest extends \PHPUnit_Framework_TestCase
             'a:b:c:d:e:f:0::'                              => true,
             'a:b:c:d:e:f::0'                               => true,
 
-            'total gibberish'                              => false
+            'total gibberish'                              => false,
         );
 
         foreach ($ips as $ip => $expectedOutcome) {
             if ($expectedOutcome) {
-                $this->assertTrue($this->validator->isValid($ip), $ip . ' failed validation (expects true)');
+                $this->assertTrue($this->validator->isValid($ip), $ip.' failed validation (expects true)');
             } else {
-                $this->assertFalse($this->validator->isValid($ip), $ip . ' failed validation (expects false)');
+                $this->assertFalse($this->validator->isValid($ip), $ip.' failed validation (expects false)');
             }
         }
     }
@@ -292,9 +291,9 @@ class IpTest extends \PHPUnit_Framework_TestCase
 
         foreach ($ips as $ip => $expectedOutcome) {
             if ($expectedOutcome) {
-                $this->assertTrue($this->validator->isValid($ip), $ip . ' failed validation (expects true)');
+                $this->assertTrue($this->validator->isValid($ip), $ip.' failed validation (expects true)');
             } else {
-                $this->assertFalse($this->validator->isValid($ip), $ip . ' failed validation (expects false)');
+                $this->assertFalse($this->validator->isValid($ip), $ip.' failed validation (expects false)');
             }
         }
     }

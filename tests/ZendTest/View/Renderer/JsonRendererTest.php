@@ -128,7 +128,7 @@ class JsonRendererTest extends TestCase
         if (version_compare(PHP_VERSION, '5.4.0', '<')) {
             $this->markTestSkipped('Can only test JsonSerializable models in PHP 5.4.0 and up');
         }
-        $model        = new TestAsset\JsonModel;
+        $model        = new TestAsset\JsonModel();
         $model->value = array('foo' => 'bar');
         $expected     = json_encode($model->value);
         $test         = $this->renderer->render($model);
@@ -148,7 +148,7 @@ class JsonRendererTest extends TestCase
 
     public function testRendersNonTraversableNonJsonSerializableObjectsAsJsonObjects()
     {
-        $model      = new stdClass;
+        $model      = new stdClass();
         $model->foo = 'bar';
         $model->bar = 'baz';
         $expected   = json_encode(get_object_vars($model));
@@ -181,7 +181,7 @@ class JsonRendererTest extends TestCase
         $model = new ViewModel(array('foo' => 'bar'));
         $this->renderer->setJsonpCallback('callback');
         $test = $this->renderer->render($model);
-        $expected = 'callback(' . json_encode(array('foo' => 'bar')) . ');';
+        $expected = 'callback('.json_encode(array('foo' => 'bar')).');';
         $this->assertEquals($expected, $test);
     }
 
@@ -190,7 +190,7 @@ class JsonRendererTest extends TestCase
      */
     public function testRendersNonObjectModelAsJsonWithJsonpCallback($model)
     {
-        $expected = 'callback(' . json_encode($model) . ');';
+        $expected = 'callback('.json_encode($model).');';
         $this->renderer->setJsonpCallback('callback');
         $test = $this->renderer->render($model);
         $this->assertEquals($expected, $test);
@@ -201,9 +201,9 @@ class JsonRendererTest extends TestCase
         if (version_compare(PHP_VERSION, '5.4.0', '<')) {
             $this->markTestSkipped('Can only test JsonSerializable models in PHP 5.4.0 and up');
         }
-        $model        = new TestAsset\JsonModel;
+        $model        = new TestAsset\JsonModel();
         $model->value = array('foo' => 'bar');
-        $expected     = 'callback(' . json_encode($model->value) . ');';
+        $expected     = 'callback('.json_encode($model->value).');';
         $this->renderer->setJsonpCallback('callback');
         $test         = $this->renderer->render($model);
         $this->assertEquals($expected, $test);
@@ -215,7 +215,7 @@ class JsonRendererTest extends TestCase
             'foo' => 'bar',
             'bar' => 'baz',
         ));
-        $expected     = 'callback(' . json_encode($model->getArrayCopy()) . ');';
+        $expected     = 'callback('.json_encode($model->getArrayCopy()).');';
         $this->renderer->setJsonpCallback('callback');
         $test         = $this->renderer->render($model);
         $this->assertEquals($expected, $test);
@@ -223,10 +223,10 @@ class JsonRendererTest extends TestCase
 
     public function testRendersNonTraversableNonJsonSerializableObjectsAsJsonObjectsWithJsonpCallback()
     {
-        $model      = new stdClass;
+        $model      = new stdClass();
         $model->foo = 'bar';
         $model->bar = 'baz';
-        $expected   = 'callback(' . json_encode(get_object_vars($model)) . ');';
+        $expected   = 'callback('.json_encode(get_object_vars($model)).');';
         $this->renderer->setJsonpCallback('callback');
         $test       = $this->renderer->render($model);
         $this->assertEquals($expected, $test);

@@ -23,22 +23,22 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile   = __DIR__ . '/_files/picture.jpg';
+        $testFile   = __DIR__.'/_files/picture.jpg';
         $pictureTests = array(
             //    Options, isValid Param, Expected value, Expected message
             array('b2a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, true,  ''),
             array('52a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, false, 'fileSha1DoesNotMatch'),
             array(
                 array('42a5334847b4328e7d19d9b41fd874dffa911c98', 'b2a5334847b4328e7d19d9b41fd874dffa911c98'),
-                $testFile, true, ''
+                $testFile, true, '',
             ),
             array(
                 array('42a5334847b4328e7d19d9b41fd874dffa911c98', '72a5334847b4328e7d19d9b41fd874dffa911c98'),
-                $testFile, false, 'fileSha1DoesNotMatch'
+                $testFile, false, 'fileSha1DoesNotMatch',
             ),
         );
 
-        $testFile   = __DIR__ . '/_files/nofile.mo';
+        $testFile   = __DIR__.'/_files/nofile.mo';
         $noFileTests = array(
             //    Options, isValid Param, Expected value, message
             array('b2a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, false, 'fileSha1NotFound'),
@@ -49,10 +49,11 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
         foreach ($testData as $data) {
             $fileUpload = array(
                 'tmp_name' => $data[1], 'name' => basename($data[1]),
-                'size' => 200, 'error' => 0, 'type' => 'text'
+                'size' => 200, 'error' => 0, 'type' => 'text',
             );
             $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
+
         return $testData;
     }
 
@@ -182,7 +183,7 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\Sha1('12345');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileSha1NotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }

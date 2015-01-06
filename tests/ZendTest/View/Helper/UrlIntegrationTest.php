@@ -55,7 +55,7 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $serviceConfig = $this->readAttribute(new ServiceListenerFactory, 'defaultServiceConfig');
+        $serviceConfig = $this->readAttribute(new ServiceListenerFactory(), 'defaultServiceConfig');
 
         $this->serviceManager = new ServiceManager(new ServiceManagerConfig($serviceConfig));
         $this->serviceManager

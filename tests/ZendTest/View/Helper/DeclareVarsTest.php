@@ -22,7 +22,7 @@ class DeclareVarsTest extends \PHPUnit_Framework_TestCase
     {
         $view = new View();
         $base = str_replace('/', DIRECTORY_SEPARATOR, '/../_templates');
-        $view->resolver()->addPath(__DIR__ . $base);
+        $view->resolver()->addPath(__DIR__.$base);
         $view->vars()->setStrictVars(true);
         $this->view = $view;
     }
@@ -39,7 +39,7 @@ class DeclareVarsTest extends \PHPUnit_Framework_TestCase
             'varName2',
             array(
                 'varName3' => 'defaultValue',
-                'varName4' => array()
+                'varName4' => array(),
             )
         );
     }

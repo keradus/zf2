@@ -29,7 +29,6 @@ use ZendTest\Stdlib\TestAsset\ArraySerializable as ArraySerializableAsset;
 use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
 use Zend\Stdlib\Hydrator\Strategy\SerializableStrategy;
 
-
 /**
  * @group      Zend_Stdlib
  */
@@ -72,7 +71,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->classMethodsCamelCaseMissing = new ClassMethodsCamelCaseMissing();
         $this->classMethodsUnderscore = new ClassMethodsUnderscore();
         $this->classMethodsInvalidParameter = new ClassMethodsInvalidParameter();
-        $this->reflection = new ReflectionAsset;
+        $this->reflection = new ReflectionAsset();
         $this->classMethodsInvalidParameter = new ClassMethodsInvalidParameter();
     }
 
@@ -100,7 +99,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
 
     public function testHydratorReflection()
     {
-        $hydrator = new Reflection;
+        $hydrator = new Reflection();
         $datas    = $hydrator->extract($this->reflection);
         $this->assertTrue(isset($datas['foo']));
         $this->assertEquals($datas['foo'], '1');
@@ -267,7 +266,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'foo_bar' => '1',
             'foo_bar_baz' => '2',
-            'invalid' => 'value'
+            'invalid' => 'value',
         );
         $test = $hydrator->hydrate($data, $this->classMethodsUnderscore);
         $this->assertSame($this->classMethodsUnderscore, $test);
@@ -389,7 +388,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
                 "foo" => "bar",
                 "bar" => "foo",
                 "blubb" => "baz",
-                "quo" => "blubb"
+                "quo" => "blubb",
             ),
             $hydrator->extract($serializable)
         );
@@ -398,6 +397,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
                 if ($property == "foo") {
                     return false;
                 }
+
                 return true;
             });
 
@@ -405,7 +405,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
             array(
                 "bar" => "foo",
                 "blubb" => "baz",
-                "quo" => "blubb"
+                "quo" => "blubb",
             ),
             $hydrator->extract($serializable)
         );
@@ -414,13 +414,14 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
                 if (strlen($property) !== 3) {
                     return false;
                 }
+
                 return true;
             }, FilterComposite::CONDITION_AND);
 
         $this->assertSame(
             array(
                 "bar" => "foo",
-                "quo" => "blubb"
+                "quo" => "blubb",
             ),
             $hydrator->extract($serializable)
         );
@@ -433,7 +434,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
                 "foo" => "bar",
                 "bar" => "foo",
                 "blubb" => "baz",
-                "quo" => "blubb"
+                "quo" => "blubb",
             ),
             $hydrator->extract($serializable)
         );
@@ -442,9 +443,9 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     public function filterProvider()
     {
         return array(
-            array(new ObjectProperty(), new ObjectPropertyAsset),
-            array(new ArraySerializable(), new ArraySerializableAsset),
-            array(new Reflection(), new ReflectionFilter)
+            array(new ObjectProperty(), new ObjectPropertyAsset()),
+            array(new ArraySerializable(), new ArraySerializableAsset()),
+            array(new Reflection(), new ReflectionFilter()),
         );
     }
 

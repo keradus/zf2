@@ -68,7 +68,7 @@ class FeedRendererTest extends TestCase
         $model = new FeedModel($this->getFeedData('atom'));
         $model->setOption('feed_type', 'atom');
         $xml = $this->renderer->render($model);
-        $this->assertContains('<' . '?xml', $xml);
+        $this->assertContains('<'.'?xml', $xml);
         $this->assertContains('atom', $xml);
     }
 
@@ -77,7 +77,7 @@ class FeedRendererTest extends TestCase
         $this->renderer->setFeedType('atom');
         $model = new FeedModel($this->getFeedData('atom'));
         $xml = $this->renderer->render($model);
-        $this->assertContains('<' . '?xml', $xml);
+        $this->assertContains('<'.'?xml', $xml);
         $this->assertContains('atom', $xml);
     }
 
@@ -86,7 +86,7 @@ class FeedRendererTest extends TestCase
         $model = new ViewModel($this->getFeedData('atom'));
         $model->setOption('feed_type', 'atom');
         $xml = $this->renderer->render($model);
-        $this->assertContains('<' . '?xml', $xml);
+        $this->assertContains('<'.'?xml', $xml);
         $this->assertContains('atom', $xml);
     }
 
@@ -95,7 +95,7 @@ class FeedRendererTest extends TestCase
         $this->renderer->setFeedType('atom');
         $model = new ViewModel($this->getFeedData('atom'));
         $xml = $this->renderer->render($model);
-        $this->assertContains('<' . '?xml', $xml);
+        $this->assertContains('<'.'?xml', $xml);
         $this->assertContains('atom', $xml);
     }
 
@@ -103,7 +103,7 @@ class FeedRendererTest extends TestCase
     {
         $this->renderer->setFeedType('atom');
         $xml = $this->renderer->render('layout', $this->getFeedData('atom'));
-        $this->assertContains('<' . '?xml', $xml);
+        $this->assertContains('<'.'?xml', $xml);
         $this->assertContains('atom', $xml);
     }
 

@@ -53,8 +53,8 @@ class ViewModelTest extends TestCase
 
     public function testAllowsPassingTraversableArgumentsToVariablesAndOptionsInConstructor()
     {
-        $vars    = new ArrayObject;
-        $options = new ArrayObject;
+        $vars    = new ArrayObject();
+        $options = new ArrayObject();
         $model = new ViewModel($vars, $options);
         $this->assertSame($vars, $model->getVariables());
         $this->assertSame(iterator_to_array($options), $model->getOptions());
@@ -62,7 +62,7 @@ class ViewModelTest extends TestCase
 
     public function testAllowsPassingNonArrayAccessObjectsAsArrayInConstructor()
     {
-        $vars  = array('foo' => new Variable);
+        $vars  = array('foo' => new Variable());
         $model = new ViewModel($vars);
         $this->assertSame($vars, $model->getVariables());
     }
@@ -86,6 +86,7 @@ class ViewModelTest extends TestCase
         $model = new ViewModel(array('foo' => 'bar', 'bar' => 'baz'));
         $model->setVariables(array('bar' => 'BAZBAT'));
         $this->assertEquals(array('foo' => 'bar', 'bar' => 'BAZBAT'), $model->getVariables());
+
         return $model;
     }
 
@@ -125,6 +126,7 @@ class ViewModelTest extends TestCase
         $model = new ViewModel(array(), array('foo' => 'bar', 'bar' => 'baz'));
         $model->setOptions(array('bar' => 'BAZBAT'));
         $this->assertEquals(array('bar' => 'BAZBAT'), $model->getOptions());
+
         return $model;
     }
 
@@ -149,14 +151,14 @@ class ViewModelTest extends TestCase
     {
         $model = new ViewModel();
         $this->setExpectedException('Zend\View\Exception\InvalidArgumentException', 'expects an array');
-        $model->setVariables(new stdClass);
+        $model->setVariables(new stdClass());
     }
 
     public function testPassingAnInvalidArgumentToSetOptionsRaisesAnException()
     {
         $model = new ViewModel();
         $this->setExpectedException('Zend\View\Exception\InvalidArgumentException', 'expects an array');
-        $model->setOptions(new stdClass);
+        $model->setOptions(new stdClass());
     }
 
     public function testCaptureToDefaultsToContent()
@@ -200,6 +202,7 @@ class ViewModelTest extends TestCase
         $this->assertEquals(1, count($model));
         $model->addChild($child);
         $this->assertEquals(2, count($model));
+
         return $model;
     }
 

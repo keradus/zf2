@@ -89,8 +89,8 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $cwd = __DIR__;
 
         // read navigation config
-        $this->_files = $cwd . '/_files';
-        $config = ConfigFactory::fromFile($this->_files . '/navigation.xml', true);
+        $this->_files = $cwd.'/_files';
+        $config = ConfigFactory::fromFile($this->_files.'/navigation.xml', true);
 
         // setup containers from config
         $this->_nav1 = new Navigation($config->get('nav_test1'));
@@ -99,10 +99,10 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         // setup view
         $view = new PhpRenderer();
-        $view->resolver()->addPath($cwd . '/_files/mvc/views');
+        $view->resolver()->addPath($cwd.'/_files/mvc/views');
 
         // create helper
-        $this->_helper = new $this->_helperName;
+        $this->_helper = new $this->_helperName();
         $this->_helper->setView($view);
 
         // set nav1 in helper as default
@@ -124,14 +124,14 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
                                         'default' => $config->get('nav_test1'),
                                     ),
                                 );
-                            }
+                            },
                         ),
                     ),
                 ),
             ),
         );
 
-        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig);
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig());
         $sm->setService('ApplicationConfig', $smConfig);
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
@@ -155,7 +155,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     protected function _getExpected($file)
     {
-        return file_get_contents($this->_files . '/expected/' . $file);
+        return file_get_contents($this->_files.'/expected/'.$file);
     }
 
     /**
@@ -201,11 +201,12 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
             'Page 2.3'     => 'Side 2.3',
             'Page 2.3.3.1' => 'Side 2.3.3.1',
             'Home'         => 'Hjem',
-            'Go home'      => 'Gå hjem'
+            'Go home'      => 'Gå hjem',
         );
         $translator = new Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
+
         return $translator;
     }
 
@@ -241,6 +242,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $translator->getPluginManager()->setService('default2', $loader2);
         $translator->addTranslationFile('default1', null, 'ZendTest_1');
         $translator->addTranslationFile('default2', null, 'ZendTest_2');
+
         return $translator;
     }
 }

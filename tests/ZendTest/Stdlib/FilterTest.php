@@ -24,7 +24,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($hasValidation->filter('Bar::FoohasFoo'));
         $this->assertFalse($hasValidation->filter('hAsFoo'));
         $this->assertFalse($hasValidation->filter('Blubb::hAsFoo'));
-        $this->assertFalse($hasValidation->filter(get_class($this). '::hAsFoo'));
+        $this->assertFalse($hasValidation->filter(get_class($this).'::hAsFoo'));
     }
 
     public function testGetValidation()

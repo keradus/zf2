@@ -60,7 +60,7 @@ class StringLengthTest extends \PHPUnit_Framework_TestCase
             array(2, 3, true, array('ab', 'abc')),
             array(2, 3, false, array('a', 'abcd')),
             array(3, 3, true, array('äöü')),
-            array(6, 6, true, array('Müller'))
+            array(6, 6, true, array('Müller')),
             );
         foreach ($valuesExpected as $element) {
             $validator = new StringLength($element[0], $element[1]);

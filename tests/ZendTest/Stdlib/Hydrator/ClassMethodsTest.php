@@ -68,7 +68,7 @@ class ClassMethodsTest extends \PHPUnit_Framework_TestCase
                 "foo" => "bar",
                 "bar" => "foo",
                 "blubb" => "baz",
-                "quo" => "blubb"
+                "quo" => "blubb",
             ),
             $arraySerializable->getArrayCopy()
         );

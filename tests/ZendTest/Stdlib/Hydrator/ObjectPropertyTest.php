@@ -74,7 +74,7 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
                 'foo' => 'bar',
                 'bar' => 'foo',
                 'blubb' => 'baz',
-                'quo' => 'blubb'
+                'quo' => 'blubb',
             ),
             $this->hydrator->extract(new ObjectPropertyTestAsset())
         );
@@ -119,7 +119,7 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
                 'bar' => 'bar',
                 'blubb' => 'blubb',
                 'quo' => 'quo',
-                'quin' => 'quin'
+                'quin' => 'quin',
             ),
             new ObjectPropertyTestAsset()
         );

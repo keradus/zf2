@@ -21,8 +21,8 @@ class GlobTest extends TestCase
         }
 
         $this->assertEquals(
-            glob(__DIR__ . '/_files/{alph,bet}a', GLOB_BRACE),
-            Glob::glob(__DIR__ . '/_files/{alph,bet}a', Glob::GLOB_BRACE, true)
+            glob(__DIR__.'/_files/{alph,bet}a', GLOB_BRACE),
+            Glob::glob(__DIR__.'/_files/{alph,bet}a', Glob::GLOB_BRACE, true)
         );
     }
 
@@ -37,7 +37,7 @@ class GlobTest extends TestCase
         $this->setExpectedException('Zend\Stdlib\Exception\RuntimeException');
 
         // run into a max path lengh error
-        $path = '/' . str_repeat('a', 10000);
+        $path = '/'.str_repeat('a', 10000);
         Glob::glob($path);
     }
 }

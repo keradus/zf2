@@ -20,7 +20,7 @@ class VariablesTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         $this->error = false;
-        $this->vars = new Variables;
+        $this->vars = new Variables();
     }
 
     public function testStrictVarsAreDisabledByDefault()
@@ -48,7 +48,7 @@ class VariablesTest extends \PHPUnit_Framework_TestCase
 
     public function testAssignCastsPlainObjectToArrayBeforeMerging()
     {
-        $vars = new \stdClass;
+        $vars = new \stdClass();
         $vars->foo = 'bar';
         $vars->bar = 'baz';
 

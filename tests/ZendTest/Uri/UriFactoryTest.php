@@ -23,8 +23,8 @@ class UriFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test registering a new Scheme
      *
-     * @param        string $scheme
-     * @param        string $class
+     * @param string $scheme
+     * @param string $class
      * @dataProvider registeringNewSchemeProvider
      */
     public function testRegisteringNewScheme($scheme, $class)

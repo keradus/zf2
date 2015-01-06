@@ -39,7 +39,7 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testBigIntegerGetValue()
     {
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new BigInteger($bigIntegerValue);
         $this->assertSame($bigIntegerValue, $bigInteger->getValue());
     }
@@ -49,7 +49,7 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testBigIntegerGetType()
     {
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new BigInteger($bigIntegerValue);
         $this->assertSame(AbstractValue::XMLRPC_TYPE_I8, $bigInteger->getType());
     }
@@ -59,11 +59,11 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testBigIntegerGeneratedXml()
     {
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new BigInteger($bigIntegerValue);
 
         $this->assertEquals(
-            '<value><i8>' . $bigIntegerValue . '</i8></value>',
+            '<value><i8>'.$bigIntegerValue.'</i8></value>',
             $bigInteger->saveXml()
         );
     }
@@ -76,9 +76,9 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
     {
         AbstractValue::setGenerator($generator);
 
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new BigInteger($bigIntegerValue);
-        $bigIntegerXml = '<value><i8>' . $bigIntegerValue . '</i8></value>';
+        $bigIntegerXml = '<value><i8>'.$bigIntegerValue.'</i8></value>';
 
         $value = AbstractValue::getXmlRpcValue(
             $bigIntegerXml,
@@ -98,9 +98,9 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
     {
         AbstractValue::setGenerator($generator);
 
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
         $bigInteger = new BigInteger($bigIntegerValue);
-        $bigIntegerXml = '<value><ex:i8 xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions">' . $bigIntegerValue . '</ex:i8></value>';
+        $bigIntegerXml = '<value><ex:i8 xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions">'.$bigIntegerValue.'</ex:i8></value>';
 
         $value = AbstractValue::getXmlRpcValue(
             $bigIntegerXml,
@@ -117,7 +117,7 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testMarshalBigIntegerFromNative()
     {
-        $bigIntegerValue = (string)(PHP_INT_MAX + 42);
+        $bigIntegerValue = (string) (PHP_INT_MAX + 42);
 
         $value = AbstractValue::getXmlRpcValue(
             $bigIntegerValue,
@@ -132,6 +132,6 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
 
     public function wrapXml($xml)
     {
-        return $xml . "\n";
+        return $xml."\n";
     }
 }

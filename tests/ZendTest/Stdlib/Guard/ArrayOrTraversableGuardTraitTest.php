@@ -28,7 +28,7 @@ class ArrayOrTraversableGuardTraitTest extends TestCase
 
     public function testGuardForArrayOrTraversableThrowsException()
     {
-        $object = new GuardedObject;
+        $object = new GuardedObject();
         $this->setExpectedException(
             'Zend\Stdlib\Exception\InvalidArgumentException',
             'Argument must be an array or Traversable, [string] given'
@@ -38,14 +38,14 @@ class ArrayOrTraversableGuardTraitTest extends TestCase
 
     public function testGuardForArrayOrTraversableAllowsArray()
     {
-        $object = new GuardedObject;
+        $object = new GuardedObject();
         $this->assertNull($object->setArrayOrTraversable(array()));
     }
 
     public function testGuardForArrayOrTraversableAllowsTraversable()
     {
-        $object      = new GuardedObject;
-        $traversable = new ArrayObject;
+        $object      = new GuardedObject();
+        $traversable = new ArrayObject();
         $this->assertNull($object->setArrayOrTraversable($traversable));
     }
 }

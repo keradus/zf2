@@ -114,8 +114,8 @@ class ReflectionTestClass
     /**
      * Public one
      *
-     * @param string $arg1
-     * @param array $arg2
+     * @param  string $arg1
+     * @param  array  $arg2
      * @return string
      */
     public function one($arg1, $arg2 = null)
@@ -127,8 +127,8 @@ class ReflectionTestClass
      *
      * Should not be reflected
      *
-     * @param string $arg1
-     * @param array $arg2
+     * @param  string $arg1
+     * @param  array  $arg2
      * @return string
      */
     protected function _one($arg1, $arg2 = null)
@@ -138,8 +138,8 @@ class ReflectionTestClass
     /**
      * Public two
      *
-     * @param string $arg1
-     * @param string $arg2
+     * @param  string     $arg1
+     * @param  string     $arg2
      * @return bool|array
      */
     public static function two($arg1, $arg2)

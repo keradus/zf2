@@ -21,7 +21,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile   = __DIR__ . '/_files/testsize.mo';
+        $testFile   = __DIR__.'/_files/testsize.mo';
         $pictureTests = array(
             //    Options, isValid Param, Expected value, Expected message
             array('mo',                       $testFile, true,  ''),
@@ -32,7 +32,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
             array(array('gif', 'gz', 'hint'), $testFile, false, 'fileExtensionFalse'),
         );
 
-        $testFile   = __DIR__ . '/_files/nofile.mo';
+        $testFile   = __DIR__.'/_files/nofile.mo';
         $noFileTests = array(
             //    Options, isValid Param, Expected value, message
             array('mo', $testFile, false, 'fileExtensionNotFound'),
@@ -43,10 +43,11 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         foreach ($testData as $data) {
             $fileUpload = array(
                 'tmp_name' => $data[1], 'name' => basename($data[1]),
-                'size' => 200, 'error' => 0, 'type' => 'text'
+                'size' => 200, 'error' => 0, 'type' => 'text',
             );
             $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
+
         return $testData;
     }
 
@@ -91,14 +92,14 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
             'name'     => 'testsize.mo',
             'type'     => 'text',
             'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
+            'tmp_name' => __DIR__.'/_files/testsize.mo',
+            'error'    => 0,
         );
         $validator = new File\Extension(array('MO', 'case' => true));
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
+        $this->assertEquals(false, $validator->isValid(__DIR__.'/_files/testsize.mo', $files));
 
         $validator = new File\Extension(array('MO', 'case' => false));
-        $this->assertEquals(true, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
+        $this->assertEquals(true, $validator->isValid(__DIR__.'/_files/testsize.mo', $files));
     }
 
     /**
@@ -160,7 +161,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\Extension('gif');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileExtensionNotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }

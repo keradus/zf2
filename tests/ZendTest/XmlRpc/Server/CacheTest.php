@@ -33,7 +33,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_file = realpath(__DIR__) . '/xmlrpc.cache';
+        $this->_file = realpath(__DIR__).'/xmlrpc.cache';
         $this->_server = new Server();
         $this->_server->setClass('Zend\\XmlRpc\\Server\\Cache', 'cache');
     }

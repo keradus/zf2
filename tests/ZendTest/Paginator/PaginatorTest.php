@@ -55,13 +55,13 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->select = new Sql\Select;
+        $this->select = new Sql\Select();
         $this->select->from('test');
 
         $this->testCollection = range(1, 101);
         $this->paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter($this->testCollection));
 
-        $this->config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
+        $this->config = Config\Factory::fromFile(__DIR__.'/_files/config.xml', true);
 
         $this->cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Paginator\Paginator::setCache($this->cache);
@@ -77,7 +77,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     protected function _getTmpDir()
     {
-        $tmpDir = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'zend_paginator';
+        $tmpDir = rtrim(sys_get_temp_dir(), '/\\').DIRECTORY_SEPARATOR.'zend_paginator';
         if (!is_dir($tmpDir)) {
             mkdir($tmpDir);
         }
@@ -98,8 +98,8 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         }
         unset($file, $dir); // required on windows to remove file handle
         if (!rmdir($path)) {
-            throw new Exception\RuntimeException('Unable to remove temporary directory ' . $path
-                                . '; perhaps it has a nested structure?');
+            throw new Exception\RuntimeException('Unable to remove temporary directory '.$path
+                                .'; perhaps it has a nested structure?');
         }
     }
 
@@ -209,7 +209,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testRendersWithPartial()
     {
         $view = new View\Renderer\PhpRenderer();
-        $view->resolver()->addPath(__DIR__ . '/_files/scripts');
+        $view->resolver()->addPath(__DIR__.'/_files/scripts');
 
         Helper\PaginationControl::setDefaultViewPartial('partial.phtml');
 
@@ -433,7 +433,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsItemsByPageHandleDbSelectAdapter()
     {
-        $resultSet = new ResultSet;
+        $resultSet = new ResultSet();
         $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $resultSet->initialize(array(
             new ArrayObject(array('foo' => 'bar')),
@@ -577,7 +577,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $expected = array(
            1 => new \ArrayIterator(range(1, 10)),
            2 => new \ArrayIterator(range(11, 20)),
-           3 => new \ArrayIterator(range(21, 30))
+           3 => new \ArrayIterator(range(21, 30)),
         );
         $this->assertEquals($expected, $pageItems);
     }
@@ -593,7 +593,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $pageItems = $this->paginator->getPageItemCache();
         $expected = array(
            1 => new \ArrayIterator(range(1, 10)),
-           3 => new \ArrayIterator(range(21, 30))
+           3 => new \ArrayIterator(range(21, 30)),
         );
         $this->assertEquals($expected, $pageItems);
 
@@ -640,8 +640,8 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         // get back to already cached data
         $this->paginator->setItemCountPerPage(5);
         $pageItems = $this->paginator->getPageItemCache();
-        $expected =array(1 => new \ArrayIterator(range(1, 5)),
-                         2 => new \ArrayIterator(range(6, 10)));
+        $expected = array(1 => new \ArrayIterator(range(1, 5)),
+                         2 => new \ArrayIterator(range(6, 10)), );
         $this->assertEquals($expected[1], $pageItems[1]);
         $this->assertEquals($expected[2], $pageItems[2]);
     }
@@ -806,14 +806,14 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadScrollingStyleWithDigitThrowsInvalidArgumentException()
     {
-        $adapter = new TestAsset\TestAdapter;
+        $adapter = new TestAsset\TestAdapter();
         $paginator = new Paginator\Paginator($adapter);
         $reflection = new ReflectionMethod($paginator, '_loadScrollingStyle');
         $reflection->setAccessible(true);
 
         $this->setExpectedException(
             'Zend\Paginator\Exception\InvalidArgumentException',
-            'Scrolling style must be a class ' .
+            'Scrolling style must be a class '.
                 'name or object implementing Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
         );
 
@@ -822,7 +822,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadScrollingStyleWithObjectThrowsInvalidArgumentException()
     {
-        $adapter = new TestAsset\TestAdapter;
+        $adapter = new TestAsset\TestAdapter();
         $paginator = new Paginator\Paginator($adapter);
         $reflection = new ReflectionMethod($paginator, '_loadScrollingStyle');
         $reflection->setAccessible(true);
@@ -837,7 +837,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCacheId()
     {
-        $adapter = new TestAsset\TestAdapter;
+        $adapter = new TestAsset\TestAdapter();
         $paginator = new Paginator\Paginator($adapter);
         $reflectionGetCacheId = new ReflectionMethod($paginator, '_getCacheId');
         $reflectionGetCacheId->setAccessible(true);
@@ -847,7 +847,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $reflectionGetCacheInternalId->setAccessible(true);
         $outputGetCacheInternalId = $reflectionGetCacheInternalId->invoke($paginator);
 
-        $this->assertEquals($outputGetCacheId, 'Zend_Paginator_1_' . $outputGetCacheInternalId);
+        $this->assertEquals($outputGetCacheId, 'Zend_Paginator_1_'.$outputGetCacheInternalId);
     }
 
     /**

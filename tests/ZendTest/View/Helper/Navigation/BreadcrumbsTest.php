@@ -67,7 +67,7 @@ class BreadcrumbsTest extends AbstractTest
 
     public function testHelperEntryPointWithContainerStringParam()
     {
-        $pm = new \Zend\View\HelperPluginManager;
+        $pm = new \Zend\View\HelperPluginManager();
         $pm->setServiceLocator($this->serviceManager);
         $this->_helper->setServiceLocator($pm);
 
@@ -137,13 +137,13 @@ class BreadcrumbsTest extends AbstractTest
         $expected = array(
             'registered'       => $rendered1,
             'supplied'         => $rendered2,
-            'registered_again' => $rendered1
+            'registered_again' => $rendered1,
         );
 
         $actual = array(
             'registered'       => $this->_helper->render(),
             'supplied'         => $this->_helper->render($this->_nav2),
-            'registered_again' => $this->_helper->render()
+            'registered_again' => $this->_helper->render(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -246,8 +246,8 @@ class BreadcrumbsTest extends AbstractTest
             array(
                 'label'  => 'Live & Learn',
                 'uri'    => '#',
-                'active' => true
-            )
+                'active' => true,
+            ),
         ));
 
         $expected = 'Live &amp; Learn';

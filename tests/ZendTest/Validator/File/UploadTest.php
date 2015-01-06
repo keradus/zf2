@@ -29,55 +29,55 @@ class UploadTest extends \PHPUnit_Framework_TestCase
                 'type'     => 'text',
                 'size'     => 200,
                 'tmp_name' => 'tmp_test1',
-                'error'    => 0),
+                'error'    => 0, ),
             'test2' => array(
                 'name'     => 'test2',
                 'type'     => 'text2',
                 'size'     => 202,
                 'tmp_name' => 'tmp_test2',
-                'error'    => 1),
+                'error'    => 1, ),
             'test3' => array(
                 'name'     => 'test3',
                 'type'     => 'text3',
                 'size'     => 203,
                 'tmp_name' => 'tmp_test3',
-                'error'    => 2),
+                'error'    => 2, ),
             'test4' => array(
                 'name'     => 'test4',
                 'type'     => 'text4',
                 'size'     => 204,
                 'tmp_name' => 'tmp_test4',
-                'error'    => 3),
+                'error'    => 3, ),
             'test5' => array(
                 'name'     => 'test5',
                 'type'     => 'text5',
                 'size'     => 205,
                 'tmp_name' => 'tmp_test5',
-                'error'    => 4),
+                'error'    => 4, ),
             'test6' => array(
                 'name'     => 'test6',
                 'type'     => 'text6',
                 'size'     => 206,
                 'tmp_name' => 'tmp_test6',
-                'error'    => 5),
+                'error'    => 5, ),
             'test7' => array(
                 'name'     => 'test7',
                 'type'     => 'text7',
                 'size'     => 207,
                 'tmp_name' => 'tmp_test7',
-                'error'    => 6),
+                'error'    => 6, ),
             'test8' => array(
                 'name'     => 'test8',
                 'type'     => 'text8',
                 'size'     => 208,
                 'tmp_name' => 'tmp_test8',
-                'error'    => 7),
+                'error'    => 7, ),
             'test9' => array(
                 'name'     => 'test9',
                 'type'     => 'text9',
                 'size'     => 209,
                 'tmp_name' => 'tmp_test9',
-                'error'    => 8)
+                'error'    => 8, ),
         );
 
         $validator = new File\Upload();
@@ -142,13 +142,13 @@ class UploadTest extends \PHPUnit_Framework_TestCase
                 'type'     => 'text',
                 'size'     => 200,
                 'tmp_name' => 'tmp_test1',
-                'error'    => 0),
+                'error'    => 0, ),
             'test2' => array(
                 'name'     => 'test3',
                 'type'     => 'text2',
                 'size'     => 202,
                 'tmp_name' => 'tmp_test2',
-                'error'    => 1));
+                'error'    => 1, ), );
 
         $files = array(
             'test'  => array(
@@ -156,7 +156,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
                 'type'     => 'text',
                 'size'     => 200,
                 'tmp_name' => 'tmp_test1',
-                'error'    => 0));
+                'error'    => 0, ), );
 
         $files1 = array(
             'test2' => array(
@@ -164,7 +164,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
                 'type'     => 'text2',
                 'size'     => 202,
                 'tmp_name' => 'tmp_test2',
-                'error'    => 1));
+                'error'    => 1, ), );
 
         $validator = new File\Upload();
         $this->assertEquals($files, $validator->getFiles('test'));
@@ -188,13 +188,13 @@ class UploadTest extends \PHPUnit_Framework_TestCase
                 'type'     => 'text',
                 'size'     => 200,
                 'tmp_name' => 'tmp_test1',
-                'error'    => 0),
+                'error'    => 0, ),
             'test2' => array(
                 'name'     => 'test2',
                 'type'     => 'text2',
                 'size'     => 202,
                 'tmp_name' => 'tmp_test2',
-                'error'    => 1));
+                'error'    => 1, ), );
 
         $_FILES = array(
             'test'  => array(
@@ -202,8 +202,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
                 'type'     => 'text3',
                 'size'     => 203,
                 'tmp_name' => 'tmp_test3',
-                'error'    => 2));
-
+                'error'    => 2, ), );
 
         $validator = new File\Upload();
         $validator->setFiles(array());
@@ -219,7 +218,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFilesReturnsEmptyArrayWhenFilesSuperglobalIsNull()
     {
-        $_FILES = NULL;
+        $_FILES = null;
         $validator = new File\Upload();
         $validator->setFiles();
         $this->assertEquals(array(), $validator->getFiles());
@@ -231,7 +230,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
     public function testGetFilesReturnsEmptyArrayAfterSetFilesIsCalledWithNull()
     {
         $validator = new File\Upload();
-        $validator->setFiles(NULL);
+        $validator->setFiles(null);
         $this->assertEquals(array(), $validator->getFiles());
     }
 
@@ -241,7 +240,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\Upload();
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileUploadErrorFileNotFound', $validator->getMessages()));
         $this->assertContains("nofile.mo'", current($validator->getMessages()));
     }
@@ -258,10 +257,10 @@ class UploadTest extends \PHPUnit_Framework_TestCase
                 'size'     => 100,
                 'tmp_name' => 'tmp_bar',
                 'error'    => 7,
-            )
+            ),
         );
 
-        $validator = new File\Upload;
+        $validator = new File\Upload();
         $validator->isValid('foo');
 
         $this->assertEquals(

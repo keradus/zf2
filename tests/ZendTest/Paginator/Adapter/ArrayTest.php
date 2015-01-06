@@ -57,7 +57,6 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(101, $this->adapter->count());
     }
 
-
     /**
      * @group ZF-4151
      */

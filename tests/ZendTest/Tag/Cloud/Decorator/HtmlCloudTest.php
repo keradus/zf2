@@ -26,7 +26,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             $decorator->render(
                 array(
                      'foo',
-                     'bar'
+                     'bar',
                 )
             )
         );
@@ -38,7 +38,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
         $decorator->setHtmlTags(
             array(
                  'span',
-                 'div' => array('id' => 'tag-cloud')
+                 'div' => array('id' => 'tag-cloud'),
             )
         );
 
@@ -47,7 +47,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             $decorator->render(
                 array(
                      'foo',
-                     'bar'
+                     'bar',
                 )
             )
         );
@@ -63,7 +63,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             $decorator->render(
                 array(
                      'foo',
-                     'bar'
+                     'bar',
                 )
             )
         );
@@ -73,14 +73,14 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
     {
         $decorator = new Decorator\HtmlCloud(array(
                                                   'htmlTags'  => array('div'),
-                                                  'separator' => ' '
+                                                  'separator' => ' ',
                                              ));
 
         $this->assertEquals(
             '<div>foo bar</div>', $decorator->render(
                 array(
                      'foo',
-                     'bar'
+                     'bar',
                 )
             )
         );
@@ -92,7 +92,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             new \Zend\Config\Config(
                 array(
                      'htmlTags'  => array('div'),
-                     'separator' => ' '
+                     'separator' => ' ',
                 )
             )
         );
@@ -101,7 +101,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             '<div>foo bar</div>', $decorator->render(
                 array(
                      'foo',
-                     'bar'
+                     'bar',
                 )
             )
         );
@@ -113,7 +113,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
         $decorator->setOptions(
             array(
                  'htmlTags'  => array('div'),
-                 'separator' => ' '
+                 'separator' => ' ',
             )
         );
 
@@ -121,7 +121,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             '<div>foo bar</div>', $decorator->render(
                 array(
                      'foo',
-                     'bar'
+                     'bar',
                 )
             )
         );
@@ -143,7 +143,7 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     '_foo' => array(),
-                )
+                ),
             ),
         );
     }
@@ -169,21 +169,21 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
                     'foo' => array(
                         '&bar' => 'baz',
                     ),
-                )
+                ),
             ),
             array(
                 array(
                     'foo' => array(
                         ':bar&baz' => 'bat',
                     ),
-                )
+                ),
             ),
             array(
                 array(
                     'foo' => array(
                         'bar/baz' => 'bat',
                     ),
-                )
+                ),
             ),
         );
     }

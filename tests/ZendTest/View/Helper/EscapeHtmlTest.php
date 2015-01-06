@@ -24,12 +24,12 @@ class EscapeHtmlTest extends TestCase
         'big5',         '950',          'gb2312',       '936',
         'big5-hkscs',   'shift_jis',    'sjis',         'sjis-win',
         'cp932',        '932',          'euc-jp',       'eucjp',
-        'eucjp-win',    'macroman'
+        'eucjp-win',    'macroman',
     );
 
     public function setUp()
     {
-        $this->helper = new EscapeHelper;
+        $this->helper = new EscapeHelper();
     }
 
     public function testUsesUtf8EncodingByDefault()
@@ -98,7 +98,7 @@ class EscapeHtmlTest extends TestCase
 
     public function testWillCastObjectsToStringsBeforeEscaping()
     {
-        $object = new TestAsset\Stringified;
+        $object = new TestAsset\Stringified();
         $test = $this->helper->__invoke($object);
         $this->assertEquals(get_class($object), $test);
     }
@@ -176,7 +176,7 @@ class EscapeHtmlTest extends TestCase
     public function testSettingValidEncodingShouldNotThrowExceptions()
     {
         foreach ($this->supportedEncodings as $value) {
-            $helper = new EscapeHelper;
+            $helper = new EscapeHelper();
             $helper->setEncoding($value);
             $helper->getEscaper();
         }

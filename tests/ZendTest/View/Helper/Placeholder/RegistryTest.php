@@ -12,7 +12,6 @@ namespace ZendTest\View\Helper\Placeholder;
 use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Helper\Placeholder\Container;
 
-
 /**
  * Test class for Zend\View\Helper\Placeholder\Registry.
  *
@@ -25,7 +24,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      * @var Registry
      */
     public $registry;
-
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -145,7 +143,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     {
         $this->registry->setContainerClass('ZendTest\View\Helper\Placeholder\MockContainer');
         $data = array(
-            'ZF-10793'
+            'ZF-10793',
         );
         $container = $this->registry->createContainer('foo', $data);
         $this->assertEquals(array('ZF-10793'), $container->data);

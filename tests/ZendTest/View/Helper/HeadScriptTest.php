@@ -30,7 +30,6 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
      */
     public $basePath;
 
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -39,7 +38,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->helper = new Helper\HeadScript();
     }
 
@@ -91,7 +90,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
     protected function _testOverloadAppend($type)
     {
-        $action = 'append' . $this->_inflectAction($type);
+        $action = 'append'.$this->_inflectAction($type);
         $string = 'foo';
         for ($i = 0; $i < 3; ++$i) {
             $string .= ' foo';
@@ -109,7 +108,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
     protected function _testOverloadPrepend($type)
     {
-        $action = 'prepend' . $this->_inflectAction($type);
+        $action = 'prepend'.$this->_inflectAction($type);
         $string = 'foo';
         for ($i = 0; $i < 3; ++$i) {
             $string .= ' foo';
@@ -128,7 +127,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
     protected function _testOverloadSet($type)
     {
-        $action = 'set' . $this->_inflectAction($type);
+        $action = 'set'.$this->_inflectAction($type);
         $string = 'foo';
         for ($i = 0; $i < 3; ++$i) {
             $this->helper->appendScript($string);
@@ -147,7 +146,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
     protected function _testOverloadOffsetSet($type)
     {
-        $action = 'offsetSet' . $this->_inflectAction($type);
+        $action = 'offsetSet'.$this->_inflectAction($type);
         $string = 'foo';
         $this->helper->$action(5, $string);
         $values = $this->helper->getArrayCopy();
@@ -270,7 +269,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('bar', $string);
         $this->assertContains('baz', $string);
 
-        $doc = new \DOMDocument;
+        $doc = new \DOMDocument();
         $dom = $doc->loadHtml($string);
         $this->assertTrue($dom !== false);
     }
@@ -412,13 +411,12 @@ document.write(bar.strlen());');
         $this->helper->offsetSetFile(10, 'test3.js');
         $this->helper->offsetSetFile(5, 'test4.js');
 
-
         $test = $this->helper->toString();
 
-        $expected = '<script type="text/javascript" src="test1.js"></script>' . PHP_EOL
-                  . '<script type="text/javascript" src="test4.js"></script>' . PHP_EOL
-                  . '<script type="text/javascript" src="test3.js"></script>' . PHP_EOL
-                  . '<script type="text/javascript" src="test2.js"></script>';
+        $expected = '<script type="text/javascript" src="test1.js"></script>'.PHP_EOL
+                  .'<script type="text/javascript" src="test4.js"></script>'.PHP_EOL
+                  .'<script type="text/javascript" src="test3.js"></script>'.PHP_EOL
+                  .'<script type="text/javascript" src="test2.js"></script>';
 
         $this->assertEquals($expected, $test);
     }
@@ -443,7 +441,7 @@ document.write(bar.strlen());');
 
     public function testNoEscapeDefaultsToFalse()
     {
-        $this->helper->__invoke()->appendScript('// some script' . PHP_EOL, 'text/javascript', array());
+        $this->helper->__invoke()->appendScript('// some script'.PHP_EOL, 'text/javascript', array());
         $test = $this->helper->__invoke()->toString();
 
         $this->assertContains('//<!--', $test);
@@ -452,7 +450,7 @@ document.write(bar.strlen());');
 
     public function testNoEscapeTrue()
     {
-        $this->helper->__invoke()->appendScript('// some script' . PHP_EOL, 'text/javascript', array('noescape' => true));
+        $this->helper->__invoke()->appendScript('// some script'.PHP_EOL, 'text/javascript', array('noescape' => true));
         $test = $this->helper->__invoke()->toString();
 
         $this->assertNotContains('//<!--', $test);
@@ -465,7 +463,7 @@ document.write(bar.strlen());');
     public function testSupportsCrossOriginAttribute()
     {
         $this->helper->__invoke()->appendScript(
-            '// some script' . PHP_EOL, 'text/javascript', array('crossorigin' => true)
+            '// some script'.PHP_EOL, 'text/javascript', array('crossorigin' => true)
         );
         $test = $this->helper->__invoke()->toString();
 

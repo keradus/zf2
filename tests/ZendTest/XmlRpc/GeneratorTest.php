@@ -101,7 +101,7 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     {
         $expected = trim($expected);
         $this->assertSame($expected, trim($actual));
-        $xmlDecl = '<?xml version="1.0" encoding="' . $actual->getEncoding() . '"?>' . "\n";
-        $this->assertSame($xmlDecl . $expected, trim($actual->saveXml()));
+        $xmlDecl = '<?xml version="1.0" encoding="'.$actual->getEncoding().'"?>'."\n";
+        $this->assertSame($xmlDecl.$expected, trim($actual->saveXml()));
     }
 }

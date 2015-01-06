@@ -45,9 +45,9 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingNameToResolverReturnsScriptName()
     {
-        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $this->renderer->resolver()->addPath(__DIR__.'/_templates');
         $filename = $this->renderer->resolver('test.phtml');
-        $this->assertEquals(realpath(__DIR__ . '/_templates/test.phtml'), $filename);
+        $this->assertEquals(realpath(__DIR__.'/_templates/test.phtml'), $filename);
     }
 
     public function testUsesVariablesObjectForVarsByDefault()
@@ -57,7 +57,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSpecifyArrayAccessForVars()
     {
-        $a = new \ArrayObject;
+        $a = new \ArrayObject();
         $this->renderer->setVars($a);
         $this->assertSame($a->getArrayCopy(), $this->renderer->vars()->getArrayCopy());
     }
@@ -105,7 +105,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
             array(1),
             array(1.0),
             array(array('foo')),
-            array(new \stdClass),
+            array(new \stdClass()),
         );
     }
 
@@ -140,7 +140,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $expected = 'foo INJECT baz';
         $this->renderer->vars()->assign(array('bar' => 'INJECT'));
-        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $this->renderer->resolver()->addPath(__DIR__.'/_templates');
         $test = $this->renderer->render('test.phtml');
         $this->assertContains($expected, $test);
     }
@@ -152,14 +152,14 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
             return str_replace('INJECT', 'bar', $content);
         });
         $this->renderer->vars()->assign(array('bar' => 'INJECT'));
-        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $this->renderer->resolver()->addPath(__DIR__.'/_templates');
         $test = $this->renderer->render('test.phtml');
         $this->assertContains($expected, $test);
     }
 
     public function testCanAccessHelpersInTemplates()
     {
-        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $this->renderer->resolver()->addPath(__DIR__.'/_templates');
         $content = $this->renderer->render('test-with-helpers.phtml');
         foreach (array('foo', 'bar', 'baz') as $value) {
             $this->assertContains("<li>$value</li>", $content);
@@ -192,7 +192,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testNestedRenderingRestoresVariablesCorrectly()
     {
         $expected = "inner\n<p>content</p>";
-        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $this->renderer->resolver()->addPath(__DIR__.'/_templates');
         $test = $this->renderer->render('testNestedOuter.phtml', array('content' => '<p>content</p>'));
         $this->assertEquals($expected, $test);
     }
@@ -245,7 +245,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $expected = '10 > 9';
         $this->renderer->vars()->assign(array('foo' => '10 > 9'));
-        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $this->renderer->resolver()->addPath(__DIR__.'/_templates');
         $test = $this->renderer->render('testLocalVars.phtml');
         $this->assertContains($expected, $test);
     }
@@ -253,8 +253,8 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testRendersTemplatesInAStack()
     {
         $resolver = new TemplateMapResolver(array(
-            'layout' => __DIR__ . '/_templates/layout.phtml',
-            'block'  => __DIR__ . '/_templates/block.phtml',
+            'layout' => __DIR__.'/_templates/layout.phtml',
+            'block'  => __DIR__.'/_templates/block.phtml',
         ));
         $this->renderer->setResolver($resolver);
 
@@ -268,7 +268,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testCanRenderViewModel()
     {
         $resolver = new TemplateMapResolver(array(
-            'empty' => __DIR__ . '/_templates/empty.phtml',
+            'empty' => __DIR__.'/_templates/empty.phtml',
         ));
         $this->renderer->setResolver($resolver);
 
@@ -295,7 +295,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testRendersViewModelWithVariablesSpecified()
     {
         $resolver = new TemplateMapResolver(array(
-            'test' => __DIR__ . '/_templates/test.phtml',
+            'test' => __DIR__.'/_templates/test.phtml',
         ));
         $this->renderer->setResolver($resolver);
 
@@ -313,7 +313,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testRenderedViewModelIsRegisteredAsCurrentViewModel()
     {
         $resolver = new TemplateMapResolver(array(
-            'empty' => __DIR__ . '/_templates/empty.phtml',
+            'empty' => __DIR__.'/_templates/empty.phtml',
         ));
         $this->renderer->setResolver($resolver);
 
@@ -329,7 +329,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testRendererRaisesExceptionInCaseOfExceptionInView()
     {
         $resolver = new TemplateMapResolver(array(
-            'exception' => __DIR__ . '../../Mvc/View/_files/exception.phtml',
+            'exception' => __DIR__.'../../Mvc/View/_files/exception.phtml',
         ));
         $this->renderer->setResolver($resolver);
 
@@ -356,7 +356,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('/does/not/exists'),
-            array('.')
+            array('.'),
         );
     }
 
@@ -415,7 +415,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $vars['foo'] = 'BAR-BAZ-BAT';
 
         $resolver = new TemplateMapResolver(array(
-            'template' => __DIR__ . '/_templates/view-model-variables.phtml',
+            'template' => __DIR__.'/_templates/view-model-variables.phtml',
         ));
         $this->renderer->setResolver($resolver);
         $test = $this->renderer->render($model);

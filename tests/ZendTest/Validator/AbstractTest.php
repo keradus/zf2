@@ -169,18 +169,18 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $messages = $this->validator->getMessageTemplates();
         $this->assertEquals(
             array('fooMessage' => '%value% was passed',
-                  'barMessage' => '%value% was wrong'), $messages);
+                  'barMessage' => '%value% was wrong', ), $messages);
 
         $this->assertEquals(
             array(TestAsset\ConcreteValidator::FOO_MESSAGE => '%value% was passed',
-                  TestAsset\ConcreteValidator::BAR_MESSAGE => '%value% was wrong'),
+                  TestAsset\ConcreteValidator::BAR_MESSAGE => '%value% was wrong', ),
             $messages
             );
     }
 
     public function testInvokeProxiesToIsValid()
     {
-        $validator = new TestAsset\ConcreteValidator;
+        $validator = new TestAsset\ConcreteValidator();
         $this->assertFalse($validator('foo'));
         $this->assertContains("foo was passed", $validator->getMessages());
     }
@@ -237,7 +237,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $messages);
         $this->assertEquals(array(
             TestAsset\ConcreteValidator::FOO_MESSAGE => 'invalid was passed',
-            TestAsset\ConcreteValidator::BAR_MESSAGE => 'invalid was wrong'
+            TestAsset\ConcreteValidator::BAR_MESSAGE => 'invalid was wrong',
         ), $messages);
     }
 
@@ -265,7 +265,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $validator->setMessages(array(
             EmailAddress::INVALID_HOSTNAME => 'This is the same error message',
-            Hostname::UNKNOWN_TLD => 'This is the same error message'
+            Hostname::UNKNOWN_TLD => 'This is the same error message',
         ));
 
         $this->assertFalse($validator->isValid('invalid@email.coma'));

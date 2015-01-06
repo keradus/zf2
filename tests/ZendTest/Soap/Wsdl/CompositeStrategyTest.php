@@ -30,8 +30,8 @@ class CompositeStrategyTest extends WsdlTestHelper
 
     public function testCompositeApiAddingStragiesToTypes()
     {
-        $strategy = new Composite(array(), new ArrayOfTypeSequence);
-        $strategy->connectTypeToStrategy('Book', new ArrayOfTypeComplex);
+        $strategy = new Composite(array(), new ArrayOfTypeSequence());
+        $strategy->connectTypeToStrategy('Book', new ArrayOfTypeComplex());
 
         $bookStrategy = $strategy->getStrategyOfType('Book');
         $cookieStrategy = $strategy->getStrategyOfType('Cookie');
@@ -45,7 +45,7 @@ class CompositeStrategyTest extends WsdlTestHelper
         $typeMap = array('Book' => '\Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex');
 
         $strategy = new ComplexTypeStrategy\Composite($typeMap,
-            new ArrayOfTypeSequence
+            new ArrayOfTypeSequence()
         );
 
         $bookStrategy = $strategy->getStrategyOfType('Book');
@@ -89,12 +89,12 @@ class CompositeStrategyTest extends WsdlTestHelper
 
     public function testCompositeDelegatesAddingComplexTypesToSubStrategies()
     {
-        $this->strategy = new ComplexTypeStrategy\Composite(array(), new AnyType);
+        $this->strategy = new ComplexTypeStrategy\Composite(array(), new AnyType());
         $this->strategy->connectTypeToStrategy('\ZendTest\Soap\TestAsset\Book',
-            new ArrayOfTypeComplex
+            new ArrayOfTypeComplex()
         );
         $this->strategy->connectTypeToStrategy('\ZendTest\Soap\TestAsset\Cookie',
-            new DefaultComplexType
+            new DefaultComplexType()
         );
 
         parent::setUp();

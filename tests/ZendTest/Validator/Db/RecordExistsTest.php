@@ -104,7 +104,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new RecordExists(array('table'   => 'users',
                                             'field'   => 'field1',
-                                            'adapter' => $this->getMockHasResult()));
+                                            'adapter' => $this->getMockHasResult(), ));
         $this->assertTrue($validator->isValid('value1'));
     }
 
@@ -117,7 +117,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new RecordExists(array('table'   => 'users',
                                             'field'   => 'field1',
-                                            'adapter' => $this->getMockNoResult()));
+                                            'adapter' => $this->getMockNoResult(), ));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -131,8 +131,8 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new RecordExists(array('table'   => 'users',
                                             'field'   => 'field1',
                                             'exclude' => array('field' => 'id',
-                                                               'value' => 1),
-                                            'adapter' => $this->getMockHasResult()));
+                                                               'value' => 1, ),
+                                            'adapter' => $this->getMockHasResult(), ));
         $this->assertTrue($validator->isValid('value3'));
     }
 
@@ -147,8 +147,8 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new RecordExists(array('table'   => 'users',
                                             'field'   => 'field1',
                                             'exclude' => array('field' => 'id',
-                                                               'value' => 1),
-                                            'adapter' => $this->getMockNoResult()));
+                                                               'value' => 1, ),
+                                            'adapter' => $this->getMockNoResult(), ));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -163,7 +163,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new RecordExists(array('table'   => 'users',
                                             'field'   => 'field1',
                                             'exclude' => 'id != 1',
-                                            'adapter' => $this->getMockHasResult()));
+                                            'adapter' => $this->getMockHasResult(), ));
         $this->assertTrue($validator->isValid('value3'));
     }
 
@@ -254,12 +254,12 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new RecordExists(
             array(
                 'table' => 'users',
-                'schema' => 'my'
+                'schema' => 'my',
             ),
             'field1',
             array(
                 'field' => 'foo',
-                'value' => 'bar'
+                'value' => 'bar',
             ),
             $this->getMockHasResult()
         );
@@ -283,12 +283,12 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new RecordExists(
             array(
                 'table' => 'users',
-                'schema' => 'my'
+                'schema' => 'my',
             ),
             'field1',
             array(
                 'field' => 'foo',
-                'value' => 'bar'
+                'value' => 'bar',
             ),
             $this->getMockHasResult()
         );

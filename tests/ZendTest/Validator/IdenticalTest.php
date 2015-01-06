@@ -23,7 +23,7 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->validator = new Identical;
+        $this->validator = new Identical();
     }
 
     public function testTokenInitiallyNull()
@@ -171,8 +171,8 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             'john@doe.com',
             array(
                 'user' => array(
-                    'email' => 'john@doe.com'
-                )
+                    'email' => 'john@doe.com',
+                ),
             )
         ));
 
@@ -180,8 +180,8 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             'john@doe.com',
             array(
                 'user' => array(
-                    'email' => 'harry@hoe.com'
-                )
+                    'email' => 'harry@hoe.com',
+                ),
             )
         ));
 
@@ -189,8 +189,8 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             'harry@hoe.com',
             array(
                 'user' => array(
-                    'email' => 'john@doe.com'
-                )
+                    'email' => 'john@doe.com',
+                ),
             )
         ));
 
@@ -198,8 +198,8 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             'john@doe.com',
             new Parameters(array(
                 'user' => array(
-                    'email' => 'john@doe.com'
-                )
+                    'email' => 'john@doe.com',
+                ),
             ))
         ));
 
@@ -207,8 +207,8 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             'john@doe.com',
             new Parameters(array(
                 'user' => array(
-                    'email' => 'harry@hoe.com'
-                )
+                    'email' => 'harry@hoe.com',
+                ),
             ))
         ));
 
@@ -216,8 +216,8 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             'harry@hoe.com',
             new Parameters(array(
                 'user' => array(
-                    'email' => 'john@doe.com'
-                )
+                    'email' => 'john@doe.com',
+                ),
             ))
         ));
     }

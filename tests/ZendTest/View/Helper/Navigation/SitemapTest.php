@@ -105,12 +105,12 @@ class SitemapTest extends AbstractTest
         $expected = array(
             'registered'       => $rendered1,
             'supplied'         => $rendered2,
-            'registered_again' => $rendered1
+            'registered_again' => $rendered1,
         );
         $actual = array(
             'registered'       => $this->_helper->render(),
             'supplied'         => $this->_helper->render($this->_nav2),
-            'registered_again' => $this->_helper->render()
+            'registered_again' => $this->_helper->render(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -182,6 +182,7 @@ class SitemapTest extends AbstractTest
                     'http://w.');
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
+
             return;
         }
 
@@ -209,7 +210,7 @@ class SitemapTest extends AbstractTest
         $this->markTestIncomplete('Zend\URI changes affect this test');
         try {
             $this->_helper->setServerUrl('site.example.org');
-            $this->fail('An invalid server URL was given, but a ' .
+            $this->fail('An invalid server URL was given, but a '.
                         'Zend\URI\Exception\ExceptionInterface was not thrown');
         } catch (\Zend\URI\Exception\ExceptionInterface $e) {
             $this->assertContains('Illegal scheme', $e->getMessage());
@@ -243,6 +244,7 @@ class SitemapTest extends AbstractTest
     public function testUseSchemaValidation()
     {
         $this->markTestSkipped('Skipped because it fetches XSD from web');
+
         return;
         $nav = clone $this->_nav2;
         $this->_helper->setUseSitemapValidators(false);
@@ -257,6 +259,7 @@ class SitemapTest extends AbstractTest
                     \Zend\View\Helper\Navigation\Sitemap::SITEMAP_XSD);
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
+
             return;
         }
 

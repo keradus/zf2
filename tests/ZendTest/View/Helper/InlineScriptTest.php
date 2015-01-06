@@ -11,7 +11,6 @@ namespace ZendTest\View\Helper;
 
 use Zend\View\Helper;
 
-
 /**
  * Test class for Zend\View\Helper\InlineScript.
  *
@@ -38,7 +37,7 @@ class InlineScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->helper = new Helper\InlineScript();
     }
 

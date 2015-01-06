@@ -43,7 +43,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testSetShouldMapToNativeProperties()
     {
         $page = AbstractPage::factory(array(
-            'type' => 'mvc'
+            'type' => 'mvc',
         ));
 
         $page->set('action', 'foo');
@@ -56,7 +56,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testGetShouldMapToNativeProperties()
     {
         $page = AbstractPage::factory(array(
-            'type' => 'mvc'
+            'type' => 'mvc',
         ));
 
         $page->setAction('foo');
@@ -69,7 +69,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testShouldSetAndGetShouldMapToProperties()
     {
         $page = AbstractPage::factory(array(
-            'type' => 'uri'
+            'type' => 'uri',
         ));
 
         $page->set('action', 'Laughing Out Loud');
@@ -80,7 +80,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'type' => 'uri',
-            'label' => 'foo'
+            'label' => 'foo',
         ));
 
         $options = array('label' => 'bar');
@@ -94,7 +94,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'type' => 'uri',
-            'label' => 'foo'
+            'label' => 'foo',
         ));
 
         $options = array('label' => 'bar');
@@ -108,7 +108,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertEquals('foo', $page->getLabel());
@@ -119,7 +119,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         foreach ($invalids as $invalid) {
             try {
                 $page->setLabel($invalid);
-                $this->fail('An invalid value was set, but a ' .
+                $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $label', $e->getMessage());
@@ -146,7 +146,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         foreach ($invalids as $invalid) {
             try {
                 $page->setFragment($invalid);
-                $this->fail('An invalid value was set, but a ' .
+                $this->fail('An invalid value was set, but a '.
                             'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains(
@@ -160,7 +160,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertEquals(null, $page->getId());
@@ -172,7 +172,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         foreach ($invalids as $invalid) {
             try {
                 $page->setId($invalid);
-                $this->fail('An invalid value was set, but a ' .
+                $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $id', $e->getMessage());
@@ -185,7 +185,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#',
-            'id' => 10
+            'id' => 10,
         ));
 
         $this->assertEquals(10, $page->getId());
@@ -195,7 +195,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertEquals(null, $page->getClass());
@@ -206,7 +206,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         foreach ($invalids as $invalid) {
             try {
                 $page->setClass($invalid);
-                $this->fail('An invalid value was set, but a ' .
+                $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $class', $e->getMessage());
@@ -218,7 +218,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertEquals(null, $page->getTitle());
@@ -229,7 +229,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         foreach ($invalids as $invalid) {
             try {
                 $page->setTitle($invalid);
-                $this->fail('An invalid value was set, but a ' .
+                $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $title', $e->getMessage());
@@ -241,7 +241,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertEquals(null, $page->getTarget());
@@ -252,7 +252,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         foreach ($invalids as $invalid) {
             try {
                 $page->setTarget($invalid);
-                $this->fail('An invalid value was set, but a ' .
+                $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $target', $e->getMessage());
@@ -267,26 +267,26 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'uri'   => '#',
             'rel'   => array(
                 'prev' => 'foo',
-                'next' => 'baz'
+                'next' => 'baz',
             ),
             'rev'   => array(
-                'alternate' => 'bat'
-            )
+                'alternate' => 'bat',
+            ),
         ));
 
         $expected = array(
             'rel'   => array(
                 'prev' => 'foo',
-                'next' => 'baz'
+                'next' => 'baz',
             ),
             'rev'   => array(
-                'alternate' => 'bat'
-            )
+                'alternate' => 'bat',
+            ),
         );
 
         $actual = array(
             'rel' => $page->getRel(),
-            'rev' => $page->getRev()
+            'rev' => $page->getRev(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -299,26 +299,26 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'uri'   => '#',
             'rel'   => array(
                 'prev' => 'foo',
-                'next' => 'baz'
+                'next' => 'baz',
             ),
             'rev'   => array(
-                'alternate' => 'bat'
-            )
+                'alternate' => 'bat',
+            ),
         )));
 
         $expected = array(
             'rel'   => array(
                 'prev' => 'foo',
-                'next' => 'baz'
+                'next' => 'baz',
             ),
             'rev'   => array(
-                'alternate' => 'bat'
-            )
+                'alternate' => 'bat',
+            ),
         );
 
         $actual = array(
             'rel' => $page->getRel(),
-            'rev' => $page->getRev()
+            'rev' => $page->getRev(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -331,20 +331,20 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'uri'   => '#',
             'rel'   => array(
                 'prev' => 'foo',
-                'next' => 'baz'
+                'next' => 'baz',
             ),
             'rev'   => array(
-                'next' => 'foo'
-            )
+                'next' => 'foo',
+            ),
         ));
 
         $expected = array(
-            'foo', 'foo'
+            'foo', 'foo',
         );
 
         $actual = array(
             $page->getRel('prev'),
-            $page->getRev('next')
+            $page->getRev('next'),
         );
 
         $this->assertEquals($expected, $actual);
@@ -354,7 +354,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertEquals(null, $page->getOrder());
@@ -372,7 +372,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         foreach ($invalids as $invalid) {
             try {
                 $page->setOrder($invalid);
-                $this->fail('An invalid value was set, but a ' .
+                $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains('Invalid argument: $order', $e->getMessage());
@@ -384,7 +384,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'type'  => 'uri',
-            'label' => 'hello'
+            'label' => 'hello',
         ));
 
         $page->setResource('foo');
@@ -396,7 +396,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
-            'resource' => 'foo'
+            'resource' => 'foo',
         ));
 
         $page->setResource();
@@ -408,7 +408,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
-            'resource' => 'foo'
+            'resource' => 'foo',
         ));
 
         $page->setResource(null);
@@ -419,7 +419,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'type'     => 'uri',
-            'label'    => 'hello'
+            'label'    => 'hello',
         ));
 
         $resource = new \Zend\Permissions\Acl\Resource\GenericResource('bar');
@@ -432,12 +432,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'type'     => 'uri',
-            'label'    => 'hello'
+            'label'    => 'hello',
         ));
 
         try {
             $page->setResource(0);
-            $this->fail('An invalid value was set, but a ' .
+            $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $resource', $e->getMessage());
@@ -448,12 +448,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'type'     => 'uri',
-            'label'    => 'hello'
+            'label'    => 'hello',
         ));
 
         try {
             $page->setResource(new \stdClass());
-            $this->fail('An invalid value was set, but a ' .
+            $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $resource', $e->getMessage());
@@ -465,7 +465,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
-            'privilege' => 'foo'
+            'privilege' => 'foo',
         ));
 
         $page->setPrivilege();
@@ -477,7 +477,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
-            'privilege' => 'foo'
+            'privilege' => 'foo',
         ));
 
         $page->setPrivilege(null);
@@ -489,7 +489,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'type'     => 'uri',
             'label'    => 'hello',
-            'privilege' => 'foo'
+            'privilege' => 'foo',
         ));
 
         $page->setPrivilege('bar');
@@ -532,11 +532,11 @@ class PageTest extends \PHPUnit_Framework_TestCase
                     'pages'  => array(
                         new Uri(array(
                             'label'  => 'Page 1.1',
-                            'active' => true
-                        ))
-                    )
-                ))
-            )
+                            'active' => true,
+                        )),
+                    ),
+                )),
+            ),
         ));
 
         $this->assertFalse($page->isActive(false));
@@ -555,11 +555,11 @@ class PageTest extends \PHPUnit_Framework_TestCase
                     'pages'  => array(
                         new Uri(array(
                             'label'  => 'Page 1.1',
-                            'active' => true
-                        ))
-                    )
-                ))
-            )
+                            'active' => true,
+                        )),
+                    ),
+                )),
+            ),
         ));
 
         $this->assertFalse($page->getActive(false));
@@ -624,11 +624,11 @@ class PageTest extends \PHPUnit_Framework_TestCase
                     'label'  => 'Page 1.1',
                     'pages'  => array(
                         new Uri(array(
-                            'label'  => 'Page 1.1'
-                        ))
-                    )
-                ))
-            )
+                            'label'  => 'Page 1.1',
+                        )),
+                    ),
+                )),
+            ),
         ));
 
         $childPage = $page->findOneByLabel('Page 1.1');
@@ -646,11 +646,11 @@ class PageTest extends \PHPUnit_Framework_TestCase
                     'label'  => 'Page 1.1',
                     'pages'  => array(
                         new Uri(array(
-                            'label'  => 'Page 1.1'
-                        ))
-                    )
-                ))
-            )
+                            'label'  => 'Page 1.1',
+                        )),
+                    ),
+                )),
+            ),
         ));
 
         $childPage = $page->findOneByLabel('Page 1.1');
@@ -694,7 +694,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'type'  => 'uri',
-            'label' => 'hello'
+            'label' => 'hello',
         ));
 
         $page->setTextdomain('foo');
@@ -705,7 +705,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => 'foo'
+            'uri' => 'foo',
         ));
 
         $this->assertSame('foo', $page->getUri());
@@ -720,7 +720,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => 'foo'
+            'uri' => 'foo',
         ));
 
         $this->assertTrue(isset($page->uri));
@@ -737,7 +737,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => 'foo'
+            'uri' => 'foo',
         ));
 
         $this->assertFalse(isset($page->category));
@@ -754,7 +754,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertEquals('foo', (string) $page);
@@ -765,14 +765,14 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'label' => 'foo',
             'action' => 'index',
-            'controller' => 'index'
+            'controller' => 'index',
         ));
 
         $options = array(
             'label' => 'bar',
             'action' => 'baz',
             'controller' => 'bat',
-            'id' => 'foo-test'
+            'id' => 'foo-test',
         );
 
         $page->setOptions($options);
@@ -781,14 +781,14 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'label'       => 'bar',
             'action'      => 'baz',
             'controller'  => 'bat',
-            'id'          => 'foo-test'
+            'id'          => 'foo-test',
         );
 
         $actual = array(
             'label'       => $page->getLabel(),
             'action'      => $page->getAction(),
             'controller'  => $page->getController(),
-            'id'          => $page->getId()
+            'id'          => $page->getId(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -798,19 +798,19 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $options = array(
             'test' => 'test',
-            'meaning' => 42
+            'meaning' => 42,
         );
 
         $page->setOptions($options);
 
         $actual = array(
             'test' => $page->test,
-            'meaning' => $page->meaning
+            'meaning' => $page->meaning,
         );
 
         $this->assertEquals($options, $actual);
@@ -820,7 +820,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'page',
-            'uri'   => '#'
+            'uri'   => '#',
         ));
 
         $page->addRel('alternate', 'foo');
@@ -828,12 +828,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             'rel' => array('alternate' => 'foo'),
-            'rev' => array('alternate' => 'bar')
+            'rev' => array('alternate' => 'bar'),
         );
 
         $actual = array(
             'rel' => $page->getRel(),
-            'rev' => $page->getRev()
+            'rev' => $page->getRev(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -843,7 +843,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $page = AbstractPage::factory(array(
             'label' => 'page',
-            'uri'   => '#'
+            'uri'   => '#',
         ));
 
         $page->addRel('alternate', 'foo');
@@ -853,12 +853,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             'rel' => array(),
-            'rev' => array()
+            'rev' => array(),
         );
 
         $actual = array(
             'rel' => $page->getRel(),
-            'rev' => $page->getRev()
+            'rev' => $page->getRev(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -870,8 +870,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'type' => 'uri',
             'rel'  => array(
                 'foo' => 'bar',
-                'baz' => 'bat'
-            )
+                'baz' => 'bat',
+            ),
         ));
 
         $value = array('alternate' => 'format/xml');
@@ -885,8 +885,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'type' => 'uri',
             'rel'  => array(
                 'foo' => 'bar',
-                'baz' => 'bat'
-            )
+                'baz' => 'bat',
+            ),
         ));
 
         $value = array('alternate' => 'format/xml');
@@ -900,8 +900,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'type' => 'uri',
             'rel'  => array(
                 'foo' => 'bar',
-                'baz' => 'bat'
-            )
+                'baz' => 'bat',
+            ),
         ));
 
         $value = array();
@@ -915,7 +915,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         try {
             $page->setRel('alternate');
-            $this->fail('An invalid value was set, but a ' .
+            $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $relations', $e->getMessage());
@@ -928,8 +928,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'type' => 'uri',
             'rev'  => array(
                 'foo' => 'bar',
-                'baz' => 'bat'
-            )
+                'baz' => 'bat',
+            ),
         ));
 
         $value = array('alternate' => 'format/xml');
@@ -943,8 +943,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'type' => 'uri',
             'rev'  => array(
                 'foo' => 'bar',
-                'baz' => 'bat'
-            )
+                'baz' => 'bat',
+            ),
         ));
 
         $value = array('alternate' => 'format/xml');
@@ -958,8 +958,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'type' => 'uri',
             'rev'  => array(
                 'foo' => 'bar',
-                'baz' => 'bat'
-            )
+                'baz' => 'bat',
+            ),
         ));
 
         $value = array();
@@ -973,7 +973,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         try {
             $page->setRev('alternate');
-            $this->fail('An invalid value was set, but a ' .
+            $this->fail('An invalid value was set, but a '.
                         'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $relations', $e->getMessage());
@@ -985,8 +985,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rel'  => array(
-                'foo' => 'bar'
-            )
+                'foo' => 'bar',
+            ),
         ));
 
         $this->assertEquals('bar', $page->getRel('foo'));
@@ -997,8 +997,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'type' => 'uri',
             'rev'  => array(
-                'foo' => 'bar'
-            )
+                'foo' => 'bar',
+            ),
         ));
 
         $this->assertEquals('bar', $page->getRev('foo'));
@@ -1010,8 +1010,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'type' => 'uri',
             'rel'  => array(
                 'alternate' => 'foo',
-                'foo' => 'bar'
-            )
+                'foo' => 'bar',
+            ),
         ));
 
         $expected = array('alternate', 'foo');
@@ -1024,8 +1024,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'type' => 'uri',
             'rev'  => array(
                 'alternate' => 'foo',
-                'foo' => 'bar'
-            )
+                'foo' => 'bar',
+            ),
         ));
 
         $expected = array('alternate', 'foo');
@@ -1037,12 +1037,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = AbstractPage::factory(array(
             'label' => 'foo',
             'uri' => '#',
-            'baz' => 'bat'
+            'baz' => 'bat',
         ));
 
         $options = array(
             'test' => 'test',
-            'meaning' => 42
+            'meaning' => 42,
         );
 
         $page->setOptions($options);
@@ -1050,7 +1050,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'baz' => 'bat',
             'test' => 'test',
-            'meaning' => 42
+            'meaning' => 42,
         );
 
         $this->assertEquals($expected, $page->getCustomProperties());
@@ -1117,9 +1117,9 @@ class PageTest extends \PHPUnit_Framework_TestCase
                     'active'    => null,
                     'visible'   => 1,
                     'pages'     => array(),
-                    'uri'       => 'http://www.example.com/foo.html'
-                )
-            )
+                    'uri'       => 'http://www.example.com/foo.html',
+                ),
+            ),
         );
 
         $page = AbstractPage::factory($options);
@@ -1136,7 +1136,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testSetPermission()
     {
         $page = AbstractPage::factory(array(
-            'type'       => 'uri'
+            'type'       => 'uri',
         ));
 
         $page->setPermission('my_permission');
@@ -1146,7 +1146,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testSetArrayPermission()
     {
         $page = AbstractPage::factory(array(
-            'type'       => 'uri'
+            'type'       => 'uri',
         ));
 
         $page->setPermission(array('my_permission', 'other_permission'));
@@ -1157,7 +1157,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     public function testSetObjectPermission()
     {
         $page = AbstractPage::factory(array(
-            'type'       => 'uri'
+            'type'       => 'uri',
         ));
 
         $permission = new \stdClass();

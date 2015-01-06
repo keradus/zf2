@@ -114,6 +114,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $args = func_get_args();
         $this->assertContains('something', $args);
+
         return $args;
     }
 }

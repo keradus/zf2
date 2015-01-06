@@ -37,7 +37,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->sessionManager = $sessionManager;
         Container::setDefaultManager($sessionManager);
 
-        $this->validator = new Csrf;
+        $this->validator = new Csrf();
     }
 
     public function tearDown()
@@ -121,7 +121,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
                 $this->assertSame($container, $value);
                 continue;
             }
-            $method = 'get' . $key;
+            $method = 'get'.$key;
             $this->assertEquals($value, $validator->$method());
         }
     }

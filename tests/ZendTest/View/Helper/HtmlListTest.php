@@ -50,7 +50,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('<ul>', $list);
         $this->assertContains('</ul>', $list);
         foreach ($items as $item) {
-            $this->assertContains('<li>' . $item . '</li>', $list);
+            $this->assertContains('<li>'.$item.'</li>', $list);
         }
     }
 
@@ -63,7 +63,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('<ol>', $list);
         $this->assertContains('</ol>', $list);
         foreach ($items as $item) {
-            $this->assertContains('<li>' . $item . '</li>', $list);
+            $this->assertContains('<li>'.$item.'</li>', $list);
         }
     }
 
@@ -79,7 +79,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('name="list"', $list);
         $this->assertContains('</ul>', $list);
         foreach ($items as $item) {
-            $this->assertContains('<li>' . $item . '</li>', $list);
+            $this->assertContains('<li>'.$item.'</li>', $list);
         }
     }
 
@@ -95,7 +95,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('name="list"', $list);
         $this->assertContains('</ol>', $list);
         foreach ($items as $item) {
-            $this->assertContains('<li>' . $item . '</li>', $list);
+            $this->assertContains('<li>'.$item.'</li>', $list);
         }
     }
 
@@ -108,11 +108,11 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
 
         $list = $this->helper->__invoke($items);
 
-        $this->assertContains('<ul>' . Helper\HtmlList::EOL, $list);
-        $this->assertContains('</ul>' . Helper\HtmlList::EOL, $list);
-        $this->assertContains('one<ul>' . Helper\HtmlList::EOL.'<li>four', $list);
-        $this->assertContains('<li>six</li>' . Helper\HtmlList::EOL . '</ul>' .
-            Helper\HtmlList::EOL . '</li>' . Helper\HtmlList::EOL . '<li>two', $list);
+        $this->assertContains('<ul>'.Helper\HtmlList::EOL, $list);
+        $this->assertContains('</ul>'.Helper\HtmlList::EOL, $list);
+        $this->assertContains('one<ul>'.Helper\HtmlList::EOL.'<li>four', $list);
+        $this->assertContains('<li>six</li>'.Helper\HtmlList::EOL.'</ul>'.
+            Helper\HtmlList::EOL.'</li>'.Helper\HtmlList::EOL.'<li>two', $list);
     }
 
     /*
@@ -124,12 +124,12 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
 
         $list = $this->helper->__invoke($items);
 
-        $this->assertContains('<ul>' . Helper\HtmlList::EOL, $list);
-        $this->assertContains('</ul>' . Helper\HtmlList::EOL, $list);
-        $this->assertContains('one<ul>' . Helper\HtmlList::EOL . '<li>four', $list);
-        $this->assertContains('<li>four<ul>' . Helper\HtmlList::EOL . '<li>six', $list);
-        $this->assertContains('<li>five</li>' . Helper\HtmlList::EOL . '</ul>' .
-            Helper\HtmlList::EOL . '</li>' . Helper\HtmlList::EOL . '<li>two', $list);
+        $this->assertContains('<ul>'.Helper\HtmlList::EOL, $list);
+        $this->assertContains('</ul>'.Helper\HtmlList::EOL, $list);
+        $this->assertContains('one<ul>'.Helper\HtmlList::EOL.'<li>four', $list);
+        $this->assertContains('<li>four<ul>'.Helper\HtmlList::EOL.'<li>six', $list);
+        $this->assertContains('<li>five</li>'.Helper\HtmlList::EOL.'</ul>'.
+            Helper\HtmlList::EOL.'</li>'.Helper\HtmlList::EOL.'<li>two', $list);
     }
 
     public function testListWithValuesToEscapeForZF2283()
@@ -183,7 +183,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         $list = $this->helper->__invoke($items, false, array('class' => 'foo'));
 
         foreach ($items[1] as $item) {
-            $this->assertRegexp('#<ul[^>]*?class="foo"[^>]*>.*?(<li>' . $item . ')#s', $list);
+            $this->assertRegexp('#<ul[^>]*?class="foo"[^>]*>.*?(<li>'.$item.')#s', $list);
         }
     }
 
@@ -215,7 +215,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
 
     public function validateItems($value, $key, $userdata)
     {
-        $this->assertContains('<li>' . $value, $userdata);
+        $this->assertContains('<li>'.$value, $userdata);
     }
 
     /**

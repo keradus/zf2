@@ -101,7 +101,6 @@ class HydratorListenerTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-
         $event->expects($this->any())->method('getExtractionObject')->will($this->returnValue($object));
 
         $this

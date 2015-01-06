@@ -76,7 +76,7 @@ class HttpTest extends TestCase
             array('file'),
             array('mailto'),
             array('g'),
-            array('http:')
+            array('http:'),
         );
     }
 
@@ -103,7 +103,7 @@ class HttpTest extends TestCase
      */
     public function testValidScheme($scheme)
     {
-        $uri = new HttpUri;
+        $uri = new HttpUri();
         $uri->setScheme($scheme);
         $this->assertEquals($scheme, $uri->getScheme());
     }
@@ -116,7 +116,7 @@ class HttpTest extends TestCase
      */
     public function testInvalidScheme($scheme)
     {
-        $uri = new HttpUri;
+        $uri = new HttpUri();
         $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException');
         $uri->setScheme($scheme);
     }
@@ -136,8 +136,8 @@ class HttpTest extends TestCase
     /**
      * Test the validity of the hosts
      *
-     * @param string  $host
-     * @param  bool $expected
+     * @param  string $host
+     * @param  bool   $expected
      * @return void
      * @dataProvider validHostProvider
      */

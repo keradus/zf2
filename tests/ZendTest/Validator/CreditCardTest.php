@@ -66,13 +66,13 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
         $validator->setType(
             array(
                 CreditCard::AMERICAN_EXPRESS,
-                CreditCard::MAESTRO
+                CreditCard::MAESTRO,
             )
         );
         $this->assertEquals(
             array(
                 CreditCard::AMERICAN_EXPRESS,
-                CreditCard::MAESTRO
+                CreditCard::MAESTRO,
             ),
             $validator->getType()
         );
@@ -84,7 +84,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
             array(
                 CreditCard::AMERICAN_EXPRESS,
                 CreditCard::MAESTRO,
-                CreditCard::MASTERCARD
+                CreditCard::MASTERCARD,
             ),
             $validator->getType()
         );
@@ -168,7 +168,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
         $validator = new CreditCard(
             array(
                 'type' => CreditCard::VISA,
-                'service' => array('ZendTest\Validator\CreditCardTest', 'staticCallback')
+                'service' => array('ZendTest\Validator\CreditCardTest', 'staticCallback'),
             )
         );
 

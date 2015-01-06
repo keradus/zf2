@@ -46,7 +46,7 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
     public function testAutoGenerateProxyFiles()
     {
         $serviceManager = new ServiceManager();
-        $namespace      = 'ZendTestProxy' . uniqid();
+        $namespace      = 'ZendTestProxy'.uniqid();
 
         $serviceManager->setService(
             'Config',
@@ -69,10 +69,10 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ProxyManager\\Proxy\\LazyLoadingInterface', $proxy);
         $this->assertInstanceOf(__CLASS__, $proxy);
         $this->assertStringMatchesFormat(
-            $namespace . '\__PM__\ZendTest\ServiceManager\Proxy\LazyServiceFactoryFactoryTest%s',
+            $namespace.'\__PM__\ZendTest\ServiceManager\Proxy\LazyServiceFactoryFactoryTest%s',
             $proxyClassName
         );
-        $this->assertFileExists(sys_get_temp_dir() . '/' . str_replace('\\', '', $proxyClassName) . '.php');
+        $this->assertFileExists(sys_get_temp_dir().'/'.str_replace('\\', '', $proxyClassName).'.php');
         $this->assertFalse($proxy->isProxyInitialized());
         $this->assertEquals($this->invalidConfigProvider(), $proxy->invalidConfigProvider());
         $this->assertTrue($proxy->isProxyInitialized());
@@ -81,7 +81,7 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
     public function testAutoGenerateAndEvaluateProxies()
     {
         $serviceManager = new ServiceManager();
-        $namespace      = 'ZendTestProxy' . uniqid();
+        $namespace      = 'ZendTestProxy'.uniqid();
 
         $serviceManager->setService(
             'Config',
@@ -103,10 +103,10 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ProxyManager\\Proxy\\LazyLoadingInterface', $proxy);
         $this->assertInstanceOf(__CLASS__, $proxy);
         $this->assertStringMatchesFormat(
-            $namespace . '\__PM__\ZendTest\ServiceManager\Proxy\LazyServiceFactoryFactoryTest%s',
+            $namespace.'\__PM__\ZendTest\ServiceManager\Proxy\LazyServiceFactoryFactoryTest%s',
             $proxyClassName
         );
-        $this->assertFileNotExists(sys_get_temp_dir() . '/' . str_replace('\\', '', $proxyClassName) . '.php');
+        $this->assertFileNotExists(sys_get_temp_dir().'/'.str_replace('\\', '', $proxyClassName).'.php');
         $this->assertFalse($proxy->isProxyInitialized());
         $this->assertEquals($this->invalidConfigProvider(), $proxy->invalidConfigProvider());
         $this->assertTrue($proxy->isProxyInitialized());
@@ -116,7 +116,7 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $autoloaders    = spl_autoload_functions();
         $serviceManager = new ServiceManager();
-        $namespace      = 'ZendTestProxy' . uniqid();
+        $namespace      = 'ZendTestProxy'.uniqid();
 
         $serviceManager->setService(
             'Config',
@@ -148,7 +148,7 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(array()),
-            array(array('lazy_services' => array()))
+            array(array('lazy_services' => array())),
         );
     }
 }

@@ -62,12 +62,12 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
             array(Hostname::ALLOW_DNS, false, array('localhost', 'localhost.localdomain', '1.2.3.4', 'domain.invalid')),
             array(Hostname::ALLOW_LOCAL, true, array('localhost', 'localhost.localdomain', 'example.com')),
             array(Hostname::ALLOW_ALL, true, array('localhost', 'example.com', '1.2.3.4')),
-            array(Hostname::ALLOW_LOCAL, false, array('local host', 'example,com', 'exam_ple.com'))
+            array(Hostname::ALLOW_LOCAL, false, array('local host', 'example,com', 'exam_ple.com')),
         );
         foreach ($valuesExpected as $element) {
             $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
-                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -78,12 +78,12 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
             array(Hostname::ALLOW_DNS | Hostname::ALLOW_LOCAL, true, array('domain.com', 'localhost', 'local.localhost')),
             array(Hostname::ALLOW_DNS | Hostname::ALLOW_LOCAL, false, array('1.2.3.4', '255.255.255.255')),
             array(Hostname::ALLOW_DNS | Hostname::ALLOW_IP, true, array('1.2.3.4', '255.255.255.255')),
-            array(Hostname::ALLOW_DNS | Hostname::ALLOW_IP, false, array('localhost', 'local.localhost'))
+            array(Hostname::ALLOW_DNS | Hostname::ALLOW_IP, false, array('localhost', 'local.localhost')),
             );
         foreach ($valuesExpected as $element) {
             $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
-                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -96,12 +96,12 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     {
         $valuesExpected = array(
             array(Hostname::ALLOW_DNS, true, array('domain.com', 'doma-in.com')),
-            array(Hostname::ALLOW_DNS, false, array('-domain.com', 'domain-.com', 'do--main.com'))
+            array(Hostname::ALLOW_DNS, false, array('-domain.com', 'domain-.com', 'do--main.com')),
             );
         foreach ($valuesExpected as $element) {
             $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
-                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -128,22 +128,22 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array(true, array('bürger.de', 'hãllo.de', 'hållo.se')),
             array(true, array('bÜrger.de', 'hÃllo.de', 'hÅllo.se')),
-            array(false, array('hãllo.se', 'bürger.lt', 'hãllo.uk'))
+            array(false, array('hãllo.se', 'bürger.lt', 'hãllo.uk')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
 
         // Check no IDN matching
         $validator->useIdnCheck(false);
         $valuesExpected = array(
-            array(false, array('bürger.de', 'hãllo.de', 'hållo.se'))
+            array(false, array('bürger.de', 'hãllo.de', 'hållo.se')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
 
@@ -151,11 +151,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         unset($validator);
         $validator = new Hostname(Hostname::ALLOW_DNS, false);
         $valuesExpected = array(
-            array(false, array('bürger.de', 'hãllo.de', 'hållo.se'))
+            array(false, array('bürger.de', 'hãllo.de', 'hållo.se')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -172,22 +172,22 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array(true, array('bürger.com', 'hãllo.com', 'hållo.com')),
             array(true, array('bÜrger.com', 'hÃllo.com', 'hÅllo.com')),
-            array(false, array('hãllo.lt', 'bürger.lt', 'hãllo.lt'))
+            array(false, array('hãllo.lt', 'bürger.lt', 'hãllo.lt')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
 
         // Check no IDN matching
         $validator->useIdnCheck(false);
         $valuesExpected = array(
-            array(false, array('bürger.com', 'hãllo.com', 'hållo.com'))
+            array(false, array('bürger.com', 'hãllo.com', 'hållo.com')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
 
@@ -195,11 +195,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         unset($validator);
         $validator = new Hostname(Hostname::ALLOW_DNS, false);
         $valuesExpected = array(
-            array(false, array('bürger.com', 'hãllo.com', 'hållo.com'))
+            array(false, array('bürger.com', 'hãllo.com', 'hållo.com')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -215,22 +215,22 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         // Check TLD matching
         $valuesExpected = array(
             array(true, array('domain.co.uk', 'domain.uk.com', 'domain.tl', 'domain.zw')),
-            array(false, array('domain.xx', 'domain.zz', 'domain.madeup'))
+            array(false, array('domain.xx', 'domain.zz', 'domain.madeup')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
 
         // Check no TLD matching
         $validator->useTldCheck(false);
         $valuesExpected = array(
-            array(true, array('domain.xx', 'domain.zz', 'domain.madeup'))
+            array(true, array('domain.xx', 'domain.zz', 'domain.madeup')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
 
@@ -238,11 +238,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         unset($validator);
         $validator = new Hostname(Hostname::ALLOW_DNS, true, false);
         $valuesExpected = array(
-            array(true, array('domain.xx', 'domain.zz', 'domain.madeup'))
+            array(true, array('domain.xx', 'domain.zz', 'domain.madeup')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -303,11 +303,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         // Check TLD matching
         $valuesExpected = array(
             array(true, array('www.danger1.com', 'danger.com', 'www.danger.com')),
-            array(false, array('www.danger1com', 'dangercom', 'www.dangercom'))
+            array(false, array('www.danger1com', 'dangercom', 'www.dangercom')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -322,11 +322,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         // Check TLD matching
         $valuesExpected = array(
             array(true, array('xn--brger-kva.com', 'xn--eckwd4c7cu47r2wf.jp')),
-            array(false, array('xn--brger-x45d2va.com', 'xn--bürger.com', 'xn--'))
+            array(false, array('xn--brger-x45d2va.com', 'xn--bürger.com', 'xn--')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -365,11 +365,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array(true, array('bürger.com', 'hãllo.com', 'hållo.com')),
             array(true, array('bÜrger.com', 'hÃllo.com', 'hÅllo.com')),
-            array(false, array('hãllo.lt', 'bürger.lt', 'hãllo.lt'))
+            array(false, array('hãllo.lt', 'bürger.lt', 'hãllo.lt')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
-                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -394,7 +394,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         foreach ($valuesExpected as $element) {
             $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
-                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -417,7 +417,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         foreach ($valuesExpected as $element) {
             $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
-                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
+                $this->assertEquals($element[1], $validator->isValid($input), implode("\n", $validator->getMessages()).$input);
             }
         }
     }
@@ -473,14 +473,14 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         // Check .IL TLD matching
         $valuesExpected = array(
             array(true, array('xn----zhcbgfhe2aacg8fb5i.org.il', 'מבחן.il', 'מבחן123.il')),
-            array(false, array('tבדיקה123.il', 'رات.il')) // Can't mix Latin and Hebrew character sets (except digits)
+            array(false, array('tבדיקה123.il', 'رات.il')), // Can't mix Latin and Hebrew character sets (except digits)
         );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals(
                     $element[0],
                     $validator->isValid($input),
-                    implode("\n", $validator->getMessages()) .' - '. $input
+                    implode("\n", $validator->getMessages()).' - '.$input
                 );
             }
         }
@@ -493,14 +493,14 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         // Check UTF-8 TLD matching
         $valuesExpected = array(
             array(true, array('test123.δοκιμή', 'тест.рф', 'туршилтын.мон')),
-            array(false, array('சோதனை3.இலங்கை', 'رات.мон'))
+            array(false, array('சோதனை3.இலங்கை', 'رات.мон')),
         );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals(
                     $element[0],
                     $validator->isValid($input),
-                    implode("\n", $validator->getMessages()) .' - '. $input
+                    implode("\n", $validator->getMessages()).' - '.$input
                 );
             }
         }

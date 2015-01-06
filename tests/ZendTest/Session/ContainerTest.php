@@ -53,7 +53,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $splAutoloadFunctions = spl_autoload_functions();
         if (!$splAutoloadFunctions || !in_array('ZendTest_Autoloader', $splAutoloadFunctions)) {
-            include __DIR__ . '/../../_autoload.php';
+            include __DIR__.'/../../_autoload.php';
         }
     }
 
@@ -64,7 +64,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      * @param  \PHPUnit_Framework_TestResult $result
      * @return void
      */
-    public function run(\PHPUnit_Framework_TestResult $result = NULL)
+    public function run(\PHPUnit_Framework_TestResult $result = null)
     {
         $this->setPreserveGlobalState(false);
 
@@ -115,7 +115,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             '_foo',
             '__foo',
             '\foo',
-            '\\foo'
+            '\\foo',
         );
         foreach ($tries as $try) {
             try {
@@ -153,14 +153,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetDefaultManager()
     {
-        $manager = new TestAsset\TestManager;
+        $manager = new TestAsset\TestManager();
         Container::setDefaultManager($manager);
         $this->assertSame($manager, Container::getDefaultManager());
     }
 
     public function testCanSetDefaultManagerToNull()
     {
-        $manager = new TestAsset\TestManager;
+        $manager = new TestAsset\TestManager();
         Container::setDefaultManager($manager);
         Container::setDefaultManager(null);
         $this->assertNotSame($manager, Container::getDefaultManager());
@@ -560,7 +560,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetArrayCopyAfterExchangeArray()
     {
-        $this->container->exchangeArray(array('foo'=>'bar'));
+        $this->container->exchangeArray(array('foo' => 'bar'));
 
         $contents = $this->container->getArrayCopy();
 

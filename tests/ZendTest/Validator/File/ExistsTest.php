@@ -21,13 +21,14 @@ class ExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/testsize.mo';
+        $testFile = __DIR__.'/_files/testsize.mo';
         $baseDir  = dirname($testFile);
         $baseName = basename($testFile);
         $fileUpload = array(
             'tmp_name' => $testFile, 'name' => basename($testFile),
-            'size' => 200, 'error' => 0, 'type' => 'text'
+            'size' => 200, 'error' => 0, 'type' => 'text',
         );
+
         return array(
             //    Options, isValid Param, Expected value
             array(dirname($baseDir), $baseName,   false),

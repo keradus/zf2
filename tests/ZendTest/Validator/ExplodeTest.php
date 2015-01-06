@@ -95,9 +95,9 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
                 'name' => 'inarray',
                 'options' => array(
                     'haystack' => array(
-                        'a', 'b', 'c'
-                    )
-                )
+                        'a', 'b', 'c',
+                    ),
+                ),
             )
         );
 
@@ -117,7 +117,7 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
         $validator = new Explode();
         $validator->setValidator(
             array(
-                'options' => array()
+                'options' => array(),
             )
         );
     }

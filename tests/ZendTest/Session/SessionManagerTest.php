@@ -38,7 +38,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     {
         $splAutoloadFunctions = spl_autoload_functions();
         if (!$splAutoloadFunctions || !in_array('ZendTest_Autoloader', $splAutoloadFunctions)) {
-            include __DIR__ . '/../../_autoload.php';
+            include __DIR__.'/../../_autoload.php';
         }
     }
 
@@ -51,8 +51,10 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     {
         if (preg_match('/expires=([^;]+)/', $cookie, $matches)) {
             $ts = new \DateTime($matches[1]);
+
             return $ts;
         }
+
         return false;
     }
 
@@ -268,7 +270,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
                 $found  = true;
             }
         }
-        $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
+        $this->assertTrue($found, 'No session cookie found: '.var_export($headers, true));
     }
 
     /**
@@ -296,7 +298,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if ($found) {
             $this->assertNotContains('expires=', $header);
         } else {
-            $this->assertFalse($found, 'Unexpected session cookie found: ' . var_export($headers, true));
+            $this->assertFalse($found, 'Unexpected session cookie found: '.var_export($headers, true));
         }
     }
 
@@ -410,7 +412,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
                 $found  = true;
             }
         }
-        $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
+        $this->assertTrue($found, 'No session cookie found: '.var_export($headers, true));
     }
 
     /**
@@ -436,12 +438,12 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
                 $cookie = $header;
             }
         }
-        $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
+        $this->assertTrue($found, 'No session cookie found: '.var_export($headers, true));
         $ts = $this->getTimestampFromCookie($cookie);
         if (!$ts) {
-            $this->fail('Cookie did not contain expiry? ' . var_export($headers, true));
+            $this->fail('Cookie did not contain expiry? '.var_export($headers, true));
         }
-        $this->assertGreaterThan($_SERVER['REQUEST_TIME'], $ts->getTimestamp(), 'Session cookie: ' . var_export($headers, 1));
+        $this->assertGreaterThan($_SERVER['REQUEST_TIME'], $ts->getTimestamp(), 'Session cookie: '.var_export($headers, 1));
     }
 
     /**
@@ -469,14 +471,14 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
                 $cookie = $header;
             }
         }
-        $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
+        $this->assertTrue($found, 'No session cookie found: '.var_export($headers, true));
         $ts = $this->getTimestampFromCookie($cookie);
         if (!$ts) {
-            $this->fail('Cookie did not contain expiry? ' . var_export($headers, true));
+            $this->fail('Cookie did not contain expiry? '.var_export($headers, true));
         }
         $compare = $_SERVER['REQUEST_TIME'] + $ttl;
         $cookieTs = $ts->getTimestamp();
-        $this->assertTrue(in_array($cookieTs, range($compare, $compare + 10)), 'Session cookie: ' . var_export($headers, 1));
+        $this->assertTrue(in_array($cookieTs, range($compare, $compare + 10)), 'Session cookie: '.var_export($headers, 1));
     }
 
     /**
@@ -500,7 +502,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
                 $found  = true;
             }
         }
-        $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
+        $this->assertTrue($found, 'No session cookie found: '.var_export($headers, true));
         $this->assertNotContains('expires=', $header);
     }
 
@@ -520,7 +522,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testResumeSessionThatFailsAValidatorShouldRaiseException()
     {
-        $this->manager->setSaveHandler(new TestAsset\TestSaveHandlerWithValidator);
+        $this->manager->setSaveHandler(new TestAsset\TestSaveHandlerWithValidator());
         $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
         $this->manager->start();
     }

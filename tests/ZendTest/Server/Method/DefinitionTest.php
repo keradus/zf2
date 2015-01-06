@@ -95,7 +95,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     public function testObjectShouldBeMutable()
     {
         $this->assertNull($this->definition->getObject());
-        $object = new \stdClass;
+        $object = new \stdClass();
         $this->definition->setObject($object);
         $this->assertEquals($object, $this->definition->getObject());
     }
@@ -116,7 +116,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     public function testInvokeArgumentsShouldBeMutable()
     {
         $this->testInvokeArgumentsShouldBeEmptyArrayByDefault();
-        $args = array('foo', array('bar', 'baz'), new \stdClass);
+        $args = array('foo', array('bar', 'baz'), new \stdClass());
         $this->definition->setInvokeArguments($args);
         $this->assertSame($args, $this->definition->getInvokeArguments());
     }
@@ -131,12 +131,12 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     public function testDefinitionShouldAllowAddingSinglePrototypes()
     {
         $this->testPrototypesShouldBeEmptyArrayByDefault();
-        $prototype1 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
         $this->definition->addPrototype($prototype1);
         $test = $this->definition->getPrototypes();
         $this->assertSame($prototype1, $test[0]);
 
-        $prototype2 = new Method\Prototype;
+        $prototype2 = new Method\Prototype();
         $this->definition->addPrototype($prototype2);
         $test = $this->definition->getPrototypes();
         $this->assertSame($prototype1, $test[0]);
@@ -145,8 +145,8 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
 
     public function testDefinitionShouldAllowAddingMultiplePrototypes()
     {
-        $prototype1 = new Method\Prototype;
-        $prototype2 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
+        $prototype2 = new Method\Prototype();
         $prototypes = array($prototype1, $prototype2);
         $this->definition->addPrototypes($prototypes);
         $this->assertSame($prototypes, $this->definition->getPrototypes());
@@ -156,8 +156,8 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     {
         $this->testDefinitionShouldAllowAddingMultiplePrototypes();
 
-        $prototype1 = new Method\Prototype;
-        $prototype2 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
+        $prototype2 = new Method\Prototype();
         $prototypes = array($prototype1, $prototype2);
         $this->assertNotSame($prototypes, $this->definition->getPrototypes());
         $this->definition->setPrototypes($prototypes);
@@ -170,7 +170,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
         $callback   = array('function' => 'foo', 'type' => 'function');
         $prototypes = array(array('returnType' => 'struct', 'parameters' => array('string', 'array')));
         $methodHelp = 'foo bar';
-        $object     = new \stdClass;
+        $object     = new \stdClass();
         $invokeArgs = array('foo', array('bar', 'baz'));
         $this->definition->setName($name)
                          ->setCallback($callback)
@@ -194,7 +194,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
             'callback'        => array('function' => 'foo', 'type' => 'function'),
             'prototypes'      => array(array('returnType' => 'struct', 'parameters' => array('string', 'array'))),
             'methodHelp'      => 'foo bar',
-            'object'          => new \stdClass,
+            'object'          => new \stdClass(),
             'invokeArguments' => array('foo', array('bar', 'baz')),
         );
         $definition = new Method\Definition($options);

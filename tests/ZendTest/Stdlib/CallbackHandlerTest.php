@@ -60,8 +60,8 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $handler = new CallbackHandler(array('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'));
         if (!is_callable(array('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'))) {
-            echo "\nClass exists? " . var_export(class_exists('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback'), 1) . "\n";
-            echo "Include path: " . get_include_path() . "\n";
+            echo "\nClass exists? ".var_export(class_exists('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback'), 1)."\n";
+            echo "Include path: ".get_include_path()."\n";
         }
         $this->assertEquals('bar', $handler->call(array()));
     }

@@ -44,7 +44,7 @@ class RelativeFallbackResolverTest extends TestCase
     public function testReturnsResourceFromTheSameNameSpaceWithPathStack()
     {
         $pathStack = new TemplatePathStack();
-        $pathStack->addPath(__DIR__ . '/../_templates');
+        $pathStack->addPath(__DIR__.'/../_templates');
         $resolver = new RelativeFallbackResolver($pathStack);
         $renderer = new PhpRenderer();
         $view = new ViewModel();
@@ -54,7 +54,7 @@ class RelativeFallbackResolverTest extends TestCase
         $helper->setCurrent($view);
 
         $test = $resolver->resolve('bar', $renderer);
-        $this->assertEquals(realpath(__DIR__ . '/../_templates/name-space/bar.phtml'), $test);
+        $this->assertEquals(realpath(__DIR__.'/../_templates/name-space/bar.phtml'), $test);
     }
 
     public function testReturnsResourceFromTopLevelIfExistsInsteadOfTheSameNameSpace()

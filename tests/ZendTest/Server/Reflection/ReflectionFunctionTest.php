@@ -46,7 +46,6 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($r->system);
     }
 
-
     public function testNamespace()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
@@ -93,7 +92,6 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($p instanceof Reflection\Prototype);
         }
     }
-
 
     public function testGetInvokeArguments()
     {

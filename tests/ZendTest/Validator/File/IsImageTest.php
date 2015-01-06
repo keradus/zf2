@@ -25,10 +25,10 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
         if (version_compare(PHP_VERSION, '5.4', '>=')
                 && version_compare(PHP_VERSION, '5.4.1', '<')
         ) {
-            return __DIR__ . '/_files/magic.lte.5.3.10.mime';
+            return __DIR__.'/_files/magic.lte.5.3.10.mime';
         }
 
-        return __DIR__ . '/_files/magic.mime';
+        return __DIR__.'/_files/magic.mime';
     }
 
     /**
@@ -36,11 +36,12 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/picture.jpg';
+        $testFile = __DIR__.'/_files/picture.jpg';
         $fileUpload = array(
             'tmp_name' => $testFile, 'name' => basename($testFile),
-            'size' => 200, 'error' => 0, 'type' => 'image/jpeg'
+            'size' => 200, 'error' => 0, 'type' => 'image/jpeg',
         );
+
         return array(
             //    Options, isValid Param, Expected value
             array(null,                              $fileUpload, true),
@@ -156,13 +157,13 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
             'name'     => 'picture.jpg',
             'type'     => 'image/jpeg',
             'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/picture.jpg',
-            'error'    => 0
+            'tmp_name' => __DIR__.'/_files/picture.jpg',
+            'error'    => 0,
         );
 
         $validator = new File\IsImage('test/notype');
         $validator->enableHeaderCheck();
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/picture.jpg', $files));
         $error = $validator->getMessages();
         $this->assertTrue(array_key_exists('fileIsImageFalseType', $error));
     }
@@ -178,7 +179,7 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
             'image/gif',
             'image/jpg',
             'magicFile'   => $magicFile,
-            'enableHeaderCheck' => true));
+            'enableHeaderCheck' => true, ));
 
         $this->assertEquals($magicFile, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
@@ -200,7 +201,7 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\IsImage();
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileIsImageNotReadable', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }

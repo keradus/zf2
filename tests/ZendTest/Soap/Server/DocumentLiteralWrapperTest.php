@@ -30,12 +30,12 @@ class DocumentLiteralWrapperTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelegate()
     {
-        $server = new Server(__DIR__ . self::WSDL);
-        $server->setObject(new DocumentLiteralWrapper(new MyCalculatorService));
+        $server = new Server(__DIR__.self::WSDL);
+        $server->setObject(new DocumentLiteralWrapper(new MyCalculatorService()));
 
         // The local client needs an abstraction for this pattern as well.
         // This is just a test so we use the messy way.
-        $client = new SoapClient($server, __DIR__ . self::WSDL);
+        $client = new SoapClient($server, __DIR__.self::WSDL);
         $ret = $client->add(array('x' => 10, 'y' => 20));
 
         $this->assertInstanceOf('stdClass', $ret);

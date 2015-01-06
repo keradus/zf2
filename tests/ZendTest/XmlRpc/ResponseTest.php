@@ -152,14 +152,14 @@ EOD;
                 'id'            => 1,
                 'name'          => 'birdy num num!',
                 'description'   => null,
-            )
+            ),
         ), $response->getReturnValue());
     }
 
     /**
      * helper for saveXml() and __toString() tests
      *
-     * @param string $xml
+     * @param  string $xml
      * @return void
      */
     protected function _testXmlResponse($xml)
@@ -235,7 +235,6 @@ EOD;
         $this->assertEquals(652, $fault->getCode());
     }
 
-
     public function trackError($error)
     {
         $this->_errorOccurred = true;
@@ -246,8 +245,8 @@ EOD;
      */
     public function testDoesNotAllowExternalEntities()
     {
-        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-response.xml');
-        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $payload = file_get_contents(dirname(__FILE__).'/_files/ZF12293-response.xml');
+        $payload = sprintf($payload, 'file://'.realpath(dirname(__FILE__).'/_files/ZF12293-payload.txt'));
         $this->_response->loadXml($payload);
         $value = $this->_response->getReturnValue();
         $this->assertTrue(empty($value));
@@ -258,8 +257,8 @@ EOD;
 
     public function testShouldDisallowsDoctypeInRequestXmlAndReturnFalseOnLoading()
     {
-        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-response.xml');
-        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $payload = file_get_contents(dirname(__FILE__).'/_files/ZF12293-response.xml');
+        $payload = sprintf($payload, 'file://'.realpath(dirname(__FILE__).'/_files/ZF12293-payload.txt'));
         $this->assertFalse($this->_response->loadXml($payload));
     }
 }

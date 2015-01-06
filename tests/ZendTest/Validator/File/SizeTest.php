@@ -22,7 +22,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/testsize.mo';
+        $testFile = __DIR__.'/_files/testsize.mo';
         $testData = array(
             //    Options, isValid Param, Expected value
             array(794,     $testFile,     true),
@@ -40,10 +40,11 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         foreach ($testData as $data) {
             $fileUpload = array(
                 'tmp_name' => $data[1], 'name' => basename($data[1]),
-                'size' => 200, 'error' => 0, 'type' => 'text'
+                'size' => 200, 'error' => 0, 'type' => 'text',
             );
             $testData[] = array($data[0], $fileUpload, $data[2]);
         }
+
         return $testData;
     }
 
@@ -181,13 +182,13 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     public function testFailureMessage()
     {
         $validator = new File\Size(array('min' => 9999, 'max' => 10000));
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/testsize.mo'));
         $messages = $validator->getMessages();
         $this->assertContains('9.76kB', current($messages));
         $this->assertContains('794B', current($messages));
 
         $validator = new File\Size(array('min' => 9999, 'max' => 10000, 'useByteString' => false));
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/testsize.mo'));
         $messages = $validator->getMessages();
         $this->assertContains('9999', current($messages));
         $this->assertContains('794', current($messages));
@@ -199,7 +200,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\Size(array('min' => 1, 'max' => 10000));
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileSizeNotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }

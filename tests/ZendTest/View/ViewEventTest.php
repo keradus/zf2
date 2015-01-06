@@ -22,7 +22,7 @@ class ViewEventTest extends TestCase
 
     public function setUp()
     {
-        $this->event = new ViewEvent;
+        $this->event = new ViewEvent();
     }
 
     public function testModelIsNullByDefault()

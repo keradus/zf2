@@ -40,7 +40,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         Helper\Doctype::unsetDoctypeRegistry();
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->view     = new View();
         $this->helper   = new Helper\HeadLink();
         $this->helper->setView($this->view);
@@ -105,11 +105,11 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $lines, $string);
 
         foreach ($links as $link) {
-            $substr = ' href="' . $link['href'] . '"';
+            $substr = ' href="'.$link['href'].'"';
             $this->assertContains($substr, $string);
-            $substr = ' rel="' . $link['rel'] . '"';
+            $substr = ' rel="'.$link['rel'].'"';
             $this->assertContains($substr, $string);
-            $substr = ' type="' . $link['type'] . '"';
+            $substr = ' type="'.$link['type'].'"';
             $this->assertContains($substr, $string);
         }
 
@@ -141,11 +141,11 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $lines, $string);
 
         foreach ($links as $link) {
-            $substr = ' href="' . $link['href'] . '"';
+            $substr = ' href="'.$link['href'].'"';
             $this->assertContains($substr, $string);
-            $substr = ' rel="' . $link['rel'] . '"';
+            $substr = ' rel="'.$link['rel'].'"';
             $this->assertContains($substr, $string);
-            $substr = ' type="' . $link['type'] . '"';
+            $substr = ' type="'.$link['type'].'"';
             $this->assertContains($substr, $string);
         }
 
@@ -168,7 +168,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         );
         $where = 'append';
         foreach ($links as $link) {
-            $method = $where . 'Alternate';
+            $method = $where.'Alternate';
             $this->helper->$method($link['href'], $link['type'], $link['title']);
             $where = ('append' == $where) ? 'prepend' : 'append';
         }
@@ -182,11 +182,11 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $lines, $string);
 
         foreach ($links as $link) {
-            $substr = ' href="' . $link['href'] . '"';
+            $substr = ' href="'.$link['href'].'"';
             $this->assertContains($substr, $string);
-            $substr = ' title="' . $link['title'] . '"';
+            $substr = ' title="'.$link['title'].'"';
             $this->assertContains($substr, $string);
-            $substr = ' type="' . $link['type'] . '"';
+            $substr = ' type="'.$link['type'].'"';
             $this->assertContains($substr, $string);
         }
 
@@ -420,10 +420,10 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
         $test = $this->helper->toString();
 
-        $expected = '<link href="/test1.css" media="screen" rel="stylesheet" type="text/css">' . PHP_EOL
-                  . '<link href="/test4.css" media="screen" rel="stylesheet" type="text/css">' . PHP_EOL
-                  . '<link href="/test2.css" media="screen" rel="stylesheet" type="text/css">' . PHP_EOL
-                  . '<link href="/test3.css" media="screen" rel="stylesheet" type="text/css">';
+        $expected = '<link href="/test1.css" media="screen" rel="stylesheet" type="text/css">'.PHP_EOL
+                  .'<link href="/test4.css" media="screen" rel="stylesheet" type="text/css">'.PHP_EOL
+                  .'<link href="/test2.css" media="screen" rel="stylesheet" type="text/css">'.PHP_EOL
+                  .'<link href="/test3.css" media="screen" rel="stylesheet" type="text/css">';
 
         $this->assertEquals($expected, $test);
     }

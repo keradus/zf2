@@ -47,11 +47,11 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
                             'Config' => function () {
                                 return array(
                                     'navigation' => array(
-                                        'file'    => __DIR__ . '/_files/navigation.xml',
+                                        'file'    => __DIR__.'/_files/navigation.xml',
                                         'default' => array(
                                             array(
                                                 'label' => 'Page 1',
-                                                'uri'   => 'page1.html'
+                                                'uri'   => 'page1.html',
                                             ),
                                             array(
                                                 'label' => 'MVC Page',
@@ -59,25 +59,25 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
                                                 'pages' => array(
                                                     array(
                                                         'label' => 'Sub MVC Page',
-                                                        'route' => 'foo'
-                                                    )
-                                                )
+                                                        'route' => 'foo',
+                                                    ),
+                                                ),
                                             ),
                                             array(
                                                 'label' => 'Page 3',
-                                                'uri'   => 'page3.html'
-                                            )
-                                        )
-                                    )
+                                                'uri'   => 'page3.html',
+                                            ),
+                                        ),
+                                    ),
                                 );
-                            }
-                        )
+                            },
+                        ),
                     ),
-                )
+                ),
             ),
         );
 
-        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig);
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfig());
         $sm->setService('ApplicationConfig', $config);
         $sm->get('ModuleManager')->loadModules();
         $sm->get('Application')->bootstrap();
@@ -133,7 +133,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function testConstructedNavigationFactoryInjectRouterAndMatcher()
     {
         $builder = $this->getMockBuilder('\Zend\Navigation\Service\ConstructedNavigationFactory');
-        $builder->setConstructorArgs(array(__DIR__ . '/_files/navigation_mvc.xml'))
+        $builder->setConstructorArgs(array(__DIR__.'/_files/navigation_mvc.xml'))
                 ->setMethods(array('injectComponents'));
 
         $factory = $builder->getMock();
@@ -157,8 +157,9 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function testMvcPagesGetInjectedWithComponentsInConstructedNavigationFactory()
     {
         $this->serviceManager->setFactory('Navigation', function ($serviceLocator) {
-              $argument = __DIR__ . '/_files/navigation_mvc.xml';
+              $argument = __DIR__.'/_files/navigation_mvc.xml';
               $factory = new \Zend\Navigation\Service\ConstructedNavigationFactory($argument);
+
               return $factory->createService($serviceLocator);
         });
 
@@ -195,16 +196,16 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $argument = array(
             array(
                 'label' => 'Page 1',
-                'uri'   => 'page1.html'
+                'uri'   => 'page1.html',
             ),
             array(
                 'label' => 'Page 2',
-                'uri'   => 'page2.html'
+                'uri'   => 'page2.html',
             ),
             array(
                 'label' => 'Page 3',
-                'uri'   => 'page3.html'
-            )
+                'uri'   => 'page3.html',
+            ),
         );
 
         $factory = new ConstructedNavigationFactory($argument);
@@ -219,7 +220,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructedFromFileString()
     {
-        $argument = __DIR__ . '/_files/navigation.xml';
+        $argument = __DIR__.'/_files/navigation.xml';
         $factory  = new ConstructedNavigationFactory($argument);
         $this->serviceManager->setFactory('Navigation', $factory);
 
@@ -235,16 +236,16 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $argument = new Config\Config(array(
             array(
                 'label' => 'Page 1',
-                'uri'   => 'page1.html'
+                'uri'   => 'page1.html',
             ),
             array(
                 'label' => 'Page 2',
-                'uri'   => 'page2.html'
+                'uri'   => 'page2.html',
             ),
             array(
                 'label' => 'Page 3',
-                'uri'   => 'page3.html'
-            )
+                'uri'   => 'page3.html',
+            ),
         ));
 
         $factory = new ConstructedNavigationFactory($argument);

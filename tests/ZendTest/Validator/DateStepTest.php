@@ -77,6 +77,7 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             $data[] = array('P2W',  'Y-\WW',           '1970-W01',             '1973-W16',             true );
             $data[] = array('P2W',  'Y-\WW',           '1970-W01',             '1973-W17',             false);
         }
+
         return $data;
     }
 

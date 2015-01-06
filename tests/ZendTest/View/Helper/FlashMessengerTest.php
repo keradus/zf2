@@ -463,7 +463,7 @@ class FlashMessengerTest extends TestCase
      */
     public function testMessageIsEscapedByDefault()
     {
-        $helper = new FlashMessenger;
+        $helper = new FlashMessenger();
         $helper->addMessage('Foo<br />bar');
         unset($helper);
 
@@ -477,7 +477,7 @@ class FlashMessengerTest extends TestCase
      */
     public function testMessageIsNotEscapedWhenAutoEscapeIsFalse()
     {
-        $helper = new FlashMessenger;
+        $helper = new FlashMessenger();
         $helper->addMessage('Foo<br />bar');
         unset($helper);
 
@@ -492,7 +492,7 @@ class FlashMessengerTest extends TestCase
      */
     public function testCanSetAutoEscapeOnRender()
     {
-        $helper = new FlashMessenger;
+        $helper = new FlashMessenger();
         $helper->addMessage('Foo<br />bar');
         unset($helper);
 
@@ -506,7 +506,7 @@ class FlashMessengerTest extends TestCase
      */
     public function testRenderUsesCurrentAutoEscapeByDefault()
     {
-        $helper = new FlashMessenger;
+        $helper = new FlashMessenger();
         $helper->addMessage('Foo<br />bar');
         unset($helper);
 
@@ -515,7 +515,7 @@ class FlashMessengerTest extends TestCase
         $display = $this->helper->render(PluginFlashMessenger::NAMESPACE_DEFAULT);
         $this->assertSame($displayAssertion, $display);
 
-        $helper = new FlashMessenger;
+        $helper = new FlashMessenger();
         $helper->addMessage('Foo<br />bar');
         unset($helper);
 

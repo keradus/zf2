@@ -118,11 +118,11 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testContainerDoesNotPersistBetweenInstances()
     {
-        $foo1 = new Foo;
+        $foo1 = new Foo();
         $foo1->append('Foo');
         $foo1->setSeparator(' - ');
 
-        $foo2 = new Foo;
+        $foo2 = new Foo();
         $foo2->append('Bar');
 
         $test = $foo2->toString();

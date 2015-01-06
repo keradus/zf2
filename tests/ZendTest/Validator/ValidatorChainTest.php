@@ -267,6 +267,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $validator->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(true));
+
         return $validator;
     }
 
@@ -282,6 +283,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $validator->expects($this->any())
             ->method('getMessages')
             ->will($this->returnValue(array('error' => 'validation failed')));
+
         return $validator;
     }
 
@@ -331,7 +333,6 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertTrue($found);
     }
-
 
     public function testCanSerializeValidatorChain()
     {

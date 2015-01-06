@@ -64,7 +64,7 @@ class OptionalParametersFilterTest extends \PHPUnit_Framework_TestCase
     public function testTriggersExceptionOnUnknownMethod()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $this->filter->filter(__CLASS__ . '::' . 'nonExistingMethod');
+        $this->filter->filter(__CLASS__.'::'.'nonExistingMethod');
     }
 
     /**
@@ -75,11 +75,11 @@ class OptionalParametersFilterTest extends \PHPUnit_Framework_TestCase
     public function methodProvider()
     {
         return array(
-            array(__CLASS__ . '::' . 'methodWithoutParameters', true),
-            array(__CLASS__ . '::' . 'methodWithSingleMandatoryParameter', false),
-            array(__CLASS__ . '::' . 'methodWithSingleOptionalParameter', true),
-            array(__CLASS__ . '::' . 'methodWithMultipleMandatoryParameters', false),
-            array(__CLASS__ . '::' . 'methodWithMultipleOptionalParameters', true),
+            array(__CLASS__.'::'.'methodWithoutParameters', true),
+            array(__CLASS__.'::'.'methodWithSingleMandatoryParameter', false),
+            array(__CLASS__.'::'.'methodWithSingleOptionalParameter', true),
+            array(__CLASS__.'::'.'methodWithMultipleMandatoryParameters', false),
+            array(__CLASS__.'::'.'methodWithMultipleOptionalParameters', true),
         );
     }
 

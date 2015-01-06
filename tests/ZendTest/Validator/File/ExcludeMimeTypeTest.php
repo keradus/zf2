@@ -23,11 +23,12 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/picture.jpg';
+        $testFile = __DIR__.'/_files/picture.jpg';
         $fileUpload = array(
             'tmp_name' => $testFile, 'name' => basename($testFile),
-            'size' => 200, 'error' => 0, 'type' => 'image/jpeg'
+            'size' => 200, 'error' => 0, 'type' => 'image/jpeg',
         );
+
         return array(
             //    Options, isValid Param, Expected value
             array('image/gif',                      $fileUpload, true),

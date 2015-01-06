@@ -11,7 +11,6 @@ namespace ZendTest\Text;
 
 use Zend\Text\Figlet;
 
-
 /**
  * @group      Zend_Text
  */
@@ -41,7 +40,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testStandardRightToLeftAlignLeft()
     {
         $figlet = new Figlet\Figlet(array('justification' => Figlet\Figlet::JUSTIFICATION_LEFT,
-                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
+                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT, ));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardRightToLeftAlignLeft.figlet');
     }
@@ -49,7 +48,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testStandardRightToLeftAlignCenter()
     {
         $figlet = new Figlet\Figlet(array('justification' => Figlet\Figlet::JUSTIFICATION_CENTER,
-                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
+                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT, ));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardRightToLeftAlignCenter.figlet');
     }
@@ -101,18 +100,18 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testNonExistentFont()
     {
         $this->setExpectedException('Zend\Text\Figlet\Exception\RuntimeException', 'not found');
-        $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/NonExistentFont.flf'));
+        $figlet = new Figlet\Figlet(array('font' => __DIR__.'/Figlet/NonExistentFont.flf'));
     }
 
     public function testInvalidFont()
     {
         $this->setExpectedException('Zend\Text\Figlet\Exception\UnexpectedValueException', 'Not a FIGlet');
-        $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/InvalidFont.flf'));
+        $figlet = new Figlet\Figlet(array('font' => __DIR__.'/Figlet/InvalidFont.flf'));
     }
 
     public function testGzippedFont()
     {
-        $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/GzippedFont.gz'));
+        $figlet = new Figlet\Figlet(array('font' => __DIR__.'/Figlet/GzippedFont.gz'));
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardAlignLeft.figlet');
     }
 
@@ -127,7 +126,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testOutputWidth()
     {
         $figlet = new Figlet\Figlet(array('outputWidth'   => 50,
-                                             'justification' => Figlet\Figlet::JUSTIFICATION_RIGHT));
+                                             'justification' => Figlet\Figlet::JUSTIFICATION_RIGHT, ));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'OutputWidth50AlignRight.figlet');
     }
@@ -142,7 +141,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testSmushModeRemovedRightToLeft()
     {
         $figlet = new Figlet\Figlet(array('smushMode'     => -1,
-                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
+                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT, ));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'NoSmushRightToLeft.figlet');
     }
@@ -226,7 +225,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     protected function _equalAgainstFile($output, $file)
     {
-        $compareString = file_get_contents(__DIR__ . '/Figlet/' . $file);
+        $compareString = file_get_contents(__DIR__.'/Figlet/'.$file);
 
         $this->assertEquals($compareString, $output);
     }

@@ -29,9 +29,9 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $identity->setUsername('a username');
         $identity->setPassword('a password');
 
-        $authenticationService = new AuthenticationService(new NonPersistentStorage, new TestAsset\AuthenticationAdapter);
+        $authenticationService = new AuthenticationService(new NonPersistentStorage(), new TestAsset\AuthenticationAdapter());
 
-        $identityHelper = new IdentityHelper;
+        $identityHelper = new IdentityHelper();
         $identityHelper->setAuthenticationService($authenticationService);
 
         $this->assertNull($identityHelper());

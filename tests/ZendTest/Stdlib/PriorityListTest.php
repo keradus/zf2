@@ -201,7 +201,7 @@ class PriorityListTest extends TestCase
             array(
                 'bar' => 'bar_value',
                 'foo' => 'foo_value',
-                'baz' => 'baz_value'
+                'baz' => 'baz_value',
             ),
             $this->list->toArray()
         );

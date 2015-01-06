@@ -74,16 +74,16 @@ class MenuTest extends AbstractTest
 
         $expected = array(
             'indent4' => $this->_getExpected('menu/indent4.html'),
-            'indent8' => $this->_getExpected('menu/indent8.html')
+            'indent8' => $this->_getExpected('menu/indent8.html'),
         );
 
         $renderOptions = array(
-            'indent' => 4
+            'indent' => 4,
         );
 
         $actual = array(
             'indent4' => rtrim($this->_helper->renderMenu(null, $renderOptions), PHP_EOL),
-            'indent8' => rtrim($this->_helper->renderMenu(), PHP_EOL)
+            'indent8' => rtrim($this->_helper->renderMenu(), PHP_EOL),
         );
 
         $this->assertEquals($expected, $actual);
@@ -96,13 +96,13 @@ class MenuTest extends AbstractTest
         $expected = array(
             'registered'       => $rendered1,
             'supplied'         => $rendered2,
-            'registered_again' => $rendered1
+            'registered_again' => $rendered1,
         );
 
         $actual = array(
             'registered'       => $this->_helper->render(),
             'supplied'         => $this->_helper->render($this->_nav2),
-            'registered_again' => $this->_helper->render()
+            'registered_again' => $this->_helper->render(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -180,13 +180,13 @@ class MenuTest extends AbstractTest
     public function testOptionEscapeLabelsAsTrue()
     {
         $options = array(
-            'escapeLabels' => true
+            'escapeLabels' => true,
         );
 
         $container = new \Zend\Navigation\Navigation($this->_nav2->toArray());
         $container->addPage(array(
             'label' => 'Badges <span class="badge">1</span>',
-            'uri' => 'badges'
+            'uri' => 'badges',
         ));
 
         $expected = $this->_getExpected('menu/escapelabels_as_true.html');
@@ -198,13 +198,13 @@ class MenuTest extends AbstractTest
     public function testOptionEscapeLabelsAsFalse()
     {
         $options = array(
-            'escapeLabels' => false
+            'escapeLabels' => false,
         );
 
         $container = new \Zend\Navigation\Navigation($this->_nav2->toArray());
         $container->addPage(array(
             'label' => 'Badges <span class="badge">1</span>',
-            'uri' => 'badges'
+            'uri' => 'badges',
         ));
 
         $expected = $this->_getExpected('menu/escapelabels_as_false.html');
@@ -427,7 +427,7 @@ class MenuTest extends AbstractTest
     public function testOptionMaxDepth()
     {
         $options = array(
-            'maxDepth' => 1
+            'maxDepth' => 1,
         );
 
         $expected = $this->_getExpected('menu/maxdepth.html');
@@ -439,7 +439,7 @@ class MenuTest extends AbstractTest
     public function testOptionMinDepth()
     {
         $options = array(
-            'minDepth' => 1
+            'minDepth' => 1,
         );
 
         $expected = $this->_getExpected('menu/mindepth.html');
@@ -452,7 +452,7 @@ class MenuTest extends AbstractTest
     {
         $options = array(
             'minDepth' => 1,
-            'maxDepth' => 2
+            'maxDepth' => 2,
         );
 
         $expected = $this->_getExpected('menu/bothdepts.html');
@@ -464,7 +464,7 @@ class MenuTest extends AbstractTest
     public function testOptionOnlyActiveBranch()
     {
         $options = array(
-            'onlyActiveBranch' => true
+            'onlyActiveBranch' => true,
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch.html');
@@ -477,7 +477,7 @@ class MenuTest extends AbstractTest
     {
         $options = array(
             'onlyActiveBranch' => true,
-            'renderParents' => false
+            'renderParents' => false,
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_noparents.html');
@@ -490,7 +490,7 @@ class MenuTest extends AbstractTest
     {
         $options = array(
             'minDepth' => 1,
-            'onlyActiveBranch' => true
+            'onlyActiveBranch' => true,
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_mindepth.html');
@@ -503,7 +503,7 @@ class MenuTest extends AbstractTest
     {
         $options = array(
             'maxDepth' => 2,
-            'onlyActiveBranch' => true
+            'onlyActiveBranch' => true,
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_maxdepth.html');
@@ -517,7 +517,7 @@ class MenuTest extends AbstractTest
         $options = array(
             'minDepth' => 1,
             'maxDepth' => 2,
-            'onlyActiveBranch' => true
+            'onlyActiveBranch' => true,
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_bothdepts.html');
@@ -532,7 +532,7 @@ class MenuTest extends AbstractTest
             'minDepth' => 2,
             'maxDepth' => 2,
             'onlyActiveBranch' => true,
-            'renderParents' => false
+            'renderParents' => false,
         );
 
         $expected = $this->_getExpected('menu/onlyactivebranch_np_bd.html');

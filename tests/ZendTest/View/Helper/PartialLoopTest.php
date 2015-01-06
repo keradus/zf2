@@ -41,7 +41,7 @@ class PartialLoopTest extends TestCase
      */
     public function setUp()
     {
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->helper   = new PartialLoop();
     }
 
@@ -69,12 +69,12 @@ class PartialLoopTest extends TestCase
         );
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->__invoke('partialLoop.phtml', $data);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item['message'];
+            $string = 'This is an iteration: '.$item['message'];
             $this->assertContains($string, $result);
         }
     }
@@ -88,17 +88,17 @@ class PartialLoopTest extends TestCase
             array('message' => 'foo'),
             array('message' => 'bar'),
             array('message' => 'baz'),
-            array('message' => 'bat')
+            array('message' => 'bat'),
         );
         $o = new IteratorTest($data);
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->__invoke('partialLoop.phtml', $o);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item['message'];
+            $string = 'This is an iteration: '.$item['message'];
             $this->assertContains($string, $result);
         }
     }
@@ -111,13 +111,13 @@ class PartialLoopTest extends TestCase
         $rIterator = new RecursiveIteratorTest();
         for ($i = 0; $i < 5; ++$i) {
             $data = array(
-                'message' => 'foo' . $i,
+                'message' => 'foo'.$i,
             );
             $rIterator->addItem(new IteratorTest($data));
         }
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->__invoke('partialLoop.phtml', $rIterator);
@@ -137,12 +137,12 @@ class PartialLoopTest extends TestCase
             array('message' => 'foo'),
             array('message' => 'bar'),
             array('message' => 'baz'),
-            array('message' => 'bat')
+            array('message' => 'bat'),
         );
         $o = new BogusIteratorTest($data);
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         try {
@@ -158,7 +158,7 @@ class PartialLoopTest extends TestCase
     public function testPassingNullDataThrowsExcpetion()
     {
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $this->setExpectedException('Zend\View\Exception\InvalidArgumentException');
@@ -177,17 +177,17 @@ class PartialLoopTest extends TestCase
             array('message' => 'foo'),
             array('message' => 'bar'),
             array('message' => 'baz'),
-            array('message' => 'bat')
+            array('message' => 'bat'),
         );
         $o = new ArrayObject($data);
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->__invoke('partialLoop.phtml', $o);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item['message'];
+            $string = 'This is an iteration: '.$item['message'];
             $this->assertContains($string, $result);
         }
     }
@@ -198,17 +198,17 @@ class PartialLoopTest extends TestCase
             array('message' => 'foo'),
             array('message' => 'bar'),
             array('message' => 'baz'),
-            array('message' => 'bat')
+            array('message' => 'bat'),
         );
         $o = new ToArrayTest($data);
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->__invoke('partialLoop.phtml', $o);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item['message'];
+            $string = 'This is an iteration: '.$item['message'];
             $this->assertContains($string, $result, $result);
         }
     }
@@ -228,13 +228,13 @@ class PartialLoopTest extends TestCase
         $o = new IteratorWithToArrayTest($data);
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
         $this->helper->setObjectKey('obj');
 
         $result = $this->helper->__invoke('partialLoopObject.phtml', $o);
         foreach ($data as $item) {
-            $string = 'This is an iteration: ' . $item->message;
+            $string = 'This is an iteration: '.$item->message;
             $this->assertContains($string, $result, $result);
         }
     }
@@ -245,7 +245,7 @@ class PartialLoopTest extends TestCase
     public function testEmptyArrayPassedToPartialLoopShouldNotThrowException()
     {
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $this->helper->__invoke('partialLoop.phtml', array());
@@ -260,11 +260,11 @@ class PartialLoopTest extends TestCase
             array('message' => 'foo'),
             array('message' => 'bar'),
             array('message' => 'baz'),
-            array('message' => 'bat')
+            array('message' => 'bat'),
         );
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $this->helper->__invoke('partialLoopCouter.phtml', $data);
@@ -280,11 +280,11 @@ class PartialLoopTest extends TestCase
             array('message' => 'foo'),
             array('message' => 'bar'),
             array('message' => 'baz'),
-            array('message' => 'bat')
+            array('message' => 'bat'),
         );
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $this->helper->__invoke('partialLoopCouter.phtml', $data);
@@ -299,13 +299,13 @@ class PartialLoopTest extends TestCase
         $rIterator = new RecursiveIteratorTest();
         for ($i = 0; $i < 5; ++$i) {
             $data = array(
-                'message' => 'foo' . $i,
+                'message' => 'foo'.$i,
             );
             $rIterator->addItem(new IteratorTest($data));
         }
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
         $this->helper->setObjectKey('obj');
 
@@ -313,7 +313,7 @@ class PartialLoopTest extends TestCase
 
         foreach ($rIterator as $item) {
             foreach ($item as $key => $value) {
-                $this->assertContains('This is an iteration: ' . $value, $result, var_export($value, 1));
+                $this->assertContains('This is an iteration: '.$value, $result, var_export($value, 1));
             }
         }
     }
@@ -327,23 +327,23 @@ class PartialLoopTest extends TestCase
         for ($i = 0; $i < 3; $i++) {
             $obj = new \stdClass();
             $obj->helper = $this->helper;
-            $obj->objectKey = "foo" . $i;
+            $obj->objectKey = "foo".$i;
             $obj->message = "bar";
             $obj->data = array(
-                $obj
+                $obj,
             );
             $data[] = $obj;
         }
 
         $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->resolver()->addPath($this->basePath.'/application/views/scripts');
         $this->helper->setView($view);
 
         $this->helper->setObjectKey('obj');
         $result = $this->helper->__invoke('partialLoopParentObject.phtml', $data);
 
         foreach ($data as $item) {
-            $string = 'This is an iteration with objectKey: ' . $item->objectKey;
+            $string = 'This is an iteration with objectKey: '.$item->objectKey;
             $this->assertContains($string, $result, $result);
         }
     }
@@ -421,6 +421,7 @@ class RecursiveIteratorTest implements Iterator
     public function addItem(Iterator $iterator)
     {
         $this->items[] = $iterator;
+
         return $this;
     }
 

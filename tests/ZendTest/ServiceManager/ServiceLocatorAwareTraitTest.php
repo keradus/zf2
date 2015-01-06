@@ -24,7 +24,7 @@ class ServiceLocatorAwareTraitTest extends TestCase
 
         $this->assertAttributeEquals(null, 'serviceLocator', $object);
 
-        $serviceLocator = new ServiceManager;
+        $serviceLocator = new ServiceManager();
 
         $object->setServiceLocator($serviceLocator);
 
@@ -37,7 +37,7 @@ class ServiceLocatorAwareTraitTest extends TestCase
 
         $this->assertNull($object->getServiceLocator());
 
-        $serviceLocator = new ServiceManager;
+        $serviceLocator = new ServiceManager();
 
         $object->setServiceLocator($serviceLocator);
 

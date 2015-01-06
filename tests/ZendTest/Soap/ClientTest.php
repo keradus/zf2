@@ -9,7 +9,7 @@
 
 namespace ZendTest\Soap;
 
-require_once __DIR__ . '/TestAsset/commontypes.php';
+require_once __DIR__.'/TestAsset/commontypes.php';
 
 use Zend\Soap\AutoDiscover;
 use Zend\Soap\Client;
@@ -51,7 +51,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 'type_ns'       => 'http://www.w3.org/2001/XMLSchema',
                 'from_xml'      => 'strtotime',
                 'to_xml'        => 'strtotime',
-            )
+            ),
         );
 
         $nonWSDLOptions = array('soap_version'   => SOAP_1_1,
@@ -79,7 +79,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                                 'features'       => 4,
 
                                 'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
-                                'typemap'        => $typeMap
+                                'typemap'        => $typeMap,
         );
 
         $client->setOptions($nonWSDLOptions);
@@ -112,7 +112,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                              'stream_context' => $ctx,
 
                              'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
-                             'typemap'        => $typeMap
+                             'typemap'        => $typeMap,
         );
 
         $client1->setOptions($wsdlOptions);
@@ -137,7 +137,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 'type_ns'       => 'http://www.w3.org/2001/XMLSchema',
                 'from_xml'      => 'strtotime',
                 'to_xml'        => 'strtotime',
-            )
+            ),
         );
 
         $options = array('soap_version'   => SOAP_1_1,
@@ -163,7 +163,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                          'passphrase'     => 'some pass phrase',
 
                          'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
-                         'typemap'        => $typeMap
+                         'typemap'        => $typeMap,
         );
 
         $client->setOptions($options);
@@ -182,17 +182,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('agent1', $client->getUserAgent());
 
         $client->setOptions(array(
-            'user_agent' => 'agent2'
+            'user_agent' => 'agent2',
         ));
         $this->assertEquals('agent2', $client->getUserAgent());
 
         $client->setOptions(array(
-            'useragent' => 'agent3'
+            'useragent' => 'agent3',
         ));
         $this->assertEquals('agent3', $client->getUserAgent());
 
         $client->setOptions(array(
-            'userAgent' => 'agent4'
+            'userAgent' => 'agent4',
         ));
         $this->assertEquals('agent4', $client->getUserAgent());
 
@@ -265,24 +265,24 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFunctions()
     {
-        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__.'/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
-        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $client = new Client\Local($server, __DIR__.'/TestAsset/wsdl_example.wsdl');
 
         $this->assertTrue($client->getFunctions() == array('string testFunc()',
                                                            'string testFunc2(string $who)',
                                                            'string testFunc3(string $who, int $when)',
-                                                           'string testFunc4()'));
+                                                           'string testFunc4()', ));
     }
 
     public function testGetTypes()
     {
-        $wsdlFilename = __DIR__ . '/TestAsset/GetTypesWsdlTest.wsdl';
+        $wsdlFilename = __DIR__.'/TestAsset/GetTypesWsdlTest.wsdl';
 
         $autodiscover = new AutoDiscover();
         $autodiscover->setServiceName('ExampleService');
-        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
+        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex());
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
         $autodiscover->setUri('http://example.com');
         $wsdl = $autodiscover->generate();
@@ -319,25 +319,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
             return;
         }
-        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__.'/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
-        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $client = new Client\Local($server, __DIR__.'/TestAsset/wsdl_example.wsdl');
 
         // Perform request
         $client->testFunc2('World');
 
-        $expectedRequest = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-                         . '<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
-                         .               'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                         .               'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                         .               'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
-                         .     '<env:Body>'
-                         .         '<env:testFunc2 env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
-                         .             '<who xsi:type="xsd:string">World</who>'
-                         .         '</env:testFunc2>'
-                         .     '</env:Body>'
-                         . '</env:Envelope>' . "\n";
+        $expectedRequest = '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+                         .'<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
+                         .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                         .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                         .'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
+                         .'<env:Body>'
+                         .'<env:testFunc2 env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
+                         .'<who xsi:type="xsd:string">World</who>'
+                         .'</env:testFunc2>'
+                         .'</env:Body>'
+                         .'</env:Envelope>'."\n";
 
         $this->assertEquals($client->getLastRequest(), $expectedRequest);
     }
@@ -350,26 +350,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__.'/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
-        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $client = new Client\Local($server, __DIR__.'/TestAsset/wsdl_example.wsdl');
 
         // Perform request
         $client->testFunc2('World');
 
-        $expectedResponse = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-                          . '<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
-                          .               'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                          .               'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                          .               'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
-                          .     '<env:Body xmlns:rpc="http://www.w3.org/2003/05/soap-rpc">'
-                          .         '<env:testFunc2Response env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
-                          .             '<rpc:result>testFunc2Return</rpc:result>'
-                          .             '<testFunc2Return xsi:type="xsd:string">Hello World!</testFunc2Return>'
-                          .         '</env:testFunc2Response>'
-                          .     '</env:Body>'
-                          . '</env:Envelope>' . "\n";
+        $expectedResponse = '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+                          .'<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
+                          .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                          .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                          .'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
+                          .'<env:Body xmlns:rpc="http://www.w3.org/2003/05/soap-rpc">'
+                          .'<env:testFunc2Response env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
+                          .'<rpc:result>testFunc2Return</rpc:result>'
+                          .'<testFunc2Return xsi:type="xsd:string">Hello World!</testFunc2Return>'
+                          .'</env:testFunc2Response>'
+                          .'</env:Body>'
+                          .'</env:Envelope>'."\n";
 
         $this->assertEquals($client->getLastResponse(), $expectedResponse);
     }
@@ -382,10 +382,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__.'/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
-        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $client = new Client\Local($server, __DIR__.'/TestAsset/wsdl_example.wsdl');
 
         $this->assertEquals($client->testFunc2('World'), 'Hello World!');
     }
@@ -398,10 +398,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__.'/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
-        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $client = new Client\Local($server, __DIR__.'/TestAsset/wsdl_example.wsdl');
 
         $this->assertEquals($client->call('testFunc2', array('World')), 'Hello World!');
     }
@@ -414,10 +414,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__.'/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
-        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $client = new Client\Local($server, __DIR__.'/TestAsset/wsdl_example.wsdl');
 
         $this->assertEquals($client->call('testFunc2', 'World'), 'Hello World!');
     }
@@ -448,7 +448,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
                                 'stream_context' => $ctx,
 
-                                'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5
+                                'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
         );
 
         $config = new \Zend\Config\Config($nonWSDLOptions);
@@ -466,10 +466,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server = new Server(__DIR__.'/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
-        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $client = new Client\Local($server, __DIR__.'/TestAsset/wsdl_example.wsdl');
 
         // Add request header
         $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader1', 'SOAP header content 1'));
@@ -479,22 +479,22 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // Perform request
         $client->testFunc2('World');
 
-        $expectedRequest = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-                         . '<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
-                         .               'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                         .               'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                         .               'xmlns:ns1="http://www.example.com/namespace" '
-                         .               'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
-                         .     '<env:Header>'
-                         .         '<ns1:MyHeader2>SOAP header content 2</ns1:MyHeader2>'
-                         .         '<ns1:MyHeader1>SOAP header content 1</ns1:MyHeader1>'
-                         .     '</env:Header>'
-                         .     '<env:Body>'
-                         .         '<env:testFunc2 env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
-                         .             '<who xsi:type="xsd:string">World</who>'
-                         .         '</env:testFunc2>'
-                         .     '</env:Body>'
-                         . '</env:Envelope>' . "\n";
+        $expectedRequest = '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+                         .'<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
+                         .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                         .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                         .'xmlns:ns1="http://www.example.com/namespace" '
+                         .'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
+                         .'<env:Header>'
+                         .'<ns1:MyHeader2>SOAP header content 2</ns1:MyHeader2>'
+                         .'<ns1:MyHeader1>SOAP header content 1</ns1:MyHeader1>'
+                         .'</env:Header>'
+                         .'<env:Body>'
+                         .'<env:testFunc2 env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
+                         .'<who xsi:type="xsd:string">World</who>'
+                         .'</env:testFunc2>'
+                         .'</env:Body>'
+                         .'</env:Envelope>'."\n";
 
         $this->assertEquals($client->getLastRequest(), $expectedRequest);
 
@@ -504,22 +504,22 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // Perform request
         $client->testFunc2('World');
 
-        $expectedRequest = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-                         . '<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
-                         .               'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                         .               'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                         .               'xmlns:ns1="http://www.example.com/namespace" '
-                         .               'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
-                         .     '<env:Header>'
-                         .         '<ns1:MyHeader2>SOAP header content 2</ns1:MyHeader2>'
-                         .         '<ns1:MyHeader3>SOAP header content 3</ns1:MyHeader3>'
-                         .     '</env:Header>'
-                         .     '<env:Body>'
-                         .         '<env:testFunc2 env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
-                         .             '<who xsi:type="xsd:string">World</who>'
-                         .         '</env:testFunc2>'
-                         .     '</env:Body>'
-                         . '</env:Envelope>' . "\n";
+        $expectedRequest = '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+                         .'<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
+                         .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                         .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                         .'xmlns:ns1="http://www.example.com/namespace" '
+                         .'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
+                         .'<env:Header>'
+                         .'<ns1:MyHeader2>SOAP header content 2</ns1:MyHeader2>'
+                         .'<ns1:MyHeader3>SOAP header content 3</ns1:MyHeader3>'
+                         .'</env:Header>'
+                         .'<env:Body>'
+                         .'<env:testFunc2 env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
+                         .'<who xsi:type="xsd:string">World</who>'
+                         .'</env:testFunc2>'
+                         .'</env:Body>'
+                         .'</env:Envelope>'."\n";
 
         $this->assertEquals($client->getLastRequest(), $expectedRequest);
 
@@ -531,21 +531,21 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // Perform request
         $client->testFunc2('World');
 
-        $expectedRequest = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-                         . '<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
-                         .               'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                         .               'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                         .               'xmlns:ns1="http://www.example.com/namespace" '
-                         .               'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
-                         .     '<env:Header>'
-                         .         '<ns1:MyHeader4>SOAP header content 4</ns1:MyHeader4>'
-                         .     '</env:Header>'
-                         .     '<env:Body>'
-                         .         '<env:testFunc2 env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
-                         .             '<who xsi:type="xsd:string">World</who>'
-                         .         '</env:testFunc2>'
-                         .     '</env:Body>'
-                         . '</env:Envelope>' . "\n";
+        $expectedRequest = '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+                         .'<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
+                         .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                         .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                         .'xmlns:ns1="http://www.example.com/namespace" '
+                         .'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
+                         .'<env:Header>'
+                         .'<ns1:MyHeader4>SOAP header content 4</ns1:MyHeader4>'
+                         .'</env:Header>'
+                         .'<env:Body>'
+                         .'<env:testFunc2 env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
+                         .'<who xsi:type="xsd:string">World</who>'
+                         .'</env:testFunc2>'
+                         .'</env:Body>'
+                         .'</env:Envelope>'."\n";
 
         $this->assertEquals($client->getLastRequest(), $expectedRequest);
     }
@@ -596,9 +596,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null,                             array()),
-            array(null,                             array('location'=>'http://example.com')),
-            array(__DIR__ . './TestAsset/wsdl_example.wsdl',    array('use'=>SOAP_ENCODED)),
-            array(__DIR__ . './TestAsset/wsdl_example.wsdl',    array('style'=>SOAP_DOCUMENT))
+            array(null,                             array('location' => 'http://example.com')),
+            array(__DIR__.'./TestAsset/wsdl_example.wsdl',    array('use' => SOAP_ENCODED)),
+            array(__DIR__.'./TestAsset/wsdl_example.wsdl',    array('style' => SOAP_DOCUMENT)),
         );
     }
 }

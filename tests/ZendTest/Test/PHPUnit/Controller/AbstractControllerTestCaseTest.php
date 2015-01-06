@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Test\PHPUnit\Controller;
 
 use org\bovigo\vfs\vfsStream;
@@ -46,7 +47,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->tearDownCacheDir();
         Console::overrideIsConsole(null);
         $this->setApplicationConfig(
-            include __DIR__ . '/../../_files/application.config.php'
+            include __DIR__.'/../../_files/application.config.php'
         );
         parent::setUp();
     }
@@ -61,7 +62,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         $config = $this->getApplicationConfig();
         $config = $config['module_listener_options']['cache_dir'];
-        $this->assertEquals(0, count(glob($config . '/*.php')));
+        $this->assertEquals(0, count(glob($config.'/*.php')));
     }
 
     public function testCanNotDefineApplicationConfigWhenApplicationIsBuilt()
@@ -71,7 +72,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->setExpectedException('Zend\Stdlib\Exception\LogicException');
         $this->setApplicationConfig(
-            include __DIR__ . '/../../_files/application.config.php'
+            include __DIR__.'/../../_files/application.config.php'
         );
     }
 

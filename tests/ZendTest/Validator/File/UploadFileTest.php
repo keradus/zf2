@@ -31,13 +31,13 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
             8 => 'fileUploadFileErrorExtension',
             9 => 'fileUploadFileErrorUnknown',
         );
-        $testSizeFile = __DIR__ . '/_files/testsize.mo';
+        $testSizeFile = __DIR__.'/_files/testsize.mo';
 
         foreach ($errorTypes as $errorCode => $errorType) {
             $data[] = array(
                 // fileInfo
                 array(
-                    'name'     => 'test' . $errorCode,
+                    'name'     => 'test'.$errorCode,
                     'type'     => 'text',
                     'size'     => 200 + $errorCode,
                     'tmp_name' => $testSizeFile,
@@ -47,6 +47,7 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
                 $errorType,
             );
         }
+
         return $data;
     }
 
@@ -79,7 +80,7 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\UploadFile();
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileUploadFileErrorFileNotFound', $validator->getMessages()));
         $this->assertContains("not found", current($validator->getMessages()));
     }

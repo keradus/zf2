@@ -83,18 +83,20 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
                 if ($property === 'getServiceLocator') {
                     return false;
                 }
+
                 return true;
             },
             'foobar' => function ($property) {
                 if ($property === 'getFooBar') {
                     return false;
                 }
+
                 return true;
-            }
+            },
         );
         $orCondition = array(
             'has' => new \Zend\Stdlib\Hydrator\Filter\HasFilter(),
-            'get' => new \Zend\Stdlib\Hydrator\Filter\GetFilter()
+            'get' => new \Zend\Stdlib\Hydrator\Filter\GetFilter(),
         );
         $filterComposite = new FilterComposite($orCondition, $andCondition);
 

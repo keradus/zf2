@@ -39,7 +39,7 @@ class LocTest extends \PHPUnit_Framework_TestCase
             'https://www.exmaple.com/?foo=bar',
             'http://www.exmaple.com:8080/foo/bar/',
             'https://user:pass@www.exmaple.com:8080/',
-            'https://www.exmaple.com/?foo=&quot;bar&apos;&amp;bar=&lt;bat&gt;'
+            'https://www.exmaple.com/?foo=&quot;bar&apos;&amp;bar=&lt;bat&gt;',
         );
 
         foreach ($values as $value) {
@@ -78,7 +78,7 @@ class LocTest extends \PHPUnit_Framework_TestCase
     public function testNotStrings()
     {
         $values = array(
-            1, 1.4, null, new \stdClass(), true, false
+            1, 1.4, null, new \stdClass(), true, false,
         );
 
         foreach ($values as $value) {

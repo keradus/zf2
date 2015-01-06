@@ -37,7 +37,7 @@ class GreaterThanTest extends \PHPUnit_Framework_TestCase
             array(array('min' => 0, 'inclusive' => true), true, array(0, 0.00, 0.01, 1, 100)),
             array(array('min' => 0, 'inclusive' => true), false, array(-0.01, -1, -100)),
             array(array('min' => 0, 'inclusive' => false), true, array(0.01, 1, 100)),
-            array(array('min' => 0, 'inclusive' => false), false, array(0, 0.00, -0.01, -1, -100))
+            array(array('min' => 0, 'inclusive' => false), false, array(0, 0.00, -0.01, -1, -100)),
         );
 
         foreach ($valuesExpected as $element) {

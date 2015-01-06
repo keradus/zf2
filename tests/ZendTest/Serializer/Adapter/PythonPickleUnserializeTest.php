@@ -133,8 +133,8 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeLong4Positive()
     {
         $value    = "\x80\x02\x8b\x07\x00\x00\x00"
-                  . str_pad("\xff", 7, "\x7f")
-                  . ".";
+                  .str_pad("\xff", 7, "\x7f")
+                  .".";
         $expected = '35887507618889727';
 
         $data = $this->adapter->unserialize($value);
@@ -144,8 +144,8 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeLong4Negative()
     {
         $value    = "\x80\x02\x8b\x07\x00\x00\x00"
-                  . str_pad("\x00", 7, "\x9f")
-                  . ".";
+                  .str_pad("\x00", 7, "\x9f")
+                  .".";
         $expected = '-27127564814278912';
 
         $data = $this->adapter->unserialize($value);
@@ -155,8 +155,8 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeLong4BigInt()
     {
         $value    = "\x80\x02\x8b\x08\x00\x00\x00"
-                  . str_pad("\x00", 8, "\x9f")
-                  . ".";
+                  .str_pad("\x00", 8, "\x9f")
+                  .".";
         $expected = '-6944656592455360768';
 
         $data = $this->adapter->unserialize($value);
@@ -202,12 +202,12 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeStringWithSpecialChars()
     {
         $value    = "S'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f"
-                  . "\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f"
-                  . "\\xff\\\\\"\\''\r\n"
-                  . "p0\r\n.";
+                  ."\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f"
+                  ."\\xff\\\\\"\\''\r\n"
+                  ."p0\r\n.";
         $expected = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
-                  . "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f"
-                  . "\xff\\\"'";
+                  ."\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f"
+                  ."\xff\\\"'";
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -216,17 +216,17 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeBinString()
     {
         $value    = "\x80\x02T\x00\x01\x00\x00"
-                  . "01234567890123456789012345678901234567890123456789"
-                  . "01234567890123456789012345678901234567890123456789"
-                  . "01234567890123456789012345678901234567890123456789"
-                  . "01234567890123456789012345678901234567890123456789"
-                  . "01234567890123456789012345678901234567890123456789012345"
-                  . "q\x00.";
+                  ."01234567890123456789012345678901234567890123456789"
+                  ."01234567890123456789012345678901234567890123456789"
+                  ."01234567890123456789012345678901234567890123456789"
+                  ."01234567890123456789012345678901234567890123456789"
+                  ."01234567890123456789012345678901234567890123456789012345"
+                  ."q\x00.";
         $expected = '01234567890123456789012345678901234567890123456789'
-                  . '01234567890123456789012345678901234567890123456789'
-                  . '01234567890123456789012345678901234567890123456789'
-                  . '01234567890123456789012345678901234567890123456789'
-                  . '01234567890123456789012345678901234567890123456789012345';
+                  .'01234567890123456789012345678901234567890123456789'
+                  .'01234567890123456789012345678901234567890123456789'
+                  .'01234567890123456789012345678901234567890123456789'
+                  .'01234567890123456789012345678901234567890123456789012345';
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -235,8 +235,8 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeShortBinString()
     {
         $value    = "\x80\x02U\x04"
-                  . "test"
-                  . "q\x00.";
+                  ."test"
+                  ."q\x00.";
         $expected = 'test';
 
         $data = $this->adapter->unserialize($value);
@@ -246,8 +246,8 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeUnicode()
     {
         $value    = "Vtest\\u0400\r\n" // test + ` + E
-                  . "p0\r\n"
-                  . ".";
+                  ."p0\r\n"
+                  .".";
         $expected = "test\xd0\x80";
 
         $data = $this->adapter->unserialize($value);
@@ -256,7 +256,7 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeBinUnicode()
     {
-        $value    = "\x80\x02" . "X\x07\x00\x00\x00" . "test\xd0\x80\n.";
+        $value    = "\x80\x02"."X\x07\x00\x00\x00"."test\xd0\x80\n.";
         $expected = "test\xd0\x80\n"; // test + ` + E + \n
 
         $data = $this->adapter->unserialize($value);
@@ -266,10 +266,10 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeListAppend()
     {
         $value = "(lp0\r\n"
-               . "I1\r\n"
-               . "aI2\r\n"
-               . "aI3\r\n"
-               . "a.";
+               ."I1\r\n"
+               ."aI2\r\n"
+               ."aI3\r\n"
+               ."a.";
         $expected = array(1,2,3);
 
         $data = $this->adapter->unserialize($value);
@@ -288,15 +288,15 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeDictSetItem()
     {
         $value = "(dp0\r\n"
-               . "S'test1'\r\n"
-               . "p1\r\n"
-               . "I1\r\n"
-               . "sI0\r\n"
-               . "I2\r\n"
-               . "sS'test3'\r\n"
-               . "p2\r\n"
-               . "g2\r\n"
-               . "s.";
+               ."S'test1'\r\n"
+               ."p1\r\n"
+               ."I1\r\n"
+               ."sI0\r\n"
+               ."I2\r\n"
+               ."sS'test3'\r\n"
+               ."p2\r\n"
+               ."g2\r\n"
+               ."s.";
         $expected = array('test1' => 1, 0 => 2, 'test3' => 'test3');
 
         $data = $this->adapter->unserialize($value);
@@ -315,10 +315,10 @@ class PythonPickleUnserializeTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeTuple()
     {
         $value    = "(I1\r\n"
-                  . "I2\r\n"
-                  . "I3\r\n"
-                  . "tp0\r\n"
-                  . ".";
+                  ."I2\r\n"
+                  ."I3\r\n"
+                  ."tp0\r\n"
+                  .".";
         $expected = array(1,2,3);
 
         $data = $this->adapter->unserialize($value);

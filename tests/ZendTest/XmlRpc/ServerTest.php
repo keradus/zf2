@@ -157,7 +157,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             array('test1' => 'argv-argument',
                 'test2' => null,
-                'arg' => array('argv-argument')),
+                'arg' => array('argv-argument'), ),
             $response->getReturnValue());
     }
 
@@ -259,7 +259,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(620, $response->getCode());
     }
 
-
     /**
      * setResponseClass() test
      *
@@ -352,19 +351,19 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $struct = array(
             array(
                 'methodName' => 'system.listMethods',
-                'params' => array()
+                'params' => array(),
             ),
             array(
                 'methodName' => 'system.methodHelp',
-                'params' => array('system.multicall')
-            )
+                'params' => array('system.multicall'),
+            ),
         );
         $request = new Request();
         $request->setMethod('system.multicall');
         $request->addParam($struct);
         $response = $this->_server->handle($request);
 
-        $this->assertTrue($response instanceof Response, $response->__toString() . "\n\n" . $request->__toString());
+        $this->assertTrue($response instanceof Response, $response->__toString()."\n\n".$request->__toString());
         $returns = $response->getReturnValue();
         $this->assertTrue(is_array($returns));
         $this->assertEquals(2, count($returns), var_export($returns, 1));
@@ -380,25 +379,25 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $struct = array(
             array(
                 'methodName' => 'system.listMethods',
-                'params' => array()
+                'params' => array(),
             ),
             array(
                 'methodName' => 'undefined',
-                'params' => array()
-            )
+                'params' => array(),
+            ),
         );
         $request = new Request();
         $request->setMethod('system.multicall');
         $request->addParam($struct);
         $response = $this->_server->handle($request);
 
-        $this->assertTrue($response instanceof Response, $response->__toString() . "\n\n" . $request->__toString());
+        $this->assertTrue($response instanceof Response, $response->__toString()."\n\n".$request->__toString());
         $returns = $response->getReturnValue();
         $this->assertTrue(is_array($returns));
         $this->assertEquals(2, count($returns), var_export($returns, 1));
         $this->assertTrue(is_array($returns[0]), var_export($returns[0], 1));
         $this->assertSame(array(
-            'faultCode' => 620, 'faultString' => 'Method "undefined" does not exist'),
+            'faultCode' => 620, 'faultString' => 'Method "undefined" does not exist', ),
             $returns[1], var_export($returns[1], 1));
     }
 
@@ -553,19 +552,19 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $try = array(
             'system.listMethods',
             array(
-                'name' => 'system.listMethods'
-            ),
-            array(
-                'methodName' => 'system.listMethods'
+                'name' => 'system.listMethods',
             ),
             array(
                 'methodName' => 'system.listMethods',
-                'params'     => ''
+            ),
+            array(
+                'methodName' => 'system.listMethods',
+                'params'     => '',
             ),
             array(
                 'methodName' => 'system.multicall',
-                'params'     => array()
-            )
+                'params'     => array(),
+            ),
         );
         $returned = $this->_server->multicall($try);
         $this->assertTrue(is_array($returned));
@@ -670,7 +669,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
  */
 function testFunction($var1, $var2 = 'optional')
 {
-    return $var2 . ': ' . implode(',', (array) $var1);
+    return $var2.': '.implode(',', (array) $var1);
 }
 
 /**
@@ -684,7 +683,6 @@ function testFunction2()
 {
     return 'function2';
 }
-
 
 class TestClass
 {
@@ -706,12 +704,12 @@ class TestClass
      *
      * Returns 'String: ' . $string
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public function test1($string)
     {
-        return 'String: ' . (string) $string;
+        return 'String: '.(string) $string;
     }
 
     /**
@@ -719,7 +717,7 @@ class TestClass
      *
      * Returns imploded array
      *
-     * @param array $array
+     * @param  array  $array
      * @return string
      */
     public static function test2($array)
@@ -739,7 +737,7 @@ class TestClass
     }
 
     /**
-     * @param string $arg
+     * @param  string $arg
      * @return struct
      */
     public function test4($arg)

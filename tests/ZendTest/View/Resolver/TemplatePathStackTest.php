@@ -33,11 +33,11 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->baseDir = realpath(__DIR__ . '/..');
+        $this->baseDir = realpath(__DIR__.'/..');
         $this->stack   = new TemplatePathStack();
         $this->paths   = array(
             TemplatePathStack::normalizePath($this->baseDir),
-            TemplatePathStack::normalizePath($this->baseDir . '/_templates'),
+            TemplatePathStack::normalizePath($this->baseDir.'/_templates'),
         );
     }
 
@@ -53,7 +53,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     {
         $paths = array(
             TemplatePathStack::normalizePath($this->baseDir),
-            TemplatePathStack::normalizePath($this->baseDir . '/_files'),
+            TemplatePathStack::normalizePath($this->baseDir.'/_files'),
         );
         foreach ($paths as $path) {
             $this->stack->addPath($path);
@@ -64,22 +64,22 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testAddPathsAddsPathsToStack()
     {
-        $this->stack->addPath($this->baseDir . '/Helper');
+        $this->stack->addPath($this->baseDir.'/Helper');
         $paths = array(
             TemplatePathStack::normalizePath($this->baseDir),
-            TemplatePathStack::normalizePath($this->baseDir . '/_files'),
+            TemplatePathStack::normalizePath($this->baseDir.'/_files'),
         );
         $this->stack->addPaths($paths);
-        array_unshift($paths, TemplatePathStack::normalizePath($this->baseDir . '/Helper'));
+        array_unshift($paths, TemplatePathStack::normalizePath($this->baseDir.'/Helper'));
         $this->assertEquals(array_reverse($paths), $this->stack->getPaths()->toArray());
     }
 
     public function testSetPathsOverwritesStack()
     {
-        $this->stack->addPath($this->baseDir . '/Helper');
+        $this->stack->addPath($this->baseDir.'/Helper');
         $paths = array(
             TemplatePathStack::normalizePath($this->baseDir),
-            TemplatePathStack::normalizePath($this->baseDir . '/_files'),
+            TemplatePathStack::normalizePath($this->baseDir.'/_files'),
         );
         $this->stack->setPaths($paths);
         $this->assertEquals(array_reverse($paths), $this->stack->getPaths()->toArray());
@@ -89,7 +89,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     {
         $paths = array(
             $this->baseDir,
-            $this->baseDir . '/_files',
+            $this->baseDir.'/_files',
         );
         $this->stack->setPaths($paths);
         $this->stack->clearPaths();
@@ -124,7 +124,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testDoesNotAllowParentDirectoryTraversalByDefault()
     {
-        $this->stack->addPath($this->baseDir . '/_templates');
+        $this->stack->addPath($this->baseDir.'/_templates');
 
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface', 'parent directory traversal');
         $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
@@ -133,7 +133,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     public function testDisablingLfiProtectionAllowsParentDirectoryTraversal()
     {
         $this->stack->setLfiProtection(false)
-                    ->addPath($this->baseDir . '/_templates');
+                    ->addPath($this->baseDir.'/_templates');
 
         $test = $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
         $this->assertContains('LfiProtectionCheck.phtml', $test);
@@ -147,15 +147,15 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnsFalseWhenUnableToResolveScriptToPath()
     {
-        $this->stack->addPath($this->baseDir . '/_templates');
+        $this->stack->addPath($this->baseDir.'/_templates');
         $this->assertFalse($this->stack->resolve('bogus-script.txt'));
         $this->assertEquals(TemplatePathStack::FAILURE_NOT_FOUND, $this->stack->getLastLookupFailure());
     }
 
     public function testReturnsFullPathNameWhenAbleToResolveScriptPath()
     {
-        $this->stack->addPath($this->baseDir . '/_templates');
-        $expected = realpath($this->baseDir . '/_templates/test.phtml');
+        $this->stack->addPath($this->baseDir.'/_templates');
+        $expected = realpath($this->baseDir.'/_templates/test.phtml');
         $test     = $this->stack->resolve('test.phtml');
         $this->assertEquals($expected, $test);
     }
@@ -167,8 +167,8 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Short tags are disabled; cannot test');
         }
         $this->stack->setUseStreamWrapper(true)
-                    ->addPath($this->baseDir . '/_templates');
-        $expected = 'zend.view://' . realpath($this->baseDir . '/_templates/test.phtml');
+                    ->addPath($this->baseDir.'/_templates');
+        $expected = 'zend.view://'.realpath($this->baseDir.'/_templates/test.phtml');
         $test     = $this->stack->resolve('test.phtml');
         $this->assertEquals($expected, $test);
     }
@@ -180,7 +180,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
             array(1),
             array(1.0),
             array('foo'),
-            array(new \stdClass),
+            array(new \stdClass()),
         );
     }
 
@@ -205,6 +205,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
             'use_stream_wrapper' => true,
             'default_suffix'     => 'php',
         );
+
         return array(
             array($options),
             array(new \ArrayObject($options)),
@@ -249,16 +250,16 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsRelativePharPath()
     {
-        $path = 'phar://' . $this->baseDir
-            . DIRECTORY_SEPARATOR . '_templates'
-            . DIRECTORY_SEPARATOR . 'view.phar'
-            . DIRECTORY_SEPARATOR . 'start'
-            . DIRECTORY_SEPARATOR . '..'
-            . DIRECTORY_SEPARATOR . 'views';
+        $path = 'phar://'.$this->baseDir
+            .DIRECTORY_SEPARATOR.'_templates'
+            .DIRECTORY_SEPARATOR.'view.phar'
+            .DIRECTORY_SEPARATOR.'start'
+            .DIRECTORY_SEPARATOR.'..'
+            .DIRECTORY_SEPARATOR.'views';
 
         $this->stack->addPath($path);
-        $test = $this->stack->resolve('foo' . DIRECTORY_SEPARATOR . 'hello.phtml');
-        $this->assertEquals($path . DIRECTORY_SEPARATOR . 'foo' . DIRECTORY_SEPARATOR . 'hello.phtml', $test);
+        $test = $this->stack->resolve('foo'.DIRECTORY_SEPARATOR.'hello.phtml');
+        $this->assertEquals($path.DIRECTORY_SEPARATOR.'foo'.DIRECTORY_SEPARATOR.'hello.phtml', $test);
     }
 
     public function testDefaultFileSuffixIsPhtml()

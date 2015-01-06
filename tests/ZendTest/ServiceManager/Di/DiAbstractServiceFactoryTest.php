@@ -42,7 +42,6 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::__construct
      */
@@ -97,25 +96,25 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($instance->canCreateServiceWithName($locator, 'an-alias', 'an-alias'));
 
         // will check instance configurations
-        $this->assertFalse($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\Non\Existing', __NAMESPACE__ . '\Non\Existing'));
-        $im->setConfig(__NAMESPACE__ . '\Non\Existing', array('parameters' => array('a' => 'b')));
-        $this->assertTrue($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\Non\Existing', __NAMESPACE__ . '\Non\Existing'));
+        $this->assertFalse($instance->canCreateServiceWithName($locator, __NAMESPACE__.'\Non\Existing', __NAMESPACE__.'\Non\Existing'));
+        $im->setConfig(__NAMESPACE__.'\Non\Existing', array('parameters' => array('a' => 'b')));
+        $this->assertTrue($instance->canCreateServiceWithName($locator, __NAMESPACE__.'\Non\Existing', __NAMESPACE__.'\Non\Existing'));
 
         // will check preferences for abstract types
-        $this->assertFalse($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\AbstractClass', __NAMESPACE__ . '\AbstractClass'));
-        $im->setTypePreference(__NAMESPACE__ . '\AbstractClass', array(__NAMESPACE__ . '\Non\Existing'));
-        $this->assertTrue($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\AbstractClass', __NAMESPACE__ . '\AbstractClass'));
+        $this->assertFalse($instance->canCreateServiceWithName($locator, __NAMESPACE__.'\AbstractClass', __NAMESPACE__.'\AbstractClass'));
+        $im->setTypePreference(__NAMESPACE__.'\AbstractClass', array(__NAMESPACE__.'\Non\Existing'));
+        $this->assertTrue($instance->canCreateServiceWithName($locator, __NAMESPACE__.'\AbstractClass', __NAMESPACE__.'\AbstractClass'));
 
         // will check definitions
         $def = $instance->definitions();
-        $this->assertFalse($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\Other\Non\Existing', __NAMESPACE__ . '\Other\Non\Existing'));
+        $this->assertFalse($instance->canCreateServiceWithName($locator, __NAMESPACE__.'\Other\Non\Existing', __NAMESPACE__.'\Other\Non\Existing'));
         $classDefinition = $this->getMock('Zend\Di\Definition\DefinitionInterface');
         $classDefinition
             ->expects($this->any())
             ->method('hasClass')
-            ->with($this->equalTo(__NAMESPACE__ . '\Other\Non\Existing'))
+            ->with($this->equalTo(__NAMESPACE__.'\Other\Non\Existing'))
             ->will($this->returnValue(true));
         $def->addDefinition($classDefinition);
-        $this->assertTrue($instance->canCreateServiceWithName($locator, __NAMESPACE__ . '\Other\Non\Existing', __NAMESPACE__ . '\Other\Non\Existing'));
+        $this->assertTrue($instance->canCreateServiceWithName($locator, __NAMESPACE__.'\Other\Non\Existing', __NAMESPACE__.'\Other\Non\Existing'));
     }
 }

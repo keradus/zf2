@@ -36,7 +36,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $resolver = new Resolver\TemplatePathStack(array('script_paths' => array(
-            __DIR__ . '/_files/scripts',
+            __DIR__.'/_files/scripts',
         )));
         $view = new View();
         $view->setResolver($resolver);

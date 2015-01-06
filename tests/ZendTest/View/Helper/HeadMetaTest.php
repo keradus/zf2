@@ -41,7 +41,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     {
         $this->error = false;
         Helper\Doctype::unsetDoctypeRegistry();
-        $this->basePath = __DIR__ . '/_files/modules';
+        $this->basePath = __DIR__.'/_files/modules';
         $this->view     = new View();
         $this->view->plugin('doctype')->__invoke('XHTML1_STRICT');
         $this->helper   = new Helper\HeadMeta();
@@ -99,12 +99,13 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $type = str_replace('-', ' ', $type);
         $type = ucwords($type);
         $type = str_replace(' ', '', $type);
+
         return $type;
     }
 
     protected function _testOverloadAppend($type)
     {
-        $action = 'append' . $this->_inflectAction($type);
+        $action = 'append'.$this->_inflectAction($type);
         $string = 'foo';
         for ($i = 0; $i < 3; ++$i) {
             $string .= ' foo';
@@ -124,7 +125,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 
     protected function _testOverloadPrepend($type)
     {
-        $action = 'prepend' . $this->_inflectAction($type);
+        $action = 'prepend'.$this->_inflectAction($type);
         $string = 'foo';
         for ($i = 0; $i < 3; ++$i) {
             $string .= ' foo';
@@ -144,8 +145,8 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 
     protected function _testOverloadSet($type)
     {
-        $setAction = 'set' . $this->_inflectAction($type);
-        $appendAction = 'append' . $this->_inflectAction($type);
+        $setAction = 'set'.$this->_inflectAction($type);
+        $appendAction = 'append'.$this->_inflectAction($type);
         $string = 'foo';
         for ($i = 0; $i < 3; ++$i) {
             $this->helper->$appendAction('keywords', $string);
@@ -312,7 +313,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $view->plugin('headMeta')->setName('keywords', 'bat');
 
         $this->assertEquals(
-            '<meta http-equiv="pragma" content="bar" />' . PHP_EOL . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL . '<meta name="keywords" content="bat" />',
+            '<meta http-equiv="pragma" content="bar" />'.PHP_EOL.'<meta http-equiv="Cache-control" content="baz" />'.PHP_EOL.'<meta name="keywords" content="bat" />',
             $view->plugin('headMeta')->toString()
             );
     }
@@ -330,7 +331,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $view->plugin('headMeta')->setName('keywords', 'bar');
 
         $this->assertEquals(
-            '<meta name="description" content="foo" />' . PHP_EOL . '<meta http-equiv="pragma" content="baz" />' . PHP_EOL . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL . '<meta name="keywords" content="bar" />',
+            '<meta name="description" content="foo" />'.PHP_EOL.'<meta http-equiv="pragma" content="baz" />'.PHP_EOL.'<meta http-equiv="Cache-control" content="baz" />'.PHP_EOL.'<meta name="keywords" content="bar" />',
             $view->plugin('headMeta')->toString()
             );
     }
@@ -346,7 +347,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $view->plugin('headMeta')->__invoke('some content', 'bar', 'name', array(), \Zend\View\Helper\Placeholder\Container\AbstractContainer::PREPEND);
 
         $this->assertEquals(
-            '<meta name="bar" content="some content" />' . PHP_EOL . '<meta name="keywords" content="foo" />',
+            '<meta name="bar" content="some content" />'.PHP_EOL.'<meta name="keywords" content="foo" />',
             $view->plugin('headMeta')->toString()
             );
     }
@@ -363,10 +364,10 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 
         $test = $this->helper->toString();
 
-        $expected = '<meta name="keywords" content="foo" />' . PHP_EOL
-                  . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL
-                  . '<meta name="description" content="foo" />' . PHP_EOL
-                  . '<meta http-equiv="pragma" content="baz" />';
+        $expected = '<meta name="keywords" content="foo" />'.PHP_EOL
+                  .'<meta http-equiv="Cache-control" content="baz" />'.PHP_EOL
+                  .'<meta name="description" content="foo" />'.PHP_EOL
+                  .'<meta http-equiv="pragma" content="baz" />';
 
         $this->assertEquals($expected, $test);
     }
@@ -403,7 +404,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
             $view->plugin('headMeta')->toString());
     }
 
-     /**
+    /**
      * @group ZF-9743
      */
     public function testPropertyIsSupportedWithRdfaDoctype()
@@ -458,7 +459,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->_testOverloadSet('property');
     }
 
-     /**
+    /**
      * @issue 3751
      */
     public function testItempropIsSupportedWithHtml5Doctype()

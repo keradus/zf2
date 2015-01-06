@@ -72,7 +72,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $validator = new EmailAddress(Hostname::ALLOW_DNS | Hostname::ALLOW_IP);
         $valuesExpected = array(
             array(Hostname::ALLOW_DNS, true, array('bob@212.212.20.4')),
-            array(Hostname::ALLOW_DNS, false, array('bob@localhost'))
+            array(Hostname::ALLOW_DNS, false, array('bob@localhost')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[2] as $input) {
@@ -171,11 +171,11 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             '"bob jones"@domain.com',
             '"bob@jones"@domain.com',
             '"[[ bob ]]"@domain.com',
-            '"jones"@domain.com'
+            '"jones"@domain.com',
             );
         foreach ($emailAddresses as $input) {
             $this->assertTrue($this->validator->isValid($input), "$input failed to pass validation:\n"
-                            . implode("\n", $this->validator->getMessages()));
+                            .implode("\n", $this->validator->getMessages()));
         }
     }
 
@@ -197,7 +197,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             );
         foreach ($emailAddresses as $input) {
             $this->assertFalse($this->validator->isValid($input), "$input failed to pass validation:\n"
-                            . implode("\n", $this->validator->getMessages()));
+                            .implode("\n", $this->validator->getMessages()));
         }
     }
 
@@ -234,11 +234,11 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             'bob+jones@domain.us',
             'bob+jones@domain.co.uk',
             'bob@some.domain.uk.com',
-            'bob@verylongdomainsupercalifragilisticexpialidociousspoonfulofsugar.com'
+            'bob@verylongdomainsupercalifragilisticexpialidociousspoonfulofsugar.com',
             );
         foreach ($emailAddresses as $input) {
             $this->assertTrue($this->validator->isValid($input), "$input failed to pass validation:\n"
-                            . implode("\n", $this->validator->getMessages()));
+                            .implode("\n", $this->validator->getMessages()));
         }
     }
 
@@ -265,10 +265,10 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             'bob @domain.com',
             'bob@ domain.com',
             'bob @ domain.com',
-            'Abc..123@example.com'
+            'Abc..123@example.com',
             );
         foreach ($emailAddresses as $input) {
-            $this->assertFalse($this->validator->isValid($input), implode("\n", $this->validator->getMessages()) . $input);
+            $this->assertFalse($this->validator->isValid($input), implode("\n", $this->validator->getMessages()).$input);
         }
     }
 
@@ -286,14 +286,14 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             '/Bob.Jones@domain.com',
             '#Bob.Jones@domain.com',
             'Bob.Jones?@domain.com',
-            'Bob~Jones@domain.com'
+            'Bob~Jones@domain.com',
             );
         foreach ($emailAddresses as $input) {
             $this->assertTrue($this->validator->isValid($input));
         }
     }
 
-   /**
+    /**
      * Ensures that the validator follows expected behavior for checking MX records
      *
      * @return void
@@ -311,7 +311,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
 
         $valuesExpected = array(
             array(true,  array('Bob.Jones@zend.com',        'Bob.Jones@php.net')),
-            array(false, array('Bob.Jones@bad.example.com', 'Bob.Jones@anotherbad.example.com'))
+            array(false, array('Bob.Jones@bad.example.com', 'Bob.Jones@anotherbad.example.com')),
         );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
@@ -362,7 +362,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid($email), implode("\n", $validator->getMessages()));
     }
 
-   /**
+    /**
      * Test changing hostname settings via EmailAddress object
      *
      * @return void
@@ -374,7 +374,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         // Check no IDN matching
         $validator->getHostnameValidator()->useIdnCheck(false);
         $valuesExpected = array(
-            array(false, array('name@b�rger.de', 'name@h�llo.de', 'name@h�llo.se'))
+            array(false, array('name@b�rger.de', 'name@h�llo.de', 'name@h�llo.se')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
@@ -385,7 +385,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         // Check no TLD matching
         $validator->getHostnameValidator()->useTldCheck(false);
         $valuesExpected = array(
-            array(true, array('name@domain.xx', 'name@domain.zz', 'name@domain.madeup'))
+            array(true, array('name@domain.xx', 'name@domain.zz', 'name@domain.madeup')),
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
@@ -678,7 +678,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
 
         $validator = new EmailAddress(array(
             'useMxCheck'        => true,
-            'useDeepMxCheck'    => true
+            'useDeepMxCheck'    => true,
         ));
 
         $emailAddresses = array(
@@ -691,12 +691,12 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             'bob+jones@nic.us',
             'bob+jones@dailymail.co.uk',
             'bob@teaparty.uk.com',
-            'bob@thelongestdomainnameintheworldandthensomeandthensomemoreandmore.com'
+            'bob@thelongestdomainnameintheworldandthensomeandthensomemoreandmore.com',
         );
 
         foreach ($emailAddresses as $input) {
             $this->assertTrue($validator->isValid($input), "$input failed to pass validation:\n"
-                            . implode("\n", $validator->getMessages()));
+                            .implode("\n", $validator->getMessages()));
         }
     }
 
@@ -707,7 +707,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new EmailAddress(array(
             'useMxCheck'        => true,
-            'useDeepMxCheck'    => true
+            'useDeepMxCheck'    => true,
         ));
 
         $emailAddresses = array(
@@ -726,10 +726,10 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             'bob @domain.com',
             'bob@ domain.com',
             'bob @ domain.com',
-            'Abc..123@example.com'
+            'Abc..123@example.com',
             );
         foreach ($emailAddresses as $input) {
-            $this->assertFalse($validator->isValid($input), implode("\n", $this->validator->getMessages()) . $input);
+            $this->assertFalse($validator->isValid($input), implode("\n", $this->validator->getMessages()).$input);
         }
     }
 

@@ -36,13 +36,13 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
             array(1, 100, true, false, array(0, 0.99, 100.01, 101)),
             array(1, 100, false, false, array(0, 1, 100, 101)),
             array('a', 'z', true, true, array('a', 'b', 'y', 'z')),
-            array('a', 'z', false, false, array('!', 'a', 'z'))
+            array('a', 'z', false, false, array('!', 'a', 'z')),
             );
         foreach ($valuesExpected as $element) {
             $validator = new Between(array('min' => $element[0], 'max' => $element[1], 'inclusive' => $element[2]));
             foreach ($element[4] as $input) {
                 $this->assertEquals($element[3], $validator->isValid($input),
-                'Failed values: ' . $input . ":" . implode("\n", $validator->getMessages()));
+                'Failed values: '.$input.":".implode("\n", $validator->getMessages()));
             }
         }
     }

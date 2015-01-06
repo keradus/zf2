@@ -119,7 +119,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Permissions\Acl\Exception\InvalidArgumentException',
                                     'addRole() expects $role to be of type Zend\Permissions\Acl\Role');
-        $this->_acl->addRole(new \stdClass, 'guest');
+        $this->_acl->addRole(new \stdClass(), 'guest');
     }
 
     /**
@@ -367,7 +367,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Permissions\Acl\Exception\InvalidArgumentException',
                                     'addResource() expects $resource to be of type Zend\Permissions\Acl\Resource');
-        $this->_acl->addResource(new \stdClass);
+        $this->_acl->addResource(new \stdClass());
     }
 
     /**
@@ -1086,7 +1086,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
             ->addRole($someRole);
 
         $nullValue     = null;
-        $nullReference =& $nullValue;
+        $nullReference = & $nullValue;
 
         try {
             $acl->exroleDFSVisitAllPrivileges($someRole, $someResource, $nullReference);
@@ -1116,7 +1116,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals('$dfs parameter may not be null', $e->getMessage());
         }
     }
-
 
     /**
      * @group ZF-1721

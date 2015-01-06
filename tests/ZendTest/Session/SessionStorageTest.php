@@ -20,7 +20,7 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $_SESSION = array();
-        $this->storage = new SessionStorage;
+        $this->storage = new SessionStorage();
     }
 
     public function tearDown()

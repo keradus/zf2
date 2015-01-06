@@ -330,10 +330,10 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $table->appendRow($row);
 
         $this->assertEquals($table->render(),   "┌──────────┬──────────┐\n"
-                                              . "│foobar    │foobar    │\n"
-                                              . "├──────────┴──────────┤\n"
-                                              . "│foobar               │\n"
-                                              . "└─────────────────────┘\n");
+                                              ."│foobar    │foobar    │\n"
+                                              ."├──────────┴──────────┤\n"
+                                              ."│foobar               │\n"
+                                              ."└─────────────────────┘\n");
     }
 
     public function testTableComplex()
@@ -361,14 +361,14 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $table->appendRow($row);
 
         $this->assertEquals($table->render(),   "┌──────────┬─────────────────────┐\n"
-                                              . "│foobar    │foobar               │\n"
-                                              . "├──────────┼─────────────────────┤\n"
-                                              . "│foobar    │foobar               │\n"
-                                              . "├──────────┴─────────────────────┤\n"
-                                              . "│foobar                          │\n"
-                                              . "├──────────┬──────────┬──────────┤\n"
-                                              . "│foobar    │foobar    │foobar    │\n"
-                                              . "└──────────┴──────────┴──────────┘\n");
+                                              ."│foobar    │foobar               │\n"
+                                              ."├──────────┼─────────────────────┤\n"
+                                              ."│foobar    │foobar               │\n"
+                                              ."├──────────┴─────────────────────┤\n"
+                                              ."│foobar                          │\n"
+                                              ."├──────────┬──────────┬──────────┤\n"
+                                              ."│foobar    │foobar    │foobar    │\n"
+                                              ."└──────────┴──────────┴──────────┘\n");
     }
 
     public function testTableMagicToString()
@@ -387,16 +387,16 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\Unicode();
 
         $chars = $decorator->getBottomLeft()
-               . $decorator->getBottomRight()
-               . $decorator->getCross()
-               . $decorator->getHorizontal()
-               . $decorator->getHorizontalDown()
-               . $decorator->getHorizontalUp()
-               . $decorator->getTopLeft()
-               . $decorator->getTopRight()
-               . $decorator->getVertical()
-               . $decorator->getVerticalLeft()
-               . $decorator->getVerticalRight();
+               .$decorator->getBottomRight()
+               .$decorator->getCross()
+               .$decorator->getHorizontal()
+               .$decorator->getHorizontalDown()
+               .$decorator->getHorizontalUp()
+               .$decorator->getTopLeft()
+               .$decorator->getTopRight()
+               .$decorator->getVertical()
+               .$decorator->getVerticalLeft()
+               .$decorator->getVerticalRight();
 
         $this->assertEquals($chars, '└┘┼─┬┴┌┐│┤├');
     }
@@ -406,36 +406,36 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\Ascii();
 
         $chars = $decorator->getBottomLeft()
-               . $decorator->getBottomRight()
-               . $decorator->getCross()
-               . $decorator->getHorizontal()
-               . $decorator->getHorizontalDown()
-               . $decorator->getHorizontalUp()
-               . $decorator->getTopLeft()
-               . $decorator->getTopRight()
-               . $decorator->getVertical()
-               . $decorator->getVerticalLeft()
-               . $decorator->getVerticalRight();
+               .$decorator->getBottomRight()
+               .$decorator->getCross()
+               .$decorator->getHorizontal()
+               .$decorator->getHorizontalDown()
+               .$decorator->getHorizontalUp()
+               .$decorator->getTopLeft()
+               .$decorator->getTopRight()
+               .$decorator->getVertical()
+               .$decorator->getVerticalLeft()
+               .$decorator->getVerticalRight();
 
         $this->assertEquals($chars, '+++-++++|++');
     }
 
     public function testDecoratorBlank()
     {
-        $decoratorManager = new Table\DecoratorManager;
+        $decoratorManager = new Table\DecoratorManager();
         $decorator = $decoratorManager->get('blank');
 
         $chars = $decorator->getBottomLeft()
-               . $decorator->getBottomRight()
-               . $decorator->getCross()
-               . $decorator->getHorizontal()
-               . $decorator->getHorizontalDown()
-               . $decorator->getHorizontalUp()
-               . $decorator->getTopLeft()
-               . $decorator->getTopRight()
-               . $decorator->getVertical()
-               . $decorator->getVerticalLeft()
-               . $decorator->getVerticalRight();
+               .$decorator->getBottomRight()
+               .$decorator->getCross()
+               .$decorator->getHorizontal()
+               .$decorator->getHorizontalDown()
+               .$decorator->getHorizontalUp()
+               .$decorator->getTopLeft()
+               .$decorator->getTopRight()
+               .$decorator->getVertical()
+               .$decorator->getVerticalLeft()
+               .$decorator->getVerticalRight();
 
         $this->assertEquals($chars, '');
     }

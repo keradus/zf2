@@ -24,7 +24,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $page = new Page\Uri(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $this->assertEquals('#', $page->getUri());
@@ -34,7 +34,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $page = new Page\Uri(array(
             'label' => 'foo',
-            'uri' => null
+            'uri' => null,
         ));
 
         $this->assertNull($page->getUri(), 'getUri() should return null');
@@ -44,7 +44,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $page = new Page\Uri(array('uri' => 1337));
-            $this->fail('An invalid \'uri\' was given, but ' .
+            $this->fail('An invalid \'uri\' was given, but '.
                         'a Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
         }
@@ -57,7 +57,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             $uri->foo = 'bar';
 
             $page = new Page\Uri(array('uri' => $uri));
-            $this->fail('An invalid \'uri\' was given, but ' .
+            $this->fail('An invalid \'uri\' was given, but '.
                         'a Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
         }
@@ -67,7 +67,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $page = new Page\Uri(array(
             'label' => 'foo',
-            'uri' => '#'
+            'uri' => '#',
         ));
 
         $page->setUri('http://www.example.com/')->setUri('about:blank');
@@ -89,7 +89,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $page = new Page\Uri(array(
             'label' => 'foo',
-            'uri' => '/bar'
+            'uri' => '/bar',
         ));
 
         $request = new Request();
@@ -107,7 +107,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $page = new Page\Uri(array(
             'label' => 'foo',
-            'uri' => '/bar'
+            'uri' => '/bar',
         ));
 
         $request = new Request();
@@ -130,7 +130,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $page->setUri($uri);
         $page->setFragment('bar');
 
-        $this->assertEquals($uri . '#bar', $page->getHref());
+        $this->assertEquals($uri.'#bar', $page->getHref());
 
         $page->setUri('#');
 

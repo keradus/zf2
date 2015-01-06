@@ -63,7 +63,7 @@ class NavigationTest extends AbstractTest
         $accepted = $this->_helper->accept(
             new \Zend\Navigation\Page\Uri(array(
                 'resource'  => 'unknownresource',
-                'privilege' => 'someprivilege'
+                'privilege' => 'someprivilege',
             ),
             false)
         );
@@ -96,7 +96,7 @@ class NavigationTest extends AbstractTest
         $this->_helper->setContainer($this->_nav2);
         $expected = array(
             'menu' => $this->_getExpected('menu/default2.html'),
-            'breadcrumbs' => $this->_getExpected('bc/default.html')
+            'breadcrumbs' => $this->_getExpected('bc/default.html'),
         );
         $actual = array();
 
@@ -119,11 +119,11 @@ class NavigationTest extends AbstractTest
         // result
         $expected = array(
             'menu'        => '',
-            'breadcrumbs' => ''
+            'breadcrumbs' => '',
         );
         $actual = array(
             'menu'        => $this->_helper->render(),
-            'breadcrumbs' => $this->_helper->breadcrumbs()->render()
+            'breadcrumbs' => $this->_helper->breadcrumbs()->render(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -140,11 +140,11 @@ class NavigationTest extends AbstractTest
 
     public function testServiceManagerIsUsedToRetrieveContainer()
     {
-        $container      = new Container;
-        $serviceManager = new ServiceManager;
+        $container      = new Container();
+        $serviceManager = new ServiceManager();
         $serviceManager->setService('navigation', $container);
 
-        $pluginManager  = new View\HelperPluginManager;
+        $pluginManager  = new View\HelperPluginManager();
         $pluginManager->setServiceLocator($serviceManager);
 
         $this->_helper->setServiceLocator($pluginManager);
@@ -225,7 +225,7 @@ class NavigationTest extends AbstractTest
     {
         $expected = array(
             'breadcrumbs' => $this->_getExpected('bc/default.html'),
-            'menu' => $this->_getExpected('menu/default1.html')
+            'menu' => $this->_getExpected('menu/default1.html'),
         );
         $actual = array();
 
@@ -304,7 +304,7 @@ class NavigationTest extends AbstractTest
     {
         try {
             $this->_helper->setRole(1337);
-            $this->fail('An invalid argument was given, but a ' .
+            $this->fail('An invalid argument was given, but a '.
                         'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
@@ -315,7 +315,7 @@ class NavigationTest extends AbstractTest
     {
         try {
             $this->_helper->setRole(new \stdClass());
-            $this->fail('An invalid argument was given, but a ' .
+            $this->fail('An invalid argument was given, but a '.
                         'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
@@ -356,7 +356,7 @@ class NavigationTest extends AbstractTest
     {
         try {
             Navigation\AbstractHelper::setDefaultRole(1337);
-            $this->fail('An invalid argument was given, but a ' .
+            $this->fail('An invalid argument was given, but a '.
                         'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
@@ -367,7 +367,7 @@ class NavigationTest extends AbstractTest
     {
         try {
             Navigation\AbstractHelper::setDefaultRole(new \stdClass());
-            $this->fail('An invalid argument was given, but a ' .
+            $this->fail('An invalid argument was given, but a '.
                         'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
@@ -398,23 +398,23 @@ class NavigationTest extends AbstractTest
             array(
                 'label' => 'Page 1',
                 'id'    => 'p1',
-                'uri'   => 'p1'
+                'uri'   => 'p1',
             ),
             array(
                 'label' => 'Page 2',
                 'id'    => 'p2',
-                'uri'   => 'p2'
-            )
+                'uri'   => 'p2',
+            ),
         ));
 
-        $expected = '<ul class="navigation">' . $nl
-                  . '    <li>' . $nl
-                  . '        <a id="menu-p1" href="p1">Page 1</a>' . $nl
-                  . '    </li>' . $nl
-                  . '    <li>' . $nl
-                  . '        <a id="menu-p2" href="p2">Page 2</a>' . $nl
-                  . '    </li>' . $nl
-                  . '</ul>';
+        $expected = '<ul class="navigation">'.$nl
+                  .'    <li>'.$nl
+                  .'        <a id="menu-p1" href="p1">Page 1</a>'.$nl
+                  .'    </li>'.$nl
+                  .'    <li>'.$nl
+                  .'        <a id="menu-p2" href="p2">Page 2</a>'.$nl
+                  .'    </li>'.$nl
+                  .'</ul>';
 
         $actual = $this->_helper->render($container);
 
@@ -430,14 +430,14 @@ class NavigationTest extends AbstractTest
             array(
                 'label' => 'Page 1',
                 'id'    => 'p1',
-                'uri'   => 'p1'
+                'uri'   => 'p1',
             ),
             array(
                 'label'   => 'Page 2',
                 'id'      => 'p2',
                 'uri'     => 'p2',
-                'visible' => false
-            )
+                'visible' => false,
+            ),
         ));
 
         $render = $this->_helper->menu()->render($container);
@@ -561,7 +561,7 @@ class NavigationTest extends AbstractTest
         $pluginManager = new \Zend\View\Helper\Navigation\PluginManager();
         $view = new PhpRenderer();
 
-        $helper = new $this->_helperName;
+        $helper = new $this->_helperName();
         $helper->setPluginManager($pluginManager);
         $helper->setView($view);
 

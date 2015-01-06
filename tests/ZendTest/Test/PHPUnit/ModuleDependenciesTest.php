@@ -19,7 +19,7 @@ class ModuleDependenciesTest extends AbstractHttpControllerTestCase
     public function testDependenciesModules()
     {
         $this->setApplicationConfig(
-            include __DIR__ . '/../_files/application.config.with.dependencies.php'
+            include __DIR__.'/../_files/application.config.with.dependencies.php'
         );
         $sm = $this->getApplicationServiceLocator();
         $this->assertEquals(true, $sm->has('FooObject'));
@@ -33,7 +33,7 @@ class ModuleDependenciesTest extends AbstractHttpControllerTestCase
     public function testBadDependenciesModules()
     {
         $this->setApplicationConfig(
-            include __DIR__ . '/../_files/application.config.with.dependencies.disabled.php'
+            include __DIR__.'/../_files/application.config.with.dependencies.disabled.php'
         );
         $sm = $this->getApplicationServiceLocator();
         $this->assertEquals(false, $sm->has('FooObject'));

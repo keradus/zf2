@@ -46,24 +46,24 @@ class UrlTest extends \PHPUnit_Framework_TestCase
             'type' => 'Zend\Mvc\Router\Http\Literal',
             'options' => array(
                 'route' => '/',
-            )
+            ),
         ));
         $router->addRoute('default', array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
                     'route' => '/:controller[/:action]',
-                )
+                ),
         ));
         $this->router = $router;
 
-        $this->url = new UrlHelper;
+        $this->url = new UrlHelper();
         $this->url->setRouter($router);
     }
 
     public function testHelperHasHardDependencyWithRouter()
     {
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'No RouteStackInterface instance provided');
-        $url = new UrlHelper;
+        $url = new UrlHelper();
         $url('home');
     }
 
@@ -159,7 +159,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 
     public function testRemovesModuleRouteListenerParamsWhenReusingMatchedParameters()
     {
-        $router = new \Zend\Mvc\Router\Http\TreeRouteStack;
+        $router = new \Zend\Mvc\Router\Http\TreeRouteStack();
         $router->addRoute('default', array(
             'type' => 'Zend\Mvc\Router\Http\Segment',
             'options' => array(
@@ -167,23 +167,23 @@ class UrlTest extends \PHPUnit_Framework_TestCase
                 'defaults' => array(
                     ModuleRouteListener::MODULE_NAMESPACE => 'ZendTest\Mvc\Controller\TestAsset',
                     'controller' => 'SampleController',
-                    'action'     => 'Dash'
-                )
+                    'action'     => 'Dash',
+                ),
             ),
             'child_routes' => array(
                 'wildcard' => array(
                     'type'    => 'Zend\Mvc\Router\Http\Wildcard',
                     'options' => array(
                         'param_delimiter'     => '=',
-                        'key_value_delimiter' => '%'
-                    )
-                )
-            )
+                        'key_value_delimiter' => '%',
+                    ),
+                ),
+            ),
         ));
 
         $routeMatch = new RouteMatch(array(
             ModuleRouteListener::MODULE_NAMESPACE => 'ZendTest\Mvc\Controller\TestAsset',
-            'controller' => 'Rainbow'
+            'controller' => 'Rainbow',
         ));
         $routeMatch->setMatchedRouteName('default/wildcard');
 

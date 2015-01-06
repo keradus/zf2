@@ -266,7 +266,7 @@ class GravatarTest extends TestCase
     public function testInvalidKeyPassedToSetOptionsMethod()
     {
         $options = array(
-            'unknown' => array('val' => 1)
+            'unknown' => array('val' => 1),
         );
         $this->helper->__invoke()->setOptions($options);
     }

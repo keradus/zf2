@@ -1,11 +1,11 @@
 <?php
 /**
-* Zend Framework (http://framework.zend.com/)
-*
-* @link      http://github.com/zendframework/zf2 for the canonical source repository
-* @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
-* @license   http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
 
 namespace ZendTest\Soap;
 
@@ -13,13 +13,12 @@ use Zend\Soap\Wsdl;
 use Zend\Soap\Wsdl\ComplexTypeStrategy;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface;
 
-
 /**
-* Zend_Soap_Server
-*
-* @group      Zend_Soap
-* @group      Zend_Soap_Wsdl
-**/
+ * Zend_Soap_Server
+ *
+ * @group      Zend_Soap
+ * @group      Zend_Soap_Wsdl
+ **/
 class WsdlTestHelper extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -67,8 +66,8 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \DOMDocument $obj
-     * @param string $documentNamespace
+     * @param  \DOMDocument $obj
+     * @param  string       $documentNamespace
      * @return \DOMDocument
      */
     public function registerNamespaces($obj, $documentNamespace = null)
@@ -106,7 +105,7 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
         /** @var $node \DOMElement */
         foreach ($element->childNodes as $node) {
             if (in_array($node->nodeType, array(XML_ELEMENT_NODE))) {
-                $this->assertNotEmpty($node->namespaceURI, 'Document element: ' . $node->nodeName . ' has no valid namespace. Line: ' . $node->getLineNo());
+                $this->assertNotEmpty($node->namespaceURI, 'Document element: '.$node->nodeName.' has no valid namespace. Line: '.$node->getLineNo());
                 $this->testDocumentNodes($node);
             }
         }

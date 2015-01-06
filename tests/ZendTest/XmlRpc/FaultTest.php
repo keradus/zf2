@@ -124,19 +124,19 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_fault->loadXml('<wellformedButInvalid/>'));
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                . '<member><name>faultString</name><value><string>str</string></value></member>'
-                . '</struct></value></fault></methodResponse>');
+                .'<member><name>faultString</name><value><string>str</string></value></member>'
+                .'</struct></value></fault></methodResponse>');
         $this->assertSame(404, $this->_fault->getCode(), 'If no fault code is given, use 404 as a default');
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                . '<member><name>faultCode</name><value><int>610</int></value></member>'
-                . '</struct></value></fault></methodResponse>');
+                .'<member><name>faultCode</name><value><int>610</int></value></member>'
+                .'</struct></value></fault></methodResponse>');
         $this->assertSame(
             'Invalid method class', $this->_fault->getMessage(), 'If empty fault string is given, resolve the code');
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                . '<member><name>faultCode</name><value><int>1234</int></value></member>'
-                . '</struct></value></fault></methodResponse>');
+                .'<member><name>faultCode</name><value><int>1234</int></value></member>'
+                .'</struct></value></fault></methodResponse>');
         $this->assertSame(
             'Unknown Error',
             $this->_fault->getMessage(),
@@ -183,7 +183,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     /**
      * helper for saveXml() and __toString() tests
      *
-     * @param string $xml
+     * @param  string $xml
      * @return void
      */
     protected function _testXmlFault($xml)

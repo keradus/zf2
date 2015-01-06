@@ -45,7 +45,7 @@ class DateTimeFormatterStrategyTest extends \PHPUnit_Framework_TestCase
     public function testCanExtractIfNotDateTime()
     {
         $strategy = new DateTimeFormatterStrategy();
-        $date = $strategy->extract(new \stdClass);
+        $date = $strategy->extract(new \stdClass());
 
         $this->assertInstanceOf('stdClass', $date);
     }

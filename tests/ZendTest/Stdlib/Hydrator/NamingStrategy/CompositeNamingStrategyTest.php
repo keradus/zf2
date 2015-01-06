@@ -22,7 +22,7 @@ class CompositeNamingStrategyTest extends \PHPUnit_Framework_TestCase
     public function testGetSameNameWhenNoNamingStrategyExistsForTheName()
     {
         $compositeNamingStrategy = new CompositeNamingStrategy(array(
-            'foo' => $this->getMock('Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface')
+            'foo' => $this->getMock('Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface'),
         ));
 
         $this->assertEquals('bar', $compositeNamingStrategy->hydrate('bar'));

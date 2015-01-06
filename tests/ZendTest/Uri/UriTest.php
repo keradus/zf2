@@ -23,7 +23,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that parsing and composing a valid URI returns the same URI
      *
-     * @param        string $uriString
+     * @param string $uriString
      * @dataProvider validUriStringProvider
      */
     public function testParseComposeUri($uriString)
@@ -43,9 +43,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testComposeNewUriAndCastToString($exp, $parts)
     {
-        $uri = new Uri;
+        $uri = new Uri();
         foreach ($parts as $k => $v) {
-            $setMethod = 'set' . ucfirst($k);
+            $setMethod = 'set'.ucfirst($k);
             $uri->$setMethod($v);
         }
 
@@ -72,7 +72,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that parseScheme throws an exception in case of invalid input
 
-     * @param  mixed $input
+     * @param mixed $input
      * @dataProvider notStringInputProvider
      */
     public function testParseSchemeInvalidInput($input)
@@ -233,7 +233,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $exp = array(
             'test' => 'a',
             'var'  => array(1, 2),
-            'some' => array('thing' => 3)
+            'some' => array('thing' => 3),
         );
 
         $this->assertEquals($exp, $url->getQueryAsArray());
@@ -281,7 +281,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetSchemeValid($scheme)
     {
-        $uri = new Uri;
+        $uri = new Uri();
         $uri->setScheme($scheme);
         $this->assertEquals($scheme, $uri->getScheme());
     }
@@ -294,7 +294,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetInvalidScheme($scheme)
     {
-        $uri = new Uri;
+        $uri = new Uri();
         $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException');
         $uri->setScheme($scheme);
     }
@@ -307,7 +307,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetValidHost($host)
     {
-        $uri = new Uri;
+        $uri = new Uri();
         $uri->setHost($host);
         $this->assertEquals($host, $uri->getHost());
     }
@@ -320,7 +320,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetInvalidHost($host)
     {
-        $uri = new Uri;
+        $uri = new Uri();
         $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException');
         $uri->setHost($host);
     }
@@ -348,7 +348,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $uri = new Uri();
         $uri->setQuery($data);
 
-        $this->assertEquals('?' . $expqs, $uri->toString());
+        $this->assertEquals('?'.$expqs, $uri->toString());
     }
 
     /**
@@ -661,8 +661,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
     /**
      * Test the removal of extra dot segments from paths
      *
-     * @param        $orig
-     * @param        $expected
+     * @param   $orig
+     * @param   $expected
      * @dataProvider pathWithDotSegmentProvider
      */
     public function testRemovePathDotSegments($orig, $expected)
@@ -772,7 +772,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testFluentInterface($method, $params)
     {
-        $uri = new Uri;
+        $uri = new Uri();
         $ret = call_user_func_array(array($uri, $method), $params);
         $this->assertSame($uri, $ret);
     }
@@ -780,7 +780,6 @@ class UriTest extends \PHPUnit_Framework_TestCase
     /**
      * Data Providers
      */
-
     public function validUserInfoProvider()
     {
         return array(
@@ -791,7 +790,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('my-user'),
             array('one:two:three:four'),
             array('my-user-has-%3A-colon:pass'),
-            array('a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word')
+            array('a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word'),
         );
     }
 
@@ -800,7 +799,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         return array(
             array('an`di:password',    'an%60di:password'),
             array('user name',         'user%20name'),
-            array('shahar.e@zend.com', 'shahar.e%40zend.com')
+            array('shahar.e@zend.com', 'shahar.e%40zend.com'),
         );
     }
 
@@ -939,25 +938,25 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function invalidUriObjectProvider()
     {
         // Empty URI is not valid
-        $obj1 = new Uri;
+        $obj1 = new Uri();
 
         // Path cannot begin with '//' if there is no authority part
-        $obj2 = new Uri;
+        $obj2 = new Uri();
         $obj2->setPath('//path');
 
         // A port-only URI with no host
-        $obj3 = new Uri;
+        $obj3 = new Uri();
         $obj3->setPort(123);
 
         // A userinfo-only URI with no host
-        $obj4 = new Uri;
+        $obj4 = new Uri();
         $obj4->setUserInfo('shahar:password');
 
         return array(
             array($obj1),
             array($obj2),
             array($obj3),
-            array($obj4)
+            array($obj4),
         );
     }
 
@@ -969,26 +968,26 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function invalidRelativeUriObjectProvider()
     {
         // Empty URI is not valid
-        $obj1 = new Uri;
+        $obj1 = new Uri();
 
         // Path cannot begin with '//'
-        $obj2 = new Uri;
+        $obj2 = new Uri();
         $obj2->setPath('//path');
 
         // An object with port
-        $obj3 = new Uri;
+        $obj3 = new Uri();
         $obj3->setPort(123);
 
         // An object with userInfo
-        $obj4 = new Uri;
+        $obj4 = new Uri();
         $obj4->setUserInfo('shahar:password');
 
         // An object with scheme
-        $obj5 = new Uri;
+        $obj5 = new Uri();
         $obj5->setScheme('https');
 
         // An object with host
-        $obj6 = new Uri;
+        $obj6 = new Uri();
         $obj6->setHost('example.com');
 
         return array(
@@ -997,10 +996,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array($obj3),
             array($obj4),
             array($obj5),
-            array($obj6)
+            array($obj6),
         );
     }
-
 
     /**
      * Data provider for valid URIs with their different parts
@@ -1026,22 +1024,22 @@ class UriTest extends \PHPUnit_Framework_TestCase
                 'userInfo' => 'dude:lebowski',
                 'host'     => 'example.com',
                 'path'     => '/',
-                'fragment' => 'fr/ag?me.nt'
+                'fragment' => 'fr/ag?me.nt',
             )),
             array('/relative/path', array(
-                'path' => '/relative/path'
+                'path' => '/relative/path',
             )),
             array('ftp://example.com:5555', array(
                 'scheme' => 'ftp',
                 'host'   => 'example.com',
                 'port'   => 5555,
-                'path'   => ''
+                'path'   => '',
             )),
             array('http://example.com/foo//bar/baz//fob/', array(
                 'scheme' => 'http',
                 'host'   => 'example.com',
-                'path'   => '/foo//bar/baz//fob/'
-            ))
+                'path'   => '/foo//bar/baz//fob/',
+            )),
         );
     }
 
@@ -1057,7 +1055,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array(1),
             array(0xffff),
             array(80),
-            array('443')
+            array('443'),
         );
     }
 
@@ -1076,7 +1074,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('0xf'),
             array('-'),
             array(':'),
-            array('/')
+            array('/'),
         );
     }
 
@@ -1114,7 +1112,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('some~unre_served.ch4r5'),
             array('pct.%D7%A9%D7%97%D7%A8%20%D7%94%D7%92%D7%93%D7%95%D7%9C.co.il'),
             array('sub-delims-!$&\'()*+,;=.are.ok'),
-            array('%2F%3A')
+            array('%2F%3A'),
         );
     }
 
@@ -1151,7 +1149,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('/#', '/%23'),
 
             // See http://framework.zend.com/issues/browse/ZF-11286
-            array('Giri%C5%9F Sayfas%C4%B1.aspx', 'Giri%C5%9F%20Sayfas%C4%B1.aspx')
+            array('Giri%C5%9F Sayfas%C4%B1.aspx', 'Giri%C5%9F%20Sayfas%C4%B1.aspx'),
         );
     }
 
@@ -1173,7 +1171,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('setFragment',  array('part2')),
             array('makeRelative', array('http://foo.bar/')),
             array('resolve',      array('http://foo.bar/')),
-            array('normalize',    array())
+            array('normalize',    array()),
         );
     }
 
@@ -1243,16 +1241,16 @@ class UriTest extends \PHPUnit_Framework_TestCase
         return array(
             array(array(
                 'foo' => 'bar',
-                'baz' => 'waka'
+                'baz' => 'waka',
             ), 'foo=bar&baz=waka'),
             array(array(
                 'some key' => 'some crazy value?!#[]&=%+',
-                '1'        => ''
+                '1'        => '',
             ), 'some%20key=some%20crazy%20value%3F%21%23%5B%5D%26%3D%25%2B&1='),
             array(array(
                 'array'        => array('foo', 'bar', 'baz'),
-                'otherstuff[]' => 1234
-            ), 'array%5B0%5D=foo&array%5B1%5D=bar&array%5B2%5D=baz&otherstuff%5B%5D=1234')
+                'otherstuff[]' => 1234,
+            ), 'array%5B0%5D=foo&array%5B1%5D=bar&array%5B2%5D=baz&otherstuff%5B%5D=1234'),
         );
     }
 
@@ -1265,7 +1263,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('/a/b/c/./../../g',   '/a/g'),
-            array('mid/content=5/../6', 'mid/6')
+            array('mid/content=5/../6', 'mid/6'),
         );
     }
 
@@ -1278,7 +1276,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('/path/%68%65%6c%6c%6f/world', '/path/hello/world'),
             array('/foo/bar?url=http%3A%2F%2Fwww.example.com%2Fbaz', '/foo/bar?url=http://www.example.com/baz'),
 
-            array('/urlencoded/params?chars=' . urlencode('+&=;%20#'), '/urlencoded/params?chars=%2B%26%3D%3B%2520%23'),
+            array('/urlencoded/params?chars='.urlencode('+&=;%20#'), '/urlencoded/params?chars=%2B%26%3D%3B%2520%23'),
             array('File:///SitePages/fi%6ce%20has%20spaces', 'file:///SitePages/file%20has%20spaces'),
             array('/foo/bar/../baz?do=action#showFragment', '/foo/baz?do=action#showFragment'),
 
@@ -1299,7 +1297,6 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * Provider for testing the constructor's behavior on invalid input
      *
@@ -1312,7 +1309,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array(false),
             array(true),
             array(array('scheme' => 'http')),
-            array(12)
+            array(12),
         );
     }
 
@@ -1330,7 +1327,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array(new Uri('http://foo.bar')),
             array(null),
             array(12),
-            array(array('scheme' => 'http', 'host' => 'example.com'))
+            array(array('scheme' => 'http', 'host' => 'example.com')),
         );
     }
 

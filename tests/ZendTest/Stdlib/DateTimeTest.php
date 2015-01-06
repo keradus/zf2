@@ -24,6 +24,7 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
             if (!stristr($errstr, 'datetime extension deprecated')) {
                 return false;
             }
+
             return true;
         }, E_USER_DEPRECATED);
     }

@@ -22,23 +22,23 @@ class ArrayUtilsTest extends TestCase
     {
         return array(
             array(array(
-                'foo' => 'bar'
+                'foo' => 'bar',
             )),
             array(array(
                 '15',
                 'foo' => 'bar',
-                'baz' => array('baz')
+                'baz' => array('baz'),
             )),
             array(array(
                 0 => false,
-                2 => null
+                2 => null,
             )),
             array(array(
                 -100 => 'foo',
-                100  => 'bar'
+                100  => 'bar',
             )),
             array(array(
-                1 => 0
+                1 => 0,
             )),
         );
     }
@@ -52,15 +52,15 @@ class ArrayUtilsTest extends TestCase
             array(array(0)),
             array(array(-0.9999)),
             array(array('string')),
-            array(array(new stdClass)),
+            array(array(new stdClass())),
             array(array(
                 0 => 'foo',
                 1 => 'bar',
                 2 => false,
                 3 => null,
                 4 => array(),
-                5 => new stdClass()
-            ))
+                5 => new stdClass(),
+            )),
         );
     }
 
@@ -83,7 +83,7 @@ class ArrayUtilsTest extends TestCase
         return array(
             array(array(
                 'foo',
-                'bar'
+                'bar',
             )),
             array(array(
                 '0' => 'foo',
@@ -92,17 +92,17 @@ class ArrayUtilsTest extends TestCase
             array(array(
                 'bar',
                 '1' => 'bar',
-                 3  => 'baz'
+                 3  => 'baz',
             )),
             array(array(
                 -10000   => null,
                 '-10000' => null,
             )),
             array(array(
-                '-00000.00009' => 'foo'
+                '-00000.00009' => 'foo',
             )),
             array(array(
-                1 => 0
+                1 => 0,
             )),
         );
     }
@@ -112,21 +112,21 @@ class ArrayUtilsTest extends TestCase
         return array(
             array(array(
                 'foo',
-                'bar,'
+                'bar,',
             )),
             array(array(
                 100 => 'foo',
-                200 => 'bar'
+                200 => 'bar',
             )),
             array(array(
                 -100 => 'foo',
                 0    => 'bar',
-                100  => 'baz'
+                100  => 'baz',
             )),
             array(array(
                 'foo',
                 'bar',
-                1000 => 'baz'
+                1000 => 'baz',
             )),
         );
     }
@@ -175,7 +175,7 @@ class ArrayUtilsTest extends TestCase
                     6     => array(
                         'd' => 'd',
                     ),
-                )
+                ),
             ),
             'merge-integer-and-string-keys-preserve-numeric' => array(
                 array(
@@ -205,61 +205,61 @@ class ArrayUtilsTest extends TestCase
                         'c',
                         'd' => 'd',
                     ),
-                )
+                ),
             ),
             'merge-arrays-recursively' => array(
                 array(
                     'foo' => array(
-                        'baz'
-                    )
+                        'baz',
+                    ),
                 ),
                 array(
                     'foo' => array(
-                        'baz'
-                    )
+                        'baz',
+                    ),
                 ),
                 false,
                 array(
                     'foo' => array(
                         0 => 'baz',
-                        1 => 'baz'
-                    )
-                )
+                        1 => 'baz',
+                    ),
+                ),
             ),
             'replace-string-keys' => array(
                 array(
                     'foo' => 'bar',
-                    'bar' => array()
+                    'bar' => array(),
                 ),
                 array(
                     'foo' => 'baz',
-                    'bar' => 'bat'
+                    'bar' => 'bat',
                 ),
                 false,
                 array(
                     'foo' => 'baz',
-                    'bar' => 'bat'
-                )
+                    'bar' => 'bat',
+                ),
             ),
             'merge-with-null' => array(
                 array(
                     'foo' => null,
                     null  => 'rod',
                     'cat' => 'bar',
-                    'god' => 'rad'
+                    'god' => 'rad',
                 ),
                 array(
                     'foo' => 'baz',
                     null  => 'zad',
-                    'god' => null
+                    'god' => null,
                 ),
                 false,
                 array(
                     'foo' => 'baz',
                     null  => 'zad',
                     'cat' => 'bar',
-                    'god' => null
-                )
+                    'god' => null,
+                ),
             ),
         );
     }
@@ -302,14 +302,14 @@ class ArrayUtilsTest extends TestCase
     {
         $a = array(
             'foo' => 'bar',
-            'bar' => 'bat'
+            'bar' => 'bat',
         );
         $b = array(
             'foo' => new MergeRemoveKey(),
             'baz' => new MergeRemoveKey(),
         );
         $expected = array(
-            'bar' => 'bat'
+            'bar' => 'bat',
         );
         $this->assertEquals($expected, ArrayUtils::merge($a, $b));
     }
@@ -370,7 +370,7 @@ class ArrayUtilsTest extends TestCase
             array(0.0),
             array(1.0),
             array('string'),
-            array(new stdClass),
+            array(new stdClass()),
         );
     }
 
@@ -403,11 +403,11 @@ class ArrayUtilsTest extends TestCase
      */
     public function testInvalidArraysAlwaysReturnFalse($test)
     {
-        $this->assertFalse(ArrayUtils::hasStringKeys($test, False));
-        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, False));
-        $this->assertFalse(ArrayUtils::hasNumericKeys($test, False));
-        $this->assertFalse(ArrayUtils::isList($test, False));
-        $this->assertFalse(ArrayUtils::isHashTable($test, False));
+        $this->assertFalse(ArrayUtils::hasStringKeys($test, false));
+        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, false));
+        $this->assertFalse(ArrayUtils::hasNumericKeys($test, false));
+        $this->assertFalse(ArrayUtils::isList($test, false));
+        $this->assertFalse(ArrayUtils::isHashTable($test, false));
 
         $this->assertFalse(ArrayUtils::hasStringKeys($test, false));
         $this->assertFalse(ArrayUtils::hasIntegerKeys($test, false));

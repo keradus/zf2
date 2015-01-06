@@ -102,13 +102,13 @@ class LinksTest extends AbstractTest
         $expected = array(
             'type'  => 'Zend\Navigation\Page\Uri',
             'href'  => 'http://www.example.com/',
-            'label' => null
+            'label' => null,
         );
 
         $actual = array(
             'type'  => get_class($found),
             'href'  => $found->getHref(),
-            'label' => $found->getLabel()
+            'label' => $found->getLabel(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -119,20 +119,20 @@ class LinksTest extends AbstractTest
         $active = $this->_helper->findOneByLabel('Page 2');
         $active->addRel('example', AbstractPage::factory(array(
             'uri' => 'http://www.example.com/',
-            'label' => 'An example page'
+            'label' => 'An example page',
         )));
         $found = $this->_helper->findRelExample($active);
 
         $expected = array(
             'type'  => 'Zend\Navigation\Page\Uri',
             'href'  => 'http://www.example.com/',
-            'label' => 'An example page'
+            'label' => 'An example page',
         );
 
         $actual = array(
             'type'  => get_class($found),
             'href'  => $found->getHref(),
-            'label' => $found->getLabel()
+            'label' => $found->getLabel(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -143,20 +143,20 @@ class LinksTest extends AbstractTest
         $active = $this->_helper->findOneByLabel('Page 2');
         $active->addRel('example', array(
             'uri' => 'http://www.example.com/',
-            'label' => 'An example page'
+            'label' => 'An example page',
         ));
         $found = $this->_helper->findRelExample($active);
 
         $expected = array(
             'type'  => 'Zend\Navigation\Page\Uri',
             'href'  => 'http://www.example.com/',
-            'label' => 'An example page'
+            'label' => 'An example page',
         );
 
         $actual = array(
             'type'  => get_class($found),
             'href'  => $found->getHref(),
-            'label' => $found->getLabel()
+            'label' => $found->getLabel(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -167,20 +167,20 @@ class LinksTest extends AbstractTest
         $active = $this->_helper->findOneByLabel('Page 2');
         $active->addRel('example', new Config\Config(array(
             'uri' => 'http://www.example.com/',
-            'label' => 'An example page'
+            'label' => 'An example page',
         )));
         $found = $this->_helper->findRelExample($active);
 
         $expected = array(
             'type'  => 'Zend\Navigation\Page\Uri',
             'href'  => 'http://www.example.com/',
-            'label' => 'An example page'
+            'label' => 'An example page',
         );
 
         $actual = array(
             'type'  => get_class($found),
             'href'  => $found->getHref(),
-            'label' => $found->getLabel()
+            'label' => $found->getLabel(),
         );
 
         $this->assertEquals($expected, $actual);
@@ -193,12 +193,12 @@ class LinksTest extends AbstractTest
         $active->addRel('alternate', array(
             array(
                 'label' => 'foo',
-                'uri'   => 'bar'
+                'uri'   => 'bar',
             ),
             array(
                 'label' => 'baz',
-                'uri'   => 'bat'
-            )
+                'uri'   => 'bat',
+            ),
         ));
 
         $found = $this->_helper->findRelAlternate($active);
@@ -215,12 +215,12 @@ class LinksTest extends AbstractTest
         $active->addRel('alternate', new Config\Config(array(
             array(
                 'label' => 'foo',
-                'uri'   => 'bar'
+                'uri'   => 'bar',
             ),
             array(
                 'label' => 'baz',
-                'uri'   => 'bat'
-            )
+                'uri'   => 'bat',
+            ),
         )));
 
         $found = $this->_helper->findRelAlternate($active);
@@ -235,12 +235,12 @@ class LinksTest extends AbstractTest
         $types = array(
             'alternate', 'stylesheet', 'start', 'next', 'prev', 'contents',
             'index', 'glossary', 'copyright', 'chapter', 'section', 'subsection',
-            'appendix', 'help', 'bookmark'
+            'appendix', 'help', 'bookmark',
         );
 
         $samplePage = AbstractPage::factory(array(
             'label' => 'An example page',
-            'uri'   => 'http://www.example.com/'
+            'uri'   => 'http://www.example.com/',
         ));
 
         $active = $this->_helper->findOneByLabel('Page 2');
@@ -431,7 +431,7 @@ class LinksTest extends AbstractTest
         $samplePage = AbstractPage::factory(array(
             'label'    => 'An example page',
             'uri'      => 'http://www.example.com/',
-            'resource' => 'protected'
+            'resource' => 'protected',
         ));
 
         $active = $this->_helper->findOneByLabel('Home');
@@ -450,7 +450,7 @@ class LinksTest extends AbstractTest
             'subsection' => false,
             'appendix'   => false,
             'help'       => false,
-            'bookmark'   => false
+            'bookmark'   => false,
         );
         $actual = array();
 
@@ -461,7 +461,7 @@ class LinksTest extends AbstractTest
             if (null === $found) {
                 $actual[$type] = false;
             } elseif (is_array($found)) {
-                $actual[$type] = 'array(' . count($found) . ')';
+                $actual[$type] = 'array('.count($found).')';
             } else {
                 $actual[$type] = $found->getLabel();
             }
@@ -497,7 +497,7 @@ class LinksTest extends AbstractTest
             'prev'       => 'Page 1.1',
             'chapter'    => 'Home',
             'section'    => 'Page 1',
-            'subsection' => 'Page 2.2'
+            'subsection' => 'Page 2.2',
         );
 
         $expected = array();
@@ -512,7 +512,7 @@ class LinksTest extends AbstractTest
             if (null === $found) {
                 $actual[$type] = false;
             } elseif (is_array($found)) {
-                $actual[$type] = 'array(' . count($found) . ')';
+                $actual[$type] = 'array('.count($found).')';
             } else {
                 $actual[$type] = $found->getLabel();
             }
@@ -526,7 +526,7 @@ class LinksTest extends AbstractTest
         $active = $this->_helper->findOneByLabel('Home');
         try {
             $this->_helper->findRelation($active, 'foo', 'bar');
-            $this->fail('An invalid value was given, but a ' .
+            $this->fail('An invalid value was given, but a '.
                         'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid argument: $rel', $e->getMessage());
@@ -538,7 +538,7 @@ class LinksTest extends AbstractTest
         $active = $this->_helper->findOneByLabel('Home');
         try {
             $this->_helper->renderLink($active, 'foo', 'bar');
-            $this->fail('An invalid value was given, but a ' .
+            $this->fail('An invalid value was given, but a '.
                         'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid relation attribute', $e->getMessage());
@@ -564,20 +564,20 @@ class LinksTest extends AbstractTest
             'help'       => array('Forced page'),
             'bookmark'   => array('Forced page'),
             'canonical'  => array('Forced page'),
-            'home'       => array('Forced page')
+            'home'       => array('Forced page'),
         );
 
         // build expected result
         $expected = array(
             'rel' => $expectedRelations,
-            'rev' => $expectedRelations
+            'rev' => $expectedRelations,
         );
 
         // find active page and create page to use for relations
         $active = $this->_helper->findOneByLabel('Page 1');
         $forcedRelation = new UriPage(array(
             'label' => 'Forced page',
-            'uri'   => '#'
+            'uri'   => '#',
         ));
 
         // add relations to active page
@@ -616,7 +616,7 @@ class LinksTest extends AbstractTest
             Navigation\Links::RENDER_APPENDIX   => 'appendix',
             Navigation\Links::RENDER_HELP       => 'help',
             Navigation\Links::RENDER_BOOKMARK   => 'bookmark',
-            Navigation\Links::RENDER_CUSTOM     => 'canonical'
+            Navigation\Links::RENDER_CUSTOM     => 'canonical',
         );
     }
 
@@ -636,11 +636,11 @@ class LinksTest extends AbstractTest
 
             $this->_helper->setRenderFlag($newFlag);
             $expectedOutput = '<link '
-                              . 'rel="' . $type . '" '
-                              . 'href="http&#x3A;&#x2F;&#x2F;www.example.com&#x2F;">' . constant($this->_helperName.'::EOL')
-                            . '<link '
-                              . 'rev="' . $type . '" '
-                              . 'href="http&#x3A;&#x2F;&#x2F;www.example.com&#x2F;">';
+                              .'rel="'.$type.'" '
+                              .'href="http&#x3A;&#x2F;&#x2F;www.example.com&#x2F;">'.constant($this->_helperName.'::EOL')
+                            .'<link '
+                              .'rev="'.$type.'" '
+                              .'href="http&#x3A;&#x2F;&#x2F;www.example.com&#x2F;">';
             $actualOutput = $this->_helper->render();
 
             $expected[$type] = $expectedOutput;
@@ -664,8 +664,8 @@ class LinksTest extends AbstractTest
 
         // test data
         $expected = '<link rel="next" href="page2" title="Page&#x20;2">'
-                  . constant($this->_helperName.'::EOL')
-                  . '<link rel="prev" href="page1" title="Page&#x20;1">';
+                  .constant($this->_helperName.'::EOL')
+                  .'<link rel="prev" href="page1" title="Page&#x20;1">';
         $actual = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
@@ -682,8 +682,8 @@ class LinksTest extends AbstractTest
 
         // build expected and actual result
         $expected = '  <link rel="next" href="page2" title="Page&#x20;2">'
-                  . constant($this->_helperName.'::EOL')
-                  . '  <link rel="prev" href="page1" title="Page&#x20;1">';
+                  .constant($this->_helperName.'::EOL')
+                  .'  <link rel="prev" href="page1" title="Page&#x20;1">';
         $actual = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);

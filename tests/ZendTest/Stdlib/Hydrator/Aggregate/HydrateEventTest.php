@@ -39,7 +39,6 @@ class HydrateEventTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($data2, $event->getHydrationData());
 
-
         $event->setHydratedObject($hydrated2);
 
         $this->assertSame($hydrated2, $event->getHydratedObject());

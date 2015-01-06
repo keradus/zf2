@@ -9,7 +9,7 @@
 
 namespace ZendTest\Soap;
 
-require_once __DIR__ . '/TestAsset/commontypes.php';
+require_once __DIR__.'/TestAsset/commontypes.php';
 
 use Zend\Soap\AutoDiscover;
 use Zend\Soap\Server;
@@ -40,7 +40,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                          'classmap' => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
                                              'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
                          'encoding' => 'ISO-8859-1',
-                         'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php'
+                         'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
                         );
         $server->setOptions($options);
 
@@ -70,7 +70,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testSetOptionsWithFeaturesOption()
     {
         $server = new Server(null, array(
-            'features' => SOAP_SINGLE_ELEMENT_ARRAYS
+            'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
         ));
 
         $this->assertEquals(
@@ -94,7 +94,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($server->getOptions() == array('soap_version' => SOAP_1_2));
 
         $options = array('soap_version' => SOAP_1_1,
-                         'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php'
+                         'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
                         );
         $server->setOptions($options);
 
@@ -182,7 +182,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
 
         $classmap = array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
-                          'TestData2' => '\ZendTest\Soap\TestAsset\TestData2');
+                          'TestData2' => '\ZendTest\Soap\TestAsset\TestData2', );
 
         $this->assertNull($server->getClassmap());
         $server->setClassmap($classmap);
@@ -210,7 +210,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
 
         $classmap = array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
-                          'TestData2' => '\ZendTest\Soap\TestAsset\TestData2');
+                          'TestData2' => '\ZendTest\Soap\TestAsset\TestData2', );
 
         $this->assertNull($server->getClassmap());
         $server->setClassmap($classmap);
@@ -248,7 +248,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         // Array of correct functions should pass
         $functions = array('\ZendTest\Soap\TestAsset\TestFunc2',
                            '\ZendTest\Soap\TestAsset\TestFunc3',
-                           '\ZendTest\Soap\TestAsset\TestFunc4');
+                           '\ZendTest\Soap\TestAsset\TestFunc4', );
         $server->addFunction($functions);
 
         $this->assertEquals(
@@ -279,7 +279,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $functions = array('\ZendTest\Soap\TestAsset\TestFunc5',
                             'bogus_function',
-                            '\ZendTest\Soap\TestAsset\TestFunc6');
+                            '\ZendTest\Soap\TestAsset\TestFunc6', );
         $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'One or more invalid functions specified in array');
         $server->addFunction($functions);
     }
@@ -407,12 +407,12 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $functions  =  array('\ZendTest\Soap\TestAsset\TestFunc2',
                              '\ZendTest\Soap\TestAsset\TestFunc3',
-                             '\ZendTest\Soap\TestAsset\TestFunc4');
+                             '\ZendTest\Soap\TestAsset\TestFunc4', );
         $server->addFunction($functions);
 
         $functions  =  array('\ZendTest\Soap\TestAsset\TestFunc3',
                              '\ZendTest\Soap\TestAsset\TestFunc5',
-                             '\ZendTest\Soap\TestAsset\TestFunc6');
+                             '\ZendTest\Soap\TestAsset\TestFunc6', );
         $server->addFunction($functions);
 
         $allAddedFunctions = array(
@@ -421,7 +421,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             '\ZendTest\Soap\TestAsset\TestFunc3',
             '\ZendTest\Soap\TestAsset\TestFunc4',
             '\ZendTest\Soap\TestAsset\TestFunc5',
-            '\ZendTest\Soap\TestAsset\TestFunc6'
+            '\ZendTest\Soap\TestAsset\TestFunc6',
         );
         $this->assertTrue($server->getFunctions() == $allAddedFunctions);
     }
@@ -481,28 +481,29 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         if (headers_sent()) {
             $this->markTestSkipped('Cannot run testGetLastRequest() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
         $server = new Server();
-        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setOptions(array('location' => 'test://', 'uri' => 'http://framework.zend.com'));
         $server->setReturnResponse(true);
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $request =
           '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
-                             . 'xmlns:ns1="http://framework.zend.com" '
-                             . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                             . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                             . 'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
-                             . 'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-          .     '<SOAP-ENV:Body>'
-          .         '<ns1:testFunc2>'
-          .             '<param0 xsi:type="xsd:string">World</param0>'
-          .         '</ns1:testFunc2>'
-          .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>';
+                             .'xmlns:ns1="http://framework.zend.com" '
+                             .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                             .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                             .'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
+                             .'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+          .'<SOAP-ENV:Body>'
+          .'<ns1:testFunc2>'
+          .'<param0 xsi:type="xsd:string">World</param0>'
+          .'</ns1:testFunc2>'
+          .'</SOAP-ENV:Body>'
+          .'</SOAP-ENV:Envelope>';
 
         $response = $server->handle($request);
 
@@ -536,44 +537,45 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         if (headers_sent()) {
             $this->markTestSkipped('Cannot run testGetLastResponse() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
         $server = new Server();
-        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setOptions(array('location' => 'test://', 'uri' => 'http://framework.zend.com'));
         $server->setReturnResponse(true);
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $request =
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
-                             . 'xmlns:ns1="http://framework.zend.com" '
-                             . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                             . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                             . 'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
-                             . 'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-          .     '<SOAP-ENV:Body>'
-          .         '<ns1:testFunc2>'
-          .             '<param0 xsi:type="xsd:string">World</param0>'
-          .         '</ns1:testFunc2>'
-          .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>' . "\n";
+            '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+          .'<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+                             .'xmlns:ns1="http://framework.zend.com" '
+                             .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                             .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                             .'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
+                             .'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+          .'<SOAP-ENV:Body>'
+          .'<ns1:testFunc2>'
+          .'<param0 xsi:type="xsd:string">World</param0>'
+          .'</ns1:testFunc2>'
+          .'</SOAP-ENV:Body>'
+          .'</SOAP-ENV:Envelope>'."\n";
 
         $expectedResponse =
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
-                             . 'xmlns:ns1="http://framework.zend.com" '
-                             . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                             . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                             . 'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
-                             . 'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-          .     '<SOAP-ENV:Body>'
-          .         '<ns1:testFunc2Response>'
-          .             '<return xsi:type="xsd:string">Hello World!</return>'
-          .         '</ns1:testFunc2Response>'
-          .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>' . "\n";
+            '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+          .'<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+                             .'xmlns:ns1="http://framework.zend.com" '
+                             .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                             .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                             .'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
+                             .'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+          .'<SOAP-ENV:Body>'
+          .'<ns1:testFunc2Response>'
+          .'<return xsi:type="xsd:string">Hello World!</return>'
+          .'</ns1:testFunc2Response>'
+          .'</SOAP-ENV:Body>'
+          .'</SOAP-ENV:Envelope>'."\n";
 
         $server->handle($request);
 
@@ -588,55 +590,55 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         if (headers_sent()) {
             $this->markTestSkipped('Cannot run testHandle() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
         $server = new Server();
-        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setOptions(array('location' => 'test://', 'uri' => 'http://framework.zend.com'));
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $localClient = new TestAsset\TestLocalSoapClient($server,
                                                          null,
-                                                         array('location'=>'test://',
-                                                               'uri'=>'http://framework.zend.com'));
+                                                         array('location' => 'test://',
+                                                               'uri' => 'http://framework.zend.com', ));
 
         // Local SOAP client call automatically invokes handle method of the provided SOAP server
         $this->assertEquals('Hello World!', $localClient->testFunc2('World'));
 
-
         $request =
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
-                             . 'xmlns:ns1="http://framework.zend.com" '
-                             . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                             . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                             . 'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
-                             . 'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-          .     '<SOAP-ENV:Body>'
-          .         '<ns1:testFunc2>'
-          .             '<param0 xsi:type="xsd:string">World</param0>'
-          .         '</ns1:testFunc2>'
-          .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>' . "\n";
+            '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+          .'<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+                             .'xmlns:ns1="http://framework.zend.com" '
+                             .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                             .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                             .'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
+                             .'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+          .'<SOAP-ENV:Body>'
+          .'<ns1:testFunc2>'
+          .'<param0 xsi:type="xsd:string">World</param0>'
+          .'</ns1:testFunc2>'
+          .'</SOAP-ENV:Body>'
+          .'</SOAP-ENV:Envelope>'."\n";
 
         $expectedResponse =
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
-                             . 'xmlns:ns1="http://framework.zend.com" '
-                             . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                             . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                             . 'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
-                             . 'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-          .     '<SOAP-ENV:Body>'
-          .         '<ns1:testFunc2Response>'
-          .             '<return xsi:type="xsd:string">Hello World!</return>'
-          .         '</ns1:testFunc2Response>'
-          .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>' . "\n";
+            '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+          .'<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+                             .'xmlns:ns1="http://framework.zend.com" '
+                             .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                             .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                             .'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
+                             .'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+          .'<SOAP-ENV:Body>'
+          .'<ns1:testFunc2Response>'
+          .'<return xsi:type="xsd:string">Hello World!</return>'
+          .'</ns1:testFunc2Response>'
+          .'</SOAP-ENV:Body>'
+          .'</SOAP-ENV:Envelope>'."\n";
 
         $server1 = new Server();
-        $server1->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server1->setOptions(array('location' => 'test://', 'uri' => 'http://framework.zend.com'));
 
         $server1->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
         $server1->setReturnResponse(true);
@@ -692,7 +694,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
         $server->registerFaultException($exception);
-
 
         if (!is_array($exception)) {
             $this->assertTrue($server->isRegisteredAsFaultException($exception));
@@ -773,11 +774,12 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testHandlePhpErrors()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run ' . __METHOD__ . '() when headers have already been sent; enable output buffering to run this test');
+            $this->markTestSkipped('Cannot run '.__METHOD__.'() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
-        $wsdlFilename = __DIR__ . '/TestAsset/testHandlePhpErrors.wsdl';
+        $wsdlFilename = __DIR__.'/TestAsset/testHandlePhpErrors.wsdl';
         $autodiscover = new AutoDiscover();
         $autodiscover->setOperationBodyStyle(array(
             'use'           => 'literal',
@@ -785,13 +787,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $autodiscover->setBindingStyle(array(
             'style'         => 'document',
-            'transport'     => 'http://schemas.xmlsoap.org/soap/http'
+            'transport'     => 'http://schemas.xmlsoap.org/soap/http',
         ));
-
 
         $autodiscover->setServiceName('ExampleService');
         $autodiscover->setUri('http://example.com');
-
 
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\errorClass');
 
@@ -818,27 +818,28 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testErrorHandlingOfSoapServerChangesToThrowingSoapFaultWhenInHandleMode()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run ' . __METHOD__ . '() when headers have already been sent; enable output buffering to run this test');
+            $this->markTestSkipped('Cannot run '.__METHOD__.'() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
         $server = new Server();
-        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setOptions(array('location' => 'test://', 'uri' => 'http://framework.zend.com'));
         $server->setReturnResponse(true);
 
         // Requesting Method with enforced parameter without it.
         $request =
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
-                             . 'xmlns:ns1="http://framework.zend.com" '
-                             . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                             . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                             . 'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
-                             . 'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-          .     '<SOAP-ENV:Body>'
-          .         '<ns1:testFunc5 />'
-          .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>' . "\n";
+            '<?xml version="1.0" encoding="UTF-8"?>'."\n"
+          .'<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+                             .'xmlns:ns1="http://framework.zend.com" '
+                             .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                             .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                             .'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
+                             .'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+          .'<SOAP-ENV:Body>'
+          .'<ns1:testFunc5 />'
+          .'</SOAP-ENV:Body>'
+          .'</SOAP-ENV:Envelope>'."\n";
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
         $response = $server->handle($request);
@@ -859,7 +860,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                          'classmap' => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
                                              'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
                          'encoding' => 'ISO-8859-1',
-                         'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php'
+                         'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
                         );
         $config = new \Zend\Config\Config($options);
 
@@ -912,25 +913,25 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testShouldThrowExceptionIfHandledRequestContainsDoctype()
     {
         $server = new Server();
-        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setOptions(array('location' => 'test://', 'uri' => 'http://framework.zend.com'));
         $server->setReturnResponse(true);
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $request =
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<!DOCTYPE foo>' . "\n"
-          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
-                             . 'xmlns:ns1="http://framework.zend.com" '
-                             . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                             . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                             . 'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
-                             . 'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-          .     '<SOAP-ENV:Body>'
-          .         '<ns1:testFunc2>'
-          .             '<param0 xsi:type="xsd:string">World</param0>'
-          .         '</ns1:testFunc2>'
-          .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>' . "\n";
+            '<?xml version="1.0" encoding="UTF-8"?>'."\n".'<!DOCTYPE foo>'."\n"
+          .'<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+                             .'xmlns:ns1="http://framework.zend.com" '
+                             .'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+                             .'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                             .'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
+                             .'SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+          .'<SOAP-ENV:Body>'
+          .'<ns1:testFunc2>'
+          .'<param0 xsi:type="xsd:string">World</param0>'
+          .'</ns1:testFunc2>'
+          .'</SOAP-ENV:Body>'
+          .'</SOAP-ENV:Envelope>'."\n";
         $response = $server->handle($request);
 
         $this->assertContains('Invalid XML', $response->getMessage());
@@ -962,7 +963,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testGetSoapInternalInstance()
     {
         $server = new Server();
-        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setOptions(array('location' => 'test://', 'uri' => 'http://framework.zend.com'));
         $internalServer = $server->getSoap();
         $this->assertInstanceOf('\SoapServer', $internalServer);
         $this->assertSame($internalServer, $server->getSoap());
@@ -971,7 +972,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testDisableEntityLoaderAfterException()
     {
         $server = new Server();
-        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setOptions(array('location' => 'test://', 'uri' => 'http://framework.zend.com'));
         $server->setReturnResponse(true);
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
         $loadEntities = libxml_disable_entity_loader(false);

@@ -25,7 +25,7 @@ class FeedStrategyTest extends TestCase
 {
     public function setUp()
     {
-        $this->renderer = new FeedRenderer;
+        $this->renderer = new FeedRenderer();
         $this->strategy = new FeedStrategy($this->renderer);
         $this->event    = new ViewEvent();
         $this->response = new HttpResponse();

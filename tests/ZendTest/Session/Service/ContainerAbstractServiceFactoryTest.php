@@ -75,7 +75,7 @@ class ContainerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $containers = array();
         $config = $this->config;
         foreach ($config['session_containers'] as $name) {
-            $containers[] = array('SomePrefix\\' . $name);
+            $containers[] = array('SomePrefix\\'.$name);
         }
         $containers[] = array('DOES_NOT_EXIST');
 

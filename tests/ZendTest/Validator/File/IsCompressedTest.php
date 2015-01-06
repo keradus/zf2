@@ -25,10 +25,10 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         if (version_compare(PHP_VERSION, '5.4', '>=')
                 && version_compare(PHP_VERSION, '5.4.1', '<')
         ) {
-            return __DIR__ . '/_files/magic.lte.5.3.10.mime';
+            return __DIR__.'/_files/magic.lte.5.3.10.mime';
         }
 
-        return __DIR__ . '/_files/magic.mime';
+        return __DIR__.'/_files/magic.mime';
     }
 
     /**
@@ -36,7 +36,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/test.zip';
+        $testFile = __DIR__.'/_files/test.zip';
 
         // Sometimes finfo gives application/zip and sometimes
         // application/x-zip ...
@@ -91,7 +91,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
 
         // Sometimes finfo gives application/zip and sometimes
         // application/x-zip ...
-        $expectedMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), __DIR__ . '/_files/test.zip');
+        $expectedMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), __DIR__.'/_files/test.zip');
         if (!in_array($expectedMimeType, array('application/zip', 'application/x-zip'))) {
             $this->markTestSkipped('finfo exhibits buggy behavior on this system!');
         }
@@ -205,13 +205,13 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
             'name'     => 'picture.jpg',
             'type'     => 'image/jpeg',
             'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/picture.jpg',
-            'error'    => 0
+            'tmp_name' => __DIR__.'/_files/picture.jpg',
+            'error'    => 0,
         );
 
         $validator = new File\IsCompressed('test/notype');
         $validator->enableHeaderCheck();
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/picture.jpg', $files));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/picture.jpg', $files));
         $error = $validator->getMessages();
         $this->assertTrue(array_key_exists('fileIsCompressedFalseType', $error));
     }
@@ -227,7 +227,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
             'image/gif',
             'image/jpg',
             'magicFile'   => $magicFile,
-            'enableHeaderCheck' => true));
+            'enableHeaderCheck' => true, ));
 
         $this->assertEquals($magicFile, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
@@ -249,7 +249,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\IsCompressed();
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileIsCompressedNotReadable', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }

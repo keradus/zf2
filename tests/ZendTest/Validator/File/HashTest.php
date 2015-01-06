@@ -23,7 +23,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile = __DIR__ . '/_files/picture.jpg';
+        $testFile = __DIR__.'/_files/picture.jpg';
         $pictureTests = array(
             //    Options, isValid Param, Expected value, Expected message
             array('3f8d07e2',                    $testFile, true, ''),
@@ -32,29 +32,29 @@ class HashTest extends \PHPUnit_Framework_TestCase
             array(array('9f8d07e2', '7f8d07e2'), $testFile, false, 'fileHashDoesNotMatch'),
             array(
                 array('ed74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'),
-                $testFile, true, ''
+                $testFile, true, '',
             ),
             array(
                 array('4d74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'),
-                $testFile, false, 'fileHashDoesNotMatch'
+                $testFile, false, 'fileHashDoesNotMatch',
             ),
             array(
                 array('4d74c22109fe9f110579f77b053b8bc3', 'ed74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'),
-                $testFile, true, ''
+                $testFile, true, '',
             ),
             array(
                 array('4d74c22109fe9f110579f77b053b8bc3', '7d74c22109fe9f110579f77b053b8bc3', 'algorithm' => 'md5'),
-                $testFile, false, 'fileHashDoesNotMatch'
+                $testFile, false, 'fileHashDoesNotMatch',
             ),
         );
 
-        $testFile = __DIR__ . '/_files/nofile.mo';
+        $testFile = __DIR__.'/_files/nofile.mo';
         $noFileTests = array(
             //    Options, isValid Param, Expected value, message
             array('3f8d07e2', $testFile, false, 'fileHashNotFound'),
         );
 
-        $testFile = __DIR__ . '/_files/testsize.mo';
+        $testFile = __DIR__.'/_files/testsize.mo';
         $sizeFileTests = array(
             //    Options, isValid Param, Expected value, message
             array('ffeb8d5d', $testFile, true,  ''),
@@ -66,10 +66,11 @@ class HashTest extends \PHPUnit_Framework_TestCase
         foreach ($testData as $data) {
             $fileUpload = array(
                 'tmp_name' => $data[1], 'name' => basename($data[1]),
-                'size' => 200, 'error' => 0, 'type' => 'text'
+                'size' => 200, 'error' => 0, 'type' => 'text',
             );
             $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
+
         return $testData;
     }
 
@@ -155,7 +156,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
     public function testZF11258()
     {
         $validator = new File\Hash('3f8d07e2');
-        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertFalse($validator->isValid(__DIR__.'/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileHashNotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }

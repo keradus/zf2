@@ -11,7 +11,6 @@ namespace ZendTest\Validator;
 
 use Zend\Validator;
 
-
 /**
  * @group      Zend_Validator
  */
@@ -52,12 +51,12 @@ class StepTest extends \PHPUnit_Framework_TestCase
             array('1', true),
             array('1.2', false),
             array(1.01, false),
-            array('not a scalar', false)
+            array('not a scalar', false),
         );
 
         foreach ($valuesExpected as $element) {
             $this->assertEquals($element[1], $this->_validator->isValid($element[0]),
-                'Test failed with ' . var_export($element, 1));
+                'Test failed with '.var_export($element, 1));
         }
     }
 
@@ -71,17 +70,17 @@ class StepTest extends \PHPUnit_Framework_TestCase
             array('2.1', true),
             array('1.1', false),
             array(1.11, false),
-            array('not a scalar', false)
+            array('not a scalar', false),
         );
 
         $validator = new Validator\Step(array(
             'baseValue' => 0.1,
-            'step'      => 2
+            'step'      => 2,
         ));
 
         foreach ($valuesExpected as $element) {
             $this->assertEquals($element[1], $validator->isValid($element[0]),
-                'Test failed with ' . var_export($element, 1));
+                'Test failed with '.var_export($element, 1));
         }
     }
 
@@ -104,17 +103,17 @@ class StepTest extends \PHPUnit_Framework_TestCase
             array('2.1', true),
             array('1.1', false),
             array(1.11, false),
-            array('not a scalar', false)
+            array('not a scalar', false),
         );
 
         $validator = new Validator\Step(array(
             'baseValue' => 0,
-            'step'      => 2.1
+            'step'      => 2.1,
         ));
 
         foreach ($valuesExpected as $element) {
             $this->assertEquals($element[1], $validator->isValid($element[0]),
-                'Test failed with ' . var_export($element, 1));
+                'Test failed with '.var_export($element, 1));
         }
     }
 
@@ -138,17 +137,17 @@ class StepTest extends \PHPUnit_Framework_TestCase
             array(0.006, false),
             array(0.007, false),
             array(0.008, false),
-            array(0.009, false)
+            array(0.009, false),
         );
 
         $validator = new Validator\Step(array(
             'baseValue' => 0,
-            'step'      => 0.01
+            'step'      => 0.01,
         ));
 
         foreach ($valuesExpected as $element) {
             $this->assertEquals($element[1], $validator->isValid($element[0]),
-                'Test failed with ' . var_export($element, 1));
+                'Test failed with '.var_export($element, 1));
         }
     }
 

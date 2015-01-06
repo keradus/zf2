@@ -24,7 +24,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->config = new SessionConfig;
+        $this->config = new SessionConfig();
     }
 
     // session.save_path
@@ -32,7 +32,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     public function testSetSavePathErrorsOnInvalidPath()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid save_path provided');
-        $this->config->setSavePath(__DIR__ . '/foobarboguspath');
+        $this->config->setSavePath(__DIR__.'/foobarboguspath');
     }
 
     public function testSavePathDefaultsToIniSettings()
@@ -453,7 +453,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     public function testSetEntropyFileErrorsOnInvalidPath()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid entropy_file provided');
-        $this->config->setEntropyFile(__DIR__ . '/foobarboguspath');
+        $this->config->setEntropyFile(__DIR__.'/foobarboguspath');
     }
 
     public function testEntropyFileDefaultsToIniSettings()
@@ -615,6 +615,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
         foreach ($hashFunctions as $function) {
             $provider[] = array($function);
         }
+
         return $provider;
     }
 
@@ -730,7 +731,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
         // Leaving out special cases.
         if ($option != 'remember_me_seconds' && $option != 'url_rewriter_tags') {
             $this->config->setStorageOption($option, $value);
-            $this->assertEquals(ini_get('session.' . $option), $value);
+            $this->assertEquals(ini_get('session.'.$option), $value);
         }
     }
 

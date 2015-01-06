@@ -31,7 +31,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
          */
         $valuesExpected = array(
             array('/[a-z]/', true, array('abc123', 'foo', 'a', 'z')),
-            array('/[a-z]/', false, array('123', 'A'))
+            array('/[a-z]/', false, array('123', 'A')),
             );
         foreach ($valuesExpected as $element) {
             $validator = new Regex($element[0]);
@@ -91,7 +91,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Regex('/^[[:alpha:]\']+$/iu');
         $this->assertEquals($expected, $validator->isValid($input),
-                            'Reason: ' . implode('', $validator->getMessages()));
+                            'Reason: '.implode('', $validator->getMessages()));
     }
 
     /**

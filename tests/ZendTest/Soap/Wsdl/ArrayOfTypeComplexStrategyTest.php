@@ -9,7 +9,7 @@
 
 namespace ZendTest\Soap\Wsdl;
 
-require_once __DIR__ . "/../TestAsset/commontypes.php";
+require_once __DIR__."/../TestAsset/commontypes.php";
 
 use Zend\Soap\Wsdl;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex;
@@ -104,7 +104,7 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
             'boolean'       => 'xsd:boolean',
             'string'        => 'xsd:string',
             'int'           => 'xsd:int',
-            'array'         => 'soap-enc:Array'
+            'array'         => 'soap-enc:Array',
                  ) as $name => $type) {
             $node = $this->xpath->query('xsd:element[@name="'.$name.'"]', $nodes->item(0));
             $this->assertEquals($name, $node->item(0)->getAttribute('name'),
@@ -133,7 +133,6 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
             $nodes->item(0)->getAttributeNS(Wsdl::WSDL_NS_URI, 'arrayType'),
             'Invalid array type reference.'
         );
-
 
         $this->testDocumentNodes();
     }
@@ -250,7 +249,6 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
     {
         $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTypeA');
         $this->assertEquals("tns:ComplexTypeA", $return);
-
 
         $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="ComplexTypeB"]/xsd:all');
         $this->assertEquals(2, $nodes->item(0)->childNodes->length, 'Invalid complex object definition.');
