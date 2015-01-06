@@ -10,7 +10,6 @@
 /**
  * @namespace
  */
-
 namespace Zend\Mvc\Router\Console;
 
 use Traversable;

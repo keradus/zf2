@@ -7,7 +7,6 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Log
  */
-
 namespace ZendTest\Log\Filter;
 
 use Zend\Log\Filter\Sample;

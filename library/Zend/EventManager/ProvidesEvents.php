@@ -6,7 +6,6 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\EventManager;
 
 trigger_error('Zend\EventManager\ProvidesEvents has been deprecated in favor of Zend\EventManager\EventManagerAwareTrait; please update your code', E_USER_DEPRECATED);

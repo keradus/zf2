@@ -10,7 +10,6 @@
 /**
  * @namespace
  */
-
 namespace Zend\Mvc\Router\Console;
 
 use Zend\Mvc\Router\RouteMatch as BaseRouteMatch;

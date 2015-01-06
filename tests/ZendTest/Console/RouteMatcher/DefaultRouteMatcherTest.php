@@ -7,7 +7,6 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Console
  */
-
 namespace ZendTest\Console\RouteMatcher;
 
 use Zend\Console\RouteMatcher\DefaultRouteMatcher;

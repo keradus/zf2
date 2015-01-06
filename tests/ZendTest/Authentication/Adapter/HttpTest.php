@@ -7,7 +7,6 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Authentication
  */
-
 namespace ZendTest\Authentication\Adapter;
 
 use Zend\Authentication\Adapter;

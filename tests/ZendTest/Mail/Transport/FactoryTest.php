@@ -4,7 +4,6 @@
  * @license See the file LICENSE.txt for copying permission.
  * ************************************************
  */
-
 namespace ZendTest\Mail\Transport;
 
 use PHPUnit_Framework_TestCase;

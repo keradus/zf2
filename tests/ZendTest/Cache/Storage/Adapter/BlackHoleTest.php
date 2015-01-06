@@ -7,7 +7,6 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Cache
  */
-
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache\Storage\Adapter\BlackHole;
